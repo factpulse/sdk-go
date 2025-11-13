@@ -31,12 +31,9 @@ type SoumettreFactureRequest struct {
 	IdStructureCpp int32 `json:"id_structure_cpp"`
 	CodeService NullableString `json:"code_service,omitempty"`
 	NumeroEngagement NullableString `json:"numero_engagement,omitempty"`
-	// Montant HT total
-	MontantHtTotal string `json:"montant_ht_total"`
-	// Montant TVA
-	MontantTva string `json:"montant_tva"`
-	// Montant TTC total
-	MontantTtcTotal string `json:"montant_ttc_total"`
+	MontantHtTotal MontantHtTotal1 `json:"montant_ht_total"`
+	MontantTva MontantTva1 `json:"montant_tva"`
+	MontantTtcTotal MontantTtcTotal1 `json:"montant_ttc_total"`
 	PieceJointePrincipaleId NullableInt32 `json:"piece_jointe_principale_id,omitempty"`
 	PieceJointePrincipaleDesignation NullableString `json:"piece_jointe_principale_designation,omitempty"`
 	Commentaire NullableString `json:"commentaire,omitempty"`
@@ -50,7 +47,7 @@ type _SoumettreFactureRequest SoumettreFactureRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSoumettreFactureRequest(numeroFacture string, dateFacture string, idStructureCpp int32, montantHtTotal string, montantTva string, montantTtcTotal string) *SoumettreFactureRequest {
+func NewSoumettreFactureRequest(numeroFacture string, dateFacture string, idStructureCpp int32, montantHtTotal MontantHtTotal1, montantTva MontantTva1, montantTtcTotal MontantTtcTotal1) *SoumettreFactureRequest {
 	this := SoumettreFactureRequest{}
 	this.NumeroFacture = numeroFacture
 	this.DateFacture = dateFacture
@@ -310,9 +307,9 @@ func (o *SoumettreFactureRequest) UnsetNumeroEngagement() {
 }
 
 // GetMontantHtTotal returns the MontantHtTotal field value
-func (o *SoumettreFactureRequest) GetMontantHtTotal() string {
+func (o *SoumettreFactureRequest) GetMontantHtTotal() MontantHtTotal1 {
 	if o == nil {
-		var ret string
+		var ret MontantHtTotal1
 		return ret
 	}
 
@@ -321,7 +318,7 @@ func (o *SoumettreFactureRequest) GetMontantHtTotal() string {
 
 // GetMontantHtTotalOk returns a tuple with the MontantHtTotal field value
 // and a boolean to check if the value has been set.
-func (o *SoumettreFactureRequest) GetMontantHtTotalOk() (*string, bool) {
+func (o *SoumettreFactureRequest) GetMontantHtTotalOk() (*MontantHtTotal1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -329,14 +326,14 @@ func (o *SoumettreFactureRequest) GetMontantHtTotalOk() (*string, bool) {
 }
 
 // SetMontantHtTotal sets field value
-func (o *SoumettreFactureRequest) SetMontantHtTotal(v string) {
+func (o *SoumettreFactureRequest) SetMontantHtTotal(v MontantHtTotal1) {
 	o.MontantHtTotal = v
 }
 
 // GetMontantTva returns the MontantTva field value
-func (o *SoumettreFactureRequest) GetMontantTva() string {
+func (o *SoumettreFactureRequest) GetMontantTva() MontantTva1 {
 	if o == nil {
-		var ret string
+		var ret MontantTva1
 		return ret
 	}
 
@@ -345,7 +342,7 @@ func (o *SoumettreFactureRequest) GetMontantTva() string {
 
 // GetMontantTvaOk returns a tuple with the MontantTva field value
 // and a boolean to check if the value has been set.
-func (o *SoumettreFactureRequest) GetMontantTvaOk() (*string, bool) {
+func (o *SoumettreFactureRequest) GetMontantTvaOk() (*MontantTva1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -353,14 +350,14 @@ func (o *SoumettreFactureRequest) GetMontantTvaOk() (*string, bool) {
 }
 
 // SetMontantTva sets field value
-func (o *SoumettreFactureRequest) SetMontantTva(v string) {
+func (o *SoumettreFactureRequest) SetMontantTva(v MontantTva1) {
 	o.MontantTva = v
 }
 
 // GetMontantTtcTotal returns the MontantTtcTotal field value
-func (o *SoumettreFactureRequest) GetMontantTtcTotal() string {
+func (o *SoumettreFactureRequest) GetMontantTtcTotal() MontantTtcTotal1 {
 	if o == nil {
-		var ret string
+		var ret MontantTtcTotal1
 		return ret
 	}
 
@@ -369,7 +366,7 @@ func (o *SoumettreFactureRequest) GetMontantTtcTotal() string {
 
 // GetMontantTtcTotalOk returns a tuple with the MontantTtcTotal field value
 // and a boolean to check if the value has been set.
-func (o *SoumettreFactureRequest) GetMontantTtcTotalOk() (*string, bool) {
+func (o *SoumettreFactureRequest) GetMontantTtcTotalOk() (*MontantTtcTotal1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -377,7 +374,7 @@ func (o *SoumettreFactureRequest) GetMontantTtcTotalOk() (*string, bool) {
 }
 
 // SetMontantTtcTotal sets field value
-func (o *SoumettreFactureRequest) SetMontantTtcTotal(v string) {
+func (o *SoumettreFactureRequest) SetMontantTtcTotal(v MontantTtcTotal1) {
 	o.MontantTtcTotal = v
 }
 

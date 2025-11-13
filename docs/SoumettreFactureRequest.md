@@ -11,9 +11,9 @@ Name | Type | Description | Notes
 **IdStructureCpp** | **int32** | ID Chorus Pro de la structure destinataire | 
 **CodeService** | Pointer to **NullableString** |  | [optional] 
 **NumeroEngagement** | Pointer to **NullableString** |  | [optional] 
-**MontantHtTotal** | **string** | Montant HT total | 
-**MontantTva** | **string** | Montant TVA | 
-**MontantTtcTotal** | **string** | Montant TTC total | 
+**MontantHtTotal** | [**MontantHtTotal1**](MontantHtTotal1.md) |  | 
+**MontantTva** | [**MontantTva1**](MontantTva1.md) |  | 
+**MontantTtcTotal** | [**MontantTtcTotal1**](MontantTtcTotal1.md) |  | 
 **PieceJointePrincipaleId** | Pointer to **NullableInt32** |  | [optional] 
 **PieceJointePrincipaleDesignation** | Pointer to **NullableString** |  | [optional] 
 **Commentaire** | Pointer to **NullableString** |  | [optional] 
@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewSoumettreFactureRequest
 
-`func NewSoumettreFactureRequest(numeroFacture string, dateFacture string, idStructureCpp int32, montantHtTotal string, montantTva string, montantTtcTotal string, ) *SoumettreFactureRequest`
+`func NewSoumettreFactureRequest(numeroFacture string, dateFacture string, idStructureCpp int32, montantHtTotal MontantHtTotal1, montantTva MontantTva1, montantTtcTotal MontantTtcTotal1, ) *SoumettreFactureRequest`
 
 NewSoumettreFactureRequest instantiates a new SoumettreFactureRequest object
 This constructor will assign default values to properties that have it defined,
@@ -241,60 +241,60 @@ HasNumeroEngagement returns a boolean if a field has been set.
 UnsetNumeroEngagement ensures that no value is present for NumeroEngagement, not even an explicit nil
 ### GetMontantHtTotal
 
-`func (o *SoumettreFactureRequest) GetMontantHtTotal() string`
+`func (o *SoumettreFactureRequest) GetMontantHtTotal() MontantHtTotal1`
 
 GetMontantHtTotal returns the MontantHtTotal field if non-nil, zero value otherwise.
 
 ### GetMontantHtTotalOk
 
-`func (o *SoumettreFactureRequest) GetMontantHtTotalOk() (*string, bool)`
+`func (o *SoumettreFactureRequest) GetMontantHtTotalOk() (*MontantHtTotal1, bool)`
 
 GetMontantHtTotalOk returns a tuple with the MontantHtTotal field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMontantHtTotal
 
-`func (o *SoumettreFactureRequest) SetMontantHtTotal(v string)`
+`func (o *SoumettreFactureRequest) SetMontantHtTotal(v MontantHtTotal1)`
 
 SetMontantHtTotal sets MontantHtTotal field to given value.
 
 
 ### GetMontantTva
 
-`func (o *SoumettreFactureRequest) GetMontantTva() string`
+`func (o *SoumettreFactureRequest) GetMontantTva() MontantTva1`
 
 GetMontantTva returns the MontantTva field if non-nil, zero value otherwise.
 
 ### GetMontantTvaOk
 
-`func (o *SoumettreFactureRequest) GetMontantTvaOk() (*string, bool)`
+`func (o *SoumettreFactureRequest) GetMontantTvaOk() (*MontantTva1, bool)`
 
 GetMontantTvaOk returns a tuple with the MontantTva field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMontantTva
 
-`func (o *SoumettreFactureRequest) SetMontantTva(v string)`
+`func (o *SoumettreFactureRequest) SetMontantTva(v MontantTva1)`
 
 SetMontantTva sets MontantTva field to given value.
 
 
 ### GetMontantTtcTotal
 
-`func (o *SoumettreFactureRequest) GetMontantTtcTotal() string`
+`func (o *SoumettreFactureRequest) GetMontantTtcTotal() MontantTtcTotal1`
 
 GetMontantTtcTotal returns the MontantTtcTotal field if non-nil, zero value otherwise.
 
 ### GetMontantTtcTotalOk
 
-`func (o *SoumettreFactureRequest) GetMontantTtcTotalOk() (*string, bool)`
+`func (o *SoumettreFactureRequest) GetMontantTtcTotalOk() (*MontantTtcTotal1, bool)`
 
 GetMontantTtcTotalOk returns a tuple with the MontantTtcTotal field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMontantTtcTotal
 
-`func (o *SoumettreFactureRequest) SetMontantTtcTotal(v string)`
+`func (o *SoumettreFactureRequest) SetMontantTtcTotal(v MontantTtcTotal1)`
 
 SetMontantTtcTotal sets MontantTtcTotal field to given value.
 

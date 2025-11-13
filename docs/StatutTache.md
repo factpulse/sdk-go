@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **IdTache** | **string** |  | 
 **Statut** | **string** |  | 
-**Resultat** | Pointer to [**NullableAnyOf**](anyOf&lt;&gt;.md) |  | [optional] 
+**Resultat** | Pointer to **map[string]interface{}** |  | [optional] 
 
 ## Methods
 
@@ -69,20 +69,20 @@ SetStatut sets Statut field to given value.
 
 ### GetResultat
 
-`func (o *StatutTache) GetResultat() AnyOf`
+`func (o *StatutTache) GetResultat() map[string]interface{}`
 
 GetResultat returns the Resultat field if non-nil, zero value otherwise.
 
 ### GetResultatOk
 
-`func (o *StatutTache) GetResultatOk() (*AnyOf, bool)`
+`func (o *StatutTache) GetResultatOk() (*map[string]interface{}, bool)`
 
 GetResultatOk returns a tuple with the Resultat field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResultat
 
-`func (o *StatutTache) SetResultat(v AnyOf)`
+`func (o *StatutTache) SetResultat(v map[string]interface{})`
 
 SetResultat sets Resultat field to given value.
 

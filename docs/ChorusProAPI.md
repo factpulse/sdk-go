@@ -710,7 +710,7 @@ import (
 )
 
 func main() {
-	soumettreFactureRequest := *openapiclient.NewSoumettreFactureRequest("NumeroFacture_example", "DateFacture_example", int32(123), "MontantHtTotal_example", "MontantTva_example", "MontantTtcTotal_example") // SoumettreFactureRequest | 
+	soumettreFactureRequest := *openapiclient.NewSoumettreFactureRequest("NumeroFacture_example", "DateFacture_example", int32(123), *openapiclient.NewMontantHtTotal1(), *openapiclient.NewMontantTva1(), *openapiclient.NewMontantTtcTotal1()) // SoumettreFactureRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

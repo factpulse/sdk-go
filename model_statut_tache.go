@@ -23,7 +23,7 @@ var _ MappedNullable = &StatutTache{}
 type StatutTache struct {
 	IdTache string `json:"id_tache"`
 	Statut string `json:"statut"`
-	Resultat NullableAnyOf `json:"resultat,omitempty"`
+	Resultat map[string]interface{} `json:"resultat,omitempty"`
 }
 
 type _StatutTache StatutTache
@@ -96,45 +96,36 @@ func (o *StatutTache) SetStatut(v string) {
 }
 
 // GetResultat returns the Resultat field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *StatutTache) GetResultat() AnyOf {
-	if o == nil || IsNil(o.Resultat.Get()) {
-		var ret AnyOf
+func (o *StatutTache) GetResultat() map[string]interface{} {
+	if o == nil {
+		var ret map[string]interface{}
 		return ret
 	}
-	return *o.Resultat.Get()
+	return o.Resultat
 }
 
 // GetResultatOk returns a tuple with the Resultat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *StatutTache) GetResultatOk() (*AnyOf, bool) {
-	if o == nil {
-		return nil, false
+func (o *StatutTache) GetResultatOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Resultat) {
+		return map[string]interface{}{}, false
 	}
-	return o.Resultat.Get(), o.Resultat.IsSet()
+	return o.Resultat, true
 }
 
 // HasResultat returns a boolean if a field has been set.
 func (o *StatutTache) HasResultat() bool {
-	if o != nil && o.Resultat.IsSet() {
+	if o != nil && !IsNil(o.Resultat) {
 		return true
 	}
 
 	return false
 }
 
-// SetResultat gets a reference to the given NullableAnyOf and assigns it to the Resultat field.
-func (o *StatutTache) SetResultat(v AnyOf) {
-	o.Resultat.Set(&v)
-}
-// SetResultatNil sets the value for Resultat to be an explicit nil
-func (o *StatutTache) SetResultatNil() {
-	o.Resultat.Set(nil)
-}
-
-// UnsetResultat ensures that no value is present for Resultat, not even an explicit nil
-func (o *StatutTache) UnsetResultat() {
-	o.Resultat.Unset()
+// SetResultat gets a reference to the given map[string]interface{} and assigns it to the Resultat field.
+func (o *StatutTache) SetResultat(v map[string]interface{}) {
+	o.Resultat = v
 }
 
 func (o StatutTache) MarshalJSON() ([]byte, error) {
@@ -149,8 +140,8 @@ func (o StatutTache) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id_tache"] = o.IdTache
 	toSerialize["statut"] = o.Statut
-	if o.Resultat.IsSet() {
-		toSerialize["resultat"] = o.Resultat.Get()
+	if o.Resultat != nil {
+		toSerialize["resultat"] = o.Resultat
 	}
 	return toSerialize, nil
 }

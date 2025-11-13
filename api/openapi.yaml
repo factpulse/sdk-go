@@ -2294,8 +2294,9 @@ components:
     Body_ajouter_fichier_api_v1_chorus_pro_transverses_ajouter_fichier_post:
       properties:
         payload:
-          additionalProperties: {}
+          additionalProperties: true
           title: Payload
+          type: object
         user_info:
           $ref: "#/components/schemas/Utilisateur"
         credentials:
@@ -2307,8 +2308,9 @@ components:
     Body_completer_facture_api_v1_chorus_pro_factures_completer_post:
       properties:
         payload:
-          additionalProperties: {}
+          additionalProperties: true
           title: Payload
+          type: object
         user_info:
           $ref: "#/components/schemas/Utilisateur"
         credentials:
@@ -2356,8 +2358,9 @@ components:
     Body_rechercher_factures_destinataire_api_v1_chorus_pro_factures_rechercher_destinataire_post:
       properties:
         payload:
-          additionalProperties: {}
+          additionalProperties: true
           title: Payload
+          type: object
         user_info:
           $ref: "#/components/schemas/Utilisateur"
         credentials:
@@ -2369,8 +2372,9 @@ components:
     Body_rechercher_factures_fournisseur_api_v1_chorus_pro_factures_rechercher_fournisseur_post:
       properties:
         payload:
-          additionalProperties: {}
+          additionalProperties: true
           title: Payload
+          type: object
         user_info:
           $ref: "#/components/schemas/Utilisateur"
         credentials:
@@ -2382,8 +2386,9 @@ components:
     Body_recycler_facture_api_v1_chorus_pro_factures_recycler_post:
       properties:
         payload:
-          additionalProperties: {}
+          additionalProperties: true
           title: Payload
+          type: object
         user_info:
           $ref: "#/components/schemas/Utilisateur"
         credentials:
@@ -2467,8 +2472,9 @@ components:
     Body_telecharger_groupe_factures_api_v1_chorus_pro_factures_telecharger_groupe_post:
       properties:
         payload:
-          additionalProperties: {}
+          additionalProperties: true
           title: Payload
+          type: object
         user_info:
           $ref: "#/components/schemas/Utilisateur"
         credentials:
@@ -2480,8 +2486,9 @@ components:
     Body_traiter_facture_recue_api_v1_chorus_pro_factures_traiter_facture_recue_post:
       properties:
         payload:
-          additionalProperties: {}
+          additionalProperties: true
           title: Payload
+          type: object
         user_info:
           $ref: "#/components/schemas/Utilisateur"
         credentials:
@@ -2553,8 +2560,9 @@ components:
     Body_valideur_consulter_facture_api_v1_chorus_pro_factures_valideur_consulter_post:
       properties:
         payload:
-          additionalProperties: {}
+          additionalProperties: true
           title: Payload
+          type: object
         user_info:
           $ref: "#/components/schemas/Utilisateur"
         credentials:
@@ -2566,8 +2574,9 @@ components:
     Body_valideur_rechercher_factures_api_v1_chorus_pro_factures_valideur_rechercher_post:
       properties:
         payload:
-          additionalProperties: {}
+          additionalProperties: true
           title: Payload
+          type: object
         user_info:
           $ref: "#/components/schemas/Utilisateur"
         credentials:
@@ -2579,8 +2588,9 @@ components:
     Body_valideur_traiter_facture_api_v1_chorus_pro_factures_valideur_traiter_post:
       properties:
         payload:
-          additionalProperties: {}
+          additionalProperties: true
           title: Payload
+          type: object
         user_info:
           $ref: "#/components/schemas/Utilisateur"
         credentials:
@@ -2957,17 +2967,20 @@ components:
           title: Numero
           type: string
         emetteur:
-          additionalProperties: {}
+          additionalProperties: true
           description: "Informations sur l'émetteur (siret, iban, ...)"
           title: Emetteur
+          type: object
         destinataire:
-          additionalProperties: {}
+          additionalProperties: true
           description: "Informations sur le destinataire (siret, ...)"
           title: Destinataire
+          type: object
         lignes:
           description: Lignes de la facture
           items:
-            additionalProperties: {}
+            additionalProperties: true
+            type: object
           minItems: 1
           type: array
         date:
@@ -3789,9 +3802,10 @@ components:
             type: string
           type: array
         metadonnees_xmp:
-          additionalProperties: {}
+          additionalProperties: true
           description: Métadonnées XMP extraites du PDF
           title: Metadonnees Xmp
+          type: object
         est_signe:
           description: True si le PDF contient au moins une signature
           title: Est Signe
@@ -4005,10 +4019,10 @@ components:
         piece_jointe_principale_designation: piece_jointe_principale_designation
         numero_engagement: numero_engagement
         numero_bon_commande: numero_bon_commande
-        piece_jointe_principale_id: 6
-        montant_ttc_total: montant_ttc_total
-        montant_tva: montant_tva
-        montant_ht_total: montant_ht_total
+        piece_jointe_principale_id: 5
+        montant_ttc_total: 5.962133916683182
+        montant_tva: 1.4658129805029452
+        montant_ht_total: 6.027456183070403
         code_service: code_service
         commentaire: commentaire
         numero_facture: numero_facture
@@ -4037,17 +4051,11 @@ components:
           nullable: true
           type: string
         montant_ht_total:
-          description: Montant HT total
-          title: Montant Ht Total
-          type: string
+          $ref: "#/components/schemas/Montant_Ht_Total_1"
         montant_tva:
-          description: Montant TVA
-          title: Montant Tva
-          type: string
+          $ref: "#/components/schemas/Montant_Tva_1"
         montant_ttc_total:
-          description: Montant TTC total
-          title: Montant Ttc Total
-          type: string
+          $ref: "#/components/schemas/Montant_Ttc_Total_1"
         piece_jointe_principale_id:
           nullable: true
           type: integer
@@ -4124,7 +4132,8 @@ components:
       description: Description complète du statut d'une tâche asynchrone.
       example:
         id_tache: id_tache
-        resultat: ""
+        resultat:
+          key: ""
         statut: statut
       properties:
         id_tache:
@@ -4134,9 +4143,9 @@ components:
           title: Statut
           type: string
         resultat:
-          anyOf: []
+          additionalProperties: true
           nullable: true
-          title: Resultat
+          type: object
       required:
       - id_tache
       - statut
@@ -5035,6 +5044,27 @@ components:
       - $ref: "#/components/schemas/DestinationChorusPro"
       - $ref: "#/components/schemas/DestinationAFNOR"
       title: Destination
+    Montant_Ht_Total_1:
+      anyOf:
+      - type: number
+      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+        type: string
+      description: Montant HT total
+      title: Montant Ht Total
+    Montant_Tva_1:
+      anyOf:
+      - type: number
+      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+        type: string
+      description: Montant TVA
+      title: Montant Tva
+    Montant_Ttc_Total_1:
+      anyOf:
+      - type: number
+      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+        type: string
+      description: Montant TTC total
+      title: Montant Ttc Total
     ValidationError_loc_inner:
       anyOf:
       - type: string
