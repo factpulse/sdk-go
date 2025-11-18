@@ -16,14 +16,14 @@ import (
 )
 
 
-// Montantapayer Montant à payer.
-type Montantapayer struct {
+// MontantAPayer Montant à payer.
+type MontantAPayer struct {
 	Float32 *float32
 	String *string
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
-func (dst *Montantapayer) UnmarshalJSON(data []byte) error {
+func (dst *MontantAPayer) UnmarshalJSON(data []byte) error {
 	var err error
 	// try to unmarshal JSON data into Float32
 	err = json.Unmarshal(data, &dst.Float32);
@@ -51,11 +51,11 @@ func (dst *Montantapayer) UnmarshalJSON(data []byte) error {
 		dst.String = nil
 	}
 
-	return fmt.Errorf("data failed to match schemas in anyOf(Montantapayer)")
+	return fmt.Errorf("data failed to match schemas in anyOf(MontantAPayer)")
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
-func (src Montantapayer) MarshalJSON() ([]byte, error) {
+func (src MontantAPayer) MarshalJSON() ([]byte, error) {
 	if src.Float32 != nil {
 		return json.Marshal(&src.Float32)
 	}
@@ -68,38 +68,38 @@ func (src Montantapayer) MarshalJSON() ([]byte, error) {
 }
 
 
-type NullableMontantapayer struct {
-	value *Montantapayer
+type NullableMontantAPayer struct {
+	value *MontantAPayer
 	isSet bool
 }
 
-func (v NullableMontantapayer) Get() *Montantapayer {
+func (v NullableMontantAPayer) Get() *MontantAPayer {
 	return v.value
 }
 
-func (v *NullableMontantapayer) Set(val *Montantapayer) {
+func (v *NullableMontantAPayer) Set(val *MontantAPayer) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableMontantapayer) IsSet() bool {
+func (v NullableMontantAPayer) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableMontantapayer) Unset() {
+func (v *NullableMontantAPayer) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableMontantapayer(val *Montantapayer) *NullableMontantapayer {
-	return &NullableMontantapayer{value: val, isSet: true}
+func NewNullableMontantAPayer(val *MontantAPayer) *NullableMontantAPayer {
+	return &NullableMontantAPayer{value: val, isSet: true}
 }
 
-func (v NullableMontantapayer) MarshalJSON() ([]byte, error) {
+func (v NullableMontantAPayer) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableMontantapayer) UnmarshalJSON(src []byte) error {
+func (v *NullableMontantAPayer) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

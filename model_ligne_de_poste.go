@@ -26,9 +26,9 @@ type LigneDePoste struct {
 	Denomination string `json:"denomination"`
 	Quantite Quantite `json:"quantite"`
 	Unite Unite `json:"unite"`
-	MontantUnitaireHt Montantunitaireht `json:"montantUnitaireHt"`
+	MontantUnitaireHt MontantUnitaireHt `json:"montantUnitaireHt"`
 	MontantRemiseHt NullableLigneDePosteMontantRemiseHt `json:"montantRemiseHt,omitempty"`
-	MontantTotalLigneHt NullableLigneDePosteMontantTotalLigneHt `json:"montantTotalLigneHt,omitempty"`
+	MontantTotalLigneHt NullableMontantTotalLigneHt `json:"montantTotalLigneHt,omitempty"`
 	TauxTva NullableString `json:"tauxTva,omitempty"`
 	TauxTvaManuel NullableLigneDePosteTauxTvaManuel `json:"tauxTvaManuel,omitempty"`
 	CategorieTva NullableCategorieTVA `json:"categorieTva,omitempty"`
@@ -44,7 +44,7 @@ type _LigneDePoste LigneDePoste
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLigneDePoste(numero int32, denomination string, quantite Quantite, unite Unite, montantUnitaireHt Montantunitaireht) *LigneDePoste {
+func NewLigneDePoste(numero int32, denomination string, quantite Quantite, unite Unite, montantUnitaireHt MontantUnitaireHt) *LigneDePoste {
 	this := LigneDePoste{}
 	this.Numero = numero
 	this.Denomination = denomination
@@ -201,9 +201,9 @@ func (o *LigneDePoste) SetUnite(v Unite) {
 }
 
 // GetMontantUnitaireHt returns the MontantUnitaireHt field value
-func (o *LigneDePoste) GetMontantUnitaireHt() Montantunitaireht {
+func (o *LigneDePoste) GetMontantUnitaireHt() MontantUnitaireHt {
 	if o == nil {
-		var ret Montantunitaireht
+		var ret MontantUnitaireHt
 		return ret
 	}
 
@@ -212,7 +212,7 @@ func (o *LigneDePoste) GetMontantUnitaireHt() Montantunitaireht {
 
 // GetMontantUnitaireHtOk returns a tuple with the MontantUnitaireHt field value
 // and a boolean to check if the value has been set.
-func (o *LigneDePoste) GetMontantUnitaireHtOk() (*Montantunitaireht, bool) {
+func (o *LigneDePoste) GetMontantUnitaireHtOk() (*MontantUnitaireHt, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -220,7 +220,7 @@ func (o *LigneDePoste) GetMontantUnitaireHtOk() (*Montantunitaireht, bool) {
 }
 
 // SetMontantUnitaireHt sets field value
-func (o *LigneDePoste) SetMontantUnitaireHt(v Montantunitaireht) {
+func (o *LigneDePoste) SetMontantUnitaireHt(v MontantUnitaireHt) {
 	o.MontantUnitaireHt = v
 }
 
@@ -267,9 +267,9 @@ func (o *LigneDePoste) UnsetMontantRemiseHt() {
 }
 
 // GetMontantTotalLigneHt returns the MontantTotalLigneHt field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *LigneDePoste) GetMontantTotalLigneHt() LigneDePosteMontantTotalLigneHt {
+func (o *LigneDePoste) GetMontantTotalLigneHt() MontantTotalLigneHt {
 	if o == nil || IsNil(o.MontantTotalLigneHt.Get()) {
-		var ret LigneDePosteMontantTotalLigneHt
+		var ret MontantTotalLigneHt
 		return ret
 	}
 	return *o.MontantTotalLigneHt.Get()
@@ -278,7 +278,7 @@ func (o *LigneDePoste) GetMontantTotalLigneHt() LigneDePosteMontantTotalLigneHt 
 // GetMontantTotalLigneHtOk returns a tuple with the MontantTotalLigneHt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *LigneDePoste) GetMontantTotalLigneHtOk() (*LigneDePosteMontantTotalLigneHt, bool) {
+func (o *LigneDePoste) GetMontantTotalLigneHtOk() (*MontantTotalLigneHt, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -294,8 +294,8 @@ func (o *LigneDePoste) HasMontantTotalLigneHt() bool {
 	return false
 }
 
-// SetMontantTotalLigneHt gets a reference to the given NullableLigneDePosteMontantTotalLigneHt and assigns it to the MontantTotalLigneHt field.
-func (o *LigneDePoste) SetMontantTotalLigneHt(v LigneDePosteMontantTotalLigneHt) {
+// SetMontantTotalLigneHt gets a reference to the given NullableMontantTotalLigneHt and assigns it to the MontantTotalLigneHt field.
+func (o *LigneDePoste) SetMontantTotalLigneHt(v MontantTotalLigneHt) {
 	o.MontantTotalLigneHt.Set(&v)
 }
 // SetMontantTotalLigneHtNil sets the value for MontantTotalLigneHt to be an explicit nil

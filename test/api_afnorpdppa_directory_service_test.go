@@ -22,6 +22,44 @@ func Test_factpulse_AFNORPDPPADirectoryServiceAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test AFNORPDPPADirectoryServiceAPIService CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.AFNORPDPPADirectoryServiceAPI.CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AFNORPDPPADirectoryServiceAPIService CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.AFNORPDPPADirectoryServiceAPI.CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AFNORPDPPADirectoryServiceAPIService DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var idInstance string
+
+		resp, httpRes, err := apiClient.AFNORPDPPADirectoryServiceAPI.DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete(context.Background(), idInstance).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AFNORPDPPADirectoryServiceAPIService DirectoryHealthcheckProxyApiV1AfnorDirectoryV1HealthcheckGet", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -34,13 +72,13 @@ func Test_factpulse_AFNORPDPPADirectoryServiceAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test AFNORPDPPADirectoryServiceAPIService GetCompanyProxyApiV1AfnorDirectoryV1CompaniesSirenGet", func(t *testing.T) {
+	t.Run("Test AFNORPDPPADirectoryServiceAPIService GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var siren string
+		var addressingIdentifier string
 
-		resp, httpRes, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetCompanyProxyApiV1AfnorDirectoryV1CompaniesSirenGet(context.Background(), siren).Execute()
+		resp, httpRes, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet(context.Background(), addressingIdentifier).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -48,11 +86,188 @@ func Test_factpulse_AFNORPDPPADirectoryServiceAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test AFNORPDPPADirectoryServiceAPIService SearchCompaniesProxyApiV1AfnorDirectoryV1CompaniesSearchPost", func(t *testing.T) {
+	t.Run("Test AFNORPDPPADirectoryServiceAPIService GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.AFNORPDPPADirectoryServiceAPI.SearchCompaniesProxyApiV1AfnorDirectoryV1CompaniesSearchPost(context.Background()).Execute()
+		var idInstance string
+
+		resp, httpRes, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet(context.Background(), idInstance).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AFNORPDPPADirectoryServiceAPIService GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var idInstance string
+
+		resp, httpRes, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet(context.Background(), idInstance).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AFNORPDPPADirectoryServiceAPIService GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var siret string
+		var routingIdentifier string
+
+		resp, httpRes, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet(context.Background(), siret, routingIdentifier).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AFNORPDPPADirectoryServiceAPIService GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var siren string
+
+		resp, httpRes, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet(context.Background(), siren).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AFNORPDPPADirectoryServiceAPIService GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var idInstance string
+
+		resp, httpRes, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet(context.Background(), idInstance).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AFNORPDPPADirectoryServiceAPIService GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var siret string
+
+		resp, httpRes, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet(context.Background(), siret).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AFNORPDPPADirectoryServiceAPIService GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var idInstance string
+
+		resp, httpRes, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet(context.Background(), idInstance).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AFNORPDPPADirectoryServiceAPIService PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var idInstance string
+
+		resp, httpRes, err := apiClient.AFNORPDPPADirectoryServiceAPI.PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch(context.Background(), idInstance).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AFNORPDPPADirectoryServiceAPIService PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var idInstance string
+
+		resp, httpRes, err := apiClient.AFNORPDPPADirectoryServiceAPI.PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch(context.Background(), idInstance).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AFNORPDPPADirectoryServiceAPIService PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var idInstance string
+
+		resp, httpRes, err := apiClient.AFNORPDPPADirectoryServiceAPI.PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut(context.Background(), idInstance).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AFNORPDPPADirectoryServiceAPIService SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.AFNORPDPPADirectoryServiceAPI.SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AFNORPDPPADirectoryServiceAPIService SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.AFNORPDPPADirectoryServiceAPI.SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AFNORPDPPADirectoryServiceAPIService SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.AFNORPDPPADirectoryServiceAPI.SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AFNORPDPPADirectoryServiceAPIService SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.AFNORPDPPADirectoryServiceAPI.SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

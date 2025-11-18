@@ -16,15 +16,20 @@ import (
 )
 
 
-// Montantttctotal Montant total TTC.
-type Montantttctotal struct {
+// MontantRemiseGlobaleTtc Montant de la remise globale TTC.
+type MontantRemiseGlobaleTtc struct {
 	Float32 *float32
 	String *string
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
-func (dst *Montantttctotal) UnmarshalJSON(data []byte) error {
+func (dst *MontantRemiseGlobaleTtc) UnmarshalJSON(data []byte) error {
 	var err error
+	// this object is nullable so check if the payload is null or empty string
+	if string(data) == "" || string(data) == "{}" {
+		return nil
+	}
+
 	// try to unmarshal JSON data into Float32
 	err = json.Unmarshal(data, &dst.Float32);
 	if err == nil {
@@ -51,11 +56,11 @@ func (dst *Montantttctotal) UnmarshalJSON(data []byte) error {
 		dst.String = nil
 	}
 
-	return fmt.Errorf("data failed to match schemas in anyOf(Montantttctotal)")
+	return fmt.Errorf("data failed to match schemas in anyOf(MontantRemiseGlobaleTtc)")
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
-func (src Montantttctotal) MarshalJSON() ([]byte, error) {
+func (src MontantRemiseGlobaleTtc) MarshalJSON() ([]byte, error) {
 	if src.Float32 != nil {
 		return json.Marshal(&src.Float32)
 	}
@@ -68,38 +73,38 @@ func (src Montantttctotal) MarshalJSON() ([]byte, error) {
 }
 
 
-type NullableMontantttctotal struct {
-	value *Montantttctotal
+type NullableMontantRemiseGlobaleTtc struct {
+	value *MontantRemiseGlobaleTtc
 	isSet bool
 }
 
-func (v NullableMontantttctotal) Get() *Montantttctotal {
+func (v NullableMontantRemiseGlobaleTtc) Get() *MontantRemiseGlobaleTtc {
 	return v.value
 }
 
-func (v *NullableMontantttctotal) Set(val *Montantttctotal) {
+func (v *NullableMontantRemiseGlobaleTtc) Set(val *MontantRemiseGlobaleTtc) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableMontantttctotal) IsSet() bool {
+func (v NullableMontantRemiseGlobaleTtc) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableMontantttctotal) Unset() {
+func (v *NullableMontantRemiseGlobaleTtc) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableMontantttctotal(val *Montantttctotal) *NullableMontantttctotal {
-	return &NullableMontantttctotal{value: val, isSet: true}
+func NewNullableMontantRemiseGlobaleTtc(val *MontantRemiseGlobaleTtc) *NullableMontantRemiseGlobaleTtc {
+	return &NullableMontantRemiseGlobaleTtc{value: val, isSet: true}
 }
 
-func (v NullableMontantttctotal) MarshalJSON() ([]byte, error) {
+func (v NullableMontantRemiseGlobaleTtc) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableMontantttctotal) UnmarshalJSON(src []byte) error {
+func (v *NullableMontantRemiseGlobaleTtc) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

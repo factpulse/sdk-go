@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **Denomination** | **string** |  | 
 **Quantite** | [**Quantite**](Quantite.md) |  | 
 **Unite** | [**Unite**](Unite.md) |  | 
-**MontantUnitaireHt** | [**Montantunitaireht**](Montantunitaireht.md) |  | 
+**MontantUnitaireHt** | [**MontantUnitaireHt**](MontantUnitaireHt.md) |  | 
 **MontantRemiseHt** | Pointer to [**NullableLigneDePosteMontantRemiseHt**](LigneDePosteMontantRemiseHt.md) |  | [optional] 
-**MontantTotalLigneHt** | Pointer to [**NullableLigneDePosteMontantTotalLigneHt**](LigneDePosteMontantTotalLigneHt.md) |  | [optional] 
+**MontantTotalLigneHt** | Pointer to [**NullableMontantTotalLigneHt**](MontantTotalLigneHt.md) |  | [optional] 
 **TauxTva** | Pointer to **NullableString** |  | [optional] 
 **TauxTvaManuel** | Pointer to [**NullableLigneDePosteTauxTvaManuel**](LigneDePosteTauxTvaManuel.md) |  | [optional] 
 **CategorieTva** | Pointer to [**NullableCategorieTVA**](CategorieTVA.md) |  | [optional] 
@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewLigneDePoste
 
-`func NewLigneDePoste(numero int32, denomination string, quantite Quantite, unite Unite, montantUnitaireHt Montantunitaireht, ) *LigneDePoste`
+`func NewLigneDePoste(numero int32, denomination string, quantite Quantite, unite Unite, montantUnitaireHt MontantUnitaireHt, ) *LigneDePoste`
 
 NewLigneDePoste instantiates a new LigneDePoste object
 This constructor will assign default values to properties that have it defined,
@@ -156,20 +156,20 @@ SetUnite sets Unite field to given value.
 
 ### GetMontantUnitaireHt
 
-`func (o *LigneDePoste) GetMontantUnitaireHt() Montantunitaireht`
+`func (o *LigneDePoste) GetMontantUnitaireHt() MontantUnitaireHt`
 
 GetMontantUnitaireHt returns the MontantUnitaireHt field if non-nil, zero value otherwise.
 
 ### GetMontantUnitaireHtOk
 
-`func (o *LigneDePoste) GetMontantUnitaireHtOk() (*Montantunitaireht, bool)`
+`func (o *LigneDePoste) GetMontantUnitaireHtOk() (*MontantUnitaireHt, bool)`
 
 GetMontantUnitaireHtOk returns a tuple with the MontantUnitaireHt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMontantUnitaireHt
 
-`func (o *LigneDePoste) SetMontantUnitaireHt(v Montantunitaireht)`
+`func (o *LigneDePoste) SetMontantUnitaireHt(v MontantUnitaireHt)`
 
 SetMontantUnitaireHt sets MontantUnitaireHt field to given value.
 
@@ -211,20 +211,20 @@ HasMontantRemiseHt returns a boolean if a field has been set.
 UnsetMontantRemiseHt ensures that no value is present for MontantRemiseHt, not even an explicit nil
 ### GetMontantTotalLigneHt
 
-`func (o *LigneDePoste) GetMontantTotalLigneHt() LigneDePosteMontantTotalLigneHt`
+`func (o *LigneDePoste) GetMontantTotalLigneHt() MontantTotalLigneHt`
 
 GetMontantTotalLigneHt returns the MontantTotalLigneHt field if non-nil, zero value otherwise.
 
 ### GetMontantTotalLigneHtOk
 
-`func (o *LigneDePoste) GetMontantTotalLigneHtOk() (*LigneDePosteMontantTotalLigneHt, bool)`
+`func (o *LigneDePoste) GetMontantTotalLigneHtOk() (*MontantTotalLigneHt, bool)`
 
 GetMontantTotalLigneHtOk returns a tuple with the MontantTotalLigneHt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMontantTotalLigneHt
 
-`func (o *LigneDePoste) SetMontantTotalLigneHt(v LigneDePosteMontantTotalLigneHt)`
+`func (o *LigneDePoste) SetMontantTotalLigneHt(v MontantTotalLigneHt)`
 
 SetMontantTotalLigneHt sets MontantTotalLigneHt field to given value.
 

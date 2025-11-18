@@ -1,4 +1,4 @@
-# Montantunitaireht
+# MontantRemiseGlobaleTtc
 
 ## Properties
 
@@ -7,20 +7,20 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewMontantunitaireht
+### NewMontantRemiseGlobaleTtc
 
-`func NewMontantunitaireht() *Montantunitaireht`
+`func NewMontantRemiseGlobaleTtc() *MontantRemiseGlobaleTtc`
 
-NewMontantunitaireht instantiates a new Montantunitaireht object
+NewMontantRemiseGlobaleTtc instantiates a new MontantRemiseGlobaleTtc object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewMontantunitairehtWithDefaults
+### NewMontantRemiseGlobaleTtcWithDefaults
 
-`func NewMontantunitairehtWithDefaults() *Montantunitaireht`
+`func NewMontantRemiseGlobaleTtcWithDefaults() *MontantRemiseGlobaleTtc`
 
-NewMontantunitairehtWithDefaults instantiates a new Montantunitaireht object
+NewMontantRemiseGlobaleTtcWithDefaults instantiates a new MontantRemiseGlobaleTtc object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 

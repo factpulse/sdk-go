@@ -1,4 +1,4 @@
-# Montanttva1
+# MontantUnitaireHt
 
 ## Properties
 
@@ -7,20 +7,20 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewMontanttva1
+### NewMontantUnitaireHt
 
-`func NewMontanttva1() *Montanttva1`
+`func NewMontantUnitaireHt() *MontantUnitaireHt`
 
-NewMontanttva1 instantiates a new Montanttva1 object
+NewMontantUnitaireHt instantiates a new MontantUnitaireHt object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewMontanttva1WithDefaults
+### NewMontantUnitaireHtWithDefaults
 
-`func NewMontanttva1WithDefaults() *Montanttva1`
+`func NewMontantUnitaireHtWithDefaults() *MontantUnitaireHt`
 
-NewMontanttva1WithDefaults instantiates a new Montanttva1 object
+NewMontantUnitaireHtWithDefaults instantiates a new MontantUnitaireHt object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 

@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MontantHtTotal** | [**Montanthttotal**](Montanthttotal.md) |  | 
-**MontantTva** | [**Montanttva1**](Montanttva1.md) |  | 
-**MontantTtcTotal** | [**Montantttctotal**](Montantttctotal.md) |  | 
-**MontantAPayer** | [**Montantapayer**](Montantapayer.md) |  | 
+**MontantHtTotal** | [**MontantHtTotal**](MontantHtTotal.md) |  | 
+**MontantTva** | [**MontantTva1**](MontantTva1.md) |  | 
+**MontantTtcTotal** | [**MontantTtcTotal**](MontantTtcTotal.md) |  | 
+**MontantAPayer** | [**MontantAPayer**](MontantAPayer.md) |  | 
 **Acompte** | Pointer to [**NullableMontantTotalAcompte**](MontantTotalAcompte.md) |  | [optional] 
-**MontantRemiseGlobaleTtc** | Pointer to [**NullableMontantTotalMontantRemiseGlobaleTtc**](MontantTotalMontantRemiseGlobaleTtc.md) |  | [optional] 
+**MontantRemiseGlobaleTtc** | Pointer to [**NullableMontantRemiseGlobaleTtc**](MontantRemiseGlobaleTtc.md) |  | [optional] 
 **MotifRemiseGlobaleTtc** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
 ### NewMontantTotal
 
-`func NewMontantTotal(montantHtTotal Montanthttotal, montantTva Montanttva1, montantTtcTotal Montantttctotal, montantAPayer Montantapayer, ) *MontantTotal`
+`func NewMontantTotal(montantHtTotal MontantHtTotal, montantTva MontantTva1, montantTtcTotal MontantTtcTotal, montantAPayer MontantAPayer, ) *MontantTotal`
 
 NewMontantTotal instantiates a new MontantTotal object
 This constructor will assign default values to properties that have it defined,
@@ -33,80 +33,80 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetMontantHtTotal
 
-`func (o *MontantTotal) GetMontantHtTotal() Montanthttotal`
+`func (o *MontantTotal) GetMontantHtTotal() MontantHtTotal`
 
 GetMontantHtTotal returns the MontantHtTotal field if non-nil, zero value otherwise.
 
 ### GetMontantHtTotalOk
 
-`func (o *MontantTotal) GetMontantHtTotalOk() (*Montanthttotal, bool)`
+`func (o *MontantTotal) GetMontantHtTotalOk() (*MontantHtTotal, bool)`
 
 GetMontantHtTotalOk returns a tuple with the MontantHtTotal field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMontantHtTotal
 
-`func (o *MontantTotal) SetMontantHtTotal(v Montanthttotal)`
+`func (o *MontantTotal) SetMontantHtTotal(v MontantHtTotal)`
 
 SetMontantHtTotal sets MontantHtTotal field to given value.
 
 
 ### GetMontantTva
 
-`func (o *MontantTotal) GetMontantTva() Montanttva1`
+`func (o *MontantTotal) GetMontantTva() MontantTva1`
 
 GetMontantTva returns the MontantTva field if non-nil, zero value otherwise.
 
 ### GetMontantTvaOk
 
-`func (o *MontantTotal) GetMontantTvaOk() (*Montanttva1, bool)`
+`func (o *MontantTotal) GetMontantTvaOk() (*MontantTva1, bool)`
 
 GetMontantTvaOk returns a tuple with the MontantTva field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMontantTva
 
-`func (o *MontantTotal) SetMontantTva(v Montanttva1)`
+`func (o *MontantTotal) SetMontantTva(v MontantTva1)`
 
 SetMontantTva sets MontantTva field to given value.
 
 
 ### GetMontantTtcTotal
 
-`func (o *MontantTotal) GetMontantTtcTotal() Montantttctotal`
+`func (o *MontantTotal) GetMontantTtcTotal() MontantTtcTotal`
 
 GetMontantTtcTotal returns the MontantTtcTotal field if non-nil, zero value otherwise.
 
 ### GetMontantTtcTotalOk
 
-`func (o *MontantTotal) GetMontantTtcTotalOk() (*Montantttctotal, bool)`
+`func (o *MontantTotal) GetMontantTtcTotalOk() (*MontantTtcTotal, bool)`
 
 GetMontantTtcTotalOk returns a tuple with the MontantTtcTotal field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMontantTtcTotal
 
-`func (o *MontantTotal) SetMontantTtcTotal(v Montantttctotal)`
+`func (o *MontantTotal) SetMontantTtcTotal(v MontantTtcTotal)`
 
 SetMontantTtcTotal sets MontantTtcTotal field to given value.
 
 
 ### GetMontantAPayer
 
-`func (o *MontantTotal) GetMontantAPayer() Montantapayer`
+`func (o *MontantTotal) GetMontantAPayer() MontantAPayer`
 
 GetMontantAPayer returns the MontantAPayer field if non-nil, zero value otherwise.
 
 ### GetMontantAPayerOk
 
-`func (o *MontantTotal) GetMontantAPayerOk() (*Montantapayer, bool)`
+`func (o *MontantTotal) GetMontantAPayerOk() (*MontantAPayer, bool)`
 
 GetMontantAPayerOk returns a tuple with the MontantAPayer field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMontantAPayer
 
-`func (o *MontantTotal) SetMontantAPayer(v Montantapayer)`
+`func (o *MontantTotal) SetMontantAPayer(v MontantAPayer)`
 
 SetMontantAPayer sets MontantAPayer field to given value.
 
@@ -148,20 +148,20 @@ HasAcompte returns a boolean if a field has been set.
 UnsetAcompte ensures that no value is present for Acompte, not even an explicit nil
 ### GetMontantRemiseGlobaleTtc
 
-`func (o *MontantTotal) GetMontantRemiseGlobaleTtc() MontantTotalMontantRemiseGlobaleTtc`
+`func (o *MontantTotal) GetMontantRemiseGlobaleTtc() MontantRemiseGlobaleTtc`
 
 GetMontantRemiseGlobaleTtc returns the MontantRemiseGlobaleTtc field if non-nil, zero value otherwise.
 
 ### GetMontantRemiseGlobaleTtcOk
 
-`func (o *MontantTotal) GetMontantRemiseGlobaleTtcOk() (*MontantTotalMontantRemiseGlobaleTtc, bool)`
+`func (o *MontantTotal) GetMontantRemiseGlobaleTtcOk() (*MontantRemiseGlobaleTtc, bool)`
 
 GetMontantRemiseGlobaleTtcOk returns a tuple with the MontantRemiseGlobaleTtc field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMontantRemiseGlobaleTtc
 
-`func (o *MontantTotal) SetMontantRemiseGlobaleTtc(v MontantTotalMontantRemiseGlobaleTtc)`
+`func (o *MontantTotal) SetMontantRemiseGlobaleTtc(v MontantRemiseGlobaleTtc)`
 
 SetMontantRemiseGlobaleTtc sets MontantRemiseGlobaleTtc field to given value.
 

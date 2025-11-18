@@ -21,8 +21,8 @@ var _ MappedNullable = &LigneDeTVA{}
 
 // LigneDeTVA Représente une ligne de totalisation par taux de TVA.
 type LigneDeTVA struct {
-	MontantBaseHt Montantbaseht `json:"montantBaseHt"`
-	MontantTva Montanttva `json:"montantTva"`
+	MontantBaseHt MontantBaseHt `json:"montantBaseHt"`
+	MontantTva MontantTva `json:"montantTva"`
 	Taux NullableString `json:"taux,omitempty"`
 	TauxManuel *Tauxmanuel `json:"tauxManuel,omitempty"`
 	Categorie NullableCategorieTVA `json:"categorie,omitempty"`
@@ -34,7 +34,7 @@ type _LigneDeTVA LigneDeTVA
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLigneDeTVA(montantBaseHt Montantbaseht, montantTva Montanttva) *LigneDeTVA {
+func NewLigneDeTVA(montantBaseHt MontantBaseHt, montantTva MontantTva) *LigneDeTVA {
 	this := LigneDeTVA{}
 	this.MontantBaseHt = montantBaseHt
 	this.MontantTva = montantTva
@@ -50,9 +50,9 @@ func NewLigneDeTVAWithDefaults() *LigneDeTVA {
 }
 
 // GetMontantBaseHt returns the MontantBaseHt field value
-func (o *LigneDeTVA) GetMontantBaseHt() Montantbaseht {
+func (o *LigneDeTVA) GetMontantBaseHt() MontantBaseHt {
 	if o == nil {
-		var ret Montantbaseht
+		var ret MontantBaseHt
 		return ret
 	}
 
@@ -61,7 +61,7 @@ func (o *LigneDeTVA) GetMontantBaseHt() Montantbaseht {
 
 // GetMontantBaseHtOk returns a tuple with the MontantBaseHt field value
 // and a boolean to check if the value has been set.
-func (o *LigneDeTVA) GetMontantBaseHtOk() (*Montantbaseht, bool) {
+func (o *LigneDeTVA) GetMontantBaseHtOk() (*MontantBaseHt, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,14 +69,14 @@ func (o *LigneDeTVA) GetMontantBaseHtOk() (*Montantbaseht, bool) {
 }
 
 // SetMontantBaseHt sets field value
-func (o *LigneDeTVA) SetMontantBaseHt(v Montantbaseht) {
+func (o *LigneDeTVA) SetMontantBaseHt(v MontantBaseHt) {
 	o.MontantBaseHt = v
 }
 
 // GetMontantTva returns the MontantTva field value
-func (o *LigneDeTVA) GetMontantTva() Montanttva {
+func (o *LigneDeTVA) GetMontantTva() MontantTva {
 	if o == nil {
-		var ret Montanttva
+		var ret MontantTva
 		return ret
 	}
 
@@ -85,7 +85,7 @@ func (o *LigneDeTVA) GetMontantTva() Montanttva {
 
 // GetMontantTvaOk returns a tuple with the MontantTva field value
 // and a boolean to check if the value has been set.
-func (o *LigneDeTVA) GetMontantTvaOk() (*Montanttva, bool) {
+func (o *LigneDeTVA) GetMontantTvaOk() (*MontantTva, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,7 +93,7 @@ func (o *LigneDeTVA) GetMontantTvaOk() (*Montanttva, bool) {
 }
 
 // SetMontantTva sets field value
-func (o *LigneDeTVA) SetMontantTva(v Montanttva) {
+func (o *LigneDeTVA) SetMontantTva(v MontantTva) {
 	o.MontantTva = v
 }
 

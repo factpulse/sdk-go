@@ -16,20 +16,15 @@ import (
 )
 
 
-// LigneDePosteMontantTotalLigneHt Montant total HT de la ligne (quantité × prix unitaire - remise).
-type LigneDePosteMontantTotalLigneHt struct {
+// MontantUnitaireHt Montant unitaire Hors Taxes de l'article.
+type MontantUnitaireHt struct {
 	Float32 *float32
 	String *string
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
-func (dst *LigneDePosteMontantTotalLigneHt) UnmarshalJSON(data []byte) error {
+func (dst *MontantUnitaireHt) UnmarshalJSON(data []byte) error {
 	var err error
-	// this object is nullable so check if the payload is null or empty string
-	if string(data) == "" || string(data) == "{}" {
-		return nil
-	}
-
 	// try to unmarshal JSON data into Float32
 	err = json.Unmarshal(data, &dst.Float32);
 	if err == nil {
@@ -56,11 +51,11 @@ func (dst *LigneDePosteMontantTotalLigneHt) UnmarshalJSON(data []byte) error {
 		dst.String = nil
 	}
 
-	return fmt.Errorf("data failed to match schemas in anyOf(LigneDePosteMontantTotalLigneHt)")
+	return fmt.Errorf("data failed to match schemas in anyOf(MontantUnitaireHt)")
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
-func (src LigneDePosteMontantTotalLigneHt) MarshalJSON() ([]byte, error) {
+func (src MontantUnitaireHt) MarshalJSON() ([]byte, error) {
 	if src.Float32 != nil {
 		return json.Marshal(&src.Float32)
 	}
@@ -73,38 +68,38 @@ func (src LigneDePosteMontantTotalLigneHt) MarshalJSON() ([]byte, error) {
 }
 
 
-type NullableLigneDePosteMontantTotalLigneHt struct {
-	value *LigneDePosteMontantTotalLigneHt
+type NullableMontantUnitaireHt struct {
+	value *MontantUnitaireHt
 	isSet bool
 }
 
-func (v NullableLigneDePosteMontantTotalLigneHt) Get() *LigneDePosteMontantTotalLigneHt {
+func (v NullableMontantUnitaireHt) Get() *MontantUnitaireHt {
 	return v.value
 }
 
-func (v *NullableLigneDePosteMontantTotalLigneHt) Set(val *LigneDePosteMontantTotalLigneHt) {
+func (v *NullableMontantUnitaireHt) Set(val *MontantUnitaireHt) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableLigneDePosteMontantTotalLigneHt) IsSet() bool {
+func (v NullableMontantUnitaireHt) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableLigneDePosteMontantTotalLigneHt) Unset() {
+func (v *NullableMontantUnitaireHt) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableLigneDePosteMontantTotalLigneHt(val *LigneDePosteMontantTotalLigneHt) *NullableLigneDePosteMontantTotalLigneHt {
-	return &NullableLigneDePosteMontantTotalLigneHt{value: val, isSet: true}
+func NewNullableMontantUnitaireHt(val *MontantUnitaireHt) *NullableMontantUnitaireHt {
+	return &NullableMontantUnitaireHt{value: val, isSet: true}
 }
 
-func (v NullableLigneDePosteMontantTotalLigneHt) MarshalJSON() ([]byte, error) {
+func (v NullableMontantUnitaireHt) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableLigneDePosteMontantTotalLigneHt) UnmarshalJSON(src []byte) error {
+func (v *NullableMontantUnitaireHt) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
