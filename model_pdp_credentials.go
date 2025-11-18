@@ -23,6 +23,7 @@ var _ MappedNullable = &PDPCredentials{}
 type PDPCredentials struct {
 	// URL de base du Flow Service AFNOR
 	FlowServiceUrl string `json:"flow_service_url"`
+	DirectoryServiceUrl NullableString `json:"directory_service_url,omitempty"`
 	// URL du serveur OAuth2
 	TokenUrl string `json:"token_url"`
 	// Client ID OAuth2
@@ -76,6 +77,48 @@ func (o *PDPCredentials) GetFlowServiceUrlOk() (*string, bool) {
 // SetFlowServiceUrl sets field value
 func (o *PDPCredentials) SetFlowServiceUrl(v string) {
 	o.FlowServiceUrl = v
+}
+
+// GetDirectoryServiceUrl returns the DirectoryServiceUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PDPCredentials) GetDirectoryServiceUrl() string {
+	if o == nil || IsNil(o.DirectoryServiceUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.DirectoryServiceUrl.Get()
+}
+
+// GetDirectoryServiceUrlOk returns a tuple with the DirectoryServiceUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PDPCredentials) GetDirectoryServiceUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DirectoryServiceUrl.Get(), o.DirectoryServiceUrl.IsSet()
+}
+
+// HasDirectoryServiceUrl returns a boolean if a field has been set.
+func (o *PDPCredentials) HasDirectoryServiceUrl() bool {
+	if o != nil && o.DirectoryServiceUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDirectoryServiceUrl gets a reference to the given NullableString and assigns it to the DirectoryServiceUrl field.
+func (o *PDPCredentials) SetDirectoryServiceUrl(v string) {
+	o.DirectoryServiceUrl.Set(&v)
+}
+// SetDirectoryServiceUrlNil sets the value for DirectoryServiceUrl to be an explicit nil
+func (o *PDPCredentials) SetDirectoryServiceUrlNil() {
+	o.DirectoryServiceUrl.Set(nil)
+}
+
+// UnsetDirectoryServiceUrl ensures that no value is present for DirectoryServiceUrl, not even an explicit nil
+func (o *PDPCredentials) UnsetDirectoryServiceUrl() {
+	o.DirectoryServiceUrl.Unset()
 }
 
 // GetTokenUrl returns the TokenUrl field value
@@ -161,6 +204,9 @@ func (o PDPCredentials) MarshalJSON() ([]byte, error) {
 func (o PDPCredentials) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["flow_service_url"] = o.FlowServiceUrl
+	if o.DirectoryServiceUrl.IsSet() {
+		toSerialize["directory_service_url"] = o.DirectoryServiceUrl.Get()
+	}
 	toSerialize["token_url"] = o.TokenUrl
 	toSerialize["client_id"] = o.ClientId
 	toSerialize["client_secret"] = o.ClientSecret

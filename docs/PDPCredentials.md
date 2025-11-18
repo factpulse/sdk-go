@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **FlowServiceUrl** | **string** | URL de base du Flow Service AFNOR | 
+**DirectoryServiceUrl** | Pointer to **NullableString** |  | [optional] 
 **TokenUrl** | **string** | URL du serveur OAuth2 | 
 **ClientId** | **string** | Client ID OAuth2 | 
 **ClientSecret** | **string** | Client Secret OAuth2 (sensible) | 
@@ -48,6 +49,41 @@ and a boolean to check if the value has been set.
 SetFlowServiceUrl sets FlowServiceUrl field to given value.
 
 
+### GetDirectoryServiceUrl
+
+`func (o *PDPCredentials) GetDirectoryServiceUrl() string`
+
+GetDirectoryServiceUrl returns the DirectoryServiceUrl field if non-nil, zero value otherwise.
+
+### GetDirectoryServiceUrlOk
+
+`func (o *PDPCredentials) GetDirectoryServiceUrlOk() (*string, bool)`
+
+GetDirectoryServiceUrlOk returns a tuple with the DirectoryServiceUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDirectoryServiceUrl
+
+`func (o *PDPCredentials) SetDirectoryServiceUrl(v string)`
+
+SetDirectoryServiceUrl sets DirectoryServiceUrl field to given value.
+
+### HasDirectoryServiceUrl
+
+`func (o *PDPCredentials) HasDirectoryServiceUrl() bool`
+
+HasDirectoryServiceUrl returns a boolean if a field has been set.
+
+### SetDirectoryServiceUrlNil
+
+`func (o *PDPCredentials) SetDirectoryServiceUrlNil(b bool)`
+
+ SetDirectoryServiceUrlNil sets the value for DirectoryServiceUrl to be an explicit nil
+
+### UnsetDirectoryServiceUrl
+`func (o *PDPCredentials) UnsetDirectoryServiceUrl()`
+
+UnsetDirectoryServiceUrl ensures that no value is present for DirectoryServiceUrl, not even an explicit nil
 ### GetTokenUrl
 
 `func (o *PDPCredentials) GetTokenUrl() string`
