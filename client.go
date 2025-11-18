@@ -49,6 +49,8 @@ type APIClient struct {
 
 	// API Services
 
+	AFNORDirectoryServiceMtierAPI *AFNORDirectoryServiceMtierAPIService
+
 	AFNORPDPPAAPI *AFNORPDPPAAPIService
 
 	AFNORPDPPADirectoryServiceAPI *AFNORPDPPADirectoryServiceAPIService
@@ -80,6 +82,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
+	c.AFNORDirectoryServiceMtierAPI = (*AFNORDirectoryServiceMtierAPIService)(&c.common)
 	c.AFNORPDPPAAPI = (*AFNORPDPPAAPIService)(&c.common)
 	c.AFNORPDPPADirectoryServiceAPI = (*AFNORPDPPADirectoryServiceAPIService)(&c.common)
 	c.AFNORPDPPAFlowServiceAPI = (*AFNORPDPPAFlowServiceAPIService)(&c.common)
