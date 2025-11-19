@@ -15,18 +15,18 @@ import (
 	"fmt"
 )
 
-// CodeRaisonReduction Codes standardisés pour justifier une réduction ou une charge.
+// CodeRaisonReduction Codes standardisés pour justifier une réduction ou une charge supplémentaire (norme EN 16931).  **Valeurs possibles :** - `AA` : REMISE_PUBLICITAIRE - Remise ou rabais publicitaire - `ABL` : SUPPLEMENT_EMBALLAGE - Supplément d'emballage - `ADR` : AUTRES_SERVICES - Autres services - `ADT` : ENLEVEMENT - Coût d'enlèvement - `FC` : COUTS_TRANSPORT - Coûts de transport - `FI` : FRAIS_FINANCIERS - Frais de financement - `LA` : ETIQUETAGE - Étiquetage
 type CodeRaisonReduction string
 
 // List of CodeRaisonReduction
 const (
-	AA CodeRaisonReduction = "AA"
-	ABL CodeRaisonReduction = "ABL"
-	ADR CodeRaisonReduction = "ADR"
-	ADT CodeRaisonReduction = "ADT"
-	FC CodeRaisonReduction = "FC"
-	FI CodeRaisonReduction = "FI"
-	LA CodeRaisonReduction = "LA"
+	REMISE_PUBLICITAIRE CodeRaisonReduction = "AA"
+	SUPPLEMENT_EMBALLAGE CodeRaisonReduction = "ABL"
+	AUTRES_SERVICES CodeRaisonReduction = "ADR"
+	ENLEVEMENT CodeRaisonReduction = "ADT"
+	COUTS_TRANSPORT CodeRaisonReduction = "FC"
+	FRAIS_FINANCIERS CodeRaisonReduction = "FI"
+	ETIQUETAGE CodeRaisonReduction = "LA"
 )
 
 // All allowed values of CodeRaisonReduction enum

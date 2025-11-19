@@ -3,23 +3,23 @@
 ## Enum
 
 
-* `S` (value: `"S"`)
+* `STANDARD` (value: `"S"`)
 
-* `Z` (value: `"Z"`)
+* `ZERO` (value: `"Z"`)
 
-* `E` (value: `"E"`)
+* `EXONEREE` (value: `"E"`)
 
-* `AE` (value: `"AE"`)
+* `AUTO_LIQUIDATION` (value: `"AE"`)
 
-* `K` (value: `"K"`)
+* `INTRA_COMMUNAUTAIRE` (value: `"K"`)
 
-* `G` (value: `"G"`)
+* `EXPORT` (value: `"G"`)
 
-* `O` (value: `"O"`)
+* `HORS_CHAMP` (value: `"O"`)
 
-* `L` (value: `"L"`)
+* `CANARIES` (value: `"L"`)
 
-* `M` (value: `"M"`)
+* `CEUTA_MELILLA` (value: `"M"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

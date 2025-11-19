@@ -15,20 +15,20 @@ import (
 	"fmt"
 )
 
-// CategorieTVA Catégories de TVA standardisées pour Factur-X.
+// CategorieTVA Catégories de TVA standardisées pour Factur-X (norme EN 16931).  **Valeurs possibles :** - `S` : STANDARD - TVA au taux standard - `Z` : ZERO - TVA à taux zéro - `E` : EXONEREE - Exonération de TVA - `AE` : AUTO_LIQUIDATION - Auto-liquidation (reverse charge) - `K` : INTRA_COMMUNAUTAIRE - Livraison intracommunautaire - `G` : EXPORT - Export hors UE - `O` : HORS_CHAMP - Hors champ de la TVA - `L` : CANARIES - TVA Canaries - `M` : CEUTA_MELILLA - TVA Ceuta/Melilla
 type CategorieTVA string
 
 // List of CategorieTVA
 const (
-	S CategorieTVA = "S"
-	Z CategorieTVA = "Z"
-	E CategorieTVA = "E"
-	AE CategorieTVA = "AE"
-	K CategorieTVA = "K"
-	G CategorieTVA = "G"
-	O CategorieTVA = "O"
-	L CategorieTVA = "L"
-	M CategorieTVA = "M"
+	STANDARD CategorieTVA = "S"
+	ZERO CategorieTVA = "Z"
+	EXONEREE CategorieTVA = "E"
+	AUTO_LIQUIDATION CategorieTVA = "AE"
+	INTRA_COMMUNAUTAIRE CategorieTVA = "K"
+	EXPORT CategorieTVA = "G"
+	HORS_CHAMP CategorieTVA = "O"
+	CANARIES CategorieTVA = "L"
+	CEUTA_MELILLA CategorieTVA = "M"
 )
 
 // All allowed values of CategorieTVA enum
