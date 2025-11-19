@@ -492,23 +492,22 @@ Récupère l'état d'avancement d'une tâche de génération de facture.
 
 ## États possibles
 
-- **PENDING** : Tâche en attente de traitement
-- **STARTED** : Tâche en cours d'exécution
-- **SUCCESS** : Tâche terminée (vérifier `resultat.statut` pour le résultat réel)
-- **FAILURE** : Erreur système lors de l'exécution
-- **RETRY** : Tentative de ré-exécution en cours
+Le champ `statut` utilise l'enum `StatutCelery` avec les valeurs :
+- **PENDING, STARTED, SUCCESS, FAILURE, RETRY**
 
-## Champ resultat
+Voir la documentation du schéma `StatutCelery` pour les détails.
 
-Quand la tâche est terminée (SUCCESS), le champ `resultat` contient :
-- `statut` : "SUCCES" ou "ERREUR"
+## Résultat métier
+
+Quand `statut="SUCCESS"`, le champ `resultat` contient :
+- `statut` : "SUCCES" ou "ERREUR" (résultat métier)
 - `chemin_fichier` : Chemin du fichier généré (si succès)
-- `message_erreur` : Détails de l'erreur (si échec)
+- `message_erreur` : Détails de l'erreur (si échec métier)
 
 ## Usage
 
 Appelez cet endpoint en boucle (polling) toutes les 2-3 secondes jusqu'à ce que
-le statut soit SUCCESS ou FAILURE.
+`statut` soit `SUCCESS` ou `FAILURE`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param idTache

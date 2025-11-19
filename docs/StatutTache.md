@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **IdTache** | **string** |  | 
-**Statut** | **string** |  | 
+**Statut** | [**StatutCelery**](StatutCelery.md) | Statut Celery de la tâche (PENDING, STARTED, SUCCESS, FAILURE, RETRY) | 
 **Resultat** | Pointer to **map[string]interface{}** |  | [optional] 
 
 ## Methods
 
 ### NewStatutTache
 
-`func NewStatutTache(idTache string, statut string, ) *StatutTache`
+`func NewStatutTache(idTache string, statut StatutCelery, ) *StatutTache`
 
 NewStatutTache instantiates a new StatutTache object
 This constructor will assign default values to properties that have it defined,
@@ -49,20 +49,20 @@ SetIdTache sets IdTache field to given value.
 
 ### GetStatut
 
-`func (o *StatutTache) GetStatut() string`
+`func (o *StatutTache) GetStatut() StatutCelery`
 
 GetStatut returns the Statut field if non-nil, zero value otherwise.
 
 ### GetStatutOk
 
-`func (o *StatutTache) GetStatutOk() (*string, bool)`
+`func (o *StatutTache) GetStatutOk() (*StatutCelery, bool)`
 
 GetStatutOk returns a tuple with the Statut field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatut
 
-`func (o *StatutTache) SetStatut(v string)`
+`func (o *StatutTache) SetStatut(v StatutCelery)`
 
 SetStatut sets Statut field to given value.
 

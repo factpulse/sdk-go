@@ -22,7 +22,7 @@ var _ MappedNullable = &MontantTotal{}
 // MontantTotal Contient tous les montants totaux de la facture.
 type MontantTotal struct {
 	MontantHtTotal MontantHtTotal `json:"montantHtTotal"`
-	MontantTva MontantTva1 `json:"montantTva"`
+	MontantTva MontantTvaTotal `json:"montantTva"`
 	MontantTtcTotal MontantTtcTotal `json:"montantTtcTotal"`
 	MontantAPayer MontantAPayer `json:"montantAPayer"`
 	Acompte NullableMontantTotalAcompte `json:"acompte,omitempty"`
@@ -36,7 +36,7 @@ type _MontantTotal MontantTotal
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMontantTotal(montantHtTotal MontantHtTotal, montantTva MontantTva1, montantTtcTotal MontantTtcTotal, montantAPayer MontantAPayer) *MontantTotal {
+func NewMontantTotal(montantHtTotal MontantHtTotal, montantTva MontantTvaTotal, montantTtcTotal MontantTtcTotal, montantAPayer MontantAPayer) *MontantTotal {
 	this := MontantTotal{}
 	this.MontantHtTotal = montantHtTotal
 	this.MontantTva = montantTva
@@ -78,9 +78,9 @@ func (o *MontantTotal) SetMontantHtTotal(v MontantHtTotal) {
 }
 
 // GetMontantTva returns the MontantTva field value
-func (o *MontantTotal) GetMontantTva() MontantTva1 {
+func (o *MontantTotal) GetMontantTva() MontantTvaTotal {
 	if o == nil {
-		var ret MontantTva1
+		var ret MontantTvaTotal
 		return ret
 	}
 
@@ -89,7 +89,7 @@ func (o *MontantTotal) GetMontantTva() MontantTva1 {
 
 // GetMontantTvaOk returns a tuple with the MontantTva field value
 // and a boolean to check if the value has been set.
-func (o *MontantTotal) GetMontantTvaOk() (*MontantTva1, bool) {
+func (o *MontantTotal) GetMontantTvaOk() (*MontantTvaTotal, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -97,7 +97,7 @@ func (o *MontantTotal) GetMontantTvaOk() (*MontantTva1, bool) {
 }
 
 // SetMontantTva sets field value
-func (o *MontantTotal) SetMontantTva(v MontantTva1) {
+func (o *MontantTotal) SetMontantTva(v MontantTvaTotal) {
 	o.MontantTva = v
 }
 

@@ -106,8 +106,8 @@ import (
 
 func main() {
 	donneesFacture := "donneesFacture_example" // string | Données de la facture au format JSON.              Deux formats acceptés :             1. **Format classique** : Structure complète FactureFacturX (tous les champs)             2. **Format simplifié** (🆕 P0.1) : Structure minimale avec auto-enrichissement              Le format est détecté automatiquement !             
-	profil := openapiclient.ProfilAPI("MINIMUM") // ProfilAPI | Profil Factur-X : MINIMUM, BASIC, EN16931 ou EXTENDED. (optional)
-	formatSortie := openapiclient.FormatSortie("xml") // FormatSortie | Format de sortie : 'xml' (XML seul) ou 'pdf' (PDF Factur-X avec XML embarqué). (optional)
+	profil := openapiclient.ProfilAPI("MINIMUM") // ProfilAPI | Profil Factur-X : MINIMUM, BASIC, EN16931 ou EXTENDED. (optional) (default to "EXTENDED")
+	formatSortie := openapiclient.FormatSortie("xml") // FormatSortie | Format de sortie : 'xml' (XML seul) ou 'pdf' (PDF Factur-X avec XML embarqué). (optional) (default to "xml")
 	autoEnrichir := true // bool | 🆕 Activer l'auto-enrichissement depuis SIRET/SIREN (format simplifié uniquement) (optional) (default to true)
 	sourcePdf := os.NewFile(1234, "some_file") // *os.File |  (optional)
 
@@ -135,8 +135,8 @@ Other parameters are passed through a pointer to a apiGenererFactureApiV1Traitem
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **donneesFacture** | **string** | Données de la facture au format JSON.              Deux formats acceptés :             1. **Format classique** : Structure complète FactureFacturX (tous les champs)             2. **Format simplifié** (🆕 P0.1) : Structure minimale avec auto-enrichissement              Le format est détecté automatiquement !              | 
- **profil** | [**ProfilAPI**](ProfilAPI.md) | Profil Factur-X : MINIMUM, BASIC, EN16931 ou EXTENDED. | 
- **formatSortie** | [**FormatSortie**](FormatSortie.md) | Format de sortie : &#39;xml&#39; (XML seul) ou &#39;pdf&#39; (PDF Factur-X avec XML embarqué). | 
+ **profil** | [**ProfilAPI**](ProfilAPI.md) | Profil Factur-X : MINIMUM, BASIC, EN16931 ou EXTENDED. | [default to &quot;EXTENDED&quot;]
+ **formatSortie** | [**FormatSortie**](FormatSortie.md) | Format de sortie : &#39;xml&#39; (XML seul) ou &#39;pdf&#39; (PDF Factur-X avec XML embarqué). | [default to &quot;xml&quot;]
  **autoEnrichir** | **bool** | 🆕 Activer l&#39;auto-enrichissement depuis SIRET/SIREN (format simplifié uniquement) | [default to true]
  **sourcePdf** | ***os.File** |  | 
 
@@ -744,7 +744,7 @@ import (
 
 func main() {
 	fichierXml := os.NewFile(1234, "some_file") // *os.File | Fichier XML Factur-X à valider (format .xml).
-	profil := openapiclient.ProfilAPI("MINIMUM") // ProfilAPI | Profil de validation (MINIMUM, BASIC, EN16931, EXTENDED). (optional)
+	profil := openapiclient.ProfilAPI("MINIMUM") // ProfilAPI | Profil de validation (MINIMUM, BASIC, EN16931, EXTENDED). (optional) (default to "EXTENDED")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -770,7 +770,7 @@ Other parameters are passed through a pointer to a apiValiderXmlApiV1TraitementV
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **fichierXml** | ***os.File** | Fichier XML Factur-X à valider (format .xml). | 
- **profil** | [**ProfilAPI**](ProfilAPI.md) | Profil de validation (MINIMUM, BASIC, EN16931, EXTENDED). | 
+ **profil** | [**ProfilAPI**](ProfilAPI.md) | Profil de validation (MINIMUM, BASIC, EN16931, EXTENDED). | [default to &quot;EXTENDED&quot;]
 
 ### Return type
 

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **MontantBaseHt** | [**MontantBaseHt**](MontantBaseHt.md) |  | 
-**MontantTva** | [**MontantTva**](MontantTva.md) |  | 
+**MontantTva** | [**MontantTvaLigne**](MontantTvaLigne.md) |  | 
 **Taux** | Pointer to **NullableString** |  | [optional] 
 **TauxManuel** | Pointer to [**Tauxmanuel**](Tauxmanuel.md) |  | [optional] 
 **Categorie** | Pointer to [**NullableCategorieTVA**](CategorieTVA.md) |  | [optional] 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewLigneDeTVA
 
-`func NewLigneDeTVA(montantBaseHt MontantBaseHt, montantTva MontantTva, ) *LigneDeTVA`
+`func NewLigneDeTVA(montantBaseHt MontantBaseHt, montantTva MontantTvaLigne, ) *LigneDeTVA`
 
 NewLigneDeTVA instantiates a new LigneDeTVA object
 This constructor will assign default values to properties that have it defined,
@@ -51,20 +51,20 @@ SetMontantBaseHt sets MontantBaseHt field to given value.
 
 ### GetMontantTva
 
-`func (o *LigneDeTVA) GetMontantTva() MontantTva`
+`func (o *LigneDeTVA) GetMontantTva() MontantTvaLigne`
 
 GetMontantTva returns the MontantTva field if non-nil, zero value otherwise.
 
 ### GetMontantTvaOk
 
-`func (o *LigneDeTVA) GetMontantTvaOk() (*MontantTva, bool)`
+`func (o *LigneDeTVA) GetMontantTvaOk() (*MontantTvaLigne, bool)`
 
 GetMontantTvaOk returns a tuple with the MontantTva field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMontantTva
 
-`func (o *LigneDeTVA) SetMontantTva(v MontantTva)`
+`func (o *LigneDeTVA) SetMontantTva(v MontantTvaLigne)`
 
 SetMontantTva sets MontantTva field to given value.
 

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Identifiant** | **string** |  | 
-**SchemeId** | Pointer to [**SchemeID**](SchemeID.md) |  | [optional] 
+**SchemeId** | Pointer to [**SchemeID**](SchemeID.md) |  | [optional] [default to FR_SIREN]
 
 ## Methods
 

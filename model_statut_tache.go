@@ -19,10 +19,11 @@ import (
 // checks if the StatutTache type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StatutTache{}
 
-// StatutTache Description complète du statut d'une tâche asynchrone.
+// StatutTache Description complète du statut d'une tâche asynchrone.  Le champ `statut` indique l'état Celery de la tâche. Quand `statut=\"SUCCESS\"`, consultez `resultat.statut` pour le résultat métier (\"SUCCES\" ou \"ERREUR\").
 type StatutTache struct {
 	IdTache string `json:"id_tache"`
-	Statut string `json:"statut"`
+	// Statut Celery de la tâche (PENDING, STARTED, SUCCESS, FAILURE, RETRY)
+	Statut StatutCelery `json:"statut"`
 	Resultat map[string]interface{} `json:"resultat,omitempty"`
 }
 
@@ -32,7 +33,7 @@ type _StatutTache StatutTache
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStatutTache(idTache string, statut string) *StatutTache {
+func NewStatutTache(idTache string, statut StatutCelery) *StatutTache {
 	this := StatutTache{}
 	this.IdTache = idTache
 	this.Statut = statut
@@ -72,9 +73,9 @@ func (o *StatutTache) SetIdTache(v string) {
 }
 
 // GetStatut returns the Statut field value
-func (o *StatutTache) GetStatut() string {
+func (o *StatutTache) GetStatut() StatutCelery {
 	if o == nil {
-		var ret string
+		var ret StatutCelery
 		return ret
 	}
 
@@ -83,7 +84,7 @@ func (o *StatutTache) GetStatut() string {
 
 // GetStatutOk returns a tuple with the Statut field value
 // and a boolean to check if the value has been set.
-func (o *StatutTache) GetStatutOk() (*string, bool) {
+func (o *StatutTache) GetStatutOk() (*StatutCelery, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -91,7 +92,7 @@ func (o *StatutTache) GetStatutOk() (*string, bool) {
 }
 
 // SetStatut sets field value
-func (o *StatutTache) SetStatut(v string) {
+func (o *StatutTache) SetStatut(v StatutCelery) {
 	o.Statut = v
 }
 

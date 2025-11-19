@@ -12,185 +12,94 @@ package factpulse
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
-// checks if the AdresseElectronique type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AdresseElectronique{}
 
-// AdresseElectronique Représente une adresse de facturation électronique, composée d'un identifiant et de son schéma (SchemeID) conformément à la norme EN16931. Exemple: { \"identifiant\": \"123456789\", \"scheme_id\": \"0225\" }
-type AdresseElectronique struct {
-	Identifiant string `json:"identifiant"`
-	SchemeId *SchemeID `json:"schemeId,omitempty"`
+// MontantTvaLigne Montant de la TVA pour cette ligne.
+type MontantTvaLigne struct {
+	Float32 *float32
+	String *string
 }
 
-type _AdresseElectronique AdresseElectronique
-
-// NewAdresseElectronique instantiates a new AdresseElectronique object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewAdresseElectronique(identifiant string) *AdresseElectronique {
-	this := AdresseElectronique{}
-	this.Identifiant = identifiant
-	var schemeId SchemeID = FR_SIREN
-	this.SchemeId = &schemeId
-	return &this
-}
-
-// NewAdresseElectroniqueWithDefaults instantiates a new AdresseElectronique object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewAdresseElectroniqueWithDefaults() *AdresseElectronique {
-	this := AdresseElectronique{}
-	var schemeId SchemeID = FR_SIREN
-	this.SchemeId = &schemeId
-	return &this
-}
-
-// GetIdentifiant returns the Identifiant field value
-func (o *AdresseElectronique) GetIdentifiant() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Identifiant
-}
-
-// GetIdentifiantOk returns a tuple with the Identifiant field value
-// and a boolean to check if the value has been set.
-func (o *AdresseElectronique) GetIdentifiantOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Identifiant, true
-}
-
-// SetIdentifiant sets field value
-func (o *AdresseElectronique) SetIdentifiant(v string) {
-	o.Identifiant = v
-}
-
-// GetSchemeId returns the SchemeId field value if set, zero value otherwise.
-func (o *AdresseElectronique) GetSchemeId() SchemeID {
-	if o == nil || IsNil(o.SchemeId) {
-		var ret SchemeID
-		return ret
-	}
-	return *o.SchemeId
-}
-
-// GetSchemeIdOk returns a tuple with the SchemeId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AdresseElectronique) GetSchemeIdOk() (*SchemeID, bool) {
-	if o == nil || IsNil(o.SchemeId) {
-		return nil, false
-	}
-	return o.SchemeId, true
-}
-
-// HasSchemeId returns a boolean if a field has been set.
-func (o *AdresseElectronique) HasSchemeId() bool {
-	if o != nil && !IsNil(o.SchemeId) {
-		return true
-	}
-
-	return false
-}
-
-// SetSchemeId gets a reference to the given SchemeID and assigns it to the SchemeId field.
-func (o *AdresseElectronique) SetSchemeId(v SchemeID) {
-	o.SchemeId = &v
-}
-
-func (o AdresseElectronique) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o AdresseElectronique) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["identifiant"] = o.Identifiant
-	if !IsNil(o.SchemeId) {
-		toSerialize["schemeId"] = o.SchemeId
-	}
-	return toSerialize, nil
-}
-
-func (o *AdresseElectronique) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"identifiant",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
+// Unmarshal JSON data into any of the pointers in the struct
+func (dst *MontantTvaLigne) UnmarshalJSON(data []byte) error {
+	var err error
+	// try to unmarshal JSON data into Float32
+	err = json.Unmarshal(data, &dst.Float32);
+	if err == nil {
+		jsonFloat32, _ := json.Marshal(dst.Float32)
+		if string(jsonFloat32) == "{}" { // empty struct
+			dst.Float32 = nil
+		} else {
+			return nil // data stored in dst.Float32, return on the first match
 		}
+	} else {
+		dst.Float32 = nil
 	}
 
-	varAdresseElectronique := _AdresseElectronique{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAdresseElectronique)
-
-	if err != nil {
-		return err
+	// try to unmarshal JSON data into String
+	err = json.Unmarshal(data, &dst.String);
+	if err == nil {
+		jsonString, _ := json.Marshal(dst.String)
+		if string(jsonString) == "{}" { // empty struct
+			dst.String = nil
+		} else {
+			return nil // data stored in dst.String, return on the first match
+		}
+	} else {
+		dst.String = nil
 	}
 
-	*o = AdresseElectronique(varAdresseElectronique)
-
-	return err
+	return fmt.Errorf("data failed to match schemas in anyOf(MontantTvaLigne)")
 }
 
-type NullableAdresseElectronique struct {
-	value *AdresseElectronique
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src MontantTvaLigne) MarshalJSON() ([]byte, error) {
+	if src.Float32 != nil {
+		return json.Marshal(&src.Float32)
+	}
+
+	if src.String != nil {
+		return json.Marshal(&src.String)
+	}
+
+	return nil, nil // no data in anyOf schemas
+}
+
+
+type NullableMontantTvaLigne struct {
+	value *MontantTvaLigne
 	isSet bool
 }
 
-func (v NullableAdresseElectronique) Get() *AdresseElectronique {
+func (v NullableMontantTvaLigne) Get() *MontantTvaLigne {
 	return v.value
 }
 
-func (v *NullableAdresseElectronique) Set(val *AdresseElectronique) {
+func (v *NullableMontantTvaLigne) Set(val *MontantTvaLigne) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAdresseElectronique) IsSet() bool {
+func (v NullableMontantTvaLigne) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAdresseElectronique) Unset() {
+func (v *NullableMontantTvaLigne) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAdresseElectronique(val *AdresseElectronique) *NullableAdresseElectronique {
-	return &NullableAdresseElectronique{value: val, isSet: true}
+func NewNullableMontantTvaLigne(val *MontantTvaLigne) *NullableMontantTvaLigne {
+	return &NullableMontantTvaLigne{value: val, isSet: true}
 }
 
-func (v NullableAdresseElectronique) MarshalJSON() ([]byte, error) {
+func (v NullableMontantTvaLigne) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAdresseElectronique) UnmarshalJSON(src []byte) error {
+func (v *NullableMontantTvaLigne) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

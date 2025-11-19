@@ -35,6 +35,8 @@ type OptionsProcessing struct {
 // will change when the set of required properties is changed
 func NewOptionsProcessing() *OptionsProcessing {
 	this := OptionsProcessing{}
+	var profilFacturx ProfilAPI = EN16931
+	this.ProfilFacturx = &profilFacturx
 	var autoEnrichir bool = true
 	this.AutoEnrichir = &autoEnrichir
 	var valider bool = true
@@ -49,6 +51,8 @@ func NewOptionsProcessing() *OptionsProcessing {
 // but it doesn't guarantee that properties required by API are set
 func NewOptionsProcessingWithDefaults() *OptionsProcessing {
 	this := OptionsProcessing{}
+	var profilFacturx ProfilAPI = EN16931
+	this.ProfilFacturx = &profilFacturx
 	var autoEnrichir bool = true
 	this.AutoEnrichir = &autoEnrichir
 	var valider bool = true

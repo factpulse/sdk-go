@@ -73,6 +73,8 @@ docs/MontantTtcTotal.md
 docs/MontantTtcTotal1.md
 docs/MontantTva.md
 docs/MontantTva1.md
+docs/MontantTvaLigne.md
+docs/MontantTvaTotal.md
 docs/MontantUnitaireHt.md
 docs/ObtenirIdChorusProRequest.md
 docs/ObtenirIdChorusProResponse.md
@@ -102,6 +104,7 @@ docs/SoumettreFactureCompleteRequest.md
 docs/SoumettreFactureCompleteResponse.md
 docs/SoumettreFactureRequest.md
 docs/SoumettreFactureResponse.md
+docs/StatutCelery.md
 docs/StatutFacture.md
 docs/StatutTache.md
 docs/StructureInfo.md
@@ -174,6 +177,8 @@ model_montant_ttc_total.go
 model_montant_ttc_total_1.go
 model_montant_tva.go
 model_montant_tva_1.go
+model_montant_tva_ligne.go
+model_montant_tva_total.go
 model_montant_unitaire_ht.go
 model_obtenir_id_chorus_pro_request.go
 model_obtenir_id_chorus_pro_response.go
@@ -202,6 +207,7 @@ model_soumettre_facture_complete_request.go
 model_soumettre_facture_complete_response.go
 model_soumettre_facture_request.go
 model_soumettre_facture_response.go
+model_statut_celery.go
 model_statut_facture.go
 model_statut_tache.go
 model_structure_info.go

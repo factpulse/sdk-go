@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **MontantHtTotal** | [**MontantHtTotal**](MontantHtTotal.md) |  | 
-**MontantTva** | [**MontantTva1**](MontantTva1.md) |  | 
+**MontantTva** | [**MontantTvaTotal**](MontantTvaTotal.md) |  | 
 **MontantTtcTotal** | [**MontantTtcTotal**](MontantTtcTotal.md) |  | 
 **MontantAPayer** | [**MontantAPayer**](MontantAPayer.md) |  | 
 **Acompte** | Pointer to [**NullableMontantTotalAcompte**](MontantTotalAcompte.md) |  | [optional] 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewMontantTotal
 
-`func NewMontantTotal(montantHtTotal MontantHtTotal, montantTva MontantTva1, montantTtcTotal MontantTtcTotal, montantAPayer MontantAPayer, ) *MontantTotal`
+`func NewMontantTotal(montantHtTotal MontantHtTotal, montantTva MontantTvaTotal, montantTtcTotal MontantTtcTotal, montantAPayer MontantAPayer, ) *MontantTotal`
 
 NewMontantTotal instantiates a new MontantTotal object
 This constructor will assign default values to properties that have it defined,
@@ -53,20 +53,20 @@ SetMontantHtTotal sets MontantHtTotal field to given value.
 
 ### GetMontantTva
 
-`func (o *MontantTotal) GetMontantTva() MontantTva1`
+`func (o *MontantTotal) GetMontantTva() MontantTvaTotal`
 
 GetMontantTva returns the MontantTva field if non-nil, zero value otherwise.
 
 ### GetMontantTvaOk
 
-`func (o *MontantTotal) GetMontantTvaOk() (*MontantTva1, bool)`
+`func (o *MontantTotal) GetMontantTvaOk() (*MontantTvaTotal, bool)`
 
 GetMontantTvaOk returns a tuple with the MontantTva field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMontantTva
 
-`func (o *MontantTotal) SetMontantTva(v MontantTva1)`
+`func (o *MontantTotal) SetMontantTva(v MontantTvaTotal)`
 
 SetMontantTva sets MontantTva field to given value.
 

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ProfilFacturx** | Pointer to [**ProfilAPI**](ProfilAPI.md) | Profil Factur-X à utiliser | [optional] 
+**ProfilFacturx** | Pointer to [**ProfilAPI**](ProfilAPI.md) | Profil Factur-X à utiliser | [optional] [default to EN16931]
 **AutoEnrichir** | Pointer to **bool** | Auto-enrichir les données (APIs Entreprises, Chorus Pro, etc.) | [optional] [default to true]
 **Valider** | Pointer to **bool** | Valider le XML Factur-X avec Schematron | [optional] [default to true]
 **VerifierParametresDestination** | Pointer to **bool** | Vérifier les paramètres requis par la destination (ex: code_service pour Chorus) | [optional] [default to true]

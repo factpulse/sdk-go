@@ -12,187 +12,106 @@ package factpulse
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
-// checks if the AdresseElectronique type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AdresseElectronique{}
+// StatutCelery Statuts possibles d'une tâche Celery lors du polling.  **Valeurs possibles :** - `PENDING` : Tâche en attente de traitement - `STARTED` : Tâche en cours d'exécution - `SUCCESS` : Tâche terminée avec succès (vérifier `resultat.statut` pour le résultat métier) - `FAILURE` : Erreur système lors de l'exécution (crash, exception non gérée) - `RETRY` : Tentative de ré-exécution en cours (après un échec temporaire)
+type StatutCelery string
 
-// AdresseElectronique Représente une adresse de facturation électronique, composée d'un identifiant et de son schéma (SchemeID) conformément à la norme EN16931. Exemple: { \"identifiant\": \"123456789\", \"scheme_id\": \"0225\" }
-type AdresseElectronique struct {
-	Identifiant string `json:"identifiant"`
-	SchemeId *SchemeID `json:"schemeId,omitempty"`
+// List of StatutCelery
+const (
+	PENDING StatutCelery = "PENDING"
+	STARTED StatutCelery = "STARTED"
+	SUCCESS StatutCelery = "SUCCESS"
+	FAILURE StatutCelery = "FAILURE"
+	RETRY StatutCelery = "RETRY"
+)
+
+// All allowed values of StatutCelery enum
+var AllowedStatutCeleryEnumValues = []StatutCelery{
+	"PENDING",
+	"STARTED",
+	"SUCCESS",
+	"FAILURE",
+	"RETRY",
 }
 
-type _AdresseElectronique AdresseElectronique
-
-// NewAdresseElectronique instantiates a new AdresseElectronique object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewAdresseElectronique(identifiant string) *AdresseElectronique {
-	this := AdresseElectronique{}
-	this.Identifiant = identifiant
-	var schemeId SchemeID = FR_SIREN
-	this.SchemeId = &schemeId
-	return &this
-}
-
-// NewAdresseElectroniqueWithDefaults instantiates a new AdresseElectronique object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewAdresseElectroniqueWithDefaults() *AdresseElectronique {
-	this := AdresseElectronique{}
-	var schemeId SchemeID = FR_SIREN
-	this.SchemeId = &schemeId
-	return &this
-}
-
-// GetIdentifiant returns the Identifiant field value
-func (o *AdresseElectronique) GetIdentifiant() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Identifiant
-}
-
-// GetIdentifiantOk returns a tuple with the Identifiant field value
-// and a boolean to check if the value has been set.
-func (o *AdresseElectronique) GetIdentifiantOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Identifiant, true
-}
-
-// SetIdentifiant sets field value
-func (o *AdresseElectronique) SetIdentifiant(v string) {
-	o.Identifiant = v
-}
-
-// GetSchemeId returns the SchemeId field value if set, zero value otherwise.
-func (o *AdresseElectronique) GetSchemeId() SchemeID {
-	if o == nil || IsNil(o.SchemeId) {
-		var ret SchemeID
-		return ret
-	}
-	return *o.SchemeId
-}
-
-// GetSchemeIdOk returns a tuple with the SchemeId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AdresseElectronique) GetSchemeIdOk() (*SchemeID, bool) {
-	if o == nil || IsNil(o.SchemeId) {
-		return nil, false
-	}
-	return o.SchemeId, true
-}
-
-// HasSchemeId returns a boolean if a field has been set.
-func (o *AdresseElectronique) HasSchemeId() bool {
-	if o != nil && !IsNil(o.SchemeId) {
-		return true
-	}
-
-	return false
-}
-
-// SetSchemeId gets a reference to the given SchemeID and assigns it to the SchemeId field.
-func (o *AdresseElectronique) SetSchemeId(v SchemeID) {
-	o.SchemeId = &v
-}
-
-func (o AdresseElectronique) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o AdresseElectronique) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["identifiant"] = o.Identifiant
-	if !IsNil(o.SchemeId) {
-		toSerialize["schemeId"] = o.SchemeId
-	}
-	return toSerialize, nil
-}
-
-func (o *AdresseElectronique) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"identifiant",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varAdresseElectronique := _AdresseElectronique{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAdresseElectronique)
-
+func (v *StatutCelery) UnmarshalJSON(src []byte) error {
+	var value string
+	err := json.Unmarshal(src, &value)
 	if err != nil {
 		return err
 	}
+	enumTypeValue := StatutCelery(value)
+	for _, existing := range AllowedStatutCeleryEnumValues {
+		if existing == enumTypeValue {
+			*v = enumTypeValue
+			return nil
+		}
+	}
 
-	*o = AdresseElectronique(varAdresseElectronique)
-
-	return err
+	return fmt.Errorf("%+v is not a valid StatutCelery", value)
 }
 
-type NullableAdresseElectronique struct {
-	value *AdresseElectronique
+// NewStatutCeleryFromValue returns a pointer to a valid StatutCelery
+// for the value passed as argument, or an error if the value passed is not allowed by the enum
+func NewStatutCeleryFromValue(v string) (*StatutCelery, error) {
+	ev := StatutCelery(v)
+	if ev.IsValid() {
+		return &ev, nil
+	} else {
+		return nil, fmt.Errorf("invalid value '%v' for StatutCelery: valid values are %v", v, AllowedStatutCeleryEnumValues)
+	}
+}
+
+// IsValid return true if the value is valid for the enum, false otherwise
+func (v StatutCelery) IsValid() bool {
+	for _, existing := range AllowedStatutCeleryEnumValues {
+		if existing == v {
+			return true
+		}
+	}
+	return false
+}
+
+// Ptr returns reference to StatutCelery value
+func (v StatutCelery) Ptr() *StatutCelery {
+	return &v
+}
+
+type NullableStatutCelery struct {
+	value *StatutCelery
 	isSet bool
 }
 
-func (v NullableAdresseElectronique) Get() *AdresseElectronique {
+func (v NullableStatutCelery) Get() *StatutCelery {
 	return v.value
 }
 
-func (v *NullableAdresseElectronique) Set(val *AdresseElectronique) {
+func (v *NullableStatutCelery) Set(val *StatutCelery) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAdresseElectronique) IsSet() bool {
+func (v NullableStatutCelery) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAdresseElectronique) Unset() {
+func (v *NullableStatutCelery) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAdresseElectronique(val *AdresseElectronique) *NullableAdresseElectronique {
-	return &NullableAdresseElectronique{value: val, isSet: true}
+func NewNullableStatutCelery(val *StatutCelery) *NullableStatutCelery {
+	return &NullableStatutCelery{value: val, isSet: true}
 }
 
-func (v NullableAdresseElectronique) MarshalJSON() ([]byte, error) {
+func (v NullableStatutCelery) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAdresseElectronique) UnmarshalJSON(src []byte) error {
+func (v *NullableStatutCelery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 
