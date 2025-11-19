@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MontantBaseHt** | [**MontantBaseHt**](MontantBaseHt.md) |  | 
-**MontantTva** | [**MontantTvaLigne**](MontantTvaLigne.md) |  | 
+**MontantBaseHt** | **float64** | Montant de la base HT pour cette ligne de TVA. | 
+**MontantTva** | **float64** | Montant de la TVA pour cette ligne. | 
 **Taux** | Pointer to **NullableString** |  | [optional] 
-**TauxManuel** | Pointer to [**Tauxmanuel**](Tauxmanuel.md) |  | [optional] 
+**TauxManuel** | Pointer to **float64** | Taux de TVA avec valeur manuelle. | [optional] 
 **Categorie** | Pointer to [**NullableCategorieTVA**](CategorieTVA.md) |  | [optional] 
 
 ## Methods
 
 ### NewLigneDeTVA
 
-`func NewLigneDeTVA(montantBaseHt MontantBaseHt, montantTva MontantTvaLigne, ) *LigneDeTVA`
+`func NewLigneDeTVA(montantBaseHt float64, montantTva float64, ) *LigneDeTVA`
 
 NewLigneDeTVA instantiates a new LigneDeTVA object
 This constructor will assign default values to properties that have it defined,
@@ -31,40 +31,40 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetMontantBaseHt
 
-`func (o *LigneDeTVA) GetMontantBaseHt() MontantBaseHt`
+`func (o *LigneDeTVA) GetMontantBaseHt() float64`
 
 GetMontantBaseHt returns the MontantBaseHt field if non-nil, zero value otherwise.
 
 ### GetMontantBaseHtOk
 
-`func (o *LigneDeTVA) GetMontantBaseHtOk() (*MontantBaseHt, bool)`
+`func (o *LigneDeTVA) GetMontantBaseHtOk() (*float64, bool)`
 
 GetMontantBaseHtOk returns a tuple with the MontantBaseHt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMontantBaseHt
 
-`func (o *LigneDeTVA) SetMontantBaseHt(v MontantBaseHt)`
+`func (o *LigneDeTVA) SetMontantBaseHt(v float64)`
 
 SetMontantBaseHt sets MontantBaseHt field to given value.
 
 
 ### GetMontantTva
 
-`func (o *LigneDeTVA) GetMontantTva() MontantTvaLigne`
+`func (o *LigneDeTVA) GetMontantTva() float64`
 
 GetMontantTva returns the MontantTva field if non-nil, zero value otherwise.
 
 ### GetMontantTvaOk
 
-`func (o *LigneDeTVA) GetMontantTvaOk() (*MontantTvaLigne, bool)`
+`func (o *LigneDeTVA) GetMontantTvaOk() (*float64, bool)`
 
 GetMontantTvaOk returns a tuple with the MontantTva field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMontantTva
 
-`func (o *LigneDeTVA) SetMontantTva(v MontantTvaLigne)`
+`func (o *LigneDeTVA) SetMontantTva(v float64)`
 
 SetMontantTva sets MontantTva field to given value.
 
@@ -106,20 +106,20 @@ HasTaux returns a boolean if a field has been set.
 UnsetTaux ensures that no value is present for Taux, not even an explicit nil
 ### GetTauxManuel
 
-`func (o *LigneDeTVA) GetTauxManuel() Tauxmanuel`
+`func (o *LigneDeTVA) GetTauxManuel() float64`
 
 GetTauxManuel returns the TauxManuel field if non-nil, zero value otherwise.
 
 ### GetTauxManuelOk
 
-`func (o *LigneDeTVA) GetTauxManuelOk() (*Tauxmanuel, bool)`
+`func (o *LigneDeTVA) GetTauxManuelOk() (*float64, bool)`
 
 GetTauxManuelOk returns a tuple with the TauxManuel field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTauxManuel
 
-`func (o *LigneDeTVA) SetTauxManuel(v Tauxmanuel)`
+`func (o *LigneDeTVA) SetTauxManuel(v float64)`
 
 SetTauxManuel sets TauxManuel field to given value.
 

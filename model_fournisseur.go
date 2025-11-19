@@ -26,6 +26,7 @@ type Fournisseur struct {
 	CodeCoordonneesBancairesFournisseur NullableInt32 `json:"codeCoordonneesBancairesFournisseur,omitempty"`
 	IdServiceFournisseur NullableInt32 `json:"idServiceFournisseur,omitempty"`
 	Nom NullableString `json:"nom,omitempty"`
+	Siren NullableString `json:"siren,omitempty"`
 	Siret NullableString `json:"siret,omitempty"`
 	NumeroTvaIntra NullableString `json:"numeroTvaIntra,omitempty"`
 	Iban NullableString `json:"iban,omitempty"`
@@ -227,6 +228,48 @@ func (o *Fournisseur) UnsetNom() {
 	o.Nom.Unset()
 }
 
+// GetSiren returns the Siren field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Fournisseur) GetSiren() string {
+	if o == nil || IsNil(o.Siren.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Siren.Get()
+}
+
+// GetSirenOk returns a tuple with the Siren field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Fournisseur) GetSirenOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Siren.Get(), o.Siren.IsSet()
+}
+
+// HasSiren returns a boolean if a field has been set.
+func (o *Fournisseur) HasSiren() bool {
+	if o != nil && o.Siren.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSiren gets a reference to the given NullableString and assigns it to the Siren field.
+func (o *Fournisseur) SetSiren(v string) {
+	o.Siren.Set(&v)
+}
+// SetSirenNil sets the value for Siren to be an explicit nil
+func (o *Fournisseur) SetSirenNil() {
+	o.Siren.Set(nil)
+}
+
+// UnsetSiren ensures that no value is present for Siren, not even an explicit nil
+func (o *Fournisseur) UnsetSiren() {
+	o.Siren.Unset()
+}
+
 // GetSiret returns the Siret field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Fournisseur) GetSiret() string {
 	if o == nil || IsNil(o.Siret.Get()) {
@@ -415,6 +458,9 @@ func (o Fournisseur) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Nom.IsSet() {
 		toSerialize["nom"] = o.Nom.Get()
+	}
+	if o.Siren.IsSet() {
+		toSerialize["siren"] = o.Siren.Get()
 	}
 	if o.Siret.IsSet() {
 		toSerialize["siret"] = o.Siret.Get()

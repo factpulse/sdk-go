@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **CodeCoordonneesBancairesFournisseur** | Pointer to **NullableInt32** |  | [optional] 
 **IdServiceFournisseur** | Pointer to **NullableInt32** |  | [optional] 
 **Nom** | Pointer to **NullableString** |  | [optional] 
+**Siren** | Pointer to **NullableString** |  | [optional] 
 **Siret** | Pointer to **NullableString** |  | [optional] 
 **NumeroTvaIntra** | Pointer to **NullableString** |  | [optional] 
 **Iban** | Pointer to **NullableString** |  | [optional] 
@@ -178,6 +179,41 @@ HasNom returns a boolean if a field has been set.
 `func (o *Fournisseur) UnsetNom()`
 
 UnsetNom ensures that no value is present for Nom, not even an explicit nil
+### GetSiren
+
+`func (o *Fournisseur) GetSiren() string`
+
+GetSiren returns the Siren field if non-nil, zero value otherwise.
+
+### GetSirenOk
+
+`func (o *Fournisseur) GetSirenOk() (*string, bool)`
+
+GetSirenOk returns a tuple with the Siren field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSiren
+
+`func (o *Fournisseur) SetSiren(v string)`
+
+SetSiren sets Siren field to given value.
+
+### HasSiren
+
+`func (o *Fournisseur) HasSiren() bool`
+
+HasSiren returns a boolean if a field has been set.
+
+### SetSirenNil
+
+`func (o *Fournisseur) SetSirenNil(b bool)`
+
+ SetSirenNil sets the value for Siren to be an explicit nil
+
+### UnsetSiren
+`func (o *Fournisseur) UnsetSiren()`
+
+UnsetSiren ensures that no value is present for Siren, not even an explicit nil
 ### GetSiret
 
 `func (o *Fournisseur) GetSiret() string`

@@ -24,6 +24,8 @@ type Destinataire struct {
 	AdresseElectronique AdresseElectronique `json:"adresseElectronique"`
 	CodeServiceExecutant NullableString `json:"codeServiceExecutant,omitempty"`
 	Nom NullableString `json:"nom,omitempty"`
+	Siren NullableString `json:"siren,omitempty"`
+	Siret NullableString `json:"siret,omitempty"`
 	AdressePostale NullableAdressePostale `json:"adressePostale,omitempty"`
 }
 
@@ -155,6 +157,90 @@ func (o *Destinataire) UnsetNom() {
 	o.Nom.Unset()
 }
 
+// GetSiren returns the Siren field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Destinataire) GetSiren() string {
+	if o == nil || IsNil(o.Siren.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Siren.Get()
+}
+
+// GetSirenOk returns a tuple with the Siren field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Destinataire) GetSirenOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Siren.Get(), o.Siren.IsSet()
+}
+
+// HasSiren returns a boolean if a field has been set.
+func (o *Destinataire) HasSiren() bool {
+	if o != nil && o.Siren.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSiren gets a reference to the given NullableString and assigns it to the Siren field.
+func (o *Destinataire) SetSiren(v string) {
+	o.Siren.Set(&v)
+}
+// SetSirenNil sets the value for Siren to be an explicit nil
+func (o *Destinataire) SetSirenNil() {
+	o.Siren.Set(nil)
+}
+
+// UnsetSiren ensures that no value is present for Siren, not even an explicit nil
+func (o *Destinataire) UnsetSiren() {
+	o.Siren.Unset()
+}
+
+// GetSiret returns the Siret field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Destinataire) GetSiret() string {
+	if o == nil || IsNil(o.Siret.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Siret.Get()
+}
+
+// GetSiretOk returns a tuple with the Siret field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Destinataire) GetSiretOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Siret.Get(), o.Siret.IsSet()
+}
+
+// HasSiret returns a boolean if a field has been set.
+func (o *Destinataire) HasSiret() bool {
+	if o != nil && o.Siret.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSiret gets a reference to the given NullableString and assigns it to the Siret field.
+func (o *Destinataire) SetSiret(v string) {
+	o.Siret.Set(&v)
+}
+// SetSiretNil sets the value for Siret to be an explicit nil
+func (o *Destinataire) SetSiretNil() {
+	o.Siret.Set(nil)
+}
+
+// UnsetSiret ensures that no value is present for Siret, not even an explicit nil
+func (o *Destinataire) UnsetSiret() {
+	o.Siret.Unset()
+}
+
 // GetAdressePostale returns the AdressePostale field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Destinataire) GetAdressePostale() AdressePostale {
 	if o == nil || IsNil(o.AdressePostale.Get()) {
@@ -213,6 +299,12 @@ func (o Destinataire) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Nom.IsSet() {
 		toSerialize["nom"] = o.Nom.Get()
+	}
+	if o.Siren.IsSet() {
+		toSerialize["siren"] = o.Siren.Get()
+	}
+	if o.Siret.IsSet() {
+		toSerialize["siret"] = o.Siret.Get()
 	}
 	if o.AdressePostale.IsSet() {
 		toSerialize["adressePostale"] = o.AdressePostale.Get()

@@ -12,99 +12,191 @@ package factpulse
 
 import (
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
+// checks if the Note type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Note{}
 
-// MontantTotalLigneHt Montant total HT de la ligne (quantité × prix unitaire - remise).
-type MontantTotalLigneHt struct {
-	Float32 *float32
-	String *string
+// Note Note de facture (IncludedNote en Factur-X).  Les notes obligatoires pour BR-FR-05 sont : - PMT : Indemnité forfaitaire pour frais de recouvrement - PMD : Pénalités de retard - AAB : Escompte pour paiement anticipé
+type Note struct {
+	SubjectCode NullableString `json:"subjectCode,omitempty"`
+	Content string `json:"content"`
 }
 
-// Unmarshal JSON data into any of the pointers in the struct
-func (dst *MontantTotalLigneHt) UnmarshalJSON(data []byte) error {
-	var err error
-	// this object is nullable so check if the payload is null or empty string
-	if string(data) == "" || string(data) == "{}" {
-		return nil
+type _Note Note
+
+// NewNote instantiates a new Note object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewNote(content string) *Note {
+	this := Note{}
+	this.Content = content
+	return &this
+}
+
+// NewNoteWithDefaults instantiates a new Note object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewNoteWithDefaults() *Note {
+	this := Note{}
+	return &this
+}
+
+// GetSubjectCode returns the SubjectCode field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Note) GetSubjectCode() string {
+	if o == nil || IsNil(o.SubjectCode.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.SubjectCode.Get()
+}
+
+// GetSubjectCodeOk returns a tuple with the SubjectCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Note) GetSubjectCodeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SubjectCode.Get(), o.SubjectCode.IsSet()
+}
+
+// HasSubjectCode returns a boolean if a field has been set.
+func (o *Note) HasSubjectCode() bool {
+	if o != nil && o.SubjectCode.IsSet() {
+		return true
 	}
 
-	// try to unmarshal JSON data into Float32
-	err = json.Unmarshal(data, &dst.Float32);
-	if err == nil {
-		jsonFloat32, _ := json.Marshal(dst.Float32)
-		if string(jsonFloat32) == "{}" { // empty struct
-			dst.Float32 = nil
-		} else {
-			return nil // data stored in dst.Float32, return on the first match
+	return false
+}
+
+// SetSubjectCode gets a reference to the given NullableString and assigns it to the SubjectCode field.
+func (o *Note) SetSubjectCode(v string) {
+	o.SubjectCode.Set(&v)
+}
+// SetSubjectCodeNil sets the value for SubjectCode to be an explicit nil
+func (o *Note) SetSubjectCodeNil() {
+	o.SubjectCode.Set(nil)
+}
+
+// UnsetSubjectCode ensures that no value is present for SubjectCode, not even an explicit nil
+func (o *Note) UnsetSubjectCode() {
+	o.SubjectCode.Unset()
+}
+
+// GetContent returns the Content field value
+func (o *Note) GetContent() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Content
+}
+
+// GetContentOk returns a tuple with the Content field value
+// and a boolean to check if the value has been set.
+func (o *Note) GetContentOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Content, true
+}
+
+// SetContent sets field value
+func (o *Note) SetContent(v string) {
+	o.Content = v
+}
+
+func (o Note) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Note) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if o.SubjectCode.IsSet() {
+		toSerialize["subjectCode"] = o.SubjectCode.Get()
+	}
+	toSerialize["content"] = o.Content
+	return toSerialize, nil
+}
+
+func (o *Note) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"content",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
-	} else {
-		dst.Float32 = nil
 	}
 
-	// try to unmarshal JSON data into String
-	err = json.Unmarshal(data, &dst.String);
-	if err == nil {
-		jsonString, _ := json.Marshal(dst.String)
-		if string(jsonString) == "{}" { // empty struct
-			dst.String = nil
-		} else {
-			return nil // data stored in dst.String, return on the first match
-		}
-	} else {
-		dst.String = nil
+	varNote := _Note{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varNote)
+
+	if err != nil {
+		return err
 	}
 
-	return fmt.Errorf("data failed to match schemas in anyOf(MontantTotalLigneHt)")
+	*o = Note(varNote)
+
+	return err
 }
 
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src MontantTotalLigneHt) MarshalJSON() ([]byte, error) {
-	if src.Float32 != nil {
-		return json.Marshal(&src.Float32)
-	}
-
-	if src.String != nil {
-		return json.Marshal(&src.String)
-	}
-
-	return nil, nil // no data in anyOf schemas
-}
-
-
-type NullableMontantTotalLigneHt struct {
-	value *MontantTotalLigneHt
+type NullableNote struct {
+	value *Note
 	isSet bool
 }
 
-func (v NullableMontantTotalLigneHt) Get() *MontantTotalLigneHt {
+func (v NullableNote) Get() *Note {
 	return v.value
 }
 
-func (v *NullableMontantTotalLigneHt) Set(val *MontantTotalLigneHt) {
+func (v *NullableNote) Set(val *Note) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableMontantTotalLigneHt) IsSet() bool {
+func (v NullableNote) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableMontantTotalLigneHt) Unset() {
+func (v *NullableNote) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableMontantTotalLigneHt(val *MontantTotalLigneHt) *NullableMontantTotalLigneHt {
-	return &NullableMontantTotalLigneHt{value: val, isSet: true}
+func NewNullableNote(val *Note) *NullableNote {
+	return &NullableNote{value: val, isSet: true}
 }
 
-func (v NullableMontantTotalLigneHt) MarshalJSON() ([]byte, error) {
+func (v NullableNote) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableMontantTotalLigneHt) UnmarshalJSON(src []byte) error {
+func (v *NullableNote) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -10,10 +10,10 @@ Name | Type | Description | Notes
 **Quantite** | [**Quantite**](Quantite.md) |  | 
 **Unite** | [**Unite**](Unite.md) |  | 
 **MontantUnitaireHt** | [**MontantUnitaireHt**](MontantUnitaireHt.md) |  | 
-**MontantRemiseHt** | Pointer to [**NullableLigneDePosteMontantRemiseHt**](LigneDePosteMontantRemiseHt.md) |  | [optional] 
-**MontantTotalLigneHt** | Pointer to [**NullableMontantTotalLigneHt**](MontantTotalLigneHt.md) |  | [optional] 
+**MontantRemiseHt** | Pointer to **NullableFloat64** | Montant de la remise HT. | [optional] 
+**MontantTotalLigneHt** | Pointer to **float64** | Montant total HT de la ligne (quantité × prix unitaire - remise). | [optional] 
 **TauxTva** | Pointer to **NullableString** |  | [optional] 
-**TauxTvaManuel** | Pointer to [**NullableLigneDePosteTauxTvaManuel**](LigneDePosteTauxTvaManuel.md) |  | [optional] 
+**TauxTvaManuel** | Pointer to **NullableFloat64** | Taux de TVA avec valeur manuelle. | [optional] 
 **CategorieTva** | Pointer to [**NullableCategorieTVA**](CategorieTVA.md) |  | [optional] 
 **DateDebutPeriode** | Pointer to **NullableString** |  | [optional] 
 **DateFinPeriode** | Pointer to **NullableString** |  | [optional] 
@@ -176,20 +176,20 @@ SetMontantUnitaireHt sets MontantUnitaireHt field to given value.
 
 ### GetMontantRemiseHt
 
-`func (o *LigneDePoste) GetMontantRemiseHt() LigneDePosteMontantRemiseHt`
+`func (o *LigneDePoste) GetMontantRemiseHt() float64`
 
 GetMontantRemiseHt returns the MontantRemiseHt field if non-nil, zero value otherwise.
 
 ### GetMontantRemiseHtOk
 
-`func (o *LigneDePoste) GetMontantRemiseHtOk() (*LigneDePosteMontantRemiseHt, bool)`
+`func (o *LigneDePoste) GetMontantRemiseHtOk() (*float64, bool)`
 
 GetMontantRemiseHtOk returns a tuple with the MontantRemiseHt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMontantRemiseHt
 
-`func (o *LigneDePoste) SetMontantRemiseHt(v LigneDePosteMontantRemiseHt)`
+`func (o *LigneDePoste) SetMontantRemiseHt(v float64)`
 
 SetMontantRemiseHt sets MontantRemiseHt field to given value.
 
@@ -211,20 +211,20 @@ HasMontantRemiseHt returns a boolean if a field has been set.
 UnsetMontantRemiseHt ensures that no value is present for MontantRemiseHt, not even an explicit nil
 ### GetMontantTotalLigneHt
 
-`func (o *LigneDePoste) GetMontantTotalLigneHt() MontantTotalLigneHt`
+`func (o *LigneDePoste) GetMontantTotalLigneHt() float64`
 
 GetMontantTotalLigneHt returns the MontantTotalLigneHt field if non-nil, zero value otherwise.
 
 ### GetMontantTotalLigneHtOk
 
-`func (o *LigneDePoste) GetMontantTotalLigneHtOk() (*MontantTotalLigneHt, bool)`
+`func (o *LigneDePoste) GetMontantTotalLigneHtOk() (*float64, bool)`
 
 GetMontantTotalLigneHtOk returns a tuple with the MontantTotalLigneHt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMontantTotalLigneHt
 
-`func (o *LigneDePoste) SetMontantTotalLigneHt(v MontantTotalLigneHt)`
+`func (o *LigneDePoste) SetMontantTotalLigneHt(v float64)`
 
 SetMontantTotalLigneHt sets MontantTotalLigneHt field to given value.
 
@@ -234,16 +234,6 @@ SetMontantTotalLigneHt sets MontantTotalLigneHt field to given value.
 
 HasMontantTotalLigneHt returns a boolean if a field has been set.
 
-### SetMontantTotalLigneHtNil
-
-`func (o *LigneDePoste) SetMontantTotalLigneHtNil(b bool)`
-
- SetMontantTotalLigneHtNil sets the value for MontantTotalLigneHt to be an explicit nil
-
-### UnsetMontantTotalLigneHt
-`func (o *LigneDePoste) UnsetMontantTotalLigneHt()`
-
-UnsetMontantTotalLigneHt ensures that no value is present for MontantTotalLigneHt, not even an explicit nil
 ### GetTauxTva
 
 `func (o *LigneDePoste) GetTauxTva() string`
@@ -281,20 +271,20 @@ HasTauxTva returns a boolean if a field has been set.
 UnsetTauxTva ensures that no value is present for TauxTva, not even an explicit nil
 ### GetTauxTvaManuel
 
-`func (o *LigneDePoste) GetTauxTvaManuel() LigneDePosteTauxTvaManuel`
+`func (o *LigneDePoste) GetTauxTvaManuel() float64`
 
 GetTauxTvaManuel returns the TauxTvaManuel field if non-nil, zero value otherwise.
 
 ### GetTauxTvaManuelOk
 
-`func (o *LigneDePoste) GetTauxTvaManuelOk() (*LigneDePosteTauxTvaManuel, bool)`
+`func (o *LigneDePoste) GetTauxTvaManuelOk() (*float64, bool)`
 
 GetTauxTvaManuelOk returns a tuple with the TauxTvaManuel field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTauxTvaManuel
 
-`func (o *LigneDePoste) SetTauxTvaManuel(v LigneDePosteTauxTvaManuel)`
+`func (o *LigneDePoste) SetTauxTvaManuel(v float64)`
 
 SetTauxTvaManuel sets TauxTvaManuel field to given value.
 

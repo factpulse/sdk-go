@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **AdresseElectronique** | [**AdresseElectronique**](AdresseElectronique.md) |  | 
 **CodeServiceExecutant** | Pointer to **NullableString** |  | [optional] 
 **Nom** | Pointer to **NullableString** |  | [optional] 
+**Siren** | Pointer to **NullableString** |  | [optional] 
+**Siret** | Pointer to **NullableString** |  | [optional] 
 **AdressePostale** | Pointer to [**NullableAdressePostale**](AdressePostale.md) |  | [optional] 
 
 ## Methods
@@ -118,6 +120,76 @@ HasNom returns a boolean if a field has been set.
 `func (o *Destinataire) UnsetNom()`
 
 UnsetNom ensures that no value is present for Nom, not even an explicit nil
+### GetSiren
+
+`func (o *Destinataire) GetSiren() string`
+
+GetSiren returns the Siren field if non-nil, zero value otherwise.
+
+### GetSirenOk
+
+`func (o *Destinataire) GetSirenOk() (*string, bool)`
+
+GetSirenOk returns a tuple with the Siren field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSiren
+
+`func (o *Destinataire) SetSiren(v string)`
+
+SetSiren sets Siren field to given value.
+
+### HasSiren
+
+`func (o *Destinataire) HasSiren() bool`
+
+HasSiren returns a boolean if a field has been set.
+
+### SetSirenNil
+
+`func (o *Destinataire) SetSirenNil(b bool)`
+
+ SetSirenNil sets the value for Siren to be an explicit nil
+
+### UnsetSiren
+`func (o *Destinataire) UnsetSiren()`
+
+UnsetSiren ensures that no value is present for Siren, not even an explicit nil
+### GetSiret
+
+`func (o *Destinataire) GetSiret() string`
+
+GetSiret returns the Siret field if non-nil, zero value otherwise.
+
+### GetSiretOk
+
+`func (o *Destinataire) GetSiretOk() (*string, bool)`
+
+GetSiretOk returns a tuple with the Siret field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSiret
+
+`func (o *Destinataire) SetSiret(v string)`
+
+SetSiret sets Siret field to given value.
+
+### HasSiret
+
+`func (o *Destinataire) HasSiret() bool`
+
+HasSiret returns a boolean if a field has been set.
+
+### SetSiretNil
+
+`func (o *Destinataire) SetSiretNil(b bool)`
+
+ SetSiretNil sets the value for Siret to be an explicit nil
+
+### UnsetSiret
+`func (o *Destinataire) UnsetSiret()`
+
+UnsetSiret ensures that no value is present for Siret, not even an explicit nil
 ### GetAdressePostale
 
 `func (o *Destinataire) GetAdressePostale() AdressePostale`

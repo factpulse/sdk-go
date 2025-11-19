@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **MontantTotal** | [**MontantTotal**](MontantTotal.md) |  | 
 **LignesDePoste** | Pointer to [**[]LigneDePoste**](LigneDePoste.md) |  | [optional] 
 **LignesDeTva** | Pointer to [**[]LigneDeTVA**](LigneDeTVA.md) |  | [optional] 
+**Notes** | Pointer to [**[]Note**](Note.md) |  | [optional] 
 **Commentaire** | Pointer to **NullableString** |  | [optional] 
 **IdUtilisateurCourant** | Pointer to **NullableInt32** |  | [optional] 
 **PiecesJointesComplementaires** | Pointer to [**[]PieceJointeComplementaire**](PieceJointeComplementaire.md) |  | [optional] 
@@ -272,6 +273,31 @@ SetLignesDeTva sets LignesDeTva field to given value.
 `func (o *FactureFacturX) HasLignesDeTva() bool`
 
 HasLignesDeTva returns a boolean if a field has been set.
+
+### GetNotes
+
+`func (o *FactureFacturX) GetNotes() []Note`
+
+GetNotes returns the Notes field if non-nil, zero value otherwise.
+
+### GetNotesOk
+
+`func (o *FactureFacturX) GetNotesOk() (*[]Note, bool)`
+
+GetNotesOk returns a tuple with the Notes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNotes
+
+`func (o *FactureFacturX) SetNotes(v []Note)`
+
+SetNotes sets Notes field to given value.
+
+### HasNotes
+
+`func (o *FactureFacturX) HasNotes() bool`
+
+HasNotes returns a boolean if a field has been set.
 
 ### GetCommentaire
 

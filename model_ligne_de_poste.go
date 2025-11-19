@@ -27,10 +27,13 @@ type LigneDePoste struct {
 	Quantite Quantite `json:"quantite"`
 	Unite Unite `json:"unite"`
 	MontantUnitaireHt MontantUnitaireHt `json:"montantUnitaireHt"`
-	MontantRemiseHt NullableLigneDePosteMontantRemiseHt `json:"montantRemiseHt,omitempty"`
-	MontantTotalLigneHt NullableMontantTotalLigneHt `json:"montantTotalLigneHt,omitempty"`
+	// Montant de la remise HT.
+	MontantRemiseHt NullableFloat64 `json:"montantRemiseHt,omitempty" validate:"regexp=^(?!^[-+.]*$)[+-]?0*(?:\\\\d{0,8}|(?=[\\\\d.]{1,13}0*$)\\\\d{0,8}\\\\.\\\\d{0,4}0*$)"`
+	// Montant total HT de la ligne (quantité × prix unitaire - remise).
+	MontantTotalLigneHt *float64 `json:"montantTotalLigneHt,omitempty" validate:"regexp=^(?!^[-+.]*$)[+-]?0*(?:\\\\d{0,10}|(?=[\\\\d.]{1,13}0*$)\\\\d{0,10}\\\\.\\\\d{0,2}0*$)"`
 	TauxTva NullableString `json:"tauxTva,omitempty"`
-	TauxTvaManuel NullableLigneDePosteTauxTvaManuel `json:"tauxTvaManuel,omitempty"`
+	// Taux de TVA avec valeur manuelle.
+	TauxTvaManuel NullableFloat64 `json:"tauxTvaManuel,omitempty" validate:"regexp=^(?!^[-+.]*$)[+-]?0*(?:\\\\d{0,8}|(?=[\\\\d.]{1,13}0*$)\\\\d{0,8}\\\\.\\\\d{0,4}0*$)"`
 	CategorieTva NullableCategorieTVA `json:"categorieTva,omitempty"`
 	DateDebutPeriode NullableString `json:"dateDebutPeriode,omitempty"`
 	DateFinPeriode NullableString `json:"dateFinPeriode,omitempty"`
@@ -225,9 +228,9 @@ func (o *LigneDePoste) SetMontantUnitaireHt(v MontantUnitaireHt) {
 }
 
 // GetMontantRemiseHt returns the MontantRemiseHt field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *LigneDePoste) GetMontantRemiseHt() LigneDePosteMontantRemiseHt {
+func (o *LigneDePoste) GetMontantRemiseHt() float64 {
 	if o == nil || IsNil(o.MontantRemiseHt.Get()) {
-		var ret LigneDePosteMontantRemiseHt
+		var ret float64
 		return ret
 	}
 	return *o.MontantRemiseHt.Get()
@@ -236,7 +239,7 @@ func (o *LigneDePoste) GetMontantRemiseHt() LigneDePosteMontantRemiseHt {
 // GetMontantRemiseHtOk returns a tuple with the MontantRemiseHt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *LigneDePoste) GetMontantRemiseHtOk() (*LigneDePosteMontantRemiseHt, bool) {
+func (o *LigneDePoste) GetMontantRemiseHtOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -252,8 +255,8 @@ func (o *LigneDePoste) HasMontantRemiseHt() bool {
 	return false
 }
 
-// SetMontantRemiseHt gets a reference to the given NullableLigneDePosteMontantRemiseHt and assigns it to the MontantRemiseHt field.
-func (o *LigneDePoste) SetMontantRemiseHt(v LigneDePosteMontantRemiseHt) {
+// SetMontantRemiseHt gets a reference to the given NullableFloat64 and assigns it to the MontantRemiseHt field.
+func (o *LigneDePoste) SetMontantRemiseHt(v float64) {
 	o.MontantRemiseHt.Set(&v)
 }
 // SetMontantRemiseHtNil sets the value for MontantRemiseHt to be an explicit nil
@@ -266,46 +269,36 @@ func (o *LigneDePoste) UnsetMontantRemiseHt() {
 	o.MontantRemiseHt.Unset()
 }
 
-// GetMontantTotalLigneHt returns the MontantTotalLigneHt field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *LigneDePoste) GetMontantTotalLigneHt() MontantTotalLigneHt {
-	if o == nil || IsNil(o.MontantTotalLigneHt.Get()) {
-		var ret MontantTotalLigneHt
+// GetMontantTotalLigneHt returns the MontantTotalLigneHt field value if set, zero value otherwise.
+func (o *LigneDePoste) GetMontantTotalLigneHt() float64 {
+	if o == nil || IsNil(o.MontantTotalLigneHt) {
+		var ret float64
 		return ret
 	}
-	return *o.MontantTotalLigneHt.Get()
+	return *o.MontantTotalLigneHt
 }
 
 // GetMontantTotalLigneHtOk returns a tuple with the MontantTotalLigneHt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *LigneDePoste) GetMontantTotalLigneHtOk() (*MontantTotalLigneHt, bool) {
-	if o == nil {
+func (o *LigneDePoste) GetMontantTotalLigneHtOk() (*float64, bool) {
+	if o == nil || IsNil(o.MontantTotalLigneHt) {
 		return nil, false
 	}
-	return o.MontantTotalLigneHt.Get(), o.MontantTotalLigneHt.IsSet()
+	return o.MontantTotalLigneHt, true
 }
 
 // HasMontantTotalLigneHt returns a boolean if a field has been set.
 func (o *LigneDePoste) HasMontantTotalLigneHt() bool {
-	if o != nil && o.MontantTotalLigneHt.IsSet() {
+	if o != nil && !IsNil(o.MontantTotalLigneHt) {
 		return true
 	}
 
 	return false
 }
 
-// SetMontantTotalLigneHt gets a reference to the given NullableMontantTotalLigneHt and assigns it to the MontantTotalLigneHt field.
-func (o *LigneDePoste) SetMontantTotalLigneHt(v MontantTotalLigneHt) {
-	o.MontantTotalLigneHt.Set(&v)
-}
-// SetMontantTotalLigneHtNil sets the value for MontantTotalLigneHt to be an explicit nil
-func (o *LigneDePoste) SetMontantTotalLigneHtNil() {
-	o.MontantTotalLigneHt.Set(nil)
-}
-
-// UnsetMontantTotalLigneHt ensures that no value is present for MontantTotalLigneHt, not even an explicit nil
-func (o *LigneDePoste) UnsetMontantTotalLigneHt() {
-	o.MontantTotalLigneHt.Unset()
+// SetMontantTotalLigneHt gets a reference to the given float64 and assigns it to the MontantTotalLigneHt field.
+func (o *LigneDePoste) SetMontantTotalLigneHt(v float64) {
+	o.MontantTotalLigneHt = &v
 }
 
 // GetTauxTva returns the TauxTva field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -351,9 +344,9 @@ func (o *LigneDePoste) UnsetTauxTva() {
 }
 
 // GetTauxTvaManuel returns the TauxTvaManuel field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *LigneDePoste) GetTauxTvaManuel() LigneDePosteTauxTvaManuel {
+func (o *LigneDePoste) GetTauxTvaManuel() float64 {
 	if o == nil || IsNil(o.TauxTvaManuel.Get()) {
-		var ret LigneDePosteTauxTvaManuel
+		var ret float64
 		return ret
 	}
 	return *o.TauxTvaManuel.Get()
@@ -362,7 +355,7 @@ func (o *LigneDePoste) GetTauxTvaManuel() LigneDePosteTauxTvaManuel {
 // GetTauxTvaManuelOk returns a tuple with the TauxTvaManuel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *LigneDePoste) GetTauxTvaManuelOk() (*LigneDePosteTauxTvaManuel, bool) {
+func (o *LigneDePoste) GetTauxTvaManuelOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -378,8 +371,8 @@ func (o *LigneDePoste) HasTauxTvaManuel() bool {
 	return false
 }
 
-// SetTauxTvaManuel gets a reference to the given NullableLigneDePosteTauxTvaManuel and assigns it to the TauxTvaManuel field.
-func (o *LigneDePoste) SetTauxTvaManuel(v LigneDePosteTauxTvaManuel) {
+// SetTauxTvaManuel gets a reference to the given NullableFloat64 and assigns it to the TauxTvaManuel field.
+func (o *LigneDePoste) SetTauxTvaManuel(v float64) {
 	o.TauxTvaManuel.Set(&v)
 }
 // SetTauxTvaManuelNil sets the value for TauxTvaManuel to be an explicit nil
@@ -623,8 +616,8 @@ func (o LigneDePoste) ToMap() (map[string]interface{}, error) {
 	if o.MontantRemiseHt.IsSet() {
 		toSerialize["montantRemiseHt"] = o.MontantRemiseHt.Get()
 	}
-	if o.MontantTotalLigneHt.IsSet() {
-		toSerialize["montantTotalLigneHt"] = o.MontantTotalLigneHt.Get()
+	if !IsNil(o.MontantTotalLigneHt) {
+		toSerialize["montantTotalLigneHt"] = o.MontantTotalLigneHt
 	}
 	if o.TauxTva.IsSet() {
 		toSerialize["tauxTva"] = o.TauxTva.Get()

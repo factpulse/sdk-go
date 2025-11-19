@@ -32,6 +32,7 @@ type FactureFacturX struct {
 	MontantTotal MontantTotal `json:"montantTotal"`
 	LignesDePoste []LigneDePoste `json:"lignesDePoste,omitempty"`
 	LignesDeTva []LigneDeTVA `json:"lignesDeTva,omitempty"`
+	Notes []Note `json:"notes,omitempty"`
 	Commentaire NullableString `json:"commentaire,omitempty"`
 	IdUtilisateurCourant NullableInt32 `json:"idUtilisateurCourant,omitempty"`
 	PiecesJointesComplementaires []PieceJointeComplementaire `json:"piecesJointesComplementaires,omitempty"`
@@ -352,6 +353,38 @@ func (o *FactureFacturX) SetLignesDeTva(v []LigneDeTVA) {
 	o.LignesDeTva = v
 }
 
+// GetNotes returns the Notes field value if set, zero value otherwise.
+func (o *FactureFacturX) GetNotes() []Note {
+	if o == nil || IsNil(o.Notes) {
+		var ret []Note
+		return ret
+	}
+	return o.Notes
+}
+
+// GetNotesOk returns a tuple with the Notes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FactureFacturX) GetNotesOk() ([]Note, bool) {
+	if o == nil || IsNil(o.Notes) {
+		return nil, false
+	}
+	return o.Notes, true
+}
+
+// HasNotes returns a boolean if a field has been set.
+func (o *FactureFacturX) HasNotes() bool {
+	if o != nil && !IsNil(o.Notes) {
+		return true
+	}
+
+	return false
+}
+
+// SetNotes gets a reference to the given []Note and assigns it to the Notes field.
+func (o *FactureFacturX) SetNotes(v []Note) {
+	o.Notes = v
+}
+
 // GetCommentaire returns the Commentaire field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FactureFacturX) GetCommentaire() string {
 	if o == nil || IsNil(o.Commentaire.Get()) {
@@ -495,6 +528,9 @@ func (o FactureFacturX) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.LignesDeTva) {
 		toSerialize["lignesDeTva"] = o.LignesDeTva
+	}
+	if !IsNil(o.Notes) {
+		toSerialize["notes"] = o.Notes
 	}
 	if o.Commentaire.IsSet() {
 		toSerialize["commentaire"] = o.Commentaire.Get()
