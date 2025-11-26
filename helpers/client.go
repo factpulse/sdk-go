@@ -128,6 +128,10 @@ func (c *Client) GetAFNORCredentialsForAPI() map[string]interface{} {
     return c.AFNORCredentials.ToMap()
 }
 
+// Alias plus courts
+func (c *Client) GetChorusProCredentials() map[string]interface{} { return c.GetChorusCredentialsForAPI() }
+func (c *Client) GetAfnorCredentials() map[string]interface{} { return c.GetAFNORCredentialsForAPI() }
+
 func (c *Client) EnsureAuthenticated(forceRefresh bool) error {
     c.mu.Lock(); defer c.mu.Unlock()
     now := time.Now()
