@@ -71,17 +71,21 @@ func MontantTotalAvecOptions(ht, tva, ttc, aPayer, remiseTtc interface{}, motifR
 
 // LigneDePoste crée une ligne de poste simplifiée
 func LigneDePoste(numero int, denomination string, quantite, montantUnitaireHt, montantLigneHt interface{}) map[string]interface{} {
-    return LigneDePosteAvecOptions(numero, denomination, quantite, montantUnitaireHt, montantLigneHt, "20.00", "C62", nil)
+    return LigneDePosteAvecOptions(numero, denomination, quantite, montantUnitaireHt, montantLigneHt, "20.00", "S", "C62", nil)
 }
 
 // LigneDePosteAvecOptions crée une ligne de poste avec options
-func LigneDePosteAvecOptions(numero int, denomination string, quantite, montantUnitaireHt, montantLigneHt interface{}, tauxTva, unite string, options map[string]interface{}) map[string]interface{} {
-    result := map[string]interface{}{"numero": numero, "denomination": denomination, "quantite": Montant(quantite), "montantUnitaireHt": Montant(montantUnitaireHt), "montantTotalLigneHt": Montant(montantLigneHt), "tauxTva": Montant(tauxTva), "unite": unite}
+func LigneDePosteAvecOptions(numero int, denomination string, quantite, montantUnitaireHt, montantLigneHt interface{}, tauxTva, categorieTva, unite string, options map[string]interface{}) map[string]interface{} {
+    result := map[string]interface{}{"numero": numero, "denomination": denomination, "quantite": Montant(quantite), "montantUnitaireHt": Montant(montantUnitaireHt), "montantTotalLigneHt": Montant(montantLigneHt), "tauxTva": Montant(tauxTva), "categorieTva": categorieTva, "unite": unite}
     if options != nil {
+        if v, ok := options["reference"]; ok { result["reference"] = v }
         if v, ok := options["montantTvaLigne"]; ok { result["montantTvaLigne"] = Montant(v) }
         if v, ok := options["montantRemiseHt"]; ok { result["montantRemiseHt"] = Montant(v) }
-        if v, ok := options["codeRaisonRemise"]; ok { result["codeRaisonReduction"] = v }
-        if v, ok := options["motifRemise"]; ok { result["motifRemise"] = v }
+        if v, ok := options["codeRaisonReduction"]; ok { result["codeRaisonReduction"] = v }
+        if v, ok := options["raisonReduction"]; ok { result["raisonReduction"] = v }
+        if v, ok := options["motifExoneration"]; ok { result["motifExoneration"] = v }
+        if v, ok := options["dateDebutPeriode"]; ok { result["dateDebutPeriode"] = v }
+        if v, ok := options["dateFinPeriode"]; ok { result["dateFinPeriode"] = v }
         if v, ok := options["description"]; ok { result["description"] = v }
     }
     return result
