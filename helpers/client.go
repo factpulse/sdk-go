@@ -1,7 +1,7 @@
 package helpers
 
 import (
-    "bytes"; "encoding/json"; "fmt"; "io"; "net/http"; "strings"; "sync"; "time"
+    "bytes"; "encoding/base64"; "encoding/json"; "fmt"; "io"; "net/http"; "os"; "strings"; "sync"; "time"
 )
 
 const DefaultAPIURL = "https://factpulse.fr"
@@ -167,7 +167,7 @@ func (c *Client) PollTask(taskID string, timeout, interval *int64) (map[string]i
     for {
         if time.Since(startTime).Milliseconds() > timeoutMs { return nil, NewFactPulsePollingTimeout(taskID, timeoutMs) }
         if err := c.EnsureAuthenticated(false); err != nil { return nil, err }
-        req, _ := http.NewRequest("GET", fmt.Sprintf("%s/api/facturation/v1/traitement/taches/%s/statut", strings.TrimRight(c.APIURL, "/"), taskID), nil)
+        req, _ := http.NewRequest("GET", fmt.Sprintf("%s/api/v1/traitement/taches/%s/statut", strings.TrimRight(c.APIURL, "/"), taskID), nil)
         req.Header.Set("Authorization", "Bearer "+c.accessToken)
         resp, err := http.DefaultClient.Do(req)
         if err != nil { return nil, NewFactPulseValidationError(fmt.Sprintf("API error: %v", err), nil) }
@@ -183,3 +183,107 @@ func (c *Client) PollTask(taskID string, timeout, interval *int64) (map[string]i
 
 func FormatMontant(m interface{}) string { return Montant(m) }
 func minFloat(a, b float64) float64 { if a < b { return a }; return b }
+
+// GenererFacturx génère une facture Factur-X à partir d'un map/struct et d'un PDF source.
+// Accepte un map[string]interface{}, une string JSON, ou tout objet sérialisable en JSON.
+func (c *Client) GenererFacturx(factureData interface{}, pdfPath string) ([]byte, error) {
+    return c.GenererFacturxWithOptions(factureData, pdfPath, "EN16931", "pdf", true, nil)
+}
+
+// GenererFacturxWithOptions génère une facture Factur-X avec options avancées.
+func (c *Client) GenererFacturxWithOptions(factureData interface{}, pdfPath, profil, formatSortie string, sync bool, timeout *int64) ([]byte, error) {
+    // Conversion des données en JSON string
+    var jsonData string
+    switch v := factureData.(type) {
+    case string:
+        jsonData = v
+    case []byte:
+        jsonData = string(v)
+    default:
+        data, err := json.Marshal(factureData)
+        if err != nil { return nil, NewFactPulseValidationError(fmt.Sprintf("Erreur sérialisation JSON: %v", err), nil) }
+        jsonData = string(data)
+    }
+
+    // Lecture du fichier PDF
+    pdfContent, err := os.ReadFile(pdfPath)
+    if err != nil { return nil, NewFactPulseValidationError(fmt.Sprintf("Erreur lecture PDF: %v", err), nil) }
+
+    if err := c.EnsureAuthenticated(false); err != nil { return nil, err }
+
+    // Construire la requête multipart
+    var body bytes.Buffer
+    writer := NewMultipartWriter(&body)
+
+    // Champ donnees_facture
+    _ = writer.WriteField("donnees_facture", jsonData)
+    _ = writer.WriteField("profil", profil)
+    _ = writer.WriteField("format_sortie", formatSortie)
+
+    // Champ source_pdf (fichier)
+    part, _ := writer.CreateFormFile("source_pdf", "facture.pdf")
+    part.Write(pdfContent)
+    writer.Close()
+
+    req, _ := http.NewRequest("POST", fmt.Sprintf("%s/api/v1/traitement/generer-facture", strings.TrimRight(c.APIURL, "/")), &body)
+    req.Header.Set("Authorization", "Bearer "+c.accessToken)
+    req.Header.Set("Content-Type", writer.FormDataContentType())
+
+    client := &http.Client{Timeout: 120 * time.Second}
+    resp, err := client.Do(req)
+    if err != nil { return nil, NewFactPulseValidationError(fmt.Sprintf("Erreur réseau: %v", err), nil) }
+    defer resp.Body.Close()
+
+    if resp.StatusCode == 401 {
+        c.ResetAuth()
+        if err := c.EnsureAuthenticated(false); err != nil { return nil, err }
+        req.Header.Set("Authorization", "Bearer "+c.accessToken)
+        resp, err = client.Do(req)
+        if err != nil { return nil, NewFactPulseValidationError(fmt.Sprintf("Erreur réseau: %v", err), nil) }
+        defer resp.Body.Close()
+    }
+
+    respBody, _ := io.ReadAll(resp.Body)
+    if resp.StatusCode >= 400 {
+        return nil, NewFactPulseValidationError(fmt.Sprintf("Erreur API (%d): %s", resp.StatusCode, string(respBody)), nil)
+    }
+
+    var data map[string]interface{}
+    json.Unmarshal(respBody, &data)
+
+    if sync {
+        if taskID, ok := data["id_tache"].(string); ok {
+            result, err := c.PollTask(taskID, timeout, nil)
+            if err != nil { return nil, err }
+            if contenuB64, ok := result["contenu_b64"].(string); ok {
+                decoded, _ := base64.StdEncoding.DecodeString(contenuB64)
+                return decoded, nil
+            }
+            if xml, ok := result["contenu_xml"].(string); ok {
+                return []byte(xml), nil
+            }
+            return nil, NewFactPulseValidationError("Résultat inattendu", nil)
+        }
+    }
+
+    return respBody, nil
+}
+
+// MultipartWriter wrapper pour créer des requêtes multipart
+type MultipartWriter struct { *multipartWriter }
+type multipartWriter struct { w *bytes.Buffer; boundary string }
+
+func NewMultipartWriter(w *bytes.Buffer) *MultipartWriter {
+    boundary := fmt.Sprintf("----GoFormBoundary%x", time.Now().UnixNano())
+    return &MultipartWriter{&multipartWriter{w: w, boundary: boundary}}
+}
+func (m *MultipartWriter) WriteField(name, value string) error {
+    fmt.Fprintf(m.w, "--%s\r\nContent-Disposition: form-data; name=\"%s\"\r\n\r\n%s\r\n", m.boundary, name, value)
+    return nil
+}
+func (m *MultipartWriter) CreateFormFile(fieldname, filename string) (io.Writer, error) {
+    fmt.Fprintf(m.w, "--%s\r\nContent-Disposition: form-data; name=\"%s\"; filename=\"%s\"\r\nContent-Type: application/pdf\r\n\r\n", m.boundary, fieldname, filename)
+    return m.w, nil
+}
+func (m *MultipartWriter) Close() error { fmt.Fprintf(m.w, "--%s--\r\n", m.boundary); return nil }
+func (m *MultipartWriter) FormDataContentType() string { return "multipart/form-data; boundary=" + m.boundary }
