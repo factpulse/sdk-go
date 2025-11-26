@@ -98,7 +98,7 @@ func LigneDeTva(taux, baseHt, montantTva interface{}) map[string]interface{} {
 
 // LigneDeTvaAvecOptions crée une ligne de TVA avec options
 func LigneDeTvaAvecOptions(taux, baseHt, montantTva interface{}, categorie, motifExoneration string) map[string]interface{} {
-    result := map[string]interface{}{"tauxTvaManuel": Montant(taux), "montantBaseHt": Montant(baseHt), "montantTva": Montant(montantTva), "categorieTva": categorie}
+    result := map[string]interface{}{"tauxManuel": Montant(taux), "montantBaseHt": Montant(baseHt), "montantTva": Montant(montantTva), "categorie": categorie}
     if motifExoneration != "" { result["motifExoneration"] = motifExoneration }
     return result
 }
