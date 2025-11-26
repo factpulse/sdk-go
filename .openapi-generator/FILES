@@ -15,6 +15,7 @@ configuration.go
 docs/AFNORPDPPAAPI.md
 docs/AFNORPDPPADirectoryServiceAPI.md
 docs/AFNORPDPPAFlowServiceAPI.md
+docs/APIError.md
 docs/AdresseElectronique.md
 docs/AdressePostale.md
 docs/BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost.md
@@ -46,6 +47,8 @@ docs/Destination.md
 docs/DestinationAFNOR.md
 docs/DestinationChorusPro.md
 docs/DonneesFactureSimplifiees.md
+docs/ErrorLevel.md
+docs/ErrorSource.md
 docs/FactureEnrichieInfo.md
 docs/FactureFacturX.md
 docs/FormatSortie.md
@@ -113,12 +116,14 @@ docs/Unite.md
 docs/Utilisateur.md
 docs/UtilisateurAPI.md
 docs/ValidationError.md
+docs/ValidationErrorDetail.md
 docs/ValidationErrorLocInner.md
 git_push.sh
 go.mod
 go.sum
 model_adresse_electronique.go
 model_adresse_postale.go
+model_api_error.go
 model_body_ajouter_fichier_api_v1_chorus_pro_transverses_ajouter_fichier_post.go
 model_body_completer_facture_api_v1_chorus_pro_factures_completer_post.go
 model_body_lister_services_structure_api_v1_chorus_pro_structures__id_structure_cpp__services_get.go
@@ -147,6 +152,8 @@ model_destination.go
 model_destination_afnor.go
 model_destination_chorus_pro.go
 model_donnees_facture_simplifiees.go
+model_error_level.go
+model_error_source.go
 model_facture_enrichie_info.go
 model_facture_factur_x.go
 model_format_sortie.go
@@ -211,6 +218,7 @@ model_type_tva.go
 model_unite.go
 model_utilisateur.go
 model_validation_error.go
+model_validation_error_detail.go
 model_validation_error_loc_inner.go
 response.go
 test/api_afnorpdppa_directory_service_test.go
