@@ -76,7 +76,7 @@ func LigneDePoste(numero int, denomination string, quantite, montantUnitaireHt, 
 
 // LigneDePosteAvecOptions crée une ligne de poste avec options
 func LigneDePosteAvecOptions(numero int, denomination string, quantite, montantUnitaireHt, montantLigneHt interface{}, tauxTva, categorieTva, unite string, options map[string]interface{}) map[string]interface{} {
-    result := map[string]interface{}{"numero": numero, "denomination": denomination, "quantite": Montant(quantite), "montantUnitaireHt": Montant(montantUnitaireHt), "montantTotalLigneHt": Montant(montantLigneHt), "tauxTva": Montant(tauxTva), "categorieTva": categorieTva, "unite": unite}
+    result := map[string]interface{}{"numero": numero, "denomination": denomination, "quantite": Montant(quantite), "montantUnitaireHt": Montant(montantUnitaireHt), "montantTotalLigneHt": Montant(montantLigneHt), "tauxTvaManuel": Montant(tauxTva), "categorieTva": categorieTva, "unite": unite}
     if options != nil {
         if v, ok := options["reference"]; ok { result["reference"] = v }
         if v, ok := options["montantTvaLigne"]; ok { result["montantTvaLigne"] = Montant(v) }
@@ -98,7 +98,7 @@ func LigneDeTva(taux, baseHt, montantTva interface{}) map[string]interface{} {
 
 // LigneDeTvaAvecOptions crée une ligne de TVA avec options
 func LigneDeTvaAvecOptions(taux, baseHt, montantTva interface{}, categorie, motifExoneration string) map[string]interface{} {
-    result := map[string]interface{}{"tauxTva": Montant(taux), "montantBaseHt": Montant(baseHt), "montantTva": Montant(montantTva), "categorieTva": categorie}
+    result := map[string]interface{}{"tauxTvaManuel": Montant(taux), "montantBaseHt": Montant(baseHt), "montantTva": Montant(montantTva), "categorieTva": categorie}
     if motifExoneration != "" { result["motifExoneration"] = motifExoneration }
     return result
 }
