@@ -28,7 +28,7 @@ type SoumettreFactureCompleteResponse struct {
 	ResultatChorus NullableResultatChorusPro `json:"resultat_chorus,omitempty"`
 	ResultatAfnor NullableResultatAFNOR `json:"resultat_afnor,omitempty"`
 	// Données de la facture enrichie
-	FactureEnrichie FactureEnrichieInfoOutput `json:"facture_enrichie"`
+	FactureEnrichie FactureEnrichieInfo `json:"facture_enrichie"`
 	// Informations sur le PDF généré
 	PdfFacturx PDFFacturXInfo `json:"pdf_facturx"`
 	Signature NullableSignatureInfo `json:"signature,omitempty"`
@@ -44,7 +44,7 @@ type _SoumettreFactureCompleteResponse SoumettreFactureCompleteResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSoumettreFactureCompleteResponse(succes bool, destinationType string, factureEnrichie FactureEnrichieInfoOutput, pdfFacturx PDFFacturXInfo, pdfBase64 string, message string) *SoumettreFactureCompleteResponse {
+func NewSoumettreFactureCompleteResponse(succes bool, destinationType string, factureEnrichie FactureEnrichieInfo, pdfFacturx PDFFacturXInfo, pdfBase64 string, message string) *SoumettreFactureCompleteResponse {
 	this := SoumettreFactureCompleteResponse{}
 	this.Succes = succes
 	this.DestinationType = destinationType
@@ -196,9 +196,9 @@ func (o *SoumettreFactureCompleteResponse) UnsetResultatAfnor() {
 }
 
 // GetFactureEnrichie returns the FactureEnrichie field value
-func (o *SoumettreFactureCompleteResponse) GetFactureEnrichie() FactureEnrichieInfoOutput {
+func (o *SoumettreFactureCompleteResponse) GetFactureEnrichie() FactureEnrichieInfo {
 	if o == nil {
-		var ret FactureEnrichieInfoOutput
+		var ret FactureEnrichieInfo
 		return ret
 	}
 
@@ -207,7 +207,7 @@ func (o *SoumettreFactureCompleteResponse) GetFactureEnrichie() FactureEnrichieI
 
 // GetFactureEnrichieOk returns a tuple with the FactureEnrichie field value
 // and a boolean to check if the value has been set.
-func (o *SoumettreFactureCompleteResponse) GetFactureEnrichieOk() (*FactureEnrichieInfoOutput, bool) {
+func (o *SoumettreFactureCompleteResponse) GetFactureEnrichieOk() (*FactureEnrichieInfo, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -215,7 +215,7 @@ func (o *SoumettreFactureCompleteResponse) GetFactureEnrichieOk() (*FactureEnric
 }
 
 // SetFactureEnrichie sets field value
-func (o *SoumettreFactureCompleteResponse) SetFactureEnrichie(v FactureEnrichieInfoOutput) {
+func (o *SoumettreFactureCompleteResponse) SetFactureEnrichie(v FactureEnrichieInfo) {
 	o.FactureEnrichie = v
 }
 

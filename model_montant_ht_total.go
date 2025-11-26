@@ -16,7 +16,7 @@ import (
 )
 
 
-// MontantHtTotal struct for MontantHtTotal
+// MontantHtTotal Montant total HT. (Accepte number, string ou integer)
 type MontantHtTotal struct {
 	Float32 *float32
 	String *string

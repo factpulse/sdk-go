@@ -1,4 +1,4 @@
-# MontantTva1
+# MontantTotalLigneHt
 
 ## Properties
 
@@ -7,20 +7,20 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewMontantTva1
+### NewMontantTotalLigneHt
 
-`func NewMontantTva1() *MontantTva1`
+`func NewMontantTotalLigneHt() *MontantTotalLigneHt`
 
-NewMontantTva1 instantiates a new MontantTva1 object
+NewMontantTotalLigneHt instantiates a new MontantTotalLigneHt object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewMontantTva1WithDefaults
+### NewMontantTotalLigneHtWithDefaults
 
-`func NewMontantTva1WithDefaults() *MontantTva1`
+`func NewMontantTotalLigneHtWithDefaults() *MontantTotalLigneHt`
 
-NewMontantTva1WithDefaults instantiates a new MontantTva1 object
+NewMontantTotalLigneHtWithDefaults instantiates a new MontantTotalLigneHt object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 

@@ -16,7 +16,7 @@ import (
 )
 
 
-// MontantTva struct for MontantTva
+// MontantTva Montant TVA
 type MontantTva struct {
 	Float32 *float32
 	String *string

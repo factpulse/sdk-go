@@ -16,11 +16,11 @@ import (
 	"fmt"
 )
 
-// checks if the FactureEnrichieInfoOutput type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &FactureEnrichieInfoOutput{}
+// checks if the FactureEnrichieInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FactureEnrichieInfo{}
 
-// FactureEnrichieInfoOutput Informations sur la facture enrichie.
-type FactureEnrichieInfoOutput struct {
+// FactureEnrichieInfo Informations sur la facture enrichie.
+type FactureEnrichieInfo struct {
 	NumeroFacture string `json:"numero_facture"`
 	IdEmetteur NullableInt32 `json:"id_emetteur,omitempty"`
 	IdDestinataire NullableInt32 `json:"id_destinataire,omitempty"`
@@ -31,14 +31,14 @@ type FactureEnrichieInfoOutput struct {
 	MontantTtcTotal string `json:"montant_ttc_total" validate:"regexp=^(?!^[-+.]*$)[+-]?0*\\\\d*\\\\.?\\\\d*$"`
 }
 
-type _FactureEnrichieInfoOutput FactureEnrichieInfoOutput
+type _FactureEnrichieInfo FactureEnrichieInfo
 
-// NewFactureEnrichieInfoOutput instantiates a new FactureEnrichieInfoOutput object
+// NewFactureEnrichieInfo instantiates a new FactureEnrichieInfo object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFactureEnrichieInfoOutput(numeroFacture string, nomEmetteur string, nomDestinataire string, montantHtTotal string, montantTva string, montantTtcTotal string) *FactureEnrichieInfoOutput {
-	this := FactureEnrichieInfoOutput{}
+func NewFactureEnrichieInfo(numeroFacture string, nomEmetteur string, nomDestinataire string, montantHtTotal string, montantTva string, montantTtcTotal string) *FactureEnrichieInfo {
+	this := FactureEnrichieInfo{}
 	this.NumeroFacture = numeroFacture
 	this.NomEmetteur = nomEmetteur
 	this.NomDestinataire = nomDestinataire
@@ -48,16 +48,16 @@ func NewFactureEnrichieInfoOutput(numeroFacture string, nomEmetteur string, nomD
 	return &this
 }
 
-// NewFactureEnrichieInfoOutputWithDefaults instantiates a new FactureEnrichieInfoOutput object
+// NewFactureEnrichieInfoWithDefaults instantiates a new FactureEnrichieInfo object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFactureEnrichieInfoOutputWithDefaults() *FactureEnrichieInfoOutput {
-	this := FactureEnrichieInfoOutput{}
+func NewFactureEnrichieInfoWithDefaults() *FactureEnrichieInfo {
+	this := FactureEnrichieInfo{}
 	return &this
 }
 
 // GetNumeroFacture returns the NumeroFacture field value
-func (o *FactureEnrichieInfoOutput) GetNumeroFacture() string {
+func (o *FactureEnrichieInfo) GetNumeroFacture() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -68,7 +68,7 @@ func (o *FactureEnrichieInfoOutput) GetNumeroFacture() string {
 
 // GetNumeroFactureOk returns a tuple with the NumeroFacture field value
 // and a boolean to check if the value has been set.
-func (o *FactureEnrichieInfoOutput) GetNumeroFactureOk() (*string, bool) {
+func (o *FactureEnrichieInfo) GetNumeroFactureOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -76,12 +76,12 @@ func (o *FactureEnrichieInfoOutput) GetNumeroFactureOk() (*string, bool) {
 }
 
 // SetNumeroFacture sets field value
-func (o *FactureEnrichieInfoOutput) SetNumeroFacture(v string) {
+func (o *FactureEnrichieInfo) SetNumeroFacture(v string) {
 	o.NumeroFacture = v
 }
 
 // GetIdEmetteur returns the IdEmetteur field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FactureEnrichieInfoOutput) GetIdEmetteur() int32 {
+func (o *FactureEnrichieInfo) GetIdEmetteur() int32 {
 	if o == nil || IsNil(o.IdEmetteur.Get()) {
 		var ret int32
 		return ret
@@ -92,7 +92,7 @@ func (o *FactureEnrichieInfoOutput) GetIdEmetteur() int32 {
 // GetIdEmetteurOk returns a tuple with the IdEmetteur field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FactureEnrichieInfoOutput) GetIdEmetteurOk() (*int32, bool) {
+func (o *FactureEnrichieInfo) GetIdEmetteurOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -100,7 +100,7 @@ func (o *FactureEnrichieInfoOutput) GetIdEmetteurOk() (*int32, bool) {
 }
 
 // HasIdEmetteur returns a boolean if a field has been set.
-func (o *FactureEnrichieInfoOutput) HasIdEmetteur() bool {
+func (o *FactureEnrichieInfo) HasIdEmetteur() bool {
 	if o != nil && o.IdEmetteur.IsSet() {
 		return true
 	}
@@ -109,21 +109,21 @@ func (o *FactureEnrichieInfoOutput) HasIdEmetteur() bool {
 }
 
 // SetIdEmetteur gets a reference to the given NullableInt32 and assigns it to the IdEmetteur field.
-func (o *FactureEnrichieInfoOutput) SetIdEmetteur(v int32) {
+func (o *FactureEnrichieInfo) SetIdEmetteur(v int32) {
 	o.IdEmetteur.Set(&v)
 }
 // SetIdEmetteurNil sets the value for IdEmetteur to be an explicit nil
-func (o *FactureEnrichieInfoOutput) SetIdEmetteurNil() {
+func (o *FactureEnrichieInfo) SetIdEmetteurNil() {
 	o.IdEmetteur.Set(nil)
 }
 
 // UnsetIdEmetteur ensures that no value is present for IdEmetteur, not even an explicit nil
-func (o *FactureEnrichieInfoOutput) UnsetIdEmetteur() {
+func (o *FactureEnrichieInfo) UnsetIdEmetteur() {
 	o.IdEmetteur.Unset()
 }
 
 // GetIdDestinataire returns the IdDestinataire field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FactureEnrichieInfoOutput) GetIdDestinataire() int32 {
+func (o *FactureEnrichieInfo) GetIdDestinataire() int32 {
 	if o == nil || IsNil(o.IdDestinataire.Get()) {
 		var ret int32
 		return ret
@@ -134,7 +134,7 @@ func (o *FactureEnrichieInfoOutput) GetIdDestinataire() int32 {
 // GetIdDestinataireOk returns a tuple with the IdDestinataire field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FactureEnrichieInfoOutput) GetIdDestinataireOk() (*int32, bool) {
+func (o *FactureEnrichieInfo) GetIdDestinataireOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -142,7 +142,7 @@ func (o *FactureEnrichieInfoOutput) GetIdDestinataireOk() (*int32, bool) {
 }
 
 // HasIdDestinataire returns a boolean if a field has been set.
-func (o *FactureEnrichieInfoOutput) HasIdDestinataire() bool {
+func (o *FactureEnrichieInfo) HasIdDestinataire() bool {
 	if o != nil && o.IdDestinataire.IsSet() {
 		return true
 	}
@@ -151,21 +151,21 @@ func (o *FactureEnrichieInfoOutput) HasIdDestinataire() bool {
 }
 
 // SetIdDestinataire gets a reference to the given NullableInt32 and assigns it to the IdDestinataire field.
-func (o *FactureEnrichieInfoOutput) SetIdDestinataire(v int32) {
+func (o *FactureEnrichieInfo) SetIdDestinataire(v int32) {
 	o.IdDestinataire.Set(&v)
 }
 // SetIdDestinataireNil sets the value for IdDestinataire to be an explicit nil
-func (o *FactureEnrichieInfoOutput) SetIdDestinataireNil() {
+func (o *FactureEnrichieInfo) SetIdDestinataireNil() {
 	o.IdDestinataire.Set(nil)
 }
 
 // UnsetIdDestinataire ensures that no value is present for IdDestinataire, not even an explicit nil
-func (o *FactureEnrichieInfoOutput) UnsetIdDestinataire() {
+func (o *FactureEnrichieInfo) UnsetIdDestinataire() {
 	o.IdDestinataire.Unset()
 }
 
 // GetNomEmetteur returns the NomEmetteur field value
-func (o *FactureEnrichieInfoOutput) GetNomEmetteur() string {
+func (o *FactureEnrichieInfo) GetNomEmetteur() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -176,7 +176,7 @@ func (o *FactureEnrichieInfoOutput) GetNomEmetteur() string {
 
 // GetNomEmetteurOk returns a tuple with the NomEmetteur field value
 // and a boolean to check if the value has been set.
-func (o *FactureEnrichieInfoOutput) GetNomEmetteurOk() (*string, bool) {
+func (o *FactureEnrichieInfo) GetNomEmetteurOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -184,12 +184,12 @@ func (o *FactureEnrichieInfoOutput) GetNomEmetteurOk() (*string, bool) {
 }
 
 // SetNomEmetteur sets field value
-func (o *FactureEnrichieInfoOutput) SetNomEmetteur(v string) {
+func (o *FactureEnrichieInfo) SetNomEmetteur(v string) {
 	o.NomEmetteur = v
 }
 
 // GetNomDestinataire returns the NomDestinataire field value
-func (o *FactureEnrichieInfoOutput) GetNomDestinataire() string {
+func (o *FactureEnrichieInfo) GetNomDestinataire() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -200,7 +200,7 @@ func (o *FactureEnrichieInfoOutput) GetNomDestinataire() string {
 
 // GetNomDestinataireOk returns a tuple with the NomDestinataire field value
 // and a boolean to check if the value has been set.
-func (o *FactureEnrichieInfoOutput) GetNomDestinataireOk() (*string, bool) {
+func (o *FactureEnrichieInfo) GetNomDestinataireOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -208,12 +208,12 @@ func (o *FactureEnrichieInfoOutput) GetNomDestinataireOk() (*string, bool) {
 }
 
 // SetNomDestinataire sets field value
-func (o *FactureEnrichieInfoOutput) SetNomDestinataire(v string) {
+func (o *FactureEnrichieInfo) SetNomDestinataire(v string) {
 	o.NomDestinataire = v
 }
 
 // GetMontantHtTotal returns the MontantHtTotal field value
-func (o *FactureEnrichieInfoOutput) GetMontantHtTotal() string {
+func (o *FactureEnrichieInfo) GetMontantHtTotal() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -224,7 +224,7 @@ func (o *FactureEnrichieInfoOutput) GetMontantHtTotal() string {
 
 // GetMontantHtTotalOk returns a tuple with the MontantHtTotal field value
 // and a boolean to check if the value has been set.
-func (o *FactureEnrichieInfoOutput) GetMontantHtTotalOk() (*string, bool) {
+func (o *FactureEnrichieInfo) GetMontantHtTotalOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -232,12 +232,12 @@ func (o *FactureEnrichieInfoOutput) GetMontantHtTotalOk() (*string, bool) {
 }
 
 // SetMontantHtTotal sets field value
-func (o *FactureEnrichieInfoOutput) SetMontantHtTotal(v string) {
+func (o *FactureEnrichieInfo) SetMontantHtTotal(v string) {
 	o.MontantHtTotal = v
 }
 
 // GetMontantTva returns the MontantTva field value
-func (o *FactureEnrichieInfoOutput) GetMontantTva() string {
+func (o *FactureEnrichieInfo) GetMontantTva() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -248,7 +248,7 @@ func (o *FactureEnrichieInfoOutput) GetMontantTva() string {
 
 // GetMontantTvaOk returns a tuple with the MontantTva field value
 // and a boolean to check if the value has been set.
-func (o *FactureEnrichieInfoOutput) GetMontantTvaOk() (*string, bool) {
+func (o *FactureEnrichieInfo) GetMontantTvaOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -256,12 +256,12 @@ func (o *FactureEnrichieInfoOutput) GetMontantTvaOk() (*string, bool) {
 }
 
 // SetMontantTva sets field value
-func (o *FactureEnrichieInfoOutput) SetMontantTva(v string) {
+func (o *FactureEnrichieInfo) SetMontantTva(v string) {
 	o.MontantTva = v
 }
 
 // GetMontantTtcTotal returns the MontantTtcTotal field value
-func (o *FactureEnrichieInfoOutput) GetMontantTtcTotal() string {
+func (o *FactureEnrichieInfo) GetMontantTtcTotal() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -272,7 +272,7 @@ func (o *FactureEnrichieInfoOutput) GetMontantTtcTotal() string {
 
 // GetMontantTtcTotalOk returns a tuple with the MontantTtcTotal field value
 // and a boolean to check if the value has been set.
-func (o *FactureEnrichieInfoOutput) GetMontantTtcTotalOk() (*string, bool) {
+func (o *FactureEnrichieInfo) GetMontantTtcTotalOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -280,11 +280,11 @@ func (o *FactureEnrichieInfoOutput) GetMontantTtcTotalOk() (*string, bool) {
 }
 
 // SetMontantTtcTotal sets field value
-func (o *FactureEnrichieInfoOutput) SetMontantTtcTotal(v string) {
+func (o *FactureEnrichieInfo) SetMontantTtcTotal(v string) {
 	o.MontantTtcTotal = v
 }
 
-func (o FactureEnrichieInfoOutput) MarshalJSON() ([]byte, error) {
+func (o FactureEnrichieInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -292,7 +292,7 @@ func (o FactureEnrichieInfoOutput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o FactureEnrichieInfoOutput) ToMap() (map[string]interface{}, error) {
+func (o FactureEnrichieInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["numero_facture"] = o.NumeroFacture
 	if o.IdEmetteur.IsSet() {
@@ -309,7 +309,7 @@ func (o FactureEnrichieInfoOutput) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *FactureEnrichieInfoOutput) UnmarshalJSON(data []byte) (err error) {
+func (o *FactureEnrichieInfo) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -336,53 +336,53 @@ func (o *FactureEnrichieInfoOutput) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varFactureEnrichieInfoOutput := _FactureEnrichieInfoOutput{}
+	varFactureEnrichieInfo := _FactureEnrichieInfo{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFactureEnrichieInfoOutput)
+	err = decoder.Decode(&varFactureEnrichieInfo)
 
 	if err != nil {
 		return err
 	}
 
-	*o = FactureEnrichieInfoOutput(varFactureEnrichieInfoOutput)
+	*o = FactureEnrichieInfo(varFactureEnrichieInfo)
 
 	return err
 }
 
-type NullableFactureEnrichieInfoOutput struct {
-	value *FactureEnrichieInfoOutput
+type NullableFactureEnrichieInfo struct {
+	value *FactureEnrichieInfo
 	isSet bool
 }
 
-func (v NullableFactureEnrichieInfoOutput) Get() *FactureEnrichieInfoOutput {
+func (v NullableFactureEnrichieInfo) Get() *FactureEnrichieInfo {
 	return v.value
 }
 
-func (v *NullableFactureEnrichieInfoOutput) Set(val *FactureEnrichieInfoOutput) {
+func (v *NullableFactureEnrichieInfo) Set(val *FactureEnrichieInfo) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFactureEnrichieInfoOutput) IsSet() bool {
+func (v NullableFactureEnrichieInfo) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFactureEnrichieInfoOutput) Unset() {
+func (v *NullableFactureEnrichieInfo) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFactureEnrichieInfoOutput(val *FactureEnrichieInfoOutput) *NullableFactureEnrichieInfoOutput {
-	return &NullableFactureEnrichieInfoOutput{value: val, isSet: true}
+func NewNullableFactureEnrichieInfo(val *FactureEnrichieInfo) *NullableFactureEnrichieInfo {
+	return &NullableFactureEnrichieInfo{value: val, isSet: true}
 }
 
-func (v NullableFactureEnrichieInfoOutput) MarshalJSON() ([]byte, error) {
+func (v NullableFactureEnrichieInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFactureEnrichieInfoOutput) UnmarshalJSON(src []byte) error {
+func (v *NullableFactureEnrichieInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

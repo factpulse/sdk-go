@@ -1,4 +1,4 @@
-# MontantTtcTotal1
+# MontantRemiseGlobaleTtc
 
 ## Properties
 
@@ -7,20 +7,20 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewMontantTtcTotal1
+### NewMontantRemiseGlobaleTtc
 
-`func NewMontantTtcTotal1() *MontantTtcTotal1`
+`func NewMontantRemiseGlobaleTtc() *MontantRemiseGlobaleTtc`
 
-NewMontantTtcTotal1 instantiates a new MontantTtcTotal1 object
+NewMontantRemiseGlobaleTtc instantiates a new MontantRemiseGlobaleTtc object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewMontantTtcTotal1WithDefaults
+### NewMontantRemiseGlobaleTtcWithDefaults
 
-`func NewMontantTtcTotal1WithDefaults() *MontantTtcTotal1`
+`func NewMontantRemiseGlobaleTtcWithDefaults() *MontantRemiseGlobaleTtc`
 
-NewMontantTtcTotal1WithDefaults instantiates a new MontantTtcTotal1 object
+NewMontantRemiseGlobaleTtcWithDefaults instantiates a new MontantRemiseGlobaleTtc object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 

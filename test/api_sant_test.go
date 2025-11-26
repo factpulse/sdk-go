@@ -22,6 +22,18 @@ func Test_factpulse_SantAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test SantAPIService HealthcheckHealthcheckGet", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.SantAPI.HealthcheckHealthcheckGet(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test SantAPIService RacineGet", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

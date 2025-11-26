@@ -21,13 +21,10 @@ var _ MappedNullable = &LigneDeTVA{}
 
 // LigneDeTVA Représente une ligne de totalisation par taux de TVA.
 type LigneDeTVA struct {
-	// Montant de la base HT pour cette ligne de TVA.
-	MontantBaseHt float64 `json:"montantBaseHt" validate:"regexp=^(?!^[-+.]*$)[+-]?0*(?:\\\\d{0,8}|(?=[\\\\d.]{1,13}0*$)\\\\d{0,8}\\\\.\\\\d{0,4}0*$)"`
-	// Montant de la TVA pour cette ligne.
-	MontantTva float64 `json:"montantTva" validate:"regexp=^(?!^[-+.]*$)[+-]?0*(?:\\\\d{0,8}|(?=[\\\\d.]{1,13}0*$)\\\\d{0,8}\\\\.\\\\d{0,4}0*$)"`
+	MontantBaseHt MontantBaseHt `json:"montantBaseHt"`
+	MontantTva MontantTvaLigne `json:"montantTva"`
 	Taux NullableString `json:"taux,omitempty"`
-	// Taux de TVA avec valeur manuelle.
-	TauxManuel *float64 `json:"tauxManuel,omitempty" validate:"regexp=^(?!^[-+.]*$)[+-]?0*(?:\\\\d{0,8}|(?=[\\\\d.]{1,13}0*$)\\\\d{0,8}\\\\.\\\\d{0,4}0*$)"`
+	TauxManuel *Tauxmanuel `json:"tauxManuel,omitempty"`
 	Categorie NullableCategorieTVA `json:"categorie,omitempty"`
 }
 
@@ -37,7 +34,7 @@ type _LigneDeTVA LigneDeTVA
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLigneDeTVA(montantBaseHt float64, montantTva float64) *LigneDeTVA {
+func NewLigneDeTVA(montantBaseHt MontantBaseHt, montantTva MontantTvaLigne) *LigneDeTVA {
 	this := LigneDeTVA{}
 	this.MontantBaseHt = montantBaseHt
 	this.MontantTva = montantTva
@@ -53,9 +50,9 @@ func NewLigneDeTVAWithDefaults() *LigneDeTVA {
 }
 
 // GetMontantBaseHt returns the MontantBaseHt field value
-func (o *LigneDeTVA) GetMontantBaseHt() float64 {
+func (o *LigneDeTVA) GetMontantBaseHt() MontantBaseHt {
 	if o == nil {
-		var ret float64
+		var ret MontantBaseHt
 		return ret
 	}
 
@@ -64,7 +61,7 @@ func (o *LigneDeTVA) GetMontantBaseHt() float64 {
 
 // GetMontantBaseHtOk returns a tuple with the MontantBaseHt field value
 // and a boolean to check if the value has been set.
-func (o *LigneDeTVA) GetMontantBaseHtOk() (*float64, bool) {
+func (o *LigneDeTVA) GetMontantBaseHtOk() (*MontantBaseHt, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -72,14 +69,14 @@ func (o *LigneDeTVA) GetMontantBaseHtOk() (*float64, bool) {
 }
 
 // SetMontantBaseHt sets field value
-func (o *LigneDeTVA) SetMontantBaseHt(v float64) {
+func (o *LigneDeTVA) SetMontantBaseHt(v MontantBaseHt) {
 	o.MontantBaseHt = v
 }
 
 // GetMontantTva returns the MontantTva field value
-func (o *LigneDeTVA) GetMontantTva() float64 {
+func (o *LigneDeTVA) GetMontantTva() MontantTvaLigne {
 	if o == nil {
-		var ret float64
+		var ret MontantTvaLigne
 		return ret
 	}
 
@@ -88,7 +85,7 @@ func (o *LigneDeTVA) GetMontantTva() float64 {
 
 // GetMontantTvaOk returns a tuple with the MontantTva field value
 // and a boolean to check if the value has been set.
-func (o *LigneDeTVA) GetMontantTvaOk() (*float64, bool) {
+func (o *LigneDeTVA) GetMontantTvaOk() (*MontantTvaLigne, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -96,7 +93,7 @@ func (o *LigneDeTVA) GetMontantTvaOk() (*float64, bool) {
 }
 
 // SetMontantTva sets field value
-func (o *LigneDeTVA) SetMontantTva(v float64) {
+func (o *LigneDeTVA) SetMontantTva(v MontantTvaLigne) {
 	o.MontantTva = v
 }
 
@@ -143,9 +140,9 @@ func (o *LigneDeTVA) UnsetTaux() {
 }
 
 // GetTauxManuel returns the TauxManuel field value if set, zero value otherwise.
-func (o *LigneDeTVA) GetTauxManuel() float64 {
+func (o *LigneDeTVA) GetTauxManuel() Tauxmanuel {
 	if o == nil || IsNil(o.TauxManuel) {
-		var ret float64
+		var ret Tauxmanuel
 		return ret
 	}
 	return *o.TauxManuel
@@ -153,7 +150,7 @@ func (o *LigneDeTVA) GetTauxManuel() float64 {
 
 // GetTauxManuelOk returns a tuple with the TauxManuel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LigneDeTVA) GetTauxManuelOk() (*float64, bool) {
+func (o *LigneDeTVA) GetTauxManuelOk() (*Tauxmanuel, bool) {
 	if o == nil || IsNil(o.TauxManuel) {
 		return nil, false
 	}
@@ -169,8 +166,8 @@ func (o *LigneDeTVA) HasTauxManuel() bool {
 	return false
 }
 
-// SetTauxManuel gets a reference to the given float64 and assigns it to the TauxManuel field.
-func (o *LigneDeTVA) SetTauxManuel(v float64) {
+// SetTauxManuel gets a reference to the given Tauxmanuel and assigns it to the TauxManuel field.
+func (o *LigneDeTVA) SetTauxManuel(v Tauxmanuel) {
 	o.TauxManuel = &v
 }
 

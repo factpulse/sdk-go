@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **DestinationType** | **string** | Type de destination | 
 **ResultatChorus** | Pointer to [**NullableResultatChorusPro**](ResultatChorusPro.md) |  | [optional] 
 **ResultatAfnor** | Pointer to [**NullableResultatAFNOR**](ResultatAFNOR.md) |  | [optional] 
-**FactureEnrichie** | [**FactureEnrichieInfoOutput**](FactureEnrichieInfoOutput.md) | Données de la facture enrichie | 
+**FactureEnrichie** | [**FactureEnrichieInfo**](FactureEnrichieInfo.md) | Données de la facture enrichie | 
 **PdfFacturx** | [**PDFFacturXInfo**](PDFFacturXInfo.md) | Informations sur le PDF généré | 
 **Signature** | Pointer to [**NullableSignatureInfo**](SignatureInfo.md) |  | [optional] 
 **PdfBase64** | **string** | PDF Factur-X généré (et signé si demandé) encodé en base64 | 
@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewSoumettreFactureCompleteResponse
 
-`func NewSoumettreFactureCompleteResponse(succes bool, destinationType string, factureEnrichie FactureEnrichieInfoOutput, pdfFacturx PDFFacturXInfo, pdfBase64 string, message string, ) *SoumettreFactureCompleteResponse`
+`func NewSoumettreFactureCompleteResponse(succes bool, destinationType string, factureEnrichie FactureEnrichieInfo, pdfFacturx PDFFacturXInfo, pdfBase64 string, message string, ) *SoumettreFactureCompleteResponse`
 
 NewSoumettreFactureCompleteResponse instantiates a new SoumettreFactureCompleteResponse object
 This constructor will assign default values to properties that have it defined,
@@ -145,20 +145,20 @@ HasResultatAfnor returns a boolean if a field has been set.
 UnsetResultatAfnor ensures that no value is present for ResultatAfnor, not even an explicit nil
 ### GetFactureEnrichie
 
-`func (o *SoumettreFactureCompleteResponse) GetFactureEnrichie() FactureEnrichieInfoOutput`
+`func (o *SoumettreFactureCompleteResponse) GetFactureEnrichie() FactureEnrichieInfo`
 
 GetFactureEnrichie returns the FactureEnrichie field if non-nil, zero value otherwise.
 
 ### GetFactureEnrichieOk
 
-`func (o *SoumettreFactureCompleteResponse) GetFactureEnrichieOk() (*FactureEnrichieInfoOutput, bool)`
+`func (o *SoumettreFactureCompleteResponse) GetFactureEnrichieOk() (*FactureEnrichieInfo, bool)`
 
 GetFactureEnrichieOk returns a tuple with the FactureEnrichie field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFactureEnrichie
 
-`func (o *SoumettreFactureCompleteResponse) SetFactureEnrichie(v FactureEnrichieInfoOutput)`
+`func (o *SoumettreFactureCompleteResponse) SetFactureEnrichie(v FactureEnrichieInfo)`
 
 SetFactureEnrichie sets FactureEnrichie field to given value.
 

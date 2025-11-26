@@ -16,14 +16,14 @@ import (
 )
 
 
-// MontantTtcTotal1 Montant TTC total
-type MontantTtcTotal1 struct {
+// MontantTvaLigne Montant de la TVA pour cette ligne. (Accepte number, string ou integer)
+type MontantTvaLigne struct {
 	Float32 *float32
 	String *string
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
-func (dst *MontantTtcTotal1) UnmarshalJSON(data []byte) error {
+func (dst *MontantTvaLigne) UnmarshalJSON(data []byte) error {
 	var err error
 	// try to unmarshal JSON data into Float32
 	err = json.Unmarshal(data, &dst.Float32);
@@ -51,11 +51,11 @@ func (dst *MontantTtcTotal1) UnmarshalJSON(data []byte) error {
 		dst.String = nil
 	}
 
-	return fmt.Errorf("data failed to match schemas in anyOf(MontantTtcTotal1)")
+	return fmt.Errorf("data failed to match schemas in anyOf(MontantTvaLigne)")
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
-func (src MontantTtcTotal1) MarshalJSON() ([]byte, error) {
+func (src MontantTvaLigne) MarshalJSON() ([]byte, error) {
 	if src.Float32 != nil {
 		return json.Marshal(&src.Float32)
 	}
@@ -68,38 +68,38 @@ func (src MontantTtcTotal1) MarshalJSON() ([]byte, error) {
 }
 
 
-type NullableMontantTtcTotal1 struct {
-	value *MontantTtcTotal1
+type NullableMontantTvaLigne struct {
+	value *MontantTvaLigne
 	isSet bool
 }
 
-func (v NullableMontantTtcTotal1) Get() *MontantTtcTotal1 {
+func (v NullableMontantTvaLigne) Get() *MontantTvaLigne {
 	return v.value
 }
 
-func (v *NullableMontantTtcTotal1) Set(val *MontantTtcTotal1) {
+func (v *NullableMontantTvaLigne) Set(val *MontantTvaLigne) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableMontantTtcTotal1) IsSet() bool {
+func (v NullableMontantTvaLigne) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableMontantTtcTotal1) Unset() {
+func (v *NullableMontantTvaLigne) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableMontantTtcTotal1(val *MontantTtcTotal1) *NullableMontantTtcTotal1 {
-	return &NullableMontantTtcTotal1{value: val, isSet: true}
+func NewNullableMontantTvaLigne(val *MontantTvaLigne) *NullableMontantTvaLigne {
+	return &NullableMontantTvaLigne{value: val, isSet: true}
 }
 
-func (v NullableMontantTtcTotal1) MarshalJSON() ([]byte, error) {
+func (v NullableMontantTvaLigne) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableMontantTtcTotal1) UnmarshalJSON(src []byte) error {
+func (v *NullableMontantTvaLigne) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

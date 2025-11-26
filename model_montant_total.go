@@ -21,18 +21,12 @@ var _ MappedNullable = &MontantTotal{}
 
 // MontantTotal Contient tous les montants totaux de la facture.
 type MontantTotal struct {
-	// Montant total HT.
-	MontantHtTotal float64 `json:"montantHtTotal" validate:"regexp=^(?!^[-+.]*$)[+-]?0*(?:\\\\d{0,8}|(?=[\\\\d.]{1,13}0*$)\\\\d{0,8}\\\\.\\\\d{0,4}0*$)"`
-	// Montant total de la TVA.
-	MontantTva float64 `json:"montantTva" validate:"regexp=^(?!^[-+.]*$)[+-]?0*(?:\\\\d{0,8}|(?=[\\\\d.]{1,13}0*$)\\\\d{0,8}\\\\.\\\\d{0,4}0*$)"`
-	// Montant total TTC.
-	MontantTtcTotal float64 `json:"montantTtcTotal" validate:"regexp=^(?!^[-+.]*$)[+-]?0*(?:\\\\d{0,8}|(?=[\\\\d.]{1,13}0*$)\\\\d{0,8}\\\\.\\\\d{0,4}0*$)"`
-	// Montant à payer.
-	MontantAPayer float64 `json:"montantAPayer" validate:"regexp=^(?!^[-+.]*$)[+-]?0*(?:\\\\d{0,8}|(?=[\\\\d.]{1,13}0*$)\\\\d{0,8}\\\\.\\\\d{0,4}0*$)"`
-	// Acompte versé.
-	Acompte NullableFloat64 `json:"acompte,omitempty" validate:"regexp=^(?!^[-+.]*$)[+-]?0*(?:\\\\d{0,8}|(?=[\\\\d.]{1,13}0*$)\\\\d{0,8}\\\\.\\\\d{0,4}0*$)"`
-	// Montant de la remise globale TTC.
-	MontantRemiseGlobaleTtc *float64 `json:"montantRemiseGlobaleTtc,omitempty" validate:"regexp=^(?!^[-+.]*$)[+-]?0*(?:\\\\d{0,8}|(?=[\\\\d.]{1,13}0*$)\\\\d{0,8}\\\\.\\\\d{0,4}0*$)"`
+	MontantHtTotal MontantHtTotal `json:"montantHtTotal"`
+	MontantTva MontantTvaTotal `json:"montantTva"`
+	MontantTtcTotal MontantTtcTotal `json:"montantTtcTotal"`
+	MontantAPayer MontantAPayer `json:"montantAPayer"`
+	Acompte NullableMontantTotalAcompte `json:"acompte,omitempty"`
+	MontantRemiseGlobaleTtc *MontantRemiseGlobaleTtc `json:"montantRemiseGlobaleTtc,omitempty"`
 	MotifRemiseGlobaleTtc NullableString `json:"motifRemiseGlobaleTtc,omitempty"`
 }
 
@@ -42,7 +36,7 @@ type _MontantTotal MontantTotal
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMontantTotal(montantHtTotal float64, montantTva float64, montantTtcTotal float64, montantAPayer float64) *MontantTotal {
+func NewMontantTotal(montantHtTotal MontantHtTotal, montantTva MontantTvaTotal, montantTtcTotal MontantTtcTotal, montantAPayer MontantAPayer) *MontantTotal {
 	this := MontantTotal{}
 	this.MontantHtTotal = montantHtTotal
 	this.MontantTva = montantTva
@@ -60,9 +54,9 @@ func NewMontantTotalWithDefaults() *MontantTotal {
 }
 
 // GetMontantHtTotal returns the MontantHtTotal field value
-func (o *MontantTotal) GetMontantHtTotal() float64 {
+func (o *MontantTotal) GetMontantHtTotal() MontantHtTotal {
 	if o == nil {
-		var ret float64
+		var ret MontantHtTotal
 		return ret
 	}
 
@@ -71,7 +65,7 @@ func (o *MontantTotal) GetMontantHtTotal() float64 {
 
 // GetMontantHtTotalOk returns a tuple with the MontantHtTotal field value
 // and a boolean to check if the value has been set.
-func (o *MontantTotal) GetMontantHtTotalOk() (*float64, bool) {
+func (o *MontantTotal) GetMontantHtTotalOk() (*MontantHtTotal, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -79,14 +73,14 @@ func (o *MontantTotal) GetMontantHtTotalOk() (*float64, bool) {
 }
 
 // SetMontantHtTotal sets field value
-func (o *MontantTotal) SetMontantHtTotal(v float64) {
+func (o *MontantTotal) SetMontantHtTotal(v MontantHtTotal) {
 	o.MontantHtTotal = v
 }
 
 // GetMontantTva returns the MontantTva field value
-func (o *MontantTotal) GetMontantTva() float64 {
+func (o *MontantTotal) GetMontantTva() MontantTvaTotal {
 	if o == nil {
-		var ret float64
+		var ret MontantTvaTotal
 		return ret
 	}
 
@@ -95,7 +89,7 @@ func (o *MontantTotal) GetMontantTva() float64 {
 
 // GetMontantTvaOk returns a tuple with the MontantTva field value
 // and a boolean to check if the value has been set.
-func (o *MontantTotal) GetMontantTvaOk() (*float64, bool) {
+func (o *MontantTotal) GetMontantTvaOk() (*MontantTvaTotal, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -103,14 +97,14 @@ func (o *MontantTotal) GetMontantTvaOk() (*float64, bool) {
 }
 
 // SetMontantTva sets field value
-func (o *MontantTotal) SetMontantTva(v float64) {
+func (o *MontantTotal) SetMontantTva(v MontantTvaTotal) {
 	o.MontantTva = v
 }
 
 // GetMontantTtcTotal returns the MontantTtcTotal field value
-func (o *MontantTotal) GetMontantTtcTotal() float64 {
+func (o *MontantTotal) GetMontantTtcTotal() MontantTtcTotal {
 	if o == nil {
-		var ret float64
+		var ret MontantTtcTotal
 		return ret
 	}
 
@@ -119,7 +113,7 @@ func (o *MontantTotal) GetMontantTtcTotal() float64 {
 
 // GetMontantTtcTotalOk returns a tuple with the MontantTtcTotal field value
 // and a boolean to check if the value has been set.
-func (o *MontantTotal) GetMontantTtcTotalOk() (*float64, bool) {
+func (o *MontantTotal) GetMontantTtcTotalOk() (*MontantTtcTotal, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -127,14 +121,14 @@ func (o *MontantTotal) GetMontantTtcTotalOk() (*float64, bool) {
 }
 
 // SetMontantTtcTotal sets field value
-func (o *MontantTotal) SetMontantTtcTotal(v float64) {
+func (o *MontantTotal) SetMontantTtcTotal(v MontantTtcTotal) {
 	o.MontantTtcTotal = v
 }
 
 // GetMontantAPayer returns the MontantAPayer field value
-func (o *MontantTotal) GetMontantAPayer() float64 {
+func (o *MontantTotal) GetMontantAPayer() MontantAPayer {
 	if o == nil {
-		var ret float64
+		var ret MontantAPayer
 		return ret
 	}
 
@@ -143,7 +137,7 @@ func (o *MontantTotal) GetMontantAPayer() float64 {
 
 // GetMontantAPayerOk returns a tuple with the MontantAPayer field value
 // and a boolean to check if the value has been set.
-func (o *MontantTotal) GetMontantAPayerOk() (*float64, bool) {
+func (o *MontantTotal) GetMontantAPayerOk() (*MontantAPayer, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -151,14 +145,14 @@ func (o *MontantTotal) GetMontantAPayerOk() (*float64, bool) {
 }
 
 // SetMontantAPayer sets field value
-func (o *MontantTotal) SetMontantAPayer(v float64) {
+func (o *MontantTotal) SetMontantAPayer(v MontantAPayer) {
 	o.MontantAPayer = v
 }
 
 // GetAcompte returns the Acompte field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *MontantTotal) GetAcompte() float64 {
+func (o *MontantTotal) GetAcompte() MontantTotalAcompte {
 	if o == nil || IsNil(o.Acompte.Get()) {
-		var ret float64
+		var ret MontantTotalAcompte
 		return ret
 	}
 	return *o.Acompte.Get()
@@ -167,7 +161,7 @@ func (o *MontantTotal) GetAcompte() float64 {
 // GetAcompteOk returns a tuple with the Acompte field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *MontantTotal) GetAcompteOk() (*float64, bool) {
+func (o *MontantTotal) GetAcompteOk() (*MontantTotalAcompte, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -183,8 +177,8 @@ func (o *MontantTotal) HasAcompte() bool {
 	return false
 }
 
-// SetAcompte gets a reference to the given NullableFloat64 and assigns it to the Acompte field.
-func (o *MontantTotal) SetAcompte(v float64) {
+// SetAcompte gets a reference to the given NullableMontantTotalAcompte and assigns it to the Acompte field.
+func (o *MontantTotal) SetAcompte(v MontantTotalAcompte) {
 	o.Acompte.Set(&v)
 }
 // SetAcompteNil sets the value for Acompte to be an explicit nil
@@ -198,9 +192,9 @@ func (o *MontantTotal) UnsetAcompte() {
 }
 
 // GetMontantRemiseGlobaleTtc returns the MontantRemiseGlobaleTtc field value if set, zero value otherwise.
-func (o *MontantTotal) GetMontantRemiseGlobaleTtc() float64 {
+func (o *MontantTotal) GetMontantRemiseGlobaleTtc() MontantRemiseGlobaleTtc {
 	if o == nil || IsNil(o.MontantRemiseGlobaleTtc) {
-		var ret float64
+		var ret MontantRemiseGlobaleTtc
 		return ret
 	}
 	return *o.MontantRemiseGlobaleTtc
@@ -208,7 +202,7 @@ func (o *MontantTotal) GetMontantRemiseGlobaleTtc() float64 {
 
 // GetMontantRemiseGlobaleTtcOk returns a tuple with the MontantRemiseGlobaleTtc field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *MontantTotal) GetMontantRemiseGlobaleTtcOk() (*float64, bool) {
+func (o *MontantTotal) GetMontantRemiseGlobaleTtcOk() (*MontantRemiseGlobaleTtc, bool) {
 	if o == nil || IsNil(o.MontantRemiseGlobaleTtc) {
 		return nil, false
 	}
@@ -224,8 +218,8 @@ func (o *MontantTotal) HasMontantRemiseGlobaleTtc() bool {
 	return false
 }
 
-// SetMontantRemiseGlobaleTtc gets a reference to the given float64 and assigns it to the MontantRemiseGlobaleTtc field.
-func (o *MontantTotal) SetMontantRemiseGlobaleTtc(v float64) {
+// SetMontantRemiseGlobaleTtc gets a reference to the given MontantRemiseGlobaleTtc and assigns it to the MontantRemiseGlobaleTtc field.
+func (o *MontantTotal) SetMontantRemiseGlobaleTtc(v MontantRemiseGlobaleTtc) {
 	o.MontantRemiseGlobaleTtc = &v
 }
 
