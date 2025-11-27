@@ -25,7 +25,7 @@ Method | HTTP request | Description
 
 ## AjouterFichierApiV1ChorusProTransversesAjouterFichierPost
 
-> interface{} AjouterFichierApiV1ChorusProTransversesAjouterFichierPost(ctx).BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost(bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost).Execute()
+> interface{} AjouterFichierApiV1ChorusProTransversesAjouterFichierPost(ctx).RequestBody(requestBody).Execute()
 
 Ajouter une pièce jointe
 
@@ -44,11 +44,11 @@ import (
 )
 
 func main() {
-	bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost := *openapiclient.NewBodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost(map[string]interface{}{"key": interface{}(123)}, *openapiclient.NewUtilisateur(int32(123), "Username_example", "Email_example", false)) // BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost | 
+	requestBody := map[string]interface{}{"key": interface{}(123)} // map[string]interface{} | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChorusProAPI.AjouterFichierApiV1ChorusProTransversesAjouterFichierPost(context.Background()).BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost(bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost).Execute()
+	resp, r, err := apiClient.ChorusProAPI.AjouterFichierApiV1ChorusProTransversesAjouterFichierPost(context.Background()).RequestBody(requestBody).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChorusProAPI.AjouterFichierApiV1ChorusProTransversesAjouterFichierPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -69,7 +69,7 @@ Other parameters are passed through a pointer to a apiAjouterFichierApiV1ChorusP
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost** | [**BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost**](BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost.md) |  | 
+ **requestBody** | **map[string]interface{}** |  | 
 
 ### Return type
 
@@ -91,7 +91,7 @@ Name | Type | Description  | Notes
 
 ## CompleterFactureApiV1ChorusProFacturesCompleterPost
 
-> interface{} CompleterFactureApiV1ChorusProFacturesCompleterPost(ctx).BodyCompleterFactureApiV1ChorusProFacturesCompleterPost(bodyCompleterFactureApiV1ChorusProFacturesCompleterPost).Execute()
+> interface{} CompleterFactureApiV1ChorusProFacturesCompleterPost(ctx).RequestBody(requestBody).Execute()
 
 Compléter une facture suspendue (Fournisseur)
 
@@ -110,11 +110,11 @@ import (
 )
 
 func main() {
-	bodyCompleterFactureApiV1ChorusProFacturesCompleterPost := *openapiclient.NewBodyCompleterFactureApiV1ChorusProFacturesCompleterPost(map[string]interface{}{"key": interface{}(123)}, *openapiclient.NewUtilisateur(int32(123), "Username_example", "Email_example", false)) // BodyCompleterFactureApiV1ChorusProFacturesCompleterPost | 
+	requestBody := map[string]interface{}{"key": interface{}(123)} // map[string]interface{} | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChorusProAPI.CompleterFactureApiV1ChorusProFacturesCompleterPost(context.Background()).BodyCompleterFactureApiV1ChorusProFacturesCompleterPost(bodyCompleterFactureApiV1ChorusProFacturesCompleterPost).Execute()
+	resp, r, err := apiClient.ChorusProAPI.CompleterFactureApiV1ChorusProFacturesCompleterPost(context.Background()).RequestBody(requestBody).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChorusProAPI.CompleterFactureApiV1ChorusProFacturesCompleterPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -135,7 +135,7 @@ Other parameters are passed through a pointer to a apiCompleterFactureApiV1Choru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **bodyCompleterFactureApiV1ChorusProFacturesCompleterPost** | [**BodyCompleterFactureApiV1ChorusProFacturesCompleterPost**](BodyCompleterFactureApiV1ChorusProFacturesCompleterPost.md) |  | 
+ **requestBody** | **map[string]interface{}** |  | 
 
 ### Return type
 
@@ -289,7 +289,7 @@ Name | Type | Description  | Notes
 
 ## ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet
 
-> RechercherServicesResponse ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(ctx, idStructureCpp).BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet).Execute()
+> RechercherServicesResponse ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(ctx, idStructureCpp).Execute()
 
 Lister les services d'une structure
 
@@ -309,11 +309,10 @@ import (
 
 func main() {
 	idStructureCpp := int32(56) // int32 | 
-	bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet := *openapiclient.NewBodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(*openapiclient.NewUtilisateur(int32(123), "Username_example", "Email_example", false)) // BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChorusProAPI.ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(context.Background(), idStructureCpp).BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet).Execute()
+	resp, r, err := apiClient.ChorusProAPI.ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(context.Background(), idStructureCpp).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChorusProAPI.ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -339,7 +338,6 @@ Other parameters are passed through a pointer to a apiListerServicesStructureApi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet** | [**BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet**](BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet.md) |  | 
 
 ### Return type
 
@@ -351,7 +349,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -427,7 +425,7 @@ Name | Type | Description  | Notes
 
 ## RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost
 
-> interface{} RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(ctx).BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost).Execute()
+> interface{} RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(ctx).RequestBody(requestBody).Execute()
 
 Rechercher factures reçues (Destinataire)
 
@@ -446,11 +444,11 @@ import (
 )
 
 func main() {
-	bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost := *openapiclient.NewBodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(map[string]interface{}{"key": interface{}(123)}, *openapiclient.NewUtilisateur(int32(123), "Username_example", "Email_example", false)) // BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost | 
+	requestBody := map[string]interface{}{"key": interface{}(123)} // map[string]interface{} | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChorusProAPI.RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(context.Background()).BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost).Execute()
+	resp, r, err := apiClient.ChorusProAPI.RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(context.Background()).RequestBody(requestBody).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChorusProAPI.RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -471,7 +469,7 @@ Other parameters are passed through a pointer to a apiRechercherFacturesDestinat
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost** | [**BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost**](BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost.md) |  | 
+ **requestBody** | **map[string]interface{}** |  | 
 
 ### Return type
 
@@ -493,7 +491,7 @@ Name | Type | Description  | Notes
 
 ## RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost
 
-> interface{} RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(ctx).BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost).Execute()
+> interface{} RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(ctx).RequestBody(requestBody).Execute()
 
 Rechercher factures émises (Fournisseur)
 
@@ -512,11 +510,11 @@ import (
 )
 
 func main() {
-	bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost := *openapiclient.NewBodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(map[string]interface{}{"key": interface{}(123)}, *openapiclient.NewUtilisateur(int32(123), "Username_example", "Email_example", false)) // BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost | 
+	requestBody := map[string]interface{}{"key": interface{}(123)} // map[string]interface{} | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChorusProAPI.RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(context.Background()).BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost).Execute()
+	resp, r, err := apiClient.ChorusProAPI.RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(context.Background()).RequestBody(requestBody).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChorusProAPI.RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -537,7 +535,7 @@ Other parameters are passed through a pointer to a apiRechercherFacturesFourniss
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost** | [**BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost**](BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost.md) |  | 
+ **requestBody** | **map[string]interface{}** |  | 
 
 ### Return type
 
@@ -625,7 +623,7 @@ Name | Type | Description  | Notes
 
 ## RecyclerFactureApiV1ChorusProFacturesRecyclerPost
 
-> interface{} RecyclerFactureApiV1ChorusProFacturesRecyclerPost(ctx).BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost(bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost).Execute()
+> interface{} RecyclerFactureApiV1ChorusProFacturesRecyclerPost(ctx).RequestBody(requestBody).Execute()
 
 Recycler une facture (Fournisseur)
 
@@ -644,11 +642,11 @@ import (
 )
 
 func main() {
-	bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost := *openapiclient.NewBodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost(map[string]interface{}{"key": interface{}(123)}, *openapiclient.NewUtilisateur(int32(123), "Username_example", "Email_example", false)) // BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost | 
+	requestBody := map[string]interface{}{"key": interface{}(123)} // map[string]interface{} | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChorusProAPI.RecyclerFactureApiV1ChorusProFacturesRecyclerPost(context.Background()).BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost(bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost).Execute()
+	resp, r, err := apiClient.ChorusProAPI.RecyclerFactureApiV1ChorusProFacturesRecyclerPost(context.Background()).RequestBody(requestBody).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChorusProAPI.RecyclerFactureApiV1ChorusProFacturesRecyclerPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -669,7 +667,7 @@ Other parameters are passed through a pointer to a apiRecyclerFactureApiV1Chorus
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost** | [**BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost**](BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost.md) |  | 
+ **requestBody** | **map[string]interface{}** |  | 
 
 ### Return type
 
@@ -757,7 +755,7 @@ Name | Type | Description  | Notes
 
 ## TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost
 
-> interface{} TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(ctx).BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost).Execute()
+> interface{} TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(ctx).RequestBody(requestBody).Execute()
 
 Télécharger un groupe de factures
 
@@ -776,11 +774,11 @@ import (
 )
 
 func main() {
-	bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost := *openapiclient.NewBodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(map[string]interface{}{"key": interface{}(123)}, *openapiclient.NewUtilisateur(int32(123), "Username_example", "Email_example", false)) // BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost | 
+	requestBody := map[string]interface{}{"key": interface{}(123)} // map[string]interface{} | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChorusProAPI.TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(context.Background()).BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost).Execute()
+	resp, r, err := apiClient.ChorusProAPI.TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(context.Background()).RequestBody(requestBody).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChorusProAPI.TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -801,7 +799,7 @@ Other parameters are passed through a pointer to a apiTelechargerGroupeFacturesA
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost** | [**BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost**](BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost.md) |  | 
+ **requestBody** | **map[string]interface{}** |  | 
 
 ### Return type
 
@@ -823,7 +821,7 @@ Name | Type | Description  | Notes
 
 ## TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost
 
-> interface{} TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(ctx).BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost).Execute()
+> interface{} TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(ctx).RequestBody(requestBody).Execute()
 
 Traiter une facture reçue (Destinataire)
 
@@ -842,11 +840,11 @@ import (
 )
 
 func main() {
-	bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost := *openapiclient.NewBodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(map[string]interface{}{"key": interface{}(123)}, *openapiclient.NewUtilisateur(int32(123), "Username_example", "Email_example", false)) // BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost | 
+	requestBody := map[string]interface{}{"key": interface{}(123)} // map[string]interface{} | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChorusProAPI.TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(context.Background()).BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost).Execute()
+	resp, r, err := apiClient.ChorusProAPI.TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(context.Background()).RequestBody(requestBody).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChorusProAPI.TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -867,7 +865,7 @@ Other parameters are passed through a pointer to a apiTraiterFactureRecueApiV1Ch
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost** | [**BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost**](BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost.md) |  | 
+ **requestBody** | **map[string]interface{}** |  | 
 
 ### Return type
 
@@ -889,11 +887,9 @@ Name | Type | Description  | Notes
 
 ## ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost
 
-> interface{} ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(ctx).BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost).Execute()
+> interface{} ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(ctx).RequestBody(requestBody).Execute()
 
 Consulter une facture (Valideur)
-
-
 
 ### Example
 
@@ -908,11 +904,11 @@ import (
 )
 
 func main() {
-	bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost := *openapiclient.NewBodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(map[string]interface{}{"key": interface{}(123)}, *openapiclient.NewUtilisateur(int32(123), "Username_example", "Email_example", false)) // BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost | 
+	requestBody := map[string]interface{}{"key": interface{}(123)} // map[string]interface{} | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChorusProAPI.ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(context.Background()).BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost).Execute()
+	resp, r, err := apiClient.ChorusProAPI.ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(context.Background()).RequestBody(requestBody).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChorusProAPI.ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -933,7 +929,7 @@ Other parameters are passed through a pointer to a apiValideurConsulterFactureAp
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost** | [**BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost**](BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost.md) |  | 
+ **requestBody** | **map[string]interface{}** |  | 
 
 ### Return type
 
@@ -955,7 +951,7 @@ Name | Type | Description  | Notes
 
 ## ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost
 
-> interface{} ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(ctx).BodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost).Execute()
+> interface{} ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(ctx).RequestBody(requestBody).Execute()
 
 Rechercher factures à valider (Valideur)
 
@@ -974,11 +970,11 @@ import (
 )
 
 func main() {
-	bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost := *openapiclient.NewBodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(map[string]interface{}{"key": interface{}(123)}, *openapiclient.NewUtilisateur(int32(123), "Username_example", "Email_example", false)) // BodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost | 
+	requestBody := map[string]interface{}{"key": interface{}(123)} // map[string]interface{} | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChorusProAPI.ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(context.Background()).BodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost).Execute()
+	resp, r, err := apiClient.ChorusProAPI.ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(context.Background()).RequestBody(requestBody).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChorusProAPI.ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -999,7 +995,7 @@ Other parameters are passed through a pointer to a apiValideurRechercherFactures
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost** | [**BodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost**](BodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost.md) |  | 
+ **requestBody** | **map[string]interface{}** |  | 
 
 ### Return type
 
@@ -1021,7 +1017,7 @@ Name | Type | Description  | Notes
 
 ## ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost
 
-> interface{} ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(ctx).BodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost).Execute()
+> interface{} ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(ctx).RequestBody(requestBody).Execute()
 
 Valider ou refuser une facture (Valideur)
 
@@ -1040,11 +1036,11 @@ import (
 )
 
 func main() {
-	bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost := *openapiclient.NewBodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(map[string]interface{}{"key": interface{}(123)}, *openapiclient.NewUtilisateur(int32(123), "Username_example", "Email_example", false)) // BodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost | 
+	requestBody := map[string]interface{}{"key": interface{}(123)} // map[string]interface{} | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChorusProAPI.ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(context.Background()).BodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost).Execute()
+	resp, r, err := apiClient.ChorusProAPI.ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(context.Background()).RequestBody(requestBody).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChorusProAPI.ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1065,7 +1061,7 @@ Other parameters are passed through a pointer to a apiValideurTraiterFactureApiV
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost** | [**BodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost**](BodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost.md) |  | 
+ **requestBody** | **map[string]interface{}** |  | 
 
 ### Return type
 

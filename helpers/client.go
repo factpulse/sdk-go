@@ -27,19 +27,27 @@ func (c *ChorusProCredentials) ToMap() map[string]interface{} {
 }
 
 // AFNORCredentials contient les credentials AFNOR PDP pour le mode Zero-Trust.
-// Ces credentials sont passés dans chaque requête et ne sont jamais stockés côté serveur.
+// L'API FactPulse utilise ces credentials pour s'authentifier auprès de la PDP AFNOR.
 type AFNORCredentials struct {
-    ClientID       string `json:"client_id"`
-    ClientSecret   string `json:"client_secret"`
-    FlowServiceURL string `json:"flow_service_url"`
+    FlowServiceURL      string `json:"flow_service_url"`
+    TokenURL            string `json:"token_url"`
+    ClientID            string `json:"client_id"`
+    ClientSecret        string `json:"client_secret"`
+    DirectoryServiceURL string `json:"directory_service_url,omitempty"`
 }
 
-func NewAFNORCredentials(clientID, clientSecret, flowServiceURL string) *AFNORCredentials {
-    return &AFNORCredentials{ClientID: clientID, ClientSecret: clientSecret, FlowServiceURL: flowServiceURL}
+func NewAFNORCredentials(flowServiceURL, tokenURL, clientID, clientSecret string) *AFNORCredentials {
+    return &AFNORCredentials{FlowServiceURL: flowServiceURL, TokenURL: tokenURL, ClientID: clientID, ClientSecret: clientSecret}
+}
+
+func NewAFNORCredentialsWithDirectory(flowServiceURL, tokenURL, clientID, clientSecret, directoryServiceURL string) *AFNORCredentials {
+    return &AFNORCredentials{FlowServiceURL: flowServiceURL, TokenURL: tokenURL, ClientID: clientID, ClientSecret: clientSecret, DirectoryServiceURL: directoryServiceURL}
 }
 
 func (c *AFNORCredentials) ToMap() map[string]interface{} {
-    return map[string]interface{}{"client_id": c.ClientID, "client_secret": c.ClientSecret, "flow_service_url": c.FlowServiceURL}
+    m := map[string]interface{}{"flow_service_url": c.FlowServiceURL, "token_url": c.TokenURL, "client_id": c.ClientID, "client_secret": c.ClientSecret}
+    if c.DirectoryServiceURL != "" { m["directory_service_url"] = c.DirectoryServiceURL }
+    return m
 }
 
 // Montant formate une valeur en montant avec 2 décimales
@@ -69,37 +77,109 @@ func MontantTotalAvecOptions(ht, tva, ttc, aPayer, remiseTtc interface{}, motifR
     return result
 }
 
-// LigneDePoste crée une ligne de poste simplifiée
-func LigneDePoste(numero int, denomination string, quantite, montantUnitaireHt, montantLigneHt interface{}) map[string]interface{} {
-    return LigneDePosteAvecOptions(numero, denomination, quantite, montantUnitaireHt, montantLigneHt, "20.00", "S", "C62", nil)
+// LigneDePoste crée une ligne de poste (aligné sur LigneDePoste de models.py)
+func LigneDePoste(numero int, denomination string, quantite, montantUnitaireHt, montantTotalLigneHt interface{}) map[string]interface{} {
+    return LigneDePosteAvecOptions(numero, denomination, quantite, montantUnitaireHt, montantTotalLigneHt, "20.00", "S", "FORFAIT", nil)
 }
 
 // LigneDePosteAvecOptions crée une ligne de poste avec options
-func LigneDePosteAvecOptions(numero int, denomination string, quantite, montantUnitaireHt, montantLigneHt interface{}, tauxTva, categorieTva, unite string, options map[string]interface{}) map[string]interface{} {
-    result := map[string]interface{}{"numero": numero, "denomination": denomination, "quantite": Montant(quantite), "montantUnitaireHt": Montant(montantUnitaireHt), "montantTotalLigneHt": Montant(montantLigneHt), "tauxTvaManuel": Montant(tauxTva), "categorieTva": categorieTva, "unite": unite}
+func LigneDePosteAvecOptions(numero int, denomination string, quantite, montantUnitaireHt, montantTotalLigneHt interface{}, tauxTva, categorieTva, unite string, options map[string]interface{}) map[string]interface{} {
+    result := map[string]interface{}{"numero": numero, "denomination": denomination, "quantite": Montant(quantite), "montantUnitaireHt": Montant(montantUnitaireHt), "montantTotalLigneHt": Montant(montantTotalLigneHt), "tauxTva": Montant(tauxTva), "categorieTva": categorieTva, "unite": unite}
     if options != nil {
         if v, ok := options["reference"]; ok { result["reference"] = v }
-        if v, ok := options["montantTvaLigne"]; ok { result["montantTvaLigne"] = Montant(v) }
         if v, ok := options["montantRemiseHt"]; ok { result["montantRemiseHt"] = Montant(v) }
         if v, ok := options["codeRaisonReduction"]; ok { result["codeRaisonReduction"] = v }
         if v, ok := options["raisonReduction"]; ok { result["raisonReduction"] = v }
-        if v, ok := options["motifExoneration"]; ok { result["motifExoneration"] = v }
         if v, ok := options["dateDebutPeriode"]; ok { result["dateDebutPeriode"] = v }
         if v, ok := options["dateFinPeriode"]; ok { result["dateFinPeriode"] = v }
-        if v, ok := options["description"]; ok { result["description"] = v }
     }
     return result
 }
 
-// LigneDeTva crée une ligne de TVA simplifiée
-func LigneDeTva(taux, baseHt, montantTva interface{}) map[string]interface{} {
-    return LigneDeTvaAvecOptions(taux, baseHt, montantTva, "S", "")
+// LigneDeTva crée une ligne de TVA (aligné sur LigneDeTVA de models.py)
+func LigneDeTva(tauxManuel, montantBaseHt, montantTva interface{}) map[string]interface{} {
+    return LigneDeTvaAvecOptions(tauxManuel, montantBaseHt, montantTva, "S")
 }
 
 // LigneDeTvaAvecOptions crée une ligne de TVA avec options
-func LigneDeTvaAvecOptions(taux, baseHt, montantTva interface{}, categorie, motifExoneration string) map[string]interface{} {
-    result := map[string]interface{}{"tauxManuel": Montant(taux), "montantBaseHt": Montant(baseHt), "montantTva": Montant(montantTva), "categorie": categorie}
-    if motifExoneration != "" { result["motifExoneration"] = motifExoneration }
+func LigneDeTvaAvecOptions(tauxManuel, montantBaseHt, montantTva interface{}, categorie string) map[string]interface{} {
+    return map[string]interface{}{"tauxManuel": Montant(tauxManuel), "montantBaseHt": Montant(montantBaseHt), "montantTva": Montant(montantTva), "categorie": categorie}
+}
+
+// AdressePostale crée une adresse postale pour l'API FactPulse
+func AdressePostale(ligne1, codePostal, ville string) map[string]interface{} {
+    return AdressePostaleAvecOptions(ligne1, codePostal, ville, "FR", "", "")
+}
+
+// AdressePostaleAvecOptions crée une adresse postale avec options
+func AdressePostaleAvecOptions(ligne1, codePostal, ville, pays, ligne2, ligne3 string) map[string]interface{} {
+    result := map[string]interface{}{"ligneUn": ligne1, "codePostal": codePostal, "nomVille": ville, "paysCodeIso": pays}
+    if ligne2 != "" { result["ligneDeux"] = ligne2 }
+    if ligne3 != "" { result["ligneTrois"] = ligne3 }
+    return result
+}
+
+// AdresseElectronique crée une adresse électronique. schemeID: "0009"=SIREN, "0225"=SIRET
+func AdresseElectronique(identifiant, schemeID string) map[string]interface{} {
+    if schemeID == "" { schemeID = "0009" }
+    return map[string]interface{}{"identifiant": identifiant, "schemeId": schemeID}
+}
+
+// calculerTvaIntra calcule le numéro TVA intracommunautaire français depuis un SIREN
+func calculerTvaIntra(siren string) string {
+    if len(siren) != 9 { return "" }
+    sirenNum, err := strconv.ParseInt(siren, 10, 64)
+    if err != nil { return "" }
+    cle := (12 + 3*(sirenNum%97)) % 97
+    return fmt.Sprintf("FR%02d%s", cle, siren)
+}
+
+// FournisseurOptions contient les options pour créer un fournisseur
+type FournisseurOptions struct {
+    IdFournisseur int
+    Siren, NumeroTvaIntra, Iban, Pays, AdresseLigne2 string
+    CodeService, CodeCoordonnesBancaires int
+}
+
+// Fournisseur crée un fournisseur avec auto-calcul SIREN, TVA intracommunautaire et adresses
+func Fournisseur(nom, siret, adresseLigne1, codePostal, ville string, opts *FournisseurOptions) map[string]interface{} {
+    if opts == nil { opts = &FournisseurOptions{} }
+    siren := opts.Siren
+    if siren == "" && len(siret) == 14 { siren = siret[:9] }
+    numeroTvaIntra := opts.NumeroTvaIntra
+    if numeroTvaIntra == "" && siren != "" { numeroTvaIntra = calculerTvaIntra(siren) }
+    pays := opts.Pays; if pays == "" { pays = "FR" }
+    result := map[string]interface{}{
+        "nom": nom, "idFournisseur": opts.IdFournisseur, "siret": siret,
+        "adresseElectronique": AdresseElectronique(siret, "0225"),
+        "adressePostale": AdressePostaleAvecOptions(adresseLigne1, codePostal, ville, pays, opts.AdresseLigne2, ""),
+    }
+    if siren != "" { result["siren"] = siren }
+    if numeroTvaIntra != "" { result["numeroTvaIntra"] = numeroTvaIntra }
+    if opts.Iban != "" { result["iban"] = opts.Iban }
+    if opts.CodeService != 0 { result["idServiceFournisseur"] = opts.CodeService }
+    if opts.CodeCoordonnesBancaires != 0 { result["codeCoordonnesBancairesFournisseur"] = opts.CodeCoordonnesBancaires }
+    return result
+}
+
+// DestinataireOptions contient les options pour créer un destinataire
+type DestinataireOptions struct {
+    Siren, Pays, AdresseLigne2, CodeServiceExecutant string
+}
+
+// Destinataire crée un destinataire avec auto-calcul SIREN et adresses
+func Destinataire(nom, siret, adresseLigne1, codePostal, ville string, opts *DestinataireOptions) map[string]interface{} {
+    if opts == nil { opts = &DestinataireOptions{} }
+    siren := opts.Siren
+    if siren == "" && len(siret) == 14 { siren = siret[:9] }
+    pays := opts.Pays; if pays == "" { pays = "FR" }
+    result := map[string]interface{}{
+        "nom": nom, "siret": siret,
+        "adresseElectronique": AdresseElectronique(siret, "0225"),
+        "adressePostale": AdressePostaleAvecOptions(adresseLigne1, codePostal, ville, pays, opts.AdresseLigne2, ""),
+    }
+    if siren != "" { result["siren"] = siren }
+    if opts.CodeServiceExecutant != "" { result["codeServiceExecutant"] = opts.CodeServiceExecutant }
     return result
 }
 

@@ -26,11 +26,11 @@ type ChorusProAPIService service
 type ApiAjouterFichierApiV1ChorusProTransversesAjouterFichierPostRequest struct {
 	ctx context.Context
 	ApiService *ChorusProAPIService
-	bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost *BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost
+	requestBody *map[string]interface{}
 }
 
-func (r ApiAjouterFichierApiV1ChorusProTransversesAjouterFichierPostRequest) BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost(bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost) ApiAjouterFichierApiV1ChorusProTransversesAjouterFichierPostRequest {
-	r.bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost = &bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost
+func (r ApiAjouterFichierApiV1ChorusProTransversesAjouterFichierPostRequest) RequestBody(requestBody map[string]interface{}) ApiAjouterFichierApiV1ChorusProTransversesAjouterFichierPostRequest {
+	r.requestBody = &requestBody
 	return r
 }
 
@@ -89,8 +89,8 @@ func (a *ChorusProAPIService) AjouterFichierApiV1ChorusProTransversesAjouterFich
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost == nil {
-		return localVarReturnValue, nil, reportError("bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost is required and must be specified")
+	if r.requestBody == nil {
+		return localVarReturnValue, nil, reportError("requestBody is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -111,7 +111,7 @@ func (a *ChorusProAPIService) AjouterFichierApiV1ChorusProTransversesAjouterFich
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost
+	localVarPostBody = r.requestBody
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -162,11 +162,11 @@ func (a *ChorusProAPIService) AjouterFichierApiV1ChorusProTransversesAjouterFich
 type ApiCompleterFactureApiV1ChorusProFacturesCompleterPostRequest struct {
 	ctx context.Context
 	ApiService *ChorusProAPIService
-	bodyCompleterFactureApiV1ChorusProFacturesCompleterPost *BodyCompleterFactureApiV1ChorusProFacturesCompleterPost
+	requestBody *map[string]interface{}
 }
 
-func (r ApiCompleterFactureApiV1ChorusProFacturesCompleterPostRequest) BodyCompleterFactureApiV1ChorusProFacturesCompleterPost(bodyCompleterFactureApiV1ChorusProFacturesCompleterPost BodyCompleterFactureApiV1ChorusProFacturesCompleterPost) ApiCompleterFactureApiV1ChorusProFacturesCompleterPostRequest {
-	r.bodyCompleterFactureApiV1ChorusProFacturesCompleterPost = &bodyCompleterFactureApiV1ChorusProFacturesCompleterPost
+func (r ApiCompleterFactureApiV1ChorusProFacturesCompleterPostRequest) RequestBody(requestBody map[string]interface{}) ApiCompleterFactureApiV1ChorusProFacturesCompleterPostRequest {
+	r.requestBody = &requestBody
 	return r
 }
 
@@ -233,8 +233,8 @@ func (a *ChorusProAPIService) CompleterFactureApiV1ChorusProFacturesCompleterPos
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.bodyCompleterFactureApiV1ChorusProFacturesCompleterPost == nil {
-		return localVarReturnValue, nil, reportError("bodyCompleterFactureApiV1ChorusProFacturesCompleterPost is required and must be specified")
+	if r.requestBody == nil {
+		return localVarReturnValue, nil, reportError("requestBody is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -255,7 +255,7 @@ func (a *ChorusProAPIService) CompleterFactureApiV1ChorusProFacturesCompleterPos
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.bodyCompleterFactureApiV1ChorusProFacturesCompleterPost
+	localVarPostBody = r.requestBody
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -569,12 +569,6 @@ type ApiListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet
 	ctx context.Context
 	ApiService *ChorusProAPIService
 	idStructureCpp int32
-	bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet *BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet
-}
-
-func (r ApiListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetRequest) BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet) ApiListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetRequest {
-	r.bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet = &bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet
-	return r
 }
 
 func (r ApiListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetRequest) Execute() (*RechercherServicesResponse, *http.Response, error) {
@@ -626,12 +620,9 @@ func (a *ChorusProAPIService) ListerServicesStructureApiV1ChorusProStructuresIdS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet == nil {
-		return localVarReturnValue, nil, reportError("bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet is required and must be specified")
-	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -647,8 +638,6 @@ func (a *ChorusProAPIService) ListerServicesStructureApiV1ChorusProStructuresIdS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -835,11 +824,11 @@ func (a *ChorusProAPIService) ObtenirIdChorusProDepuisSiretApiV1ChorusProStructu
 type ApiRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostRequest struct {
 	ctx context.Context
 	ApiService *ChorusProAPIService
-	bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost *BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost
+	requestBody *map[string]interface{}
 }
 
-func (r ApiRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostRequest) BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost) ApiRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostRequest {
-	r.bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost = &bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost
+func (r ApiRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostRequest) RequestBody(requestBody map[string]interface{}) ApiRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostRequest {
+	r.requestBody = &requestBody
 	return r
 }
 
@@ -890,8 +879,8 @@ func (a *ChorusProAPIService) RechercherFacturesDestinataireApiV1ChorusProFactur
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost == nil {
-		return localVarReturnValue, nil, reportError("bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost is required and must be specified")
+	if r.requestBody == nil {
+		return localVarReturnValue, nil, reportError("requestBody is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -912,7 +901,7 @@ func (a *ChorusProAPIService) RechercherFacturesDestinataireApiV1ChorusProFactur
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost
+	localVarPostBody = r.requestBody
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -963,11 +952,11 @@ func (a *ChorusProAPIService) RechercherFacturesDestinataireApiV1ChorusProFactur
 type ApiRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostRequest struct {
 	ctx context.Context
 	ApiService *ChorusProAPIService
-	bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost *BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost
+	requestBody *map[string]interface{}
 }
 
-func (r ApiRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostRequest) BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost) ApiRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostRequest {
-	r.bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost = &bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost
+func (r ApiRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostRequest) RequestBody(requestBody map[string]interface{}) ApiRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostRequest {
+	r.requestBody = &requestBody
 	return r
 }
 
@@ -1022,8 +1011,8 @@ func (a *ChorusProAPIService) RechercherFacturesFournisseurApiV1ChorusProFacture
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost == nil {
-		return localVarReturnValue, nil, reportError("bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost is required and must be specified")
+	if r.requestBody == nil {
+		return localVarReturnValue, nil, reportError("requestBody is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1044,7 +1033,7 @@ func (a *ChorusProAPIService) RechercherFacturesFournisseurApiV1ChorusProFacture
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost
+	localVarPostBody = r.requestBody
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1228,11 +1217,11 @@ func (a *ChorusProAPIService) RechercherStructuresApiV1ChorusProStructuresRecher
 type ApiRecyclerFactureApiV1ChorusProFacturesRecyclerPostRequest struct {
 	ctx context.Context
 	ApiService *ChorusProAPIService
-	bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost *BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost
+	requestBody *map[string]interface{}
 }
 
-func (r ApiRecyclerFactureApiV1ChorusProFacturesRecyclerPostRequest) BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost(bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost) ApiRecyclerFactureApiV1ChorusProFacturesRecyclerPostRequest {
-	r.bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost = &bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost
+func (r ApiRecyclerFactureApiV1ChorusProFacturesRecyclerPostRequest) RequestBody(requestBody map[string]interface{}) ApiRecyclerFactureApiV1ChorusProFacturesRecyclerPostRequest {
+	r.requestBody = &requestBody
 	return r
 }
 
@@ -1299,8 +1288,8 @@ func (a *ChorusProAPIService) RecyclerFactureApiV1ChorusProFacturesRecyclerPostE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost == nil {
-		return localVarReturnValue, nil, reportError("bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost is required and must be specified")
+	if r.requestBody == nil {
+		return localVarReturnValue, nil, reportError("requestBody is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1321,7 +1310,7 @@ func (a *ChorusProAPIService) RecyclerFactureApiV1ChorusProFacturesRecyclerPostE
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost
+	localVarPostBody = r.requestBody
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1523,11 +1512,11 @@ func (a *ChorusProAPIService) SoumettreFactureApiV1ChorusProFacturesSoumettrePos
 type ApiTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostRequest struct {
 	ctx context.Context
 	ApiService *ChorusProAPIService
-	bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost *BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost
+	requestBody *map[string]interface{}
 }
 
-func (r ApiTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostRequest) BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost) ApiTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostRequest {
-	r.bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost = &bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost
+func (r ApiTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostRequest) RequestBody(requestBody map[string]interface{}) ApiTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostRequest {
+	r.requestBody = &requestBody
 	return r
 }
 
@@ -1590,8 +1579,8 @@ func (a *ChorusProAPIService) TelechargerGroupeFacturesApiV1ChorusProFacturesTel
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost == nil {
-		return localVarReturnValue, nil, reportError("bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost is required and must be specified")
+	if r.requestBody == nil {
+		return localVarReturnValue, nil, reportError("requestBody is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1612,7 +1601,7 @@ func (a *ChorusProAPIService) TelechargerGroupeFacturesApiV1ChorusProFacturesTel
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost
+	localVarPostBody = r.requestBody
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1663,11 +1652,11 @@ func (a *ChorusProAPIService) TelechargerGroupeFacturesApiV1ChorusProFacturesTel
 type ApiTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostRequest struct {
 	ctx context.Context
 	ApiService *ChorusProAPIService
-	bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost *BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost
+	requestBody *map[string]interface{}
 }
 
-func (r ApiTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostRequest) BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost) ApiTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostRequest {
-	r.bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost = &bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost
+func (r ApiTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostRequest) RequestBody(requestBody map[string]interface{}) ApiTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostRequest {
+	r.requestBody = &requestBody
 	return r
 }
 
@@ -1738,8 +1727,8 @@ func (a *ChorusProAPIService) TraiterFactureRecueApiV1ChorusProFacturesTraiterFa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost == nil {
-		return localVarReturnValue, nil, reportError("bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost is required and must be specified")
+	if r.requestBody == nil {
+		return localVarReturnValue, nil, reportError("requestBody is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1760,7 +1749,7 @@ func (a *ChorusProAPIService) TraiterFactureRecueApiV1ChorusProFacturesTraiterFa
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost
+	localVarPostBody = r.requestBody
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1811,11 +1800,11 @@ func (a *ChorusProAPIService) TraiterFactureRecueApiV1ChorusProFacturesTraiterFa
 type ApiValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostRequest struct {
 	ctx context.Context
 	ApiService *ChorusProAPIService
-	bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost *BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost
+	requestBody *map[string]interface{}
 }
 
-func (r ApiValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostRequest) BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost) ApiValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostRequest {
-	r.bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost = &bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost
+func (r ApiValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostRequest) RequestBody(requestBody map[string]interface{}) ApiValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostRequest {
+	r.requestBody = &requestBody
 	return r
 }
 
@@ -1825,8 +1814,6 @@ func (r ApiValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostRe
 
 /*
 ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost Consulter une facture (Valideur)
-
-Consulte facture (valideur).
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostRequest
@@ -1858,8 +1845,8 @@ func (a *ChorusProAPIService) ValideurConsulterFactureApiV1ChorusProFacturesVali
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost == nil {
-		return localVarReturnValue, nil, reportError("bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost is required and must be specified")
+	if r.requestBody == nil {
+		return localVarReturnValue, nil, reportError("requestBody is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1880,7 +1867,7 @@ func (a *ChorusProAPIService) ValideurConsulterFactureApiV1ChorusProFacturesVali
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost
+	localVarPostBody = r.requestBody
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1931,11 +1918,11 @@ func (a *ChorusProAPIService) ValideurConsulterFactureApiV1ChorusProFacturesVali
 type ApiValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostRequest struct {
 	ctx context.Context
 	ApiService *ChorusProAPIService
-	bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost *BodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost
+	requestBody *map[string]interface{}
 }
 
-func (r ApiValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostRequest) BodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost BodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost) ApiValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostRequest {
-	r.bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost = &bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost
+func (r ApiValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostRequest) RequestBody(requestBody map[string]interface{}) ApiValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostRequest {
+	r.requestBody = &requestBody
 	return r
 }
 
@@ -1982,8 +1969,8 @@ func (a *ChorusProAPIService) ValideurRechercherFacturesApiV1ChorusProFacturesVa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost == nil {
-		return localVarReturnValue, nil, reportError("bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost is required and must be specified")
+	if r.requestBody == nil {
+		return localVarReturnValue, nil, reportError("requestBody is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2004,7 +1991,7 @@ func (a *ChorusProAPIService) ValideurRechercherFacturesApiV1ChorusProFacturesVa
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost
+	localVarPostBody = r.requestBody
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -2055,11 +2042,11 @@ func (a *ChorusProAPIService) ValideurRechercherFacturesApiV1ChorusProFacturesVa
 type ApiValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostRequest struct {
 	ctx context.Context
 	ApiService *ChorusProAPIService
-	bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost *BodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost
+	requestBody *map[string]interface{}
 }
 
-func (r ApiValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostRequest) BodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost BodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost) ApiValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostRequest {
-	r.bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost = &bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost
+func (r ApiValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostRequest) RequestBody(requestBody map[string]interface{}) ApiValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostRequest {
+	r.requestBody = &requestBody
 	return r
 }
 
@@ -2106,8 +2093,8 @@ func (a *ChorusProAPIService) ValideurTraiterFactureApiV1ChorusProFacturesValide
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost == nil {
-		return localVarReturnValue, nil, reportError("bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost is required and must be specified")
+	if r.requestBody == nil {
+		return localVarReturnValue, nil, reportError("requestBody is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2128,7 +2115,7 @@ func (a *ChorusProAPIService) ValideurTraiterFactureApiV1ChorusProFacturesValide
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost
+	localVarPostBody = r.requestBody
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
