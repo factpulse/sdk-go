@@ -47,6 +47,9 @@ type FactureEntrante struct {
 	NumeroBonCommande NullableString `json:"numero_bon_commande,omitempty"`
 	ReferenceContrat NullableString `json:"reference_contrat,omitempty"`
 	ObjetFacture NullableString `json:"objet_facture,omitempty"`
+	DocumentBase64 NullableString `json:"document_base64,omitempty"`
+	DocumentContentType NullableString `json:"document_content_type,omitempty"`
+	DocumentFilename NullableString `json:"document_filename,omitempty"`
 }
 
 type _FactureEntrante FactureEntrante
@@ -592,6 +595,132 @@ func (o *FactureEntrante) UnsetObjetFacture() {
 	o.ObjetFacture.Unset()
 }
 
+// GetDocumentBase64 returns the DocumentBase64 field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FactureEntrante) GetDocumentBase64() string {
+	if o == nil || IsNil(o.DocumentBase64.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.DocumentBase64.Get()
+}
+
+// GetDocumentBase64Ok returns a tuple with the DocumentBase64 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FactureEntrante) GetDocumentBase64Ok() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DocumentBase64.Get(), o.DocumentBase64.IsSet()
+}
+
+// HasDocumentBase64 returns a boolean if a field has been set.
+func (o *FactureEntrante) HasDocumentBase64() bool {
+	if o != nil && o.DocumentBase64.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDocumentBase64 gets a reference to the given NullableString and assigns it to the DocumentBase64 field.
+func (o *FactureEntrante) SetDocumentBase64(v string) {
+	o.DocumentBase64.Set(&v)
+}
+// SetDocumentBase64Nil sets the value for DocumentBase64 to be an explicit nil
+func (o *FactureEntrante) SetDocumentBase64Nil() {
+	o.DocumentBase64.Set(nil)
+}
+
+// UnsetDocumentBase64 ensures that no value is present for DocumentBase64, not even an explicit nil
+func (o *FactureEntrante) UnsetDocumentBase64() {
+	o.DocumentBase64.Unset()
+}
+
+// GetDocumentContentType returns the DocumentContentType field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FactureEntrante) GetDocumentContentType() string {
+	if o == nil || IsNil(o.DocumentContentType.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.DocumentContentType.Get()
+}
+
+// GetDocumentContentTypeOk returns a tuple with the DocumentContentType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FactureEntrante) GetDocumentContentTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DocumentContentType.Get(), o.DocumentContentType.IsSet()
+}
+
+// HasDocumentContentType returns a boolean if a field has been set.
+func (o *FactureEntrante) HasDocumentContentType() bool {
+	if o != nil && o.DocumentContentType.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDocumentContentType gets a reference to the given NullableString and assigns it to the DocumentContentType field.
+func (o *FactureEntrante) SetDocumentContentType(v string) {
+	o.DocumentContentType.Set(&v)
+}
+// SetDocumentContentTypeNil sets the value for DocumentContentType to be an explicit nil
+func (o *FactureEntrante) SetDocumentContentTypeNil() {
+	o.DocumentContentType.Set(nil)
+}
+
+// UnsetDocumentContentType ensures that no value is present for DocumentContentType, not even an explicit nil
+func (o *FactureEntrante) UnsetDocumentContentType() {
+	o.DocumentContentType.Unset()
+}
+
+// GetDocumentFilename returns the DocumentFilename field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FactureEntrante) GetDocumentFilename() string {
+	if o == nil || IsNil(o.DocumentFilename.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.DocumentFilename.Get()
+}
+
+// GetDocumentFilenameOk returns a tuple with the DocumentFilename field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FactureEntrante) GetDocumentFilenameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DocumentFilename.Get(), o.DocumentFilename.IsSet()
+}
+
+// HasDocumentFilename returns a boolean if a field has been set.
+func (o *FactureEntrante) HasDocumentFilename() bool {
+	if o != nil && o.DocumentFilename.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDocumentFilename gets a reference to the given NullableString and assigns it to the DocumentFilename field.
+func (o *FactureEntrante) SetDocumentFilename(v string) {
+	o.DocumentFilename.Set(&v)
+}
+// SetDocumentFilenameNil sets the value for DocumentFilename to be an explicit nil
+func (o *FactureEntrante) SetDocumentFilenameNil() {
+	o.DocumentFilename.Set(nil)
+}
+
+// UnsetDocumentFilename ensures that no value is present for DocumentFilename, not even an explicit nil
+func (o *FactureEntrante) UnsetDocumentFilename() {
+	o.DocumentFilename.Unset()
+}
+
 func (o FactureEntrante) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -633,6 +762,15 @@ func (o FactureEntrante) ToMap() (map[string]interface{}, error) {
 	}
 	if o.ObjetFacture.IsSet() {
 		toSerialize["objet_facture"] = o.ObjetFacture.Get()
+	}
+	if o.DocumentBase64.IsSet() {
+		toSerialize["document_base64"] = o.DocumentBase64.Get()
+	}
+	if o.DocumentContentType.IsSet() {
+		toSerialize["document_content_type"] = o.DocumentContentType.Get()
+	}
+	if o.DocumentFilename.IsSet() {
+		toSerialize["document_filename"] = o.DocumentFilename.Get()
 	}
 	return toSerialize, nil
 }

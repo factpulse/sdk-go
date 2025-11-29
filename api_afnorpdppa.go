@@ -126,6 +126,12 @@ type ApiGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetRequest struct {
 	ctx context.Context
 	ApiService *AFNORPDPPAAPIService
 	flowId string
+	includeDocument *bool
+}
+
+func (r ApiGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetRequest) IncludeDocument(includeDocument bool) ApiGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetRequest {
+	r.includeDocument = &includeDocument
+	return r
 }
 
 func (r ApiGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetRequest) Execute() (*FactureEntrante, *http.Response, error) {
@@ -171,6 +177,13 @@ func (a *AFNORPDPPAAPIService) GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetExec
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.includeDocument != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "include_document", r.includeDocument, "form", "")
+	} else {
+        var defaultValue bool = false
+        parameterAddToHeaderOrQuery(localVarQueryParams, "include_document", defaultValue, "form", "")
+        r.includeDocument = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

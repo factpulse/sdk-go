@@ -20,6 +20,9 @@ Name | Type | Description | Notes
 **NumeroBonCommande** | Pointer to **NullableString** |  | [optional] 
 **ReferenceContrat** | Pointer to **NullableString** |  | [optional] 
 **ObjetFacture** | Pointer to **NullableString** |  | [optional] 
+**DocumentBase64** | Pointer to **NullableString** |  | [optional] 
+**DocumentContentType** | Pointer to **NullableString** |  | [optional] 
+**DocumentFilename** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
@@ -460,6 +463,111 @@ HasObjetFacture returns a boolean if a field has been set.
 `func (o *FactureEntrante) UnsetObjetFacture()`
 
 UnsetObjetFacture ensures that no value is present for ObjetFacture, not even an explicit nil
+### GetDocumentBase64
+
+`func (o *FactureEntrante) GetDocumentBase64() string`
+
+GetDocumentBase64 returns the DocumentBase64 field if non-nil, zero value otherwise.
+
+### GetDocumentBase64Ok
+
+`func (o *FactureEntrante) GetDocumentBase64Ok() (*string, bool)`
+
+GetDocumentBase64Ok returns a tuple with the DocumentBase64 field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDocumentBase64
+
+`func (o *FactureEntrante) SetDocumentBase64(v string)`
+
+SetDocumentBase64 sets DocumentBase64 field to given value.
+
+### HasDocumentBase64
+
+`func (o *FactureEntrante) HasDocumentBase64() bool`
+
+HasDocumentBase64 returns a boolean if a field has been set.
+
+### SetDocumentBase64Nil
+
+`func (o *FactureEntrante) SetDocumentBase64Nil(b bool)`
+
+ SetDocumentBase64Nil sets the value for DocumentBase64 to be an explicit nil
+
+### UnsetDocumentBase64
+`func (o *FactureEntrante) UnsetDocumentBase64()`
+
+UnsetDocumentBase64 ensures that no value is present for DocumentBase64, not even an explicit nil
+### GetDocumentContentType
+
+`func (o *FactureEntrante) GetDocumentContentType() string`
+
+GetDocumentContentType returns the DocumentContentType field if non-nil, zero value otherwise.
+
+### GetDocumentContentTypeOk
+
+`func (o *FactureEntrante) GetDocumentContentTypeOk() (*string, bool)`
+
+GetDocumentContentTypeOk returns a tuple with the DocumentContentType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDocumentContentType
+
+`func (o *FactureEntrante) SetDocumentContentType(v string)`
+
+SetDocumentContentType sets DocumentContentType field to given value.
+
+### HasDocumentContentType
+
+`func (o *FactureEntrante) HasDocumentContentType() bool`
+
+HasDocumentContentType returns a boolean if a field has been set.
+
+### SetDocumentContentTypeNil
+
+`func (o *FactureEntrante) SetDocumentContentTypeNil(b bool)`
+
+ SetDocumentContentTypeNil sets the value for DocumentContentType to be an explicit nil
+
+### UnsetDocumentContentType
+`func (o *FactureEntrante) UnsetDocumentContentType()`
+
+UnsetDocumentContentType ensures that no value is present for DocumentContentType, not even an explicit nil
+### GetDocumentFilename
+
+`func (o *FactureEntrante) GetDocumentFilename() string`
+
+GetDocumentFilename returns the DocumentFilename field if non-nil, zero value otherwise.
+
+### GetDocumentFilenameOk
+
+`func (o *FactureEntrante) GetDocumentFilenameOk() (*string, bool)`
+
+GetDocumentFilenameOk returns a tuple with the DocumentFilename field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDocumentFilename
+
+`func (o *FactureEntrante) SetDocumentFilename(v string)`
+
+SetDocumentFilename sets DocumentFilename field to given value.
+
+### HasDocumentFilename
+
+`func (o *FactureEntrante) HasDocumentFilename() bool`
+
+HasDocumentFilename returns a boolean if a field has been set.
+
+### SetDocumentFilenameNil
+
+`func (o *FactureEntrante) SetDocumentFilenameNil(b bool)`
+
+ SetDocumentFilenameNil sets the value for DocumentFilename to be an explicit nil
+
+### UnsetDocumentFilename
+`func (o *FactureEntrante) UnsetDocumentFilename()`
+
+UnsetDocumentFilename ensures that no value is present for DocumentFilename, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

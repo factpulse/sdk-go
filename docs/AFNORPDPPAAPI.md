@@ -73,7 +73,7 @@ Other parameters are passed through a pointer to a apiGetAfnorCredentialsApiV1Af
 
 ## GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet
 
-> FactureEntrante GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(ctx, flowId).Execute()
+> FactureEntrante GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(ctx, flowId).IncludeDocument(includeDocument).Execute()
 
 Récupérer et extraire une facture entrante
 
@@ -93,10 +93,11 @@ import (
 
 func main() {
 	flowId := "flowId_example" // string | 
+	includeDocument := true // bool |  (optional) (default to false)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AFNORPDPPAAPI.GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(context.Background(), flowId).Execute()
+	resp, r, err := apiClient.AFNORPDPPAAPI.GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(context.Background(), flowId).IncludeDocument(includeDocument).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPAAPI.GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -122,6 +123,7 @@ Other parameters are passed through a pointer to a apiGetFluxEntrantApiV1AfnorFl
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **includeDocument** | **bool** |  | [default to false]
 
 ### Return type
 
