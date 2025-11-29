@@ -488,6 +488,22 @@ func (c *Client) TelechargerFluxAfnor(flowID string) ([]byte, error) {
     return nil, nil
 }
 
+// ObtenirFactureEntranteAfnor récupère les métadonnées JSON d'un flux entrant (facture fournisseur).
+// Télécharge un flux entrant depuis la PDP AFNOR et extrait les métadonnées
+// de la facture vers un format JSON unifié. Supporte Factur-X, CII et UBL.
+//
+// flowID: Identifiant du flux (UUID)
+// includeDocument: Si true, inclut le document original encodé en base64
+//
+// Retourne les métadonnées de la facture (fournisseur, montants, dates, etc.)
+func (c *Client) ObtenirFactureEntranteAfnor(flowID string, includeDocument bool) (map[string]interface{}, error) {
+    endpoint := fmt.Sprintf("/flux-entrants/%s", flowID)
+    if includeDocument {
+        endpoint += "?include_document=true"
+    }
+    return c.makeAfnorRequest("GET", endpoint, nil, nil, "")
+}
+
 // HealthcheckAfnor vérifie la disponibilité du Flow Service AFNOR
 func (c *Client) HealthcheckAfnor() (map[string]interface{}, error) {
     return c.makeAfnorRequest("GET", "/flow/v1/healthcheck", nil, nil, "")
