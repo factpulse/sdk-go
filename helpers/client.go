@@ -492,16 +492,35 @@ func (c *Client) TelechargerFluxAfnor(flowID string) ([]byte, error) {
 // Télécharge un flux entrant depuis la PDP AFNOR et extrait les métadonnées
 // de la facture vers un format JSON unifié. Supporte Factur-X, CII et UBL.
 //
+// Note: Cet endpoint utilise l'authentification JWT FactPulse (pas OAuth AFNOR).
+// Le serveur FactPulse se charge d'appeler la PDP avec les credentials stockés.
+//
 // flowID: Identifiant du flux (UUID)
 // includeDocument: Si true, inclut le document original encodé en base64
 //
 // Retourne les métadonnées de la facture (fournisseur, montants, dates, etc.)
 func (c *Client) ObtenirFactureEntranteAfnor(flowID string, includeDocument bool) (map[string]interface{}, error) {
-    endpoint := fmt.Sprintf("/flux-entrants/%s", flowID)
+    if err := c.EnsureAuthenticated(false); err != nil { return nil, err }
+
+    url := fmt.Sprintf("%s/api/v1/afnor/flux-entrants/%s", strings.TrimRight(c.APIURL, "/"), flowID)
     if includeDocument {
-        endpoint += "?include_document=true"
+        url += "?include_document=true"
     }
-    return c.makeAfnorRequest("GET", endpoint, nil, nil, "")
+
+    req, _ := http.NewRequest("GET", url, nil)
+    req.Header.Set("Authorization", "Bearer "+c.accessToken)
+
+    client := &http.Client{Timeout: 60 * time.Second}
+    resp, err := client.Do(req)
+    if err != nil { return nil, NewFactPulseValidationError(fmt.Sprintf("Network error: %v", err), nil) }
+    defer resp.Body.Close()
+
+    body, _ := io.ReadAll(resp.Body)
+    if resp.StatusCode >= 400 {
+        return nil, NewFactPulseValidationError(fmt.Sprintf("Erreur flux entrant (%d): %s", resp.StatusCode, string(body)), nil)
+    }
+
+    var result map[string]interface{}; json.Unmarshal(body, &result); return result, nil
 }
 
 // HealthcheckAfnor vérifie la disponibilité du Flow Service AFNOR
