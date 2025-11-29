@@ -39,9 +39,12 @@ docs/DonneesFactureSimplifiees.md
 docs/ErrorLevel.md
 docs/ErrorSource.md
 docs/FactureEnrichieInfo.md
+docs/FactureEntrante.md
 docs/FactureFacturX.md
+docs/FormatFacture.md
 docs/FormatSortie.md
 docs/Fournisseur.md
+docs/FournisseurEntrant.md
 docs/GenerateCertificateRequest.md
 docs/GenerateCertificateResponse.md
 docs/HTTPValidationError.md
@@ -98,6 +101,7 @@ docs/StatutTache.md
 docs/StructureInfo.md
 docs/Tauxmanuel.md
 docs/TraitementFactureAPI.md
+docs/TypeDocument.md
 docs/TypeFacture.md
 docs/TypeTVA.md
 docs/Unite.md
@@ -131,9 +135,12 @@ model_donnees_facture_simplifiees.go
 model_error_level.go
 model_error_source.go
 model_facture_enrichie_info.go
+model_facture_entrante.go
 model_facture_factur_x.go
+model_format_facture.go
 model_format_sortie.go
 model_fournisseur.go
+model_fournisseur_entrant.go
 model_generate_certificate_request.go
 model_generate_certificate_response.go
 model_http_validation_error.go
@@ -188,6 +195,7 @@ model_statut_facture.go
 model_statut_tache.go
 model_structure_info.go
 model_tauxmanuel.go
+model_type_document.go
 model_type_facture.go
 model_type_tva.go
 model_unite.go
