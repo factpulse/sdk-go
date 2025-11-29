@@ -2,24 +2,21 @@
 
 Client Go officiel pour l'API FactPulse - Facturation électronique française.
 
-## 🎯 Fonctionnalités
+## Fonctionnalités
 
 - **Factur-X** : Génération et validation de factures électroniques (profils MINIMUM, BASIC, EN16931, EXTENDED)
 - **Chorus Pro** : Intégration avec la plateforme de facturation publique française
 - **AFNOR PDP/PA** : Soumission de flux conformes à la norme XP Z12-013
 - **Signature électronique** : Signature PDF (PAdES-B-B, PAdES-B-T, PAdES-B-LT)
 - **Client simplifié** : Authentification JWT et polling intégrés via `helpers`
-- **Go 1.18+** : Support des generics et modules modernes
 
-## 🚀 Installation
+## Installation
 
 ```bash
 go get github.com/factpulse/sdk-go
 ```
 
-## 📖 Démarrage rapide
-
-### Méthode recommandée : Client simplifié avec helpers
+## Démarrage rapide
 
 Le package `helpers` offre une API simplifiée avec authentification et polling automatiques :
 
@@ -35,203 +32,187 @@ import (
 )
 
 func main() {
-    // Créer le client (authentification automatique)
-    client := helpers.NewClient(helpers.ClientConfig{
-        Email:    "votre_email@example.com",
-        Password: "votre_mot_de_passe",
-    })
-
-    // Données de la facture
-    factureData := map[string]interface{}{
-        "numero_facture": "FAC-2025-001",
-        "date_facture":   "2025-01-15",
-        "fournisseur": map[string]interface{}{
-            "nom":   "Mon Entreprise SAS",
-            "siret": "12345678901234",
-            "adresse_postale": map[string]string{
-                "ligne_un":      "123 Rue Example",
-                "code_postal":   "75001",
-                "nom_ville":     "Paris",
-                "pays_code_iso": "FR",
-            },
-        },
-        "destinataire": map[string]interface{}{
-            "nom":   "Client SARL",
-            "siret": "98765432109876",
-            "adresse_postale": map[string]string{
-                "ligne_un":      "456 Avenue Test",
-                "code_postal":   "69001",
-                "nom_ville":     "Lyon",
-                "pays_code_iso": "FR",
-            },
-        },
-        "montant_total": map[string]string{
-            "montant_ht_total":  "1000.00",
-            "montant_tva":       "200.00",
-            "montant_ttc_total": "1200.00",
-            "montant_a_payer":   "1200.00",
-        },
-        "lignes_de_poste": []map[string]interface{}{
-            {
-                "numero":            1,
-                "denomination":      "Prestation de conseil",
-                "quantite":          "10.00",
-                "unite":             "PIECE",
-                "montant_unitaire_ht": "100.00",
-            },
-        },
-    }
-
-    // Lire le PDF source
-    pdfSource, err := os.ReadFile("facture_source.pdf")
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    // Générer le PDF Factur-X (polling automatique)
-    ctx := context.Background()
-    pdfBytes, err := client.GenererFacturx(
-        ctx,
-        factureData,
-        pdfSource,
-        "EN16931", // profil
-        "pdf",     // format
-        true,      // sync (attend le résultat)
-        nil,       // timeout (utilise la valeur par défaut)
+    // Créer le client
+    client := helpers.NewClient(
+        "votre_email@example.com",
+        "votre_mot_de_passe",
     )
+
+    // Construire la facture avec les helpers
+    factureData := map[string]interface{}{
+        "numeroFacture": "FAC-2025-001",
+        "dateFacture":   "2025-01-15",
+        "fournisseur": helpers.Fournisseur(
+            "Mon Entreprise SAS", "12345678901234",
+            "123 Rue Example", "75001", "Paris", nil,
+        ),
+        "destinataire": helpers.Destinataire(
+            "Client SARL", "98765432109876",
+            "456 Avenue Test", "69001", "Lyon", nil,
+        ),
+        "montantTotal": helpers.MontantTotal(1000.00, 200.00, 1200.00, 1200.00),
+        "lignesDePoste": []interface{}{
+            helpers.LigneDePoste(1, "Prestation de conseil", 10, 100.00, 1000.00),
+        },
+        "lignesDeTva": []interface{}{
+            helpers.LigneDeTva(1000.00, 200.00, nil),
+        },
+    }
+
+    // Générer le PDF Factur-X
+    ctx := context.Background()
+    pdfBytes, err := client.GenererFacturx(ctx, factureData, "facture_source.pdf", "EN16931")
     if err != nil {
         log.Fatal(err)
     }
 
-    // Sauvegarder
     os.WriteFile("facture_facturx.pdf", pdfBytes, 0644)
 }
 ```
 
-### Méthode alternative : SDK brut
+## Helpers disponibles (package helpers)
 
-Pour un contrôle total, utilisez le SDK généré directement :
+### Montant(value)
+
+Convertit une valeur en string formaté pour les montants monétaires.
 
 ```go
-package main
+helpers.Montant(1234.5)      // "1234.50"
+helpers.Montant("1234.56")   // "1234.56"
+helpers.Montant(nil)         // "0.00"
+```
 
-import (
-    "bytes"
-    "context"
-    "encoding/json"
-    "net/http"
-    "os"
+### MontantTotal(ht, tva, ttc, aPayer)
 
-    factpulse "github.com/factpulse/sdk-go"
+Crée un objet MontantTotal complet.
+
+```go
+total := helpers.MontantTotal(1000.00, 200.00, 1200.00, 1200.00)
+
+// Avec options
+total := helpers.MontantTotalWithOptions(
+    1000.00, 200.00, 1200.00, 1200.00,
+    &helpers.MontantTotalOptions{
+        RemiseTtc:   50.00,
+        MotifRemise: "Fidélité",
+        Acompte:     100.00,
+    },
 )
+```
 
-func main() {
-    // 1. Obtenir le token JWT
-    credentials := map[string]string{
-        "username": "votre_email@example.com",
-        "password": "votre_mot_de_passe",
-    }
-    jsonData, _ := json.Marshal(credentials)
-    resp, _ := http.Post(
-        "https://factpulse.fr/api/token/",
-        "application/json",
-        bytes.NewBuffer(jsonData),
-    )
-    defer resp.Body.Close()
+### LigneDePoste(numero, denomination, quantite, montantUnitaireHt, montantTotalLigneHt)
 
-    var result map[string]string
-    json.NewDecoder(resp.Body).Decode(&result)
-    token := result["access"]
+Crée une ligne de facturation.
 
-    // 2. Configurer le client
-    cfg := factpulse.NewConfiguration()
-    cfg.Servers = factpulse.ServerConfigurations{
-        {URL: "https://factpulse.fr/api/facturation"},
-    }
-    cfg.AddDefaultHeader("Authorization", "Bearer "+token)
+```go
+ligne := helpers.LigneDePosteWithOptions(
+    1,
+    "Prestation de conseil",
+    5,
+    200.00,
+    1000.00,  // montantTotalLigneHt requis
+    &helpers.LigneDePosteOptions{
+        TauxTva:     "TVA20",      // Ou TauxTvaManuel: "20.00"
+        CategorieTva: "S",         // S, Z, E, AE, K
+        Unite:       "HEURE",      // FORFAIT, PIECE, HEURE, JOUR...
+        Reference:   "REF-001",
+    },
+)
+```
 
-    client := factpulse.NewAPIClient(cfg)
-    ctx := context.Background()
+### LigneDeTva(montantBaseHt, montantTva, options)
 
-    // 3. Appeler l'API
-    pdfFile, _ := os.Open("facture_source.pdf")
-    defer pdfFile.Close()
+Crée une ligne de ventilation TVA.
 
-    response, _, _ := client.TraitementFactureAPI.
-        GenererFactureApiV1TraitementGenererFacturePost(ctx).
-        DonneesFacture(string(jsonData)).
-        Profil("EN16931").
-        FormatSortie("pdf").
-        SourcePdf(pdfFile).
-        Execute()
+```go
+tva := helpers.LigneDeTva(1000.00, 200.00, &helpers.LigneDeTvaOptions{
+    Taux:      "TVA20",       // Ou TauxManuel: "20.00"
+    Categorie: "S",           // S, Z, E, AE, K
+})
+```
 
-    // 4. Polling manuel pour récupérer le résultat
-    taskID := response.GetIdTache()
-    // ... (implémenter le polling)
+### AdressePostale(ligne1, codePostal, ville, options)
+
+Crée une adresse postale structurée.
+
+```go
+adresse := helpers.AdressePostale(
+    "123 Rue de la République",
+    "75001",
+    "Paris",
+    &helpers.AdressePostaleOptions{
+        Pays:   "FR",          // Défaut: "FR"
+        Ligne2: "Bâtiment A",  // Optionnel
+    },
+)
+```
+
+### Fournisseur(nom, siret, adresseLigne1, codePostal, ville, options)
+
+Crée un fournisseur complet avec calcul automatique du SIREN et TVA intra.
+
+```go
+f := helpers.Fournisseur(
+    "Ma Société SAS",
+    "12345678901234",
+    "123 Rue Example",
+    "75001",
+    "Paris",
+    &helpers.FournisseurOptions{
+        IBAN: "FR7630006000011234567890189",
+    },
+)
+// SIREN et TVA intracommunautaire calculés automatiquement
+```
+
+### Destinataire(nom, siret, adresseLigne1, codePostal, ville, options)
+
+Crée un destinataire (client) avec calcul automatique du SIREN.
+
+```go
+d := helpers.Destinataire(
+    "Client SARL",
+    "98765432109876",
+    "456 Avenue Test",
+    "69001",
+    "Lyon",
+    nil,
+)
+```
+
+## Mode Zero-Trust (Chorus Pro / AFNOR)
+
+Pour passer vos propres credentials sans stockage côté serveur :
+
+```go
+chorusCreds := &helpers.ChorusProCredentials{
+    PisteClientID:     "votre_client_id",
+    PisteClientSecret: "votre_client_secret",
+    ChorusProLogin:    "votre_login",
+    ChorusProPassword: "votre_password",
+    Sandbox:           true,
 }
+
+afnorCreds := &helpers.AFNORCredentials{
+    FlowServiceURL: "https://api.pdp.fr/flow/v1",
+    TokenURL:       "https://auth.pdp.fr/oauth/token",
+    ClientID:       "votre_client_id",
+    ClientSecret:   "votre_client_secret",
+}
+
+client := helpers.NewClientWithCredentials(
+    "votre_email@example.com",
+    "votre_mot_de_passe",
+    chorusCreds,
+    afnorCreds,
+)
 ```
 
-## 🔧 Avantages des helpers
-
-| Fonctionnalité | SDK brut | helpers |
-|----------------|----------|---------|
-| Authentification | Manuelle | Automatique |
-| Refresh token | Manuel | Automatique |
-| Polling tâches async | Manuel | Automatique (backoff) |
-| Retry sur 401 | Manuel | Automatique |
-
-## 🔑 Options d'authentification
-
-### Client UID (multi-clients)
-
-Si vous gérez plusieurs clients :
-
-```go
-client := helpers.NewClient(helpers.ClientConfig{
-    Email:     "votre_email@example.com",
-    Password:  "votre_mot_de_passe",
-    ClientUID: "identifiant_client",  // UID du client cible
-})
-```
-
-### Configuration avancée
-
-```go
-client := helpers.NewClient(helpers.ClientConfig{
-    Email:           "votre_email@example.com",
-    Password:        "votre_mot_de_passe",
-    APIURL:          "https://factpulse.fr",  // URL personnalisée
-    PollingInterval: 2000,  // Intervalle de polling initial (ms)
-    PollingTimeout:  120000,  // Timeout de polling (ms)
-    MaxRetries:      2,  // Tentatives en cas de 401
-})
-```
-
-## 💡 Formats de montants acceptés
-
-L'API accepte plusieurs formats pour les montants :
-
-```go
-// String (recommandé pour la précision)
-montant := "1234.56"
-
-// Float
-montant := 1234.56
-
-// Integer
-montant := 1234
-
-// Helper de formatage
-montantFormate := helpers.FormatMontant(1234.5)  // "1234.50"
-```
-
-## 📚 Ressources
+## Ressources
 
 - **Documentation API** : https://factpulse.fr/api/facturation/documentation
-- **Code source** : https://github.com/factpulse/sdk-go
-- **Issues** : https://github.com/factpulse/sdk-go/issues
 - **Support** : contact@factpulse.fr
 
-## 📄 Licence
+## Licence
 
 MIT License - Copyright (c) 2025 FactPulse
