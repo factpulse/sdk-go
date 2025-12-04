@@ -21,8 +21,8 @@ var _ MappedNullable = &Note{}
 
 // Note Note de facture (IncludedNote en Factur-X).  Les notes obligatoires pour BR-FR-05 sont : - PMT : Indemnité forfaitaire pour frais de recouvrement - PMD : Pénalités de retard - AAB : Escompte pour paiement anticipé
 type Note struct {
-	SubjectCode NullableString `json:"subjectCode,omitempty"`
-	Content string `json:"content"`
+	CodeSujet NullableString `json:"codeSujet,omitempty"`
+	Contenu string `json:"contenu"`
 }
 
 type _Note Note
@@ -31,9 +31,9 @@ type _Note Note
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNote(content string) *Note {
+func NewNote(contenu string) *Note {
 	this := Note{}
-	this.Content = content
+	this.Contenu = contenu
 	return &this
 }
 
@@ -45,70 +45,70 @@ func NewNoteWithDefaults() *Note {
 	return &this
 }
 
-// GetSubjectCode returns the SubjectCode field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Note) GetSubjectCode() string {
-	if o == nil || IsNil(o.SubjectCode.Get()) {
+// GetCodeSujet returns the CodeSujet field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Note) GetCodeSujet() string {
+	if o == nil || IsNil(o.CodeSujet.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.SubjectCode.Get()
+	return *o.CodeSujet.Get()
 }
 
-// GetSubjectCodeOk returns a tuple with the SubjectCode field value if set, nil otherwise
+// GetCodeSujetOk returns a tuple with the CodeSujet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Note) GetSubjectCodeOk() (*string, bool) {
+func (o *Note) GetCodeSujetOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.SubjectCode.Get(), o.SubjectCode.IsSet()
+	return o.CodeSujet.Get(), o.CodeSujet.IsSet()
 }
 
-// HasSubjectCode returns a boolean if a field has been set.
-func (o *Note) HasSubjectCode() bool {
-	if o != nil && o.SubjectCode.IsSet() {
+// HasCodeSujet returns a boolean if a field has been set.
+func (o *Note) HasCodeSujet() bool {
+	if o != nil && o.CodeSujet.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSubjectCode gets a reference to the given NullableString and assigns it to the SubjectCode field.
-func (o *Note) SetSubjectCode(v string) {
-	o.SubjectCode.Set(&v)
+// SetCodeSujet gets a reference to the given NullableString and assigns it to the CodeSujet field.
+func (o *Note) SetCodeSujet(v string) {
+	o.CodeSujet.Set(&v)
 }
-// SetSubjectCodeNil sets the value for SubjectCode to be an explicit nil
-func (o *Note) SetSubjectCodeNil() {
-	o.SubjectCode.Set(nil)
-}
-
-// UnsetSubjectCode ensures that no value is present for SubjectCode, not even an explicit nil
-func (o *Note) UnsetSubjectCode() {
-	o.SubjectCode.Unset()
+// SetCodeSujetNil sets the value for CodeSujet to be an explicit nil
+func (o *Note) SetCodeSujetNil() {
+	o.CodeSujet.Set(nil)
 }
 
-// GetContent returns the Content field value
-func (o *Note) GetContent() string {
+// UnsetCodeSujet ensures that no value is present for CodeSujet, not even an explicit nil
+func (o *Note) UnsetCodeSujet() {
+	o.CodeSujet.Unset()
+}
+
+// GetContenu returns the Contenu field value
+func (o *Note) GetContenu() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Content
+	return o.Contenu
 }
 
-// GetContentOk returns a tuple with the Content field value
+// GetContenuOk returns a tuple with the Contenu field value
 // and a boolean to check if the value has been set.
-func (o *Note) GetContentOk() (*string, bool) {
+func (o *Note) GetContenuOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Content, true
+	return &o.Contenu, true
 }
 
-// SetContent sets field value
-func (o *Note) SetContent(v string) {
-	o.Content = v
+// SetContenu sets field value
+func (o *Note) SetContenu(v string) {
+	o.Contenu = v
 }
 
 func (o Note) MarshalJSON() ([]byte, error) {
@@ -121,10 +121,10 @@ func (o Note) MarshalJSON() ([]byte, error) {
 
 func (o Note) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.SubjectCode.IsSet() {
-		toSerialize["subjectCode"] = o.SubjectCode.Get()
+	if o.CodeSujet.IsSet() {
+		toSerialize["codeSujet"] = o.CodeSujet.Get()
 	}
-	toSerialize["content"] = o.Content
+	toSerialize["contenu"] = o.Contenu
 	return toSerialize, nil
 }
 
@@ -133,7 +133,7 @@ func (o *Note) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"content",
+		"contenu",
 	}
 
 	allProperties := make(map[string]interface{})

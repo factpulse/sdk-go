@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SubjectCode** | Pointer to **NullableString** |  | [optional] 
-**Content** | **string** |  | 
+**CodeSujet** | Pointer to **NullableString** |  | [optional] 
+**Contenu** | **string** |  | 
 
 ## Methods
 
 ### NewNote
 
-`func NewNote(content string, ) *Note`
+`func NewNote(contenu string, ) *Note`
 
 NewNote instantiates a new Note object
 This constructor will assign default values to properties that have it defined,
@@ -26,59 +26,59 @@ NewNoteWithDefaults instantiates a new Note object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetSubjectCode
+### GetCodeSujet
 
-`func (o *Note) GetSubjectCode() string`
+`func (o *Note) GetCodeSujet() string`
 
-GetSubjectCode returns the SubjectCode field if non-nil, zero value otherwise.
+GetCodeSujet returns the CodeSujet field if non-nil, zero value otherwise.
 
-### GetSubjectCodeOk
+### GetCodeSujetOk
 
-`func (o *Note) GetSubjectCodeOk() (*string, bool)`
+`func (o *Note) GetCodeSujetOk() (*string, bool)`
 
-GetSubjectCodeOk returns a tuple with the SubjectCode field if it's non-nil, zero value otherwise
+GetCodeSujetOk returns a tuple with the CodeSujet field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSubjectCode
+### SetCodeSujet
 
-`func (o *Note) SetSubjectCode(v string)`
+`func (o *Note) SetCodeSujet(v string)`
 
-SetSubjectCode sets SubjectCode field to given value.
+SetCodeSujet sets CodeSujet field to given value.
 
-### HasSubjectCode
+### HasCodeSujet
 
-`func (o *Note) HasSubjectCode() bool`
+`func (o *Note) HasCodeSujet() bool`
 
-HasSubjectCode returns a boolean if a field has been set.
+HasCodeSujet returns a boolean if a field has been set.
 
-### SetSubjectCodeNil
+### SetCodeSujetNil
 
-`func (o *Note) SetSubjectCodeNil(b bool)`
+`func (o *Note) SetCodeSujetNil(b bool)`
 
- SetSubjectCodeNil sets the value for SubjectCode to be an explicit nil
+ SetCodeSujetNil sets the value for CodeSujet to be an explicit nil
 
-### UnsetSubjectCode
-`func (o *Note) UnsetSubjectCode()`
+### UnsetCodeSujet
+`func (o *Note) UnsetCodeSujet()`
 
-UnsetSubjectCode ensures that no value is present for SubjectCode, not even an explicit nil
-### GetContent
+UnsetCodeSujet ensures that no value is present for CodeSujet, not even an explicit nil
+### GetContenu
 
-`func (o *Note) GetContent() string`
+`func (o *Note) GetContenu() string`
 
-GetContent returns the Content field if non-nil, zero value otherwise.
+GetContenu returns the Contenu field if non-nil, zero value otherwise.
 
-### GetContentOk
+### GetContenuOk
 
-`func (o *Note) GetContentOk() (*string, bool)`
+`func (o *Note) GetContenuOk() (*string, bool)`
 
-GetContentOk returns a tuple with the Content field if it's non-nil, zero value otherwise
+GetContenuOk returns a tuple with the Contenu field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetContent
+### SetContenu
 
-`func (o *Note) SetContent(v string)`
+`func (o *Note) SetContenu(v string)`
 
-SetContent sets Content field to given value.
+SetContenu sets Contenu field to given value.
 
 
 
