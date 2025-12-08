@@ -15,52 +15,54 @@ import (
 	"fmt"
 )
 
-// ErrorLevel the model 'ErrorLevel'
-type ErrorLevel string
+// StatutAcquittement Statut d'acquittement du flux
+type StatutAcquittement string
 
-// List of ErrorLevel
+// List of StatutAcquittement
 const (
-	ERROR ErrorLevel = "Error"
-	WARNING ErrorLevel = "Warning"
+	PENDING StatutAcquittement = "Pending"
+	OK StatutAcquittement = "Ok"
+	ERROR StatutAcquittement = "Error"
 )
 
-// All allowed values of ErrorLevel enum
-var AllowedErrorLevelEnumValues = []ErrorLevel{
+// All allowed values of StatutAcquittement enum
+var AllowedStatutAcquittementEnumValues = []StatutAcquittement{
+	"Pending",
+	"Ok",
 	"Error",
-	"Warning",
 }
 
-func (v *ErrorLevel) UnmarshalJSON(src []byte) error {
+func (v *StatutAcquittement) UnmarshalJSON(src []byte) error {
 	var value string
 	err := json.Unmarshal(src, &value)
 	if err != nil {
 		return err
 	}
-	enumTypeValue := ErrorLevel(value)
-	for _, existing := range AllowedErrorLevelEnumValues {
+	enumTypeValue := StatutAcquittement(value)
+	for _, existing := range AllowedStatutAcquittementEnumValues {
 		if existing == enumTypeValue {
 			*v = enumTypeValue
 			return nil
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid ErrorLevel", value)
+	return fmt.Errorf("%+v is not a valid StatutAcquittement", value)
 }
 
-// NewErrorLevelFromValue returns a pointer to a valid ErrorLevel
+// NewStatutAcquittementFromValue returns a pointer to a valid StatutAcquittement
 // for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewErrorLevelFromValue(v string) (*ErrorLevel, error) {
-	ev := ErrorLevel(v)
+func NewStatutAcquittementFromValue(v string) (*StatutAcquittement, error) {
+	ev := StatutAcquittement(v)
 	if ev.IsValid() {
 		return &ev, nil
 	} else {
-		return nil, fmt.Errorf("invalid value '%v' for ErrorLevel: valid values are %v", v, AllowedErrorLevelEnumValues)
+		return nil, fmt.Errorf("invalid value '%v' for StatutAcquittement: valid values are %v", v, AllowedStatutAcquittementEnumValues)
 	}
 }
 
 // IsValid return true if the value is valid for the enum, false otherwise
-func (v ErrorLevel) IsValid() bool {
-	for _, existing := range AllowedErrorLevelEnumValues {
+func (v StatutAcquittement) IsValid() bool {
+	for _, existing := range AllowedStatutAcquittementEnumValues {
 		if existing == v {
 			return true
 		}
@@ -68,43 +70,43 @@ func (v ErrorLevel) IsValid() bool {
 	return false
 }
 
-// Ptr returns reference to ErrorLevel value
-func (v ErrorLevel) Ptr() *ErrorLevel {
+// Ptr returns reference to StatutAcquittement value
+func (v StatutAcquittement) Ptr() *StatutAcquittement {
 	return &v
 }
 
-type NullableErrorLevel struct {
-	value *ErrorLevel
+type NullableStatutAcquittement struct {
+	value *StatutAcquittement
 	isSet bool
 }
 
-func (v NullableErrorLevel) Get() *ErrorLevel {
+func (v NullableStatutAcquittement) Get() *StatutAcquittement {
 	return v.value
 }
 
-func (v *NullableErrorLevel) Set(val *ErrorLevel) {
+func (v *NullableStatutAcquittement) Set(val *StatutAcquittement) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableErrorLevel) IsSet() bool {
+func (v NullableStatutAcquittement) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableErrorLevel) Unset() {
+func (v *NullableStatutAcquittement) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableErrorLevel(val *ErrorLevel) *NullableErrorLevel {
-	return &NullableErrorLevel{value: val, isSet: true}
+func NewNullableStatutAcquittement(val *StatutAcquittement) *NullableStatutAcquittement {
+	return &NullableStatutAcquittement{value: val, isSet: true}
 }
 
-func (v NullableErrorLevel) MarshalJSON() ([]byte, error) {
+func (v NullableStatutAcquittement) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableErrorLevel) UnmarshalJSON(src []byte) error {
+func (v *NullableStatutAcquittement) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

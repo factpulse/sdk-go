@@ -19,13 +19,15 @@ import (
 // checks if the LigneDeTVA type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LigneDeTVA{}
 
-// LigneDeTVA Représente une ligne de totalisation par taux de TVA.
+// LigneDeTVA Représente une ligne de totalisation par taux de TVA.  Pour les exonérations (catégories E, AE, K, G, O), les champs `motif_exoneration` et `code_vatex` sont requis selon EN16931.
 type LigneDeTVA struct {
 	MontantBaseHt MontantBaseHt `json:"montantBaseHt"`
 	MontantTva MontantTvaLigne `json:"montantTva"`
 	Taux NullableString `json:"taux,omitempty"`
 	TauxManuel *Tauxmanuel `json:"tauxManuel,omitempty"`
 	Categorie NullableCategorieTVA `json:"categorie,omitempty"`
+	MotifExoneration NullableString `json:"motifExoneration,omitempty"`
+	CodeVatex NullableString `json:"codeVatex,omitempty"`
 }
 
 type _LigneDeTVA LigneDeTVA
@@ -213,6 +215,90 @@ func (o *LigneDeTVA) UnsetCategorie() {
 	o.Categorie.Unset()
 }
 
+// GetMotifExoneration returns the MotifExoneration field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *LigneDeTVA) GetMotifExoneration() string {
+	if o == nil || IsNil(o.MotifExoneration.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.MotifExoneration.Get()
+}
+
+// GetMotifExonerationOk returns a tuple with the MotifExoneration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *LigneDeTVA) GetMotifExonerationOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.MotifExoneration.Get(), o.MotifExoneration.IsSet()
+}
+
+// HasMotifExoneration returns a boolean if a field has been set.
+func (o *LigneDeTVA) HasMotifExoneration() bool {
+	if o != nil && o.MotifExoneration.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetMotifExoneration gets a reference to the given NullableString and assigns it to the MotifExoneration field.
+func (o *LigneDeTVA) SetMotifExoneration(v string) {
+	o.MotifExoneration.Set(&v)
+}
+// SetMotifExonerationNil sets the value for MotifExoneration to be an explicit nil
+func (o *LigneDeTVA) SetMotifExonerationNil() {
+	o.MotifExoneration.Set(nil)
+}
+
+// UnsetMotifExoneration ensures that no value is present for MotifExoneration, not even an explicit nil
+func (o *LigneDeTVA) UnsetMotifExoneration() {
+	o.MotifExoneration.Unset()
+}
+
+// GetCodeVatex returns the CodeVatex field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *LigneDeTVA) GetCodeVatex() string {
+	if o == nil || IsNil(o.CodeVatex.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.CodeVatex.Get()
+}
+
+// GetCodeVatexOk returns a tuple with the CodeVatex field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *LigneDeTVA) GetCodeVatexOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CodeVatex.Get(), o.CodeVatex.IsSet()
+}
+
+// HasCodeVatex returns a boolean if a field has been set.
+func (o *LigneDeTVA) HasCodeVatex() bool {
+	if o != nil && o.CodeVatex.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCodeVatex gets a reference to the given NullableString and assigns it to the CodeVatex field.
+func (o *LigneDeTVA) SetCodeVatex(v string) {
+	o.CodeVatex.Set(&v)
+}
+// SetCodeVatexNil sets the value for CodeVatex to be an explicit nil
+func (o *LigneDeTVA) SetCodeVatexNil() {
+	o.CodeVatex.Set(nil)
+}
+
+// UnsetCodeVatex ensures that no value is present for CodeVatex, not even an explicit nil
+func (o *LigneDeTVA) UnsetCodeVatex() {
+	o.CodeVatex.Unset()
+}
+
 func (o LigneDeTVA) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -233,6 +319,12 @@ func (o LigneDeTVA) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Categorie.IsSet() {
 		toSerialize["categorie"] = o.Categorie.Get()
+	}
+	if o.MotifExoneration.IsSet() {
+		toSerialize["motifExoneration"] = o.MotifExoneration.Get()
+	}
+	if o.CodeVatex.IsSet() {
+		toSerialize["codeVatex"] = o.CodeVatex.Get()
 	}
 	return toSerialize, nil
 }

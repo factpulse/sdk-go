@@ -12,100 +12,206 @@ package factpulse
 
 import (
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
-// ErrorLevel the model 'ErrorLevel'
-type ErrorLevel string
+// checks if the ReponseHealthcheckAFNOR type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ReponseHealthcheckAFNOR{}
 
-// List of ErrorLevel
-const (
-	ERROR ErrorLevel = "Error"
-	WARNING ErrorLevel = "Warning"
-)
-
-// All allowed values of ErrorLevel enum
-var AllowedErrorLevelEnumValues = []ErrorLevel{
-	"Error",
-	"Warning",
+// ReponseHealthcheckAFNOR Réponse du healthcheck des services AFNOR
+type ReponseHealthcheckAFNOR struct {
+	// État du Flow Service API
+	FlowServiceOk bool `json:"flow_service_ok"`
+	// État du Directory Service API
+	DirectoryServiceOk bool `json:"directory_service_ok"`
+	// Message descriptif de l'état
+	Message string `json:"message"`
 }
 
-func (v *ErrorLevel) UnmarshalJSON(src []byte) error {
-	var value string
-	err := json.Unmarshal(src, &value)
+type _ReponseHealthcheckAFNOR ReponseHealthcheckAFNOR
+
+// NewReponseHealthcheckAFNOR instantiates a new ReponseHealthcheckAFNOR object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewReponseHealthcheckAFNOR(flowServiceOk bool, directoryServiceOk bool, message string) *ReponseHealthcheckAFNOR {
+	this := ReponseHealthcheckAFNOR{}
+	this.FlowServiceOk = flowServiceOk
+	this.DirectoryServiceOk = directoryServiceOk
+	this.Message = message
+	return &this
+}
+
+// NewReponseHealthcheckAFNORWithDefaults instantiates a new ReponseHealthcheckAFNOR object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewReponseHealthcheckAFNORWithDefaults() *ReponseHealthcheckAFNOR {
+	this := ReponseHealthcheckAFNOR{}
+	return &this
+}
+
+// GetFlowServiceOk returns the FlowServiceOk field value
+func (o *ReponseHealthcheckAFNOR) GetFlowServiceOk() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.FlowServiceOk
+}
+
+// GetFlowServiceOkOk returns a tuple with the FlowServiceOk field value
+// and a boolean to check if the value has been set.
+func (o *ReponseHealthcheckAFNOR) GetFlowServiceOkOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FlowServiceOk, true
+}
+
+// SetFlowServiceOk sets field value
+func (o *ReponseHealthcheckAFNOR) SetFlowServiceOk(v bool) {
+	o.FlowServiceOk = v
+}
+
+// GetDirectoryServiceOk returns the DirectoryServiceOk field value
+func (o *ReponseHealthcheckAFNOR) GetDirectoryServiceOk() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.DirectoryServiceOk
+}
+
+// GetDirectoryServiceOkOk returns a tuple with the DirectoryServiceOk field value
+// and a boolean to check if the value has been set.
+func (o *ReponseHealthcheckAFNOR) GetDirectoryServiceOkOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.DirectoryServiceOk, true
+}
+
+// SetDirectoryServiceOk sets field value
+func (o *ReponseHealthcheckAFNOR) SetDirectoryServiceOk(v bool) {
+	o.DirectoryServiceOk = v
+}
+
+// GetMessage returns the Message field value
+func (o *ReponseHealthcheckAFNOR) GetMessage() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Message
+}
+
+// GetMessageOk returns a tuple with the Message field value
+// and a boolean to check if the value has been set.
+func (o *ReponseHealthcheckAFNOR) GetMessageOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Message, true
+}
+
+// SetMessage sets field value
+func (o *ReponseHealthcheckAFNOR) SetMessage(v string) {
+	o.Message = v
+}
+
+func (o ReponseHealthcheckAFNOR) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ReponseHealthcheckAFNOR) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["flow_service_ok"] = o.FlowServiceOk
+	toSerialize["directory_service_ok"] = o.DirectoryServiceOk
+	toSerialize["message"] = o.Message
+	return toSerialize, nil
+}
+
+func (o *ReponseHealthcheckAFNOR) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"flow_service_ok",
+		"directory_service_ok",
+		"message",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varReponseHealthcheckAFNOR := _ReponseHealthcheckAFNOR{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varReponseHealthcheckAFNOR)
+
 	if err != nil {
 		return err
 	}
-	enumTypeValue := ErrorLevel(value)
-	for _, existing := range AllowedErrorLevelEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
 
-	return fmt.Errorf("%+v is not a valid ErrorLevel", value)
+	*o = ReponseHealthcheckAFNOR(varReponseHealthcheckAFNOR)
+
+	return err
 }
 
-// NewErrorLevelFromValue returns a pointer to a valid ErrorLevel
-// for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewErrorLevelFromValue(v string) (*ErrorLevel, error) {
-	ev := ErrorLevel(v)
-	if ev.IsValid() {
-		return &ev, nil
-	} else {
-		return nil, fmt.Errorf("invalid value '%v' for ErrorLevel: valid values are %v", v, AllowedErrorLevelEnumValues)
-	}
-}
-
-// IsValid return true if the value is valid for the enum, false otherwise
-func (v ErrorLevel) IsValid() bool {
-	for _, existing := range AllowedErrorLevelEnumValues {
-		if existing == v {
-			return true
-		}
-	}
-	return false
-}
-
-// Ptr returns reference to ErrorLevel value
-func (v ErrorLevel) Ptr() *ErrorLevel {
-	return &v
-}
-
-type NullableErrorLevel struct {
-	value *ErrorLevel
+type NullableReponseHealthcheckAFNOR struct {
+	value *ReponseHealthcheckAFNOR
 	isSet bool
 }
 
-func (v NullableErrorLevel) Get() *ErrorLevel {
+func (v NullableReponseHealthcheckAFNOR) Get() *ReponseHealthcheckAFNOR {
 	return v.value
 }
 
-func (v *NullableErrorLevel) Set(val *ErrorLevel) {
+func (v *NullableReponseHealthcheckAFNOR) Set(val *ReponseHealthcheckAFNOR) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableErrorLevel) IsSet() bool {
+func (v NullableReponseHealthcheckAFNOR) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableErrorLevel) Unset() {
+func (v *NullableReponseHealthcheckAFNOR) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableErrorLevel(val *ErrorLevel) *NullableErrorLevel {
-	return &NullableErrorLevel{value: val, isSet: true}
+func NewNullableReponseHealthcheckAFNOR(val *ReponseHealthcheckAFNOR) *NullableReponseHealthcheckAFNOR {
+	return &NullableReponseHealthcheckAFNOR{value: val, isSet: true}
 }
 
-func (v NullableErrorLevel) MarshalJSON() ([]byte, error) {
+func (v NullableReponseHealthcheckAFNOR) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableErrorLevel) UnmarshalJSON(src []byte) error {
+func (v *NullableReponseHealthcheckAFNOR) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
 

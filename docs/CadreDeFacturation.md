@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CodeCadreFacturation** | [**CodeCadreFacturation**](CodeCadreFacturation.md) |  | 
+**NatureOperation** | Pointer to [**NullableNatureOperation**](NatureOperation.md) |  | [optional] 
 **CodeServiceValideur** | Pointer to **NullableString** |  | [optional] 
 **CodeStructureValideur** | Pointer to **NullableString** |  | [optional] 
 
@@ -47,6 +48,41 @@ and a boolean to check if the value has been set.
 SetCodeCadreFacturation sets CodeCadreFacturation field to given value.
 
 
+### GetNatureOperation
+
+`func (o *CadreDeFacturation) GetNatureOperation() NatureOperation`
+
+GetNatureOperation returns the NatureOperation field if non-nil, zero value otherwise.
+
+### GetNatureOperationOk
+
+`func (o *CadreDeFacturation) GetNatureOperationOk() (*NatureOperation, bool)`
+
+GetNatureOperationOk returns a tuple with the NatureOperation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNatureOperation
+
+`func (o *CadreDeFacturation) SetNatureOperation(v NatureOperation)`
+
+SetNatureOperation sets NatureOperation field to given value.
+
+### HasNatureOperation
+
+`func (o *CadreDeFacturation) HasNatureOperation() bool`
+
+HasNatureOperation returns a boolean if a field has been set.
+
+### SetNatureOperationNil
+
+`func (o *CadreDeFacturation) SetNatureOperationNil(b bool)`
+
+ SetNatureOperationNil sets the value for NatureOperation to be an explicit nil
+
+### UnsetNatureOperation
+`func (o *CadreDeFacturation) UnsetNatureOperation()`
+
+UnsetNatureOperation ensures that no value is present for NatureOperation, not even an explicit nil
 ### GetCodeServiceValideur
 
 `func (o *CadreDeFacturation) GetCodeServiceValideur() string`

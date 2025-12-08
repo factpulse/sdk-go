@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// ErrorSource Source de l'erreur pour faciliter le diagnostic.
+// ErrorSource the model 'ErrorSource'
 type ErrorSource string
 
 // List of ErrorSource

@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// CodeCadreFacturation the model 'CodeCadreFacturation'
+// CodeCadreFacturation Codes Chorus Pro pour le cadre de facturation (usage B2G).
 type CodeCadreFacturation string
 
 // List of CodeCadreFacturation

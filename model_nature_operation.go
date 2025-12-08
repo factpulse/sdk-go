@@ -15,52 +15,104 @@ import (
 	"fmt"
 )
 
-// ErrorLevel the model 'ErrorLevel'
-type ErrorLevel string
+// NatureOperation Nature de l'opération (BT-23) pour Factur-X - Réforme française.  BR-FR-08: Le cadre de facturation doit être l'un des codes suivants. La première lettre indique : B = Biens, S = Services, M = Mixte.  Ref: XP Z12-012, article_conformite_pdf_facturx.md  Exemple d'utilisation:     >>> cadre = CadreDeFacturation(     ...     code_cadre_facturation=CodeCadreFacturation.A1_FACTURE_FOURNISSEUR,     ...     nature_operation=NatureOperation.BIENS     ... )
+type NatureOperation string
 
-// List of ErrorLevel
+// List of NatureOperation
 const (
-	ERROR ErrorLevel = "Error"
-	WARNING ErrorLevel = "Warning"
+	B1 NatureOperation = "B1"
+	B12 NatureOperation = "B1"
+	S1 NatureOperation = "S1"
+	S12 NatureOperation = "S1"
+	M1 NatureOperation = "M1"
+	M12 NatureOperation = "M1"
+	B2 NatureOperation = "B2"
+	B22 NatureOperation = "B2"
+	S2 NatureOperation = "S2"
+	S22 NatureOperation = "S2"
+	M2 NatureOperation = "M2"
+	M22 NatureOperation = "M2"
+	B4 NatureOperation = "B4"
+	B42 NatureOperation = "B4"
+	S4 NatureOperation = "S4"
+	S42 NatureOperation = "S4"
+	M4 NatureOperation = "M4"
+	M42 NatureOperation = "M4"
+	S3 NatureOperation = "S3"
+	S32 NatureOperation = "S3"
+	S5 NatureOperation = "S5"
+	S52 NatureOperation = "S5"
+	S6 NatureOperation = "S6"
+	S62 NatureOperation = "S6"
+	B7 NatureOperation = "B7"
+	B72 NatureOperation = "B7"
+	S7 NatureOperation = "S7"
+	S72 NatureOperation = "S7"
 )
 
-// All allowed values of ErrorLevel enum
-var AllowedErrorLevelEnumValues = []ErrorLevel{
-	"Error",
-	"Warning",
+// All allowed values of NatureOperation enum
+var AllowedNatureOperationEnumValues = []NatureOperation{
+	"B1",
+	"B1",
+	"S1",
+	"S1",
+	"M1",
+	"M1",
+	"B2",
+	"B2",
+	"S2",
+	"S2",
+	"M2",
+	"M2",
+	"B4",
+	"B4",
+	"S4",
+	"S4",
+	"M4",
+	"M4",
+	"S3",
+	"S3",
+	"S5",
+	"S5",
+	"S6",
+	"S6",
+	"B7",
+	"B7",
+	"S7",
+	"S7",
 }
 
-func (v *ErrorLevel) UnmarshalJSON(src []byte) error {
+func (v *NatureOperation) UnmarshalJSON(src []byte) error {
 	var value string
 	err := json.Unmarshal(src, &value)
 	if err != nil {
 		return err
 	}
-	enumTypeValue := ErrorLevel(value)
-	for _, existing := range AllowedErrorLevelEnumValues {
+	enumTypeValue := NatureOperation(value)
+	for _, existing := range AllowedNatureOperationEnumValues {
 		if existing == enumTypeValue {
 			*v = enumTypeValue
 			return nil
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid ErrorLevel", value)
+	return fmt.Errorf("%+v is not a valid NatureOperation", value)
 }
 
-// NewErrorLevelFromValue returns a pointer to a valid ErrorLevel
+// NewNatureOperationFromValue returns a pointer to a valid NatureOperation
 // for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewErrorLevelFromValue(v string) (*ErrorLevel, error) {
-	ev := ErrorLevel(v)
+func NewNatureOperationFromValue(v string) (*NatureOperation, error) {
+	ev := NatureOperation(v)
 	if ev.IsValid() {
 		return &ev, nil
 	} else {
-		return nil, fmt.Errorf("invalid value '%v' for ErrorLevel: valid values are %v", v, AllowedErrorLevelEnumValues)
+		return nil, fmt.Errorf("invalid value '%v' for NatureOperation: valid values are %v", v, AllowedNatureOperationEnumValues)
 	}
 }
 
 // IsValid return true if the value is valid for the enum, false otherwise
-func (v ErrorLevel) IsValid() bool {
-	for _, existing := range AllowedErrorLevelEnumValues {
+func (v NatureOperation) IsValid() bool {
+	for _, existing := range AllowedNatureOperationEnumValues {
 		if existing == v {
 			return true
 		}
@@ -68,43 +120,43 @@ func (v ErrorLevel) IsValid() bool {
 	return false
 }
 
-// Ptr returns reference to ErrorLevel value
-func (v ErrorLevel) Ptr() *ErrorLevel {
+// Ptr returns reference to NatureOperation value
+func (v NatureOperation) Ptr() *NatureOperation {
 	return &v
 }
 
-type NullableErrorLevel struct {
-	value *ErrorLevel
+type NullableNatureOperation struct {
+	value *NatureOperation
 	isSet bool
 }
 
-func (v NullableErrorLevel) Get() *ErrorLevel {
+func (v NullableNatureOperation) Get() *NatureOperation {
 	return v.value
 }
 
-func (v *NullableErrorLevel) Set(val *ErrorLevel) {
+func (v *NullableNatureOperation) Set(val *NatureOperation) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableErrorLevel) IsSet() bool {
+func (v NullableNatureOperation) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableErrorLevel) Unset() {
+func (v *NullableNatureOperation) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableErrorLevel(val *ErrorLevel) *NullableErrorLevel {
-	return &NullableErrorLevel{value: val, isSet: true}
+func NewNullableNatureOperation(val *NatureOperation) *NullableNatureOperation {
+	return &NullableNatureOperation{value: val, isSet: true}
 }
 
-func (v NullableErrorLevel) MarshalJSON() ([]byte, error) {
+func (v NullableNatureOperation) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableErrorLevel) UnmarshalJSON(src []byte) error {
+func (v *NullableNatureOperation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

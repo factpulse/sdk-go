@@ -15,52 +15,58 @@ import (
 	"fmt"
 )
 
-// ErrorLevel the model 'ErrorLevel'
-type ErrorLevel string
+// TypeFlux Types de flux de facturation
+type TypeFlux string
 
-// List of ErrorLevel
+// List of TypeFlux
 const (
-	ERROR ErrorLevel = "Error"
-	WARNING ErrorLevel = "Warning"
+	CUSTOMER_INVOICE TypeFlux = "CustomerInvoice"
+	SUPPLIER_INVOICE TypeFlux = "SupplierInvoice"
+	CUSTOMER_INVOICE_LC TypeFlux = "CustomerInvoiceLC"
+	SUPPLIER_INVOICE_LC TypeFlux = "SupplierInvoiceLC"
+	E_REPORTING TypeFlux = "eReporting"
 )
 
-// All allowed values of ErrorLevel enum
-var AllowedErrorLevelEnumValues = []ErrorLevel{
-	"Error",
-	"Warning",
+// All allowed values of TypeFlux enum
+var AllowedTypeFluxEnumValues = []TypeFlux{
+	"CustomerInvoice",
+	"SupplierInvoice",
+	"CustomerInvoiceLC",
+	"SupplierInvoiceLC",
+	"eReporting",
 }
 
-func (v *ErrorLevel) UnmarshalJSON(src []byte) error {
+func (v *TypeFlux) UnmarshalJSON(src []byte) error {
 	var value string
 	err := json.Unmarshal(src, &value)
 	if err != nil {
 		return err
 	}
-	enumTypeValue := ErrorLevel(value)
-	for _, existing := range AllowedErrorLevelEnumValues {
+	enumTypeValue := TypeFlux(value)
+	for _, existing := range AllowedTypeFluxEnumValues {
 		if existing == enumTypeValue {
 			*v = enumTypeValue
 			return nil
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid ErrorLevel", value)
+	return fmt.Errorf("%+v is not a valid TypeFlux", value)
 }
 
-// NewErrorLevelFromValue returns a pointer to a valid ErrorLevel
+// NewTypeFluxFromValue returns a pointer to a valid TypeFlux
 // for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewErrorLevelFromValue(v string) (*ErrorLevel, error) {
-	ev := ErrorLevel(v)
+func NewTypeFluxFromValue(v string) (*TypeFlux, error) {
+	ev := TypeFlux(v)
 	if ev.IsValid() {
 		return &ev, nil
 	} else {
-		return nil, fmt.Errorf("invalid value '%v' for ErrorLevel: valid values are %v", v, AllowedErrorLevelEnumValues)
+		return nil, fmt.Errorf("invalid value '%v' for TypeFlux: valid values are %v", v, AllowedTypeFluxEnumValues)
 	}
 }
 
 // IsValid return true if the value is valid for the enum, false otherwise
-func (v ErrorLevel) IsValid() bool {
-	for _, existing := range AllowedErrorLevelEnumValues {
+func (v TypeFlux) IsValid() bool {
+	for _, existing := range AllowedTypeFluxEnumValues {
 		if existing == v {
 			return true
 		}
@@ -68,43 +74,43 @@ func (v ErrorLevel) IsValid() bool {
 	return false
 }
 
-// Ptr returns reference to ErrorLevel value
-func (v ErrorLevel) Ptr() *ErrorLevel {
+// Ptr returns reference to TypeFlux value
+func (v TypeFlux) Ptr() *TypeFlux {
 	return &v
 }
 
-type NullableErrorLevel struct {
-	value *ErrorLevel
+type NullableTypeFlux struct {
+	value *TypeFlux
 	isSet bool
 }
 
-func (v NullableErrorLevel) Get() *ErrorLevel {
+func (v NullableTypeFlux) Get() *TypeFlux {
 	return v.value
 }
 
-func (v *NullableErrorLevel) Set(val *ErrorLevel) {
+func (v *NullableTypeFlux) Set(val *TypeFlux) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableErrorLevel) IsSet() bool {
+func (v NullableTypeFlux) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableErrorLevel) Unset() {
+func (v *NullableTypeFlux) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableErrorLevel(val *ErrorLevel) *NullableErrorLevel {
-	return &NullableErrorLevel{value: val, isSet: true}
+func NewNullableTypeFlux(val *TypeFlux) *NullableTypeFlux {
+	return &NullableTypeFlux{value: val, isSet: true}
 }
 
-func (v NullableErrorLevel) MarshalJSON() ([]byte, error) {
+func (v NullableTypeFlux) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableErrorLevel) UnmarshalJSON(src []byte) error {
+func (v *NullableTypeFlux) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

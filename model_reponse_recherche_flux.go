@@ -12,100 +12,235 @@ package factpulse
 
 import (
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
-// ErrorLevel the model 'ErrorLevel'
-type ErrorLevel string
+// checks if the ReponseRechercheFlux type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ReponseRechercheFlux{}
 
-// List of ErrorLevel
-const (
-	ERROR ErrorLevel = "Error"
-	WARNING ErrorLevel = "Warning"
-)
-
-// All allowed values of ErrorLevel enum
-var AllowedErrorLevelEnumValues = []ErrorLevel{
-	"Error",
-	"Warning",
+// ReponseRechercheFlux Réponse d'une recherche de flux
+type ReponseRechercheFlux struct {
+	// Nombre total de résultats
+	Total int32 `json:"total"`
+	// Décalage appliqué
+	Offset int32 `json:"offset"`
+	// Limite de résultats
+	Limit int32 `json:"limit"`
+	// Liste des flux trouvés
+	Resultats []FluxResume `json:"resultats"`
 }
 
-func (v *ErrorLevel) UnmarshalJSON(src []byte) error {
-	var value string
-	err := json.Unmarshal(src, &value)
+type _ReponseRechercheFlux ReponseRechercheFlux
+
+// NewReponseRechercheFlux instantiates a new ReponseRechercheFlux object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewReponseRechercheFlux(total int32, offset int32, limit int32, resultats []FluxResume) *ReponseRechercheFlux {
+	this := ReponseRechercheFlux{}
+	this.Total = total
+	this.Offset = offset
+	this.Limit = limit
+	this.Resultats = resultats
+	return &this
+}
+
+// NewReponseRechercheFluxWithDefaults instantiates a new ReponseRechercheFlux object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewReponseRechercheFluxWithDefaults() *ReponseRechercheFlux {
+	this := ReponseRechercheFlux{}
+	return &this
+}
+
+// GetTotal returns the Total field value
+func (o *ReponseRechercheFlux) GetTotal() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Total
+}
+
+// GetTotalOk returns a tuple with the Total field value
+// and a boolean to check if the value has been set.
+func (o *ReponseRechercheFlux) GetTotalOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Total, true
+}
+
+// SetTotal sets field value
+func (o *ReponseRechercheFlux) SetTotal(v int32) {
+	o.Total = v
+}
+
+// GetOffset returns the Offset field value
+func (o *ReponseRechercheFlux) GetOffset() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Offset
+}
+
+// GetOffsetOk returns a tuple with the Offset field value
+// and a boolean to check if the value has been set.
+func (o *ReponseRechercheFlux) GetOffsetOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Offset, true
+}
+
+// SetOffset sets field value
+func (o *ReponseRechercheFlux) SetOffset(v int32) {
+	o.Offset = v
+}
+
+// GetLimit returns the Limit field value
+func (o *ReponseRechercheFlux) GetLimit() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Limit
+}
+
+// GetLimitOk returns a tuple with the Limit field value
+// and a boolean to check if the value has been set.
+func (o *ReponseRechercheFlux) GetLimitOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Limit, true
+}
+
+// SetLimit sets field value
+func (o *ReponseRechercheFlux) SetLimit(v int32) {
+	o.Limit = v
+}
+
+// GetResultats returns the Resultats field value
+func (o *ReponseRechercheFlux) GetResultats() []FluxResume {
+	if o == nil {
+		var ret []FluxResume
+		return ret
+	}
+
+	return o.Resultats
+}
+
+// GetResultatsOk returns a tuple with the Resultats field value
+// and a boolean to check if the value has been set.
+func (o *ReponseRechercheFlux) GetResultatsOk() ([]FluxResume, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Resultats, true
+}
+
+// SetResultats sets field value
+func (o *ReponseRechercheFlux) SetResultats(v []FluxResume) {
+	o.Resultats = v
+}
+
+func (o ReponseRechercheFlux) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ReponseRechercheFlux) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["total"] = o.Total
+	toSerialize["offset"] = o.Offset
+	toSerialize["limit"] = o.Limit
+	toSerialize["resultats"] = o.Resultats
+	return toSerialize, nil
+}
+
+func (o *ReponseRechercheFlux) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"total",
+		"offset",
+		"limit",
+		"resultats",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varReponseRechercheFlux := _ReponseRechercheFlux{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varReponseRechercheFlux)
+
 	if err != nil {
 		return err
 	}
-	enumTypeValue := ErrorLevel(value)
-	for _, existing := range AllowedErrorLevelEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
 
-	return fmt.Errorf("%+v is not a valid ErrorLevel", value)
+	*o = ReponseRechercheFlux(varReponseRechercheFlux)
+
+	return err
 }
 
-// NewErrorLevelFromValue returns a pointer to a valid ErrorLevel
-// for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewErrorLevelFromValue(v string) (*ErrorLevel, error) {
-	ev := ErrorLevel(v)
-	if ev.IsValid() {
-		return &ev, nil
-	} else {
-		return nil, fmt.Errorf("invalid value '%v' for ErrorLevel: valid values are %v", v, AllowedErrorLevelEnumValues)
-	}
-}
-
-// IsValid return true if the value is valid for the enum, false otherwise
-func (v ErrorLevel) IsValid() bool {
-	for _, existing := range AllowedErrorLevelEnumValues {
-		if existing == v {
-			return true
-		}
-	}
-	return false
-}
-
-// Ptr returns reference to ErrorLevel value
-func (v ErrorLevel) Ptr() *ErrorLevel {
-	return &v
-}
-
-type NullableErrorLevel struct {
-	value *ErrorLevel
+type NullableReponseRechercheFlux struct {
+	value *ReponseRechercheFlux
 	isSet bool
 }
 
-func (v NullableErrorLevel) Get() *ErrorLevel {
+func (v NullableReponseRechercheFlux) Get() *ReponseRechercheFlux {
 	return v.value
 }
 
-func (v *NullableErrorLevel) Set(val *ErrorLevel) {
+func (v *NullableReponseRechercheFlux) Set(val *ReponseRechercheFlux) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableErrorLevel) IsSet() bool {
+func (v NullableReponseRechercheFlux) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableErrorLevel) Unset() {
+func (v *NullableReponseRechercheFlux) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableErrorLevel(val *ErrorLevel) *NullableErrorLevel {
-	return &NullableErrorLevel{value: val, isSet: true}
+func NewNullableReponseRechercheFlux(val *ReponseRechercheFlux) *NullableReponseRechercheFlux {
+	return &NullableReponseRechercheFlux{value: val, isSet: true}
 }
 
-func (v NullableErrorLevel) MarshalJSON() ([]byte, error) {
+func (v NullableReponseRechercheFlux) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableErrorLevel) UnmarshalJSON(src []byte) error {
+func (v *NullableReponseRechercheFlux) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
 

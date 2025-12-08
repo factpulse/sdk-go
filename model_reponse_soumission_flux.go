@@ -16,188 +16,254 @@ import (
 	"fmt"
 )
 
-// checks if the CadreDeFacturation type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CadreDeFacturation{}
+// checks if the ReponseSoumissionFlux type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ReponseSoumissionFlux{}
 
-// CadreDeFacturation Définit le cadre de facturation.  - code_cadre_facturation: Code Chorus Pro (A1, A2, A9, A12) - utilisé pour B2G - nature_operation: Nature de l'opération (B1, S1, M1, etc.) - prioritaire pour Factur-X  Si nature_operation est fourni, il sera utilisé directement dans le XML Factur-X (BT-23). Sinon, le code sera déduit de code_cadre_facturation via un mapping automatique.  Exemple:     >>> cadre = CadreDeFacturation(     ...     code_cadre_facturation=CodeCadreFacturation.A1_FACTURE_FOURNISSEUR,     ...     nature_operation=NatureOperation.BIENS  # Force B1 au lieu de S1     ... )
-type CadreDeFacturation struct {
-	CodeCadreFacturation CodeCadreFacturation `json:"codeCadreFacturation"`
-	NatureOperation NullableNatureOperation `json:"natureOperation,omitempty"`
-	CodeServiceValideur NullableString `json:"codeServiceValideur,omitempty"`
-	CodeStructureValideur NullableString `json:"codeStructureValideur,omitempty"`
+// ReponseSoumissionFlux Réponse après soumission d'un flux
+type ReponseSoumissionFlux struct {
+	// Identifiant unique du flux généré par la PDP
+	FlowId string `json:"flow_id"`
+	TrackingId NullableString `json:"tracking_id,omitempty"`
+	// Nom du flux
+	Nom string `json:"nom"`
+	// Syntaxe du flux (CII, UBL, etc.)
+	SyntaxeFlux string `json:"syntaxe_flux"`
+	ProfilFlux NullableString `json:"profil_flux,omitempty"`
+	// Hash SHA256 du fichier soumis
+	Sha256 string `json:"sha256"`
+	// Message de confirmation
+	Message string `json:"message"`
 }
 
-type _CadreDeFacturation CadreDeFacturation
+type _ReponseSoumissionFlux ReponseSoumissionFlux
 
-// NewCadreDeFacturation instantiates a new CadreDeFacturation object
+// NewReponseSoumissionFlux instantiates a new ReponseSoumissionFlux object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCadreDeFacturation(codeCadreFacturation CodeCadreFacturation) *CadreDeFacturation {
-	this := CadreDeFacturation{}
-	this.CodeCadreFacturation = codeCadreFacturation
+func NewReponseSoumissionFlux(flowId string, nom string, syntaxeFlux string, sha256 string, message string) *ReponseSoumissionFlux {
+	this := ReponseSoumissionFlux{}
+	this.FlowId = flowId
+	this.Nom = nom
+	this.SyntaxeFlux = syntaxeFlux
+	this.Sha256 = sha256
+	this.Message = message
 	return &this
 }
 
-// NewCadreDeFacturationWithDefaults instantiates a new CadreDeFacturation object
+// NewReponseSoumissionFluxWithDefaults instantiates a new ReponseSoumissionFlux object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCadreDeFacturationWithDefaults() *CadreDeFacturation {
-	this := CadreDeFacturation{}
+func NewReponseSoumissionFluxWithDefaults() *ReponseSoumissionFlux {
+	this := ReponseSoumissionFlux{}
 	return &this
 }
 
-// GetCodeCadreFacturation returns the CodeCadreFacturation field value
-func (o *CadreDeFacturation) GetCodeCadreFacturation() CodeCadreFacturation {
+// GetFlowId returns the FlowId field value
+func (o *ReponseSoumissionFlux) GetFlowId() string {
 	if o == nil {
-		var ret CodeCadreFacturation
-		return ret
-	}
-
-	return o.CodeCadreFacturation
-}
-
-// GetCodeCadreFacturationOk returns a tuple with the CodeCadreFacturation field value
-// and a boolean to check if the value has been set.
-func (o *CadreDeFacturation) GetCodeCadreFacturationOk() (*CodeCadreFacturation, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.CodeCadreFacturation, true
-}
-
-// SetCodeCadreFacturation sets field value
-func (o *CadreDeFacturation) SetCodeCadreFacturation(v CodeCadreFacturation) {
-	o.CodeCadreFacturation = v
-}
-
-// GetNatureOperation returns the NatureOperation field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CadreDeFacturation) GetNatureOperation() NatureOperation {
-	if o == nil || IsNil(o.NatureOperation.Get()) {
-		var ret NatureOperation
-		return ret
-	}
-	return *o.NatureOperation.Get()
-}
-
-// GetNatureOperationOk returns a tuple with the NatureOperation field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CadreDeFacturation) GetNatureOperationOk() (*NatureOperation, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.NatureOperation.Get(), o.NatureOperation.IsSet()
-}
-
-// HasNatureOperation returns a boolean if a field has been set.
-func (o *CadreDeFacturation) HasNatureOperation() bool {
-	if o != nil && o.NatureOperation.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetNatureOperation gets a reference to the given NullableNatureOperation and assigns it to the NatureOperation field.
-func (o *CadreDeFacturation) SetNatureOperation(v NatureOperation) {
-	o.NatureOperation.Set(&v)
-}
-// SetNatureOperationNil sets the value for NatureOperation to be an explicit nil
-func (o *CadreDeFacturation) SetNatureOperationNil() {
-	o.NatureOperation.Set(nil)
-}
-
-// UnsetNatureOperation ensures that no value is present for NatureOperation, not even an explicit nil
-func (o *CadreDeFacturation) UnsetNatureOperation() {
-	o.NatureOperation.Unset()
-}
-
-// GetCodeServiceValideur returns the CodeServiceValideur field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CadreDeFacturation) GetCodeServiceValideur() string {
-	if o == nil || IsNil(o.CodeServiceValideur.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.CodeServiceValideur.Get()
+
+	return o.FlowId
 }
 
-// GetCodeServiceValideurOk returns a tuple with the CodeServiceValideur field value if set, nil otherwise
+// GetFlowIdOk returns a tuple with the FlowId field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CadreDeFacturation) GetCodeServiceValideurOk() (*string, bool) {
+func (o *ReponseSoumissionFlux) GetFlowIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.CodeServiceValideur.Get(), o.CodeServiceValideur.IsSet()
+	return &o.FlowId, true
 }
 
-// HasCodeServiceValideur returns a boolean if a field has been set.
-func (o *CadreDeFacturation) HasCodeServiceValideur() bool {
-	if o != nil && o.CodeServiceValideur.IsSet() {
-		return true
-	}
-
-	return false
+// SetFlowId sets field value
+func (o *ReponseSoumissionFlux) SetFlowId(v string) {
+	o.FlowId = v
 }
 
-// SetCodeServiceValideur gets a reference to the given NullableString and assigns it to the CodeServiceValideur field.
-func (o *CadreDeFacturation) SetCodeServiceValideur(v string) {
-	o.CodeServiceValideur.Set(&v)
-}
-// SetCodeServiceValideurNil sets the value for CodeServiceValideur to be an explicit nil
-func (o *CadreDeFacturation) SetCodeServiceValideurNil() {
-	o.CodeServiceValideur.Set(nil)
-}
-
-// UnsetCodeServiceValideur ensures that no value is present for CodeServiceValideur, not even an explicit nil
-func (o *CadreDeFacturation) UnsetCodeServiceValideur() {
-	o.CodeServiceValideur.Unset()
-}
-
-// GetCodeStructureValideur returns the CodeStructureValideur field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CadreDeFacturation) GetCodeStructureValideur() string {
-	if o == nil || IsNil(o.CodeStructureValideur.Get()) {
+// GetTrackingId returns the TrackingId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ReponseSoumissionFlux) GetTrackingId() string {
+	if o == nil || IsNil(o.TrackingId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.CodeStructureValideur.Get()
+	return *o.TrackingId.Get()
 }
 
-// GetCodeStructureValideurOk returns a tuple with the CodeStructureValideur field value if set, nil otherwise
+// GetTrackingIdOk returns a tuple with the TrackingId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CadreDeFacturation) GetCodeStructureValideurOk() (*string, bool) {
+func (o *ReponseSoumissionFlux) GetTrackingIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.CodeStructureValideur.Get(), o.CodeStructureValideur.IsSet()
+	return o.TrackingId.Get(), o.TrackingId.IsSet()
 }
 
-// HasCodeStructureValideur returns a boolean if a field has been set.
-func (o *CadreDeFacturation) HasCodeStructureValideur() bool {
-	if o != nil && o.CodeStructureValideur.IsSet() {
+// HasTrackingId returns a boolean if a field has been set.
+func (o *ReponseSoumissionFlux) HasTrackingId() bool {
+	if o != nil && o.TrackingId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCodeStructureValideur gets a reference to the given NullableString and assigns it to the CodeStructureValideur field.
-func (o *CadreDeFacturation) SetCodeStructureValideur(v string) {
-	o.CodeStructureValideur.Set(&v)
+// SetTrackingId gets a reference to the given NullableString and assigns it to the TrackingId field.
+func (o *ReponseSoumissionFlux) SetTrackingId(v string) {
+	o.TrackingId.Set(&v)
 }
-// SetCodeStructureValideurNil sets the value for CodeStructureValideur to be an explicit nil
-func (o *CadreDeFacturation) SetCodeStructureValideurNil() {
-	o.CodeStructureValideur.Set(nil)
-}
-
-// UnsetCodeStructureValideur ensures that no value is present for CodeStructureValideur, not even an explicit nil
-func (o *CadreDeFacturation) UnsetCodeStructureValideur() {
-	o.CodeStructureValideur.Unset()
+// SetTrackingIdNil sets the value for TrackingId to be an explicit nil
+func (o *ReponseSoumissionFlux) SetTrackingIdNil() {
+	o.TrackingId.Set(nil)
 }
 
-func (o CadreDeFacturation) MarshalJSON() ([]byte, error) {
+// UnsetTrackingId ensures that no value is present for TrackingId, not even an explicit nil
+func (o *ReponseSoumissionFlux) UnsetTrackingId() {
+	o.TrackingId.Unset()
+}
+
+// GetNom returns the Nom field value
+func (o *ReponseSoumissionFlux) GetNom() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Nom
+}
+
+// GetNomOk returns a tuple with the Nom field value
+// and a boolean to check if the value has been set.
+func (o *ReponseSoumissionFlux) GetNomOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Nom, true
+}
+
+// SetNom sets field value
+func (o *ReponseSoumissionFlux) SetNom(v string) {
+	o.Nom = v
+}
+
+// GetSyntaxeFlux returns the SyntaxeFlux field value
+func (o *ReponseSoumissionFlux) GetSyntaxeFlux() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.SyntaxeFlux
+}
+
+// GetSyntaxeFluxOk returns a tuple with the SyntaxeFlux field value
+// and a boolean to check if the value has been set.
+func (o *ReponseSoumissionFlux) GetSyntaxeFluxOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.SyntaxeFlux, true
+}
+
+// SetSyntaxeFlux sets field value
+func (o *ReponseSoumissionFlux) SetSyntaxeFlux(v string) {
+	o.SyntaxeFlux = v
+}
+
+// GetProfilFlux returns the ProfilFlux field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ReponseSoumissionFlux) GetProfilFlux() string {
+	if o == nil || IsNil(o.ProfilFlux.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ProfilFlux.Get()
+}
+
+// GetProfilFluxOk returns a tuple with the ProfilFlux field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ReponseSoumissionFlux) GetProfilFluxOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ProfilFlux.Get(), o.ProfilFlux.IsSet()
+}
+
+// HasProfilFlux returns a boolean if a field has been set.
+func (o *ReponseSoumissionFlux) HasProfilFlux() bool {
+	if o != nil && o.ProfilFlux.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetProfilFlux gets a reference to the given NullableString and assigns it to the ProfilFlux field.
+func (o *ReponseSoumissionFlux) SetProfilFlux(v string) {
+	o.ProfilFlux.Set(&v)
+}
+// SetProfilFluxNil sets the value for ProfilFlux to be an explicit nil
+func (o *ReponseSoumissionFlux) SetProfilFluxNil() {
+	o.ProfilFlux.Set(nil)
+}
+
+// UnsetProfilFlux ensures that no value is present for ProfilFlux, not even an explicit nil
+func (o *ReponseSoumissionFlux) UnsetProfilFlux() {
+	o.ProfilFlux.Unset()
+}
+
+// GetSha256 returns the Sha256 field value
+func (o *ReponseSoumissionFlux) GetSha256() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Sha256
+}
+
+// GetSha256Ok returns a tuple with the Sha256 field value
+// and a boolean to check if the value has been set.
+func (o *ReponseSoumissionFlux) GetSha256Ok() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Sha256, true
+}
+
+// SetSha256 sets field value
+func (o *ReponseSoumissionFlux) SetSha256(v string) {
+	o.Sha256 = v
+}
+
+// GetMessage returns the Message field value
+func (o *ReponseSoumissionFlux) GetMessage() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Message
+}
+
+// GetMessageOk returns a tuple with the Message field value
+// and a boolean to check if the value has been set.
+func (o *ReponseSoumissionFlux) GetMessageOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Message, true
+}
+
+// SetMessage sets field value
+func (o *ReponseSoumissionFlux) SetMessage(v string) {
+	o.Message = v
+}
+
+func (o ReponseSoumissionFlux) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -205,27 +271,32 @@ func (o CadreDeFacturation) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CadreDeFacturation) ToMap() (map[string]interface{}, error) {
+func (o ReponseSoumissionFlux) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["codeCadreFacturation"] = o.CodeCadreFacturation
-	if o.NatureOperation.IsSet() {
-		toSerialize["natureOperation"] = o.NatureOperation.Get()
+	toSerialize["flow_id"] = o.FlowId
+	if o.TrackingId.IsSet() {
+		toSerialize["tracking_id"] = o.TrackingId.Get()
 	}
-	if o.CodeServiceValideur.IsSet() {
-		toSerialize["codeServiceValideur"] = o.CodeServiceValideur.Get()
+	toSerialize["nom"] = o.Nom
+	toSerialize["syntaxe_flux"] = o.SyntaxeFlux
+	if o.ProfilFlux.IsSet() {
+		toSerialize["profil_flux"] = o.ProfilFlux.Get()
 	}
-	if o.CodeStructureValideur.IsSet() {
-		toSerialize["codeStructureValideur"] = o.CodeStructureValideur.Get()
-	}
+	toSerialize["sha256"] = o.Sha256
+	toSerialize["message"] = o.Message
 	return toSerialize, nil
 }
 
-func (o *CadreDeFacturation) UnmarshalJSON(data []byte) (err error) {
+func (o *ReponseSoumissionFlux) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"codeCadreFacturation",
+		"flow_id",
+		"nom",
+		"syntaxe_flux",
+		"sha256",
+		"message",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -242,53 +313,53 @@ func (o *CadreDeFacturation) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varCadreDeFacturation := _CadreDeFacturation{}
+	varReponseSoumissionFlux := _ReponseSoumissionFlux{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCadreDeFacturation)
+	err = decoder.Decode(&varReponseSoumissionFlux)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CadreDeFacturation(varCadreDeFacturation)
+	*o = ReponseSoumissionFlux(varReponseSoumissionFlux)
 
 	return err
 }
 
-type NullableCadreDeFacturation struct {
-	value *CadreDeFacturation
+type NullableReponseSoumissionFlux struct {
+	value *ReponseSoumissionFlux
 	isSet bool
 }
 
-func (v NullableCadreDeFacturation) Get() *CadreDeFacturation {
+func (v NullableReponseSoumissionFlux) Get() *ReponseSoumissionFlux {
 	return v.value
 }
 
-func (v *NullableCadreDeFacturation) Set(val *CadreDeFacturation) {
+func (v *NullableReponseSoumissionFlux) Set(val *ReponseSoumissionFlux) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCadreDeFacturation) IsSet() bool {
+func (v NullableReponseSoumissionFlux) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCadreDeFacturation) Unset() {
+func (v *NullableReponseSoumissionFlux) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCadreDeFacturation(val *CadreDeFacturation) *NullableCadreDeFacturation {
-	return &NullableCadreDeFacturation{value: val, isSet: true}
+func NewNullableReponseSoumissionFlux(val *ReponseSoumissionFlux) *NullableReponseSoumissionFlux {
+	return &NullableReponseSoumissionFlux{value: val, isSet: true}
 }
 
-func (v NullableCadreDeFacturation) MarshalJSON() ([]byte, error) {
+func (v NullableReponseSoumissionFlux) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCadreDeFacturation) UnmarshalJSON(src []byte) error {
+func (v *NullableReponseSoumissionFlux) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

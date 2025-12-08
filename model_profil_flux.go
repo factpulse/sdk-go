@@ -15,52 +15,54 @@ import (
 	"fmt"
 )
 
-// ErrorLevel the model 'ErrorLevel'
-type ErrorLevel string
+// ProfilFlux Profils de flux supportés
+type ProfilFlux string
 
-// List of ErrorLevel
+// List of ProfilFlux
 const (
-	ERROR ErrorLevel = "Error"
-	WARNING ErrorLevel = "Warning"
+	BASIC ProfilFlux = "Basic"
+	CIUS ProfilFlux = "CIUS"
+	EXTENDED_CTC_FR ProfilFlux = "Extended-CTC-FR"
 )
 
-// All allowed values of ErrorLevel enum
-var AllowedErrorLevelEnumValues = []ErrorLevel{
-	"Error",
-	"Warning",
+// All allowed values of ProfilFlux enum
+var AllowedProfilFluxEnumValues = []ProfilFlux{
+	"Basic",
+	"CIUS",
+	"Extended-CTC-FR",
 }
 
-func (v *ErrorLevel) UnmarshalJSON(src []byte) error {
+func (v *ProfilFlux) UnmarshalJSON(src []byte) error {
 	var value string
 	err := json.Unmarshal(src, &value)
 	if err != nil {
 		return err
 	}
-	enumTypeValue := ErrorLevel(value)
-	for _, existing := range AllowedErrorLevelEnumValues {
+	enumTypeValue := ProfilFlux(value)
+	for _, existing := range AllowedProfilFluxEnumValues {
 		if existing == enumTypeValue {
 			*v = enumTypeValue
 			return nil
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid ErrorLevel", value)
+	return fmt.Errorf("%+v is not a valid ProfilFlux", value)
 }
 
-// NewErrorLevelFromValue returns a pointer to a valid ErrorLevel
+// NewProfilFluxFromValue returns a pointer to a valid ProfilFlux
 // for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewErrorLevelFromValue(v string) (*ErrorLevel, error) {
-	ev := ErrorLevel(v)
+func NewProfilFluxFromValue(v string) (*ProfilFlux, error) {
+	ev := ProfilFlux(v)
 	if ev.IsValid() {
 		return &ev, nil
 	} else {
-		return nil, fmt.Errorf("invalid value '%v' for ErrorLevel: valid values are %v", v, AllowedErrorLevelEnumValues)
+		return nil, fmt.Errorf("invalid value '%v' for ProfilFlux: valid values are %v", v, AllowedProfilFluxEnumValues)
 	}
 }
 
 // IsValid return true if the value is valid for the enum, false otherwise
-func (v ErrorLevel) IsValid() bool {
-	for _, existing := range AllowedErrorLevelEnumValues {
+func (v ProfilFlux) IsValid() bool {
+	for _, existing := range AllowedProfilFluxEnumValues {
 		if existing == v {
 			return true
 		}
@@ -68,43 +70,43 @@ func (v ErrorLevel) IsValid() bool {
 	return false
 }
 
-// Ptr returns reference to ErrorLevel value
-func (v ErrorLevel) Ptr() *ErrorLevel {
+// Ptr returns reference to ProfilFlux value
+func (v ProfilFlux) Ptr() *ProfilFlux {
 	return &v
 }
 
-type NullableErrorLevel struct {
-	value *ErrorLevel
+type NullableProfilFlux struct {
+	value *ProfilFlux
 	isSet bool
 }
 
-func (v NullableErrorLevel) Get() *ErrorLevel {
+func (v NullableProfilFlux) Get() *ProfilFlux {
 	return v.value
 }
 
-func (v *NullableErrorLevel) Set(val *ErrorLevel) {
+func (v *NullableProfilFlux) Set(val *ProfilFlux) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableErrorLevel) IsSet() bool {
+func (v NullableProfilFlux) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableErrorLevel) Unset() {
+func (v *NullableProfilFlux) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableErrorLevel(val *ErrorLevel) *NullableErrorLevel {
-	return &NullableErrorLevel{value: val, isSet: true}
+func NewNullableProfilFlux(val *ProfilFlux) *NullableProfilFlux {
+	return &NullableProfilFlux{value: val, isSet: true}
 }
 
-func (v NullableErrorLevel) MarshalJSON() ([]byte, error) {
+func (v NullableProfilFlux) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableErrorLevel) UnmarshalJSON(src []byte) error {
+func (v *NullableProfilFlux) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

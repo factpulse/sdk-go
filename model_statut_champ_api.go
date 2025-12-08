@@ -15,52 +15,58 @@ import (
 	"fmt"
 )
 
-// ErrorLevel the model 'ErrorLevel'
-type ErrorLevel string
+// StatutChampAPI Statut de conformité d'un champ.
+type StatutChampAPI string
 
-// List of ErrorLevel
+// List of StatutChampAPI
 const (
-	ERROR ErrorLevel = "Error"
-	WARNING ErrorLevel = "Warning"
+	CONFORME StatutChampAPI = "CONFORME"
+	ECART StatutChampAPI = "ECART"
+	ABSENT_PDF StatutChampAPI = "ABSENT_PDF"
+	ABSENT_XML StatutChampAPI = "ABSENT_XML"
+	NON_VERIFIE StatutChampAPI = "NON_VERIFIE"
 )
 
-// All allowed values of ErrorLevel enum
-var AllowedErrorLevelEnumValues = []ErrorLevel{
-	"Error",
-	"Warning",
+// All allowed values of StatutChampAPI enum
+var AllowedStatutChampAPIEnumValues = []StatutChampAPI{
+	"CONFORME",
+	"ECART",
+	"ABSENT_PDF",
+	"ABSENT_XML",
+	"NON_VERIFIE",
 }
 
-func (v *ErrorLevel) UnmarshalJSON(src []byte) error {
+func (v *StatutChampAPI) UnmarshalJSON(src []byte) error {
 	var value string
 	err := json.Unmarshal(src, &value)
 	if err != nil {
 		return err
 	}
-	enumTypeValue := ErrorLevel(value)
-	for _, existing := range AllowedErrorLevelEnumValues {
+	enumTypeValue := StatutChampAPI(value)
+	for _, existing := range AllowedStatutChampAPIEnumValues {
 		if existing == enumTypeValue {
 			*v = enumTypeValue
 			return nil
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid ErrorLevel", value)
+	return fmt.Errorf("%+v is not a valid StatutChampAPI", value)
 }
 
-// NewErrorLevelFromValue returns a pointer to a valid ErrorLevel
+// NewStatutChampAPIFromValue returns a pointer to a valid StatutChampAPI
 // for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewErrorLevelFromValue(v string) (*ErrorLevel, error) {
-	ev := ErrorLevel(v)
+func NewStatutChampAPIFromValue(v string) (*StatutChampAPI, error) {
+	ev := StatutChampAPI(v)
 	if ev.IsValid() {
 		return &ev, nil
 	} else {
-		return nil, fmt.Errorf("invalid value '%v' for ErrorLevel: valid values are %v", v, AllowedErrorLevelEnumValues)
+		return nil, fmt.Errorf("invalid value '%v' for StatutChampAPI: valid values are %v", v, AllowedStatutChampAPIEnumValues)
 	}
 }
 
 // IsValid return true if the value is valid for the enum, false otherwise
-func (v ErrorLevel) IsValid() bool {
-	for _, existing := range AllowedErrorLevelEnumValues {
+func (v StatutChampAPI) IsValid() bool {
+	for _, existing := range AllowedStatutChampAPIEnumValues {
 		if existing == v {
 			return true
 		}
@@ -68,43 +74,43 @@ func (v ErrorLevel) IsValid() bool {
 	return false
 }
 
-// Ptr returns reference to ErrorLevel value
-func (v ErrorLevel) Ptr() *ErrorLevel {
+// Ptr returns reference to StatutChampAPI value
+func (v StatutChampAPI) Ptr() *StatutChampAPI {
 	return &v
 }
 
-type NullableErrorLevel struct {
-	value *ErrorLevel
+type NullableStatutChampAPI struct {
+	value *StatutChampAPI
 	isSet bool
 }
 
-func (v NullableErrorLevel) Get() *ErrorLevel {
+func (v NullableStatutChampAPI) Get() *StatutChampAPI {
 	return v.value
 }
 
-func (v *NullableErrorLevel) Set(val *ErrorLevel) {
+func (v *NullableStatutChampAPI) Set(val *StatutChampAPI) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableErrorLevel) IsSet() bool {
+func (v NullableStatutChampAPI) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableErrorLevel) Unset() {
+func (v *NullableStatutChampAPI) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableErrorLevel(val *ErrorLevel) *NullableErrorLevel {
-	return &NullableErrorLevel{value: val, isSet: true}
+func NewNullableStatutChampAPI(val *StatutChampAPI) *NullableStatutChampAPI {
+	return &NullableStatutChampAPI{value: val, isSet: true}
 }
 
-func (v NullableErrorLevel) MarshalJSON() ([]byte, error) {
+func (v NullableStatutChampAPI) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableErrorLevel) UnmarshalJSON(src []byte) error {
+func (v *NullableStatutChampAPI) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

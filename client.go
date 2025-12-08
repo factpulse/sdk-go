@@ -62,6 +62,8 @@ type APIClient struct {
 	TraitementFactureAPI *TraitementFactureAPIService
 
 	UtilisateurAPI *UtilisateurAPIService
+
+	VrificationPDFXMLAPI *VrificationPDFXMLAPIService
 }
 
 type service struct {
@@ -87,6 +89,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.SantAPI = (*SantAPIService)(&c.common)
 	c.TraitementFactureAPI = (*TraitementFactureAPIService)(&c.common)
 	c.UtilisateurAPI = (*UtilisateurAPIService)(&c.common)
+	c.VrificationPDFXMLAPI = (*VrificationPDFXMLAPIService)(&c.common)
 
 	return c
 }

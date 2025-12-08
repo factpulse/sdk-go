@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **Taux** | Pointer to **NullableString** |  | [optional] 
 **TauxManuel** | Pointer to [**Tauxmanuel**](Tauxmanuel.md) |  | [optional] 
 **Categorie** | Pointer to [**NullableCategorieTVA**](CategorieTVA.md) |  | [optional] 
+**MotifExoneration** | Pointer to **NullableString** |  | [optional] 
+**CodeVatex** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
@@ -164,6 +166,76 @@ HasCategorie returns a boolean if a field has been set.
 `func (o *LigneDeTVA) UnsetCategorie()`
 
 UnsetCategorie ensures that no value is present for Categorie, not even an explicit nil
+### GetMotifExoneration
+
+`func (o *LigneDeTVA) GetMotifExoneration() string`
+
+GetMotifExoneration returns the MotifExoneration field if non-nil, zero value otherwise.
+
+### GetMotifExonerationOk
+
+`func (o *LigneDeTVA) GetMotifExonerationOk() (*string, bool)`
+
+GetMotifExonerationOk returns a tuple with the MotifExoneration field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMotifExoneration
+
+`func (o *LigneDeTVA) SetMotifExoneration(v string)`
+
+SetMotifExoneration sets MotifExoneration field to given value.
+
+### HasMotifExoneration
+
+`func (o *LigneDeTVA) HasMotifExoneration() bool`
+
+HasMotifExoneration returns a boolean if a field has been set.
+
+### SetMotifExonerationNil
+
+`func (o *LigneDeTVA) SetMotifExonerationNil(b bool)`
+
+ SetMotifExonerationNil sets the value for MotifExoneration to be an explicit nil
+
+### UnsetMotifExoneration
+`func (o *LigneDeTVA) UnsetMotifExoneration()`
+
+UnsetMotifExoneration ensures that no value is present for MotifExoneration, not even an explicit nil
+### GetCodeVatex
+
+`func (o *LigneDeTVA) GetCodeVatex() string`
+
+GetCodeVatex returns the CodeVatex field if non-nil, zero value otherwise.
+
+### GetCodeVatexOk
+
+`func (o *LigneDeTVA) GetCodeVatexOk() (*string, bool)`
+
+GetCodeVatexOk returns a tuple with the CodeVatex field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCodeVatex
+
+`func (o *LigneDeTVA) SetCodeVatex(v string)`
+
+SetCodeVatex sets CodeVatex field to given value.
+
+### HasCodeVatex
+
+`func (o *LigneDeTVA) HasCodeVatex() bool`
+
+HasCodeVatex returns a boolean if a field has been set.
+
+### SetCodeVatexNil
+
+`func (o *LigneDeTVA) SetCodeVatexNil(b bool)`
+
+ SetCodeVatexNil sets the value for CodeVatex to be an explicit nil
+
+### UnsetCodeVatex
+`func (o *LigneDeTVA) UnsetCodeVatex()`
+
+UnsetCodeVatex ensures that no value is present for CodeVatex, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

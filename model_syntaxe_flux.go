@@ -15,52 +15,58 @@ import (
 	"fmt"
 )
 
-// ErrorLevel the model 'ErrorLevel'
-type ErrorLevel string
+// SyntaxeFlux Syntaxes de flux supportées par AFNOR
+type SyntaxeFlux string
 
-// List of ErrorLevel
+// List of SyntaxeFlux
 const (
-	ERROR ErrorLevel = "Error"
-	WARNING ErrorLevel = "Warning"
+	CII SyntaxeFlux = "CII"
+	UBL SyntaxeFlux = "UBL"
+	FACTUR_X SyntaxeFlux = "Factur-X"
+	CDAR SyntaxeFlux = "CDAR"
+	FRR SyntaxeFlux = "FRR"
 )
 
-// All allowed values of ErrorLevel enum
-var AllowedErrorLevelEnumValues = []ErrorLevel{
-	"Error",
-	"Warning",
+// All allowed values of SyntaxeFlux enum
+var AllowedSyntaxeFluxEnumValues = []SyntaxeFlux{
+	"CII",
+	"UBL",
+	"Factur-X",
+	"CDAR",
+	"FRR",
 }
 
-func (v *ErrorLevel) UnmarshalJSON(src []byte) error {
+func (v *SyntaxeFlux) UnmarshalJSON(src []byte) error {
 	var value string
 	err := json.Unmarshal(src, &value)
 	if err != nil {
 		return err
 	}
-	enumTypeValue := ErrorLevel(value)
-	for _, existing := range AllowedErrorLevelEnumValues {
+	enumTypeValue := SyntaxeFlux(value)
+	for _, existing := range AllowedSyntaxeFluxEnumValues {
 		if existing == enumTypeValue {
 			*v = enumTypeValue
 			return nil
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid ErrorLevel", value)
+	return fmt.Errorf("%+v is not a valid SyntaxeFlux", value)
 }
 
-// NewErrorLevelFromValue returns a pointer to a valid ErrorLevel
+// NewSyntaxeFluxFromValue returns a pointer to a valid SyntaxeFlux
 // for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewErrorLevelFromValue(v string) (*ErrorLevel, error) {
-	ev := ErrorLevel(v)
+func NewSyntaxeFluxFromValue(v string) (*SyntaxeFlux, error) {
+	ev := SyntaxeFlux(v)
 	if ev.IsValid() {
 		return &ev, nil
 	} else {
-		return nil, fmt.Errorf("invalid value '%v' for ErrorLevel: valid values are %v", v, AllowedErrorLevelEnumValues)
+		return nil, fmt.Errorf("invalid value '%v' for SyntaxeFlux: valid values are %v", v, AllowedSyntaxeFluxEnumValues)
 	}
 }
 
 // IsValid return true if the value is valid for the enum, false otherwise
-func (v ErrorLevel) IsValid() bool {
-	for _, existing := range AllowedErrorLevelEnumValues {
+func (v SyntaxeFlux) IsValid() bool {
+	for _, existing := range AllowedSyntaxeFluxEnumValues {
 		if existing == v {
 			return true
 		}
@@ -68,43 +74,43 @@ func (v ErrorLevel) IsValid() bool {
 	return false
 }
 
-// Ptr returns reference to ErrorLevel value
-func (v ErrorLevel) Ptr() *ErrorLevel {
+// Ptr returns reference to SyntaxeFlux value
+func (v SyntaxeFlux) Ptr() *SyntaxeFlux {
 	return &v
 }
 
-type NullableErrorLevel struct {
-	value *ErrorLevel
+type NullableSyntaxeFlux struct {
+	value *SyntaxeFlux
 	isSet bool
 }
 
-func (v NullableErrorLevel) Get() *ErrorLevel {
+func (v NullableSyntaxeFlux) Get() *SyntaxeFlux {
 	return v.value
 }
 
-func (v *NullableErrorLevel) Set(val *ErrorLevel) {
+func (v *NullableSyntaxeFlux) Set(val *SyntaxeFlux) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableErrorLevel) IsSet() bool {
+func (v NullableSyntaxeFlux) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableErrorLevel) Unset() {
+func (v *NullableSyntaxeFlux) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableErrorLevel(val *ErrorLevel) *NullableErrorLevel {
-	return &NullableErrorLevel{value: val, isSet: true}
+func NewNullableSyntaxeFlux(val *SyntaxeFlux) *NullableSyntaxeFlux {
+	return &NullableSyntaxeFlux{value: val, isSet: true}
 }
 
-func (v NullableErrorLevel) MarshalJSON() ([]byte, error) {
+func (v NullableSyntaxeFlux) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableErrorLevel) UnmarshalJSON(src []byte) error {
+func (v *NullableSyntaxeFlux) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
