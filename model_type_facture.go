@@ -20,22 +20,22 @@ type TypeFacture string
 
 // List of TypeFacture
 const (
-	_380 TypeFacture = "380"
-	_389 TypeFacture = "389"
-	_393 TypeFacture = "393"
-	_501 TypeFacture = "501"
-	_386 TypeFacture = "386"
-	_500 TypeFacture = "500"
-	_384 TypeFacture = "384"
-	_471 TypeFacture = "471"
-	_472 TypeFacture = "472"
-	_473 TypeFacture = "473"
-	_381 TypeFacture = "381"
-	_261 TypeFacture = "261"
-	_262 TypeFacture = "262"
-	_396 TypeFacture = "396"
-	_502 TypeFacture = "502"
-	_503 TypeFacture = "503"
+	FACTURE TypeFacture = "380"
+	FACTURE_AUTOFACTUREE TypeFacture = "389"
+	FACTURE_AFFACTUREE TypeFacture = "393"
+	FACTURE_AUTOFACTUREE_AFFACTUREE TypeFacture = "501"
+	FACTURE_ACOMPTE TypeFacture = "386"
+	FACTURE_ACOMPTE_AUTOFACTUREE TypeFacture = "500"
+	FACTURE_RECTIFICATIVE TypeFacture = "384"
+	FACTURE_RECTIFICATIVE_AUTOFACTUREE TypeFacture = "471"
+	FACTURE_RECTIFICATIVE_AFFACTUREE TypeFacture = "472"
+	FACTURE_RECTIFICATIVE_AUTOFACTUREE_AFFACTUREE TypeFacture = "473"
+	AVOIR TypeFacture = "381"
+	AVOIR_AUTOFACTURE TypeFacture = "261"
+	AVOIR_REMISE_GLOBALE TypeFacture = "262"
+	AVOIR_AFFACTURE TypeFacture = "396"
+	AVOIR_AUTOFACTURE_AFFACTURE TypeFacture = "502"
+	AVOIR_ACOMPTE TypeFacture = "503"
 )
 
 // All allowed values of TypeFacture enum
