@@ -21,7 +21,7 @@ var _ MappedNullable = &Destinataire{}
 
 // Destinataire Informations sur le destinataire de la facture (le client).
 type Destinataire struct {
-	AdresseElectronique AdresseElectronique `json:"adresseElectronique"`
+	AdresseElectronique NullableAdresseElectronique `json:"adresseElectronique"`
 	CodeServiceExecutant NullableString `json:"codeServiceExecutant,omitempty"`
 	Nom NullableString `json:"nom,omitempty"`
 	Siren NullableString `json:"siren,omitempty"`
@@ -35,7 +35,7 @@ type _Destinataire Destinataire
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDestinataire(adresseElectronique AdresseElectronique) *Destinataire {
+func NewDestinataire(adresseElectronique NullableAdresseElectronique) *Destinataire {
 	this := Destinataire{}
 	this.AdresseElectronique = adresseElectronique
 	return &this
@@ -50,27 +50,29 @@ func NewDestinataireWithDefaults() *Destinataire {
 }
 
 // GetAdresseElectronique returns the AdresseElectronique field value
+// If the value is explicit nil, the zero value for AdresseElectronique will be returned
 func (o *Destinataire) GetAdresseElectronique() AdresseElectronique {
-	if o == nil {
+	if o == nil || o.AdresseElectronique.Get() == nil {
 		var ret AdresseElectronique
 		return ret
 	}
 
-	return o.AdresseElectronique
+	return *o.AdresseElectronique.Get()
 }
 
 // GetAdresseElectroniqueOk returns a tuple with the AdresseElectronique field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Destinataire) GetAdresseElectroniqueOk() (*AdresseElectronique, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.AdresseElectronique, true
+	return o.AdresseElectronique.Get(), o.AdresseElectronique.IsSet()
 }
 
 // SetAdresseElectronique sets field value
 func (o *Destinataire) SetAdresseElectronique(v AdresseElectronique) {
-	o.AdresseElectronique = v
+	o.AdresseElectronique.Set(&v)
 }
 
 // GetCodeServiceExecutant returns the CodeServiceExecutant field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -293,7 +295,7 @@ func (o Destinataire) MarshalJSON() ([]byte, error) {
 
 func (o Destinataire) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["adresseElectronique"] = o.AdresseElectronique
+	toSerialize["adresseElectronique"] = o.AdresseElectronique.Get()
 	if o.CodeServiceExecutant.IsSet() {
 		toSerialize["codeServiceExecutant"] = o.CodeServiceExecutant.Get()
 	}

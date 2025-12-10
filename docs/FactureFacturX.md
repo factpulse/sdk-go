@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **Commentaire** | Pointer to **NullableString** |  | [optional] 
 **IdUtilisateurCourant** | Pointer to **NullableInt32** |  | [optional] 
 **PiecesJointesComplementaires** | Pointer to [**[]PieceJointeComplementaire**](PieceJointeComplementaire.md) |  | [optional] 
+**Beneficiaire** | Pointer to [**NullableBeneficiaire**](Beneficiaire.md) |  | [optional] 
 
 ## Methods
 
@@ -404,6 +405,41 @@ HasPiecesJointesComplementaires returns a boolean if a field has been set.
 `func (o *FactureFacturX) UnsetPiecesJointesComplementaires()`
 
 UnsetPiecesJointesComplementaires ensures that no value is present for PiecesJointesComplementaires, not even an explicit nil
+### GetBeneficiaire
+
+`func (o *FactureFacturX) GetBeneficiaire() Beneficiaire`
+
+GetBeneficiaire returns the Beneficiaire field if non-nil, zero value otherwise.
+
+### GetBeneficiaireOk
+
+`func (o *FactureFacturX) GetBeneficiaireOk() (*Beneficiaire, bool)`
+
+GetBeneficiaireOk returns a tuple with the Beneficiaire field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBeneficiaire
+
+`func (o *FactureFacturX) SetBeneficiaire(v Beneficiaire)`
+
+SetBeneficiaire sets Beneficiaire field to given value.
+
+### HasBeneficiaire
+
+`func (o *FactureFacturX) HasBeneficiaire() bool`
+
+HasBeneficiaire returns a boolean if a field has been set.
+
+### SetBeneficiaireNil
+
+`func (o *FactureFacturX) SetBeneficiaireNil(b bool)`
+
+ SetBeneficiaireNil sets the value for Beneficiaire to be an explicit nil
+
+### UnsetBeneficiaire
+`func (o *FactureFacturX) UnsetBeneficiaire()`
+
+UnsetBeneficiaire ensures that no value is present for Beneficiaire, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -15,19 +15,47 @@ import (
 	"fmt"
 )
 
-// TypeFacture Type de document (facture ou avoir).
+// TypeFacture Type de document selon BR-FR-04 (codes UNTDID 1001).  Cette énumération contient tous les types de factures autorisés par la réforme française de la facturation électronique (BR-FR-04).  Les valeurs correspondent aux codes UNTDID 1001 utilisés dans le XML Factur-X.  Catégories: - Factures simples: 380, 389, 393, 501 - Factures d'acompte: 386, 500 - Factures rectificatives: 384, 471, 472, 473 - Avoirs: 261, 262, 381, 396, 502, 503
 type TypeFacture string
 
 // List of TypeFacture
 const (
-	FACTURE TypeFacture = "FACTURE"
-	AVOIR TypeFacture = "AVOIR"
+	_380 TypeFacture = "380"
+	_389 TypeFacture = "389"
+	_393 TypeFacture = "393"
+	_501 TypeFacture = "501"
+	_386 TypeFacture = "386"
+	_500 TypeFacture = "500"
+	_384 TypeFacture = "384"
+	_471 TypeFacture = "471"
+	_472 TypeFacture = "472"
+	_473 TypeFacture = "473"
+	_381 TypeFacture = "381"
+	_261 TypeFacture = "261"
+	_262 TypeFacture = "262"
+	_396 TypeFacture = "396"
+	_502 TypeFacture = "502"
+	_503 TypeFacture = "503"
 )
 
 // All allowed values of TypeFacture enum
 var AllowedTypeFactureEnumValues = []TypeFacture{
-	"FACTURE",
-	"AVOIR",
+	"380",
+	"389",
+	"393",
+	"501",
+	"386",
+	"500",
+	"384",
+	"471",
+	"472",
+	"473",
+	"381",
+	"261",
+	"262",
+	"396",
+	"502",
+	"503",
 }
 
 func (v *TypeFacture) UnmarshalJSON(src []byte) error {

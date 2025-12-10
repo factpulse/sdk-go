@@ -21,7 +21,7 @@ var _ MappedNullable = &Fournisseur{}
 
 // Fournisseur Informations sur le fournisseur qui émet la facture.
 type Fournisseur struct {
-	AdresseElectronique AdresseElectronique `json:"adresseElectronique"`
+	AdresseElectronique NullableAdresseElectronique `json:"adresseElectronique"`
 	IdFournisseur int32 `json:"idFournisseur"`
 	CodeCoordonneesBancairesFournisseur NullableInt32 `json:"codeCoordonneesBancairesFournisseur,omitempty"`
 	IdServiceFournisseur NullableInt32 `json:"idServiceFournisseur,omitempty"`
@@ -39,7 +39,7 @@ type _Fournisseur Fournisseur
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFournisseur(adresseElectronique AdresseElectronique, idFournisseur int32) *Fournisseur {
+func NewFournisseur(adresseElectronique NullableAdresseElectronique, idFournisseur int32) *Fournisseur {
 	this := Fournisseur{}
 	this.AdresseElectronique = adresseElectronique
 	this.IdFournisseur = idFournisseur
@@ -55,27 +55,29 @@ func NewFournisseurWithDefaults() *Fournisseur {
 }
 
 // GetAdresseElectronique returns the AdresseElectronique field value
+// If the value is explicit nil, the zero value for AdresseElectronique will be returned
 func (o *Fournisseur) GetAdresseElectronique() AdresseElectronique {
-	if o == nil {
+	if o == nil || o.AdresseElectronique.Get() == nil {
 		var ret AdresseElectronique
 		return ret
 	}
 
-	return o.AdresseElectronique
+	return *o.AdresseElectronique.Get()
 }
 
 // GetAdresseElectroniqueOk returns a tuple with the AdresseElectronique field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Fournisseur) GetAdresseElectroniqueOk() (*AdresseElectronique, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.AdresseElectronique, true
+	return o.AdresseElectronique.Get(), o.AdresseElectronique.IsSet()
 }
 
 // SetAdresseElectronique sets field value
 func (o *Fournisseur) SetAdresseElectronique(v AdresseElectronique) {
-	o.AdresseElectronique = v
+	o.AdresseElectronique.Set(&v)
 }
 
 // GetIdFournisseur returns the IdFournisseur field value
@@ -448,7 +450,7 @@ func (o Fournisseur) MarshalJSON() ([]byte, error) {
 
 func (o Fournisseur) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["adresseElectronique"] = o.AdresseElectronique
+	toSerialize["adresseElectronique"] = o.AdresseElectronique.Get()
 	toSerialize["idFournisseur"] = o.IdFournisseur
 	if o.CodeCoordonneesBancairesFournisseur.IsSet() {
 		toSerialize["codeCoordonneesBancairesFournisseur"] = o.CodeCoordonneesBancairesFournisseur.Get()

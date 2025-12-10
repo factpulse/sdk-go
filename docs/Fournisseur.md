@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AdresseElectronique** | [**AdresseElectronique**](AdresseElectronique.md) |  | 
+**AdresseElectronique** | [**NullableAdresseElectronique**](AdresseElectronique.md) |  | 
 **IdFournisseur** | **int32** |  | 
 **CodeCoordonneesBancairesFournisseur** | Pointer to **NullableInt32** |  | [optional] 
 **IdServiceFournisseur** | Pointer to **NullableInt32** |  | [optional] 
@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewFournisseur
 
-`func NewFournisseur(adresseElectronique AdresseElectronique, idFournisseur int32, ) *Fournisseur`
+`func NewFournisseur(adresseElectronique NullableAdresseElectronique, idFournisseur int32, ) *Fournisseur`
 
 NewFournisseur instantiates a new Fournisseur object
 This constructor will assign default values to properties that have it defined,
@@ -54,6 +54,16 @@ and a boolean to check if the value has been set.
 SetAdresseElectronique sets AdresseElectronique field to given value.
 
 
+### SetAdresseElectroniqueNil
+
+`func (o *Fournisseur) SetAdresseElectroniqueNil(b bool)`
+
+ SetAdresseElectroniqueNil sets the value for AdresseElectronique to be an explicit nil
+
+### UnsetAdresseElectronique
+`func (o *Fournisseur) UnsetAdresseElectronique()`
+
+UnsetAdresseElectronique ensures that no value is present for AdresseElectronique, not even an explicit nil
 ### GetIdFournisseur
 
 `func (o *Fournisseur) GetIdFournisseur() int32`

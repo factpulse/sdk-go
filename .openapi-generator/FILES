@@ -19,6 +19,7 @@ docs/AFNORPDPPAFlowServiceAPI.md
 docs/APIError.md
 docs/AdresseElectronique.md
 docs/AdressePostale.md
+docs/Beneficiaire.md
 docs/BoundingBoxSchema.md
 docs/CadreDeFacturation.md
 docs/CategorieTVA.md
@@ -136,6 +137,7 @@ go.sum
 model_adresse_electronique.go
 model_adresse_postale.go
 model_api_error.go
+model_beneficiaire.go
 model_bounding_box_schema.go
 model_cadre_de_facturation.go
 model_categorie_tva.go

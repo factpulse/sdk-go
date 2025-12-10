@@ -184,6 +184,35 @@ func Destinataire(nom, siret, adresseLigne1, codePostal, ville string, opts *Des
     return result
 }
 
+// BeneficiaireOptions contient les options pour créer un bénéficiaire (factor)
+type BeneficiaireOptions struct {
+    Siret, Siren, Iban, Bic string
+}
+
+// Beneficiaire crée un bénéficiaire (factor) pour l'affacturage.
+//
+// Le bénéficiaire (BG-10 / PayeeTradeParty) est utilisé lorsque le paiement
+// doit être effectué à un tiers différent du fournisseur, typiquement un
+// factor (société d'affacturage).
+//
+// Pour les factures affacturées, il faut aussi:
+// - Utiliser un type de document affacturé (393, 396, 501, 502, 472, 473)
+// - Ajouter une note ACC avec la mention de subrogation
+// - L'IBAN du bénéficiaire sera utilisé pour le paiement
+func Beneficiaire(nom string, opts *BeneficiaireOptions) map[string]interface{} {
+    if opts == nil { opts = &BeneficiaireOptions{} }
+    // Auto-calcul SIREN depuis SIRET
+    siren := opts.Siren
+    if siren == "" && len(opts.Siret) == 14 { siren = opts.Siret[:9] }
+
+    result := map[string]interface{}{"nom": nom}
+    if opts.Siret != "" { result["siret"] = opts.Siret }
+    if siren != "" { result["siren"] = siren }
+    if opts.Iban != "" { result["iban"] = opts.Iban }
+    if opts.Bic != "" { result["bic"] = opts.Bic }
+    return result
+}
+
 type Client struct {
     Email, Password, APIURL, ClientUID string
     PollingInterval, PollingTimeout int64

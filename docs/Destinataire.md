@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AdresseElectronique** | [**AdresseElectronique**](AdresseElectronique.md) |  | 
+**AdresseElectronique** | [**NullableAdresseElectronique**](AdresseElectronique.md) |  | 
 **CodeServiceExecutant** | Pointer to **NullableString** |  | [optional] 
 **Nom** | Pointer to **NullableString** |  | [optional] 
 **Siren** | Pointer to **NullableString** |  | [optional] 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewDestinataire
 
-`func NewDestinataire(adresseElectronique AdresseElectronique, ) *Destinataire`
+`func NewDestinataire(adresseElectronique NullableAdresseElectronique, ) *Destinataire`
 
 NewDestinataire instantiates a new Destinataire object
 This constructor will assign default values to properties that have it defined,
@@ -50,6 +50,16 @@ and a boolean to check if the value has been set.
 SetAdresseElectronique sets AdresseElectronique field to given value.
 
 
+### SetAdresseElectroniqueNil
+
+`func (o *Destinataire) SetAdresseElectroniqueNil(b bool)`
+
+ SetAdresseElectroniqueNil sets the value for AdresseElectronique to be an explicit nil
+
+### UnsetAdresseElectronique
+`func (o *Destinataire) UnsetAdresseElectronique()`
+
+UnsetAdresseElectronique ensures that no value is present for AdresseElectronique, not even an explicit nil
 ### GetCodeServiceExecutant
 
 `func (o *Destinataire) GetCodeServiceExecutant() string`

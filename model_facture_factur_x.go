@@ -36,6 +36,7 @@ type FactureFacturX struct {
 	Commentaire NullableString `json:"commentaire,omitempty"`
 	IdUtilisateurCourant NullableInt32 `json:"idUtilisateurCourant,omitempty"`
 	PiecesJointesComplementaires []PieceJointeComplementaire `json:"piecesJointesComplementaires,omitempty"`
+	Beneficiaire NullableBeneficiaire `json:"beneficiaire,omitempty"`
 }
 
 type _FactureFacturX FactureFacturX
@@ -502,6 +503,48 @@ func (o *FactureFacturX) SetPiecesJointesComplementaires(v []PieceJointeCompleme
 	o.PiecesJointesComplementaires = v
 }
 
+// GetBeneficiaire returns the Beneficiaire field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FactureFacturX) GetBeneficiaire() Beneficiaire {
+	if o == nil || IsNil(o.Beneficiaire.Get()) {
+		var ret Beneficiaire
+		return ret
+	}
+	return *o.Beneficiaire.Get()
+}
+
+// GetBeneficiaireOk returns a tuple with the Beneficiaire field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FactureFacturX) GetBeneficiaireOk() (*Beneficiaire, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Beneficiaire.Get(), o.Beneficiaire.IsSet()
+}
+
+// HasBeneficiaire returns a boolean if a field has been set.
+func (o *FactureFacturX) HasBeneficiaire() bool {
+	if o != nil && o.Beneficiaire.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetBeneficiaire gets a reference to the given NullableBeneficiaire and assigns it to the Beneficiaire field.
+func (o *FactureFacturX) SetBeneficiaire(v Beneficiaire) {
+	o.Beneficiaire.Set(&v)
+}
+// SetBeneficiaireNil sets the value for Beneficiaire to be an explicit nil
+func (o *FactureFacturX) SetBeneficiaireNil() {
+	o.Beneficiaire.Set(nil)
+}
+
+// UnsetBeneficiaire ensures that no value is present for Beneficiaire, not even an explicit nil
+func (o *FactureFacturX) UnsetBeneficiaire() {
+	o.Beneficiaire.Unset()
+}
+
 func (o FactureFacturX) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -540,6 +583,9 @@ func (o FactureFacturX) ToMap() (map[string]interface{}, error) {
 	}
 	if o.PiecesJointesComplementaires != nil {
 		toSerialize["piecesJointesComplementaires"] = o.PiecesJointesComplementaires
+	}
+	if o.Beneficiaire.IsSet() {
+		toSerialize["beneficiaire"] = o.Beneficiaire.Get()
 	}
 	return toSerialize, nil
 }
