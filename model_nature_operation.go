@@ -21,64 +21,36 @@ type NatureOperation string
 // List of NatureOperation
 const (
 	B1 NatureOperation = "B1"
-	B12 NatureOperation = "B1"
 	S1 NatureOperation = "S1"
-	S12 NatureOperation = "S1"
 	M1 NatureOperation = "M1"
-	M12 NatureOperation = "M1"
 	B2 NatureOperation = "B2"
-	B22 NatureOperation = "B2"
 	S2 NatureOperation = "S2"
-	S22 NatureOperation = "S2"
 	M2 NatureOperation = "M2"
-	M22 NatureOperation = "M2"
 	B4 NatureOperation = "B4"
-	B42 NatureOperation = "B4"
 	S4 NatureOperation = "S4"
-	S42 NatureOperation = "S4"
 	M4 NatureOperation = "M4"
-	M42 NatureOperation = "M4"
 	S3 NatureOperation = "S3"
-	S32 NatureOperation = "S3"
 	S5 NatureOperation = "S5"
-	S52 NatureOperation = "S5"
 	S6 NatureOperation = "S6"
-	S62 NatureOperation = "S6"
 	B7 NatureOperation = "B7"
-	B72 NatureOperation = "B7"
 	S7 NatureOperation = "S7"
-	S72 NatureOperation = "S7"
 )
 
 // All allowed values of NatureOperation enum
 var AllowedNatureOperationEnumValues = []NatureOperation{
 	"B1",
-	"B1",
-	"S1",
 	"S1",
 	"M1",
-	"M1",
-	"B2",
 	"B2",
 	"S2",
-	"S2",
-	"M2",
 	"M2",
 	"B4",
-	"B4",
-	"S4",
 	"S4",
 	"M4",
-	"M4",
-	"S3",
 	"S3",
 	"S5",
-	"S5",
-	"S6",
 	"S6",
 	"B7",
-	"B7",
-	"S7",
 	"S7",
 }
 
