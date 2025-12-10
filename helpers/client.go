@@ -321,7 +321,41 @@ func (c *Client) GenererFacturxWithOptions(factureData interface{}, pdfPath, pro
 
     respBody, _ := io.ReadAll(resp.Body)
     if resp.StatusCode >= 400 {
-        return nil, NewFactPulseValidationError(fmt.Sprintf("Erreur API (%d): %s", resp.StatusCode, string(respBody)), nil)
+        // Extraire les détails d'erreur du corps de la réponse
+        errorMsg := fmt.Sprintf("Erreur API (%d)", resp.StatusCode)
+        var errors []ValidationErrorDetail
+
+        var errorData map[string]interface{}
+        if err := json.Unmarshal(respBody, &errorData); err == nil {
+            // Format FastAPI/Pydantic: {"detail": [{"loc": [...], "msg": "...", "type": "..."}]}
+            if detail, ok := errorData["detail"]; ok {
+                if detailList, ok := detail.([]interface{}); ok {
+                    errorMsg = "Erreur de validation"
+                    for _, item := range detailList {
+                        if errItem, ok := item.(map[string]interface{}); ok {
+                            loc := ""
+                            if locList, ok := errItem["loc"].([]interface{}); ok {
+                                locParts := make([]string, len(locList))
+                                for i, l := range locList { locParts[i] = fmt.Sprintf("%v", l) }
+                                loc = strings.Join(locParts, " -> ")
+                            }
+                            reason := ""
+                            if msg, ok := errItem["msg"].(string); ok { reason = msg }
+                            code := ""
+                            if t, ok := errItem["type"].(string); ok { code = t }
+                            errors = append(errors, ValidationErrorDetail{Level: "ERROR", Item: loc, Reason: reason, Source: "validation", Code: code})
+                        }
+                    }
+                } else if detailStr, ok := detail.(string); ok {
+                    errorMsg = detailStr
+                }
+            } else if errMsg, ok := errorData["errorMessage"].(string); ok {
+                errorMsg = errMsg
+            }
+        }
+
+        log.Printf("Erreur API %d: %s", resp.StatusCode, string(respBody))
+        return nil, NewFactPulseValidationError(errorMsg, errors)
     }
 
     var data map[string]interface{}
