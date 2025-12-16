@@ -682,9 +682,14 @@ func (c *Client) ConsulterFactureChorus(identifiantFactureCpp int) (map[string]i
 // Validation
 // =========================================================================
 
+// ValiderPdfFacturxOptions options pour ValiderPdfFacturx
+type ValiderPdfFacturxOptions struct {
+    Profil     string // Profil Factur-X (MINIMUM, BASIC, EN16931, EXTENDED). Si vide, auto-détecté.
+    UseVerapdf bool   // Active la validation stricte PDF/A avec VeraPDF (défaut: false)
+}
+
 // ValiderPdfFacturx valide un PDF Factur-X
-func (c *Client) ValiderPdfFacturx(pdfPath, profil string) (map[string]interface{}, error) {
-    if profil == "" { profil = "EN16931" }
+func (c *Client) ValiderPdfFacturx(pdfPath string, opts *ValiderPdfFacturxOptions) (map[string]interface{}, error) {
     if err := c.EnsureAuthenticated(false); err != nil { return nil, err }
 
     pdfContent, err := os.ReadFile(pdfPath)
@@ -694,7 +699,14 @@ func (c *Client) ValiderPdfFacturx(pdfPath, profil string) (map[string]interface
     writer := multipart.NewWriter(&body)
     part, _ := writer.CreateFormFile("fichier_pdf", filepath.Base(pdfPath))
     part.Write(pdfContent)
-    writer.WriteField("profil", profil)
+    if opts != nil && opts.Profil != "" {
+        writer.WriteField("profil", opts.Profil)
+    }
+    useVerapdf := "false"
+    if opts != nil && opts.UseVerapdf {
+        useVerapdf = "true"
+    }
+    writer.WriteField("use_verapdf", useVerapdf)
     writer.Close()
 
     req, _ := http.NewRequest("POST", fmt.Sprintf("%s/api/v1/traitement/valider-pdf-facturx", strings.TrimRight(c.APIURL, "/")), &body)

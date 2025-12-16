@@ -15,16 +15,16 @@ import (
 	"fmt"
 )
 
-// TypeDocument Types de documents commerciaux (UNTDID 1001).
+// TypeDocument Types de documents commerciaux (UNTDID 1001).  | Code | Nom | Description | |------|-----|-------------| | 380 | FACTURE | Facture commerciale | | 381 | AVOIR | Avoir | | 384 | FACTURE_RECTIFICATIVE | Facture rectificative | | 386 | ACOMPTE | Facture d'acompte | | 389 | AUTOFACTURATION | Facture auto-facturée |
 type TypeDocument string
 
 // List of TypeDocument
 const (
-	_380 TypeDocument = "380"
-	_381 TypeDocument = "381"
-	_384 TypeDocument = "384"
-	_386 TypeDocument = "386"
-	_389 TypeDocument = "389"
+	FACTURE TypeDocument = "380"
+	AVOIR TypeDocument = "381"
+	FACTURE_RECTIFICATIVE TypeDocument = "384"
+	ACOMPTE TypeDocument = "386"
+	AUTOFACTURATION TypeDocument = "389"
 )
 
 // All allowed values of TypeDocument enum

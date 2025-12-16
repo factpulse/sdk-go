@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **FlowId** | Pointer to **NullableString** |  | [optional] 
 **FormatSource** | [**FormatFacture**](FormatFacture.md) | Format source de la facture | 
 **RefFournisseur** | **string** | Numéro de facture émis par le fournisseur (BT-1) | 
-**TypeDocument** | Pointer to [**TypeDocument**](TypeDocument.md) | Type de document (BT-3) | [optional] [default to _380]
+**TypeDocument** | Pointer to [**TypeDocument**](TypeDocument.md) | Type de document (BT-3) | [optional] [default to FACTURE]
 **Fournisseur** | [**FournisseurEntrant**](FournisseurEntrant.md) | Émetteur de la facture (SellerTradeParty) | 
 **SiteFacturationNom** | **string** | Nom du destinataire / votre entreprise (BT-44) | 
 **SiteFacturationSiret** | Pointer to **NullableString** |  | [optional] 

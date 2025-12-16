@@ -62,7 +62,7 @@ func NewFactureEntrante(formatSource FormatFacture, refFournisseur string, fourn
 	this := FactureEntrante{}
 	this.FormatSource = formatSource
 	this.RefFournisseur = refFournisseur
-	var typeDocument TypeDocument = _380
+	var typeDocument TypeDocument = FACTURE
 	this.TypeDocument = &typeDocument
 	this.Fournisseur = fournisseur
 	this.SiteFacturationNom = siteFacturationNom
@@ -80,7 +80,7 @@ func NewFactureEntrante(formatSource FormatFacture, refFournisseur string, fourn
 // but it doesn't guarantee that properties required by API are set
 func NewFactureEntranteWithDefaults() *FactureEntrante {
 	this := FactureEntrante{}
-	var typeDocument TypeDocument = _380
+	var typeDocument TypeDocument = FACTURE
 	this.TypeDocument = &typeDocument
 	var devise string = "EUR"
 	this.Devise = &devise
