@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet
 
-> TaskStatus GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet(ctx, taskId).Execute()
+> AsyncTaskStatus GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet(ctx, taskId).Execute()
 
 Get status of an asynchronous verification
 
@@ -43,7 +43,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PDFXMLVerificationAPI.GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet`: TaskStatus
+	// response from `GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet`: AsyncTaskStatus
 	fmt.Fprintf(os.Stdout, "Response from `PDFXMLVerificationAPI.GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet`: %v\n", resp)
 }
 ```
@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TaskStatus**](TaskStatus.md)
+[**AsyncTaskStatus**](AsyncTaskStatus.md)
 
 ### Authorization
 
@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 
 ## GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet_0
 
-> TaskStatus GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet_0(ctx, taskId).Execute()
+> AsyncTaskStatus GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet_0(ctx, taskId).Execute()
 
 Get status of an asynchronous verification
 
@@ -113,7 +113,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PDFXMLVerificationAPI.GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet_0``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet_0`: TaskStatus
+	// response from `GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet_0`: AsyncTaskStatus
 	fmt.Fprintf(os.Stdout, "Response from `PDFXMLVerificationAPI.GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet_0`: %v\n", resp)
 }
 ```
@@ -137,7 +137,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TaskStatus**](TaskStatus.md)
+[**AsyncTaskStatus**](AsyncTaskStatus.md)
 
 ### Authorization
 

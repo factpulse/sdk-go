@@ -481,7 +481,7 @@ type ApiGetTaskStatusApiV1ProcessingTasksTaskIdStatusGetRequest struct {
 	taskId string
 }
 
-func (r ApiGetTaskStatusApiV1ProcessingTasksTaskIdStatusGetRequest) Execute() (*TaskStatus, *http.Response, error) {
+func (r ApiGetTaskStatusApiV1ProcessingTasksTaskIdStatusGetRequest) Execute() (*AsyncTaskStatus, *http.Response, error) {
 	return r.ApiService.GetTaskStatusApiV1ProcessingTasksTaskIdStatusGetExecute(r)
 }
 
@@ -522,13 +522,13 @@ func (a *InvoiceProcessingAPIService) GetTaskStatusApiV1ProcessingTasksTaskIdSta
 }
 
 // Execute executes the request
-//  @return TaskStatus
-func (a *InvoiceProcessingAPIService) GetTaskStatusApiV1ProcessingTasksTaskIdStatusGetExecute(r ApiGetTaskStatusApiV1ProcessingTasksTaskIdStatusGetRequest) (*TaskStatus, *http.Response, error) {
+//  @return AsyncTaskStatus
+func (a *InvoiceProcessingAPIService) GetTaskStatusApiV1ProcessingTasksTaskIdStatusGetExecute(r ApiGetTaskStatusApiV1ProcessingTasksTaskIdStatusGetRequest) (*AsyncTaskStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *TaskStatus
+		localVarReturnValue  *AsyncTaskStatus
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InvoiceProcessingAPIService.GetTaskStatusApiV1ProcessingTasksTaskIdStatusGet")

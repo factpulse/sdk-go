@@ -25,6 +25,7 @@ docs/APIProfile.md
 docs/AcknowledgmentStatus.md
 docs/AllowanceReasonCode.md
 docs/AmountDue.md
+docs/AsyncTaskStatus.md
 docs/BoundingBoxSchema.md
 docs/CeleryStatus.md
 docs/CertificateInfoResponse.md
@@ -114,7 +115,6 @@ docs/SubmitVatAmount.md
 docs/SupplementaryAttachment.md
 docs/Supplier.md
 docs/TaskResponse.md
-docs/TaskStatus.md
 docs/TaxableAmount.md
 docs/TotalGrossAmount.md
 docs/TotalNetAmount.md
@@ -145,6 +145,7 @@ model_allowance_reason_code.go
 model_amount_due.go
 model_api_error.go
 model_api_profile.go
+model_async_task_status.go
 model_bounding_box_schema.go
 model_celery_status.go
 model_certificate_info_response.go
@@ -230,7 +231,6 @@ model_submit_vat_amount.go
 model_supplementary_attachment.go
 model_supplier.go
 model_task_response.go
-model_task_status.go
 model_taxable_amount.go
 model_total_gross_amount.go
 model_total_net_amount.go

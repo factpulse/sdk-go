@@ -160,7 +160,7 @@ Name | Type | Description  | Notes
 
 ## GetTaskStatusApiV1ProcessingTasksTaskIdStatusGet
 
-> TaskStatus GetTaskStatusApiV1ProcessingTasksTaskIdStatusGet(ctx, taskId).Execute()
+> AsyncTaskStatus GetTaskStatusApiV1ProcessingTasksTaskIdStatusGet(ctx, taskId).Execute()
 
 Get task generation status
 
@@ -188,7 +188,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `InvoiceProcessingAPI.GetTaskStatusApiV1ProcessingTasksTaskIdStatusGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetTaskStatusApiV1ProcessingTasksTaskIdStatusGet`: TaskStatus
+	// response from `GetTaskStatusApiV1ProcessingTasksTaskIdStatusGet`: AsyncTaskStatus
 	fmt.Fprintf(os.Stdout, "Response from `InvoiceProcessingAPI.GetTaskStatusApiV1ProcessingTasksTaskIdStatusGet`: %v\n", resp)
 }
 ```
@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TaskStatus**](TaskStatus.md)
+[**AsyncTaskStatus**](AsyncTaskStatus.md)
 
 ### Authorization
 

@@ -1,4 +1,4 @@
-# TaskStatus
+# AsyncTaskStatus
 
 ## Properties
 
@@ -10,96 +10,96 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewTaskStatus
+### NewAsyncTaskStatus
 
-`func NewTaskStatus(taskId string, status CeleryStatus, ) *TaskStatus`
+`func NewAsyncTaskStatus(taskId string, status CeleryStatus, ) *AsyncTaskStatus`
 
-NewTaskStatus instantiates a new TaskStatus object
+NewAsyncTaskStatus instantiates a new AsyncTaskStatus object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewTaskStatusWithDefaults
+### NewAsyncTaskStatusWithDefaults
 
-`func NewTaskStatusWithDefaults() *TaskStatus`
+`func NewAsyncTaskStatusWithDefaults() *AsyncTaskStatus`
 
-NewTaskStatusWithDefaults instantiates a new TaskStatus object
+NewAsyncTaskStatusWithDefaults instantiates a new AsyncTaskStatus object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetTaskId
 
-`func (o *TaskStatus) GetTaskId() string`
+`func (o *AsyncTaskStatus) GetTaskId() string`
 
 GetTaskId returns the TaskId field if non-nil, zero value otherwise.
 
 ### GetTaskIdOk
 
-`func (o *TaskStatus) GetTaskIdOk() (*string, bool)`
+`func (o *AsyncTaskStatus) GetTaskIdOk() (*string, bool)`
 
 GetTaskIdOk returns a tuple with the TaskId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTaskId
 
-`func (o *TaskStatus) SetTaskId(v string)`
+`func (o *AsyncTaskStatus) SetTaskId(v string)`
 
 SetTaskId sets TaskId field to given value.
 
 
 ### GetStatus
 
-`func (o *TaskStatus) GetStatus() CeleryStatus`
+`func (o *AsyncTaskStatus) GetStatus() CeleryStatus`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *TaskStatus) GetStatusOk() (*CeleryStatus, bool)`
+`func (o *AsyncTaskStatus) GetStatusOk() (*CeleryStatus, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *TaskStatus) SetStatus(v CeleryStatus)`
+`func (o *AsyncTaskStatus) SetStatus(v CeleryStatus)`
 
 SetStatus sets Status field to given value.
 
 
 ### GetResult
 
-`func (o *TaskStatus) GetResult() map[string]interface{}`
+`func (o *AsyncTaskStatus) GetResult() map[string]interface{}`
 
 GetResult returns the Result field if non-nil, zero value otherwise.
 
 ### GetResultOk
 
-`func (o *TaskStatus) GetResultOk() (*map[string]interface{}, bool)`
+`func (o *AsyncTaskStatus) GetResultOk() (*map[string]interface{}, bool)`
 
 GetResultOk returns a tuple with the Result field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResult
 
-`func (o *TaskStatus) SetResult(v map[string]interface{})`
+`func (o *AsyncTaskStatus) SetResult(v map[string]interface{})`
 
 SetResult sets Result field to given value.
 
 ### HasResult
 
-`func (o *TaskStatus) HasResult() bool`
+`func (o *AsyncTaskStatus) HasResult() bool`
 
 HasResult returns a boolean if a field has been set.
 
 ### SetResultNil
 
-`func (o *TaskStatus) SetResultNil(b bool)`
+`func (o *AsyncTaskStatus) SetResultNil(b bool)`
 
  SetResultNil sets the value for Result to be an explicit nil
 
 ### UnsetResult
-`func (o *TaskStatus) UnsetResult()`
+`func (o *AsyncTaskStatus) UnsetResult()`
 
 UnsetResult ensures that no value is present for Result, not even an explicit nil
 

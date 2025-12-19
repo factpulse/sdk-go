@@ -16,11 +16,11 @@ import (
 	"fmt"
 )
 
-// checks if the TaskStatus type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &TaskStatus{}
+// checks if the AsyncTaskStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AsyncTaskStatus{}
 
-// TaskStatus Complete description of an async task status.  The `status` field indicates the Celery state of the task. When `status=\"SUCCESS\"`, check `result.status` for the business result (\"SUCCESS\" or \"ERROR\").
-type TaskStatus struct {
+// AsyncTaskStatus Complete description of an async task status.  The `status` field indicates the Celery state of the task. When `status=\"SUCCESS\"`, check `result.status` for the business result (\"SUCCESS\" or \"ERROR\").
+type AsyncTaskStatus struct {
 	// Unique task identifier
 	TaskId string `json:"taskId"`
 	// Celery task status (PENDING, STARTED, SUCCESS, FAILURE, RETRY)
@@ -28,29 +28,29 @@ type TaskStatus struct {
 	Result map[string]interface{} `json:"result,omitempty"`
 }
 
-type _TaskStatus TaskStatus
+type _AsyncTaskStatus AsyncTaskStatus
 
-// NewTaskStatus instantiates a new TaskStatus object
+// NewAsyncTaskStatus instantiates a new AsyncTaskStatus object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTaskStatus(taskId string, status CeleryStatus) *TaskStatus {
-	this := TaskStatus{}
+func NewAsyncTaskStatus(taskId string, status CeleryStatus) *AsyncTaskStatus {
+	this := AsyncTaskStatus{}
 	this.TaskId = taskId
 	this.Status = status
 	return &this
 }
 
-// NewTaskStatusWithDefaults instantiates a new TaskStatus object
+// NewAsyncTaskStatusWithDefaults instantiates a new AsyncTaskStatus object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewTaskStatusWithDefaults() *TaskStatus {
-	this := TaskStatus{}
+func NewAsyncTaskStatusWithDefaults() *AsyncTaskStatus {
+	this := AsyncTaskStatus{}
 	return &this
 }
 
 // GetTaskId returns the TaskId field value
-func (o *TaskStatus) GetTaskId() string {
+func (o *AsyncTaskStatus) GetTaskId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -61,7 +61,7 @@ func (o *TaskStatus) GetTaskId() string {
 
 // GetTaskIdOk returns a tuple with the TaskId field value
 // and a boolean to check if the value has been set.
-func (o *TaskStatus) GetTaskIdOk() (*string, bool) {
+func (o *AsyncTaskStatus) GetTaskIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,12 +69,12 @@ func (o *TaskStatus) GetTaskIdOk() (*string, bool) {
 }
 
 // SetTaskId sets field value
-func (o *TaskStatus) SetTaskId(v string) {
+func (o *AsyncTaskStatus) SetTaskId(v string) {
 	o.TaskId = v
 }
 
 // GetStatus returns the Status field value
-func (o *TaskStatus) GetStatus() CeleryStatus {
+func (o *AsyncTaskStatus) GetStatus() CeleryStatus {
 	if o == nil {
 		var ret CeleryStatus
 		return ret
@@ -85,7 +85,7 @@ func (o *TaskStatus) GetStatus() CeleryStatus {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *TaskStatus) GetStatusOk() (*CeleryStatus, bool) {
+func (o *AsyncTaskStatus) GetStatusOk() (*CeleryStatus, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,12 +93,12 @@ func (o *TaskStatus) GetStatusOk() (*CeleryStatus, bool) {
 }
 
 // SetStatus sets field value
-func (o *TaskStatus) SetStatus(v CeleryStatus) {
+func (o *AsyncTaskStatus) SetStatus(v CeleryStatus) {
 	o.Status = v
 }
 
 // GetResult returns the Result field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *TaskStatus) GetResult() map[string]interface{} {
+func (o *AsyncTaskStatus) GetResult() map[string]interface{} {
 	if o == nil {
 		var ret map[string]interface{}
 		return ret
@@ -109,7 +109,7 @@ func (o *TaskStatus) GetResult() map[string]interface{} {
 // GetResultOk returns a tuple with the Result field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *TaskStatus) GetResultOk() (map[string]interface{}, bool) {
+func (o *AsyncTaskStatus) GetResultOk() (map[string]interface{}, bool) {
 	if o == nil || IsNil(o.Result) {
 		return map[string]interface{}{}, false
 	}
@@ -117,7 +117,7 @@ func (o *TaskStatus) GetResultOk() (map[string]interface{}, bool) {
 }
 
 // HasResult returns a boolean if a field has been set.
-func (o *TaskStatus) HasResult() bool {
+func (o *AsyncTaskStatus) HasResult() bool {
 	if o != nil && !IsNil(o.Result) {
 		return true
 	}
@@ -126,11 +126,11 @@ func (o *TaskStatus) HasResult() bool {
 }
 
 // SetResult gets a reference to the given map[string]interface{} and assigns it to the Result field.
-func (o *TaskStatus) SetResult(v map[string]interface{}) {
+func (o *AsyncTaskStatus) SetResult(v map[string]interface{}) {
 	o.Result = v
 }
 
-func (o TaskStatus) MarshalJSON() ([]byte, error) {
+func (o AsyncTaskStatus) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -138,7 +138,7 @@ func (o TaskStatus) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TaskStatus) ToMap() (map[string]interface{}, error) {
+func (o AsyncTaskStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["taskId"] = o.TaskId
 	toSerialize["status"] = o.Status
@@ -148,7 +148,7 @@ func (o TaskStatus) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *TaskStatus) UnmarshalJSON(data []byte) (err error) {
+func (o *AsyncTaskStatus) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -171,53 +171,53 @@ func (o *TaskStatus) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varTaskStatus := _TaskStatus{}
+	varAsyncTaskStatus := _AsyncTaskStatus{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTaskStatus)
+	err = decoder.Decode(&varAsyncTaskStatus)
 
 	if err != nil {
 		return err
 	}
 
-	*o = TaskStatus(varTaskStatus)
+	*o = AsyncTaskStatus(varAsyncTaskStatus)
 
 	return err
 }
 
-type NullableTaskStatus struct {
-	value *TaskStatus
+type NullableAsyncTaskStatus struct {
+	value *AsyncTaskStatus
 	isSet bool
 }
 
-func (v NullableTaskStatus) Get() *TaskStatus {
+func (v NullableAsyncTaskStatus) Get() *AsyncTaskStatus {
 	return v.value
 }
 
-func (v *NullableTaskStatus) Set(val *TaskStatus) {
+func (v *NullableAsyncTaskStatus) Set(val *AsyncTaskStatus) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableTaskStatus) IsSet() bool {
+func (v NullableAsyncTaskStatus) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableTaskStatus) Unset() {
+func (v *NullableAsyncTaskStatus) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableTaskStatus(val *TaskStatus) *NullableTaskStatus {
-	return &NullableTaskStatus{value: val, isSet: true}
+func NewNullableAsyncTaskStatus(val *AsyncTaskStatus) *NullableAsyncTaskStatus {
+	return &NullableAsyncTaskStatus{value: val, isSet: true}
 }
 
-func (v NullableTaskStatus) MarshalJSON() ([]byte, error) {
+func (v NullableAsyncTaskStatus) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableTaskStatus) UnmarshalJSON(src []byte) error {
+func (v *NullableAsyncTaskStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -30,7 +30,7 @@ type ApiGetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGetRequest 
 	taskId string
 }
 
-func (r ApiGetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGetRequest) Execute() (*TaskStatus, *http.Response, error) {
+func (r ApiGetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGetRequest) Execute() (*AsyncTaskStatus, *http.Response, error) {
 	return r.ApiService.GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGetExecute(r)
 }
 
@@ -61,13 +61,13 @@ func (a *PDFXMLVerificationAPIService) GetVerificationStatusApiV1VerificationVer
 }
 
 // Execute executes the request
-//  @return TaskStatus
-func (a *PDFXMLVerificationAPIService) GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGetExecute(r ApiGetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGetRequest) (*TaskStatus, *http.Response, error) {
+//  @return AsyncTaskStatus
+func (a *PDFXMLVerificationAPIService) GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGetExecute(r ApiGetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGetRequest) (*AsyncTaskStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *TaskStatus
+		localVarReturnValue  *AsyncTaskStatus
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PDFXMLVerificationAPIService.GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet")
@@ -152,7 +152,7 @@ type ApiGetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet_0Reques
 	taskId string
 }
 
-func (r ApiGetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet_0Request) Execute() (*TaskStatus, *http.Response, error) {
+func (r ApiGetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet_0Request) Execute() (*AsyncTaskStatus, *http.Response, error) {
 	return r.ApiService.GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet_1Execute(r)
 }
 
@@ -183,13 +183,13 @@ func (a *PDFXMLVerificationAPIService) GetVerificationStatusApiV1VerificationVer
 }
 
 // Execute executes the request
-//  @return TaskStatus
-func (a *PDFXMLVerificationAPIService) GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet_1Execute(r ApiGetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet_0Request) (*TaskStatus, *http.Response, error) {
+//  @return AsyncTaskStatus
+func (a *PDFXMLVerificationAPIService) GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet_1Execute(r ApiGetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet_0Request) (*AsyncTaskStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *TaskStatus
+		localVarReturnValue  *AsyncTaskStatus
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PDFXMLVerificationAPIService.GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet_1")
