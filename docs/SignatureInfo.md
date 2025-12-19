@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Signe** | **bool** | Le PDF a été signé | 
+**Signed** | **bool** | PDF was signed | 
 **Cn** | Pointer to **NullableString** |  | [optional] 
 **Expiration** | Pointer to **NullableString** |  | [optional] 
 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewSignatureInfo
 
-`func NewSignatureInfo(signe bool, ) *SignatureInfo`
+`func NewSignatureInfo(signed bool, ) *SignatureInfo`
 
 NewSignatureInfo instantiates a new SignatureInfo object
 This constructor will assign default values to properties that have it defined,
@@ -27,24 +27,24 @@ NewSignatureInfoWithDefaults instantiates a new SignatureInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetSigne
+### GetSigned
 
-`func (o *SignatureInfo) GetSigne() bool`
+`func (o *SignatureInfo) GetSigned() bool`
 
-GetSigne returns the Signe field if non-nil, zero value otherwise.
+GetSigned returns the Signed field if non-nil, zero value otherwise.
 
-### GetSigneOk
+### GetSignedOk
 
-`func (o *SignatureInfo) GetSigneOk() (*bool, bool)`
+`func (o *SignatureInfo) GetSignedOk() (*bool, bool)`
 
-GetSigneOk returns a tuple with the Signe field if it's non-nil, zero value otherwise
+GetSignedOk returns a tuple with the Signed field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSigne
+### SetSigned
 
-`func (o *SignatureInfo) SetSigne(v bool)`
+`func (o *SignatureInfo) SetSigned(v bool)`
 
-SetSigne sets Signe field to given value.
+SetSigned sets Signed field to given value.
 
 
 ### GetCn

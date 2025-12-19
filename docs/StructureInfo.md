@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**IdStructureCpp** | **int32** | ID Chorus Pro de la structure | 
-**IdentifiantStructure** | **string** | Identifiant (SIRET, SIREN) | 
-**DesignationStructure** | **string** | Nom de la structure | 
-**TypeIdentifiantStructure** | **string** | Type d&#39;identifiant | 
-**Statut** | **string** | Statut (ACTIVE, INACTIVE) | 
+**StructureId** | **int32** | Chorus Pro structure ID | 
+**StructureIdentifier** | **string** | Identifier (SIRET, SIREN) | 
+**StructureName** | **string** | Structure name | 
+**StructureIdentifierType** | **string** | Identifier type | 
+**Status** | **string** | Status (ACTIVE, INACTIVE) | 
 
 ## Methods
 
 ### NewStructureInfo
 
-`func NewStructureInfo(idStructureCpp int32, identifiantStructure string, designationStructure string, typeIdentifiantStructure string, statut string, ) *StructureInfo`
+`func NewStructureInfo(structureId int32, structureIdentifier string, structureName string, structureIdentifierType string, status string, ) *StructureInfo`
 
 NewStructureInfo instantiates a new StructureInfo object
 This constructor will assign default values to properties that have it defined,
@@ -29,104 +29,104 @@ NewStructureInfoWithDefaults instantiates a new StructureInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetIdStructureCpp
+### GetStructureId
 
-`func (o *StructureInfo) GetIdStructureCpp() int32`
+`func (o *StructureInfo) GetStructureId() int32`
 
-GetIdStructureCpp returns the IdStructureCpp field if non-nil, zero value otherwise.
+GetStructureId returns the StructureId field if non-nil, zero value otherwise.
 
-### GetIdStructureCppOk
+### GetStructureIdOk
 
-`func (o *StructureInfo) GetIdStructureCppOk() (*int32, bool)`
+`func (o *StructureInfo) GetStructureIdOk() (*int32, bool)`
 
-GetIdStructureCppOk returns a tuple with the IdStructureCpp field if it's non-nil, zero value otherwise
+GetStructureIdOk returns a tuple with the StructureId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIdStructureCpp
+### SetStructureId
 
-`func (o *StructureInfo) SetIdStructureCpp(v int32)`
+`func (o *StructureInfo) SetStructureId(v int32)`
 
-SetIdStructureCpp sets IdStructureCpp field to given value.
+SetStructureId sets StructureId field to given value.
 
 
-### GetIdentifiantStructure
+### GetStructureIdentifier
 
-`func (o *StructureInfo) GetIdentifiantStructure() string`
+`func (o *StructureInfo) GetStructureIdentifier() string`
 
-GetIdentifiantStructure returns the IdentifiantStructure field if non-nil, zero value otherwise.
+GetStructureIdentifier returns the StructureIdentifier field if non-nil, zero value otherwise.
 
-### GetIdentifiantStructureOk
+### GetStructureIdentifierOk
 
-`func (o *StructureInfo) GetIdentifiantStructureOk() (*string, bool)`
+`func (o *StructureInfo) GetStructureIdentifierOk() (*string, bool)`
 
-GetIdentifiantStructureOk returns a tuple with the IdentifiantStructure field if it's non-nil, zero value otherwise
+GetStructureIdentifierOk returns a tuple with the StructureIdentifier field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIdentifiantStructure
+### SetStructureIdentifier
 
-`func (o *StructureInfo) SetIdentifiantStructure(v string)`
+`func (o *StructureInfo) SetStructureIdentifier(v string)`
 
-SetIdentifiantStructure sets IdentifiantStructure field to given value.
+SetStructureIdentifier sets StructureIdentifier field to given value.
 
 
-### GetDesignationStructure
+### GetStructureName
 
-`func (o *StructureInfo) GetDesignationStructure() string`
+`func (o *StructureInfo) GetStructureName() string`
 
-GetDesignationStructure returns the DesignationStructure field if non-nil, zero value otherwise.
+GetStructureName returns the StructureName field if non-nil, zero value otherwise.
 
-### GetDesignationStructureOk
+### GetStructureNameOk
 
-`func (o *StructureInfo) GetDesignationStructureOk() (*string, bool)`
+`func (o *StructureInfo) GetStructureNameOk() (*string, bool)`
 
-GetDesignationStructureOk returns a tuple with the DesignationStructure field if it's non-nil, zero value otherwise
+GetStructureNameOk returns a tuple with the StructureName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDesignationStructure
+### SetStructureName
 
-`func (o *StructureInfo) SetDesignationStructure(v string)`
+`func (o *StructureInfo) SetStructureName(v string)`
 
-SetDesignationStructure sets DesignationStructure field to given value.
+SetStructureName sets StructureName field to given value.
 
 
-### GetTypeIdentifiantStructure
+### GetStructureIdentifierType
 
-`func (o *StructureInfo) GetTypeIdentifiantStructure() string`
+`func (o *StructureInfo) GetStructureIdentifierType() string`
 
-GetTypeIdentifiantStructure returns the TypeIdentifiantStructure field if non-nil, zero value otherwise.
+GetStructureIdentifierType returns the StructureIdentifierType field if non-nil, zero value otherwise.
 
-### GetTypeIdentifiantStructureOk
+### GetStructureIdentifierTypeOk
 
-`func (o *StructureInfo) GetTypeIdentifiantStructureOk() (*string, bool)`
+`func (o *StructureInfo) GetStructureIdentifierTypeOk() (*string, bool)`
 
-GetTypeIdentifiantStructureOk returns a tuple with the TypeIdentifiantStructure field if it's non-nil, zero value otherwise
+GetStructureIdentifierTypeOk returns a tuple with the StructureIdentifierType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTypeIdentifiantStructure
+### SetStructureIdentifierType
 
-`func (o *StructureInfo) SetTypeIdentifiantStructure(v string)`
+`func (o *StructureInfo) SetStructureIdentifierType(v string)`
 
-SetTypeIdentifiantStructure sets TypeIdentifiantStructure field to given value.
+SetStructureIdentifierType sets StructureIdentifierType field to given value.
 
 
-### GetStatut
+### GetStatus
 
-`func (o *StructureInfo) GetStatut() string`
+`func (o *StructureInfo) GetStatus() string`
 
-GetStatut returns the Statut field if non-nil, zero value otherwise.
+GetStatus returns the Status field if non-nil, zero value otherwise.
 
-### GetStatutOk
+### GetStatusOk
 
-`func (o *StructureInfo) GetStatutOk() (*string, bool)`
+`func (o *StructureInfo) GetStatusOk() (*string, bool)`
 
-GetStatutOk returns a tuple with the Statut field if it's non-nil, zero value otherwise
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetStatut
+### SetStatus
 
-`func (o *StructureInfo) SetStatut(v string)`
+`func (o *StructureInfo) SetStatus(v string)`
 
-SetStatut sets Statut field to given value.
+SetStatus sets Status field to given value.
 
 
 

@@ -1,7 +1,7 @@
 /*
-API REST FactPulse
+FactPulse REST API
 
- API REST pour la facturation électronique en France : Factur-X, AFNOR PDP/PA, signatures électroniques.  ## 🎯 Fonctionnalités principales  ### 📄 Génération de factures Factur-X - **Formats** : XML seul ou PDF/A-3 avec XML embarqué - **Profils** : MINIMUM, BASIC, EN16931, EXTENDED - **Normes** : EN 16931 (directive UE 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Format simplifié** : Génération à partir de SIRET + auto-enrichissement (API Chorus Pro + Recherche Entreprises)  ### ✅ Validation et conformité - **Validation XML** : Schematron (45 à 210+ règles selon profil) - **Validation PDF** : PDF/A-3, métadonnées XMP Factur-X, signatures électroniques - **VeraPDF** : Validation stricte PDF/A (146+ règles ISO 19005-3) - **Traitement asynchrone** : Support Celery pour validations lourdes (VeraPDF)  ### 📡 Intégration AFNOR PDP/PA (XP Z12-013) - **Soumission de flux** : Envoi de factures vers Plateformes de Dématérialisation Partenaires - **Recherche de flux** : Consultation des factures soumises - **Téléchargement** : Récupération des PDF/A-3 avec XML - **Directory Service** : Recherche d'entreprises (SIREN/SIRET) - **Multi-client** : Support de plusieurs configs PDP par utilisateur (stored credentials ou zero-storage)  ### ✍️ Signature électronique PDF - **Standards** : PAdES-B-B, PAdES-B-T (horodatage RFC 3161), PAdES-B-LT (archivage long terme) - **Niveaux eIDAS** : SES (auto-signé), AdES (CA commerciale), QES (PSCO) - **Validation** : Vérification intégrité cryptographique et certificats - **Génération de certificats** : Certificats X.509 auto-signés pour tests  ### 🔄 Traitement asynchrone - **Celery** : Génération, validation et signature asynchrones - **Polling** : Suivi d'état via `/taches/{id_tache}/statut` - **Pas de timeout** : Idéal pour gros fichiers ou validations lourdes  ## 🔒 Authentification  Toutes les requêtes nécessitent un **token JWT** dans le header Authorization : ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### Comment obtenir un token JWT ?  #### 🔑 Méthode 1 : API `/api/token/` (Recommandée)  **URL :** `https://www.factpulse.fr/api/token/`  Cette méthode est **recommandée** pour l'intégration dans vos applications et workflows CI/CD.  **Prérequis :** Avoir défini un mot de passe sur votre compte  **Pour les utilisateurs inscrits via email/password :** - Vous avez déjà un mot de passe, utilisez-le directement  **Pour les utilisateurs inscrits via OAuth (Google/GitHub) :** - Vous devez d'abord définir un mot de passe sur : https://www.factpulse.fr/accounts/password/set/ - Une fois le mot de passe créé, vous pourrez utiliser l'API  **Exemple de requête :** ```bash curl -X POST https://www.factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"votre_email@example.com\",     \"password\": \"votre_mot_de_passe\"   }' ```  **Paramètre optionnel `client_uid` :**  Pour sélectionner les credentials d'un client spécifique (PA/PDP, Chorus Pro, certificats de signature), ajoutez `client_uid` :  ```bash curl -X POST https://www.factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"votre_email@example.com\",     \"password\": \"votre_mot_de_passe\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  Le `client_uid` sera inclus dans le JWT et permettra à l'API d'utiliser automatiquement : - Les credentials AFNOR/PDP configurés pour ce client - Les credentials Chorus Pro configurés pour ce client - Les certificats de signature électronique configurés pour ce client  **Réponse :** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Token d'accès (validité: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Token de rafraîchissement (validité: 7 jours) } ```  **Avantages :** - ✅ Automatisation complète (CI/CD, scripts) - ✅ Gestion programmatique des tokens - ✅ Support du refresh token pour renouveler automatiquement l'accès - ✅ Intégration facile dans n'importe quel langage/outil  #### 🖥️ Méthode 2 : Génération via Dashboard (Alternative)  **URL :** https://www.factpulse.fr/dashboard/  Cette méthode convient pour des tests rapides ou une utilisation occasionnelle via l'interface graphique.  **Fonctionnement :** - Connectez-vous au dashboard - Utilisez les boutons \"Generate Test Token\" ou \"Generate Production Token\" - Fonctionne pour **tous** les utilisateurs (OAuth et email/password), sans nécessiter de mot de passe  **Types de tokens :** - **Token Test** : Validité 24h, quota 1000 appels/jour (gratuit) - **Token Production** : Validité 7 jours, quota selon votre forfait  **Avantages :** - ✅ Rapide pour tester l'API - ✅ Aucun mot de passe requis - ✅ Interface visuelle simple  **Inconvénients :** - ❌ Nécessite une action manuelle - ❌ Pas de refresh token - ❌ Moins adapté pour l'automatisation  ### 📚 Documentation complète  Pour plus d'informations sur l'authentification et l'utilisation de l'API : https://www.factpulse.fr/documentation-api/     
+ REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X Invoice Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Validation and Compliance - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata, electronic signatures - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules) - **Asynchronous Processing**: Celery support for heavy validations (VeraPDF)  ### 📡 AFNOR PDP/PA Integration (XP Z12-013) - **Flow Submission**: Send invoices to Partner Dematerialization Platforms - **Flow Search**: View submitted invoices - **Download**: Retrieve PDF/A-3 with XML - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user (stored credentials or zero-storage)  ### ✍️ PDF Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification - **Certificate Generation**: Self-signed X.509 certificates for testing  ### 🔄 Asynchronous Processing - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **No timeout**: Ideal for large files or heavy validations  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://www.factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://www.factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://www.factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://www.factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://www.factpulse.fr/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://www.factpulse.fr/documentation-api/     
 
 API version: 1.0.0
 */
@@ -17,28 +17,28 @@ import (
 // checks if the GenerateCertificateRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GenerateCertificateRequest{}
 
-// GenerateCertificateRequest Requête pour générer un certificat X.509 auto-signé de test.  ⚠️ ATTENTION : Ce certificat est destiné uniquement aux TESTS. NE PAS utiliser en production ! Niveau eIDAS : SES (Simple Electronic Signature)
+// GenerateCertificateRequest Request to generate a self-signed X.509 test certificate.  WARNING: This certificate is intended for TESTING only. DO NOT use in production! eIDAS level: SES (Simple Electronic Signature)
 type GenerateCertificateRequest struct {
-	// Common Name (CN) - Nom du certificat
+	// Common Name (CN) - Certificate name
 	Cn *string `json:"cn,omitempty"`
-	// Organisation (O)
-	Organisation *string `json:"organisation,omitempty"`
-	// Code pays ISO 2 lettres (C)
-	Pays *string `json:"pays,omitempty"`
-	// Ville (L)
-	Ville *string `json:"ville,omitempty"`
-	// Province/État (ST)
-	Province *string `json:"province,omitempty"`
+	// Organization (O)
+	Organization *string `json:"organization,omitempty"`
+	// ISO 2-letter country code (C)
+	Country *string `json:"country,omitempty"`
+	// City (L)
+	City *string `json:"city,omitempty"`
+	// State/Province (ST)
+	State *string `json:"state,omitempty"`
 	Email NullableString `json:"email,omitempty"`
-	// Durée de validité en jours
-	DureeJours *int32 `json:"duree_jours,omitempty"`
-	// Taille de la clé RSA en bits
-	TailleCle *int32 `json:"taille_cle,omitempty"`
-	PassphraseCle NullableString `json:"passphrase_cle,omitempty"`
-	// Générer aussi un fichier PKCS#12 (.p12)
-	GenererP12 *bool `json:"generer_p12,omitempty"`
-	// Passphrase pour le fichier PKCS#12
-	PassphraseP12 *string `json:"passphrase_p12,omitempty"`
+	// Validity duration in days
+	ValidityDays *int32 `json:"validity_days,omitempty"`
+	// RSA key size in bits
+	KeySize *int32 `json:"key_size,omitempty"`
+	KeyPassphrase NullableString `json:"key_passphrase,omitempty"`
+	// Also generate a PKCS#12 (.p12) file
+	GenerateP12 *bool `json:"generate_p12,omitempty"`
+	// Passphrase for PKCS#12 file
+	P12Passphrase *string `json:"p12_passphrase,omitempty"`
 }
 
 // NewGenerateCertificateRequest instantiates a new GenerateCertificateRequest object
@@ -49,22 +49,22 @@ func NewGenerateCertificateRequest() *GenerateCertificateRequest {
 	this := GenerateCertificateRequest{}
 	var cn string = "Test Signature FactPulse"
 	this.Cn = &cn
-	var organisation string = "FactPulse Test"
-	this.Organisation = &organisation
-	var pays string = "FR"
-	this.Pays = &pays
-	var ville string = "Paris"
-	this.Ville = &ville
-	var province string = "Ile-de-France"
-	this.Province = &province
-	var dureeJours int32 = 365
-	this.DureeJours = &dureeJours
-	var tailleCle int32 = 2048
-	this.TailleCle = &tailleCle
-	var genererP12 bool = false
-	this.GenererP12 = &genererP12
-	var passphraseP12 string = "changeme"
-	this.PassphraseP12 = &passphraseP12
+	var organization string = "FactPulse Test"
+	this.Organization = &organization
+	var country string = "FR"
+	this.Country = &country
+	var city string = "Paris"
+	this.City = &city
+	var state string = "Ile-de-France"
+	this.State = &state
+	var validityDays int32 = 365
+	this.ValidityDays = &validityDays
+	var keySize int32 = 2048
+	this.KeySize = &keySize
+	var generateP12 bool = false
+	this.GenerateP12 = &generateP12
+	var p12Passphrase string = "changeme"
+	this.P12Passphrase = &p12Passphrase
 	return &this
 }
 
@@ -75,22 +75,22 @@ func NewGenerateCertificateRequestWithDefaults() *GenerateCertificateRequest {
 	this := GenerateCertificateRequest{}
 	var cn string = "Test Signature FactPulse"
 	this.Cn = &cn
-	var organisation string = "FactPulse Test"
-	this.Organisation = &organisation
-	var pays string = "FR"
-	this.Pays = &pays
-	var ville string = "Paris"
-	this.Ville = &ville
-	var province string = "Ile-de-France"
-	this.Province = &province
-	var dureeJours int32 = 365
-	this.DureeJours = &dureeJours
-	var tailleCle int32 = 2048
-	this.TailleCle = &tailleCle
-	var genererP12 bool = false
-	this.GenererP12 = &genererP12
-	var passphraseP12 string = "changeme"
-	this.PassphraseP12 = &passphraseP12
+	var organization string = "FactPulse Test"
+	this.Organization = &organization
+	var country string = "FR"
+	this.Country = &country
+	var city string = "Paris"
+	this.City = &city
+	var state string = "Ile-de-France"
+	this.State = &state
+	var validityDays int32 = 365
+	this.ValidityDays = &validityDays
+	var keySize int32 = 2048
+	this.KeySize = &keySize
+	var generateP12 bool = false
+	this.GenerateP12 = &generateP12
+	var p12Passphrase string = "changeme"
+	this.P12Passphrase = &p12Passphrase
 	return &this
 }
 
@@ -126,132 +126,132 @@ func (o *GenerateCertificateRequest) SetCn(v string) {
 	o.Cn = &v
 }
 
-// GetOrganisation returns the Organisation field value if set, zero value otherwise.
-func (o *GenerateCertificateRequest) GetOrganisation() string {
-	if o == nil || IsNil(o.Organisation) {
+// GetOrganization returns the Organization field value if set, zero value otherwise.
+func (o *GenerateCertificateRequest) GetOrganization() string {
+	if o == nil || IsNil(o.Organization) {
 		var ret string
 		return ret
 	}
-	return *o.Organisation
+	return *o.Organization
 }
 
-// GetOrganisationOk returns a tuple with the Organisation field value if set, nil otherwise
+// GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GenerateCertificateRequest) GetOrganisationOk() (*string, bool) {
-	if o == nil || IsNil(o.Organisation) {
+func (o *GenerateCertificateRequest) GetOrganizationOk() (*string, bool) {
+	if o == nil || IsNil(o.Organization) {
 		return nil, false
 	}
-	return o.Organisation, true
+	return o.Organization, true
 }
 
-// HasOrganisation returns a boolean if a field has been set.
-func (o *GenerateCertificateRequest) HasOrganisation() bool {
-	if o != nil && !IsNil(o.Organisation) {
+// HasOrganization returns a boolean if a field has been set.
+func (o *GenerateCertificateRequest) HasOrganization() bool {
+	if o != nil && !IsNil(o.Organization) {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganisation gets a reference to the given string and assigns it to the Organisation field.
-func (o *GenerateCertificateRequest) SetOrganisation(v string) {
-	o.Organisation = &v
+// SetOrganization gets a reference to the given string and assigns it to the Organization field.
+func (o *GenerateCertificateRequest) SetOrganization(v string) {
+	o.Organization = &v
 }
 
-// GetPays returns the Pays field value if set, zero value otherwise.
-func (o *GenerateCertificateRequest) GetPays() string {
-	if o == nil || IsNil(o.Pays) {
+// GetCountry returns the Country field value if set, zero value otherwise.
+func (o *GenerateCertificateRequest) GetCountry() string {
+	if o == nil || IsNil(o.Country) {
 		var ret string
 		return ret
 	}
-	return *o.Pays
+	return *o.Country
 }
 
-// GetPaysOk returns a tuple with the Pays field value if set, nil otherwise
+// GetCountryOk returns a tuple with the Country field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GenerateCertificateRequest) GetPaysOk() (*string, bool) {
-	if o == nil || IsNil(o.Pays) {
+func (o *GenerateCertificateRequest) GetCountryOk() (*string, bool) {
+	if o == nil || IsNil(o.Country) {
 		return nil, false
 	}
-	return o.Pays, true
+	return o.Country, true
 }
 
-// HasPays returns a boolean if a field has been set.
-func (o *GenerateCertificateRequest) HasPays() bool {
-	if o != nil && !IsNil(o.Pays) {
+// HasCountry returns a boolean if a field has been set.
+func (o *GenerateCertificateRequest) HasCountry() bool {
+	if o != nil && !IsNil(o.Country) {
 		return true
 	}
 
 	return false
 }
 
-// SetPays gets a reference to the given string and assigns it to the Pays field.
-func (o *GenerateCertificateRequest) SetPays(v string) {
-	o.Pays = &v
+// SetCountry gets a reference to the given string and assigns it to the Country field.
+func (o *GenerateCertificateRequest) SetCountry(v string) {
+	o.Country = &v
 }
 
-// GetVille returns the Ville field value if set, zero value otherwise.
-func (o *GenerateCertificateRequest) GetVille() string {
-	if o == nil || IsNil(o.Ville) {
+// GetCity returns the City field value if set, zero value otherwise.
+func (o *GenerateCertificateRequest) GetCity() string {
+	if o == nil || IsNil(o.City) {
 		var ret string
 		return ret
 	}
-	return *o.Ville
+	return *o.City
 }
 
-// GetVilleOk returns a tuple with the Ville field value if set, nil otherwise
+// GetCityOk returns a tuple with the City field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GenerateCertificateRequest) GetVilleOk() (*string, bool) {
-	if o == nil || IsNil(o.Ville) {
+func (o *GenerateCertificateRequest) GetCityOk() (*string, bool) {
+	if o == nil || IsNil(o.City) {
 		return nil, false
 	}
-	return o.Ville, true
+	return o.City, true
 }
 
-// HasVille returns a boolean if a field has been set.
-func (o *GenerateCertificateRequest) HasVille() bool {
-	if o != nil && !IsNil(o.Ville) {
+// HasCity returns a boolean if a field has been set.
+func (o *GenerateCertificateRequest) HasCity() bool {
+	if o != nil && !IsNil(o.City) {
 		return true
 	}
 
 	return false
 }
 
-// SetVille gets a reference to the given string and assigns it to the Ville field.
-func (o *GenerateCertificateRequest) SetVille(v string) {
-	o.Ville = &v
+// SetCity gets a reference to the given string and assigns it to the City field.
+func (o *GenerateCertificateRequest) SetCity(v string) {
+	o.City = &v
 }
 
-// GetProvince returns the Province field value if set, zero value otherwise.
-func (o *GenerateCertificateRequest) GetProvince() string {
-	if o == nil || IsNil(o.Province) {
+// GetState returns the State field value if set, zero value otherwise.
+func (o *GenerateCertificateRequest) GetState() string {
+	if o == nil || IsNil(o.State) {
 		var ret string
 		return ret
 	}
-	return *o.Province
+	return *o.State
 }
 
-// GetProvinceOk returns a tuple with the Province field value if set, nil otherwise
+// GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GenerateCertificateRequest) GetProvinceOk() (*string, bool) {
-	if o == nil || IsNil(o.Province) {
+func (o *GenerateCertificateRequest) GetStateOk() (*string, bool) {
+	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
-	return o.Province, true
+	return o.State, true
 }
 
-// HasProvince returns a boolean if a field has been set.
-func (o *GenerateCertificateRequest) HasProvince() bool {
-	if o != nil && !IsNil(o.Province) {
+// HasState returns a boolean if a field has been set.
+func (o *GenerateCertificateRequest) HasState() bool {
+	if o != nil && !IsNil(o.State) {
 		return true
 	}
 
 	return false
 }
 
-// SetProvince gets a reference to the given string and assigns it to the Province field.
-func (o *GenerateCertificateRequest) SetProvince(v string) {
-	o.Province = &v
+// SetState gets a reference to the given string and assigns it to the State field.
+func (o *GenerateCertificateRequest) SetState(v string) {
+	o.State = &v
 }
 
 // GetEmail returns the Email field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -296,174 +296,174 @@ func (o *GenerateCertificateRequest) UnsetEmail() {
 	o.Email.Unset()
 }
 
-// GetDureeJours returns the DureeJours field value if set, zero value otherwise.
-func (o *GenerateCertificateRequest) GetDureeJours() int32 {
-	if o == nil || IsNil(o.DureeJours) {
+// GetValidityDays returns the ValidityDays field value if set, zero value otherwise.
+func (o *GenerateCertificateRequest) GetValidityDays() int32 {
+	if o == nil || IsNil(o.ValidityDays) {
 		var ret int32
 		return ret
 	}
-	return *o.DureeJours
+	return *o.ValidityDays
 }
 
-// GetDureeJoursOk returns a tuple with the DureeJours field value if set, nil otherwise
+// GetValidityDaysOk returns a tuple with the ValidityDays field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GenerateCertificateRequest) GetDureeJoursOk() (*int32, bool) {
-	if o == nil || IsNil(o.DureeJours) {
+func (o *GenerateCertificateRequest) GetValidityDaysOk() (*int32, bool) {
+	if o == nil || IsNil(o.ValidityDays) {
 		return nil, false
 	}
-	return o.DureeJours, true
+	return o.ValidityDays, true
 }
 
-// HasDureeJours returns a boolean if a field has been set.
-func (o *GenerateCertificateRequest) HasDureeJours() bool {
-	if o != nil && !IsNil(o.DureeJours) {
+// HasValidityDays returns a boolean if a field has been set.
+func (o *GenerateCertificateRequest) HasValidityDays() bool {
+	if o != nil && !IsNil(o.ValidityDays) {
 		return true
 	}
 
 	return false
 }
 
-// SetDureeJours gets a reference to the given int32 and assigns it to the DureeJours field.
-func (o *GenerateCertificateRequest) SetDureeJours(v int32) {
-	o.DureeJours = &v
+// SetValidityDays gets a reference to the given int32 and assigns it to the ValidityDays field.
+func (o *GenerateCertificateRequest) SetValidityDays(v int32) {
+	o.ValidityDays = &v
 }
 
-// GetTailleCle returns the TailleCle field value if set, zero value otherwise.
-func (o *GenerateCertificateRequest) GetTailleCle() int32 {
-	if o == nil || IsNil(o.TailleCle) {
+// GetKeySize returns the KeySize field value if set, zero value otherwise.
+func (o *GenerateCertificateRequest) GetKeySize() int32 {
+	if o == nil || IsNil(o.KeySize) {
 		var ret int32
 		return ret
 	}
-	return *o.TailleCle
+	return *o.KeySize
 }
 
-// GetTailleCleOk returns a tuple with the TailleCle field value if set, nil otherwise
+// GetKeySizeOk returns a tuple with the KeySize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GenerateCertificateRequest) GetTailleCleOk() (*int32, bool) {
-	if o == nil || IsNil(o.TailleCle) {
+func (o *GenerateCertificateRequest) GetKeySizeOk() (*int32, bool) {
+	if o == nil || IsNil(o.KeySize) {
 		return nil, false
 	}
-	return o.TailleCle, true
+	return o.KeySize, true
 }
 
-// HasTailleCle returns a boolean if a field has been set.
-func (o *GenerateCertificateRequest) HasTailleCle() bool {
-	if o != nil && !IsNil(o.TailleCle) {
+// HasKeySize returns a boolean if a field has been set.
+func (o *GenerateCertificateRequest) HasKeySize() bool {
+	if o != nil && !IsNil(o.KeySize) {
 		return true
 	}
 
 	return false
 }
 
-// SetTailleCle gets a reference to the given int32 and assigns it to the TailleCle field.
-func (o *GenerateCertificateRequest) SetTailleCle(v int32) {
-	o.TailleCle = &v
+// SetKeySize gets a reference to the given int32 and assigns it to the KeySize field.
+func (o *GenerateCertificateRequest) SetKeySize(v int32) {
+	o.KeySize = &v
 }
 
-// GetPassphraseCle returns the PassphraseCle field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *GenerateCertificateRequest) GetPassphraseCle() string {
-	if o == nil || IsNil(o.PassphraseCle.Get()) {
+// GetKeyPassphrase returns the KeyPassphrase field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GenerateCertificateRequest) GetKeyPassphrase() string {
+	if o == nil || IsNil(o.KeyPassphrase.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.PassphraseCle.Get()
+	return *o.KeyPassphrase.Get()
 }
 
-// GetPassphraseCleOk returns a tuple with the PassphraseCle field value if set, nil otherwise
+// GetKeyPassphraseOk returns a tuple with the KeyPassphrase field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GenerateCertificateRequest) GetPassphraseCleOk() (*string, bool) {
+func (o *GenerateCertificateRequest) GetKeyPassphraseOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.PassphraseCle.Get(), o.PassphraseCle.IsSet()
+	return o.KeyPassphrase.Get(), o.KeyPassphrase.IsSet()
 }
 
-// HasPassphraseCle returns a boolean if a field has been set.
-func (o *GenerateCertificateRequest) HasPassphraseCle() bool {
-	if o != nil && o.PassphraseCle.IsSet() {
+// HasKeyPassphrase returns a boolean if a field has been set.
+func (o *GenerateCertificateRequest) HasKeyPassphrase() bool {
+	if o != nil && o.KeyPassphrase.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPassphraseCle gets a reference to the given NullableString and assigns it to the PassphraseCle field.
-func (o *GenerateCertificateRequest) SetPassphraseCle(v string) {
-	o.PassphraseCle.Set(&v)
+// SetKeyPassphrase gets a reference to the given NullableString and assigns it to the KeyPassphrase field.
+func (o *GenerateCertificateRequest) SetKeyPassphrase(v string) {
+	o.KeyPassphrase.Set(&v)
 }
-// SetPassphraseCleNil sets the value for PassphraseCle to be an explicit nil
-func (o *GenerateCertificateRequest) SetPassphraseCleNil() {
-	o.PassphraseCle.Set(nil)
-}
-
-// UnsetPassphraseCle ensures that no value is present for PassphraseCle, not even an explicit nil
-func (o *GenerateCertificateRequest) UnsetPassphraseCle() {
-	o.PassphraseCle.Unset()
+// SetKeyPassphraseNil sets the value for KeyPassphrase to be an explicit nil
+func (o *GenerateCertificateRequest) SetKeyPassphraseNil() {
+	o.KeyPassphrase.Set(nil)
 }
 
-// GetGenererP12 returns the GenererP12 field value if set, zero value otherwise.
-func (o *GenerateCertificateRequest) GetGenererP12() bool {
-	if o == nil || IsNil(o.GenererP12) {
+// UnsetKeyPassphrase ensures that no value is present for KeyPassphrase, not even an explicit nil
+func (o *GenerateCertificateRequest) UnsetKeyPassphrase() {
+	o.KeyPassphrase.Unset()
+}
+
+// GetGenerateP12 returns the GenerateP12 field value if set, zero value otherwise.
+func (o *GenerateCertificateRequest) GetGenerateP12() bool {
+	if o == nil || IsNil(o.GenerateP12) {
 		var ret bool
 		return ret
 	}
-	return *o.GenererP12
+	return *o.GenerateP12
 }
 
-// GetGenererP12Ok returns a tuple with the GenererP12 field value if set, nil otherwise
+// GetGenerateP12Ok returns a tuple with the GenerateP12 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GenerateCertificateRequest) GetGenererP12Ok() (*bool, bool) {
-	if o == nil || IsNil(o.GenererP12) {
+func (o *GenerateCertificateRequest) GetGenerateP12Ok() (*bool, bool) {
+	if o == nil || IsNil(o.GenerateP12) {
 		return nil, false
 	}
-	return o.GenererP12, true
+	return o.GenerateP12, true
 }
 
-// HasGenererP12 returns a boolean if a field has been set.
-func (o *GenerateCertificateRequest) HasGenererP12() bool {
-	if o != nil && !IsNil(o.GenererP12) {
+// HasGenerateP12 returns a boolean if a field has been set.
+func (o *GenerateCertificateRequest) HasGenerateP12() bool {
+	if o != nil && !IsNil(o.GenerateP12) {
 		return true
 	}
 
 	return false
 }
 
-// SetGenererP12 gets a reference to the given bool and assigns it to the GenererP12 field.
-func (o *GenerateCertificateRequest) SetGenererP12(v bool) {
-	o.GenererP12 = &v
+// SetGenerateP12 gets a reference to the given bool and assigns it to the GenerateP12 field.
+func (o *GenerateCertificateRequest) SetGenerateP12(v bool) {
+	o.GenerateP12 = &v
 }
 
-// GetPassphraseP12 returns the PassphraseP12 field value if set, zero value otherwise.
-func (o *GenerateCertificateRequest) GetPassphraseP12() string {
-	if o == nil || IsNil(o.PassphraseP12) {
+// GetP12Passphrase returns the P12Passphrase field value if set, zero value otherwise.
+func (o *GenerateCertificateRequest) GetP12Passphrase() string {
+	if o == nil || IsNil(o.P12Passphrase) {
 		var ret string
 		return ret
 	}
-	return *o.PassphraseP12
+	return *o.P12Passphrase
 }
 
-// GetPassphraseP12Ok returns a tuple with the PassphraseP12 field value if set, nil otherwise
+// GetP12PassphraseOk returns a tuple with the P12Passphrase field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GenerateCertificateRequest) GetPassphraseP12Ok() (*string, bool) {
-	if o == nil || IsNil(o.PassphraseP12) {
+func (o *GenerateCertificateRequest) GetP12PassphraseOk() (*string, bool) {
+	if o == nil || IsNil(o.P12Passphrase) {
 		return nil, false
 	}
-	return o.PassphraseP12, true
+	return o.P12Passphrase, true
 }
 
-// HasPassphraseP12 returns a boolean if a field has been set.
-func (o *GenerateCertificateRequest) HasPassphraseP12() bool {
-	if o != nil && !IsNil(o.PassphraseP12) {
+// HasP12Passphrase returns a boolean if a field has been set.
+func (o *GenerateCertificateRequest) HasP12Passphrase() bool {
+	if o != nil && !IsNil(o.P12Passphrase) {
 		return true
 	}
 
 	return false
 }
 
-// SetPassphraseP12 gets a reference to the given string and assigns it to the PassphraseP12 field.
-func (o *GenerateCertificateRequest) SetPassphraseP12(v string) {
-	o.PassphraseP12 = &v
+// SetP12Passphrase gets a reference to the given string and assigns it to the P12Passphrase field.
+func (o *GenerateCertificateRequest) SetP12Passphrase(v string) {
+	o.P12Passphrase = &v
 }
 
 func (o GenerateCertificateRequest) MarshalJSON() ([]byte, error) {
@@ -479,35 +479,35 @@ func (o GenerateCertificateRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Cn) {
 		toSerialize["cn"] = o.Cn
 	}
-	if !IsNil(o.Organisation) {
-		toSerialize["organisation"] = o.Organisation
+	if !IsNil(o.Organization) {
+		toSerialize["organization"] = o.Organization
 	}
-	if !IsNil(o.Pays) {
-		toSerialize["pays"] = o.Pays
+	if !IsNil(o.Country) {
+		toSerialize["country"] = o.Country
 	}
-	if !IsNil(o.Ville) {
-		toSerialize["ville"] = o.Ville
+	if !IsNil(o.City) {
+		toSerialize["city"] = o.City
 	}
-	if !IsNil(o.Province) {
-		toSerialize["province"] = o.Province
+	if !IsNil(o.State) {
+		toSerialize["state"] = o.State
 	}
 	if o.Email.IsSet() {
 		toSerialize["email"] = o.Email.Get()
 	}
-	if !IsNil(o.DureeJours) {
-		toSerialize["duree_jours"] = o.DureeJours
+	if !IsNil(o.ValidityDays) {
+		toSerialize["validity_days"] = o.ValidityDays
 	}
-	if !IsNil(o.TailleCle) {
-		toSerialize["taille_cle"] = o.TailleCle
+	if !IsNil(o.KeySize) {
+		toSerialize["key_size"] = o.KeySize
 	}
-	if o.PassphraseCle.IsSet() {
-		toSerialize["passphrase_cle"] = o.PassphraseCle.Get()
+	if o.KeyPassphrase.IsSet() {
+		toSerialize["key_passphrase"] = o.KeyPassphrase.Get()
 	}
-	if !IsNil(o.GenererP12) {
-		toSerialize["generer_p12"] = o.GenererP12
+	if !IsNil(o.GenerateP12) {
+		toSerialize["generate_p12"] = o.GenerateP12
 	}
-	if !IsNil(o.PassphraseP12) {
-		toSerialize["passphrase_p12"] = o.PassphraseP12
+	if !IsNil(o.P12Passphrase) {
+		toSerialize["p12_passphrase"] = o.P12Passphrase
 	}
 	return toSerialize, nil
 }

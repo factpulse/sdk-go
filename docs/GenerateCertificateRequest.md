@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Cn** | Pointer to **string** | Common Name (CN) - Nom du certificat | [optional] [default to "Test Signature FactPulse"]
-**Organisation** | Pointer to **string** | Organisation (O) | [optional] [default to "FactPulse Test"]
-**Pays** | Pointer to **string** | Code pays ISO 2 lettres (C) | [optional] [default to "FR"]
-**Ville** | Pointer to **string** | Ville (L) | [optional] [default to "Paris"]
-**Province** | Pointer to **string** | Province/État (ST) | [optional] [default to "Ile-de-France"]
+**Cn** | Pointer to **string** | Common Name (CN) - Certificate name | [optional] [default to "Test Signature FactPulse"]
+**Organization** | Pointer to **string** | Organization (O) | [optional] [default to "FactPulse Test"]
+**Country** | Pointer to **string** | ISO 2-letter country code (C) | [optional] [default to "FR"]
+**City** | Pointer to **string** | City (L) | [optional] [default to "Paris"]
+**State** | Pointer to **string** | State/Province (ST) | [optional] [default to "Ile-de-France"]
 **Email** | Pointer to **NullableString** |  | [optional] 
-**DureeJours** | Pointer to **int32** | Durée de validité en jours | [optional] [default to 365]
-**TailleCle** | Pointer to **int32** | Taille de la clé RSA en bits | [optional] [default to 2048]
-**PassphraseCle** | Pointer to **NullableString** |  | [optional] 
-**GenererP12** | Pointer to **bool** | Générer aussi un fichier PKCS#12 (.p12) | [optional] [default to false]
-**PassphraseP12** | Pointer to **string** | Passphrase pour le fichier PKCS#12 | [optional] [default to "changeme"]
+**ValidityDays** | Pointer to **int32** | Validity duration in days | [optional] [default to 365]
+**KeySize** | Pointer to **int32** | RSA key size in bits | [optional] [default to 2048]
+**KeyPassphrase** | Pointer to **NullableString** |  | [optional] 
+**GenerateP12** | Pointer to **bool** | Also generate a PKCS#12 (.p12) file | [optional] [default to false]
+**P12Passphrase** | Pointer to **string** | Passphrase for PKCS#12 file | [optional] [default to "changeme"]
 
 ## Methods
 
@@ -60,105 +60,105 @@ SetCn sets Cn field to given value.
 
 HasCn returns a boolean if a field has been set.
 
-### GetOrganisation
+### GetOrganization
 
-`func (o *GenerateCertificateRequest) GetOrganisation() string`
+`func (o *GenerateCertificateRequest) GetOrganization() string`
 
-GetOrganisation returns the Organisation field if non-nil, zero value otherwise.
+GetOrganization returns the Organization field if non-nil, zero value otherwise.
 
-### GetOrganisationOk
+### GetOrganizationOk
 
-`func (o *GenerateCertificateRequest) GetOrganisationOk() (*string, bool)`
+`func (o *GenerateCertificateRequest) GetOrganizationOk() (*string, bool)`
 
-GetOrganisationOk returns a tuple with the Organisation field if it's non-nil, zero value otherwise
+GetOrganizationOk returns a tuple with the Organization field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOrganisation
+### SetOrganization
 
-`func (o *GenerateCertificateRequest) SetOrganisation(v string)`
+`func (o *GenerateCertificateRequest) SetOrganization(v string)`
 
-SetOrganisation sets Organisation field to given value.
+SetOrganization sets Organization field to given value.
 
-### HasOrganisation
+### HasOrganization
 
-`func (o *GenerateCertificateRequest) HasOrganisation() bool`
+`func (o *GenerateCertificateRequest) HasOrganization() bool`
 
-HasOrganisation returns a boolean if a field has been set.
+HasOrganization returns a boolean if a field has been set.
 
-### GetPays
+### GetCountry
 
-`func (o *GenerateCertificateRequest) GetPays() string`
+`func (o *GenerateCertificateRequest) GetCountry() string`
 
-GetPays returns the Pays field if non-nil, zero value otherwise.
+GetCountry returns the Country field if non-nil, zero value otherwise.
 
-### GetPaysOk
+### GetCountryOk
 
-`func (o *GenerateCertificateRequest) GetPaysOk() (*string, bool)`
+`func (o *GenerateCertificateRequest) GetCountryOk() (*string, bool)`
 
-GetPaysOk returns a tuple with the Pays field if it's non-nil, zero value otherwise
+GetCountryOk returns a tuple with the Country field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPays
+### SetCountry
 
-`func (o *GenerateCertificateRequest) SetPays(v string)`
+`func (o *GenerateCertificateRequest) SetCountry(v string)`
 
-SetPays sets Pays field to given value.
+SetCountry sets Country field to given value.
 
-### HasPays
+### HasCountry
 
-`func (o *GenerateCertificateRequest) HasPays() bool`
+`func (o *GenerateCertificateRequest) HasCountry() bool`
 
-HasPays returns a boolean if a field has been set.
+HasCountry returns a boolean if a field has been set.
 
-### GetVille
+### GetCity
 
-`func (o *GenerateCertificateRequest) GetVille() string`
+`func (o *GenerateCertificateRequest) GetCity() string`
 
-GetVille returns the Ville field if non-nil, zero value otherwise.
+GetCity returns the City field if non-nil, zero value otherwise.
 
-### GetVilleOk
+### GetCityOk
 
-`func (o *GenerateCertificateRequest) GetVilleOk() (*string, bool)`
+`func (o *GenerateCertificateRequest) GetCityOk() (*string, bool)`
 
-GetVilleOk returns a tuple with the Ville field if it's non-nil, zero value otherwise
+GetCityOk returns a tuple with the City field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetVille
+### SetCity
 
-`func (o *GenerateCertificateRequest) SetVille(v string)`
+`func (o *GenerateCertificateRequest) SetCity(v string)`
 
-SetVille sets Ville field to given value.
+SetCity sets City field to given value.
 
-### HasVille
+### HasCity
 
-`func (o *GenerateCertificateRequest) HasVille() bool`
+`func (o *GenerateCertificateRequest) HasCity() bool`
 
-HasVille returns a boolean if a field has been set.
+HasCity returns a boolean if a field has been set.
 
-### GetProvince
+### GetState
 
-`func (o *GenerateCertificateRequest) GetProvince() string`
+`func (o *GenerateCertificateRequest) GetState() string`
 
-GetProvince returns the Province field if non-nil, zero value otherwise.
+GetState returns the State field if non-nil, zero value otherwise.
 
-### GetProvinceOk
+### GetStateOk
 
-`func (o *GenerateCertificateRequest) GetProvinceOk() (*string, bool)`
+`func (o *GenerateCertificateRequest) GetStateOk() (*string, bool)`
 
-GetProvinceOk returns a tuple with the Province field if it's non-nil, zero value otherwise
+GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetProvince
+### SetState
 
-`func (o *GenerateCertificateRequest) SetProvince(v string)`
+`func (o *GenerateCertificateRequest) SetState(v string)`
 
-SetProvince sets Province field to given value.
+SetState sets State field to given value.
 
-### HasProvince
+### HasState
 
-`func (o *GenerateCertificateRequest) HasProvince() bool`
+`func (o *GenerateCertificateRequest) HasState() bool`
 
-HasProvince returns a boolean if a field has been set.
+HasState returns a boolean if a field has been set.
 
 ### GetEmail
 
@@ -195,140 +195,140 @@ HasEmail returns a boolean if a field has been set.
 `func (o *GenerateCertificateRequest) UnsetEmail()`
 
 UnsetEmail ensures that no value is present for Email, not even an explicit nil
-### GetDureeJours
+### GetValidityDays
 
-`func (o *GenerateCertificateRequest) GetDureeJours() int32`
+`func (o *GenerateCertificateRequest) GetValidityDays() int32`
 
-GetDureeJours returns the DureeJours field if non-nil, zero value otherwise.
+GetValidityDays returns the ValidityDays field if non-nil, zero value otherwise.
 
-### GetDureeJoursOk
+### GetValidityDaysOk
 
-`func (o *GenerateCertificateRequest) GetDureeJoursOk() (*int32, bool)`
+`func (o *GenerateCertificateRequest) GetValidityDaysOk() (*int32, bool)`
 
-GetDureeJoursOk returns a tuple with the DureeJours field if it's non-nil, zero value otherwise
+GetValidityDaysOk returns a tuple with the ValidityDays field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDureeJours
+### SetValidityDays
 
-`func (o *GenerateCertificateRequest) SetDureeJours(v int32)`
+`func (o *GenerateCertificateRequest) SetValidityDays(v int32)`
 
-SetDureeJours sets DureeJours field to given value.
+SetValidityDays sets ValidityDays field to given value.
 
-### HasDureeJours
+### HasValidityDays
 
-`func (o *GenerateCertificateRequest) HasDureeJours() bool`
+`func (o *GenerateCertificateRequest) HasValidityDays() bool`
 
-HasDureeJours returns a boolean if a field has been set.
+HasValidityDays returns a boolean if a field has been set.
 
-### GetTailleCle
+### GetKeySize
 
-`func (o *GenerateCertificateRequest) GetTailleCle() int32`
+`func (o *GenerateCertificateRequest) GetKeySize() int32`
 
-GetTailleCle returns the TailleCle field if non-nil, zero value otherwise.
+GetKeySize returns the KeySize field if non-nil, zero value otherwise.
 
-### GetTailleCleOk
+### GetKeySizeOk
 
-`func (o *GenerateCertificateRequest) GetTailleCleOk() (*int32, bool)`
+`func (o *GenerateCertificateRequest) GetKeySizeOk() (*int32, bool)`
 
-GetTailleCleOk returns a tuple with the TailleCle field if it's non-nil, zero value otherwise
+GetKeySizeOk returns a tuple with the KeySize field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTailleCle
+### SetKeySize
 
-`func (o *GenerateCertificateRequest) SetTailleCle(v int32)`
+`func (o *GenerateCertificateRequest) SetKeySize(v int32)`
 
-SetTailleCle sets TailleCle field to given value.
+SetKeySize sets KeySize field to given value.
 
-### HasTailleCle
+### HasKeySize
 
-`func (o *GenerateCertificateRequest) HasTailleCle() bool`
+`func (o *GenerateCertificateRequest) HasKeySize() bool`
 
-HasTailleCle returns a boolean if a field has been set.
+HasKeySize returns a boolean if a field has been set.
 
-### GetPassphraseCle
+### GetKeyPassphrase
 
-`func (o *GenerateCertificateRequest) GetPassphraseCle() string`
+`func (o *GenerateCertificateRequest) GetKeyPassphrase() string`
 
-GetPassphraseCle returns the PassphraseCle field if non-nil, zero value otherwise.
+GetKeyPassphrase returns the KeyPassphrase field if non-nil, zero value otherwise.
 
-### GetPassphraseCleOk
+### GetKeyPassphraseOk
 
-`func (o *GenerateCertificateRequest) GetPassphraseCleOk() (*string, bool)`
+`func (o *GenerateCertificateRequest) GetKeyPassphraseOk() (*string, bool)`
 
-GetPassphraseCleOk returns a tuple with the PassphraseCle field if it's non-nil, zero value otherwise
+GetKeyPassphraseOk returns a tuple with the KeyPassphrase field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPassphraseCle
+### SetKeyPassphrase
 
-`func (o *GenerateCertificateRequest) SetPassphraseCle(v string)`
+`func (o *GenerateCertificateRequest) SetKeyPassphrase(v string)`
 
-SetPassphraseCle sets PassphraseCle field to given value.
+SetKeyPassphrase sets KeyPassphrase field to given value.
 
-### HasPassphraseCle
+### HasKeyPassphrase
 
-`func (o *GenerateCertificateRequest) HasPassphraseCle() bool`
+`func (o *GenerateCertificateRequest) HasKeyPassphrase() bool`
 
-HasPassphraseCle returns a boolean if a field has been set.
+HasKeyPassphrase returns a boolean if a field has been set.
 
-### SetPassphraseCleNil
+### SetKeyPassphraseNil
 
-`func (o *GenerateCertificateRequest) SetPassphraseCleNil(b bool)`
+`func (o *GenerateCertificateRequest) SetKeyPassphraseNil(b bool)`
 
- SetPassphraseCleNil sets the value for PassphraseCle to be an explicit nil
+ SetKeyPassphraseNil sets the value for KeyPassphrase to be an explicit nil
 
-### UnsetPassphraseCle
-`func (o *GenerateCertificateRequest) UnsetPassphraseCle()`
+### UnsetKeyPassphrase
+`func (o *GenerateCertificateRequest) UnsetKeyPassphrase()`
 
-UnsetPassphraseCle ensures that no value is present for PassphraseCle, not even an explicit nil
-### GetGenererP12
+UnsetKeyPassphrase ensures that no value is present for KeyPassphrase, not even an explicit nil
+### GetGenerateP12
 
-`func (o *GenerateCertificateRequest) GetGenererP12() bool`
+`func (o *GenerateCertificateRequest) GetGenerateP12() bool`
 
-GetGenererP12 returns the GenererP12 field if non-nil, zero value otherwise.
+GetGenerateP12 returns the GenerateP12 field if non-nil, zero value otherwise.
 
-### GetGenererP12Ok
+### GetGenerateP12Ok
 
-`func (o *GenerateCertificateRequest) GetGenererP12Ok() (*bool, bool)`
+`func (o *GenerateCertificateRequest) GetGenerateP12Ok() (*bool, bool)`
 
-GetGenererP12Ok returns a tuple with the GenererP12 field if it's non-nil, zero value otherwise
+GetGenerateP12Ok returns a tuple with the GenerateP12 field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetGenererP12
+### SetGenerateP12
 
-`func (o *GenerateCertificateRequest) SetGenererP12(v bool)`
+`func (o *GenerateCertificateRequest) SetGenerateP12(v bool)`
 
-SetGenererP12 sets GenererP12 field to given value.
+SetGenerateP12 sets GenerateP12 field to given value.
 
-### HasGenererP12
+### HasGenerateP12
 
-`func (o *GenerateCertificateRequest) HasGenererP12() bool`
+`func (o *GenerateCertificateRequest) HasGenerateP12() bool`
 
-HasGenererP12 returns a boolean if a field has been set.
+HasGenerateP12 returns a boolean if a field has been set.
 
-### GetPassphraseP12
+### GetP12Passphrase
 
-`func (o *GenerateCertificateRequest) GetPassphraseP12() string`
+`func (o *GenerateCertificateRequest) GetP12Passphrase() string`
 
-GetPassphraseP12 returns the PassphraseP12 field if non-nil, zero value otherwise.
+GetP12Passphrase returns the P12Passphrase field if non-nil, zero value otherwise.
 
-### GetPassphraseP12Ok
+### GetP12PassphraseOk
 
-`func (o *GenerateCertificateRequest) GetPassphraseP12Ok() (*string, bool)`
+`func (o *GenerateCertificateRequest) GetP12PassphraseOk() (*string, bool)`
 
-GetPassphraseP12Ok returns a tuple with the PassphraseP12 field if it's non-nil, zero value otherwise
+GetP12PassphraseOk returns a tuple with the P12Passphrase field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPassphraseP12
+### SetP12Passphrase
 
-`func (o *GenerateCertificateRequest) SetPassphraseP12(v string)`
+`func (o *GenerateCertificateRequest) SetP12Passphrase(v string)`
 
-SetPassphraseP12 sets PassphraseP12 field to given value.
+SetP12Passphrase sets P12Passphrase field to given value.
 
-### HasPassphraseP12
+### HasP12Passphrase
 
-`func (o *GenerateCertificateRequest) HasPassphraseP12() bool`
+`func (o *GenerateCertificateRequest) HasP12Passphrase() bool`
 
-HasPassphraseP12 returns a boolean if a field has been set.
+HasP12Passphrase returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

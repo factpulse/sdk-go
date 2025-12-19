@@ -1,5 +1,5 @@
 /*
-API REST FactPulse
+FactPulse REST API
 
 Testing AFNORPDPPAAPIService
 
@@ -34,13 +34,13 @@ func Test_factpulse_AFNORPDPPAAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test AFNORPDPPAAPIService GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet", func(t *testing.T) {
+	t.Run("Test AFNORPDPPAAPIService GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var flowId string
 
-		resp, httpRes, err := apiClient.AFNORPDPPAAPI.GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(context.Background(), flowId).Execute()
+		resp, httpRes, err := apiClient.AFNORPDPPAAPI.GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet(context.Background(), flowId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

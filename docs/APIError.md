@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ErrorCode** | **string** | Code alphanumérique identifiant précisément l&#39;erreur | 
-**ErrorMessage** | **string** | Message décrivant l&#39;erreur (non destiné à l&#39;utilisateur final) | 
+**ErrorCode** | **string** | Alphanumeric code precisely identifying the error | 
+**ErrorMessage** | **string** | Message describing the error (not intended for end user) | 
 **Details** | Pointer to [**[]ValidationErrorDetail**](ValidationErrorDetail.md) |  | [optional] 
 
 ## Methods

@@ -10,7 +10,7 @@ func NewFactPulseAuthError(msg string) *FactPulseAuthError { return &FactPulseAu
 
 type FactPulsePollingTimeout struct { FactPulseError; TaskID string; Timeout int64 }
 func NewFactPulsePollingTimeout(taskID string, timeout int64) *FactPulsePollingTimeout {
-    return &FactPulsePollingTimeout{FactPulseError: FactPulseError{Message: fmt.Sprintf("Timeout (%dms) pour %s", timeout, taskID)}, TaskID: taskID, Timeout: timeout}
+    return &FactPulsePollingTimeout{FactPulseError: FactPulseError{Message: fmt.Sprintf("Timeout (%dms) for task %s", timeout, taskID)}, TaskID: taskID, Timeout: timeout}
 }
 
 type ValidationErrorDetail struct { Level, Item, Reason string; Source, Code *string }

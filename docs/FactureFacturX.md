@@ -4,28 +4,28 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**NumeroFacture** | **string** |  | 
-**DateEcheancePaiement** | **string** |  | 
-**DateFacture** | Pointer to **string** |  | [optional] 
-**ModeDepot** | [**ModeDepot**](ModeDepot.md) |  | 
-**Destinataire** | [**Destinataire**](Destinataire.md) |  | 
-**Fournisseur** | [**Fournisseur**](Fournisseur.md) |  | 
-**CadreDeFacturation** | [**CadreDeFacturation**](CadreDeFacturation.md) |  | 
-**References** | [**References**](References.md) |  | 
-**MontantTotal** | [**MontantTotal**](MontantTotal.md) |  | 
-**LignesDePoste** | Pointer to [**[]LigneDePoste**](LigneDePoste.md) |  | [optional] 
-**LignesDeTva** | Pointer to [**[]LigneDeTVA**](LigneDeTVA.md) |  | [optional] 
-**Notes** | Pointer to [**[]Note**](Note.md) |  | [optional] 
-**Commentaire** | Pointer to **NullableString** |  | [optional] 
-**IdUtilisateurCourant** | Pointer to **NullableInt32** |  | [optional] 
-**PiecesJointesComplementaires** | Pointer to [**[]PieceJointeComplementaire**](PieceJointeComplementaire.md) |  | [optional] 
-**Beneficiaire** | Pointer to [**NullableBeneficiaire**](Beneficiaire.md) |  | [optional] 
+**InvoiceNumber** | **string** |  | 
+**PaymentDueDate** | **string** |  | 
+**InvoiceDate** | Pointer to **string** |  | [optional] 
+**SubmissionMode** | [**SubmissionMode**](SubmissionMode.md) |  | 
+**Recipient** | [**Recipient**](Recipient.md) |  | 
+**Supplier** | [**Supplier**](Supplier.md) |  | 
+**InvoicingFramework** | [**InvoicingFramework**](InvoicingFramework.md) |  | 
+**References** | [**InvoiceReferences**](InvoiceReferences.md) |  | 
+**Totals** | [**InvoiceTotals**](InvoiceTotals.md) |  | 
+**InvoiceLines** | Pointer to [**[]InvoiceLine**](InvoiceLine.md) |  | [optional] 
+**VatLines** | Pointer to [**[]VATLine**](VATLine.md) |  | [optional] 
+**Notes** | Pointer to [**[]InvoiceNote**](InvoiceNote.md) |  | [optional] 
+**Comment** | Pointer to **NullableString** |  | [optional] 
+**CurrentUserId** | Pointer to **NullableInt32** |  | [optional] 
+**SupplementaryAttachments** | Pointer to [**[]SupplementaryAttachment**](SupplementaryAttachment.md) |  | [optional] 
+**Payee** | Pointer to [**NullablePayee**](Payee.md) |  | [optional] 
 
 ## Methods
 
 ### NewFactureFacturX
 
-`func NewFactureFacturX(numeroFacture string, dateEcheancePaiement string, modeDepot ModeDepot, destinataire Destinataire, fournisseur Fournisseur, cadreDeFacturation CadreDeFacturation, references References, montantTotal MontantTotal, ) *FactureFacturX`
+`func NewFactureFacturX(invoiceNumber string, paymentDueDate string, submissionMode SubmissionMode, recipient Recipient, supplier Supplier, invoicingFramework InvoicingFramework, references InvoiceReferences, totals InvoiceTotals, ) *FactureFacturX`
 
 NewFactureFacturX instantiates a new FactureFacturX object
 This constructor will assign default values to properties that have it defined,
@@ -40,257 +40,257 @@ NewFactureFacturXWithDefaults instantiates a new FactureFacturX object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetNumeroFacture
+### GetInvoiceNumber
 
-`func (o *FactureFacturX) GetNumeroFacture() string`
+`func (o *FactureFacturX) GetInvoiceNumber() string`
 
-GetNumeroFacture returns the NumeroFacture field if non-nil, zero value otherwise.
+GetInvoiceNumber returns the InvoiceNumber field if non-nil, zero value otherwise.
 
-### GetNumeroFactureOk
+### GetInvoiceNumberOk
 
-`func (o *FactureFacturX) GetNumeroFactureOk() (*string, bool)`
+`func (o *FactureFacturX) GetInvoiceNumberOk() (*string, bool)`
 
-GetNumeroFactureOk returns a tuple with the NumeroFacture field if it's non-nil, zero value otherwise
+GetInvoiceNumberOk returns a tuple with the InvoiceNumber field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetNumeroFacture
+### SetInvoiceNumber
 
-`func (o *FactureFacturX) SetNumeroFacture(v string)`
+`func (o *FactureFacturX) SetInvoiceNumber(v string)`
 
-SetNumeroFacture sets NumeroFacture field to given value.
+SetInvoiceNumber sets InvoiceNumber field to given value.
 
 
-### GetDateEcheancePaiement
+### GetPaymentDueDate
 
-`func (o *FactureFacturX) GetDateEcheancePaiement() string`
+`func (o *FactureFacturX) GetPaymentDueDate() string`
 
-GetDateEcheancePaiement returns the DateEcheancePaiement field if non-nil, zero value otherwise.
+GetPaymentDueDate returns the PaymentDueDate field if non-nil, zero value otherwise.
 
-### GetDateEcheancePaiementOk
+### GetPaymentDueDateOk
 
-`func (o *FactureFacturX) GetDateEcheancePaiementOk() (*string, bool)`
+`func (o *FactureFacturX) GetPaymentDueDateOk() (*string, bool)`
 
-GetDateEcheancePaiementOk returns a tuple with the DateEcheancePaiement field if it's non-nil, zero value otherwise
+GetPaymentDueDateOk returns a tuple with the PaymentDueDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDateEcheancePaiement
+### SetPaymentDueDate
 
-`func (o *FactureFacturX) SetDateEcheancePaiement(v string)`
+`func (o *FactureFacturX) SetPaymentDueDate(v string)`
 
-SetDateEcheancePaiement sets DateEcheancePaiement field to given value.
+SetPaymentDueDate sets PaymentDueDate field to given value.
 
 
-### GetDateFacture
+### GetInvoiceDate
 
-`func (o *FactureFacturX) GetDateFacture() string`
+`func (o *FactureFacturX) GetInvoiceDate() string`
 
-GetDateFacture returns the DateFacture field if non-nil, zero value otherwise.
+GetInvoiceDate returns the InvoiceDate field if non-nil, zero value otherwise.
 
-### GetDateFactureOk
+### GetInvoiceDateOk
 
-`func (o *FactureFacturX) GetDateFactureOk() (*string, bool)`
+`func (o *FactureFacturX) GetInvoiceDateOk() (*string, bool)`
 
-GetDateFactureOk returns a tuple with the DateFacture field if it's non-nil, zero value otherwise
+GetInvoiceDateOk returns a tuple with the InvoiceDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDateFacture
+### SetInvoiceDate
 
-`func (o *FactureFacturX) SetDateFacture(v string)`
+`func (o *FactureFacturX) SetInvoiceDate(v string)`
 
-SetDateFacture sets DateFacture field to given value.
+SetInvoiceDate sets InvoiceDate field to given value.
 
-### HasDateFacture
+### HasInvoiceDate
 
-`func (o *FactureFacturX) HasDateFacture() bool`
+`func (o *FactureFacturX) HasInvoiceDate() bool`
 
-HasDateFacture returns a boolean if a field has been set.
+HasInvoiceDate returns a boolean if a field has been set.
 
-### GetModeDepot
+### GetSubmissionMode
 
-`func (o *FactureFacturX) GetModeDepot() ModeDepot`
+`func (o *FactureFacturX) GetSubmissionMode() SubmissionMode`
 
-GetModeDepot returns the ModeDepot field if non-nil, zero value otherwise.
+GetSubmissionMode returns the SubmissionMode field if non-nil, zero value otherwise.
 
-### GetModeDepotOk
+### GetSubmissionModeOk
 
-`func (o *FactureFacturX) GetModeDepotOk() (*ModeDepot, bool)`
+`func (o *FactureFacturX) GetSubmissionModeOk() (*SubmissionMode, bool)`
 
-GetModeDepotOk returns a tuple with the ModeDepot field if it's non-nil, zero value otherwise
+GetSubmissionModeOk returns a tuple with the SubmissionMode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetModeDepot
+### SetSubmissionMode
 
-`func (o *FactureFacturX) SetModeDepot(v ModeDepot)`
+`func (o *FactureFacturX) SetSubmissionMode(v SubmissionMode)`
 
-SetModeDepot sets ModeDepot field to given value.
+SetSubmissionMode sets SubmissionMode field to given value.
 
 
-### GetDestinataire
+### GetRecipient
 
-`func (o *FactureFacturX) GetDestinataire() Destinataire`
+`func (o *FactureFacturX) GetRecipient() Recipient`
 
-GetDestinataire returns the Destinataire field if non-nil, zero value otherwise.
+GetRecipient returns the Recipient field if non-nil, zero value otherwise.
 
-### GetDestinataireOk
+### GetRecipientOk
 
-`func (o *FactureFacturX) GetDestinataireOk() (*Destinataire, bool)`
+`func (o *FactureFacturX) GetRecipientOk() (*Recipient, bool)`
 
-GetDestinataireOk returns a tuple with the Destinataire field if it's non-nil, zero value otherwise
+GetRecipientOk returns a tuple with the Recipient field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDestinataire
+### SetRecipient
 
-`func (o *FactureFacturX) SetDestinataire(v Destinataire)`
+`func (o *FactureFacturX) SetRecipient(v Recipient)`
 
-SetDestinataire sets Destinataire field to given value.
+SetRecipient sets Recipient field to given value.
 
 
-### GetFournisseur
+### GetSupplier
 
-`func (o *FactureFacturX) GetFournisseur() Fournisseur`
+`func (o *FactureFacturX) GetSupplier() Supplier`
 
-GetFournisseur returns the Fournisseur field if non-nil, zero value otherwise.
+GetSupplier returns the Supplier field if non-nil, zero value otherwise.
 
-### GetFournisseurOk
+### GetSupplierOk
 
-`func (o *FactureFacturX) GetFournisseurOk() (*Fournisseur, bool)`
+`func (o *FactureFacturX) GetSupplierOk() (*Supplier, bool)`
 
-GetFournisseurOk returns a tuple with the Fournisseur field if it's non-nil, zero value otherwise
+GetSupplierOk returns a tuple with the Supplier field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetFournisseur
+### SetSupplier
 
-`func (o *FactureFacturX) SetFournisseur(v Fournisseur)`
+`func (o *FactureFacturX) SetSupplier(v Supplier)`
 
-SetFournisseur sets Fournisseur field to given value.
+SetSupplier sets Supplier field to given value.
 
 
-### GetCadreDeFacturation
+### GetInvoicingFramework
 
-`func (o *FactureFacturX) GetCadreDeFacturation() CadreDeFacturation`
+`func (o *FactureFacturX) GetInvoicingFramework() InvoicingFramework`
 
-GetCadreDeFacturation returns the CadreDeFacturation field if non-nil, zero value otherwise.
+GetInvoicingFramework returns the InvoicingFramework field if non-nil, zero value otherwise.
 
-### GetCadreDeFacturationOk
+### GetInvoicingFrameworkOk
 
-`func (o *FactureFacturX) GetCadreDeFacturationOk() (*CadreDeFacturation, bool)`
+`func (o *FactureFacturX) GetInvoicingFrameworkOk() (*InvoicingFramework, bool)`
 
-GetCadreDeFacturationOk returns a tuple with the CadreDeFacturation field if it's non-nil, zero value otherwise
+GetInvoicingFrameworkOk returns a tuple with the InvoicingFramework field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCadreDeFacturation
+### SetInvoicingFramework
 
-`func (o *FactureFacturX) SetCadreDeFacturation(v CadreDeFacturation)`
+`func (o *FactureFacturX) SetInvoicingFramework(v InvoicingFramework)`
 
-SetCadreDeFacturation sets CadreDeFacturation field to given value.
+SetInvoicingFramework sets InvoicingFramework field to given value.
 
 
 ### GetReferences
 
-`func (o *FactureFacturX) GetReferences() References`
+`func (o *FactureFacturX) GetReferences() InvoiceReferences`
 
 GetReferences returns the References field if non-nil, zero value otherwise.
 
 ### GetReferencesOk
 
-`func (o *FactureFacturX) GetReferencesOk() (*References, bool)`
+`func (o *FactureFacturX) GetReferencesOk() (*InvoiceReferences, bool)`
 
 GetReferencesOk returns a tuple with the References field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetReferences
 
-`func (o *FactureFacturX) SetReferences(v References)`
+`func (o *FactureFacturX) SetReferences(v InvoiceReferences)`
 
 SetReferences sets References field to given value.
 
 
-### GetMontantTotal
+### GetTotals
 
-`func (o *FactureFacturX) GetMontantTotal() MontantTotal`
+`func (o *FactureFacturX) GetTotals() InvoiceTotals`
 
-GetMontantTotal returns the MontantTotal field if non-nil, zero value otherwise.
+GetTotals returns the Totals field if non-nil, zero value otherwise.
 
-### GetMontantTotalOk
+### GetTotalsOk
 
-`func (o *FactureFacturX) GetMontantTotalOk() (*MontantTotal, bool)`
+`func (o *FactureFacturX) GetTotalsOk() (*InvoiceTotals, bool)`
 
-GetMontantTotalOk returns a tuple with the MontantTotal field if it's non-nil, zero value otherwise
+GetTotalsOk returns a tuple with the Totals field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMontantTotal
+### SetTotals
 
-`func (o *FactureFacturX) SetMontantTotal(v MontantTotal)`
+`func (o *FactureFacturX) SetTotals(v InvoiceTotals)`
 
-SetMontantTotal sets MontantTotal field to given value.
+SetTotals sets Totals field to given value.
 
 
-### GetLignesDePoste
+### GetInvoiceLines
 
-`func (o *FactureFacturX) GetLignesDePoste() []LigneDePoste`
+`func (o *FactureFacturX) GetInvoiceLines() []InvoiceLine`
 
-GetLignesDePoste returns the LignesDePoste field if non-nil, zero value otherwise.
+GetInvoiceLines returns the InvoiceLines field if non-nil, zero value otherwise.
 
-### GetLignesDePosteOk
+### GetInvoiceLinesOk
 
-`func (o *FactureFacturX) GetLignesDePosteOk() (*[]LigneDePoste, bool)`
+`func (o *FactureFacturX) GetInvoiceLinesOk() (*[]InvoiceLine, bool)`
 
-GetLignesDePosteOk returns a tuple with the LignesDePoste field if it's non-nil, zero value otherwise
+GetInvoiceLinesOk returns a tuple with the InvoiceLines field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetLignesDePoste
+### SetInvoiceLines
 
-`func (o *FactureFacturX) SetLignesDePoste(v []LigneDePoste)`
+`func (o *FactureFacturX) SetInvoiceLines(v []InvoiceLine)`
 
-SetLignesDePoste sets LignesDePoste field to given value.
+SetInvoiceLines sets InvoiceLines field to given value.
 
-### HasLignesDePoste
+### HasInvoiceLines
 
-`func (o *FactureFacturX) HasLignesDePoste() bool`
+`func (o *FactureFacturX) HasInvoiceLines() bool`
 
-HasLignesDePoste returns a boolean if a field has been set.
+HasInvoiceLines returns a boolean if a field has been set.
 
-### GetLignesDeTva
+### GetVatLines
 
-`func (o *FactureFacturX) GetLignesDeTva() []LigneDeTVA`
+`func (o *FactureFacturX) GetVatLines() []VATLine`
 
-GetLignesDeTva returns the LignesDeTva field if non-nil, zero value otherwise.
+GetVatLines returns the VatLines field if non-nil, zero value otherwise.
 
-### GetLignesDeTvaOk
+### GetVatLinesOk
 
-`func (o *FactureFacturX) GetLignesDeTvaOk() (*[]LigneDeTVA, bool)`
+`func (o *FactureFacturX) GetVatLinesOk() (*[]VATLine, bool)`
 
-GetLignesDeTvaOk returns a tuple with the LignesDeTva field if it's non-nil, zero value otherwise
+GetVatLinesOk returns a tuple with the VatLines field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetLignesDeTva
+### SetVatLines
 
-`func (o *FactureFacturX) SetLignesDeTva(v []LigneDeTVA)`
+`func (o *FactureFacturX) SetVatLines(v []VATLine)`
 
-SetLignesDeTva sets LignesDeTva field to given value.
+SetVatLines sets VatLines field to given value.
 
-### HasLignesDeTva
+### HasVatLines
 
-`func (o *FactureFacturX) HasLignesDeTva() bool`
+`func (o *FactureFacturX) HasVatLines() bool`
 
-HasLignesDeTva returns a boolean if a field has been set.
+HasVatLines returns a boolean if a field has been set.
 
 ### GetNotes
 
-`func (o *FactureFacturX) GetNotes() []Note`
+`func (o *FactureFacturX) GetNotes() []InvoiceNote`
 
 GetNotes returns the Notes field if non-nil, zero value otherwise.
 
 ### GetNotesOk
 
-`func (o *FactureFacturX) GetNotesOk() (*[]Note, bool)`
+`func (o *FactureFacturX) GetNotesOk() (*[]InvoiceNote, bool)`
 
 GetNotesOk returns a tuple with the Notes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNotes
 
-`func (o *FactureFacturX) SetNotes(v []Note)`
+`func (o *FactureFacturX) SetNotes(v []InvoiceNote)`
 
 SetNotes sets Notes field to given value.
 
@@ -300,146 +300,146 @@ SetNotes sets Notes field to given value.
 
 HasNotes returns a boolean if a field has been set.
 
-### GetCommentaire
+### GetComment
 
-`func (o *FactureFacturX) GetCommentaire() string`
+`func (o *FactureFacturX) GetComment() string`
 
-GetCommentaire returns the Commentaire field if non-nil, zero value otherwise.
+GetComment returns the Comment field if non-nil, zero value otherwise.
 
-### GetCommentaireOk
+### GetCommentOk
 
-`func (o *FactureFacturX) GetCommentaireOk() (*string, bool)`
+`func (o *FactureFacturX) GetCommentOk() (*string, bool)`
 
-GetCommentaireOk returns a tuple with the Commentaire field if it's non-nil, zero value otherwise
+GetCommentOk returns a tuple with the Comment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCommentaire
+### SetComment
 
-`func (o *FactureFacturX) SetCommentaire(v string)`
+`func (o *FactureFacturX) SetComment(v string)`
 
-SetCommentaire sets Commentaire field to given value.
+SetComment sets Comment field to given value.
 
-### HasCommentaire
+### HasComment
 
-`func (o *FactureFacturX) HasCommentaire() bool`
+`func (o *FactureFacturX) HasComment() bool`
 
-HasCommentaire returns a boolean if a field has been set.
+HasComment returns a boolean if a field has been set.
 
-### SetCommentaireNil
+### SetCommentNil
 
-`func (o *FactureFacturX) SetCommentaireNil(b bool)`
+`func (o *FactureFacturX) SetCommentNil(b bool)`
 
- SetCommentaireNil sets the value for Commentaire to be an explicit nil
+ SetCommentNil sets the value for Comment to be an explicit nil
 
-### UnsetCommentaire
-`func (o *FactureFacturX) UnsetCommentaire()`
+### UnsetComment
+`func (o *FactureFacturX) UnsetComment()`
 
-UnsetCommentaire ensures that no value is present for Commentaire, not even an explicit nil
-### GetIdUtilisateurCourant
+UnsetComment ensures that no value is present for Comment, not even an explicit nil
+### GetCurrentUserId
 
-`func (o *FactureFacturX) GetIdUtilisateurCourant() int32`
+`func (o *FactureFacturX) GetCurrentUserId() int32`
 
-GetIdUtilisateurCourant returns the IdUtilisateurCourant field if non-nil, zero value otherwise.
+GetCurrentUserId returns the CurrentUserId field if non-nil, zero value otherwise.
 
-### GetIdUtilisateurCourantOk
+### GetCurrentUserIdOk
 
-`func (o *FactureFacturX) GetIdUtilisateurCourantOk() (*int32, bool)`
+`func (o *FactureFacturX) GetCurrentUserIdOk() (*int32, bool)`
 
-GetIdUtilisateurCourantOk returns a tuple with the IdUtilisateurCourant field if it's non-nil, zero value otherwise
+GetCurrentUserIdOk returns a tuple with the CurrentUserId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIdUtilisateurCourant
+### SetCurrentUserId
 
-`func (o *FactureFacturX) SetIdUtilisateurCourant(v int32)`
+`func (o *FactureFacturX) SetCurrentUserId(v int32)`
 
-SetIdUtilisateurCourant sets IdUtilisateurCourant field to given value.
+SetCurrentUserId sets CurrentUserId field to given value.
 
-### HasIdUtilisateurCourant
+### HasCurrentUserId
 
-`func (o *FactureFacturX) HasIdUtilisateurCourant() bool`
+`func (o *FactureFacturX) HasCurrentUserId() bool`
 
-HasIdUtilisateurCourant returns a boolean if a field has been set.
+HasCurrentUserId returns a boolean if a field has been set.
 
-### SetIdUtilisateurCourantNil
+### SetCurrentUserIdNil
 
-`func (o *FactureFacturX) SetIdUtilisateurCourantNil(b bool)`
+`func (o *FactureFacturX) SetCurrentUserIdNil(b bool)`
 
- SetIdUtilisateurCourantNil sets the value for IdUtilisateurCourant to be an explicit nil
+ SetCurrentUserIdNil sets the value for CurrentUserId to be an explicit nil
 
-### UnsetIdUtilisateurCourant
-`func (o *FactureFacturX) UnsetIdUtilisateurCourant()`
+### UnsetCurrentUserId
+`func (o *FactureFacturX) UnsetCurrentUserId()`
 
-UnsetIdUtilisateurCourant ensures that no value is present for IdUtilisateurCourant, not even an explicit nil
-### GetPiecesJointesComplementaires
+UnsetCurrentUserId ensures that no value is present for CurrentUserId, not even an explicit nil
+### GetSupplementaryAttachments
 
-`func (o *FactureFacturX) GetPiecesJointesComplementaires() []PieceJointeComplementaire`
+`func (o *FactureFacturX) GetSupplementaryAttachments() []SupplementaryAttachment`
 
-GetPiecesJointesComplementaires returns the PiecesJointesComplementaires field if non-nil, zero value otherwise.
+GetSupplementaryAttachments returns the SupplementaryAttachments field if non-nil, zero value otherwise.
 
-### GetPiecesJointesComplementairesOk
+### GetSupplementaryAttachmentsOk
 
-`func (o *FactureFacturX) GetPiecesJointesComplementairesOk() (*[]PieceJointeComplementaire, bool)`
+`func (o *FactureFacturX) GetSupplementaryAttachmentsOk() (*[]SupplementaryAttachment, bool)`
 
-GetPiecesJointesComplementairesOk returns a tuple with the PiecesJointesComplementaires field if it's non-nil, zero value otherwise
+GetSupplementaryAttachmentsOk returns a tuple with the SupplementaryAttachments field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPiecesJointesComplementaires
+### SetSupplementaryAttachments
 
-`func (o *FactureFacturX) SetPiecesJointesComplementaires(v []PieceJointeComplementaire)`
+`func (o *FactureFacturX) SetSupplementaryAttachments(v []SupplementaryAttachment)`
 
-SetPiecesJointesComplementaires sets PiecesJointesComplementaires field to given value.
+SetSupplementaryAttachments sets SupplementaryAttachments field to given value.
 
-### HasPiecesJointesComplementaires
+### HasSupplementaryAttachments
 
-`func (o *FactureFacturX) HasPiecesJointesComplementaires() bool`
+`func (o *FactureFacturX) HasSupplementaryAttachments() bool`
 
-HasPiecesJointesComplementaires returns a boolean if a field has been set.
+HasSupplementaryAttachments returns a boolean if a field has been set.
 
-### SetPiecesJointesComplementairesNil
+### SetSupplementaryAttachmentsNil
 
-`func (o *FactureFacturX) SetPiecesJointesComplementairesNil(b bool)`
+`func (o *FactureFacturX) SetSupplementaryAttachmentsNil(b bool)`
 
- SetPiecesJointesComplementairesNil sets the value for PiecesJointesComplementaires to be an explicit nil
+ SetSupplementaryAttachmentsNil sets the value for SupplementaryAttachments to be an explicit nil
 
-### UnsetPiecesJointesComplementaires
-`func (o *FactureFacturX) UnsetPiecesJointesComplementaires()`
+### UnsetSupplementaryAttachments
+`func (o *FactureFacturX) UnsetSupplementaryAttachments()`
 
-UnsetPiecesJointesComplementaires ensures that no value is present for PiecesJointesComplementaires, not even an explicit nil
-### GetBeneficiaire
+UnsetSupplementaryAttachments ensures that no value is present for SupplementaryAttachments, not even an explicit nil
+### GetPayee
 
-`func (o *FactureFacturX) GetBeneficiaire() Beneficiaire`
+`func (o *FactureFacturX) GetPayee() Payee`
 
-GetBeneficiaire returns the Beneficiaire field if non-nil, zero value otherwise.
+GetPayee returns the Payee field if non-nil, zero value otherwise.
 
-### GetBeneficiaireOk
+### GetPayeeOk
 
-`func (o *FactureFacturX) GetBeneficiaireOk() (*Beneficiaire, bool)`
+`func (o *FactureFacturX) GetPayeeOk() (*Payee, bool)`
 
-GetBeneficiaireOk returns a tuple with the Beneficiaire field if it's non-nil, zero value otherwise
+GetPayeeOk returns a tuple with the Payee field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetBeneficiaire
+### SetPayee
 
-`func (o *FactureFacturX) SetBeneficiaire(v Beneficiaire)`
+`func (o *FactureFacturX) SetPayee(v Payee)`
 
-SetBeneficiaire sets Beneficiaire field to given value.
+SetPayee sets Payee field to given value.
 
-### HasBeneficiaire
+### HasPayee
 
-`func (o *FactureFacturX) HasBeneficiaire() bool`
+`func (o *FactureFacturX) HasPayee() bool`
 
-HasBeneficiaire returns a boolean if a field has been set.
+HasPayee returns a boolean if a field has been set.
 
-### SetBeneficiaireNil
+### SetPayeeNil
 
-`func (o *FactureFacturX) SetBeneficiaireNil(b bool)`
+`func (o *FactureFacturX) SetPayeeNil(b bool)`
 
- SetBeneficiaireNil sets the value for Beneficiaire to be an explicit nil
+ SetPayeeNil sets the value for Payee to be an explicit nil
 
-### UnsetBeneficiaire
-`func (o *FactureFacturX) UnsetBeneficiaire()`
+### UnsetPayee
+`func (o *FactureFacturX) UnsetPayee()`
 
-UnsetBeneficiaire ensures that no value is present for Beneficiaire, not even an explicit nil
+UnsetPayee ensures that no value is present for Payee, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

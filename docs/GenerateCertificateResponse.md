@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Status** | Pointer to **string** | Statut de l&#39;opération | [optional] [default to "success"]
-**CertificatPem** | **string** | Certificat X.509 au format PEM | 
-**ClePriveePem** | **string** | Clé privée RSA au format PEM | 
+**Status** | Pointer to **string** | Operation status | [optional] [default to "success"]
+**CertificatePem** | **string** | X.509 certificate in PEM format | 
+**PrivateKeyPem** | **string** | RSA private key in PEM format | 
 **Pkcs12Base64** | Pointer to **NullableString** |  | [optional] 
-**Info** | [**CertificateInfoResponse**](CertificateInfoResponse.md) | Informations sur le certificat généré | 
-**Avertissement** | Pointer to **string** | Avertissement sur l&#39;utilisation du certificat | [optional] [default to "⚠️ Ce certificat est AUTO-SIGNÉ et destiné uniquement aux TESTS. Ne PAS utiliser en production. Niveau eIDAS : SES (Simple Electronic Signature)"]
+**Info** | [**CertificateInfoResponse**](CertificateInfoResponse.md) | Generated certificate information | 
+**Warning** | Pointer to **string** | Warning about certificate usage | [optional] [default to "WARNING: This certificate is SELF-SIGNED and intended for TESTING only. DO NOT use in production. eIDAS level: SES (Simple Electronic Signature)"]
 
 ## Methods
 
 ### NewGenerateCertificateResponse
 
-`func NewGenerateCertificateResponse(certificatPem string, clePriveePem string, info CertificateInfoResponse, ) *GenerateCertificateResponse`
+`func NewGenerateCertificateResponse(certificatePem string, privateKeyPem string, info CertificateInfoResponse, ) *GenerateCertificateResponse`
 
 NewGenerateCertificateResponse instantiates a new GenerateCertificateResponse object
 This constructor will assign default values to properties that have it defined,
@@ -55,44 +55,44 @@ SetStatus sets Status field to given value.
 
 HasStatus returns a boolean if a field has been set.
 
-### GetCertificatPem
+### GetCertificatePem
 
-`func (o *GenerateCertificateResponse) GetCertificatPem() string`
+`func (o *GenerateCertificateResponse) GetCertificatePem() string`
 
-GetCertificatPem returns the CertificatPem field if non-nil, zero value otherwise.
+GetCertificatePem returns the CertificatePem field if non-nil, zero value otherwise.
 
-### GetCertificatPemOk
+### GetCertificatePemOk
 
-`func (o *GenerateCertificateResponse) GetCertificatPemOk() (*string, bool)`
+`func (o *GenerateCertificateResponse) GetCertificatePemOk() (*string, bool)`
 
-GetCertificatPemOk returns a tuple with the CertificatPem field if it's non-nil, zero value otherwise
+GetCertificatePemOk returns a tuple with the CertificatePem field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCertificatPem
+### SetCertificatePem
 
-`func (o *GenerateCertificateResponse) SetCertificatPem(v string)`
+`func (o *GenerateCertificateResponse) SetCertificatePem(v string)`
 
-SetCertificatPem sets CertificatPem field to given value.
+SetCertificatePem sets CertificatePem field to given value.
 
 
-### GetClePriveePem
+### GetPrivateKeyPem
 
-`func (o *GenerateCertificateResponse) GetClePriveePem() string`
+`func (o *GenerateCertificateResponse) GetPrivateKeyPem() string`
 
-GetClePriveePem returns the ClePriveePem field if non-nil, zero value otherwise.
+GetPrivateKeyPem returns the PrivateKeyPem field if non-nil, zero value otherwise.
 
-### GetClePriveePemOk
+### GetPrivateKeyPemOk
 
-`func (o *GenerateCertificateResponse) GetClePriveePemOk() (*string, bool)`
+`func (o *GenerateCertificateResponse) GetPrivateKeyPemOk() (*string, bool)`
 
-GetClePriveePemOk returns a tuple with the ClePriveePem field if it's non-nil, zero value otherwise
+GetPrivateKeyPemOk returns a tuple with the PrivateKeyPem field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetClePriveePem
+### SetPrivateKeyPem
 
-`func (o *GenerateCertificateResponse) SetClePriveePem(v string)`
+`func (o *GenerateCertificateResponse) SetPrivateKeyPem(v string)`
 
-SetClePriveePem sets ClePriveePem field to given value.
+SetPrivateKeyPem sets PrivateKeyPem field to given value.
 
 
 ### GetPkcs12Base64
@@ -150,30 +150,30 @@ and a boolean to check if the value has been set.
 SetInfo sets Info field to given value.
 
 
-### GetAvertissement
+### GetWarning
 
-`func (o *GenerateCertificateResponse) GetAvertissement() string`
+`func (o *GenerateCertificateResponse) GetWarning() string`
 
-GetAvertissement returns the Avertissement field if non-nil, zero value otherwise.
+GetWarning returns the Warning field if non-nil, zero value otherwise.
 
-### GetAvertissementOk
+### GetWarningOk
 
-`func (o *GenerateCertificateResponse) GetAvertissementOk() (*string, bool)`
+`func (o *GenerateCertificateResponse) GetWarningOk() (*string, bool)`
 
-GetAvertissementOk returns a tuple with the Avertissement field if it's non-nil, zero value otherwise
+GetWarningOk returns a tuple with the Warning field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAvertissement
+### SetWarning
 
-`func (o *GenerateCertificateResponse) SetAvertissement(v string)`
+`func (o *GenerateCertificateResponse) SetWarning(v string)`
 
-SetAvertissement sets Avertissement field to given value.
+SetWarning sets Warning field to given value.
 
-### HasAvertissement
+### HasWarning
 
-`func (o *GenerateCertificateResponse) HasAvertissement() bool`
+`func (o *GenerateCertificateResponse) HasWarning() bool`
 
-HasAvertissement returns a boolean if a field has been set.
+HasWarning returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

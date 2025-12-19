@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**X0** | **float32** | Coordonnée X gauche | 
-**Y0** | **float32** | Coordonnée Y bas | 
-**X1** | **float32** | Coordonnée X droite | 
-**Y1** | **float32** | Coordonnée Y haut | 
-**Page** | Pointer to **int32** | Numéro de page (0-indexed) | [optional] [default to 0]
-**Width** | **float32** | Largeur de la zone | 
-**Height** | **float32** | Hauteur de la zone | 
+**X0** | **float32** | Left X coordinate | 
+**Y0** | **float32** | Bottom Y coordinate | 
+**X1** | **float32** | Right X coordinate | 
+**Y1** | **float32** | Top Y coordinate | 
+**Page** | Pointer to **int32** | Page number (0-indexed) | [optional] [default to 0]
+**Width** | **float32** | Area width | 
+**Height** | **float32** | Area height | 
 
 ## Methods
 

@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Level** | Pointer to [**ErrorLevel**](ErrorLevel.md) | Niveau de gravité : &#39;Error&#39; ou &#39;Warning&#39; | [optional] [default to ERROR]
-**Item** | **string** | Identifiant de l&#39;élément concerné (XPath, champ, règle BR-FR, etc.) | 
-**Reason** | **string** | Description de l&#39;erreur | 
+**Level** | Pointer to [**ErrorLevel**](ErrorLevel.md) | Severity level: &#39;Error&#39; or &#39;Warning&#39; | [optional] [default to ERROR]
+**Item** | **string** | Identifier of the concerned element (XPath, field, BR-FR rule, etc.) | 
+**Reason** | **string** | Error description | 
 **Source** | Pointer to [**NullableErrorSource**](ErrorSource.md) |  | [optional] 
 **Code** | Pointer to **NullableString** |  | [optional] 
 

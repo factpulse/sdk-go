@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** |  | [optional] [default to "chorus_pro"]
-**Credentials** | Pointer to [**CredentialsAFNOR**](CredentialsAFNOR.md) |  | [optional] 
-**FlowSyntax** | Pointer to **string** | Syntaxe du flux à envoyer | [optional] [default to "Factur-X"]
+**Credentials** | Pointer to [**AFNORCredentials**](AFNORCredentials.md) |  | [optional] 
+**FlowSyntax** | Pointer to **string** | Flow syntax to send | [optional] [default to "Factur-X"]
 **TrackingId** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -55,20 +55,20 @@ HasType returns a boolean if a field has been set.
 
 ### GetCredentials
 
-`func (o *Destination) GetCredentials() CredentialsAFNOR`
+`func (o *Destination) GetCredentials() AFNORCredentials`
 
 GetCredentials returns the Credentials field if non-nil, zero value otherwise.
 
 ### GetCredentialsOk
 
-`func (o *Destination) GetCredentialsOk() (*CredentialsAFNOR, bool)`
+`func (o *Destination) GetCredentialsOk() (*AFNORCredentials, bool)`
 
 GetCredentialsOk returns a tuple with the Credentials field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCredentials
 
-`func (o *Destination) SetCredentials(v CredentialsAFNOR)`
+`func (o *Destination) SetCredentials(v AFNORCredentials)`
 
 SetCredentials sets Credentials field to given value.
 

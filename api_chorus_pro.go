@@ -1,7 +1,7 @@
 /*
-API REST FactPulse
+FactPulse REST API
 
- API REST pour la facturation électronique en France : Factur-X, AFNOR PDP/PA, signatures électroniques.  ## 🎯 Fonctionnalités principales  ### 📄 Génération de factures Factur-X - **Formats** : XML seul ou PDF/A-3 avec XML embarqué - **Profils** : MINIMUM, BASIC, EN16931, EXTENDED - **Normes** : EN 16931 (directive UE 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Format simplifié** : Génération à partir de SIRET + auto-enrichissement (API Chorus Pro + Recherche Entreprises)  ### ✅ Validation et conformité - **Validation XML** : Schematron (45 à 210+ règles selon profil) - **Validation PDF** : PDF/A-3, métadonnées XMP Factur-X, signatures électroniques - **VeraPDF** : Validation stricte PDF/A (146+ règles ISO 19005-3) - **Traitement asynchrone** : Support Celery pour validations lourdes (VeraPDF)  ### 📡 Intégration AFNOR PDP/PA (XP Z12-013) - **Soumission de flux** : Envoi de factures vers Plateformes de Dématérialisation Partenaires - **Recherche de flux** : Consultation des factures soumises - **Téléchargement** : Récupération des PDF/A-3 avec XML - **Directory Service** : Recherche d'entreprises (SIREN/SIRET) - **Multi-client** : Support de plusieurs configs PDP par utilisateur (stored credentials ou zero-storage)  ### ✍️ Signature électronique PDF - **Standards** : PAdES-B-B, PAdES-B-T (horodatage RFC 3161), PAdES-B-LT (archivage long terme) - **Niveaux eIDAS** : SES (auto-signé), AdES (CA commerciale), QES (PSCO) - **Validation** : Vérification intégrité cryptographique et certificats - **Génération de certificats** : Certificats X.509 auto-signés pour tests  ### 🔄 Traitement asynchrone - **Celery** : Génération, validation et signature asynchrones - **Polling** : Suivi d'état via `/taches/{id_tache}/statut` - **Pas de timeout** : Idéal pour gros fichiers ou validations lourdes  ## 🔒 Authentification  Toutes les requêtes nécessitent un **token JWT** dans le header Authorization : ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### Comment obtenir un token JWT ?  #### 🔑 Méthode 1 : API `/api/token/` (Recommandée)  **URL :** `https://www.factpulse.fr/api/token/`  Cette méthode est **recommandée** pour l'intégration dans vos applications et workflows CI/CD.  **Prérequis :** Avoir défini un mot de passe sur votre compte  **Pour les utilisateurs inscrits via email/password :** - Vous avez déjà un mot de passe, utilisez-le directement  **Pour les utilisateurs inscrits via OAuth (Google/GitHub) :** - Vous devez d'abord définir un mot de passe sur : https://www.factpulse.fr/accounts/password/set/ - Une fois le mot de passe créé, vous pourrez utiliser l'API  **Exemple de requête :** ```bash curl -X POST https://www.factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"votre_email@example.com\",     \"password\": \"votre_mot_de_passe\"   }' ```  **Paramètre optionnel `client_uid` :**  Pour sélectionner les credentials d'un client spécifique (PA/PDP, Chorus Pro, certificats de signature), ajoutez `client_uid` :  ```bash curl -X POST https://www.factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"votre_email@example.com\",     \"password\": \"votre_mot_de_passe\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  Le `client_uid` sera inclus dans le JWT et permettra à l'API d'utiliser automatiquement : - Les credentials AFNOR/PDP configurés pour ce client - Les credentials Chorus Pro configurés pour ce client - Les certificats de signature électronique configurés pour ce client  **Réponse :** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Token d'accès (validité: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Token de rafraîchissement (validité: 7 jours) } ```  **Avantages :** - ✅ Automatisation complète (CI/CD, scripts) - ✅ Gestion programmatique des tokens - ✅ Support du refresh token pour renouveler automatiquement l'accès - ✅ Intégration facile dans n'importe quel langage/outil  #### 🖥️ Méthode 2 : Génération via Dashboard (Alternative)  **URL :** https://www.factpulse.fr/dashboard/  Cette méthode convient pour des tests rapides ou une utilisation occasionnelle via l'interface graphique.  **Fonctionnement :** - Connectez-vous au dashboard - Utilisez les boutons \"Generate Test Token\" ou \"Generate Production Token\" - Fonctionne pour **tous** les utilisateurs (OAuth et email/password), sans nécessiter de mot de passe  **Types de tokens :** - **Token Test** : Validité 24h, quota 1000 appels/jour (gratuit) - **Token Production** : Validité 7 jours, quota selon votre forfait  **Avantages :** - ✅ Rapide pour tester l'API - ✅ Aucun mot de passe requis - ✅ Interface visuelle simple  **Inconvénients :** - ❌ Nécessite une action manuelle - ❌ Pas de refresh token - ❌ Moins adapté pour l'automatisation  ### 📚 Documentation complète  Pour plus d'informations sur l'authentification et l'utilisation de l'API : https://www.factpulse.fr/documentation-api/     
+ REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X Invoice Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Validation and Compliance - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata, electronic signatures - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules) - **Asynchronous Processing**: Celery support for heavy validations (VeraPDF)  ### 📡 AFNOR PDP/PA Integration (XP Z12-013) - **Flow Submission**: Send invoices to Partner Dematerialization Platforms - **Flow Search**: View submitted invoices - **Download**: Retrieve PDF/A-3 with XML - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user (stored credentials or zero-storage)  ### ✍️ PDF Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification - **Certificate Generation**: Self-signed X.509 certificates for testing  ### 🔄 Asynchronous Processing - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **No timeout**: Ideal for large files or heavy validations  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://www.factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://www.factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://www.factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://www.factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://www.factpulse.fr/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://www.factpulse.fr/documentation-api/     
 
 API version: 1.0.0
 */
@@ -39,25 +39,25 @@ func (r ApiAjouterFichierApiV1ChorusProTransversesAjouterFichierPostRequest) Exe
 }
 
 /*
-AjouterFichierApiV1ChorusProTransversesAjouterFichierPost Ajouter une pièce jointe
+AjouterFichierApiV1ChorusProTransversesAjouterFichierPost Add an attachment
 
-Ajoute une pièce jointe au compte utilisateur courant.
+Add an attachment to the current user account.
 
-    **Taille max** : 10 Mo par fichier
+    **Max size**: 10 MB per file
 
-    **Payload exemple** :
+    **Example payload**:
     ```json
     {
       "pieceJointeFichier": "JVBERi0xLjQKJeLjz9MKNSAwIG9iago8P...",
-      "pieceJointeNom": "bon_commande.pdf",
+      "pieceJointeNom": "purchase_order.pdf",
       "pieceJointeTypeMime": "application/pdf",
       "pieceJointeExtension": "PDF"
     }
     ```
 
-    **Retour** : L'ID de la pièce jointe (`pieceJointeIdFichier`) à utiliser ensuite dans `/factures/completer`.
+    **Returns**: The attachment ID (`pieceJointeIdFichier`) to use in `/factures/completer`.
 
-    **Extensions acceptées** : PDF, JPG, PNG, ZIP, XML, etc.
+    **Accepted extensions**: PDF, JPG, PNG, ZIP, XML, etc.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAjouterFichierApiV1ChorusProTransversesAjouterFichierPostRequest
@@ -175,33 +175,33 @@ func (r ApiCompleterFactureApiV1ChorusProFacturesCompleterPostRequest) Execute()
 }
 
 /*
-CompleterFactureApiV1ChorusProFacturesCompleterPost Compléter une facture suspendue (Fournisseur)
+CompleterFactureApiV1ChorusProFacturesCompleterPost Complete a suspended invoice (Supplier)
 
-Complète une facture au statut SUSPENDUE en ajoutant des pièces jointes ou un commentaire.
+Complete a SUSPENDUE status invoice by adding attachments or a comment.
 
-    **Statut requis** : SUSPENDUE
+    **Required status**: SUSPENDUE
 
-    **Actions possibles** :
-    - Ajouter des pièces jointes (justificatifs, bons de commande, etc.)
-    - Modifier le commentaire
+    **Possible actions**:
+    - Add attachments (supporting documents, purchase orders, etc.)
+    - Modify comment
 
-    **Payload exemple** :
+    **Example payload**:
     ```json
     {
       "identifiantFactureCPP": 12345,
-      "commentaire": "Voici les justificatifs demandés",
+      "commentaire": "Here are the requested documents",
       "listePiecesJointes": [
         {
           "pieceJointeIdFichier": 98765,
-          "pieceJointeNom": "bon_commande.pdf"
+          "pieceJointeNom": "purchase_order.pdf"
         }
       ]
     }
     ```
 
-    **Note** : Les pièces jointes doivent d'abord être uploadées via `/transverses/ajouter-fichier`.
+    **Note**: Attachments must first be uploaded via `/transverses/ajouter-fichier`.
 
-    **Après complétion** : La facture repasse au statut MISE_A_DISPOSITION.
+    **After completion**: The invoice returns to MISE_A_DISPOSITION status.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCompleterFactureApiV1ChorusProFacturesCompleterPostRequest
@@ -306,35 +306,35 @@ func (a *ChorusProAPIService) CompleterFactureApiV1ChorusProFacturesCompleterPos
 type ApiConsulterFactureApiV1ChorusProFacturesConsulterPostRequest struct {
 	ctx context.Context
 	ApiService *ChorusProAPIService
-	consulterFactureRequest *ConsulterFactureRequest
+	getInvoiceRequest *GetInvoiceRequest
 }
 
-func (r ApiConsulterFactureApiV1ChorusProFacturesConsulterPostRequest) ConsulterFactureRequest(consulterFactureRequest ConsulterFactureRequest) ApiConsulterFactureApiV1ChorusProFacturesConsulterPostRequest {
-	r.consulterFactureRequest = &consulterFactureRequest
+func (r ApiConsulterFactureApiV1ChorusProFacturesConsulterPostRequest) GetInvoiceRequest(getInvoiceRequest GetInvoiceRequest) ApiConsulterFactureApiV1ChorusProFacturesConsulterPostRequest {
+	r.getInvoiceRequest = &getInvoiceRequest
 	return r
 }
 
-func (r ApiConsulterFactureApiV1ChorusProFacturesConsulterPostRequest) Execute() (*ConsulterFactureResponse, *http.Response, error) {
+func (r ApiConsulterFactureApiV1ChorusProFacturesConsulterPostRequest) Execute() (*GetInvoiceResponse, *http.Response, error) {
 	return r.ApiService.ConsulterFactureApiV1ChorusProFacturesConsulterPostExecute(r)
 }
 
 /*
-ConsulterFactureApiV1ChorusProFacturesConsulterPost Consulter le statut d'une facture
+ConsulterFactureApiV1ChorusProFacturesConsulterPost Consult invoice status
 
-Récupère les informations et le statut actuel d'une facture soumise à Chorus Pro.
+Retrieves the information and current status of an invoice submitted to Chorus Pro.
 
-    **Retour** :
-    - Numéro et date de facture
-    - Montant TTC
-    - **Statut courant** : SOUMISE, VALIDEE, REJETEE, SUSPENDUE, MANDATEE, MISE_EN_PAIEMENT, etc.
-    - Structure destinataire
+    **Returns**:
+    - Invoice number and date
+    - Total gross amount
+    - **Current status**: SOUMISE, VALIDEE, REJETEE, SUSPENDUE, MANDATEE, MISE_EN_PAIEMENT, etc.
+    - Recipient structure
 
-    **Cas d'usage** :
-    - Suivre l'évolution du traitement d'une facture
-    - Vérifier si une facture a été validée ou rejetée
-    - Obtenir la date de mise en paiement
+    **Use cases**:
+    - Track the processing progress of an invoice
+    - Check if an invoice has been validated or rejected
+    - Get the payment date
 
-    **Polling** : Appelez cet endpoint régulièrement pour suivre l'évolution du statut.
+    **Polling**: Call this endpoint regularly to track status changes.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiConsulterFactureApiV1ChorusProFacturesConsulterPostRequest
@@ -347,13 +347,13 @@ func (a *ChorusProAPIService) ConsulterFactureApiV1ChorusProFacturesConsulterPos
 }
 
 // Execute executes the request
-//  @return ConsulterFactureResponse
-func (a *ChorusProAPIService) ConsulterFactureApiV1ChorusProFacturesConsulterPostExecute(r ApiConsulterFactureApiV1ChorusProFacturesConsulterPostRequest) (*ConsulterFactureResponse, *http.Response, error) {
+//  @return GetInvoiceResponse
+func (a *ChorusProAPIService) ConsulterFactureApiV1ChorusProFacturesConsulterPostExecute(r ApiConsulterFactureApiV1ChorusProFacturesConsulterPostRequest) (*GetInvoiceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ConsulterFactureResponse
+		localVarReturnValue  *GetInvoiceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChorusProAPIService.ConsulterFactureApiV1ChorusProFacturesConsulterPost")
@@ -366,8 +366,8 @@ func (a *ChorusProAPIService) ConsulterFactureApiV1ChorusProFacturesConsulterPos
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.consulterFactureRequest == nil {
-		return localVarReturnValue, nil, reportError("consulterFactureRequest is required and must be specified")
+	if r.getInvoiceRequest == nil {
+		return localVarReturnValue, nil, reportError("getInvoiceRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -388,7 +388,7 @@ func (a *ChorusProAPIService) ConsulterFactureApiV1ChorusProFacturesConsulterPos
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.consulterFactureRequest
+	localVarPostBody = r.getInvoiceRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -439,31 +439,31 @@ func (a *ChorusProAPIService) ConsulterFactureApiV1ChorusProFacturesConsulterPos
 type ApiConsulterStructureApiV1ChorusProStructuresConsulterPostRequest struct {
 	ctx context.Context
 	ApiService *ChorusProAPIService
-	consulterStructureRequest *ConsulterStructureRequest
+	getStructureRequest *GetStructureRequest
 }
 
-func (r ApiConsulterStructureApiV1ChorusProStructuresConsulterPostRequest) ConsulterStructureRequest(consulterStructureRequest ConsulterStructureRequest) ApiConsulterStructureApiV1ChorusProStructuresConsulterPostRequest {
-	r.consulterStructureRequest = &consulterStructureRequest
+func (r ApiConsulterStructureApiV1ChorusProStructuresConsulterPostRequest) GetStructureRequest(getStructureRequest GetStructureRequest) ApiConsulterStructureApiV1ChorusProStructuresConsulterPostRequest {
+	r.getStructureRequest = &getStructureRequest
 	return r
 }
 
-func (r ApiConsulterStructureApiV1ChorusProStructuresConsulterPostRequest) Execute() (*ConsulterStructureResponse, *http.Response, error) {
+func (r ApiConsulterStructureApiV1ChorusProStructuresConsulterPostRequest) Execute() (*GetStructureResponse, *http.Response, error) {
 	return r.ApiService.ConsulterStructureApiV1ChorusProStructuresConsulterPostExecute(r)
 }
 
 /*
-ConsulterStructureApiV1ChorusProStructuresConsulterPost Consulter les détails d'une structure
+ConsulterStructureApiV1ChorusProStructuresConsulterPost Consult structure details
 
-Récupère les informations détaillées d'une structure Chorus Pro.
+Retrieves detailed information about a Chorus Pro structure.
 
 
-    **Retour** :
-    - Raison sociale
-    - Numéro de TVA intracommunautaire
-    - Email de contact
-    - **Paramètres obligatoires** : Indique si le code service et/ou numéro d'engagement sont requis pour soumettre une facture
+    **Returns**:
+    - Company name
+    - Intra-EU VAT number
+    - Contact email
+    - **Required parameters**: Indicates if service code and/or engagement number are required to submit an invoice
 
-    **Étape typique** : Appelée après `rechercher-structures` pour savoir quels champs sont obligatoires avant de soumettre une facture.
+    **Typical step**: Called after `search-structures` to know which fields are mandatory before submitting an invoice.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiConsulterStructureApiV1ChorusProStructuresConsulterPostRequest
@@ -476,13 +476,13 @@ func (a *ChorusProAPIService) ConsulterStructureApiV1ChorusProStructuresConsulte
 }
 
 // Execute executes the request
-//  @return ConsulterStructureResponse
-func (a *ChorusProAPIService) ConsulterStructureApiV1ChorusProStructuresConsulterPostExecute(r ApiConsulterStructureApiV1ChorusProStructuresConsulterPostRequest) (*ConsulterStructureResponse, *http.Response, error) {
+//  @return GetStructureResponse
+func (a *ChorusProAPIService) ConsulterStructureApiV1ChorusProStructuresConsulterPostExecute(r ApiConsulterStructureApiV1ChorusProStructuresConsulterPostRequest) (*GetStructureResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ConsulterStructureResponse
+		localVarReturnValue  *GetStructureResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChorusProAPIService.ConsulterStructureApiV1ChorusProStructuresConsulterPost")
@@ -495,8 +495,8 @@ func (a *ChorusProAPIService) ConsulterStructureApiV1ChorusProStructuresConsulte
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.consulterStructureRequest == nil {
-		return localVarReturnValue, nil, reportError("consulterStructureRequest is required and must be specified")
+	if r.getStructureRequest == nil {
+		return localVarReturnValue, nil, reportError("getStructureRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -517,7 +517,7 @@ func (a *ChorusProAPIService) ConsulterStructureApiV1ChorusProStructuresConsulte
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.consulterStructureRequest
+	localVarPostBody = r.getStructureRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -571,21 +571,21 @@ type ApiListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet
 	idStructureCpp int32
 }
 
-func (r ApiListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetRequest) Execute() (*RechercherServicesResponse, *http.Response, error) {
+func (r ApiListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetRequest) Execute() (*SearchServicesResponse, *http.Response, error) {
 	return r.ApiService.ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetExecute(r)
 }
 
 /*
-ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet Lister les services d'une structure
+ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet List structure services
 
-Récupère la liste des services actifs d'une structure publique.
+Retrieves the list of active services for a public structure.
 
-    **Cas d'usage** :
-    - Lister les services disponibles pour une administration
-    - Vérifier qu'un code service existe avant de soumettre une facture
+    **Use cases**:
+    - List available services for an administration
+    - Verify that a service code exists before submitting an invoice
 
-    **Retour** :
-    - Liste des services avec leur code, libellé et statut (actif/inactif)
+    **Returns**:
+    - List of services with their code, label, and status (active/inactive)
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param idStructureCpp
@@ -600,13 +600,13 @@ func (a *ChorusProAPIService) ListerServicesStructureApiV1ChorusProStructuresIdS
 }
 
 // Execute executes the request
-//  @return RechercherServicesResponse
-func (a *ChorusProAPIService) ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetExecute(r ApiListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetRequest) (*RechercherServicesResponse, *http.Response, error) {
+//  @return SearchServicesResponse
+func (a *ChorusProAPIService) ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetExecute(r ApiListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetRequest) (*SearchServicesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *RechercherServicesResponse
+		localVarReturnValue  *SearchServicesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChorusProAPIService.ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet")
@@ -688,38 +688,38 @@ func (a *ChorusProAPIService) ListerServicesStructureApiV1ChorusProStructuresIdS
 type ApiObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPostRequest struct {
 	ctx context.Context
 	ApiService *ChorusProAPIService
-	obtenirIdChorusProRequest *ObtenirIdChorusProRequest
+	getChorusProIdRequest *GetChorusProIdRequest
 }
 
-func (r ApiObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPostRequest) ObtenirIdChorusProRequest(obtenirIdChorusProRequest ObtenirIdChorusProRequest) ApiObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPostRequest {
-	r.obtenirIdChorusProRequest = &obtenirIdChorusProRequest
+func (r ApiObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPostRequest) GetChorusProIdRequest(getChorusProIdRequest GetChorusProIdRequest) ApiObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPostRequest {
+	r.getChorusProIdRequest = &getChorusProIdRequest
 	return r
 }
 
-func (r ApiObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPostRequest) Execute() (*ObtenirIdChorusProResponse, *http.Response, error) {
+func (r ApiObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPostRequest) Execute() (*GetChorusProIdResponse, *http.Response, error) {
 	return r.ApiService.ObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPostExecute(r)
 }
 
 /*
-ObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPost Utilitaire : Obtenir l'ID Chorus Pro depuis un SIRET
+ObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPost Utility: Get Chorus Pro ID from SIRET
 
-**Utilitaire pratique** pour obtenir l'ID Chorus Pro d'une structure à partir de son SIRET.
+**Convenient utility** to get a structure's Chorus Pro ID from its SIRET.
 
 
-    Cette fonction wrapper combine :
-    1. Recherche de la structure par SIRET
-    2. Extraction de l'`id_structure_cpp` si une seule structure est trouvée
+    This wrapper function combines:
+    1. Searching for the structure by SIRET
+    2. Extracting the `id_structure_cpp` if a single structure is found
 
-    **Retour** :
-    - `id_structure_cpp` : ID Chorus Pro (0 si non trouvé ou si plusieurs résultats)
-    - `designation_structure` : Nom de la structure (si trouvée)
-    - `message` : Message explicatif
+    **Returns**:
+    - `id_structure_cpp`: Chorus Pro ID (0 if not found or multiple results)
+    - `designation_structure`: Structure name (if found)
+    - `message`: Explanatory message
 
-    **Cas d'usage** :
-    - Raccourci pour obtenir directement l'ID Chorus Pro avant de soumettre une facture
-    - Alternative simplifiée à `rechercher-structures` + extraction manuelle de l'ID
+    **Use cases**:
+    - Shortcut to directly get the Chorus Pro ID before submitting an invoice
+    - Simplified alternative to `search-structures` + manual ID extraction
 
-    **Note** : Si plusieurs structures correspondent au SIRET (rare), retourne 0 et un message d'erreur.
+    **Note**: If multiple structures match the SIRET (rare), returns 0 and an error message.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPostRequest
@@ -732,13 +732,13 @@ func (a *ChorusProAPIService) ObtenirIdChorusProDepuisSiretApiV1ChorusProStructu
 }
 
 // Execute executes the request
-//  @return ObtenirIdChorusProResponse
-func (a *ChorusProAPIService) ObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPostExecute(r ApiObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPostRequest) (*ObtenirIdChorusProResponse, *http.Response, error) {
+//  @return GetChorusProIdResponse
+func (a *ChorusProAPIService) ObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPostExecute(r ApiObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPostRequest) (*GetChorusProIdResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ObtenirIdChorusProResponse
+		localVarReturnValue  *GetChorusProIdResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChorusProAPIService.ObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPost")
@@ -751,8 +751,8 @@ func (a *ChorusProAPIService) ObtenirIdChorusProDepuisSiretApiV1ChorusProStructu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.obtenirIdChorusProRequest == nil {
-		return localVarReturnValue, nil, reportError("obtenirIdChorusProRequest is required and must be specified")
+	if r.getChorusProIdRequest == nil {
+		return localVarReturnValue, nil, reportError("getChorusProIdRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -773,7 +773,7 @@ func (a *ChorusProAPIService) ObtenirIdChorusProDepuisSiretApiV1ChorusProStructu
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.obtenirIdChorusProRequest
+	localVarPostBody = r.getChorusProIdRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -837,17 +837,17 @@ func (r ApiRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestina
 }
 
 /*
-RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost Rechercher factures reçues (Destinataire)
+RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost Search received invoices (Recipient)
 
-Recherche les factures reçues par le destinataire connecté.
+Search invoices received by the connected recipient.
 
-    **Filtres** :
-    - Téléchargée / non téléchargée
-    - Dates de réception
-    - Statut (MISE_A_DISPOSITION, SUSPENDUE, etc.)
-    - Fournisseur
+    **Filters**:
+    - Downloaded / not downloaded
+    - Reception dates
+    - Status (MISE_A_DISPOSITION, SUSPENDUE, etc.)
+    - Supplier
 
-    **Indicateur utile** : `factureTelechargeeParDestinataire` permet de savoir si la facture a déjà été téléchargée.
+    **Useful indicator**: `factureTelechargeeParDestinataire` indicates whether the invoice has already been downloaded.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostRequest
@@ -965,21 +965,21 @@ func (r ApiRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFourniss
 }
 
 /*
-RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost Rechercher factures émises (Fournisseur)
+RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost Search issued invoices (Supplier)
 
-Recherche les factures émises par le fournisseur connecté.
+Search invoices issued by the connected supplier.
 
-    **Filtres disponibles** :
-    - Numéro de facture
-    - Dates (début/fin)
-    - Statut
-    - Structure destinataire
-    - Montant
+    **Available filters**:
+    - Invoice number
+    - Dates (start/end)
+    - Status
+    - Recipient structure
+    - Amount
 
-    **Cas d'usage** :
-    - Suivi des factures émises
-    - Vérification des statuts
-    - Export pour comptabilité
+    **Use cases**:
+    - Track issued invoices
+    - Verify statuses
+    - Export for accounting
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostRequest
@@ -1084,35 +1084,35 @@ func (a *ChorusProAPIService) RechercherFacturesFournisseurApiV1ChorusProFacture
 type ApiRechercherStructuresApiV1ChorusProStructuresRechercherPostRequest struct {
 	ctx context.Context
 	ApiService *ChorusProAPIService
-	rechercherStructureRequest *RechercherStructureRequest
+	searchStructureRequest *SearchStructureRequest
 }
 
-func (r ApiRechercherStructuresApiV1ChorusProStructuresRechercherPostRequest) RechercherStructureRequest(rechercherStructureRequest RechercherStructureRequest) ApiRechercherStructuresApiV1ChorusProStructuresRechercherPostRequest {
-	r.rechercherStructureRequest = &rechercherStructureRequest
+func (r ApiRechercherStructuresApiV1ChorusProStructuresRechercherPostRequest) SearchStructureRequest(searchStructureRequest SearchStructureRequest) ApiRechercherStructuresApiV1ChorusProStructuresRechercherPostRequest {
+	r.searchStructureRequest = &searchStructureRequest
 	return r
 }
 
-func (r ApiRechercherStructuresApiV1ChorusProStructuresRechercherPostRequest) Execute() (*RechercherStructureResponse, *http.Response, error) {
+func (r ApiRechercherStructuresApiV1ChorusProStructuresRechercherPostRequest) Execute() (*SearchStructureResponse, *http.Response, error) {
 	return r.ApiService.RechercherStructuresApiV1ChorusProStructuresRechercherPostExecute(r)
 }
 
 /*
-RechercherStructuresApiV1ChorusProStructuresRechercherPost Rechercher des structures Chorus Pro
+RechercherStructuresApiV1ChorusProStructuresRechercherPost Search Chorus Pro structures
 
-Recherche des structures (entreprises, administrations) enregistrées sur Chorus Pro.
+Search for structures (companies, administrations) registered on Chorus Pro.
 
-    **Cas d'usage** :
-    - Trouver l'ID Chorus Pro d'une structure à partir de son SIRET
-    - Vérifier si une structure est enregistrée sur Chorus Pro
-    - Lister les structures correspondant à des critères
+    **Use cases**:
+    - Find the Chorus Pro ID of a structure from its SIRET
+    - Check if a structure is registered on Chorus Pro
+    - List structures matching criteria
 
-    **Filtres disponibles** :
-    - Identifiant (SIRET, SIREN, etc.)
-    - Raison sociale
-    - Type d'identifiant
-    - Structures privées uniquement
+    **Available filters**:
+    - Identifier (SIRET, SIREN, etc.)
+    - Company name
+    - Identifier type
+    - Private structures only
 
-    **Étape typique** : Appelée avant `soumettre-facture` pour obtenir l'`id_structure_cpp` du destinataire.
+    **Typical step**: Called before `submit-invoice` to get the recipient's `id_structure_cpp`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRechercherStructuresApiV1ChorusProStructuresRechercherPostRequest
@@ -1125,13 +1125,13 @@ func (a *ChorusProAPIService) RechercherStructuresApiV1ChorusProStructuresRecher
 }
 
 // Execute executes the request
-//  @return RechercherStructureResponse
-func (a *ChorusProAPIService) RechercherStructuresApiV1ChorusProStructuresRechercherPostExecute(r ApiRechercherStructuresApiV1ChorusProStructuresRechercherPostRequest) (*RechercherStructureResponse, *http.Response, error) {
+//  @return SearchStructureResponse
+func (a *ChorusProAPIService) RechercherStructuresApiV1ChorusProStructuresRechercherPostExecute(r ApiRechercherStructuresApiV1ChorusProStructuresRechercherPostRequest) (*SearchStructureResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *RechercherStructureResponse
+		localVarReturnValue  *SearchStructureResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChorusProAPIService.RechercherStructuresApiV1ChorusProStructuresRechercherPost")
@@ -1144,8 +1144,8 @@ func (a *ChorusProAPIService) RechercherStructuresApiV1ChorusProStructuresRecher
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.rechercherStructureRequest == nil {
-		return localVarReturnValue, nil, reportError("rechercherStructureRequest is required and must be specified")
+	if r.searchStructureRequest == nil {
+		return localVarReturnValue, nil, reportError("searchStructureRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1166,7 +1166,7 @@ func (a *ChorusProAPIService) RechercherStructuresApiV1ChorusProStructuresRecher
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.rechercherStructureRequest
+	localVarPostBody = r.searchStructureRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1230,23 +1230,23 @@ func (r ApiRecyclerFactureApiV1ChorusProFacturesRecyclerPostRequest) Execute() (
 }
 
 /*
-RecyclerFactureApiV1ChorusProFacturesRecyclerPost Recycler une facture (Fournisseur)
+RecyclerFactureApiV1ChorusProFacturesRecyclerPost Recycle an invoice (Supplier)
 
-Recycle une facture au statut A_RECYCLER en modifiant les données d'acheminement.
+Recycle an invoice with A_RECYCLER status by modifying routing data.
 
-    **Statut requis** : A_RECYCLER
+    **Required status**: A_RECYCLER
 
-    **Champs modifiables** :
-    - Destinataire (`idStructureCPP`)
-    - Code service
-    - Numéro d'engagement
+    **Modifiable fields**:
+    - Recipient (`idStructureCPP`)
+    - Service code
+    - Engagement number
 
-    **Cas d'usage** :
-    - Erreur de destinataire
-    - Changement de service facturation
-    - Mise à jour du numéro d'engagement
+    **Use cases**:
+    - Wrong recipient
+    - Change of billing service
+    - Update engagement number
 
-    **Payload exemple** :
+    **Example payload**:
     ```json
     {
       "identifiantFactureCPP": 12345,
@@ -1256,7 +1256,7 @@ Recycle une facture au statut A_RECYCLER en modifiant les données d'acheminemen
     }
     ```
 
-    **Note** : La facture conserve son numéro et ses montants, seuls les champs d'acheminement changent.
+    **Note**: The invoice keeps its number and amounts, only routing fields change.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRecyclerFactureApiV1ChorusProFacturesRecyclerPostRequest
@@ -1361,53 +1361,53 @@ func (a *ChorusProAPIService) RecyclerFactureApiV1ChorusProFacturesRecyclerPostE
 type ApiSoumettreFactureApiV1ChorusProFacturesSoumettrePostRequest struct {
 	ctx context.Context
 	ApiService *ChorusProAPIService
-	soumettreFactureRequest *SoumettreFactureRequest
+	submitInvoiceRequest *SubmitInvoiceRequest
 }
 
-func (r ApiSoumettreFactureApiV1ChorusProFacturesSoumettrePostRequest) SoumettreFactureRequest(soumettreFactureRequest SoumettreFactureRequest) ApiSoumettreFactureApiV1ChorusProFacturesSoumettrePostRequest {
-	r.soumettreFactureRequest = &soumettreFactureRequest
+func (r ApiSoumettreFactureApiV1ChorusProFacturesSoumettrePostRequest) SubmitInvoiceRequest(submitInvoiceRequest SubmitInvoiceRequest) ApiSoumettreFactureApiV1ChorusProFacturesSoumettrePostRequest {
+	r.submitInvoiceRequest = &submitInvoiceRequest
 	return r
 }
 
-func (r ApiSoumettreFactureApiV1ChorusProFacturesSoumettrePostRequest) Execute() (*SoumettreFactureResponse, *http.Response, error) {
+func (r ApiSoumettreFactureApiV1ChorusProFacturesSoumettrePostRequest) Execute() (*SubmitInvoiceResponse, *http.Response, error) {
 	return r.ApiService.SoumettreFactureApiV1ChorusProFacturesSoumettrePostExecute(r)
 }
 
 /*
-SoumettreFactureApiV1ChorusProFacturesSoumettrePost Soumettre une facture à Chorus Pro
+SoumettreFactureApiV1ChorusProFacturesSoumettrePost Submit an invoice to Chorus Pro
 
-Soumet une facture électronique à une structure publique via Chorus Pro.
+Submits an electronic invoice to a public structure via Chorus Pro.
 
 
-    **📋 Workflow complet** :
-    1. **Uploader le PDF Factur-X** via `/transverses/ajouter-fichier` → récupérer `pieceJointeId`
-    2. **Obtenir l'ID structure** via `/structures/rechercher` ou `/structures/obtenir-id-depuis-siret`
-    3. **Vérifier les paramètres obligatoires** via `/structures/consulter`
-    4. **Soumettre la facture** avec le `piece_jointe_principale_id` obtenu à l'étape 1
+    **Complete workflow**:
+    1. **Upload the Factur-X PDF** via `/transverses/ajouter-fichier` → retrieve `pieceJointeId`
+    2. **Get the structure ID** via `/structures/rechercher` or `/structures/obtenir-id-depuis-siret`
+    3. **Check mandatory parameters** via `/structures/consulter`
+    4. **Submit the invoice** with the `piece_jointe_principale_id` obtained in step 1
 
-    **Pré-requis** :
-    1. Avoir l'`id_structure_cpp` du destinataire (via `/structures/rechercher`)
-    2. Connaître les paramètres obligatoires (via `/structures/consulter`) :
-       - Code service si `code_service_doit_etre_renseigne=true`
-       - Numéro d'engagement si `numero_ej_doit_etre_renseigne=true`
-    3. Avoir uploadé le PDF Factur-X (via `/transverses/ajouter-fichier`)
+    **Prerequisites**:
+    1. Have the recipient's `id_structure_cpp` (via `/structures/rechercher`)
+    2. Know the mandatory parameters (via `/structures/consulter`):
+       - Service code if `code_service_doit_etre_renseigne=true`
+       - Engagement number if `numero_ej_doit_etre_renseigne=true`
+    3. Have uploaded the Factur-X PDF (via `/transverses/ajouter-fichier`)
 
-    **Format attendu** :
-    - `piece_jointe_principale_id` : ID retourné par `/transverses/ajouter-fichier`
-    - Montants : Chaînes de caractères avec 2 décimales (ex: "1250.50")
-    - Dates : Format ISO 8601 (YYYY-MM-DD)
+    **Expected format**:
+    - `piece_jointe_principale_id`: ID returned by `/transverses/ajouter-fichier`
+    - Amounts: Strings with 2 decimals (e.g., "1250.50")
+    - Dates: ISO 8601 format (YYYY-MM-DD)
 
-    **Retour** :
-    - `identifiant_facture_cpp` : ID Chorus Pro de la facture créée
-    - `numero_flux_depot` : Numéro de suivi du dépôt
+    **Returns**:
+    - `identifiant_facture_cpp`: Chorus Pro ID of the created invoice
+    - `numero_flux_depot`: Deposit tracking number
 
-    **Statuts possibles après soumission** :
-    - SOUMISE : En attente de validation
-    - VALIDEE : Validée par le destinataire
-    - REJETEE : Rejetée (erreur de données ou refus métier)
-    - SUSPENDUE : En attente d'informations complémentaires
+    **Possible statuses after submission**:
+    - SOUMISE: Pending validation
+    - VALIDEE: Validated by recipient
+    - REJETEE: Rejected (data error or business refusal)
+    - SUSPENDUE: Pending additional information
 
-    **Note** : Utilisez `/factures/consulter` pour suivre l'évolution du statut.
+    **Note**: Use `/factures/consulter` to track status changes.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSoumettreFactureApiV1ChorusProFacturesSoumettrePostRequest
@@ -1420,13 +1420,13 @@ func (a *ChorusProAPIService) SoumettreFactureApiV1ChorusProFacturesSoumettrePos
 }
 
 // Execute executes the request
-//  @return SoumettreFactureResponse
-func (a *ChorusProAPIService) SoumettreFactureApiV1ChorusProFacturesSoumettrePostExecute(r ApiSoumettreFactureApiV1ChorusProFacturesSoumettrePostRequest) (*SoumettreFactureResponse, *http.Response, error) {
+//  @return SubmitInvoiceResponse
+func (a *ChorusProAPIService) SoumettreFactureApiV1ChorusProFacturesSoumettrePostExecute(r ApiSoumettreFactureApiV1ChorusProFacturesSoumettrePostRequest) (*SubmitInvoiceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *SoumettreFactureResponse
+		localVarReturnValue  *SubmitInvoiceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChorusProAPIService.SoumettreFactureApiV1ChorusProFacturesSoumettrePost")
@@ -1439,8 +1439,8 @@ func (a *ChorusProAPIService) SoumettreFactureApiV1ChorusProFacturesSoumettrePos
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.soumettreFactureRequest == nil {
-		return localVarReturnValue, nil, reportError("soumettreFactureRequest is required and must be specified")
+	if r.submitInvoiceRequest == nil {
+		return localVarReturnValue, nil, reportError("submitInvoiceRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1461,7 +1461,7 @@ func (a *ChorusProAPIService) SoumettreFactureApiV1ChorusProFacturesSoumettrePos
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.soumettreFactureRequest
+	localVarPostBody = r.submitInvoiceRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1525,18 +1525,18 @@ func (r ApiTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostR
 }
 
 /*
-TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost Télécharger un groupe de factures
+TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost Download a group of invoices
 
-Télécharge une ou plusieurs factures (max 10 recommandé) avec leurs pièces jointes.
+Download one or more invoices (max 10 recommended) with their attachments.
 
-    **Formats disponibles** :
-    - PDF : Fichier PDF uniquement
-    - XML : Fichier XML uniquement
-    - ZIP : Archive contenant PDF + XML + pièces jointes
+    **Available formats**:
+    - PDF: PDF file only
+    - XML: XML file only
+    - ZIP: Archive containing PDF + XML + attachments
 
-    **Taille maximale** : 120 Mo par téléchargement
+    **Maximum size**: 120 MB per download
 
-    **Payload exemple** :
+    **Example payload**:
     ```json
     {
       "listeIdentifiantsFactureCPP": [12345, 12346],
@@ -1545,9 +1545,9 @@ Télécharge une ou plusieurs factures (max 10 recommandé) avec leurs pièces j
     }
     ```
 
-    **Retour** : Le fichier est encodé en base64 dans le champ `fichierBase64`.
+    **Returns**: The file is base64-encoded in the `fichierBase64` field.
 
-    **Note** : Le flag `factureTelechargeeParDestinataire` est mis à jour automatiquement.
+    **Note**: The `factureTelechargeeParDestinataire` flag is automatically updated.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostRequest
@@ -1665,37 +1665,37 @@ func (r ApiTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostReque
 }
 
 /*
-TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost Traiter une facture reçue (Destinataire)
+TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost Process a received invoice (Recipient)
 
-Change le statut d'une facture reçue.
+Change the status of a received invoice.
 
-    **Statuts possibles** :
-    - MISE_A_DISPOSITION : Facture acceptée
-    - SUSPENDUE : En attente d'informations complémentaires (motif obligatoire)
-    - REJETEE : Facture refusée (motif obligatoire)
-    - MANDATEE : Facture mandatée
-    - MISE_EN_PAIEMENT : Facture en cours de paiement
-    - COMPTABILISEE : Facture comptabilisée
-    - MISE_A_DISPOSITION_COMPTABLE : Mise à disposition comptable
-    - A_RECYCLER : À recycler
-    - COMPLETEE : Complétée
-    - SERVICE-FAIT : Service fait
-    - PRISE_EN_COMPTE_DESTINATAIRE : Prise en compte
-    - TRANSMISE_MOA : Transmise à la MOA
+    **Possible statuses**:
+    - MISE_A_DISPOSITION: Invoice accepted
+    - SUSPENDUE: Pending additional information (reason required)
+    - REJETEE: Invoice refused (reason required)
+    - MANDATEE: Invoice mandated
+    - MISE_EN_PAIEMENT: Invoice being paid
+    - COMPTABILISEE: Invoice accounted
+    - MISE_A_DISPOSITION_COMPTABLE: Made available to accounting
+    - A_RECYCLER: To be recycled
+    - COMPLETEE: Completed
+    - SERVICE-FAIT: Service rendered
+    - PRISE_EN_COMPTE_DESTINATAIRE: Acknowledged
+    - TRANSMISE_MOA: Transmitted to MOA
 
-    **Payload exemple** :
+    **Example payload**:
     ```json
     {
       "identifiantFactureCPP": 12345,
       "nouveauStatut": "REJETEE",
-      "motifRejet": "Facture en double",
-      "commentaire": "Facture déjà reçue sous la référence ABC123"
+      "motifRejet": "Duplicate invoice",
+      "commentaire": "Invoice already received under reference ABC123"
     }
     ```
 
-    **Règles** :
-    - Un motif est **obligatoire** pour SUSPENDUE et REJETEE
-    - Seuls certains statuts sont autorisés selon le statut actuel de la facture
+    **Rules**:
+    - A reason is **required** for SUSPENDUE and REJETEE
+    - Only certain statuses are allowed depending on the invoice's current status
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostRequest
@@ -1813,7 +1813,7 @@ func (r ApiValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostRe
 }
 
 /*
-ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost Consulter une facture (Valideur)
+ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost Consult an invoice (Validator)
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostRequest
@@ -1931,13 +1931,13 @@ func (r ApiValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPos
 }
 
 /*
-ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost Rechercher factures à valider (Valideur)
+ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost Search invoices to validate (Validator)
 
-Recherche les factures en attente de validation par le valideur connecté.
+Search invoices pending validation by the connected validator.
 
-    **Rôle** : Valideur dans le circuit de validation interne.
+    **Role**: Validator in the internal validation workflow.
 
-    **Filtres** : Dates, structure, service, etc.
+    **Filters**: Dates, structure, service, etc.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostRequest
@@ -2055,13 +2055,13 @@ func (r ApiValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostReques
 }
 
 /*
-ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost Valider ou refuser une facture (Valideur)
+ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost Validate or reject an invoice (Validator)
 
-Valide ou refuse une facture en attente de validation.
+Validate or reject an invoice pending validation.
 
-    **Actions** :
-    - Valider : La facture passe au statut suivant du circuit
-    - Refuser : La facture est rejetée (motif obligatoire)
+    **Actions**:
+    - Validate: The invoice moves to the next status in the workflow
+    - Reject: The invoice is rejected (reason required)
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostRequest

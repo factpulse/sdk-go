@@ -4,22 +4,22 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AjouterFichierApiV1ChorusProTransversesAjouterFichierPost**](ChorusProAPI.md#AjouterFichierApiV1ChorusProTransversesAjouterFichierPost) | **Post** /api/v1/chorus-pro/transverses/ajouter-fichier | Ajouter une pièce jointe
-[**CompleterFactureApiV1ChorusProFacturesCompleterPost**](ChorusProAPI.md#CompleterFactureApiV1ChorusProFacturesCompleterPost) | **Post** /api/v1/chorus-pro/factures/completer | Compléter une facture suspendue (Fournisseur)
-[**ConsulterFactureApiV1ChorusProFacturesConsulterPost**](ChorusProAPI.md#ConsulterFactureApiV1ChorusProFacturesConsulterPost) | **Post** /api/v1/chorus-pro/factures/consulter | Consulter le statut d&#39;une facture
-[**ConsulterStructureApiV1ChorusProStructuresConsulterPost**](ChorusProAPI.md#ConsulterStructureApiV1ChorusProStructuresConsulterPost) | **Post** /api/v1/chorus-pro/structures/consulter | Consulter les détails d&#39;une structure
-[**ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet**](ChorusProAPI.md#ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet) | **Get** /api/v1/chorus-pro/structures/{id_structure_cpp}/services | Lister les services d&#39;une structure
-[**ObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPost**](ChorusProAPI.md#ObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPost) | **Post** /api/v1/chorus-pro/structures/obtenir-id-depuis-siret | Utilitaire : Obtenir l&#39;ID Chorus Pro depuis un SIRET
-[**RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost**](ChorusProAPI.md#RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost) | **Post** /api/v1/chorus-pro/factures/rechercher-destinataire | Rechercher factures reçues (Destinataire)
-[**RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost**](ChorusProAPI.md#RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost) | **Post** /api/v1/chorus-pro/factures/rechercher-fournisseur | Rechercher factures émises (Fournisseur)
-[**RechercherStructuresApiV1ChorusProStructuresRechercherPost**](ChorusProAPI.md#RechercherStructuresApiV1ChorusProStructuresRechercherPost) | **Post** /api/v1/chorus-pro/structures/rechercher | Rechercher des structures Chorus Pro
-[**RecyclerFactureApiV1ChorusProFacturesRecyclerPost**](ChorusProAPI.md#RecyclerFactureApiV1ChorusProFacturesRecyclerPost) | **Post** /api/v1/chorus-pro/factures/recycler | Recycler une facture (Fournisseur)
-[**SoumettreFactureApiV1ChorusProFacturesSoumettrePost**](ChorusProAPI.md#SoumettreFactureApiV1ChorusProFacturesSoumettrePost) | **Post** /api/v1/chorus-pro/factures/soumettre | Soumettre une facture à Chorus Pro
-[**TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost**](ChorusProAPI.md#TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost) | **Post** /api/v1/chorus-pro/factures/telecharger-groupe | Télécharger un groupe de factures
-[**TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost**](ChorusProAPI.md#TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost) | **Post** /api/v1/chorus-pro/factures/traiter-facture-recue | Traiter une facture reçue (Destinataire)
-[**ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost**](ChorusProAPI.md#ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost) | **Post** /api/v1/chorus-pro/factures/valideur/consulter | Consulter une facture (Valideur)
-[**ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost**](ChorusProAPI.md#ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost) | **Post** /api/v1/chorus-pro/factures/valideur/rechercher | Rechercher factures à valider (Valideur)
-[**ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost**](ChorusProAPI.md#ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost) | **Post** /api/v1/chorus-pro/factures/valideur/traiter | Valider ou refuser une facture (Valideur)
+[**AjouterFichierApiV1ChorusProTransversesAjouterFichierPost**](ChorusProAPI.md#AjouterFichierApiV1ChorusProTransversesAjouterFichierPost) | **Post** /api/v1/chorus-pro/transverses/ajouter-fichier | Add an attachment
+[**CompleterFactureApiV1ChorusProFacturesCompleterPost**](ChorusProAPI.md#CompleterFactureApiV1ChorusProFacturesCompleterPost) | **Post** /api/v1/chorus-pro/factures/completer | Complete a suspended invoice (Supplier)
+[**ConsulterFactureApiV1ChorusProFacturesConsulterPost**](ChorusProAPI.md#ConsulterFactureApiV1ChorusProFacturesConsulterPost) | **Post** /api/v1/chorus-pro/factures/consulter | Consult invoice status
+[**ConsulterStructureApiV1ChorusProStructuresConsulterPost**](ChorusProAPI.md#ConsulterStructureApiV1ChorusProStructuresConsulterPost) | **Post** /api/v1/chorus-pro/structures/consulter | Consult structure details
+[**ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet**](ChorusProAPI.md#ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet) | **Get** /api/v1/chorus-pro/structures/{id_structure_cpp}/services | List structure services
+[**ObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPost**](ChorusProAPI.md#ObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPost) | **Post** /api/v1/chorus-pro/structures/obtenir-id-depuis-siret | Utility: Get Chorus Pro ID from SIRET
+[**RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost**](ChorusProAPI.md#RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost) | **Post** /api/v1/chorus-pro/factures/rechercher-destinataire | Search received invoices (Recipient)
+[**RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost**](ChorusProAPI.md#RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost) | **Post** /api/v1/chorus-pro/factures/rechercher-fournisseur | Search issued invoices (Supplier)
+[**RechercherStructuresApiV1ChorusProStructuresRechercherPost**](ChorusProAPI.md#RechercherStructuresApiV1ChorusProStructuresRechercherPost) | **Post** /api/v1/chorus-pro/structures/rechercher | Search Chorus Pro structures
+[**RecyclerFactureApiV1ChorusProFacturesRecyclerPost**](ChorusProAPI.md#RecyclerFactureApiV1ChorusProFacturesRecyclerPost) | **Post** /api/v1/chorus-pro/factures/recycler | Recycle an invoice (Supplier)
+[**SoumettreFactureApiV1ChorusProFacturesSoumettrePost**](ChorusProAPI.md#SoumettreFactureApiV1ChorusProFacturesSoumettrePost) | **Post** /api/v1/chorus-pro/factures/soumettre | Submit an invoice to Chorus Pro
+[**TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost**](ChorusProAPI.md#TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost) | **Post** /api/v1/chorus-pro/factures/telecharger-groupe | Download a group of invoices
+[**TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost**](ChorusProAPI.md#TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost) | **Post** /api/v1/chorus-pro/factures/traiter-facture-recue | Process a received invoice (Recipient)
+[**ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost**](ChorusProAPI.md#ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost) | **Post** /api/v1/chorus-pro/factures/valideur/consulter | Consult an invoice (Validator)
+[**ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost**](ChorusProAPI.md#ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost) | **Post** /api/v1/chorus-pro/factures/valideur/rechercher | Search invoices to validate (Validator)
+[**ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost**](ChorusProAPI.md#ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost) | **Post** /api/v1/chorus-pro/factures/valideur/traiter | Validate or reject an invoice (Validator)
 
 
 
@@ -27,7 +27,7 @@ Method | HTTP request | Description
 
 > interface{} AjouterFichierApiV1ChorusProTransversesAjouterFichierPost(ctx).RequestBody(requestBody).Execute()
 
-Ajouter une pièce jointe
+Add an attachment
 
 
 
@@ -93,7 +93,7 @@ Name | Type | Description  | Notes
 
 > interface{} CompleterFactureApiV1ChorusProFacturesCompleterPost(ctx).RequestBody(requestBody).Execute()
 
-Compléter une facture suspendue (Fournisseur)
+Complete a suspended invoice (Supplier)
 
 
 
@@ -157,9 +157,9 @@ Name | Type | Description  | Notes
 
 ## ConsulterFactureApiV1ChorusProFacturesConsulterPost
 
-> ConsulterFactureResponse ConsulterFactureApiV1ChorusProFacturesConsulterPost(ctx).ConsulterFactureRequest(consulterFactureRequest).Execute()
+> GetInvoiceResponse ConsulterFactureApiV1ChorusProFacturesConsulterPost(ctx).GetInvoiceRequest(getInvoiceRequest).Execute()
 
-Consulter le statut d'une facture
+Consult invoice status
 
 
 
@@ -176,16 +176,16 @@ import (
 )
 
 func main() {
-	consulterFactureRequest := *openapiclient.NewConsulterFactureRequest(int32(123)) // ConsulterFactureRequest | 
+	getInvoiceRequest := *openapiclient.NewGetInvoiceRequest(int32(123)) // GetInvoiceRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChorusProAPI.ConsulterFactureApiV1ChorusProFacturesConsulterPost(context.Background()).ConsulterFactureRequest(consulterFactureRequest).Execute()
+	resp, r, err := apiClient.ChorusProAPI.ConsulterFactureApiV1ChorusProFacturesConsulterPost(context.Background()).GetInvoiceRequest(getInvoiceRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChorusProAPI.ConsulterFactureApiV1ChorusProFacturesConsulterPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ConsulterFactureApiV1ChorusProFacturesConsulterPost`: ConsulterFactureResponse
+	// response from `ConsulterFactureApiV1ChorusProFacturesConsulterPost`: GetInvoiceResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChorusProAPI.ConsulterFactureApiV1ChorusProFacturesConsulterPost`: %v\n", resp)
 }
 ```
@@ -201,11 +201,11 @@ Other parameters are passed through a pointer to a apiConsulterFactureApiV1Choru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **consulterFactureRequest** | [**ConsulterFactureRequest**](ConsulterFactureRequest.md) |  | 
+ **getInvoiceRequest** | [**GetInvoiceRequest**](GetInvoiceRequest.md) |  | 
 
 ### Return type
 
-[**ConsulterFactureResponse**](ConsulterFactureResponse.md)
+[**GetInvoiceResponse**](GetInvoiceResponse.md)
 
 ### Authorization
 
@@ -223,9 +223,9 @@ Name | Type | Description  | Notes
 
 ## ConsulterStructureApiV1ChorusProStructuresConsulterPost
 
-> ConsulterStructureResponse ConsulterStructureApiV1ChorusProStructuresConsulterPost(ctx).ConsulterStructureRequest(consulterStructureRequest).Execute()
+> GetStructureResponse ConsulterStructureApiV1ChorusProStructuresConsulterPost(ctx).GetStructureRequest(getStructureRequest).Execute()
 
-Consulter les détails d'une structure
+Consult structure details
 
 
 
@@ -242,16 +242,16 @@ import (
 )
 
 func main() {
-	consulterStructureRequest := *openapiclient.NewConsulterStructureRequest(int32(123)) // ConsulterStructureRequest | 
+	getStructureRequest := *openapiclient.NewGetStructureRequest(int32(123)) // GetStructureRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChorusProAPI.ConsulterStructureApiV1ChorusProStructuresConsulterPost(context.Background()).ConsulterStructureRequest(consulterStructureRequest).Execute()
+	resp, r, err := apiClient.ChorusProAPI.ConsulterStructureApiV1ChorusProStructuresConsulterPost(context.Background()).GetStructureRequest(getStructureRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChorusProAPI.ConsulterStructureApiV1ChorusProStructuresConsulterPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ConsulterStructureApiV1ChorusProStructuresConsulterPost`: ConsulterStructureResponse
+	// response from `ConsulterStructureApiV1ChorusProStructuresConsulterPost`: GetStructureResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChorusProAPI.ConsulterStructureApiV1ChorusProStructuresConsulterPost`: %v\n", resp)
 }
 ```
@@ -267,11 +267,11 @@ Other parameters are passed through a pointer to a apiConsulterStructureApiV1Cho
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **consulterStructureRequest** | [**ConsulterStructureRequest**](ConsulterStructureRequest.md) |  | 
+ **getStructureRequest** | [**GetStructureRequest**](GetStructureRequest.md) |  | 
 
 ### Return type
 
-[**ConsulterStructureResponse**](ConsulterStructureResponse.md)
+[**GetStructureResponse**](GetStructureResponse.md)
 
 ### Authorization
 
@@ -289,9 +289,9 @@ Name | Type | Description  | Notes
 
 ## ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet
 
-> RechercherServicesResponse ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(ctx, idStructureCpp).Execute()
+> SearchServicesResponse ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(ctx, idStructureCpp).Execute()
 
-Lister les services d'une structure
+List structure services
 
 
 
@@ -317,7 +317,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChorusProAPI.ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet`: RechercherServicesResponse
+	// response from `ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet`: SearchServicesResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChorusProAPI.ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet`: %v\n", resp)
 }
 ```
@@ -341,7 +341,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RechercherServicesResponse**](RechercherServicesResponse.md)
+[**SearchServicesResponse**](SearchServicesResponse.md)
 
 ### Authorization
 
@@ -359,9 +359,9 @@ Name | Type | Description  | Notes
 
 ## ObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPost
 
-> ObtenirIdChorusProResponse ObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPost(ctx).ObtenirIdChorusProRequest(obtenirIdChorusProRequest).Execute()
+> GetChorusProIdResponse ObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPost(ctx).GetChorusProIdRequest(getChorusProIdRequest).Execute()
 
-Utilitaire : Obtenir l'ID Chorus Pro depuis un SIRET
+Utility: Get Chorus Pro ID from SIRET
 
 
 
@@ -378,16 +378,16 @@ import (
 )
 
 func main() {
-	obtenirIdChorusProRequest := *openapiclient.NewObtenirIdChorusProRequest("Siret_example") // ObtenirIdChorusProRequest | 
+	getChorusProIdRequest := *openapiclient.NewGetChorusProIdRequest("Siret_example") // GetChorusProIdRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChorusProAPI.ObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPost(context.Background()).ObtenirIdChorusProRequest(obtenirIdChorusProRequest).Execute()
+	resp, r, err := apiClient.ChorusProAPI.ObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPost(context.Background()).GetChorusProIdRequest(getChorusProIdRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChorusProAPI.ObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPost`: ObtenirIdChorusProResponse
+	// response from `ObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPost`: GetChorusProIdResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChorusProAPI.ObtenirIdChorusProDepuisSiretApiV1ChorusProStructuresObtenirIdDepuisSiretPost`: %v\n", resp)
 }
 ```
@@ -403,11 +403,11 @@ Other parameters are passed through a pointer to a apiObtenirIdChorusProDepuisSi
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **obtenirIdChorusProRequest** | [**ObtenirIdChorusProRequest**](ObtenirIdChorusProRequest.md) |  | 
+ **getChorusProIdRequest** | [**GetChorusProIdRequest**](GetChorusProIdRequest.md) |  | 
 
 ### Return type
 
-[**ObtenirIdChorusProResponse**](ObtenirIdChorusProResponse.md)
+[**GetChorusProIdResponse**](GetChorusProIdResponse.md)
 
 ### Authorization
 
@@ -427,7 +427,7 @@ Name | Type | Description  | Notes
 
 > interface{} RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(ctx).RequestBody(requestBody).Execute()
 
-Rechercher factures reçues (Destinataire)
+Search received invoices (Recipient)
 
 
 
@@ -493,7 +493,7 @@ Name | Type | Description  | Notes
 
 > interface{} RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(ctx).RequestBody(requestBody).Execute()
 
-Rechercher factures émises (Fournisseur)
+Search issued invoices (Supplier)
 
 
 
@@ -557,9 +557,9 @@ Name | Type | Description  | Notes
 
 ## RechercherStructuresApiV1ChorusProStructuresRechercherPost
 
-> RechercherStructureResponse RechercherStructuresApiV1ChorusProStructuresRechercherPost(ctx).RechercherStructureRequest(rechercherStructureRequest).Execute()
+> SearchStructureResponse RechercherStructuresApiV1ChorusProStructuresRechercherPost(ctx).SearchStructureRequest(searchStructureRequest).Execute()
 
-Rechercher des structures Chorus Pro
+Search Chorus Pro structures
 
 
 
@@ -576,16 +576,16 @@ import (
 )
 
 func main() {
-	rechercherStructureRequest := *openapiclient.NewRechercherStructureRequest() // RechercherStructureRequest | 
+	searchStructureRequest := *openapiclient.NewSearchStructureRequest() // SearchStructureRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChorusProAPI.RechercherStructuresApiV1ChorusProStructuresRechercherPost(context.Background()).RechercherStructureRequest(rechercherStructureRequest).Execute()
+	resp, r, err := apiClient.ChorusProAPI.RechercherStructuresApiV1ChorusProStructuresRechercherPost(context.Background()).SearchStructureRequest(searchStructureRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChorusProAPI.RechercherStructuresApiV1ChorusProStructuresRechercherPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RechercherStructuresApiV1ChorusProStructuresRechercherPost`: RechercherStructureResponse
+	// response from `RechercherStructuresApiV1ChorusProStructuresRechercherPost`: SearchStructureResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChorusProAPI.RechercherStructuresApiV1ChorusProStructuresRechercherPost`: %v\n", resp)
 }
 ```
@@ -601,11 +601,11 @@ Other parameters are passed through a pointer to a apiRechercherStructuresApiV1C
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **rechercherStructureRequest** | [**RechercherStructureRequest**](RechercherStructureRequest.md) |  | 
+ **searchStructureRequest** | [**SearchStructureRequest**](SearchStructureRequest.md) |  | 
 
 ### Return type
 
-[**RechercherStructureResponse**](RechercherStructureResponse.md)
+[**SearchStructureResponse**](SearchStructureResponse.md)
 
 ### Authorization
 
@@ -625,7 +625,7 @@ Name | Type | Description  | Notes
 
 > interface{} RecyclerFactureApiV1ChorusProFacturesRecyclerPost(ctx).RequestBody(requestBody).Execute()
 
-Recycler une facture (Fournisseur)
+Recycle an invoice (Supplier)
 
 
 
@@ -689,9 +689,9 @@ Name | Type | Description  | Notes
 
 ## SoumettreFactureApiV1ChorusProFacturesSoumettrePost
 
-> SoumettreFactureResponse SoumettreFactureApiV1ChorusProFacturesSoumettrePost(ctx).SoumettreFactureRequest(soumettreFactureRequest).Execute()
+> SubmitInvoiceResponse SoumettreFactureApiV1ChorusProFacturesSoumettrePost(ctx).SubmitInvoiceRequest(submitInvoiceRequest).Execute()
 
-Soumettre une facture à Chorus Pro
+Submit an invoice to Chorus Pro
 
 
 
@@ -708,16 +708,16 @@ import (
 )
 
 func main() {
-	soumettreFactureRequest := *openapiclient.NewSoumettreFactureRequest("NumeroFacture_example", "DateFacture_example", int32(123), *openapiclient.NewMontantHtTotal(), *openapiclient.NewMontantTva(), *openapiclient.NewMontantTtcTotal()) // SoumettreFactureRequest | 
+	submitInvoiceRequest := *openapiclient.NewSubmitInvoiceRequest("InvoiceNumber_example", "InvoiceDate_example", int32(123), *openapiclient.NewTotalNetAmount(), *openapiclient.NewVatAmount(), *openapiclient.NewTotalGrossAmount()) // SubmitInvoiceRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChorusProAPI.SoumettreFactureApiV1ChorusProFacturesSoumettrePost(context.Background()).SoumettreFactureRequest(soumettreFactureRequest).Execute()
+	resp, r, err := apiClient.ChorusProAPI.SoumettreFactureApiV1ChorusProFacturesSoumettrePost(context.Background()).SubmitInvoiceRequest(submitInvoiceRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChorusProAPI.SoumettreFactureApiV1ChorusProFacturesSoumettrePost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SoumettreFactureApiV1ChorusProFacturesSoumettrePost`: SoumettreFactureResponse
+	// response from `SoumettreFactureApiV1ChorusProFacturesSoumettrePost`: SubmitInvoiceResponse
 	fmt.Fprintf(os.Stdout, "Response from `ChorusProAPI.SoumettreFactureApiV1ChorusProFacturesSoumettrePost`: %v\n", resp)
 }
 ```
@@ -733,11 +733,11 @@ Other parameters are passed through a pointer to a apiSoumettreFactureApiV1Choru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **soumettreFactureRequest** | [**SoumettreFactureRequest**](SoumettreFactureRequest.md) |  | 
+ **submitInvoiceRequest** | [**SubmitInvoiceRequest**](SubmitInvoiceRequest.md) |  | 
 
 ### Return type
 
-[**SoumettreFactureResponse**](SoumettreFactureResponse.md)
+[**SubmitInvoiceResponse**](SubmitInvoiceResponse.md)
 
 ### Authorization
 
@@ -757,7 +757,7 @@ Name | Type | Description  | Notes
 
 > interface{} TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(ctx).RequestBody(requestBody).Execute()
 
-Télécharger un groupe de factures
+Download a group of invoices
 
 
 
@@ -823,7 +823,7 @@ Name | Type | Description  | Notes
 
 > interface{} TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(ctx).RequestBody(requestBody).Execute()
 
-Traiter une facture reçue (Destinataire)
+Process a received invoice (Recipient)
 
 
 
@@ -889,7 +889,7 @@ Name | Type | Description  | Notes
 
 > interface{} ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(ctx).RequestBody(requestBody).Execute()
 
-Consulter une facture (Valideur)
+Consult an invoice (Validator)
 
 ### Example
 
@@ -953,7 +953,7 @@ Name | Type | Description  | Notes
 
 > interface{} ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(ctx).RequestBody(requestBody).Execute()
 
-Rechercher factures à valider (Valideur)
+Search invoices to validate (Validator)
 
 
 
@@ -1019,7 +1019,7 @@ Name | Type | Description  | Notes
 
 > interface{} ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(ctx).RequestBody(requestBody).Execute()
 
-Valider ou refuser une facture (Valideur)
+Validate or reject an invoice (Validator)
 
 
 

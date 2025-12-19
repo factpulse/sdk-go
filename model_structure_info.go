@@ -1,7 +1,7 @@
 /*
-API REST FactPulse
+FactPulse REST API
 
- API REST pour la facturation électronique en France : Factur-X, AFNOR PDP/PA, signatures électroniques.  ## 🎯 Fonctionnalités principales  ### 📄 Génération de factures Factur-X - **Formats** : XML seul ou PDF/A-3 avec XML embarqué - **Profils** : MINIMUM, BASIC, EN16931, EXTENDED - **Normes** : EN 16931 (directive UE 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Format simplifié** : Génération à partir de SIRET + auto-enrichissement (API Chorus Pro + Recherche Entreprises)  ### ✅ Validation et conformité - **Validation XML** : Schematron (45 à 210+ règles selon profil) - **Validation PDF** : PDF/A-3, métadonnées XMP Factur-X, signatures électroniques - **VeraPDF** : Validation stricte PDF/A (146+ règles ISO 19005-3) - **Traitement asynchrone** : Support Celery pour validations lourdes (VeraPDF)  ### 📡 Intégration AFNOR PDP/PA (XP Z12-013) - **Soumission de flux** : Envoi de factures vers Plateformes de Dématérialisation Partenaires - **Recherche de flux** : Consultation des factures soumises - **Téléchargement** : Récupération des PDF/A-3 avec XML - **Directory Service** : Recherche d'entreprises (SIREN/SIRET) - **Multi-client** : Support de plusieurs configs PDP par utilisateur (stored credentials ou zero-storage)  ### ✍️ Signature électronique PDF - **Standards** : PAdES-B-B, PAdES-B-T (horodatage RFC 3161), PAdES-B-LT (archivage long terme) - **Niveaux eIDAS** : SES (auto-signé), AdES (CA commerciale), QES (PSCO) - **Validation** : Vérification intégrité cryptographique et certificats - **Génération de certificats** : Certificats X.509 auto-signés pour tests  ### 🔄 Traitement asynchrone - **Celery** : Génération, validation et signature asynchrones - **Polling** : Suivi d'état via `/taches/{id_tache}/statut` - **Pas de timeout** : Idéal pour gros fichiers ou validations lourdes  ## 🔒 Authentification  Toutes les requêtes nécessitent un **token JWT** dans le header Authorization : ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### Comment obtenir un token JWT ?  #### 🔑 Méthode 1 : API `/api/token/` (Recommandée)  **URL :** `https://www.factpulse.fr/api/token/`  Cette méthode est **recommandée** pour l'intégration dans vos applications et workflows CI/CD.  **Prérequis :** Avoir défini un mot de passe sur votre compte  **Pour les utilisateurs inscrits via email/password :** - Vous avez déjà un mot de passe, utilisez-le directement  **Pour les utilisateurs inscrits via OAuth (Google/GitHub) :** - Vous devez d'abord définir un mot de passe sur : https://www.factpulse.fr/accounts/password/set/ - Une fois le mot de passe créé, vous pourrez utiliser l'API  **Exemple de requête :** ```bash curl -X POST https://www.factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"votre_email@example.com\",     \"password\": \"votre_mot_de_passe\"   }' ```  **Paramètre optionnel `client_uid` :**  Pour sélectionner les credentials d'un client spécifique (PA/PDP, Chorus Pro, certificats de signature), ajoutez `client_uid` :  ```bash curl -X POST https://www.factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"votre_email@example.com\",     \"password\": \"votre_mot_de_passe\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  Le `client_uid` sera inclus dans le JWT et permettra à l'API d'utiliser automatiquement : - Les credentials AFNOR/PDP configurés pour ce client - Les credentials Chorus Pro configurés pour ce client - Les certificats de signature électronique configurés pour ce client  **Réponse :** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Token d'accès (validité: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Token de rafraîchissement (validité: 7 jours) } ```  **Avantages :** - ✅ Automatisation complète (CI/CD, scripts) - ✅ Gestion programmatique des tokens - ✅ Support du refresh token pour renouveler automatiquement l'accès - ✅ Intégration facile dans n'importe quel langage/outil  #### 🖥️ Méthode 2 : Génération via Dashboard (Alternative)  **URL :** https://www.factpulse.fr/dashboard/  Cette méthode convient pour des tests rapides ou une utilisation occasionnelle via l'interface graphique.  **Fonctionnement :** - Connectez-vous au dashboard - Utilisez les boutons \"Generate Test Token\" ou \"Generate Production Token\" - Fonctionne pour **tous** les utilisateurs (OAuth et email/password), sans nécessiter de mot de passe  **Types de tokens :** - **Token Test** : Validité 24h, quota 1000 appels/jour (gratuit) - **Token Production** : Validité 7 jours, quota selon votre forfait  **Avantages :** - ✅ Rapide pour tester l'API - ✅ Aucun mot de passe requis - ✅ Interface visuelle simple  **Inconvénients :** - ❌ Nécessite une action manuelle - ❌ Pas de refresh token - ❌ Moins adapté pour l'automatisation  ### 📚 Documentation complète  Pour plus d'informations sur l'authentification et l'utilisation de l'API : https://www.factpulse.fr/documentation-api/     
+ REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X Invoice Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Validation and Compliance - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata, electronic signatures - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules) - **Asynchronous Processing**: Celery support for heavy validations (VeraPDF)  ### 📡 AFNOR PDP/PA Integration (XP Z12-013) - **Flow Submission**: Send invoices to Partner Dematerialization Platforms - **Flow Search**: View submitted invoices - **Download**: Retrieve PDF/A-3 with XML - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user (stored credentials or zero-storage)  ### ✍️ PDF Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification - **Certificate Generation**: Self-signed X.509 certificates for testing  ### 🔄 Asynchronous Processing - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **No timeout**: Ideal for large files or heavy validations  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://www.factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://www.factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://www.factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://www.factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://www.factpulse.fr/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://www.factpulse.fr/documentation-api/     
 
 API version: 1.0.0
 */
@@ -19,18 +19,18 @@ import (
 // checks if the StructureInfo type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StructureInfo{}
 
-// StructureInfo Informations d'une structure.
+// StructureInfo Structure information.
 type StructureInfo struct {
-	// ID Chorus Pro de la structure
-	IdStructureCpp int32 `json:"id_structure_cpp"`
-	// Identifiant (SIRET, SIREN)
-	IdentifiantStructure string `json:"identifiant_structure"`
-	// Nom de la structure
-	DesignationStructure string `json:"designation_structure"`
-	// Type d'identifiant
-	TypeIdentifiantStructure string `json:"type_identifiant_structure"`
-	// Statut (ACTIVE, INACTIVE)
-	Statut string `json:"statut"`
+	// Chorus Pro structure ID
+	StructureId int32 `json:"structureId"`
+	// Identifier (SIRET, SIREN)
+	StructureIdentifier string `json:"structureIdentifier"`
+	// Structure name
+	StructureName string `json:"structureName"`
+	// Identifier type
+	StructureIdentifierType string `json:"structureIdentifierType"`
+	// Status (ACTIVE, INACTIVE)
+	Status string `json:"status"`
 }
 
 type _StructureInfo StructureInfo
@@ -39,13 +39,13 @@ type _StructureInfo StructureInfo
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStructureInfo(idStructureCpp int32, identifiantStructure string, designationStructure string, typeIdentifiantStructure string, statut string) *StructureInfo {
+func NewStructureInfo(structureId int32, structureIdentifier string, structureName string, structureIdentifierType string, status string) *StructureInfo {
 	this := StructureInfo{}
-	this.IdStructureCpp = idStructureCpp
-	this.IdentifiantStructure = identifiantStructure
-	this.DesignationStructure = designationStructure
-	this.TypeIdentifiantStructure = typeIdentifiantStructure
-	this.Statut = statut
+	this.StructureId = structureId
+	this.StructureIdentifier = structureIdentifier
+	this.StructureName = structureName
+	this.StructureIdentifierType = structureIdentifierType
+	this.Status = status
 	return &this
 }
 
@@ -57,124 +57,124 @@ func NewStructureInfoWithDefaults() *StructureInfo {
 	return &this
 }
 
-// GetIdStructureCpp returns the IdStructureCpp field value
-func (o *StructureInfo) GetIdStructureCpp() int32 {
+// GetStructureId returns the StructureId field value
+func (o *StructureInfo) GetStructureId() int32 {
 	if o == nil {
 		var ret int32
 		return ret
 	}
 
-	return o.IdStructureCpp
+	return o.StructureId
 }
 
-// GetIdStructureCppOk returns a tuple with the IdStructureCpp field value
+// GetStructureIdOk returns a tuple with the StructureId field value
 // and a boolean to check if the value has been set.
-func (o *StructureInfo) GetIdStructureCppOk() (*int32, bool) {
+func (o *StructureInfo) GetStructureIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.IdStructureCpp, true
+	return &o.StructureId, true
 }
 
-// SetIdStructureCpp sets field value
-func (o *StructureInfo) SetIdStructureCpp(v int32) {
-	o.IdStructureCpp = v
+// SetStructureId sets field value
+func (o *StructureInfo) SetStructureId(v int32) {
+	o.StructureId = v
 }
 
-// GetIdentifiantStructure returns the IdentifiantStructure field value
-func (o *StructureInfo) GetIdentifiantStructure() string {
+// GetStructureIdentifier returns the StructureIdentifier field value
+func (o *StructureInfo) GetStructureIdentifier() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.IdentifiantStructure
+	return o.StructureIdentifier
 }
 
-// GetIdentifiantStructureOk returns a tuple with the IdentifiantStructure field value
+// GetStructureIdentifierOk returns a tuple with the StructureIdentifier field value
 // and a boolean to check if the value has been set.
-func (o *StructureInfo) GetIdentifiantStructureOk() (*string, bool) {
+func (o *StructureInfo) GetStructureIdentifierOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.IdentifiantStructure, true
+	return &o.StructureIdentifier, true
 }
 
-// SetIdentifiantStructure sets field value
-func (o *StructureInfo) SetIdentifiantStructure(v string) {
-	o.IdentifiantStructure = v
+// SetStructureIdentifier sets field value
+func (o *StructureInfo) SetStructureIdentifier(v string) {
+	o.StructureIdentifier = v
 }
 
-// GetDesignationStructure returns the DesignationStructure field value
-func (o *StructureInfo) GetDesignationStructure() string {
+// GetStructureName returns the StructureName field value
+func (o *StructureInfo) GetStructureName() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.DesignationStructure
+	return o.StructureName
 }
 
-// GetDesignationStructureOk returns a tuple with the DesignationStructure field value
+// GetStructureNameOk returns a tuple with the StructureName field value
 // and a boolean to check if the value has been set.
-func (o *StructureInfo) GetDesignationStructureOk() (*string, bool) {
+func (o *StructureInfo) GetStructureNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.DesignationStructure, true
+	return &o.StructureName, true
 }
 
-// SetDesignationStructure sets field value
-func (o *StructureInfo) SetDesignationStructure(v string) {
-	o.DesignationStructure = v
+// SetStructureName sets field value
+func (o *StructureInfo) SetStructureName(v string) {
+	o.StructureName = v
 }
 
-// GetTypeIdentifiantStructure returns the TypeIdentifiantStructure field value
-func (o *StructureInfo) GetTypeIdentifiantStructure() string {
+// GetStructureIdentifierType returns the StructureIdentifierType field value
+func (o *StructureInfo) GetStructureIdentifierType() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.TypeIdentifiantStructure
+	return o.StructureIdentifierType
 }
 
-// GetTypeIdentifiantStructureOk returns a tuple with the TypeIdentifiantStructure field value
+// GetStructureIdentifierTypeOk returns a tuple with the StructureIdentifierType field value
 // and a boolean to check if the value has been set.
-func (o *StructureInfo) GetTypeIdentifiantStructureOk() (*string, bool) {
+func (o *StructureInfo) GetStructureIdentifierTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.TypeIdentifiantStructure, true
+	return &o.StructureIdentifierType, true
 }
 
-// SetTypeIdentifiantStructure sets field value
-func (o *StructureInfo) SetTypeIdentifiantStructure(v string) {
-	o.TypeIdentifiantStructure = v
+// SetStructureIdentifierType sets field value
+func (o *StructureInfo) SetStructureIdentifierType(v string) {
+	o.StructureIdentifierType = v
 }
 
-// GetStatut returns the Statut field value
-func (o *StructureInfo) GetStatut() string {
+// GetStatus returns the Status field value
+func (o *StructureInfo) GetStatus() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Statut
+	return o.Status
 }
 
-// GetStatutOk returns a tuple with the Statut field value
+// GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *StructureInfo) GetStatutOk() (*string, bool) {
+func (o *StructureInfo) GetStatusOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Statut, true
+	return &o.Status, true
 }
 
-// SetStatut sets field value
-func (o *StructureInfo) SetStatut(v string) {
-	o.Statut = v
+// SetStatus sets field value
+func (o *StructureInfo) SetStatus(v string) {
+	o.Status = v
 }
 
 func (o StructureInfo) MarshalJSON() ([]byte, error) {
@@ -187,11 +187,11 @@ func (o StructureInfo) MarshalJSON() ([]byte, error) {
 
 func (o StructureInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id_structure_cpp"] = o.IdStructureCpp
-	toSerialize["identifiant_structure"] = o.IdentifiantStructure
-	toSerialize["designation_structure"] = o.DesignationStructure
-	toSerialize["type_identifiant_structure"] = o.TypeIdentifiantStructure
-	toSerialize["statut"] = o.Statut
+	toSerialize["structureId"] = o.StructureId
+	toSerialize["structureIdentifier"] = o.StructureIdentifier
+	toSerialize["structureName"] = o.StructureName
+	toSerialize["structureIdentifierType"] = o.StructureIdentifierType
+	toSerialize["status"] = o.Status
 	return toSerialize, nil
 }
 
@@ -200,11 +200,11 @@ func (o *StructureInfo) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"id_structure_cpp",
-		"identifiant_structure",
-		"designation_structure",
-		"type_identifiant_structure",
-		"statut",
+		"structureId",
+		"structureIdentifier",
+		"structureName",
+		"structureIdentifierType",
+		"status",
 	}
 
 	allProperties := make(map[string]interface{})

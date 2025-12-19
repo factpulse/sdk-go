@@ -1,7 +1,7 @@
 /*
-API REST FactPulse
+FactPulse REST API
 
- API REST pour la facturation électronique en France : Factur-X, AFNOR PDP/PA, signatures électroniques.  ## 🎯 Fonctionnalités principales  ### 📄 Génération de factures Factur-X - **Formats** : XML seul ou PDF/A-3 avec XML embarqué - **Profils** : MINIMUM, BASIC, EN16931, EXTENDED - **Normes** : EN 16931 (directive UE 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Format simplifié** : Génération à partir de SIRET + auto-enrichissement (API Chorus Pro + Recherche Entreprises)  ### ✅ Validation et conformité - **Validation XML** : Schematron (45 à 210+ règles selon profil) - **Validation PDF** : PDF/A-3, métadonnées XMP Factur-X, signatures électroniques - **VeraPDF** : Validation stricte PDF/A (146+ règles ISO 19005-3) - **Traitement asynchrone** : Support Celery pour validations lourdes (VeraPDF)  ### 📡 Intégration AFNOR PDP/PA (XP Z12-013) - **Soumission de flux** : Envoi de factures vers Plateformes de Dématérialisation Partenaires - **Recherche de flux** : Consultation des factures soumises - **Téléchargement** : Récupération des PDF/A-3 avec XML - **Directory Service** : Recherche d'entreprises (SIREN/SIRET) - **Multi-client** : Support de plusieurs configs PDP par utilisateur (stored credentials ou zero-storage)  ### ✍️ Signature électronique PDF - **Standards** : PAdES-B-B, PAdES-B-T (horodatage RFC 3161), PAdES-B-LT (archivage long terme) - **Niveaux eIDAS** : SES (auto-signé), AdES (CA commerciale), QES (PSCO) - **Validation** : Vérification intégrité cryptographique et certificats - **Génération de certificats** : Certificats X.509 auto-signés pour tests  ### 🔄 Traitement asynchrone - **Celery** : Génération, validation et signature asynchrones - **Polling** : Suivi d'état via `/taches/{id_tache}/statut` - **Pas de timeout** : Idéal pour gros fichiers ou validations lourdes  ## 🔒 Authentification  Toutes les requêtes nécessitent un **token JWT** dans le header Authorization : ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### Comment obtenir un token JWT ?  #### 🔑 Méthode 1 : API `/api/token/` (Recommandée)  **URL :** `https://www.factpulse.fr/api/token/`  Cette méthode est **recommandée** pour l'intégration dans vos applications et workflows CI/CD.  **Prérequis :** Avoir défini un mot de passe sur votre compte  **Pour les utilisateurs inscrits via email/password :** - Vous avez déjà un mot de passe, utilisez-le directement  **Pour les utilisateurs inscrits via OAuth (Google/GitHub) :** - Vous devez d'abord définir un mot de passe sur : https://www.factpulse.fr/accounts/password/set/ - Une fois le mot de passe créé, vous pourrez utiliser l'API  **Exemple de requête :** ```bash curl -X POST https://www.factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"votre_email@example.com\",     \"password\": \"votre_mot_de_passe\"   }' ```  **Paramètre optionnel `client_uid` :**  Pour sélectionner les credentials d'un client spécifique (PA/PDP, Chorus Pro, certificats de signature), ajoutez `client_uid` :  ```bash curl -X POST https://www.factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"votre_email@example.com\",     \"password\": \"votre_mot_de_passe\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  Le `client_uid` sera inclus dans le JWT et permettra à l'API d'utiliser automatiquement : - Les credentials AFNOR/PDP configurés pour ce client - Les credentials Chorus Pro configurés pour ce client - Les certificats de signature électronique configurés pour ce client  **Réponse :** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Token d'accès (validité: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Token de rafraîchissement (validité: 7 jours) } ```  **Avantages :** - ✅ Automatisation complète (CI/CD, scripts) - ✅ Gestion programmatique des tokens - ✅ Support du refresh token pour renouveler automatiquement l'accès - ✅ Intégration facile dans n'importe quel langage/outil  #### 🖥️ Méthode 2 : Génération via Dashboard (Alternative)  **URL :** https://www.factpulse.fr/dashboard/  Cette méthode convient pour des tests rapides ou une utilisation occasionnelle via l'interface graphique.  **Fonctionnement :** - Connectez-vous au dashboard - Utilisez les boutons \"Generate Test Token\" ou \"Generate Production Token\" - Fonctionne pour **tous** les utilisateurs (OAuth et email/password), sans nécessiter de mot de passe  **Types de tokens :** - **Token Test** : Validité 24h, quota 1000 appels/jour (gratuit) - **Token Production** : Validité 7 jours, quota selon votre forfait  **Avantages :** - ✅ Rapide pour tester l'API - ✅ Aucun mot de passe requis - ✅ Interface visuelle simple  **Inconvénients :** - ❌ Nécessite une action manuelle - ❌ Pas de refresh token - ❌ Moins adapté pour l'automatisation  ### 📚 Documentation complète  Pour plus d'informations sur l'authentification et l'utilisation de l'API : https://www.factpulse.fr/documentation-api/     
+ REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X Invoice Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Validation and Compliance - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata, electronic signatures - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules) - **Asynchronous Processing**: Celery support for heavy validations (VeraPDF)  ### 📡 AFNOR PDP/PA Integration (XP Z12-013) - **Flow Submission**: Send invoices to Partner Dematerialization Platforms - **Flow Search**: View submitted invoices - **Download**: Retrieve PDF/A-3 with XML - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user (stored credentials or zero-storage)  ### ✍️ PDF Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification - **Certificate Generation**: Self-signed X.509 certificates for testing  ### 🔄 Asynchronous Processing - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **No timeout**: Ideal for large files or heavy validations  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://www.factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://www.factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://www.factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://www.factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://www.factpulse.fr/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://www.factpulse.fr/documentation-api/     
 
 API version: 1.0.0
 */
@@ -19,24 +19,24 @@ import (
 // checks if the FactureFacturX type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FactureFacturX{}
 
-// FactureFacturX Modèle de données pour une facture destinée à être convertie en Factur-X.
+// FactureFacturX Data model for an invoice to be converted to Factur-X.
 type FactureFacturX struct {
-	NumeroFacture string `json:"numeroFacture"`
-	DateEcheancePaiement string `json:"dateEcheancePaiement"`
-	DateFacture *string `json:"dateFacture,omitempty"`
-	ModeDepot ModeDepot `json:"modeDepot"`
-	Destinataire Destinataire `json:"destinataire"`
-	Fournisseur Fournisseur `json:"fournisseur"`
-	CadreDeFacturation CadreDeFacturation `json:"cadreDeFacturation"`
-	References References `json:"references"`
-	MontantTotal MontantTotal `json:"montantTotal"`
-	LignesDePoste []LigneDePoste `json:"lignesDePoste,omitempty"`
-	LignesDeTva []LigneDeTVA `json:"lignesDeTva,omitempty"`
-	Notes []Note `json:"notes,omitempty"`
-	Commentaire NullableString `json:"commentaire,omitempty"`
-	IdUtilisateurCourant NullableInt32 `json:"idUtilisateurCourant,omitempty"`
-	PiecesJointesComplementaires []PieceJointeComplementaire `json:"piecesJointesComplementaires,omitempty"`
-	Beneficiaire NullableBeneficiaire `json:"beneficiaire,omitempty"`
+	InvoiceNumber string `json:"invoice_number"`
+	PaymentDueDate string `json:"payment_due_date"`
+	InvoiceDate *string `json:"invoice_date,omitempty"`
+	SubmissionMode SubmissionMode `json:"submission_mode"`
+	Recipient Recipient `json:"recipient"`
+	Supplier Supplier `json:"supplier"`
+	InvoicingFramework InvoicingFramework `json:"invoicing_framework"`
+	References InvoiceReferences `json:"references"`
+	Totals InvoiceTotals `json:"totals"`
+	InvoiceLines []InvoiceLine `json:"invoice_lines,omitempty"`
+	VatLines []VATLine `json:"vat_lines,omitempty"`
+	Notes []InvoiceNote `json:"notes,omitempty"`
+	Comment NullableString `json:"comment,omitempty"`
+	CurrentUserId NullableInt32 `json:"current_user_id,omitempty"`
+	SupplementaryAttachments []SupplementaryAttachment `json:"supplementary_attachments,omitempty"`
+	Payee NullablePayee `json:"payee,omitempty"`
 }
 
 type _FactureFacturX FactureFacturX
@@ -45,16 +45,16 @@ type _FactureFacturX FactureFacturX
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFactureFacturX(numeroFacture string, dateEcheancePaiement string, modeDepot ModeDepot, destinataire Destinataire, fournisseur Fournisseur, cadreDeFacturation CadreDeFacturation, references References, montantTotal MontantTotal) *FactureFacturX {
+func NewFactureFacturX(invoiceNumber string, paymentDueDate string, submissionMode SubmissionMode, recipient Recipient, supplier Supplier, invoicingFramework InvoicingFramework, references InvoiceReferences, totals InvoiceTotals) *FactureFacturX {
 	this := FactureFacturX{}
-	this.NumeroFacture = numeroFacture
-	this.DateEcheancePaiement = dateEcheancePaiement
-	this.ModeDepot = modeDepot
-	this.Destinataire = destinataire
-	this.Fournisseur = fournisseur
-	this.CadreDeFacturation = cadreDeFacturation
+	this.InvoiceNumber = invoiceNumber
+	this.PaymentDueDate = paymentDueDate
+	this.SubmissionMode = submissionMode
+	this.Recipient = recipient
+	this.Supplier = supplier
+	this.InvoicingFramework = invoicingFramework
 	this.References = references
-	this.MontantTotal = montantTotal
+	this.Totals = totals
 	return &this
 }
 
@@ -66,186 +66,186 @@ func NewFactureFacturXWithDefaults() *FactureFacturX {
 	return &this
 }
 
-// GetNumeroFacture returns the NumeroFacture field value
-func (o *FactureFacturX) GetNumeroFacture() string {
+// GetInvoiceNumber returns the InvoiceNumber field value
+func (o *FactureFacturX) GetInvoiceNumber() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.NumeroFacture
+	return o.InvoiceNumber
 }
 
-// GetNumeroFactureOk returns a tuple with the NumeroFacture field value
+// GetInvoiceNumberOk returns a tuple with the InvoiceNumber field value
 // and a boolean to check if the value has been set.
-func (o *FactureFacturX) GetNumeroFactureOk() (*string, bool) {
+func (o *FactureFacturX) GetInvoiceNumberOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.NumeroFacture, true
+	return &o.InvoiceNumber, true
 }
 
-// SetNumeroFacture sets field value
-func (o *FactureFacturX) SetNumeroFacture(v string) {
-	o.NumeroFacture = v
+// SetInvoiceNumber sets field value
+func (o *FactureFacturX) SetInvoiceNumber(v string) {
+	o.InvoiceNumber = v
 }
 
-// GetDateEcheancePaiement returns the DateEcheancePaiement field value
-func (o *FactureFacturX) GetDateEcheancePaiement() string {
+// GetPaymentDueDate returns the PaymentDueDate field value
+func (o *FactureFacturX) GetPaymentDueDate() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.DateEcheancePaiement
+	return o.PaymentDueDate
 }
 
-// GetDateEcheancePaiementOk returns a tuple with the DateEcheancePaiement field value
+// GetPaymentDueDateOk returns a tuple with the PaymentDueDate field value
 // and a boolean to check if the value has been set.
-func (o *FactureFacturX) GetDateEcheancePaiementOk() (*string, bool) {
+func (o *FactureFacturX) GetPaymentDueDateOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.DateEcheancePaiement, true
+	return &o.PaymentDueDate, true
 }
 
-// SetDateEcheancePaiement sets field value
-func (o *FactureFacturX) SetDateEcheancePaiement(v string) {
-	o.DateEcheancePaiement = v
+// SetPaymentDueDate sets field value
+func (o *FactureFacturX) SetPaymentDueDate(v string) {
+	o.PaymentDueDate = v
 }
 
-// GetDateFacture returns the DateFacture field value if set, zero value otherwise.
-func (o *FactureFacturX) GetDateFacture() string {
-	if o == nil || IsNil(o.DateFacture) {
+// GetInvoiceDate returns the InvoiceDate field value if set, zero value otherwise.
+func (o *FactureFacturX) GetInvoiceDate() string {
+	if o == nil || IsNil(o.InvoiceDate) {
 		var ret string
 		return ret
 	}
-	return *o.DateFacture
+	return *o.InvoiceDate
 }
 
-// GetDateFactureOk returns a tuple with the DateFacture field value if set, nil otherwise
+// GetInvoiceDateOk returns a tuple with the InvoiceDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FactureFacturX) GetDateFactureOk() (*string, bool) {
-	if o == nil || IsNil(o.DateFacture) {
+func (o *FactureFacturX) GetInvoiceDateOk() (*string, bool) {
+	if o == nil || IsNil(o.InvoiceDate) {
 		return nil, false
 	}
-	return o.DateFacture, true
+	return o.InvoiceDate, true
 }
 
-// HasDateFacture returns a boolean if a field has been set.
-func (o *FactureFacturX) HasDateFacture() bool {
-	if o != nil && !IsNil(o.DateFacture) {
+// HasInvoiceDate returns a boolean if a field has been set.
+func (o *FactureFacturX) HasInvoiceDate() bool {
+	if o != nil && !IsNil(o.InvoiceDate) {
 		return true
 	}
 
 	return false
 }
 
-// SetDateFacture gets a reference to the given string and assigns it to the DateFacture field.
-func (o *FactureFacturX) SetDateFacture(v string) {
-	o.DateFacture = &v
+// SetInvoiceDate gets a reference to the given string and assigns it to the InvoiceDate field.
+func (o *FactureFacturX) SetInvoiceDate(v string) {
+	o.InvoiceDate = &v
 }
 
-// GetModeDepot returns the ModeDepot field value
-func (o *FactureFacturX) GetModeDepot() ModeDepot {
+// GetSubmissionMode returns the SubmissionMode field value
+func (o *FactureFacturX) GetSubmissionMode() SubmissionMode {
 	if o == nil {
-		var ret ModeDepot
+		var ret SubmissionMode
 		return ret
 	}
 
-	return o.ModeDepot
+	return o.SubmissionMode
 }
 
-// GetModeDepotOk returns a tuple with the ModeDepot field value
+// GetSubmissionModeOk returns a tuple with the SubmissionMode field value
 // and a boolean to check if the value has been set.
-func (o *FactureFacturX) GetModeDepotOk() (*ModeDepot, bool) {
+func (o *FactureFacturX) GetSubmissionModeOk() (*SubmissionMode, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ModeDepot, true
+	return &o.SubmissionMode, true
 }
 
-// SetModeDepot sets field value
-func (o *FactureFacturX) SetModeDepot(v ModeDepot) {
-	o.ModeDepot = v
+// SetSubmissionMode sets field value
+func (o *FactureFacturX) SetSubmissionMode(v SubmissionMode) {
+	o.SubmissionMode = v
 }
 
-// GetDestinataire returns the Destinataire field value
-func (o *FactureFacturX) GetDestinataire() Destinataire {
+// GetRecipient returns the Recipient field value
+func (o *FactureFacturX) GetRecipient() Recipient {
 	if o == nil {
-		var ret Destinataire
+		var ret Recipient
 		return ret
 	}
 
-	return o.Destinataire
+	return o.Recipient
 }
 
-// GetDestinataireOk returns a tuple with the Destinataire field value
+// GetRecipientOk returns a tuple with the Recipient field value
 // and a boolean to check if the value has been set.
-func (o *FactureFacturX) GetDestinataireOk() (*Destinataire, bool) {
+func (o *FactureFacturX) GetRecipientOk() (*Recipient, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Destinataire, true
+	return &o.Recipient, true
 }
 
-// SetDestinataire sets field value
-func (o *FactureFacturX) SetDestinataire(v Destinataire) {
-	o.Destinataire = v
+// SetRecipient sets field value
+func (o *FactureFacturX) SetRecipient(v Recipient) {
+	o.Recipient = v
 }
 
-// GetFournisseur returns the Fournisseur field value
-func (o *FactureFacturX) GetFournisseur() Fournisseur {
+// GetSupplier returns the Supplier field value
+func (o *FactureFacturX) GetSupplier() Supplier {
 	if o == nil {
-		var ret Fournisseur
+		var ret Supplier
 		return ret
 	}
 
-	return o.Fournisseur
+	return o.Supplier
 }
 
-// GetFournisseurOk returns a tuple with the Fournisseur field value
+// GetSupplierOk returns a tuple with the Supplier field value
 // and a boolean to check if the value has been set.
-func (o *FactureFacturX) GetFournisseurOk() (*Fournisseur, bool) {
+func (o *FactureFacturX) GetSupplierOk() (*Supplier, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Fournisseur, true
+	return &o.Supplier, true
 }
 
-// SetFournisseur sets field value
-func (o *FactureFacturX) SetFournisseur(v Fournisseur) {
-	o.Fournisseur = v
+// SetSupplier sets field value
+func (o *FactureFacturX) SetSupplier(v Supplier) {
+	o.Supplier = v
 }
 
-// GetCadreDeFacturation returns the CadreDeFacturation field value
-func (o *FactureFacturX) GetCadreDeFacturation() CadreDeFacturation {
+// GetInvoicingFramework returns the InvoicingFramework field value
+func (o *FactureFacturX) GetInvoicingFramework() InvoicingFramework {
 	if o == nil {
-		var ret CadreDeFacturation
+		var ret InvoicingFramework
 		return ret
 	}
 
-	return o.CadreDeFacturation
+	return o.InvoicingFramework
 }
 
-// GetCadreDeFacturationOk returns a tuple with the CadreDeFacturation field value
+// GetInvoicingFrameworkOk returns a tuple with the InvoicingFramework field value
 // and a boolean to check if the value has been set.
-func (o *FactureFacturX) GetCadreDeFacturationOk() (*CadreDeFacturation, bool) {
+func (o *FactureFacturX) GetInvoicingFrameworkOk() (*InvoicingFramework, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.CadreDeFacturation, true
+	return &o.InvoicingFramework, true
 }
 
-// SetCadreDeFacturation sets field value
-func (o *FactureFacturX) SetCadreDeFacturation(v CadreDeFacturation) {
-	o.CadreDeFacturation = v
+// SetInvoicingFramework sets field value
+func (o *FactureFacturX) SetInvoicingFramework(v InvoicingFramework) {
+	o.InvoicingFramework = v
 }
 
 // GetReferences returns the References field value
-func (o *FactureFacturX) GetReferences() References {
+func (o *FactureFacturX) GetReferences() InvoiceReferences {
 	if o == nil {
-		var ret References
+		var ret InvoiceReferences
 		return ret
 	}
 
@@ -254,7 +254,7 @@ func (o *FactureFacturX) GetReferences() References {
 
 // GetReferencesOk returns a tuple with the References field value
 // and a boolean to check if the value has been set.
-func (o *FactureFacturX) GetReferencesOk() (*References, bool) {
+func (o *FactureFacturX) GetReferencesOk() (*InvoiceReferences, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -262,102 +262,102 @@ func (o *FactureFacturX) GetReferencesOk() (*References, bool) {
 }
 
 // SetReferences sets field value
-func (o *FactureFacturX) SetReferences(v References) {
+func (o *FactureFacturX) SetReferences(v InvoiceReferences) {
 	o.References = v
 }
 
-// GetMontantTotal returns the MontantTotal field value
-func (o *FactureFacturX) GetMontantTotal() MontantTotal {
+// GetTotals returns the Totals field value
+func (o *FactureFacturX) GetTotals() InvoiceTotals {
 	if o == nil {
-		var ret MontantTotal
+		var ret InvoiceTotals
 		return ret
 	}
 
-	return o.MontantTotal
+	return o.Totals
 }
 
-// GetMontantTotalOk returns a tuple with the MontantTotal field value
+// GetTotalsOk returns a tuple with the Totals field value
 // and a boolean to check if the value has been set.
-func (o *FactureFacturX) GetMontantTotalOk() (*MontantTotal, bool) {
+func (o *FactureFacturX) GetTotalsOk() (*InvoiceTotals, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.MontantTotal, true
+	return &o.Totals, true
 }
 
-// SetMontantTotal sets field value
-func (o *FactureFacturX) SetMontantTotal(v MontantTotal) {
-	o.MontantTotal = v
+// SetTotals sets field value
+func (o *FactureFacturX) SetTotals(v InvoiceTotals) {
+	o.Totals = v
 }
 
-// GetLignesDePoste returns the LignesDePoste field value if set, zero value otherwise.
-func (o *FactureFacturX) GetLignesDePoste() []LigneDePoste {
-	if o == nil || IsNil(o.LignesDePoste) {
-		var ret []LigneDePoste
+// GetInvoiceLines returns the InvoiceLines field value if set, zero value otherwise.
+func (o *FactureFacturX) GetInvoiceLines() []InvoiceLine {
+	if o == nil || IsNil(o.InvoiceLines) {
+		var ret []InvoiceLine
 		return ret
 	}
-	return o.LignesDePoste
+	return o.InvoiceLines
 }
 
-// GetLignesDePosteOk returns a tuple with the LignesDePoste field value if set, nil otherwise
+// GetInvoiceLinesOk returns a tuple with the InvoiceLines field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FactureFacturX) GetLignesDePosteOk() ([]LigneDePoste, bool) {
-	if o == nil || IsNil(o.LignesDePoste) {
+func (o *FactureFacturX) GetInvoiceLinesOk() ([]InvoiceLine, bool) {
+	if o == nil || IsNil(o.InvoiceLines) {
 		return nil, false
 	}
-	return o.LignesDePoste, true
+	return o.InvoiceLines, true
 }
 
-// HasLignesDePoste returns a boolean if a field has been set.
-func (o *FactureFacturX) HasLignesDePoste() bool {
-	if o != nil && !IsNil(o.LignesDePoste) {
+// HasInvoiceLines returns a boolean if a field has been set.
+func (o *FactureFacturX) HasInvoiceLines() bool {
+	if o != nil && !IsNil(o.InvoiceLines) {
 		return true
 	}
 
 	return false
 }
 
-// SetLignesDePoste gets a reference to the given []LigneDePoste and assigns it to the LignesDePoste field.
-func (o *FactureFacturX) SetLignesDePoste(v []LigneDePoste) {
-	o.LignesDePoste = v
+// SetInvoiceLines gets a reference to the given []InvoiceLine and assigns it to the InvoiceLines field.
+func (o *FactureFacturX) SetInvoiceLines(v []InvoiceLine) {
+	o.InvoiceLines = v
 }
 
-// GetLignesDeTva returns the LignesDeTva field value if set, zero value otherwise.
-func (o *FactureFacturX) GetLignesDeTva() []LigneDeTVA {
-	if o == nil || IsNil(o.LignesDeTva) {
-		var ret []LigneDeTVA
+// GetVatLines returns the VatLines field value if set, zero value otherwise.
+func (o *FactureFacturX) GetVatLines() []VATLine {
+	if o == nil || IsNil(o.VatLines) {
+		var ret []VATLine
 		return ret
 	}
-	return o.LignesDeTva
+	return o.VatLines
 }
 
-// GetLignesDeTvaOk returns a tuple with the LignesDeTva field value if set, nil otherwise
+// GetVatLinesOk returns a tuple with the VatLines field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FactureFacturX) GetLignesDeTvaOk() ([]LigneDeTVA, bool) {
-	if o == nil || IsNil(o.LignesDeTva) {
+func (o *FactureFacturX) GetVatLinesOk() ([]VATLine, bool) {
+	if o == nil || IsNil(o.VatLines) {
 		return nil, false
 	}
-	return o.LignesDeTva, true
+	return o.VatLines, true
 }
 
-// HasLignesDeTva returns a boolean if a field has been set.
-func (o *FactureFacturX) HasLignesDeTva() bool {
-	if o != nil && !IsNil(o.LignesDeTva) {
+// HasVatLines returns a boolean if a field has been set.
+func (o *FactureFacturX) HasVatLines() bool {
+	if o != nil && !IsNil(o.VatLines) {
 		return true
 	}
 
 	return false
 }
 
-// SetLignesDeTva gets a reference to the given []LigneDeTVA and assigns it to the LignesDeTva field.
-func (o *FactureFacturX) SetLignesDeTva(v []LigneDeTVA) {
-	o.LignesDeTva = v
+// SetVatLines gets a reference to the given []VATLine and assigns it to the VatLines field.
+func (o *FactureFacturX) SetVatLines(v []VATLine) {
+	o.VatLines = v
 }
 
 // GetNotes returns the Notes field value if set, zero value otherwise.
-func (o *FactureFacturX) GetNotes() []Note {
+func (o *FactureFacturX) GetNotes() []InvoiceNote {
 	if o == nil || IsNil(o.Notes) {
-		var ret []Note
+		var ret []InvoiceNote
 		return ret
 	}
 	return o.Notes
@@ -365,7 +365,7 @@ func (o *FactureFacturX) GetNotes() []Note {
 
 // GetNotesOk returns a tuple with the Notes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FactureFacturX) GetNotesOk() ([]Note, bool) {
+func (o *FactureFacturX) GetNotesOk() ([]InvoiceNote, bool) {
 	if o == nil || IsNil(o.Notes) {
 		return nil, false
 	}
@@ -381,168 +381,168 @@ func (o *FactureFacturX) HasNotes() bool {
 	return false
 }
 
-// SetNotes gets a reference to the given []Note and assigns it to the Notes field.
-func (o *FactureFacturX) SetNotes(v []Note) {
+// SetNotes gets a reference to the given []InvoiceNote and assigns it to the Notes field.
+func (o *FactureFacturX) SetNotes(v []InvoiceNote) {
 	o.Notes = v
 }
 
-// GetCommentaire returns the Commentaire field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FactureFacturX) GetCommentaire() string {
-	if o == nil || IsNil(o.Commentaire.Get()) {
+// GetComment returns the Comment field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FactureFacturX) GetComment() string {
+	if o == nil || IsNil(o.Comment.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Commentaire.Get()
+	return *o.Comment.Get()
 }
 
-// GetCommentaireOk returns a tuple with the Commentaire field value if set, nil otherwise
+// GetCommentOk returns a tuple with the Comment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FactureFacturX) GetCommentaireOk() (*string, bool) {
+func (o *FactureFacturX) GetCommentOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Commentaire.Get(), o.Commentaire.IsSet()
+	return o.Comment.Get(), o.Comment.IsSet()
 }
 
-// HasCommentaire returns a boolean if a field has been set.
-func (o *FactureFacturX) HasCommentaire() bool {
-	if o != nil && o.Commentaire.IsSet() {
+// HasComment returns a boolean if a field has been set.
+func (o *FactureFacturX) HasComment() bool {
+	if o != nil && o.Comment.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCommentaire gets a reference to the given NullableString and assigns it to the Commentaire field.
-func (o *FactureFacturX) SetCommentaire(v string) {
-	o.Commentaire.Set(&v)
+// SetComment gets a reference to the given NullableString and assigns it to the Comment field.
+func (o *FactureFacturX) SetComment(v string) {
+	o.Comment.Set(&v)
 }
-// SetCommentaireNil sets the value for Commentaire to be an explicit nil
-func (o *FactureFacturX) SetCommentaireNil() {
-	o.Commentaire.Set(nil)
-}
-
-// UnsetCommentaire ensures that no value is present for Commentaire, not even an explicit nil
-func (o *FactureFacturX) UnsetCommentaire() {
-	o.Commentaire.Unset()
+// SetCommentNil sets the value for Comment to be an explicit nil
+func (o *FactureFacturX) SetCommentNil() {
+	o.Comment.Set(nil)
 }
 
-// GetIdUtilisateurCourant returns the IdUtilisateurCourant field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FactureFacturX) GetIdUtilisateurCourant() int32 {
-	if o == nil || IsNil(o.IdUtilisateurCourant.Get()) {
+// UnsetComment ensures that no value is present for Comment, not even an explicit nil
+func (o *FactureFacturX) UnsetComment() {
+	o.Comment.Unset()
+}
+
+// GetCurrentUserId returns the CurrentUserId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FactureFacturX) GetCurrentUserId() int32 {
+	if o == nil || IsNil(o.CurrentUserId.Get()) {
 		var ret int32
 		return ret
 	}
-	return *o.IdUtilisateurCourant.Get()
+	return *o.CurrentUserId.Get()
 }
 
-// GetIdUtilisateurCourantOk returns a tuple with the IdUtilisateurCourant field value if set, nil otherwise
+// GetCurrentUserIdOk returns a tuple with the CurrentUserId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FactureFacturX) GetIdUtilisateurCourantOk() (*int32, bool) {
+func (o *FactureFacturX) GetCurrentUserIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.IdUtilisateurCourant.Get(), o.IdUtilisateurCourant.IsSet()
+	return o.CurrentUserId.Get(), o.CurrentUserId.IsSet()
 }
 
-// HasIdUtilisateurCourant returns a boolean if a field has been set.
-func (o *FactureFacturX) HasIdUtilisateurCourant() bool {
-	if o != nil && o.IdUtilisateurCourant.IsSet() {
+// HasCurrentUserId returns a boolean if a field has been set.
+func (o *FactureFacturX) HasCurrentUserId() bool {
+	if o != nil && o.CurrentUserId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIdUtilisateurCourant gets a reference to the given NullableInt32 and assigns it to the IdUtilisateurCourant field.
-func (o *FactureFacturX) SetIdUtilisateurCourant(v int32) {
-	o.IdUtilisateurCourant.Set(&v)
+// SetCurrentUserId gets a reference to the given NullableInt32 and assigns it to the CurrentUserId field.
+func (o *FactureFacturX) SetCurrentUserId(v int32) {
+	o.CurrentUserId.Set(&v)
 }
-// SetIdUtilisateurCourantNil sets the value for IdUtilisateurCourant to be an explicit nil
-func (o *FactureFacturX) SetIdUtilisateurCourantNil() {
-	o.IdUtilisateurCourant.Set(nil)
-}
-
-// UnsetIdUtilisateurCourant ensures that no value is present for IdUtilisateurCourant, not even an explicit nil
-func (o *FactureFacturX) UnsetIdUtilisateurCourant() {
-	o.IdUtilisateurCourant.Unset()
+// SetCurrentUserIdNil sets the value for CurrentUserId to be an explicit nil
+func (o *FactureFacturX) SetCurrentUserIdNil() {
+	o.CurrentUserId.Set(nil)
 }
 
-// GetPiecesJointesComplementaires returns the PiecesJointesComplementaires field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FactureFacturX) GetPiecesJointesComplementaires() []PieceJointeComplementaire {
+// UnsetCurrentUserId ensures that no value is present for CurrentUserId, not even an explicit nil
+func (o *FactureFacturX) UnsetCurrentUserId() {
+	o.CurrentUserId.Unset()
+}
+
+// GetSupplementaryAttachments returns the SupplementaryAttachments field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FactureFacturX) GetSupplementaryAttachments() []SupplementaryAttachment {
 	if o == nil {
-		var ret []PieceJointeComplementaire
+		var ret []SupplementaryAttachment
 		return ret
 	}
-	return o.PiecesJointesComplementaires
+	return o.SupplementaryAttachments
 }
 
-// GetPiecesJointesComplementairesOk returns a tuple with the PiecesJointesComplementaires field value if set, nil otherwise
+// GetSupplementaryAttachmentsOk returns a tuple with the SupplementaryAttachments field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FactureFacturX) GetPiecesJointesComplementairesOk() ([]PieceJointeComplementaire, bool) {
-	if o == nil || IsNil(o.PiecesJointesComplementaires) {
+func (o *FactureFacturX) GetSupplementaryAttachmentsOk() ([]SupplementaryAttachment, bool) {
+	if o == nil || IsNil(o.SupplementaryAttachments) {
 		return nil, false
 	}
-	return o.PiecesJointesComplementaires, true
+	return o.SupplementaryAttachments, true
 }
 
-// HasPiecesJointesComplementaires returns a boolean if a field has been set.
-func (o *FactureFacturX) HasPiecesJointesComplementaires() bool {
-	if o != nil && !IsNil(o.PiecesJointesComplementaires) {
+// HasSupplementaryAttachments returns a boolean if a field has been set.
+func (o *FactureFacturX) HasSupplementaryAttachments() bool {
+	if o != nil && !IsNil(o.SupplementaryAttachments) {
 		return true
 	}
 
 	return false
 }
 
-// SetPiecesJointesComplementaires gets a reference to the given []PieceJointeComplementaire and assigns it to the PiecesJointesComplementaires field.
-func (o *FactureFacturX) SetPiecesJointesComplementaires(v []PieceJointeComplementaire) {
-	o.PiecesJointesComplementaires = v
+// SetSupplementaryAttachments gets a reference to the given []SupplementaryAttachment and assigns it to the SupplementaryAttachments field.
+func (o *FactureFacturX) SetSupplementaryAttachments(v []SupplementaryAttachment) {
+	o.SupplementaryAttachments = v
 }
 
-// GetBeneficiaire returns the Beneficiaire field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FactureFacturX) GetBeneficiaire() Beneficiaire {
-	if o == nil || IsNil(o.Beneficiaire.Get()) {
-		var ret Beneficiaire
+// GetPayee returns the Payee field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FactureFacturX) GetPayee() Payee {
+	if o == nil || IsNil(o.Payee.Get()) {
+		var ret Payee
 		return ret
 	}
-	return *o.Beneficiaire.Get()
+	return *o.Payee.Get()
 }
 
-// GetBeneficiaireOk returns a tuple with the Beneficiaire field value if set, nil otherwise
+// GetPayeeOk returns a tuple with the Payee field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FactureFacturX) GetBeneficiaireOk() (*Beneficiaire, bool) {
+func (o *FactureFacturX) GetPayeeOk() (*Payee, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Beneficiaire.Get(), o.Beneficiaire.IsSet()
+	return o.Payee.Get(), o.Payee.IsSet()
 }
 
-// HasBeneficiaire returns a boolean if a field has been set.
-func (o *FactureFacturX) HasBeneficiaire() bool {
-	if o != nil && o.Beneficiaire.IsSet() {
+// HasPayee returns a boolean if a field has been set.
+func (o *FactureFacturX) HasPayee() bool {
+	if o != nil && o.Payee.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBeneficiaire gets a reference to the given NullableBeneficiaire and assigns it to the Beneficiaire field.
-func (o *FactureFacturX) SetBeneficiaire(v Beneficiaire) {
-	o.Beneficiaire.Set(&v)
+// SetPayee gets a reference to the given NullablePayee and assigns it to the Payee field.
+func (o *FactureFacturX) SetPayee(v Payee) {
+	o.Payee.Set(&v)
 }
-// SetBeneficiaireNil sets the value for Beneficiaire to be an explicit nil
-func (o *FactureFacturX) SetBeneficiaireNil() {
-	o.Beneficiaire.Set(nil)
+// SetPayeeNil sets the value for Payee to be an explicit nil
+func (o *FactureFacturX) SetPayeeNil() {
+	o.Payee.Set(nil)
 }
 
-// UnsetBeneficiaire ensures that no value is present for Beneficiaire, not even an explicit nil
-func (o *FactureFacturX) UnsetBeneficiaire() {
-	o.Beneficiaire.Unset()
+// UnsetPayee ensures that no value is present for Payee, not even an explicit nil
+func (o *FactureFacturX) UnsetPayee() {
+	o.Payee.Unset()
 }
 
 func (o FactureFacturX) MarshalJSON() ([]byte, error) {
@@ -555,37 +555,37 @@ func (o FactureFacturX) MarshalJSON() ([]byte, error) {
 
 func (o FactureFacturX) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["numeroFacture"] = o.NumeroFacture
-	toSerialize["dateEcheancePaiement"] = o.DateEcheancePaiement
-	if !IsNil(o.DateFacture) {
-		toSerialize["dateFacture"] = o.DateFacture
+	toSerialize["invoice_number"] = o.InvoiceNumber
+	toSerialize["payment_due_date"] = o.PaymentDueDate
+	if !IsNil(o.InvoiceDate) {
+		toSerialize["invoice_date"] = o.InvoiceDate
 	}
-	toSerialize["modeDepot"] = o.ModeDepot
-	toSerialize["destinataire"] = o.Destinataire
-	toSerialize["fournisseur"] = o.Fournisseur
-	toSerialize["cadreDeFacturation"] = o.CadreDeFacturation
+	toSerialize["submission_mode"] = o.SubmissionMode
+	toSerialize["recipient"] = o.Recipient
+	toSerialize["supplier"] = o.Supplier
+	toSerialize["invoicing_framework"] = o.InvoicingFramework
 	toSerialize["references"] = o.References
-	toSerialize["montantTotal"] = o.MontantTotal
-	if !IsNil(o.LignesDePoste) {
-		toSerialize["lignesDePoste"] = o.LignesDePoste
+	toSerialize["totals"] = o.Totals
+	if !IsNil(o.InvoiceLines) {
+		toSerialize["invoice_lines"] = o.InvoiceLines
 	}
-	if !IsNil(o.LignesDeTva) {
-		toSerialize["lignesDeTva"] = o.LignesDeTva
+	if !IsNil(o.VatLines) {
+		toSerialize["vat_lines"] = o.VatLines
 	}
 	if !IsNil(o.Notes) {
 		toSerialize["notes"] = o.Notes
 	}
-	if o.Commentaire.IsSet() {
-		toSerialize["commentaire"] = o.Commentaire.Get()
+	if o.Comment.IsSet() {
+		toSerialize["comment"] = o.Comment.Get()
 	}
-	if o.IdUtilisateurCourant.IsSet() {
-		toSerialize["idUtilisateurCourant"] = o.IdUtilisateurCourant.Get()
+	if o.CurrentUserId.IsSet() {
+		toSerialize["current_user_id"] = o.CurrentUserId.Get()
 	}
-	if o.PiecesJointesComplementaires != nil {
-		toSerialize["piecesJointesComplementaires"] = o.PiecesJointesComplementaires
+	if o.SupplementaryAttachments != nil {
+		toSerialize["supplementary_attachments"] = o.SupplementaryAttachments
 	}
-	if o.Beneficiaire.IsSet() {
-		toSerialize["beneficiaire"] = o.Beneficiaire.Get()
+	if o.Payee.IsSet() {
+		toSerialize["payee"] = o.Payee.Get()
 	}
 	return toSerialize, nil
 }
@@ -595,14 +595,14 @@ func (o *FactureFacturX) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"numeroFacture",
-		"dateEcheancePaiement",
-		"modeDepot",
-		"destinataire",
-		"fournisseur",
-		"cadreDeFacturation",
+		"invoice_number",
+		"payment_due_date",
+		"submission_mode",
+		"recipient",
+		"supplier",
+		"invoicing_framework",
 		"references",
-		"montantTotal",
+		"totals",
 	}
 
 	allProperties := make(map[string]interface{})

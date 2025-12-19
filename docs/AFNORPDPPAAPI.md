@@ -4,9 +4,9 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetAfnorCredentialsApiV1AfnorCredentialsGet**](AFNORPDPPAAPI.md#GetAfnorCredentialsApiV1AfnorCredentialsGet) | **Get** /api/v1/afnor/credentials | Récupérer les credentials AFNOR stockés
-[**GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet**](AFNORPDPPAAPI.md#GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet) | **Get** /api/v1/afnor/flux-entrants/{flow_id} | Récupérer et extraire une facture entrante
-[**OauthTokenProxyApiV1AfnorOauthTokenPost**](AFNORPDPPAAPI.md#OauthTokenProxyApiV1AfnorOauthTokenPost) | **Post** /api/v1/afnor/oauth/token | Endpoint OAuth2 pour authentification AFNOR
+[**GetAfnorCredentialsApiV1AfnorCredentialsGet**](AFNORPDPPAAPI.md#GetAfnorCredentialsApiV1AfnorCredentialsGet) | **Get** /api/v1/afnor/credentials | Retrieve stored AFNOR credentials
+[**GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet**](AFNORPDPPAAPI.md#GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet) | **Get** /api/v1/afnor/incoming-flows/{flow_id} | Retrieve and extract an incoming invoice
+[**OauthTokenProxyApiV1AfnorOauthTokenPost**](AFNORPDPPAAPI.md#OauthTokenProxyApiV1AfnorOauthTokenPost) | **Post** /api/v1/afnor/oauth/token | OAuth2 endpoint for AFNOR authentication
 
 
 
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 > interface{} GetAfnorCredentialsApiV1AfnorCredentialsGet(ctx).Execute()
 
-Récupérer les credentials AFNOR stockés
+Retrieve stored AFNOR credentials
 
 
 
@@ -71,11 +71,11 @@ Other parameters are passed through a pointer to a apiGetAfnorCredentialsApiV1Af
 [[Back to README]](../README.md)
 
 
-## GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet
+## GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet
 
-> FactureEntrante GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(ctx, flowId).IncludeDocument(includeDocument).Execute()
+> IncomingInvoice GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet(ctx, flowId).IncludeDocument(includeDocument).Execute()
 
-Récupérer et extraire une facture entrante
+Retrieve and extract an incoming invoice
 
 
 
@@ -97,13 +97,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AFNORPDPPAAPI.GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(context.Background(), flowId).IncludeDocument(includeDocument).Execute()
+	resp, r, err := apiClient.AFNORPDPPAAPI.GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet(context.Background(), flowId).IncludeDocument(includeDocument).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPAAPI.GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPAAPI.GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet`: FactureEntrante
-	fmt.Fprintf(os.Stdout, "Response from `AFNORPDPPAAPI.GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet`: %v\n", resp)
+	// response from `GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet`: IncomingInvoice
+	fmt.Fprintf(os.Stdout, "Response from `AFNORPDPPAAPI.GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet`: %v\n", resp)
 }
 ```
 
@@ -117,7 +117,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -127,7 +127,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FactureEntrante**](FactureEntrante.md)
+[**IncomingInvoice**](IncomingInvoice.md)
 
 ### Authorization
 
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 
 > interface{} OauthTokenProxyApiV1AfnorOauthTokenPost(ctx).Execute()
 
-Endpoint OAuth2 pour authentification AFNOR
+OAuth2 endpoint for AFNOR authentication
 
 
 

@@ -5,23 +5,23 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Cn** | **string** | Common Name | 
-**Organisation** | **string** | Organisation | 
-**Pays** | **string** | Code pays | 
-**Ville** | **string** | Ville | 
-**Province** | **string** | Province | 
+**Organization** | **string** | Organization | 
+**Country** | **string** | Country code | 
+**City** | **string** | City | 
+**State** | **string** | State/Province | 
 **Email** | Pointer to **NullableString** |  | [optional] 
-**Sujet** | **string** | Sujet complet (RFC4514) | 
-**Emetteur** | **string** | Émetteur (auto-signé &#x3D; même que sujet) | 
-**NumeroSerie** | **int32** | Numéro de série du certificat | 
-**ValideDu** | **string** | Date de début de validité (ISO 8601) | 
-**ValideAu** | **string** | Date de fin de validité (ISO 8601) | 
-**Algorithme** | **string** | Algorithme de signature | 
+**Subject** | **string** | Full subject (RFC4514) | 
+**Issuer** | **string** | Issuer (self-signed &#x3D; same as subject) | 
+**SerialNumber** | **int32** | Certificate serial number | 
+**ValidFrom** | **string** | Validity start date (ISO 8601) | 
+**ValidTo** | **string** | Validity end date (ISO 8601) | 
+**Algorithm** | **string** | Signature algorithm | 
 
 ## Methods
 
 ### NewCertificateInfoResponse
 
-`func NewCertificateInfoResponse(cn string, organisation string, pays string, ville string, province string, sujet string, emetteur string, numeroSerie int32, valideDu string, valideAu string, algorithme string, ) *CertificateInfoResponse`
+`func NewCertificateInfoResponse(cn string, organization string, country string, city string, state string, subject string, issuer string, serialNumber int32, validFrom string, validTo string, algorithm string, ) *CertificateInfoResponse`
 
 NewCertificateInfoResponse instantiates a new CertificateInfoResponse object
 This constructor will assign default values to properties that have it defined,
@@ -56,84 +56,84 @@ and a boolean to check if the value has been set.
 SetCn sets Cn field to given value.
 
 
-### GetOrganisation
+### GetOrganization
 
-`func (o *CertificateInfoResponse) GetOrganisation() string`
+`func (o *CertificateInfoResponse) GetOrganization() string`
 
-GetOrganisation returns the Organisation field if non-nil, zero value otherwise.
+GetOrganization returns the Organization field if non-nil, zero value otherwise.
 
-### GetOrganisationOk
+### GetOrganizationOk
 
-`func (o *CertificateInfoResponse) GetOrganisationOk() (*string, bool)`
+`func (o *CertificateInfoResponse) GetOrganizationOk() (*string, bool)`
 
-GetOrganisationOk returns a tuple with the Organisation field if it's non-nil, zero value otherwise
+GetOrganizationOk returns a tuple with the Organization field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOrganisation
+### SetOrganization
 
-`func (o *CertificateInfoResponse) SetOrganisation(v string)`
+`func (o *CertificateInfoResponse) SetOrganization(v string)`
 
-SetOrganisation sets Organisation field to given value.
+SetOrganization sets Organization field to given value.
 
 
-### GetPays
+### GetCountry
 
-`func (o *CertificateInfoResponse) GetPays() string`
+`func (o *CertificateInfoResponse) GetCountry() string`
 
-GetPays returns the Pays field if non-nil, zero value otherwise.
+GetCountry returns the Country field if non-nil, zero value otherwise.
 
-### GetPaysOk
+### GetCountryOk
 
-`func (o *CertificateInfoResponse) GetPaysOk() (*string, bool)`
+`func (o *CertificateInfoResponse) GetCountryOk() (*string, bool)`
 
-GetPaysOk returns a tuple with the Pays field if it's non-nil, zero value otherwise
+GetCountryOk returns a tuple with the Country field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPays
+### SetCountry
 
-`func (o *CertificateInfoResponse) SetPays(v string)`
+`func (o *CertificateInfoResponse) SetCountry(v string)`
 
-SetPays sets Pays field to given value.
+SetCountry sets Country field to given value.
 
 
-### GetVille
+### GetCity
 
-`func (o *CertificateInfoResponse) GetVille() string`
+`func (o *CertificateInfoResponse) GetCity() string`
 
-GetVille returns the Ville field if non-nil, zero value otherwise.
+GetCity returns the City field if non-nil, zero value otherwise.
 
-### GetVilleOk
+### GetCityOk
 
-`func (o *CertificateInfoResponse) GetVilleOk() (*string, bool)`
+`func (o *CertificateInfoResponse) GetCityOk() (*string, bool)`
 
-GetVilleOk returns a tuple with the Ville field if it's non-nil, zero value otherwise
+GetCityOk returns a tuple with the City field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetVille
+### SetCity
 
-`func (o *CertificateInfoResponse) SetVille(v string)`
+`func (o *CertificateInfoResponse) SetCity(v string)`
 
-SetVille sets Ville field to given value.
+SetCity sets City field to given value.
 
 
-### GetProvince
+### GetState
 
-`func (o *CertificateInfoResponse) GetProvince() string`
+`func (o *CertificateInfoResponse) GetState() string`
 
-GetProvince returns the Province field if non-nil, zero value otherwise.
+GetState returns the State field if non-nil, zero value otherwise.
 
-### GetProvinceOk
+### GetStateOk
 
-`func (o *CertificateInfoResponse) GetProvinceOk() (*string, bool)`
+`func (o *CertificateInfoResponse) GetStateOk() (*string, bool)`
 
-GetProvinceOk returns a tuple with the Province field if it's non-nil, zero value otherwise
+GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetProvince
+### SetState
 
-`func (o *CertificateInfoResponse) SetProvince(v string)`
+`func (o *CertificateInfoResponse) SetState(v string)`
 
-SetProvince sets Province field to given value.
+SetState sets State field to given value.
 
 
 ### GetEmail
@@ -171,124 +171,124 @@ HasEmail returns a boolean if a field has been set.
 `func (o *CertificateInfoResponse) UnsetEmail()`
 
 UnsetEmail ensures that no value is present for Email, not even an explicit nil
-### GetSujet
+### GetSubject
 
-`func (o *CertificateInfoResponse) GetSujet() string`
+`func (o *CertificateInfoResponse) GetSubject() string`
 
-GetSujet returns the Sujet field if non-nil, zero value otherwise.
+GetSubject returns the Subject field if non-nil, zero value otherwise.
 
-### GetSujetOk
+### GetSubjectOk
 
-`func (o *CertificateInfoResponse) GetSujetOk() (*string, bool)`
+`func (o *CertificateInfoResponse) GetSubjectOk() (*string, bool)`
 
-GetSujetOk returns a tuple with the Sujet field if it's non-nil, zero value otherwise
+GetSubjectOk returns a tuple with the Subject field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSujet
+### SetSubject
 
-`func (o *CertificateInfoResponse) SetSujet(v string)`
+`func (o *CertificateInfoResponse) SetSubject(v string)`
 
-SetSujet sets Sujet field to given value.
+SetSubject sets Subject field to given value.
 
 
-### GetEmetteur
+### GetIssuer
 
-`func (o *CertificateInfoResponse) GetEmetteur() string`
+`func (o *CertificateInfoResponse) GetIssuer() string`
 
-GetEmetteur returns the Emetteur field if non-nil, zero value otherwise.
+GetIssuer returns the Issuer field if non-nil, zero value otherwise.
 
-### GetEmetteurOk
+### GetIssuerOk
 
-`func (o *CertificateInfoResponse) GetEmetteurOk() (*string, bool)`
+`func (o *CertificateInfoResponse) GetIssuerOk() (*string, bool)`
 
-GetEmetteurOk returns a tuple with the Emetteur field if it's non-nil, zero value otherwise
+GetIssuerOk returns a tuple with the Issuer field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetEmetteur
+### SetIssuer
 
-`func (o *CertificateInfoResponse) SetEmetteur(v string)`
+`func (o *CertificateInfoResponse) SetIssuer(v string)`
 
-SetEmetteur sets Emetteur field to given value.
+SetIssuer sets Issuer field to given value.
 
 
-### GetNumeroSerie
+### GetSerialNumber
 
-`func (o *CertificateInfoResponse) GetNumeroSerie() int32`
+`func (o *CertificateInfoResponse) GetSerialNumber() int32`
 
-GetNumeroSerie returns the NumeroSerie field if non-nil, zero value otherwise.
+GetSerialNumber returns the SerialNumber field if non-nil, zero value otherwise.
 
-### GetNumeroSerieOk
+### GetSerialNumberOk
 
-`func (o *CertificateInfoResponse) GetNumeroSerieOk() (*int32, bool)`
+`func (o *CertificateInfoResponse) GetSerialNumberOk() (*int32, bool)`
 
-GetNumeroSerieOk returns a tuple with the NumeroSerie field if it's non-nil, zero value otherwise
+GetSerialNumberOk returns a tuple with the SerialNumber field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetNumeroSerie
+### SetSerialNumber
 
-`func (o *CertificateInfoResponse) SetNumeroSerie(v int32)`
+`func (o *CertificateInfoResponse) SetSerialNumber(v int32)`
 
-SetNumeroSerie sets NumeroSerie field to given value.
+SetSerialNumber sets SerialNumber field to given value.
 
 
-### GetValideDu
+### GetValidFrom
 
-`func (o *CertificateInfoResponse) GetValideDu() string`
+`func (o *CertificateInfoResponse) GetValidFrom() string`
 
-GetValideDu returns the ValideDu field if non-nil, zero value otherwise.
+GetValidFrom returns the ValidFrom field if non-nil, zero value otherwise.
 
-### GetValideDuOk
+### GetValidFromOk
 
-`func (o *CertificateInfoResponse) GetValideDuOk() (*string, bool)`
+`func (o *CertificateInfoResponse) GetValidFromOk() (*string, bool)`
 
-GetValideDuOk returns a tuple with the ValideDu field if it's non-nil, zero value otherwise
+GetValidFromOk returns a tuple with the ValidFrom field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetValideDu
+### SetValidFrom
 
-`func (o *CertificateInfoResponse) SetValideDu(v string)`
+`func (o *CertificateInfoResponse) SetValidFrom(v string)`
 
-SetValideDu sets ValideDu field to given value.
+SetValidFrom sets ValidFrom field to given value.
 
 
-### GetValideAu
+### GetValidTo
 
-`func (o *CertificateInfoResponse) GetValideAu() string`
+`func (o *CertificateInfoResponse) GetValidTo() string`
 
-GetValideAu returns the ValideAu field if non-nil, zero value otherwise.
+GetValidTo returns the ValidTo field if non-nil, zero value otherwise.
 
-### GetValideAuOk
+### GetValidToOk
 
-`func (o *CertificateInfoResponse) GetValideAuOk() (*string, bool)`
+`func (o *CertificateInfoResponse) GetValidToOk() (*string, bool)`
 
-GetValideAuOk returns a tuple with the ValideAu field if it's non-nil, zero value otherwise
+GetValidToOk returns a tuple with the ValidTo field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetValideAu
+### SetValidTo
 
-`func (o *CertificateInfoResponse) SetValideAu(v string)`
+`func (o *CertificateInfoResponse) SetValidTo(v string)`
 
-SetValideAu sets ValideAu field to given value.
+SetValidTo sets ValidTo field to given value.
 
 
-### GetAlgorithme
+### GetAlgorithm
 
-`func (o *CertificateInfoResponse) GetAlgorithme() string`
+`func (o *CertificateInfoResponse) GetAlgorithm() string`
 
-GetAlgorithme returns the Algorithme field if non-nil, zero value otherwise.
+GetAlgorithm returns the Algorithm field if non-nil, zero value otherwise.
 
-### GetAlgorithmeOk
+### GetAlgorithmOk
 
-`func (o *CertificateInfoResponse) GetAlgorithmeOk() (*string, bool)`
+`func (o *CertificateInfoResponse) GetAlgorithmOk() (*string, bool)`
 
-GetAlgorithmeOk returns a tuple with the Algorithme field if it's non-nil, zero value otherwise
+GetAlgorithmOk returns a tuple with the Algorithm field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAlgorithme
+### SetAlgorithm
 
-`func (o *CertificateInfoResponse) SetAlgorithme(v string)`
+`func (o *CertificateInfoResponse) SetAlgorithm(v string)`
 
-SetAlgorithme sets Algorithme field to given value.
+SetAlgorithm sets Algorithm field to given value.
 
 
 

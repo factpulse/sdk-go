@@ -1,14 +1,14 @@
 # FactPulse SDK Go
 
-Client Go officiel pour l'API FactPulse - Facturation électronique française.
+Official Go client for the FactPulse API - French electronic invoicing.
 
-## Fonctionnalités
+## Features
 
-- **Factur-X** : Génération et validation de factures électroniques (profils MINIMUM, BASIC, EN16931, EXTENDED)
-- **Chorus Pro** : Intégration avec la plateforme de facturation publique française
-- **AFNOR PDP/PA** : Soumission de flux conformes à la norme XP Z12-013
-- **Signature électronique** : Signature PDF (PAdES-B-B, PAdES-B-T, PAdES-B-LT)
-- **Client simplifié** : Authentification JWT et polling intégrés via `helpers`
+- **Factur-X**: Generation and validation of electronic invoices (MINIMUM, BASIC, EN16931, EXTENDED profiles)
+- **Chorus Pro**: Integration with the French public sector invoicing platform
+- **AFNOR PDP/PA**: Submission of flows compliant with the XP Z12-013 standard
+- **Electronic signature**: PDF signature (PAdES-B-B, PAdES-B-T, PAdES-B-LT)
+- **Simplified client**: JWT authentication and integrated polling via `helpers`
 
 ## Installation
 
@@ -16,9 +16,9 @@ Client Go officiel pour l'API FactPulse - Facturation électronique française.
 go get github.com/factpulse/sdk-go
 ```
 
-## Démarrage rapide
+## Quick Start
 
-Le package `helpers` offre une API simplifiée avec authentification et polling automatiques :
+The `helpers` package provides a simplified API with automatic authentication and polling:
 
 ```go
 package main
@@ -32,187 +32,187 @@ import (
 )
 
 func main() {
-    // Créer le client
+    // Create the client
     client := helpers.NewClient(
-        "votre_email@example.com",
-        "votre_mot_de_passe",
+        "your_email@example.com",
+        "your_password",
     )
 
-    // Construire la facture avec les helpers
-    factureData := map[string]interface{}{
-        "numeroFacture": "FAC-2025-001",
-        "dateFacture":   "2025-01-15",
-        "fournisseur": helpers.Fournisseur(
-            "Mon Entreprise SAS", "12345678901234",
-            "123 Rue Example", "75001", "Paris", nil,
+    // Build the invoice with helpers
+    invoiceData := map[string]interface{}{
+        "number": "INV-2025-001",
+        "date":   "2025-01-15",
+        "supplier": helpers.Supplier(
+            "My Company SAS", "12345678901234",
+            "123 Example Street", "75001", "Paris", nil,
         ),
-        "destinataire": helpers.Destinataire(
+        "recipient": helpers.Recipient(
             "Client SARL", "98765432109876",
-            "456 Avenue Test", "69001", "Lyon", nil,
+            "456 Test Avenue", "69001", "Lyon", nil,
         ),
-        "montantTotal": helpers.MontantTotal(1000.00, 200.00, 1200.00, 1200.00),
-        "lignesDePoste": []interface{}{
-            helpers.LigneDePoste(1, "Prestation de conseil", 10, 100.00, 1000.00),
+        "totalAmount": helpers.TotalAmount(1000.00, 200.00, 1200.00, 1200.00),
+        "lines": []interface{}{
+            helpers.InvoiceLine(1, "Consulting services", 10, 100.00, 1000.00),
         },
-        "lignesDeTva": []interface{}{
-            helpers.LigneDeTva(1000.00, 200.00, nil),
+        "vatLines": []interface{}{
+            helpers.VatLine(1000.00, 200.00, nil),
         },
     }
 
-    // Générer le PDF Factur-X
+    // Generate the Factur-X PDF
     ctx := context.Background()
-    pdfBytes, err := client.GenererFacturx(ctx, factureData, "facture_source.pdf", "EN16931")
+    pdfBytes, err := client.GenerateFacturx(ctx, invoiceData, "source_invoice.pdf", "EN16931")
     if err != nil {
         log.Fatal(err)
     }
 
-    os.WriteFile("facture_facturx.pdf", pdfBytes, 0644)
+    os.WriteFile("invoice_facturx.pdf", pdfBytes, 0644)
 }
 ```
 
-## Helpers disponibles (package helpers)
+## Available Helpers (helpers package)
 
-### Montant(value)
+### Amount(value)
 
-Convertit une valeur en string formaté pour les montants monétaires.
+Converts a value to a formatted string for monetary amounts.
 
 ```go
-helpers.Montant(1234.5)      // "1234.50"
-helpers.Montant("1234.56")   // "1234.56"
-helpers.Montant(nil)         // "0.00"
+helpers.Amount(1234.5)      // "1234.50"
+helpers.Amount("1234.56")   // "1234.56"
+helpers.Amount(nil)         // "0.00"
 ```
 
-### MontantTotal(ht, tva, ttc, aPayer)
+### TotalAmount(excludingTax, vat, includingTax, due)
 
-Crée un objet MontantTotal complet.
+Creates a complete TotalAmount object.
 
 ```go
-total := helpers.MontantTotal(1000.00, 200.00, 1200.00, 1200.00)
+total := helpers.TotalAmount(1000.00, 200.00, 1200.00, 1200.00)
 
-// Avec options
-total := helpers.MontantTotalWithOptions(
+// With options
+total := helpers.TotalAmountWithOptions(
     1000.00, 200.00, 1200.00, 1200.00,
-    &helpers.MontantTotalOptions{
-        RemiseTtc:   50.00,
-        MotifRemise: "Fidélité",
-        Acompte:     100.00,
+    &helpers.TotalAmountOptions{
+        DiscountIncludingTax: 50.00,
+        DiscountReason:       "Loyalty",
+        Prepayment:           100.00,
     },
 )
 ```
 
-### LigneDePoste(numero, denomination, quantite, montantUnitaireHt, montantTotalLigneHt)
+### InvoiceLine(number, description, quantity, unitPrice, lineTotal)
 
-Crée une ligne de facturation.
+Creates an invoice line.
 
 ```go
-ligne := helpers.LigneDePosteWithOptions(
+line := helpers.InvoiceLineWithOptions(
     1,
-    "Prestation de conseil",
+    "Consulting services",
     5,
     200.00,
-    1000.00,  // montantTotalLigneHt requis
-    &helpers.LigneDePosteOptions{
-        TauxTva:     "TVA20",      // Ou TauxTvaManuel: "20.00"
-        CategorieTva: "S",         // S, Z, E, AE, K
-        Unite:       "HEURE",      // FORFAIT, PIECE, HEURE, JOUR...
+    1000.00,  // lineTotal required
+    &helpers.InvoiceLineOptions{
+        VatRate:     "VAT20",      // Or ManualVatRate: "20.00"
+        VatCategory: "S",          // S, Z, E, AE, K
+        Unit:        "HOUR",       // FIXED, PIECE, HOUR, DAY...
         Reference:   "REF-001",
     },
 )
 ```
 
-### LigneDeTva(montantBaseHt, montantTva, options)
+### VatLine(baseExcludingTax, vatAmount, options)
 
-Crée une ligne de ventilation TVA.
+Creates a VAT breakdown line.
 
 ```go
-tva := helpers.LigneDeTva(1000.00, 200.00, &helpers.LigneDeTvaOptions{
-    Taux:      "TVA20",       // Ou TauxManuel: "20.00"
-    Categorie: "S",           // S, Z, E, AE, K
+vat := helpers.VatLine(1000.00, 200.00, &helpers.VatLineOptions{
+    Rate:     "VAT20",       // Or ManualRate: "20.00"
+    Category: "S",           // S, Z, E, AE, K
 })
 ```
 
-### AdressePostale(ligne1, codePostal, ville, options)
+### PostalAddress(line1, postalCode, city, options)
 
-Crée une adresse postale structurée.
+Creates a structured postal address.
 
 ```go
-adresse := helpers.AdressePostale(
-    "123 Rue de la République",
+address := helpers.PostalAddress(
+    "123 Republic Street",
     "75001",
     "Paris",
-    &helpers.AdressePostaleOptions{
-        Pays:   "FR",          // Défaut: "FR"
-        Ligne2: "Bâtiment A",  // Optionnel
+    &helpers.PostalAddressOptions{
+        Country: "FR",          // Default: "FR"
+        Line2:   "Building A",  // Optional
     },
 )
 ```
 
-### Fournisseur(nom, siret, adresseLigne1, codePostal, ville, options)
+### Supplier(name, siret, addressLine1, postalCode, city, options)
 
-Crée un fournisseur complet avec calcul automatique du SIREN et TVA intra.
+Creates a complete supplier with automatic calculation of SIREN and intra-community VAT.
 
 ```go
-f := helpers.Fournisseur(
-    "Ma Société SAS",
+s := helpers.Supplier(
+    "My Company SAS",
     "12345678901234",
-    "123 Rue Example",
+    "123 Example Street",
     "75001",
     "Paris",
-    &helpers.FournisseurOptions{
+    &helpers.SupplierOptions{
         IBAN: "FR7630006000011234567890189",
     },
 )
-// SIREN et TVA intracommunautaire calculés automatiquement
+// SIREN and intra-community VAT automatically calculated
 ```
 
-### Destinataire(nom, siret, adresseLigne1, codePostal, ville, options)
+### Recipient(name, siret, addressLine1, postalCode, city, options)
 
-Crée un destinataire (client) avec calcul automatique du SIREN.
+Creates a recipient (customer) with automatic calculation of SIREN.
 
 ```go
-d := helpers.Destinataire(
+r := helpers.Recipient(
     "Client SARL",
     "98765432109876",
-    "456 Avenue Test",
+    "456 Test Avenue",
     "69001",
     "Lyon",
     nil,
 )
 ```
 
-## Mode Zero-Trust (Chorus Pro / AFNOR)
+## Zero-Trust Mode (Chorus Pro / AFNOR)
 
-Pour passer vos propres credentials sans stockage côté serveur :
+To pass your own credentials without server-side storage:
 
 ```go
 chorusCreds := &helpers.ChorusProCredentials{
-    PisteClientID:     "votre_client_id",
-    PisteClientSecret: "votre_client_secret",
-    ChorusProLogin:    "votre_login",
-    ChorusProPassword: "votre_password",
+    PisteClientID:     "your_client_id",
+    PisteClientSecret: "your_client_secret",
+    ChorusProLogin:    "your_login",
+    ChorusProPassword: "your_password",
     Sandbox:           true,
 }
 
 afnorCreds := &helpers.AFNORCredentials{
     FlowServiceURL: "https://api.pdp.fr/flow/v1",
     TokenURL:       "https://auth.pdp.fr/oauth/token",
-    ClientID:       "votre_client_id",
-    ClientSecret:   "votre_client_secret",
+    ClientID:       "your_client_id",
+    ClientSecret:   "your_client_secret",
 }
 
 client := helpers.NewClientWithCredentials(
-    "votre_email@example.com",
-    "votre_mot_de_passe",
+    "your_email@example.com",
+    "your_password",
     chorusCreds,
     afnorCreds,
 )
 ```
 
-## Ressources
+## Resources
 
-- **Documentation API** : https://factpulse.fr/api/facturation/documentation
-- **Support** : contact@factpulse.fr
+- **API Documentation**: https://factpulse.fr/api/facturation/documentation
+- **Support**: contact@factpulse.fr
 
-## Licence
+## License
 
 MIT License - Copyright (c) 2025 FactPulse

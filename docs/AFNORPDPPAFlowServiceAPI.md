@@ -4,10 +4,10 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DownloadFlowProxyApiV1AfnorFlowV1FlowsFlowIdGet**](AFNORPDPPAFlowServiceAPI.md#DownloadFlowProxyApiV1AfnorFlowV1FlowsFlowIdGet) | **Get** /api/v1/afnor/flow/v1/flows/{flowId} | Télécharger un flux
+[**DownloadFlowProxyApiV1AfnorFlowV1FlowsFlowIdGet**](AFNORPDPPAFlowServiceAPI.md#DownloadFlowProxyApiV1AfnorFlowV1FlowsFlowIdGet) | **Get** /api/v1/afnor/flow/v1/flows/{flowId} | Download a flow
 [**FlowHealthcheckProxyApiV1AfnorFlowV1HealthcheckGet**](AFNORPDPPAFlowServiceAPI.md#FlowHealthcheckProxyApiV1AfnorFlowV1HealthcheckGet) | **Get** /api/v1/afnor/flow/v1/healthcheck | Healthcheck Flow Service
-[**SearchFlowsProxyApiV1AfnorFlowV1FlowsSearchPost**](AFNORPDPPAFlowServiceAPI.md#SearchFlowsProxyApiV1AfnorFlowV1FlowsSearchPost) | **Post** /api/v1/afnor/flow/v1/flows/search | Rechercher des flux
-[**SubmitFlowProxyApiV1AfnorFlowV1FlowsPost**](AFNORPDPPAFlowServiceAPI.md#SubmitFlowProxyApiV1AfnorFlowV1FlowsPost) | **Post** /api/v1/afnor/flow/v1/flows | Soumettre un flux de facturation
+[**SearchFlowsProxyApiV1AfnorFlowV1FlowsSearchPost**](AFNORPDPPAFlowServiceAPI.md#SearchFlowsProxyApiV1AfnorFlowV1FlowsSearchPost) | **Post** /api/v1/afnor/flow/v1/flows/search | Search flows
+[**SubmitFlowProxyApiV1AfnorFlowV1FlowsPost**](AFNORPDPPAFlowServiceAPI.md#SubmitFlowProxyApiV1AfnorFlowV1FlowsPost) | **Post** /api/v1/afnor/flow/v1/flows | Submit an invoicing flow
 
 
 
@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 > interface{} DownloadFlowProxyApiV1AfnorFlowV1FlowsFlowIdGet(ctx, flowId).Execute()
 
-Télécharger un flux
+Download a flow
 
 
 
@@ -146,7 +146,7 @@ No authorization required
 
 > interface{} SearchFlowsProxyApiV1AfnorFlowV1FlowsSearchPost(ctx).Execute()
 
-Rechercher des flux
+Search flows
 
 
 
@@ -207,7 +207,7 @@ No authorization required
 
 > interface{} SubmitFlowProxyApiV1AfnorFlowV1FlowsPost(ctx).Execute()
 
-Soumettre un flux de facturation
+Submit an invoicing flow
 
 
 

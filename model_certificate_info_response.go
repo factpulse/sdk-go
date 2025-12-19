@@ -1,7 +1,7 @@
 /*
-API REST FactPulse
+FactPulse REST API
 
- API REST pour la facturation électronique en France : Factur-X, AFNOR PDP/PA, signatures électroniques.  ## 🎯 Fonctionnalités principales  ### 📄 Génération de factures Factur-X - **Formats** : XML seul ou PDF/A-3 avec XML embarqué - **Profils** : MINIMUM, BASIC, EN16931, EXTENDED - **Normes** : EN 16931 (directive UE 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Format simplifié** : Génération à partir de SIRET + auto-enrichissement (API Chorus Pro + Recherche Entreprises)  ### ✅ Validation et conformité - **Validation XML** : Schematron (45 à 210+ règles selon profil) - **Validation PDF** : PDF/A-3, métadonnées XMP Factur-X, signatures électroniques - **VeraPDF** : Validation stricte PDF/A (146+ règles ISO 19005-3) - **Traitement asynchrone** : Support Celery pour validations lourdes (VeraPDF)  ### 📡 Intégration AFNOR PDP/PA (XP Z12-013) - **Soumission de flux** : Envoi de factures vers Plateformes de Dématérialisation Partenaires - **Recherche de flux** : Consultation des factures soumises - **Téléchargement** : Récupération des PDF/A-3 avec XML - **Directory Service** : Recherche d'entreprises (SIREN/SIRET) - **Multi-client** : Support de plusieurs configs PDP par utilisateur (stored credentials ou zero-storage)  ### ✍️ Signature électronique PDF - **Standards** : PAdES-B-B, PAdES-B-T (horodatage RFC 3161), PAdES-B-LT (archivage long terme) - **Niveaux eIDAS** : SES (auto-signé), AdES (CA commerciale), QES (PSCO) - **Validation** : Vérification intégrité cryptographique et certificats - **Génération de certificats** : Certificats X.509 auto-signés pour tests  ### 🔄 Traitement asynchrone - **Celery** : Génération, validation et signature asynchrones - **Polling** : Suivi d'état via `/taches/{id_tache}/statut` - **Pas de timeout** : Idéal pour gros fichiers ou validations lourdes  ## 🔒 Authentification  Toutes les requêtes nécessitent un **token JWT** dans le header Authorization : ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### Comment obtenir un token JWT ?  #### 🔑 Méthode 1 : API `/api/token/` (Recommandée)  **URL :** `https://www.factpulse.fr/api/token/`  Cette méthode est **recommandée** pour l'intégration dans vos applications et workflows CI/CD.  **Prérequis :** Avoir défini un mot de passe sur votre compte  **Pour les utilisateurs inscrits via email/password :** - Vous avez déjà un mot de passe, utilisez-le directement  **Pour les utilisateurs inscrits via OAuth (Google/GitHub) :** - Vous devez d'abord définir un mot de passe sur : https://www.factpulse.fr/accounts/password/set/ - Une fois le mot de passe créé, vous pourrez utiliser l'API  **Exemple de requête :** ```bash curl -X POST https://www.factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"votre_email@example.com\",     \"password\": \"votre_mot_de_passe\"   }' ```  **Paramètre optionnel `client_uid` :**  Pour sélectionner les credentials d'un client spécifique (PA/PDP, Chorus Pro, certificats de signature), ajoutez `client_uid` :  ```bash curl -X POST https://www.factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"votre_email@example.com\",     \"password\": \"votre_mot_de_passe\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  Le `client_uid` sera inclus dans le JWT et permettra à l'API d'utiliser automatiquement : - Les credentials AFNOR/PDP configurés pour ce client - Les credentials Chorus Pro configurés pour ce client - Les certificats de signature électronique configurés pour ce client  **Réponse :** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Token d'accès (validité: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Token de rafraîchissement (validité: 7 jours) } ```  **Avantages :** - ✅ Automatisation complète (CI/CD, scripts) - ✅ Gestion programmatique des tokens - ✅ Support du refresh token pour renouveler automatiquement l'accès - ✅ Intégration facile dans n'importe quel langage/outil  #### 🖥️ Méthode 2 : Génération via Dashboard (Alternative)  **URL :** https://www.factpulse.fr/dashboard/  Cette méthode convient pour des tests rapides ou une utilisation occasionnelle via l'interface graphique.  **Fonctionnement :** - Connectez-vous au dashboard - Utilisez les boutons \"Generate Test Token\" ou \"Generate Production Token\" - Fonctionne pour **tous** les utilisateurs (OAuth et email/password), sans nécessiter de mot de passe  **Types de tokens :** - **Token Test** : Validité 24h, quota 1000 appels/jour (gratuit) - **Token Production** : Validité 7 jours, quota selon votre forfait  **Avantages :** - ✅ Rapide pour tester l'API - ✅ Aucun mot de passe requis - ✅ Interface visuelle simple  **Inconvénients :** - ❌ Nécessite une action manuelle - ❌ Pas de refresh token - ❌ Moins adapté pour l'automatisation  ### 📚 Documentation complète  Pour plus d'informations sur l'authentification et l'utilisation de l'API : https://www.factpulse.fr/documentation-api/     
+ REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X Invoice Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Validation and Compliance - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata, electronic signatures - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules) - **Asynchronous Processing**: Celery support for heavy validations (VeraPDF)  ### 📡 AFNOR PDP/PA Integration (XP Z12-013) - **Flow Submission**: Send invoices to Partner Dematerialization Platforms - **Flow Search**: View submitted invoices - **Download**: Retrieve PDF/A-3 with XML - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user (stored credentials or zero-storage)  ### ✍️ PDF Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification - **Certificate Generation**: Self-signed X.509 certificates for testing  ### 🔄 Asynchronous Processing - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **No timeout**: Ideal for large files or heavy validations  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://www.factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://www.factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://www.factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://www.factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://www.factpulse.fr/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://www.factpulse.fr/documentation-api/     
 
 API version: 1.0.0
 */
@@ -19,31 +19,31 @@ import (
 // checks if the CertificateInfoResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CertificateInfoResponse{}
 
-// CertificateInfoResponse Informations sur un certificat généré.
+// CertificateInfoResponse Information about a generated certificate.
 type CertificateInfoResponse struct {
 	// Common Name
 	Cn string `json:"cn"`
-	// Organisation
-	Organisation string `json:"organisation"`
-	// Code pays
-	Pays string `json:"pays"`
-	// Ville
-	Ville string `json:"ville"`
-	// Province
-	Province string `json:"province"`
+	// Organization
+	Organization string `json:"organization"`
+	// Country code
+	Country string `json:"country"`
+	// City
+	City string `json:"city"`
+	// State/Province
+	State string `json:"state"`
 	Email NullableString `json:"email,omitempty"`
-	// Sujet complet (RFC4514)
-	Sujet string `json:"sujet"`
-	// Émetteur (auto-signé = même que sujet)
-	Emetteur string `json:"emetteur"`
-	// Numéro de série du certificat
-	NumeroSerie int32 `json:"numero_serie"`
-	// Date de début de validité (ISO 8601)
-	ValideDu string `json:"valide_du"`
-	// Date de fin de validité (ISO 8601)
-	ValideAu string `json:"valide_au"`
-	// Algorithme de signature
-	Algorithme string `json:"algorithme"`
+	// Full subject (RFC4514)
+	Subject string `json:"subject"`
+	// Issuer (self-signed = same as subject)
+	Issuer string `json:"issuer"`
+	// Certificate serial number
+	SerialNumber int32 `json:"serialNumber"`
+	// Validity start date (ISO 8601)
+	ValidFrom string `json:"validFrom"`
+	// Validity end date (ISO 8601)
+	ValidTo string `json:"validTo"`
+	// Signature algorithm
+	Algorithm string `json:"algorithm"`
 }
 
 type _CertificateInfoResponse CertificateInfoResponse
@@ -52,19 +52,19 @@ type _CertificateInfoResponse CertificateInfoResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCertificateInfoResponse(cn string, organisation string, pays string, ville string, province string, sujet string, emetteur string, numeroSerie int32, valideDu string, valideAu string, algorithme string) *CertificateInfoResponse {
+func NewCertificateInfoResponse(cn string, organization string, country string, city string, state string, subject string, issuer string, serialNumber int32, validFrom string, validTo string, algorithm string) *CertificateInfoResponse {
 	this := CertificateInfoResponse{}
 	this.Cn = cn
-	this.Organisation = organisation
-	this.Pays = pays
-	this.Ville = ville
-	this.Province = province
-	this.Sujet = sujet
-	this.Emetteur = emetteur
-	this.NumeroSerie = numeroSerie
-	this.ValideDu = valideDu
-	this.ValideAu = valideAu
-	this.Algorithme = algorithme
+	this.Organization = organization
+	this.Country = country
+	this.City = city
+	this.State = state
+	this.Subject = subject
+	this.Issuer = issuer
+	this.SerialNumber = serialNumber
+	this.ValidFrom = validFrom
+	this.ValidTo = validTo
+	this.Algorithm = algorithm
 	return &this
 }
 
@@ -100,100 +100,100 @@ func (o *CertificateInfoResponse) SetCn(v string) {
 	o.Cn = v
 }
 
-// GetOrganisation returns the Organisation field value
-func (o *CertificateInfoResponse) GetOrganisation() string {
+// GetOrganization returns the Organization field value
+func (o *CertificateInfoResponse) GetOrganization() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Organisation
+	return o.Organization
 }
 
-// GetOrganisationOk returns a tuple with the Organisation field value
+// GetOrganizationOk returns a tuple with the Organization field value
 // and a boolean to check if the value has been set.
-func (o *CertificateInfoResponse) GetOrganisationOk() (*string, bool) {
+func (o *CertificateInfoResponse) GetOrganizationOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Organisation, true
+	return &o.Organization, true
 }
 
-// SetOrganisation sets field value
-func (o *CertificateInfoResponse) SetOrganisation(v string) {
-	o.Organisation = v
+// SetOrganization sets field value
+func (o *CertificateInfoResponse) SetOrganization(v string) {
+	o.Organization = v
 }
 
-// GetPays returns the Pays field value
-func (o *CertificateInfoResponse) GetPays() string {
+// GetCountry returns the Country field value
+func (o *CertificateInfoResponse) GetCountry() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Pays
+	return o.Country
 }
 
-// GetPaysOk returns a tuple with the Pays field value
+// GetCountryOk returns a tuple with the Country field value
 // and a boolean to check if the value has been set.
-func (o *CertificateInfoResponse) GetPaysOk() (*string, bool) {
+func (o *CertificateInfoResponse) GetCountryOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Pays, true
+	return &o.Country, true
 }
 
-// SetPays sets field value
-func (o *CertificateInfoResponse) SetPays(v string) {
-	o.Pays = v
+// SetCountry sets field value
+func (o *CertificateInfoResponse) SetCountry(v string) {
+	o.Country = v
 }
 
-// GetVille returns the Ville field value
-func (o *CertificateInfoResponse) GetVille() string {
+// GetCity returns the City field value
+func (o *CertificateInfoResponse) GetCity() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Ville
+	return o.City
 }
 
-// GetVilleOk returns a tuple with the Ville field value
+// GetCityOk returns a tuple with the City field value
 // and a boolean to check if the value has been set.
-func (o *CertificateInfoResponse) GetVilleOk() (*string, bool) {
+func (o *CertificateInfoResponse) GetCityOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Ville, true
+	return &o.City, true
 }
 
-// SetVille sets field value
-func (o *CertificateInfoResponse) SetVille(v string) {
-	o.Ville = v
+// SetCity sets field value
+func (o *CertificateInfoResponse) SetCity(v string) {
+	o.City = v
 }
 
-// GetProvince returns the Province field value
-func (o *CertificateInfoResponse) GetProvince() string {
+// GetState returns the State field value
+func (o *CertificateInfoResponse) GetState() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Province
+	return o.State
 }
 
-// GetProvinceOk returns a tuple with the Province field value
+// GetStateOk returns a tuple with the State field value
 // and a boolean to check if the value has been set.
-func (o *CertificateInfoResponse) GetProvinceOk() (*string, bool) {
+func (o *CertificateInfoResponse) GetStateOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Province, true
+	return &o.State, true
 }
 
-// SetProvince sets field value
-func (o *CertificateInfoResponse) SetProvince(v string) {
-	o.Province = v
+// SetState sets field value
+func (o *CertificateInfoResponse) SetState(v string) {
+	o.State = v
 }
 
 // GetEmail returns the Email field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -238,148 +238,148 @@ func (o *CertificateInfoResponse) UnsetEmail() {
 	o.Email.Unset()
 }
 
-// GetSujet returns the Sujet field value
-func (o *CertificateInfoResponse) GetSujet() string {
+// GetSubject returns the Subject field value
+func (o *CertificateInfoResponse) GetSubject() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Sujet
+	return o.Subject
 }
 
-// GetSujetOk returns a tuple with the Sujet field value
+// GetSubjectOk returns a tuple with the Subject field value
 // and a boolean to check if the value has been set.
-func (o *CertificateInfoResponse) GetSujetOk() (*string, bool) {
+func (o *CertificateInfoResponse) GetSubjectOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Sujet, true
+	return &o.Subject, true
 }
 
-// SetSujet sets field value
-func (o *CertificateInfoResponse) SetSujet(v string) {
-	o.Sujet = v
+// SetSubject sets field value
+func (o *CertificateInfoResponse) SetSubject(v string) {
+	o.Subject = v
 }
 
-// GetEmetteur returns the Emetteur field value
-func (o *CertificateInfoResponse) GetEmetteur() string {
+// GetIssuer returns the Issuer field value
+func (o *CertificateInfoResponse) GetIssuer() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Emetteur
+	return o.Issuer
 }
 
-// GetEmetteurOk returns a tuple with the Emetteur field value
+// GetIssuerOk returns a tuple with the Issuer field value
 // and a boolean to check if the value has been set.
-func (o *CertificateInfoResponse) GetEmetteurOk() (*string, bool) {
+func (o *CertificateInfoResponse) GetIssuerOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Emetteur, true
+	return &o.Issuer, true
 }
 
-// SetEmetteur sets field value
-func (o *CertificateInfoResponse) SetEmetteur(v string) {
-	o.Emetteur = v
+// SetIssuer sets field value
+func (o *CertificateInfoResponse) SetIssuer(v string) {
+	o.Issuer = v
 }
 
-// GetNumeroSerie returns the NumeroSerie field value
-func (o *CertificateInfoResponse) GetNumeroSerie() int32 {
+// GetSerialNumber returns the SerialNumber field value
+func (o *CertificateInfoResponse) GetSerialNumber() int32 {
 	if o == nil {
 		var ret int32
 		return ret
 	}
 
-	return o.NumeroSerie
+	return o.SerialNumber
 }
 
-// GetNumeroSerieOk returns a tuple with the NumeroSerie field value
+// GetSerialNumberOk returns a tuple with the SerialNumber field value
 // and a boolean to check if the value has been set.
-func (o *CertificateInfoResponse) GetNumeroSerieOk() (*int32, bool) {
+func (o *CertificateInfoResponse) GetSerialNumberOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.NumeroSerie, true
+	return &o.SerialNumber, true
 }
 
-// SetNumeroSerie sets field value
-func (o *CertificateInfoResponse) SetNumeroSerie(v int32) {
-	o.NumeroSerie = v
+// SetSerialNumber sets field value
+func (o *CertificateInfoResponse) SetSerialNumber(v int32) {
+	o.SerialNumber = v
 }
 
-// GetValideDu returns the ValideDu field value
-func (o *CertificateInfoResponse) GetValideDu() string {
+// GetValidFrom returns the ValidFrom field value
+func (o *CertificateInfoResponse) GetValidFrom() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.ValideDu
+	return o.ValidFrom
 }
 
-// GetValideDuOk returns a tuple with the ValideDu field value
+// GetValidFromOk returns a tuple with the ValidFrom field value
 // and a boolean to check if the value has been set.
-func (o *CertificateInfoResponse) GetValideDuOk() (*string, bool) {
+func (o *CertificateInfoResponse) GetValidFromOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ValideDu, true
+	return &o.ValidFrom, true
 }
 
-// SetValideDu sets field value
-func (o *CertificateInfoResponse) SetValideDu(v string) {
-	o.ValideDu = v
+// SetValidFrom sets field value
+func (o *CertificateInfoResponse) SetValidFrom(v string) {
+	o.ValidFrom = v
 }
 
-// GetValideAu returns the ValideAu field value
-func (o *CertificateInfoResponse) GetValideAu() string {
+// GetValidTo returns the ValidTo field value
+func (o *CertificateInfoResponse) GetValidTo() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.ValideAu
+	return o.ValidTo
 }
 
-// GetValideAuOk returns a tuple with the ValideAu field value
+// GetValidToOk returns a tuple with the ValidTo field value
 // and a boolean to check if the value has been set.
-func (o *CertificateInfoResponse) GetValideAuOk() (*string, bool) {
+func (o *CertificateInfoResponse) GetValidToOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ValideAu, true
+	return &o.ValidTo, true
 }
 
-// SetValideAu sets field value
-func (o *CertificateInfoResponse) SetValideAu(v string) {
-	o.ValideAu = v
+// SetValidTo sets field value
+func (o *CertificateInfoResponse) SetValidTo(v string) {
+	o.ValidTo = v
 }
 
-// GetAlgorithme returns the Algorithme field value
-func (o *CertificateInfoResponse) GetAlgorithme() string {
+// GetAlgorithm returns the Algorithm field value
+func (o *CertificateInfoResponse) GetAlgorithm() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Algorithme
+	return o.Algorithm
 }
 
-// GetAlgorithmeOk returns a tuple with the Algorithme field value
+// GetAlgorithmOk returns a tuple with the Algorithm field value
 // and a boolean to check if the value has been set.
-func (o *CertificateInfoResponse) GetAlgorithmeOk() (*string, bool) {
+func (o *CertificateInfoResponse) GetAlgorithmOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Algorithme, true
+	return &o.Algorithm, true
 }
 
-// SetAlgorithme sets field value
-func (o *CertificateInfoResponse) SetAlgorithme(v string) {
-	o.Algorithme = v
+// SetAlgorithm sets field value
+func (o *CertificateInfoResponse) SetAlgorithm(v string) {
+	o.Algorithm = v
 }
 
 func (o CertificateInfoResponse) MarshalJSON() ([]byte, error) {
@@ -393,19 +393,19 @@ func (o CertificateInfoResponse) MarshalJSON() ([]byte, error) {
 func (o CertificateInfoResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["cn"] = o.Cn
-	toSerialize["organisation"] = o.Organisation
-	toSerialize["pays"] = o.Pays
-	toSerialize["ville"] = o.Ville
-	toSerialize["province"] = o.Province
+	toSerialize["organization"] = o.Organization
+	toSerialize["country"] = o.Country
+	toSerialize["city"] = o.City
+	toSerialize["state"] = o.State
 	if o.Email.IsSet() {
 		toSerialize["email"] = o.Email.Get()
 	}
-	toSerialize["sujet"] = o.Sujet
-	toSerialize["emetteur"] = o.Emetteur
-	toSerialize["numero_serie"] = o.NumeroSerie
-	toSerialize["valide_du"] = o.ValideDu
-	toSerialize["valide_au"] = o.ValideAu
-	toSerialize["algorithme"] = o.Algorithme
+	toSerialize["subject"] = o.Subject
+	toSerialize["issuer"] = o.Issuer
+	toSerialize["serialNumber"] = o.SerialNumber
+	toSerialize["validFrom"] = o.ValidFrom
+	toSerialize["validTo"] = o.ValidTo
+	toSerialize["algorithm"] = o.Algorithm
 	return toSerialize, nil
 }
 
@@ -415,16 +415,16 @@ func (o *CertificateInfoResponse) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"cn",
-		"organisation",
-		"pays",
-		"ville",
-		"province",
-		"sujet",
-		"emetteur",
-		"numero_serie",
-		"valide_du",
-		"valide_au",
-		"algorithme",
+		"organization",
+		"country",
+		"city",
+		"state",
+		"subject",
+		"issuer",
+		"serialNumber",
+		"validFrom",
+		"validTo",
+		"algorithm",
 	}
 
 	allProperties := make(map[string]interface{})

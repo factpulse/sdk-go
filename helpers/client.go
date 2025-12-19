@@ -9,8 +9,8 @@ const DefaultAPIURL = "https://factpulse.fr"
 const DefaultPollingInterval = 2000
 const DefaultPollingTimeout = 120000
 
-// ChorusProCredentials contient les credentials Chorus Pro pour le mode Zero-Trust.
-// Ces credentials sont passés dans chaque requête et ne sont jamais stockés côté serveur.
+// ChorusProCredentials contains Chorus Pro credentials for Zero-Trust mode.
+// These credentials are passed in each request and are never stored server-side.
 type ChorusProCredentials struct {
     PisteClientID     string `json:"piste_client_id"`
     PisteClientSecret string `json:"piste_client_secret"`
@@ -27,8 +27,8 @@ func (c *ChorusProCredentials) ToMap() map[string]interface{} {
     return map[string]interface{}{"piste_client_id": c.PisteClientID, "piste_client_secret": c.PisteClientSecret, "chorus_pro_login": c.ChorusProLogin, "chorus_pro_password": c.ChorusProPassword, "sandbox": c.Sandbox}
 }
 
-// AFNORCredentials contient les credentials AFNOR PDP pour le mode Zero-Trust.
-// L'API FactPulse utilise ces credentials pour s'authentifier auprès de la PDP AFNOR.
+// AFNORCredentials contains AFNOR PDP credentials for Zero-Trust mode.
+// The FactPulse API uses these credentials to authenticate with the AFNOR PDP.
 type AFNORCredentials struct {
     FlowServiceURL      string `json:"flow_service_url"`
     TokenURL            string `json:"token_url"`
@@ -51,8 +51,8 @@ func (c *AFNORCredentials) ToMap() map[string]interface{} {
     return m
 }
 
-// Montant formate une valeur en montant avec 2 décimales
-func Montant(m interface{}) string {
+// Amount formats a value as an amount with 2 decimal places
+func Amount(m interface{}) string {
     if m == nil { return "0.00" }
     switch v := m.(type) {
     case float64: return fmt.Sprintf("%.2f", v)
@@ -64,70 +64,70 @@ func Montant(m interface{}) string {
     }
 }
 
-// MontantTotal crée un objet montant total simplifié
-func MontantTotal(ht, tva, ttc, aPayer interface{}) map[string]interface{} {
-    return MontantTotalAvecOptions(ht, tva, ttc, aPayer, nil, "", nil)
+// TotalAmount creates a simplified total amount object
+func TotalAmount(exclTax, vat, inclTax, amountDue interface{}) map[string]interface{} {
+    return TotalAmountWithOptions(exclTax, vat, inclTax, amountDue, nil, "", nil)
 }
 
-// MontantTotalAvecOptions crée un objet montant total avec options
-func MontantTotalAvecOptions(ht, tva, ttc, aPayer, remiseTtc interface{}, motifRemise string, acompte interface{}) map[string]interface{} {
-    result := map[string]interface{}{"montantHtTotal": Montant(ht), "montantTva": Montant(tva), "montantTtcTotal": Montant(ttc), "montantAPayer": Montant(aPayer)}
-    if remiseTtc != nil { result["montantRemiseGlobaleTtc"] = Montant(remiseTtc) }
-    if motifRemise != "" { result["motifRemiseGlobaleTtc"] = motifRemise }
-    if acompte != nil { result["acompte"] = Montant(acompte) }
+// TotalAmountWithOptions creates a total amount object with options
+func TotalAmountWithOptions(exclTax, vat, inclTax, amountDue, discountInclTax interface{}, discountReason string, prepayment interface{}) map[string]interface{} {
+    result := map[string]interface{}{"totalExclTax": Amount(exclTax), "vatAmount": Amount(vat), "totalInclTax": Amount(inclTax), "amountDue": Amount(amountDue)}
+    if discountInclTax != nil { result["globalDiscountInclTax"] = Amount(discountInclTax) }
+    if discountReason != "" { result["globalDiscountReason"] = discountReason }
+    if prepayment != nil { result["prepayment"] = Amount(prepayment) }
     return result
 }
 
-// LigneDePoste crée une ligne de poste (aligné sur LigneDePoste de models.py)
-func LigneDePoste(numero int, denomination string, quantite, montantUnitaireHt, montantTotalLigneHt interface{}) map[string]interface{} {
-    return LigneDePosteAvecOptions(numero, denomination, quantite, montantUnitaireHt, montantTotalLigneHt, "20.00", "S", "FORFAIT", nil)
+// InvoiceLine creates an invoice line (aligned with InvoiceLine in models.py)
+func InvoiceLine(number int, description string, quantity, unitPriceExclTax, lineTotalExclTax interface{}) map[string]interface{} {
+    return InvoiceLineWithOptions(number, description, quantity, unitPriceExclTax, lineTotalExclTax, "20.00", "S", "LUMP_SUM", nil)
 }
 
-// LigneDePosteAvecOptions crée une ligne de poste avec options
-func LigneDePosteAvecOptions(numero int, denomination string, quantite, montantUnitaireHt, montantTotalLigneHt interface{}, tauxTva, categorieTva, unite string, options map[string]interface{}) map[string]interface{} {
-    result := map[string]interface{}{"numero": numero, "denomination": denomination, "quantite": Montant(quantite), "montantUnitaireHt": Montant(montantUnitaireHt), "montantTotalLigneHt": Montant(montantTotalLigneHt), "tauxTvaManuel": Montant(tauxTva), "categorieTva": categorieTva, "unite": unite}
+// InvoiceLineWithOptions creates an invoice line with options
+func InvoiceLineWithOptions(number int, description string, quantity, unitPriceExclTax, lineTotalExclTax interface{}, vatRate, vatCategory, unit string, options map[string]interface{}) map[string]interface{} {
+    result := map[string]interface{}{"number": number, "description": description, "quantity": Amount(quantity), "unitPriceExclTax": Amount(unitPriceExclTax), "lineTotalExclTax": Amount(lineTotalExclTax), "vatRateManual": Amount(vatRate), "vatCategory": vatCategory, "unit": unit}
     if options != nil {
         if v, ok := options["reference"]; ok { result["reference"] = v }
-        if v, ok := options["montantRemiseHt"]; ok { result["montantRemiseHt"] = Montant(v) }
-        if v, ok := options["codeRaisonReduction"]; ok { result["codeRaisonReduction"] = v }
-        if v, ok := options["raisonReduction"]; ok { result["raisonReduction"] = v }
-        if v, ok := options["dateDebutPeriode"]; ok { result["dateDebutPeriode"] = v }
-        if v, ok := options["dateFinPeriode"]; ok { result["dateFinPeriode"] = v }
+        if v, ok := options["discountExclTax"]; ok { result["discountExclTax"] = Amount(v) }
+        if v, ok := options["discountReasonCode"]; ok { result["discountReasonCode"] = v }
+        if v, ok := options["discountReason"]; ok { result["discountReason"] = v }
+        if v, ok := options["periodStartDate"]; ok { result["periodStartDate"] = v }
+        if v, ok := options["periodEndDate"]; ok { result["periodEndDate"] = v }
     }
     return result
 }
 
-// LigneDeTva crée une ligne de TVA (aligné sur LigneDeTVA de models.py)
-func LigneDeTva(tauxManuel, montantBaseHt, montantTva interface{}) map[string]interface{} {
-    return LigneDeTvaAvecOptions(tauxManuel, montantBaseHt, montantTva, "S")
+// VatLine creates a VAT line (aligned with VatLine in models.py)
+func VatLine(rateManual, baseAmountExclTax, vatAmount interface{}) map[string]interface{} {
+    return VatLineWithOptions(rateManual, baseAmountExclTax, vatAmount, "S")
 }
 
-// LigneDeTvaAvecOptions crée une ligne de TVA avec options
-func LigneDeTvaAvecOptions(tauxManuel, montantBaseHt, montantTva interface{}, categorie string) map[string]interface{} {
-    return map[string]interface{}{"tauxManuel": Montant(tauxManuel), "montantBaseHt": Montant(montantBaseHt), "montantTva": Montant(montantTva), "categorie": categorie}
+// VatLineWithOptions creates a VAT line with options
+func VatLineWithOptions(rateManual, baseAmountExclTax, vatAmount interface{}, category string) map[string]interface{} {
+    return map[string]interface{}{"rateManual": Amount(rateManual), "baseAmountExclTax": Amount(baseAmountExclTax), "vatAmount": Amount(vatAmount), "category": category}
 }
 
-// AdressePostale crée une adresse postale pour l'API FactPulse
-func AdressePostale(ligne1, codePostal, ville string) map[string]interface{} {
-    return AdressePostaleAvecOptions(ligne1, codePostal, ville, "FR", "", "")
+// PostalAddress creates a postal address for the FactPulse API
+func PostalAddress(line1, postalCode, city string) map[string]interface{} {
+    return PostalAddressWithOptions(line1, postalCode, city, "FR", "", "")
 }
 
-// AdressePostaleAvecOptions crée une adresse postale avec options
-func AdressePostaleAvecOptions(ligne1, codePostal, ville, pays, ligne2, ligne3 string) map[string]interface{} {
-    result := map[string]interface{}{"ligneUn": ligne1, "codePostal": codePostal, "nomVille": ville, "paysCodeIso": pays}
-    if ligne2 != "" { result["ligneDeux"] = ligne2 }
-    if ligne3 != "" { result["ligneTrois"] = ligne3 }
+// PostalAddressWithOptions creates a postal address with options
+func PostalAddressWithOptions(line1, postalCode, city, country, line2, line3 string) map[string]interface{} {
+    result := map[string]interface{}{"line1": line1, "postalCode": postalCode, "city": city, "countryCode": country}
+    if line2 != "" { result["line2"] = line2 }
+    if line3 != "" { result["line3"] = line3 }
     return result
 }
 
-// AdresseElectronique crée une adresse électronique. schemeID: "0009"=SIREN, "0225"=SIRET
-func AdresseElectronique(identifiant, schemeID string) map[string]interface{} {
+// ElectronicAddress creates an electronic address. schemeID: "0009"=SIREN, "0225"=SIRET
+func ElectronicAddress(identifier, schemeID string) map[string]interface{} {
     if schemeID == "" { schemeID = "0009" }
-    return map[string]interface{}{"identifiant": identifiant, "schemeId": schemeID}
+    return map[string]interface{}{"identifier": identifier, "schemeId": schemeID}
 }
 
-// calculerTvaIntra calcule le numéro TVA intracommunautaire français depuis un SIREN
-func calculerTvaIntra(siren string) string {
+// computeVatIntra computes the French intra-community VAT number from a SIREN
+func computeVatIntra(siren string) string {
     if len(siren) != 9 { return "" }
     sirenNum, err := strconv.ParseInt(siren, 10, 64)
     if err != nil { return "" }
@@ -135,77 +135,77 @@ func calculerTvaIntra(siren string) string {
     return fmt.Sprintf("FR%02d%s", cle, siren)
 }
 
-// FournisseurOptions contient les options pour créer un fournisseur
-type FournisseurOptions struct {
-    IdFournisseur int
-    Siren, NumeroTvaIntra, Iban, Pays, AdresseLigne2 string
-    CodeService, CodeCoordonnesBancaires int
+// SupplierOptions contains options for creating a supplier
+type SupplierOptions struct {
+    SupplierID int
+    Siren, VatIntra, Iban, Country, AddressLine2 string
+    ServiceCode, BankCoordinatesCode int
 }
 
-// Fournisseur crée un fournisseur avec auto-calcul SIREN, TVA intracommunautaire et adresses
-func Fournisseur(nom, siret, adresseLigne1, codePostal, ville string, opts *FournisseurOptions) map[string]interface{} {
-    if opts == nil { opts = &FournisseurOptions{} }
+// Supplier creates a supplier with auto-computed SIREN, intra-EU VAT number and addresses
+func Supplier(name, siret, addressLine1, postalCode, city string, opts *SupplierOptions) map[string]interface{} {
+    if opts == nil { opts = &SupplierOptions{} }
     siren := opts.Siren
     if siren == "" && len(siret) == 14 { siren = siret[:9] }
-    numeroTvaIntra := opts.NumeroTvaIntra
-    if numeroTvaIntra == "" && siren != "" { numeroTvaIntra = calculerTvaIntra(siren) }
-    pays := opts.Pays; if pays == "" { pays = "FR" }
+    vatIntra := opts.VatIntra
+    if vatIntra == "" && siren != "" { vatIntra = computeVatIntra(siren) }
+    country := opts.Country; if country == "" { country = "FR" }
     result := map[string]interface{}{
-        "nom": nom, "idFournisseur": opts.IdFournisseur, "siret": siret,
-        "adresseElectronique": AdresseElectronique(siret, "0225"),
-        "adressePostale": AdressePostaleAvecOptions(adresseLigne1, codePostal, ville, pays, opts.AdresseLigne2, ""),
+        "name": name, "supplierId": opts.SupplierID, "siret": siret,
+        "electronicAddress": ElectronicAddress(siret, "0225"),
+        "postalAddress": PostalAddressWithOptions(addressLine1, postalCode, city, country, opts.AddressLine2, ""),
     }
     if siren != "" { result["siren"] = siren }
-    if numeroTvaIntra != "" { result["numeroTvaIntra"] = numeroTvaIntra }
+    if vatIntra != "" { result["vatIntra"] = vatIntra }
     if opts.Iban != "" { result["iban"] = opts.Iban }
-    if opts.CodeService != 0 { result["idServiceFournisseur"] = opts.CodeService }
-    if opts.CodeCoordonnesBancaires != 0 { result["codeCoordonnesBancairesFournisseur"] = opts.CodeCoordonnesBancaires }
+    if opts.ServiceCode != 0 { result["supplierServiceId"] = opts.ServiceCode }
+    if opts.BankCoordinatesCode != 0 { result["supplierBankCoordinatesCode"] = opts.BankCoordinatesCode }
     return result
 }
 
-// DestinataireOptions contient les options pour créer un destinataire
-type DestinataireOptions struct {
-    Siren, Pays, AdresseLigne2, CodeServiceExecutant string
+// RecipientOptions contains options for creating a recipient
+type RecipientOptions struct {
+    Siren, Country, AddressLine2, ExecutingServiceCode string
 }
 
-// Destinataire crée un destinataire avec auto-calcul SIREN et adresses
-func Destinataire(nom, siret, adresseLigne1, codePostal, ville string, opts *DestinataireOptions) map[string]interface{} {
-    if opts == nil { opts = &DestinataireOptions{} }
+// Recipient creates a recipient with auto-computed SIREN and addresses
+func Recipient(name, siret, addressLine1, postalCode, city string, opts *RecipientOptions) map[string]interface{} {
+    if opts == nil { opts = &RecipientOptions{} }
     siren := opts.Siren
     if siren == "" && len(siret) == 14 { siren = siret[:9] }
-    pays := opts.Pays; if pays == "" { pays = "FR" }
+    country := opts.Country; if country == "" { country = "FR" }
     result := map[string]interface{}{
-        "nom": nom, "siret": siret,
-        "adresseElectronique": AdresseElectronique(siret, "0225"),
-        "adressePostale": AdressePostaleAvecOptions(adresseLigne1, codePostal, ville, pays, opts.AdresseLigne2, ""),
+        "name": name, "siret": siret,
+        "electronicAddress": ElectronicAddress(siret, "0225"),
+        "postalAddress": PostalAddressWithOptions(addressLine1, postalCode, city, country, opts.AddressLine2, ""),
     }
     if siren != "" { result["siren"] = siren }
-    if opts.CodeServiceExecutant != "" { result["codeServiceExecutant"] = opts.CodeServiceExecutant }
+    if opts.ExecutingServiceCode != "" { result["executingServiceCode"] = opts.ExecutingServiceCode }
     return result
 }
 
-// BeneficiaireOptions contient les options pour créer un bénéficiaire (factor)
-type BeneficiaireOptions struct {
+// BeneficiaryOptions contains options for creating a beneficiary (factor)
+type BeneficiaryOptions struct {
     Siret, Siren, Iban, Bic string
 }
 
-// Beneficiaire crée un bénéficiaire (factor) pour l'affacturage.
+// Beneficiary creates a beneficiary (factor) for factoring.
 //
-// Le bénéficiaire (BG-10 / PayeeTradeParty) est utilisé lorsque le paiement
-// doit être effectué à un tiers différent du fournisseur, typiquement un
-// factor (société d'affacturage).
+// The beneficiary (BG-10 / PayeeTradeParty) is used when payment
+// must be made to a third party different from the supplier, typically
+// a factor (factoring company).
 //
-// Pour les factures affacturées, il faut aussi:
-// - Utiliser un type de document affacturé (393, 396, 501, 502, 472, 473)
-// - Ajouter une note ACC avec la mention de subrogation
-// - L'IBAN du bénéficiaire sera utilisé pour le paiement
-func Beneficiaire(nom string, opts *BeneficiaireOptions) map[string]interface{} {
-    if opts == nil { opts = &BeneficiaireOptions{} }
-    // Auto-calcul SIREN depuis SIRET
+// For factored invoices, you also need to:
+// - Use a factored document type (393, 396, 501, 502, 472, 473)
+// - Add an ACC note with the subrogation mention
+// - The beneficiary's IBAN will be used for payment
+func Beneficiary(name string, opts *BeneficiaryOptions) map[string]interface{} {
+    if opts == nil { opts = &BeneficiaryOptions{} }
+    // Auto-compute SIREN from SIRET
     siren := opts.Siren
     if siren == "" && len(opts.Siret) == 14 { siren = opts.Siret[:9] }
 
-    result := map[string]interface{}{"nom": nom}
+    result := map[string]interface{}{"name": name}
     if opts.Siret != "" { result["siret"] = opts.Siret }
     if siren != "" { result["siren"] = siren }
     if opts.Iban != "" { result["iban"] = opts.Iban }
@@ -277,7 +277,7 @@ func (c *Client) PollTask(taskID string, timeout, interval *int64) (map[string]i
     for {
         if time.Since(startTime).Milliseconds() > timeoutMs { return nil, NewFactPulsePollingTimeout(taskID, timeoutMs) }
         if err := c.EnsureAuthenticated(false); err != nil { return nil, err }
-        req, _ := http.NewRequest("GET", fmt.Sprintf("%s/api/v1/traitement/taches/%s/statut", strings.TrimRight(c.APIURL, "/"), taskID), nil)
+        req, _ := http.NewRequest("GET", fmt.Sprintf("%s/api/v1/processing/tasks/%s/status", strings.TrimRight(c.APIURL, "/"), taskID), nil)
         req.Header.Set("Authorization", "Bearer "+c.accessToken)
         resp, err := http.DefaultClient.Do(req)
         if err != nil { return nil, NewFactPulseValidationError(fmt.Sprintf("API error: %v", err), nil) }
@@ -291,52 +291,52 @@ func (c *Client) PollTask(taskID string, timeout, interval *int64) (map[string]i
     }
 }
 
-func FormatMontant(m interface{}) string { return Montant(m) }
+func FormatAmount(m interface{}) string { return Amount(m) }
 func minFloat(a, b float64) float64 { if a < b { return a }; return b }
 
-// GenererFacturx génère une facture Factur-X à partir d'un map/struct et d'un PDF source.
-func (c *Client) GenererFacturx(factureData interface{}, pdfPath string) ([]byte, error) {
-    return c.GenererFacturxWithOptions(factureData, pdfPath, "EN16931", "pdf", true, nil)
+// GenerateFacturx generates a Factur-X invoice from a map/struct and a source PDF.
+func (c *Client) GenerateFacturx(invoiceData interface{}, pdfPath string) ([]byte, error) {
+    return c.GenerateFacturxWithOptions(invoiceData, pdfPath, "EN16931", "pdf", true, nil)
 }
 
-// GenererFacturxWithOptions génère une facture Factur-X avec options avancées.
-func (c *Client) GenererFacturxWithOptions(factureData interface{}, pdfPath, profil, formatSortie string, sync bool, timeout *int64) ([]byte, error) {
-    // Conversion des données en JSON string
+// GenerateFacturxWithOptions generates a Factur-X invoice with advanced options.
+func (c *Client) GenerateFacturxWithOptions(invoiceData interface{}, pdfPath, profile, outputFormat string, sync bool, timeout *int64) ([]byte, error) {
+    // Convert data to JSON string
     var jsonData string
-    switch v := factureData.(type) {
+    switch v := invoiceData.(type) {
     case string:
         jsonData = v
     case []byte:
         jsonData = string(v)
     default:
-        data, err := json.Marshal(factureData)
-        if err != nil { return nil, NewFactPulseValidationError(fmt.Sprintf("Erreur sérialisation JSON: %v", err), nil) }
+        data, err := json.Marshal(invoiceData)
+        if err != nil { return nil, NewFactPulseValidationError(fmt.Sprintf("JSON serialization error: %v", err), nil) }
         jsonData = string(data)
     }
 
-    // Lecture du fichier PDF
+    // Read PDF file
     pdfContent, err := os.ReadFile(pdfPath)
-    if err != nil { return nil, NewFactPulseValidationError(fmt.Sprintf("Erreur lecture PDF: %v", err), nil) }
+    if err != nil { return nil, NewFactPulseValidationError(fmt.Sprintf("Error reading PDF: %v", err), nil) }
 
     if err := c.EnsureAuthenticated(false); err != nil { return nil, err }
 
-    // Construire la requête multipart
+    // Build multipart request
     var body bytes.Buffer
     writer := multipart.NewWriter(&body)
-    writer.WriteField("donnees_facture", jsonData)
-    writer.WriteField("profil", profil)
-    writer.WriteField("format_sortie", formatSortie)
+    writer.WriteField("invoice_data", jsonData)
+    writer.WriteField("profile", profile)
+    writer.WriteField("output_format", outputFormat)
     part, _ := writer.CreateFormFile("source_pdf", filepath.Base(pdfPath))
     part.Write(pdfContent)
     writer.Close()
 
-    req, _ := http.NewRequest("POST", fmt.Sprintf("%s/api/v1/traitement/generer-facture", strings.TrimRight(c.APIURL, "/")), &body)
+    req, _ := http.NewRequest("POST", fmt.Sprintf("%s/api/v1/processing/generate-invoice", strings.TrimRight(c.APIURL, "/")), &body)
     req.Header.Set("Authorization", "Bearer "+c.accessToken)
     req.Header.Set("Content-Type", writer.FormDataContentType())
 
     client := &http.Client{Timeout: 120 * time.Second}
     resp, err := client.Do(req)
-    if err != nil { return nil, NewFactPulseValidationError(fmt.Sprintf("Erreur réseau: %v", err), nil) }
+    if err != nil { return nil, NewFactPulseValidationError(fmt.Sprintf("Network error: %v", err), nil) }
     defer resp.Body.Close()
 
     if resp.StatusCode == 401 {
@@ -344,22 +344,22 @@ func (c *Client) GenererFacturxWithOptions(factureData interface{}, pdfPath, pro
         if err := c.EnsureAuthenticated(false); err != nil { return nil, err }
         req.Header.Set("Authorization", "Bearer "+c.accessToken)
         resp, err = client.Do(req)
-        if err != nil { return nil, NewFactPulseValidationError(fmt.Sprintf("Erreur réseau: %v", err), nil) }
+        if err != nil { return nil, NewFactPulseValidationError(fmt.Sprintf("Network error: %v", err), nil) }
         defer resp.Body.Close()
     }
 
     respBody, _ := io.ReadAll(resp.Body)
     if resp.StatusCode >= 400 {
-        // Extraire les détails d'erreur du corps de la réponse
-        errorMsg := fmt.Sprintf("Erreur API (%d)", resp.StatusCode)
+        // Extract error details from response body
+        errorMsg := fmt.Sprintf("API Error (%d)", resp.StatusCode)
         var errors []ValidationErrorDetail
 
         var errorData map[string]interface{}
         if err := json.Unmarshal(respBody, &errorData); err == nil {
-            // Format FastAPI/Pydantic: {"detail": [{"loc": [...], "msg": "...", "type": "..."}]}
+            // FastAPI/Pydantic format: {"detail": [{"loc": [...], "msg": "...", "type": "..."}]}
             if detail, ok := errorData["detail"]; ok {
                 if detailList, ok := detail.([]interface{}); ok {
-                    errorMsg = "Erreur de validation"
+                    errorMsg = "Validation error"
                     for _, item := range detailList {
                         if errItem, ok := item.(map[string]interface{}); ok {
                             loc := ""
@@ -383,7 +383,7 @@ func (c *Client) GenererFacturxWithOptions(factureData interface{}, pdfPath, pro
             }
         }
 
-        log.Printf("Erreur API %d: %s", resp.StatusCode, string(respBody))
+        log.Printf("API Error %d: %s", resp.StatusCode, string(respBody))
         return nil, NewFactPulseValidationError(errorMsg, errors)
     }
 
@@ -391,7 +391,7 @@ func (c *Client) GenererFacturxWithOptions(factureData interface{}, pdfPath, pro
     json.Unmarshal(respBody, &data)
 
     if sync {
-        if taskID, ok := data["id_tache"].(string); ok {
+        if taskID, ok := data["task_id"].(string); ok {
             result, err := c.PollTask(taskID, timeout, nil)
             if err != nil { return nil, err }
             if contenuB64, ok := result["contenu_b64"].(string); ok {
@@ -401,7 +401,7 @@ func (c *Client) GenererFacturxWithOptions(factureData interface{}, pdfPath, pro
             if xml, ok := result["contenu_xml"].(string); ok {
                 return []byte(xml), nil
             }
-            return nil, NewFactPulseValidationError("Résultat inattendu", nil)
+            return nil, NewFactPulseValidationError("Unexpected result", nil)
         }
     }
 
@@ -409,7 +409,7 @@ func (c *Client) GenererFacturxWithOptions(factureData interface{}, pdfPath, pro
 }
 
 // =========================================================================
-// AFNOR PDP - Authentication et helpers internes
+// AFNOR PDP - Authentication and internal helpers
 // =========================================================================
 
 func (c *Client) getAfnorCredentialsInternal() (*AFNORCredentials, error) {
@@ -491,14 +491,14 @@ func (c *Client) makeAfnorRequest(method, endpoint string, jsonData map[string]i
 
 // ==================== AFNOR Flow Service ====================
 
-// SoumettreFactureAfnorOptions contient les options pour soumettreFactureAfnor
-type SoumettreFactureAfnorOptions struct {
+// SubmitInvoiceAfnorOptions contains options for SubmitInvoiceAfnor
+type SubmitInvoiceAfnorOptions struct {
     FlowSyntax, FlowProfile, TrackingID string
 }
 
-// SoumettreFactureAfnor soumet une facture à une PDP via l'API AFNOR
-func (c *Client) SoumettreFactureAfnor(pdfPath, flowName string, opts *SoumettreFactureAfnorOptions) (map[string]interface{}, error) {
-    if opts == nil { opts = &SoumettreFactureAfnorOptions{} }
+// SubmitInvoiceAfnor submits an invoice to a PDP via the AFNOR API
+func (c *Client) SubmitInvoiceAfnor(pdfPath, flowName string, opts *SubmitInvoiceAfnorOptions) (map[string]interface{}, error) {
+    if opts == nil { opts = &SubmitInvoiceAfnorOptions{} }
     pdfContent, err := os.ReadFile(pdfPath)
     if err != nil { return nil, NewFactPulseValidationError(fmt.Sprintf("Error reading PDF: %v", err), nil) }
 
@@ -528,8 +528,8 @@ func (c *Client) SoumettreFactureAfnor(pdfPath, flowName string, opts *Soumettre
     return c.makeAfnorRequest("POST", "/flow/v1/flows", nil, &body, writer.FormDataContentType())
 }
 
-// RechercherFluxAfnor recherche des flux de facturation AFNOR
-func (c *Client) RechercherFluxAfnor(criteria map[string]interface{}) (map[string]interface{}, error) {
+// SearchFlowsAfnor searches for AFNOR invoicing flows
+func (c *Client) SearchFlowsAfnor(criteria map[string]interface{}) (map[string]interface{}, error) {
     if criteria == nil { criteria = map[string]interface{}{} }
     searchBody := map[string]interface{}{
         "offset": getIntOrDefault(criteria, "offset", 0),
@@ -543,29 +543,29 @@ func (c *Client) RechercherFluxAfnor(criteria map[string]interface{}) (map[strin
     return c.makeAfnorRequest("POST", "/flow/v1/flows/search", searchBody, nil, "")
 }
 
-// TelechargerFluxAfnor télécharge le fichier PDF d'un flux AFNOR
-func (c *Client) TelechargerFluxAfnor(flowID string) ([]byte, error) {
+// DownloadFlowAfnor downloads the PDF file of an AFNOR flow
+func (c *Client) DownloadFlowAfnor(flowID string) ([]byte, error) {
     result, err := c.makeAfnorRequest("GET", fmt.Sprintf("/flow/v1/flows/%s", flowID), nil, nil, "")
     if err != nil { return nil, err }
     if raw, ok := result["_raw"].([]byte); ok { return raw, nil }
     return nil, nil
 }
 
-// ObtenirFactureEntranteAfnor récupère les métadonnées JSON d'un flux entrant (facture fournisseur).
-// Télécharge un flux entrant depuis la PDP AFNOR et extrait les métadonnées
-// de la facture vers un format JSON unifié. Supporte Factur-X, CII et UBL.
+// GetIncomingInvoiceAfnor retrieves JSON metadata of an incoming flow (supplier invoice).
+// Downloads an incoming flow from the AFNOR PDP and extracts invoice metadata
+// into a unified JSON format. Supports Factur-X, CII and UBL.
 //
-// Note: Cet endpoint utilise l'authentification JWT FactPulse (pas OAuth AFNOR).
-// Le serveur FactPulse se charge d'appeler la PDP avec les credentials stockés.
+// Note: This endpoint uses FactPulse JWT authentication (not AFNOR OAuth).
+// The FactPulse server handles calling the PDP with stored credentials.
 //
-// flowID: Identifiant du flux (UUID)
-// includeDocument: Si true, inclut le document original encodé en base64
+// flowID: Flow identifier (UUID)
+// includeDocument: If true, includes the original document encoded in base64
 //
-// Retourne les métadonnées de la facture (fournisseur, montants, dates, etc.)
-func (c *Client) ObtenirFactureEntranteAfnor(flowID string, includeDocument bool) (map[string]interface{}, error) {
+// Returns invoice metadata (supplier, amounts, dates, etc.)
+func (c *Client) GetIncomingInvoiceAfnor(flowID string, includeDocument bool) (map[string]interface{}, error) {
     if err := c.EnsureAuthenticated(false); err != nil { return nil, err }
 
-    url := fmt.Sprintf("%s/api/v1/afnor/flux-entrants/%s", strings.TrimRight(c.APIURL, "/"), flowID)
+    url := fmt.Sprintf("%s/api/v1/afnor/incoming-flows/%s", strings.TrimRight(c.APIURL, "/"), flowID)
     if includeDocument {
         url += "?include_document=true"
     }
@@ -580,31 +580,31 @@ func (c *Client) ObtenirFactureEntranteAfnor(flowID string, includeDocument bool
 
     body, _ := io.ReadAll(resp.Body)
     if resp.StatusCode >= 400 {
-        return nil, NewFactPulseValidationError(fmt.Sprintf("Erreur flux entrant (%d): %s", resp.StatusCode, string(body)), nil)
+        return nil, NewFactPulseValidationError(fmt.Sprintf("Incoming flow error (%d): %s", resp.StatusCode, string(body)), nil)
     }
 
     var result map[string]interface{}; json.Unmarshal(body, &result); return result, nil
 }
 
-// HealthcheckAfnor vérifie la disponibilité du Flow Service AFNOR
+// HealthcheckAfnor checks the availability of the AFNOR Flow Service
 func (c *Client) HealthcheckAfnor() (map[string]interface{}, error) {
     return c.makeAfnorRequest("GET", "/flow/v1/healthcheck", nil, nil, "")
 }
 
 // ==================== AFNOR Directory ====================
 
-// RechercherSiretAfnor recherche une entreprise par SIRET dans l'annuaire AFNOR
-func (c *Client) RechercherSiretAfnor(siret string) (map[string]interface{}, error) {
+// SearchSiretAfnor searches for a company by SIRET in the AFNOR directory
+func (c *Client) SearchSiretAfnor(siret string) (map[string]interface{}, error) {
     return c.makeAfnorRequest("GET", fmt.Sprintf("/directory/siret/%s", siret), nil, nil, "")
 }
 
-// RechercherSirenAfnor recherche une entreprise par SIREN dans l'annuaire AFNOR
-func (c *Client) RechercherSirenAfnor(siren string) (map[string]interface{}, error) {
+// SearchSirenAfnor searches for a company by SIREN in the AFNOR directory
+func (c *Client) SearchSirenAfnor(siren string) (map[string]interface{}, error) {
     return c.makeAfnorRequest("GET", fmt.Sprintf("/directory/siren/%s", siren), nil, nil, "")
 }
 
-// ListerCodesRoutageAfnor liste les codes de routage disponibles pour un SIREN
-func (c *Client) ListerCodesRoutageAfnor(siren string) (map[string]interface{}, error) {
+// ListRoutingCodesAfnor lists available routing codes for a SIREN
+func (c *Client) ListRoutingCodesAfnor(siren string) (map[string]interface{}, error) {
     return c.makeAfnorRequest("GET", fmt.Sprintf("/directory/siren/%s/routing-codes", siren), nil, nil, "")
 }
 
@@ -643,53 +643,53 @@ func (c *Client) makeChorusRequest(method, endpoint string, jsonData map[string]
     var result map[string]interface{}; json.Unmarshal(respBody, &result); return result, nil
 }
 
-// RechercherStructureChorus recherche des structures sur Chorus Pro
-func (c *Client) RechercherStructureChorus(identifiantStructure, raisonSociale, typeIdentifiant string, restreindrePrivees bool) (map[string]interface{}, error) {
-    body := map[string]interface{}{"restreindre_structures_privees": restreindrePrivees}
-    if identifiantStructure != "" { body["identifiant_structure"] = identifiantStructure }
-    if raisonSociale != "" { body["raison_sociale_structure"] = raisonSociale }
-    if typeIdentifiant != "" { body["type_identifiant_structure"] = typeIdentifiant }
-    return c.makeChorusRequest("POST", "/structures/rechercher", body)
+// SearchStructureChorus searches for structures on Chorus Pro
+func (c *Client) SearchStructureChorus(structureIdentifier, businessName, identifierType string, restrictPrivate bool) (map[string]interface{}, error) {
+    body := map[string]interface{}{"restrict_private_structures": restrictPrivate}
+    if structureIdentifier != "" { body["structure_identifier"] = structureIdentifier }
+    if businessName != "" { body["structure_business_name"] = businessName }
+    if identifierType != "" { body["structure_identifier_type"] = identifierType }
+    return c.makeChorusRequest("POST", "/structures/search", body)
 }
 
-// ConsulterStructureChorus consulte les détails d'une structure Chorus Pro
-func (c *Client) ConsulterStructureChorus(idStructureCpp int) (map[string]interface{}, error) {
-    return c.makeChorusRequest("POST", "/structures/consulter", map[string]interface{}{"id_structure_cpp": idStructureCpp})
+// GetStructureChorus gets the details of a Chorus Pro structure
+func (c *Client) GetStructureChorus(cppStructureId int) (map[string]interface{}, error) {
+    return c.makeChorusRequest("POST", "/structures/get", map[string]interface{}{"cpp_structure_id": cppStructureId})
 }
 
-// ObtenirIdChorusDepuisSiret obtient l'ID Chorus Pro d'une structure depuis son SIRET
-func (c *Client) ObtenirIdChorusDepuisSiret(siret, typeIdentifiant string) (map[string]interface{}, error) {
-    if typeIdentifiant == "" { typeIdentifiant = "SIRET" }
-    return c.makeChorusRequest("POST", "/structures/obtenir-id-depuis-siret", map[string]interface{}{"siret": siret, "type_identifiant": typeIdentifiant})
+// GetChorusIdFromSiret gets the Chorus Pro ID of a structure from its SIRET
+func (c *Client) GetChorusIdFromSiret(siret, identifierType string) (map[string]interface{}, error) {
+    if identifierType == "" { identifierType = "SIRET" }
+    return c.makeChorusRequest("POST", "/structures/get-id-from-siret", map[string]interface{}{"siret": siret, "identifier_type": identifierType})
 }
 
-// ListerServicesStructureChorus liste les services d'une structure Chorus Pro
-func (c *Client) ListerServicesStructureChorus(idStructureCpp int) (map[string]interface{}, error) {
-    return c.makeChorusRequest("GET", fmt.Sprintf("/structures/%d/services", idStructureCpp), nil)
+// ListStructureServicesChorus lists the services of a Chorus Pro structure
+func (c *Client) ListStructureServicesChorus(cppStructureId int) (map[string]interface{}, error) {
+    return c.makeChorusRequest("GET", fmt.Sprintf("/structures/%d/services", cppStructureId), nil)
 }
 
-// SoumettreFactureChorus soumet une facture à Chorus Pro
-func (c *Client) SoumettreFactureChorus(factureData map[string]interface{}) (map[string]interface{}, error) {
-    return c.makeChorusRequest("POST", "/factures/soumettre", factureData)
+// SubmitInvoiceChorus submits an invoice to Chorus Pro
+func (c *Client) SubmitInvoiceChorus(invoiceData map[string]interface{}) (map[string]interface{}, error) {
+    return c.makeChorusRequest("POST", "/invoices/submit", invoiceData)
 }
 
-// ConsulterFactureChorus consulte le statut d'une facture Chorus Pro
-func (c *Client) ConsulterFactureChorus(identifiantFactureCpp int) (map[string]interface{}, error) {
-    return c.makeChorusRequest("POST", "/factures/consulter", map[string]interface{}{"identifiant_facture_cpp": identifiantFactureCpp})
+// GetInvoiceChorus gets the status of a Chorus Pro invoice
+func (c *Client) GetInvoiceChorus(cppInvoiceIdentifier int) (map[string]interface{}, error) {
+    return c.makeChorusRequest("POST", "/invoices/get", map[string]interface{}{"cpp_invoice_identifier": cppInvoiceIdentifier})
 }
 
 // =========================================================================
 // Validation
 // =========================================================================
 
-// ValiderPdfFacturxOptions options pour ValiderPdfFacturx
-type ValiderPdfFacturxOptions struct {
-    Profil     string // Profil Factur-X (MINIMUM, BASIC, EN16931, EXTENDED). Si vide, auto-détecté.
-    UseVerapdf bool   // Active la validation stricte PDF/A avec VeraPDF (défaut: false)
+// ValidateFacturxPdfOptions options for ValidateFacturxPdf
+type ValidateFacturxPdfOptions struct {
+    Profile    string // Factur-X profile (MINIMUM, BASIC, EN16931, EXTENDED). If empty, auto-detected.
+    UseVerapdf bool   // Enable strict PDF/A validation with VeraPDF (default: false)
 }
 
-// ValiderPdfFacturx valide un PDF Factur-X
-func (c *Client) ValiderPdfFacturx(pdfPath string, opts *ValiderPdfFacturxOptions) (map[string]interface{}, error) {
+// ValidateFacturxPdf validates a Factur-X PDF
+func (c *Client) ValidateFacturxPdf(pdfPath string, opts *ValidateFacturxPdfOptions) (map[string]interface{}, error) {
     if err := c.EnsureAuthenticated(false); err != nil { return nil, err }
 
     pdfContent, err := os.ReadFile(pdfPath)
@@ -697,10 +697,10 @@ func (c *Client) ValiderPdfFacturx(pdfPath string, opts *ValiderPdfFacturxOption
 
     var body bytes.Buffer
     writer := multipart.NewWriter(&body)
-    part, _ := writer.CreateFormFile("fichier_pdf", filepath.Base(pdfPath))
+    part, _ := writer.CreateFormFile("pdf_file", filepath.Base(pdfPath))
     part.Write(pdfContent)
-    if opts != nil && opts.Profil != "" {
-        writer.WriteField("profil", opts.Profil)
+    if opts != nil && opts.Profile != "" {
+        writer.WriteField("profile", opts.Profile)
     }
     useVerapdf := "false"
     if opts != nil && opts.UseVerapdf {
@@ -709,7 +709,7 @@ func (c *Client) ValiderPdfFacturx(pdfPath string, opts *ValiderPdfFacturxOption
     writer.WriteField("use_verapdf", useVerapdf)
     writer.Close()
 
-    req, _ := http.NewRequest("POST", fmt.Sprintf("%s/api/v1/traitement/valider-pdf-facturx", strings.TrimRight(c.APIURL, "/")), &body)
+    req, _ := http.NewRequest("POST", fmt.Sprintf("%s/api/v1/processing/validate-facturx-pdf", strings.TrimRight(c.APIURL, "/")), &body)
     req.Header.Set("Authorization", "Bearer "+c.accessToken)
     req.Header.Set("Content-Type", writer.FormDataContentType())
 
@@ -720,19 +720,19 @@ func (c *Client) ValiderPdfFacturx(pdfPath string, opts *ValiderPdfFacturxOption
     var result map[string]interface{}; json.NewDecoder(resp.Body).Decode(&result); return result, nil
 }
 
-// ValiderXmlFacturx valide un XML Factur-X
-func (c *Client) ValiderXmlFacturx(xmlContent, profil string) (map[string]interface{}, error) {
-    if profil == "" { profil = "EN16931" }
+// ValidateFacturxXml validates a Factur-X XML
+func (c *Client) ValidateFacturxXml(xmlContent, profile string) (map[string]interface{}, error) {
+    if profile == "" { profile = "EN16931" }
     if err := c.EnsureAuthenticated(false); err != nil { return nil, err }
 
     var body bytes.Buffer
     writer := multipart.NewWriter(&body)
-    part, _ := writer.CreateFormFile("fichier_xml", "facture.xml")
+    part, _ := writer.CreateFormFile("xml_file", "invoice.xml")
     part.Write([]byte(xmlContent))
-    writer.WriteField("profil", profil)
+    writer.WriteField("profile", profile)
     writer.Close()
 
-    req, _ := http.NewRequest("POST", fmt.Sprintf("%s/api/v1/traitement/valider-xml", strings.TrimRight(c.APIURL, "/")), &body)
+    req, _ := http.NewRequest("POST", fmt.Sprintf("%s/api/v1/processing/validate-xml", strings.TrimRight(c.APIURL, "/")), &body)
     req.Header.Set("Authorization", "Bearer "+c.accessToken)
     req.Header.Set("Content-Type", writer.FormDataContentType())
 
@@ -743,8 +743,8 @@ func (c *Client) ValiderXmlFacturx(xmlContent, profil string) (map[string]interf
     var result map[string]interface{}; json.NewDecoder(resp.Body).Decode(&result); return result, nil
 }
 
-// ValiderSignaturePdf valide la signature d'un PDF signé
-func (c *Client) ValiderSignaturePdf(pdfPath string) (map[string]interface{}, error) {
+// ValidatePdfSignature validates the signature of a signed PDF
+func (c *Client) ValidatePdfSignature(pdfPath string) (map[string]interface{}, error) {
     if err := c.EnsureAuthenticated(false); err != nil { return nil, err }
 
     pdfContent, err := os.ReadFile(pdfPath)
@@ -752,11 +752,11 @@ func (c *Client) ValiderSignaturePdf(pdfPath string) (map[string]interface{}, er
 
     var body bytes.Buffer
     writer := multipart.NewWriter(&body)
-    part, _ := writer.CreateFormFile("fichier_pdf", filepath.Base(pdfPath))
+    part, _ := writer.CreateFormFile("pdf_file", filepath.Base(pdfPath))
     part.Write(pdfContent)
     writer.Close()
 
-    req, _ := http.NewRequest("POST", fmt.Sprintf("%s/api/v1/traitement/valider-signature-pdf", strings.TrimRight(c.APIURL, "/")), &body)
+    req, _ := http.NewRequest("POST", fmt.Sprintf("%s/api/v1/processing/validate-pdf-signature", strings.TrimRight(c.APIURL, "/")), &body)
     req.Header.Set("Authorization", "Bearer "+c.accessToken)
     req.Header.Set("Content-Type", writer.FormDataContentType())
 
@@ -771,15 +771,15 @@ func (c *Client) ValiderSignaturePdf(pdfPath string) (map[string]interface{}, er
 // Signature
 // =========================================================================
 
-// SignerPdfOptions contient les options pour signerPdf
-type SignerPdfOptions struct {
-    Raison, Localisation, Contact string
+// SignPdfOptions contains options for SignPdf
+type SignPdfOptions struct {
+    Reason, Location, Contact string
     UsePadesLt, UseTimestamp bool
 }
 
-// SignerPdf signe un PDF avec le certificat configuré côté serveur
-func (c *Client) SignerPdf(pdfPath string, opts *SignerPdfOptions) ([]byte, error) {
-    if opts == nil { opts = &SignerPdfOptions{UseTimestamp: true} }
+// SignPdf signs a PDF with the server-configured certificate
+func (c *Client) SignPdf(pdfPath string, opts *SignPdfOptions) ([]byte, error) {
+    if opts == nil { opts = &SignPdfOptions{UseTimestamp: true} }
     if err := c.EnsureAuthenticated(false); err != nil { return nil, err }
 
     pdfContent, err := os.ReadFile(pdfPath)
@@ -787,16 +787,16 @@ func (c *Client) SignerPdf(pdfPath string, opts *SignerPdfOptions) ([]byte, erro
 
     var body bytes.Buffer
     writer := multipart.NewWriter(&body)
-    part, _ := writer.CreateFormFile("fichier_pdf", filepath.Base(pdfPath))
+    part, _ := writer.CreateFormFile("pdf_file", filepath.Base(pdfPath))
     part.Write(pdfContent)
-    if opts.Raison != "" { writer.WriteField("raison", opts.Raison) }
-    if opts.Localisation != "" { writer.WriteField("localisation", opts.Localisation) }
+    if opts.Reason != "" { writer.WriteField("reason", opts.Reason) }
+    if opts.Location != "" { writer.WriteField("location", opts.Location) }
     if opts.Contact != "" { writer.WriteField("contact", opts.Contact) }
     writer.WriteField("use_pades_lt", fmt.Sprintf("%t", opts.UsePadesLt))
     writer.WriteField("use_timestamp", fmt.Sprintf("%t", opts.UseTimestamp))
     writer.Close()
 
-    req, _ := http.NewRequest("POST", fmt.Sprintf("%s/api/v1/traitement/signer-pdf", strings.TrimRight(c.APIURL, "/")), &body)
+    req, _ := http.NewRequest("POST", fmt.Sprintf("%s/api/v1/processing/sign-pdf", strings.TrimRight(c.APIURL, "/")), &body)
     req.Header.Set("Authorization", "Bearer "+c.accessToken)
     req.Header.Set("Content-Type", writer.FormDataContentType())
 
@@ -811,27 +811,27 @@ func (c *Client) SignerPdf(pdfPath string, opts *SignerPdfOptions) ([]byte, erro
     return nil, NewFactPulseValidationError("Invalid signature response", nil)
 }
 
-// GenererCertificatTestOptions contient les options pour genererCertificatTest
-type GenererCertificatTestOptions struct {
+// GenerateTestCertificateOptions contains options for GenerateTestCertificate
+type GenerateTestCertificateOptions struct {
     CN, Organisation, Email string
-    DureeJours, TailleCle int
+    ValidityDays, KeySize int
 }
 
-// GenererCertificatTest génère un certificat de test (NON PRODUCTION)
-func (c *Client) GenererCertificatTest(opts *GenererCertificatTestOptions) (map[string]interface{}, error) {
-    if opts == nil { opts = &GenererCertificatTestOptions{} }
+// GenerateTestCertificate generates a test certificate (NOT FOR PRODUCTION)
+func (c *Client) GenerateTestCertificate(opts *GenerateTestCertificateOptions) (map[string]interface{}, error) {
+    if opts == nil { opts = &GenerateTestCertificateOptions{} }
     if err := c.EnsureAuthenticated(false); err != nil { return nil, err }
 
     body := map[string]interface{}{
         "cn": ifEmpty(opts.CN, "Test Organisation"),
         "organisation": ifEmpty(opts.Organisation, "Test Organisation"),
         "email": ifEmpty(opts.Email, "test@example.com"),
-        "duree_jours": ifZero(opts.DureeJours, 365),
-        "taille_cle": ifZero(opts.TailleCle, 2048),
+        "validity_days": ifZero(opts.ValidityDays, 365),
+        "key_size": ifZero(opts.KeySize, 2048),
     }
     jsonBody, _ := json.Marshal(body)
 
-    req, _ := http.NewRequest("POST", fmt.Sprintf("%s/api/v1/traitement/generer-certificat-test", strings.TrimRight(c.APIURL, "/")), bytes.NewReader(jsonBody))
+    req, _ := http.NewRequest("POST", fmt.Sprintf("%s/api/v1/processing/generate-test-certificate", strings.TrimRight(c.APIURL, "/")), bytes.NewReader(jsonBody))
     req.Header.Set("Authorization", "Bearer "+c.accessToken)
     req.Header.Set("Content-Type", "application/json")
 
@@ -843,32 +843,32 @@ func (c *Client) GenererCertificatTest(opts *GenererCertificatTestOptions) (map[
 }
 
 // =========================================================================
-// Workflow complet
+// Complete workflow
 // =========================================================================
 
-// GenererFacturxCompletOptions contient les options pour genererFacturxComplet
-type GenererFacturxCompletOptions struct {
-    Profil, OutputPath, AfnorFlowName, AfnorTrackingID string
-    Valider, Signer, SoumettreAfnor bool
+// GenerateFacturxCompleteOptions contains options for GenerateFacturxComplete
+type GenerateFacturxCompleteOptions struct {
+    Profile, OutputPath, AfnorFlowName, AfnorTrackingID string
+    Validate, Sign, SubmitAfnor bool
     Timeout int64
-    SignerPdfOptions *SignerPdfOptions
+    SignPdfOptions *SignPdfOptions
 }
 
-// GenererFacturxComplet génère un PDF Factur-X complet avec validation, signature et soumission optionnelles
-func (c *Client) GenererFacturxComplet(facture map[string]interface{}, pdfSourcePath string, opts *GenererFacturxCompletOptions) (map[string]interface{}, error) {
-    if opts == nil { opts = &GenererFacturxCompletOptions{Valider: true} }
-    profil := ifEmpty(opts.Profil, "EN16931")
+// GenerateFacturxComplete generates a complete Factur-X PDF with optional validation, signature and submission
+func (c *Client) GenerateFacturxComplete(invoice map[string]interface{}, pdfSourcePath string, opts *GenerateFacturxCompleteOptions) (map[string]interface{}, error) {
+    if opts == nil { opts = &GenerateFacturxCompleteOptions{Validate: true} }
+    profile := ifEmpty(opts.Profile, "EN16931")
     timeout := opts.Timeout; if timeout == 0 { timeout = 120000 }
 
     result := map[string]interface{}{}
 
-    // 1. Génération
+    // 1. Generation
     timeoutPtr := &timeout
-    pdfBytes, err := c.GenererFacturxWithOptions(facture, pdfSourcePath, profil, "pdf", true, timeoutPtr)
+    pdfBytes, err := c.GenerateFacturxWithOptions(invoice, pdfSourcePath, profile, "pdf", true, timeoutPtr)
     if err != nil { return nil, err }
     result["pdfBytes"] = pdfBytes
 
-    // Créer un fichier temporaire
+    // Create temporary file
     tempFile, err := os.CreateTemp("", "facturx_*.pdf")
     if err != nil { return nil, NewFactPulseValidationError(fmt.Sprintf("Error creating temp file: %v", err), nil) }
     defer os.Remove(tempFile.Name())
@@ -876,11 +876,11 @@ func (c *Client) GenererFacturxComplet(facture map[string]interface{}, pdfSource
     tempFile.Close()
 
     // 2. Validation
-    if opts.Valider {
-        validation, err := c.ValiderPdfFacturx(tempFile.Name(), profil)
+    if opts.Validate {
+        validation, err := c.ValidateFacturxPdf(tempFile.Name(), &ValidateFacturxPdfOptions{Profile: profile})
         if err != nil { return nil, err }
         result["validation"] = validation
-        if estConforme, ok := validation["est_conforme"].(bool); !ok || !estConforme {
+        if isCompliant, ok := validation["is_compliant"].(bool); !ok || !isCompliant {
             if opts.OutputPath != "" {
                 os.WriteFile(opts.OutputPath, pdfBytes, 0644)
                 result["pdfPath"] = opts.OutputPath
@@ -890,26 +890,26 @@ func (c *Client) GenererFacturxComplet(facture map[string]interface{}, pdfSource
     }
 
     // 3. Signature
-    if opts.Signer {
-        signedPdf, err := c.SignerPdf(tempFile.Name(), opts.SignerPdfOptions)
+    if opts.Sign {
+        signedPdf, err := c.SignPdf(tempFile.Name(), opts.SignPdfOptions)
         if err != nil { return nil, err }
         pdfBytes = signedPdf
         result["pdfBytes"] = pdfBytes
-        result["signature"] = map[string]interface{}{"signe": true}
+        result["signature"] = map[string]interface{}{"signed": true}
         os.WriteFile(tempFile.Name(), pdfBytes, 0644)
     }
 
-    // 4. Soumission AFNOR
-    if opts.SoumettreAfnor {
-        numeroFacture := getStringOrDefault(facture, "numeroFacture", getStringOrDefault(facture, "numero_facture", "FACTURE"))
-        flowName := ifEmpty(opts.AfnorFlowName, fmt.Sprintf("Facture %s", numeroFacture))
-        trackingID := ifEmpty(opts.AfnorTrackingID, numeroFacture)
-        afnorResult, err := c.SoumettreFactureAfnor(tempFile.Name(), flowName, &SoumettreFactureAfnorOptions{TrackingID: trackingID})
+    // 4. AFNOR submission
+    if opts.SubmitAfnor {
+        invoiceNumber := getStringOrDefault(invoice, "number", getStringOrDefault(invoice, "invoice_number", "INVOICE"))
+        flowName := ifEmpty(opts.AfnorFlowName, fmt.Sprintf("Invoice %s", invoiceNumber))
+        trackingID := ifEmpty(opts.AfnorTrackingID, invoiceNumber)
+        afnorResult, err := c.SubmitInvoiceAfnor(tempFile.Name(), flowName, &SubmitInvoiceAfnorOptions{TrackingID: trackingID})
         if err != nil { return nil, err }
         result["afnor"] = afnorResult
     }
 
-    // Sauvegarde finale
+    // Final save
     if opts.OutputPath != "" {
         os.WriteFile(opts.OutputPath, pdfBytes, 0644)
         result["pdfPath"] = opts.OutputPath
@@ -918,7 +918,7 @@ func (c *Client) GenererFacturxComplet(facture map[string]interface{}, pdfSource
     return result, nil
 }
 
-// Utilitaires
+// Utilities
 func ifEmpty(s, def string) string { if s == "" { return def }; return s }
 func ifZero(n, def int) int { if n == 0 { return def }; return n }
 func getIntOrDefault(m map[string]interface{}, key string, def int) int {

@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FlowServiceUrl** | **string** | URL de base du Flow Service AFNOR | 
+**FlowServiceUrl** | **string** | Base URL of the AFNOR Flow Service | 
 **DirectoryServiceUrl** | Pointer to **NullableString** |  | [optional] 
-**TokenUrl** | **string** | URL du serveur OAuth2 | 
-**ClientId** | **string** | Client ID OAuth2 | 
-**ClientSecret** | **string** | Client Secret OAuth2 (sensible) | 
+**TokenUrl** | **string** | OAuth2 server URL | 
+**ClientId** | **string** | OAuth2 Client ID | 
+**ClientSecret** | **string** | OAuth2 Client Secret (sensitive) | 
 
 ## Methods
 
