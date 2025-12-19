@@ -11,14 +11,6 @@
 
 * `SANS_TVA` (value: `"SANS_TVA"`)
 
-* `TVA_SUR_DEBIT2` (value: `"TVA_SUR_DEBIT"`)
-
-* `TVA_SUR_ENCAISSEMENT2` (value: `"TVA_SUR_ENCAISSEMENT"`)
-
-* `EXONERATION2` (value: `"EXONERATION"`)
-
-* `SANS_TVA2` (value: `"SANS_TVA"`)
-
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

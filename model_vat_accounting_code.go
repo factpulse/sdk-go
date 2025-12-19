@@ -24,18 +24,10 @@ const (
 	TVA_SUR_ENCAISSEMENT VATAccountingCode = "TVA_SUR_ENCAISSEMENT"
 	EXONERATION VATAccountingCode = "EXONERATION"
 	SANS_TVA VATAccountingCode = "SANS_TVA"
-	TVA_SUR_DEBIT2 VATAccountingCode = "TVA_SUR_DEBIT"
-	TVA_SUR_ENCAISSEMENT2 VATAccountingCode = "TVA_SUR_ENCAISSEMENT"
-	EXONERATION2 VATAccountingCode = "EXONERATION"
-	SANS_TVA2 VATAccountingCode = "SANS_TVA"
 )
 
 // All allowed values of VATAccountingCode enum
 var AllowedVATAccountingCodeEnumValues = []VATAccountingCode{
-	"TVA_SUR_DEBIT",
-	"TVA_SUR_ENCAISSEMENT",
-	"EXONERATION",
-	"SANS_TVA",
 	"TVA_SUR_DEBIT",
 	"TVA_SUR_ENCAISSEMENT",
 	"EXONERATION",

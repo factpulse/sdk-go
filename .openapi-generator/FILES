@@ -38,10 +38,10 @@ docs/ElectronicAddress.md
 docs/EnrichedInvoiceInfo.md
 docs/ErrorLevel.md
 docs/ErrorSource.md
+docs/FacturXInvoice.md
 docs/FacturXPDFInfo.md
 docs/FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.md
 docs/FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.md
-docs/FactureFacturX.md
 docs/FieldStatus.md
 docs/FlowDirection.md
 docs/FlowProfile.md
@@ -157,10 +157,10 @@ model_electronic_address.go
 model_enriched_invoice_info.go
 model_error_level.go
 model_error_source.go
+model_factur_x_invoice.go
 model_factur_xpdf_info.go
 model_facture_electronique__rest_api__schemas__chorus_pro__chorus_pro_credentials.go
 model_facture_electronique__rest_api__schemas__processing__chorus_pro_credentials.go
-model_facture_factur_x.go
 model_field_status.go
 model_flow_direction.go
 model_flow_profile.go

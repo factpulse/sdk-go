@@ -36,42 +36,10 @@ const (
 	FACTORED_CREDIT_NOTE InvoiceTypeCode = "396"
 	SELF_BILLED_FACTORED_CREDIT_NOTE InvoiceTypeCode = "502"
 	PREPAYMENT_CREDIT_NOTE InvoiceTypeCode = "503"
-	_3802 InvoiceTypeCode = "380"
-	_3892 InvoiceTypeCode = "389"
-	_3932 InvoiceTypeCode = "393"
-	_5012 InvoiceTypeCode = "501"
-	_3862 InvoiceTypeCode = "386"
-	_5002 InvoiceTypeCode = "500"
-	_3842 InvoiceTypeCode = "384"
-	_4712 InvoiceTypeCode = "471"
-	_4722 InvoiceTypeCode = "472"
-	_4732 InvoiceTypeCode = "473"
-	_3812 InvoiceTypeCode = "381"
-	_2612 InvoiceTypeCode = "261"
-	_2622 InvoiceTypeCode = "262"
-	_3962 InvoiceTypeCode = "396"
-	_5022 InvoiceTypeCode = "502"
-	_5032 InvoiceTypeCode = "503"
 )
 
 // All allowed values of InvoiceTypeCode enum
 var AllowedInvoiceTypeCodeEnumValues = []InvoiceTypeCode{
-	"380",
-	"389",
-	"393",
-	"501",
-	"386",
-	"500",
-	"384",
-	"471",
-	"472",
-	"473",
-	"381",
-	"261",
-	"262",
-	"396",
-	"502",
-	"503",
 	"380",
 	"389",
 	"393",

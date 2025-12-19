@@ -26,22 +26,10 @@ const (
 	ESPECE PaymentMeans = "ESPECE"
 	AUTRE PaymentMeans = "AUTRE"
 	REPORT PaymentMeans = "REPORT"
-	CHEQUE2 PaymentMeans = "CHEQUE"
-	PRELEVEMENT2 PaymentMeans = "PRELEVEMENT"
-	VIREMENT2 PaymentMeans = "VIREMENT"
-	ESPECE2 PaymentMeans = "ESPECE"
-	AUTRE2 PaymentMeans = "AUTRE"
-	REPORT2 PaymentMeans = "REPORT"
 )
 
 // All allowed values of PaymentMeans enum
 var AllowedPaymentMeansEnumValues = []PaymentMeans{
-	"CHEQUE",
-	"PRELEVEMENT",
-	"VIREMENT",
-	"ESPECE",
-	"AUTRE",
-	"REPORT",
 	"CHEQUE",
 	"PRELEVEMENT",
 	"VIREMENT",

@@ -23,16 +23,10 @@ const (
 	SAISIE_API SubmissionMode = "SAISIE_API"
 	DEPOT_PDF_API SubmissionMode = "DEPOT_PDF_API"
 	DEPOT_PDF_SIGNE_API SubmissionMode = "DEPOT_PDF_SIGNE_API"
-	SAISIE_API2 SubmissionMode = "SAISIE_API"
-	DEPOT_PDF_API2 SubmissionMode = "DEPOT_PDF_API"
-	DEPOT_PDF_SIGNE_API2 SubmissionMode = "DEPOT_PDF_SIGNE_API"
 )
 
 // All allowed values of SubmissionMode enum
 var AllowedSubmissionModeEnumValues = []SubmissionMode{
-	"SAISIE_API",
-	"DEPOT_PDF_API",
-	"DEPOT_PDF_SIGNE_API",
 	"SAISIE_API",
 	"DEPOT_PDF_API",
 	"DEPOT_PDF_SIGNE_API",

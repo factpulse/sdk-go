@@ -26,22 +26,10 @@ const (
 	KILOGRAMME UnitOfMeasure = "KILOGRAMME"
 	LITRE UnitOfMeasure = "LITRE"
 	FORFAIT UnitOfMeasure = "FORFAIT"
-	PIECE2 UnitOfMeasure = "PIECE"
-	HEURE2 UnitOfMeasure = "HEURE"
-	JOUR2 UnitOfMeasure = "JOUR"
-	KILOGRAMME2 UnitOfMeasure = "KILOGRAMME"
-	LITRE2 UnitOfMeasure = "LITRE"
-	FORFAIT2 UnitOfMeasure = "FORFAIT"
 )
 
 // All allowed values of UnitOfMeasure enum
 var AllowedUnitOfMeasureEnumValues = []UnitOfMeasure{
-	"PIECE",
-	"HEURE",
-	"JOUR",
-	"KILOGRAMME",
-	"LITRE",
-	"FORFAIT",
 	"PIECE",
 	"HEURE",
 	"JOUR",
