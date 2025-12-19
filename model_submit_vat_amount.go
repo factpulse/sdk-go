@@ -16,14 +16,14 @@ import (
 )
 
 
-// VATAmount VAT amount for this line. (Accepte number, string ou integer)
-type VATAmount struct {
+// SubmitVatAmount VAT amount
+type SubmitVatAmount struct {
 	Float32 *float32
 	String *string
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
-func (dst *VATAmount) UnmarshalJSON(data []byte) error {
+func (dst *SubmitVatAmount) UnmarshalJSON(data []byte) error {
 	var err error
 	// try to unmarshal JSON data into Float32
 	err = json.Unmarshal(data, &dst.Float32);
@@ -51,11 +51,11 @@ func (dst *VATAmount) UnmarshalJSON(data []byte) error {
 		dst.String = nil
 	}
 
-	return fmt.Errorf("data failed to match schemas in anyOf(VATAmount)")
+	return fmt.Errorf("data failed to match schemas in anyOf(SubmitVatAmount)")
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
-func (src VATAmount) MarshalJSON() ([]byte, error) {
+func (src SubmitVatAmount) MarshalJSON() ([]byte, error) {
 	if src.Float32 != nil {
 		return json.Marshal(&src.Float32)
 	}
@@ -68,38 +68,38 @@ func (src VATAmount) MarshalJSON() ([]byte, error) {
 }
 
 
-type NullableVATAmount struct {
-	value *VATAmount
+type NullableSubmitVatAmount struct {
+	value *SubmitVatAmount
 	isSet bool
 }
 
-func (v NullableVATAmount) Get() *VATAmount {
+func (v NullableSubmitVatAmount) Get() *SubmitVatAmount {
 	return v.value
 }
 
-func (v *NullableVATAmount) Set(val *VATAmount) {
+func (v *NullableSubmitVatAmount) Set(val *SubmitVatAmount) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableVATAmount) IsSet() bool {
+func (v NullableSubmitVatAmount) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableVATAmount) Unset() {
+func (v *NullableSubmitVatAmount) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableVATAmount(val *VATAmount) *NullableVATAmount {
-	return &NullableVATAmount{value: val, isSet: true}
+func NewNullableSubmitVatAmount(val *SubmitVatAmount) *NullableSubmitVatAmount {
+	return &NullableSubmitVatAmount{value: val, isSet: true}
 }
 
-func (v NullableVATAmount) MarshalJSON() ([]byte, error) {
+func (v NullableSubmitVatAmount) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableVATAmount) UnmarshalJSON(src []byte) error {
+func (v *NullableSubmitVatAmount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

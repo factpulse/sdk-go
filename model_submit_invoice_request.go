@@ -31,9 +31,9 @@ type SubmitInvoiceRequest struct {
 	StructureId int32 `json:"structure_id"`
 	ServiceCode NullableString `json:"service_code,omitempty"`
 	EngagementNumber NullableString `json:"engagement_number,omitempty"`
-	TotalNetAmount TotalNetAmount `json:"total_net_amount"`
-	VatAmount VatAmount `json:"vat_amount"`
-	TotalGrossAmount TotalGrossAmount `json:"total_gross_amount"`
+	TotalNetAmount SubmitNetAmount `json:"total_net_amount"`
+	VatAmount SubmitVatAmount `json:"vat_amount"`
+	TotalGrossAmount SubmitGrossAmount `json:"total_gross_amount"`
 	MainAttachmentId NullableInt32 `json:"main_attachment_id,omitempty"`
 	MainAttachmentLabel NullableString `json:"main_attachment_label,omitempty"`
 	Comment NullableString `json:"comment,omitempty"`
@@ -47,7 +47,7 @@ type _SubmitInvoiceRequest SubmitInvoiceRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSubmitInvoiceRequest(invoiceNumber string, invoiceDate string, structureId int32, totalNetAmount TotalNetAmount, vatAmount VatAmount, totalGrossAmount TotalGrossAmount) *SubmitInvoiceRequest {
+func NewSubmitInvoiceRequest(invoiceNumber string, invoiceDate string, structureId int32, totalNetAmount SubmitNetAmount, vatAmount SubmitVatAmount, totalGrossAmount SubmitGrossAmount) *SubmitInvoiceRequest {
 	this := SubmitInvoiceRequest{}
 	this.InvoiceNumber = invoiceNumber
 	this.InvoiceDate = invoiceDate
@@ -307,9 +307,9 @@ func (o *SubmitInvoiceRequest) UnsetEngagementNumber() {
 }
 
 // GetTotalNetAmount returns the TotalNetAmount field value
-func (o *SubmitInvoiceRequest) GetTotalNetAmount() TotalNetAmount {
+func (o *SubmitInvoiceRequest) GetTotalNetAmount() SubmitNetAmount {
 	if o == nil {
-		var ret TotalNetAmount
+		var ret SubmitNetAmount
 		return ret
 	}
 
@@ -318,7 +318,7 @@ func (o *SubmitInvoiceRequest) GetTotalNetAmount() TotalNetAmount {
 
 // GetTotalNetAmountOk returns a tuple with the TotalNetAmount field value
 // and a boolean to check if the value has been set.
-func (o *SubmitInvoiceRequest) GetTotalNetAmountOk() (*TotalNetAmount, bool) {
+func (o *SubmitInvoiceRequest) GetTotalNetAmountOk() (*SubmitNetAmount, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -326,14 +326,14 @@ func (o *SubmitInvoiceRequest) GetTotalNetAmountOk() (*TotalNetAmount, bool) {
 }
 
 // SetTotalNetAmount sets field value
-func (o *SubmitInvoiceRequest) SetTotalNetAmount(v TotalNetAmount) {
+func (o *SubmitInvoiceRequest) SetTotalNetAmount(v SubmitNetAmount) {
 	o.TotalNetAmount = v
 }
 
 // GetVatAmount returns the VatAmount field value
-func (o *SubmitInvoiceRequest) GetVatAmount() VatAmount {
+func (o *SubmitInvoiceRequest) GetVatAmount() SubmitVatAmount {
 	if o == nil {
-		var ret VatAmount
+		var ret SubmitVatAmount
 		return ret
 	}
 
@@ -342,7 +342,7 @@ func (o *SubmitInvoiceRequest) GetVatAmount() VatAmount {
 
 // GetVatAmountOk returns a tuple with the VatAmount field value
 // and a boolean to check if the value has been set.
-func (o *SubmitInvoiceRequest) GetVatAmountOk() (*VatAmount, bool) {
+func (o *SubmitInvoiceRequest) GetVatAmountOk() (*SubmitVatAmount, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -350,14 +350,14 @@ func (o *SubmitInvoiceRequest) GetVatAmountOk() (*VatAmount, bool) {
 }
 
 // SetVatAmount sets field value
-func (o *SubmitInvoiceRequest) SetVatAmount(v VatAmount) {
+func (o *SubmitInvoiceRequest) SetVatAmount(v SubmitVatAmount) {
 	o.VatAmount = v
 }
 
 // GetTotalGrossAmount returns the TotalGrossAmount field value
-func (o *SubmitInvoiceRequest) GetTotalGrossAmount() TotalGrossAmount {
+func (o *SubmitInvoiceRequest) GetTotalGrossAmount() SubmitGrossAmount {
 	if o == nil {
-		var ret TotalGrossAmount
+		var ret SubmitGrossAmount
 		return ret
 	}
 
@@ -366,7 +366,7 @@ func (o *SubmitInvoiceRequest) GetTotalGrossAmount() TotalGrossAmount {
 
 // GetTotalGrossAmountOk returns a tuple with the TotalGrossAmount field value
 // and a boolean to check if the value has been set.
-func (o *SubmitInvoiceRequest) GetTotalGrossAmountOk() (*TotalGrossAmount, bool) {
+func (o *SubmitInvoiceRequest) GetTotalGrossAmountOk() (*SubmitGrossAmount, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -374,7 +374,7 @@ func (o *SubmitInvoiceRequest) GetTotalGrossAmountOk() (*TotalGrossAmount, bool)
 }
 
 // SetTotalGrossAmount sets field value
-func (o *SubmitInvoiceRequest) SetTotalGrossAmount(v TotalGrossAmount) {
+func (o *SubmitInvoiceRequest) SetTotalGrossAmount(v SubmitGrossAmount) {
 	o.TotalGrossAmount = v
 }
 

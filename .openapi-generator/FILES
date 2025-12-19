@@ -106,8 +106,11 @@ docs/SubmitCompleteInvoiceRequest.md
 docs/SubmitCompleteInvoiceResponse.md
 docs/SubmitFlowRequest.md
 docs/SubmitFlowResponse.md
+docs/SubmitGrossAmount.md
 docs/SubmitInvoiceRequest.md
 docs/SubmitInvoiceResponse.md
+docs/SubmitNetAmount.md
+docs/SubmitVatAmount.md
 docs/SupplementaryAttachment.md
 docs/Supplier.md
 docs/TaskResponse.md
@@ -128,7 +131,6 @@ docs/ValidationErrorDetail.md
 docs/ValidationErrorLocInner.md
 docs/ValidationErrorResponse.md
 docs/ValidationSuccessResponse.md
-docs/VatAmount.md
 docs/VerificationSuccessResponse.md
 docs/VerifiedFieldSchema.md
 git_push.sh
@@ -220,8 +222,11 @@ model_submit_complete_invoice_request.go
 model_submit_complete_invoice_response.go
 model_submit_flow_request.go
 model_submit_flow_response.go
+model_submit_gross_amount.go
 model_submit_invoice_request.go
 model_submit_invoice_response.go
+model_submit_net_amount.go
+model_submit_vat_amount.go
 model_supplementary_attachment.go
 model_supplier.go
 model_task_response.go
@@ -238,7 +243,6 @@ model_validation_error_loc_inner.go
 model_validation_error_response.go
 model_validation_success_response.go
 model_vat_accounting_code.go
-model_vat_amount.go
 model_vat_amount.go
 model_vat_category.go
 model_vat_line.go

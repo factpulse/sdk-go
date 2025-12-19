@@ -708,7 +708,7 @@ import (
 )
 
 func main() {
-	submitInvoiceRequest := *openapiclient.NewSubmitInvoiceRequest("InvoiceNumber_example", "InvoiceDate_example", int32(123), *openapiclient.NewTotalNetAmount(), *openapiclient.NewVatAmount(), *openapiclient.NewTotalGrossAmount()) // SubmitInvoiceRequest | 
+	submitInvoiceRequest := *openapiclient.NewSubmitInvoiceRequest("InvoiceNumber_example", "InvoiceDate_example", int32(123), *openapiclient.NewSubmitNetAmount(), *openapiclient.NewSubmitVatAmount(), *openapiclient.NewSubmitGrossAmount()) // SubmitInvoiceRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

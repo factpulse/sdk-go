@@ -11,9 +11,9 @@ Name | Type | Description | Notes
 **StructureId** | **int32** | Chorus Pro recipient structure ID | 
 **ServiceCode** | Pointer to **NullableString** |  | [optional] 
 **EngagementNumber** | Pointer to **NullableString** |  | [optional] 
-**TotalNetAmount** | [**TotalNetAmount**](TotalNetAmount.md) |  | 
-**VatAmount** | [**VatAmount**](VatAmount.md) |  | 
-**TotalGrossAmount** | [**TotalGrossAmount**](TotalGrossAmount.md) |  | 
+**TotalNetAmount** | [**SubmitNetAmount**](SubmitNetAmount.md) |  | 
+**VatAmount** | [**SubmitVatAmount**](SubmitVatAmount.md) |  | 
+**TotalGrossAmount** | [**SubmitGrossAmount**](SubmitGrossAmount.md) |  | 
 **MainAttachmentId** | Pointer to **NullableInt32** |  | [optional] 
 **MainAttachmentLabel** | Pointer to **NullableString** |  | [optional] 
 **Comment** | Pointer to **NullableString** |  | [optional] 
@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewSubmitInvoiceRequest
 
-`func NewSubmitInvoiceRequest(invoiceNumber string, invoiceDate string, structureId int32, totalNetAmount TotalNetAmount, vatAmount VatAmount, totalGrossAmount TotalGrossAmount, ) *SubmitInvoiceRequest`
+`func NewSubmitInvoiceRequest(invoiceNumber string, invoiceDate string, structureId int32, totalNetAmount SubmitNetAmount, vatAmount SubmitVatAmount, totalGrossAmount SubmitGrossAmount, ) *SubmitInvoiceRequest`
 
 NewSubmitInvoiceRequest instantiates a new SubmitInvoiceRequest object
 This constructor will assign default values to properties that have it defined,
@@ -241,60 +241,60 @@ HasEngagementNumber returns a boolean if a field has been set.
 UnsetEngagementNumber ensures that no value is present for EngagementNumber, not even an explicit nil
 ### GetTotalNetAmount
 
-`func (o *SubmitInvoiceRequest) GetTotalNetAmount() TotalNetAmount`
+`func (o *SubmitInvoiceRequest) GetTotalNetAmount() SubmitNetAmount`
 
 GetTotalNetAmount returns the TotalNetAmount field if non-nil, zero value otherwise.
 
 ### GetTotalNetAmountOk
 
-`func (o *SubmitInvoiceRequest) GetTotalNetAmountOk() (*TotalNetAmount, bool)`
+`func (o *SubmitInvoiceRequest) GetTotalNetAmountOk() (*SubmitNetAmount, bool)`
 
 GetTotalNetAmountOk returns a tuple with the TotalNetAmount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTotalNetAmount
 
-`func (o *SubmitInvoiceRequest) SetTotalNetAmount(v TotalNetAmount)`
+`func (o *SubmitInvoiceRequest) SetTotalNetAmount(v SubmitNetAmount)`
 
 SetTotalNetAmount sets TotalNetAmount field to given value.
 
 
 ### GetVatAmount
 
-`func (o *SubmitInvoiceRequest) GetVatAmount() VatAmount`
+`func (o *SubmitInvoiceRequest) GetVatAmount() SubmitVatAmount`
 
 GetVatAmount returns the VatAmount field if non-nil, zero value otherwise.
 
 ### GetVatAmountOk
 
-`func (o *SubmitInvoiceRequest) GetVatAmountOk() (*VatAmount, bool)`
+`func (o *SubmitInvoiceRequest) GetVatAmountOk() (*SubmitVatAmount, bool)`
 
 GetVatAmountOk returns a tuple with the VatAmount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetVatAmount
 
-`func (o *SubmitInvoiceRequest) SetVatAmount(v VatAmount)`
+`func (o *SubmitInvoiceRequest) SetVatAmount(v SubmitVatAmount)`
 
 SetVatAmount sets VatAmount field to given value.
 
 
 ### GetTotalGrossAmount
 
-`func (o *SubmitInvoiceRequest) GetTotalGrossAmount() TotalGrossAmount`
+`func (o *SubmitInvoiceRequest) GetTotalGrossAmount() SubmitGrossAmount`
 
 GetTotalGrossAmount returns the TotalGrossAmount field if non-nil, zero value otherwise.
 
 ### GetTotalGrossAmountOk
 
-`func (o *SubmitInvoiceRequest) GetTotalGrossAmountOk() (*TotalGrossAmount, bool)`
+`func (o *SubmitInvoiceRequest) GetTotalGrossAmountOk() (*SubmitGrossAmount, bool)`
 
 GetTotalGrossAmountOk returns a tuple with the TotalGrossAmount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTotalGrossAmount
 
-`func (o *SubmitInvoiceRequest) SetTotalGrossAmount(v TotalGrossAmount)`
+`func (o *SubmitInvoiceRequest) SetTotalGrossAmount(v SubmitGrossAmount)`
 
 SetTotalGrossAmount sets TotalGrossAmount field to given value.
 
