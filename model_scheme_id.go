@@ -21,16 +21,16 @@ type SchemeID string
 // List of SchemeID
 const (
 	FR_SIREN SchemeID = "0225"
-	GLN SchemeID = "0009"
-	DUNS SchemeID = "0002"
-	FR_TVA_INTRA SchemeID = "0088"
-	GLEIF SchemeID = "0060"
-	_9957 SchemeID = "9957"
-	_0199 SchemeID = "0199"
-	_0231 SchemeID = "0231"
-	EM SchemeID = "EM"
-	_0177 SchemeID = "0177"
-	_0224 SchemeID = "0224"
+	FR_SIRET SchemeID = "0009"
+	FR_SIREN_OLD SchemeID = "0002"
+	GLN SchemeID = "0088"
+	DUNS SchemeID = "0060"
+	FR_VAT_INTRA SchemeID = "9957"
+	GLEIF SchemeID = "0199"
+	DT_DIRECTORY_ID SchemeID = "0231"
+	EMAIL SchemeID = "EM"
+	ODETTE SchemeID = "0177"
+	FR_CHORUS_PRO_ROUTING SchemeID = "0224"
 )
 
 // All allowed values of SchemeID enum
