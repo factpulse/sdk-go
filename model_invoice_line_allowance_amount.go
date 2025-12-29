@@ -16,7 +16,7 @@ import (
 )
 
 
-// InvoiceLineAllowanceAmount Allowance amount before tax. (Accepte number, string ou integer)
+// InvoiceLineAllowanceAmount Simple line allowance amount (BT-136). (Accepte number, string ou integer)
 type InvoiceLineAllowanceAmount struct {
 	Float32 *float32
 	String *string

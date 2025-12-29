@@ -23,9 +23,9 @@ var _ MappedNullable = &GetStructureRequest{}
 type GetStructureRequest struct {
 	Credentials NullableFactureElectroniqueRestApiSchemasChorusProChorusProCredentials `json:"credentials,omitempty"`
 	// Chorus Pro structure ID
-	StructureId int32 `json:"structure_id"`
+	StructureId int32 `json:"structureId"`
 	// Language code (fr, en)
-	LanguageCode *string `json:"language_code,omitempty"`
+	LanguageCode *string `json:"languageCode,omitempty"`
 }
 
 type _GetStructureRequest GetStructureRequest
@@ -163,9 +163,9 @@ func (o GetStructureRequest) ToMap() (map[string]interface{}, error) {
 	if o.Credentials.IsSet() {
 		toSerialize["credentials"] = o.Credentials.Get()
 	}
-	toSerialize["structure_id"] = o.StructureId
+	toSerialize["structureId"] = o.StructureId
 	if !IsNil(o.LanguageCode) {
-		toSerialize["language_code"] = o.LanguageCode
+		toSerialize["languageCode"] = o.LanguageCode
 	}
 	return toSerialize, nil
 }
@@ -175,7 +175,7 @@ func (o *GetStructureRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"structure_id",
+		"structureId",
 	}
 
 	allProperties := make(map[string]interface{})

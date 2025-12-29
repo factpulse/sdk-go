@@ -19,18 +19,26 @@ import (
 // checks if the Supplier type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Supplier{}
 
-// Supplier Information about the supplier who issues the invoice.
+// Supplier Information about the supplier / seller (BG-4).
 type Supplier struct {
 	ElectronicAddress NullableElectronicAddress `json:"electronic_address"`
 	SupplierId int32 `json:"supplier_id"`
+	PrivateId NullableString `json:"private_id,omitempty"`
 	SupplierBankAccountCode NullableInt32 `json:"supplier_bank_account_code,omitempty"`
 	SupplierServiceId NullableInt32 `json:"supplier_service_id,omitempty"`
 	Name NullableString `json:"name,omitempty"`
+	TradingBusinessName NullableString `json:"trading_business_name,omitempty"`
+	LegalDescription NullableString `json:"legal_description,omitempty"`
 	Siren NullableString `json:"siren,omitempty"`
 	Siret NullableString `json:"siret,omitempty"`
 	VatNumber NullableString `json:"vat_number,omitempty"`
 	Iban NullableString `json:"iban,omitempty"`
+	Bic NullableString `json:"bic,omitempty"`
+	BankAccountName NullableString `json:"bank_account_name,omitempty"`
+	ProprietaryId NullableString `json:"proprietaryId,omitempty"`
 	PostalAddress NullablePostalAddress `json:"postal_address,omitempty"`
+	Contact NullableContact `json:"contact,omitempty"`
+	GlobalIds []ElectronicAddress `json:"global_ids,omitempty"`
 }
 
 type _Supplier Supplier
@@ -102,6 +110,48 @@ func (o *Supplier) GetSupplierIdOk() (*int32, bool) {
 // SetSupplierId sets field value
 func (o *Supplier) SetSupplierId(v int32) {
 	o.SupplierId = v
+}
+
+// GetPrivateId returns the PrivateId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Supplier) GetPrivateId() string {
+	if o == nil || IsNil(o.PrivateId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.PrivateId.Get()
+}
+
+// GetPrivateIdOk returns a tuple with the PrivateId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Supplier) GetPrivateIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PrivateId.Get(), o.PrivateId.IsSet()
+}
+
+// HasPrivateId returns a boolean if a field has been set.
+func (o *Supplier) HasPrivateId() bool {
+	if o != nil && o.PrivateId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPrivateId gets a reference to the given NullableString and assigns it to the PrivateId field.
+func (o *Supplier) SetPrivateId(v string) {
+	o.PrivateId.Set(&v)
+}
+// SetPrivateIdNil sets the value for PrivateId to be an explicit nil
+func (o *Supplier) SetPrivateIdNil() {
+	o.PrivateId.Set(nil)
+}
+
+// UnsetPrivateId ensures that no value is present for PrivateId, not even an explicit nil
+func (o *Supplier) UnsetPrivateId() {
+	o.PrivateId.Unset()
 }
 
 // GetSupplierBankAccountCode returns the SupplierBankAccountCode field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -228,6 +278,90 @@ func (o *Supplier) SetNameNil() {
 // UnsetName ensures that no value is present for Name, not even an explicit nil
 func (o *Supplier) UnsetName() {
 	o.Name.Unset()
+}
+
+// GetTradingBusinessName returns the TradingBusinessName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Supplier) GetTradingBusinessName() string {
+	if o == nil || IsNil(o.TradingBusinessName.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.TradingBusinessName.Get()
+}
+
+// GetTradingBusinessNameOk returns a tuple with the TradingBusinessName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Supplier) GetTradingBusinessNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TradingBusinessName.Get(), o.TradingBusinessName.IsSet()
+}
+
+// HasTradingBusinessName returns a boolean if a field has been set.
+func (o *Supplier) HasTradingBusinessName() bool {
+	if o != nil && o.TradingBusinessName.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTradingBusinessName gets a reference to the given NullableString and assigns it to the TradingBusinessName field.
+func (o *Supplier) SetTradingBusinessName(v string) {
+	o.TradingBusinessName.Set(&v)
+}
+// SetTradingBusinessNameNil sets the value for TradingBusinessName to be an explicit nil
+func (o *Supplier) SetTradingBusinessNameNil() {
+	o.TradingBusinessName.Set(nil)
+}
+
+// UnsetTradingBusinessName ensures that no value is present for TradingBusinessName, not even an explicit nil
+func (o *Supplier) UnsetTradingBusinessName() {
+	o.TradingBusinessName.Unset()
+}
+
+// GetLegalDescription returns the LegalDescription field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Supplier) GetLegalDescription() string {
+	if o == nil || IsNil(o.LegalDescription.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.LegalDescription.Get()
+}
+
+// GetLegalDescriptionOk returns a tuple with the LegalDescription field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Supplier) GetLegalDescriptionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LegalDescription.Get(), o.LegalDescription.IsSet()
+}
+
+// HasLegalDescription returns a boolean if a field has been set.
+func (o *Supplier) HasLegalDescription() bool {
+	if o != nil && o.LegalDescription.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLegalDescription gets a reference to the given NullableString and assigns it to the LegalDescription field.
+func (o *Supplier) SetLegalDescription(v string) {
+	o.LegalDescription.Set(&v)
+}
+// SetLegalDescriptionNil sets the value for LegalDescription to be an explicit nil
+func (o *Supplier) SetLegalDescriptionNil() {
+	o.LegalDescription.Set(nil)
+}
+
+// UnsetLegalDescription ensures that no value is present for LegalDescription, not even an explicit nil
+func (o *Supplier) UnsetLegalDescription() {
+	o.LegalDescription.Unset()
 }
 
 // GetSiren returns the Siren field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -398,6 +532,132 @@ func (o *Supplier) UnsetIban() {
 	o.Iban.Unset()
 }
 
+// GetBic returns the Bic field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Supplier) GetBic() string {
+	if o == nil || IsNil(o.Bic.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Bic.Get()
+}
+
+// GetBicOk returns a tuple with the Bic field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Supplier) GetBicOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Bic.Get(), o.Bic.IsSet()
+}
+
+// HasBic returns a boolean if a field has been set.
+func (o *Supplier) HasBic() bool {
+	if o != nil && o.Bic.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetBic gets a reference to the given NullableString and assigns it to the Bic field.
+func (o *Supplier) SetBic(v string) {
+	o.Bic.Set(&v)
+}
+// SetBicNil sets the value for Bic to be an explicit nil
+func (o *Supplier) SetBicNil() {
+	o.Bic.Set(nil)
+}
+
+// UnsetBic ensures that no value is present for Bic, not even an explicit nil
+func (o *Supplier) UnsetBic() {
+	o.Bic.Unset()
+}
+
+// GetBankAccountName returns the BankAccountName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Supplier) GetBankAccountName() string {
+	if o == nil || IsNil(o.BankAccountName.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.BankAccountName.Get()
+}
+
+// GetBankAccountNameOk returns a tuple with the BankAccountName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Supplier) GetBankAccountNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.BankAccountName.Get(), o.BankAccountName.IsSet()
+}
+
+// HasBankAccountName returns a boolean if a field has been set.
+func (o *Supplier) HasBankAccountName() bool {
+	if o != nil && o.BankAccountName.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetBankAccountName gets a reference to the given NullableString and assigns it to the BankAccountName field.
+func (o *Supplier) SetBankAccountName(v string) {
+	o.BankAccountName.Set(&v)
+}
+// SetBankAccountNameNil sets the value for BankAccountName to be an explicit nil
+func (o *Supplier) SetBankAccountNameNil() {
+	o.BankAccountName.Set(nil)
+}
+
+// UnsetBankAccountName ensures that no value is present for BankAccountName, not even an explicit nil
+func (o *Supplier) UnsetBankAccountName() {
+	o.BankAccountName.Unset()
+}
+
+// GetProprietaryId returns the ProprietaryId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Supplier) GetProprietaryId() string {
+	if o == nil || IsNil(o.ProprietaryId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ProprietaryId.Get()
+}
+
+// GetProprietaryIdOk returns a tuple with the ProprietaryId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Supplier) GetProprietaryIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ProprietaryId.Get(), o.ProprietaryId.IsSet()
+}
+
+// HasProprietaryId returns a boolean if a field has been set.
+func (o *Supplier) HasProprietaryId() bool {
+	if o != nil && o.ProprietaryId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetProprietaryId gets a reference to the given NullableString and assigns it to the ProprietaryId field.
+func (o *Supplier) SetProprietaryId(v string) {
+	o.ProprietaryId.Set(&v)
+}
+// SetProprietaryIdNil sets the value for ProprietaryId to be an explicit nil
+func (o *Supplier) SetProprietaryIdNil() {
+	o.ProprietaryId.Set(nil)
+}
+
+// UnsetProprietaryId ensures that no value is present for ProprietaryId, not even an explicit nil
+func (o *Supplier) UnsetProprietaryId() {
+	o.ProprietaryId.Unset()
+}
+
 // GetPostalAddress returns the PostalAddress field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Supplier) GetPostalAddress() PostalAddress {
 	if o == nil || IsNil(o.PostalAddress.Get()) {
@@ -440,6 +700,81 @@ func (o *Supplier) UnsetPostalAddress() {
 	o.PostalAddress.Unset()
 }
 
+// GetContact returns the Contact field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Supplier) GetContact() Contact {
+	if o == nil || IsNil(o.Contact.Get()) {
+		var ret Contact
+		return ret
+	}
+	return *o.Contact.Get()
+}
+
+// GetContactOk returns a tuple with the Contact field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Supplier) GetContactOk() (*Contact, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Contact.Get(), o.Contact.IsSet()
+}
+
+// HasContact returns a boolean if a field has been set.
+func (o *Supplier) HasContact() bool {
+	if o != nil && o.Contact.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetContact gets a reference to the given NullableContact and assigns it to the Contact field.
+func (o *Supplier) SetContact(v Contact) {
+	o.Contact.Set(&v)
+}
+// SetContactNil sets the value for Contact to be an explicit nil
+func (o *Supplier) SetContactNil() {
+	o.Contact.Set(nil)
+}
+
+// UnsetContact ensures that no value is present for Contact, not even an explicit nil
+func (o *Supplier) UnsetContact() {
+	o.Contact.Unset()
+}
+
+// GetGlobalIds returns the GlobalIds field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Supplier) GetGlobalIds() []ElectronicAddress {
+	if o == nil {
+		var ret []ElectronicAddress
+		return ret
+	}
+	return o.GlobalIds
+}
+
+// GetGlobalIdsOk returns a tuple with the GlobalIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Supplier) GetGlobalIdsOk() ([]ElectronicAddress, bool) {
+	if o == nil || IsNil(o.GlobalIds) {
+		return nil, false
+	}
+	return o.GlobalIds, true
+}
+
+// HasGlobalIds returns a boolean if a field has been set.
+func (o *Supplier) HasGlobalIds() bool {
+	if o != nil && !IsNil(o.GlobalIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetGlobalIds gets a reference to the given []ElectronicAddress and assigns it to the GlobalIds field.
+func (o *Supplier) SetGlobalIds(v []ElectronicAddress) {
+	o.GlobalIds = v
+}
+
 func (o Supplier) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -452,6 +787,9 @@ func (o Supplier) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["electronic_address"] = o.ElectronicAddress.Get()
 	toSerialize["supplier_id"] = o.SupplierId
+	if o.PrivateId.IsSet() {
+		toSerialize["private_id"] = o.PrivateId.Get()
+	}
 	if o.SupplierBankAccountCode.IsSet() {
 		toSerialize["supplier_bank_account_code"] = o.SupplierBankAccountCode.Get()
 	}
@@ -460,6 +798,12 @@ func (o Supplier) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Name.IsSet() {
 		toSerialize["name"] = o.Name.Get()
+	}
+	if o.TradingBusinessName.IsSet() {
+		toSerialize["trading_business_name"] = o.TradingBusinessName.Get()
+	}
+	if o.LegalDescription.IsSet() {
+		toSerialize["legal_description"] = o.LegalDescription.Get()
 	}
 	if o.Siren.IsSet() {
 		toSerialize["siren"] = o.Siren.Get()
@@ -473,8 +817,23 @@ func (o Supplier) ToMap() (map[string]interface{}, error) {
 	if o.Iban.IsSet() {
 		toSerialize["iban"] = o.Iban.Get()
 	}
+	if o.Bic.IsSet() {
+		toSerialize["bic"] = o.Bic.Get()
+	}
+	if o.BankAccountName.IsSet() {
+		toSerialize["bank_account_name"] = o.BankAccountName.Get()
+	}
+	if o.ProprietaryId.IsSet() {
+		toSerialize["proprietaryId"] = o.ProprietaryId.Get()
+	}
 	if o.PostalAddress.IsSet() {
 		toSerialize["postal_address"] = o.PostalAddress.Get()
+	}
+	if o.Contact.IsSet() {
+		toSerialize["contact"] = o.Contact.Get()
+	}
+	if o.GlobalIds != nil {
+		toSerialize["global_ids"] = o.GlobalIds
 	}
 	return toSerialize, nil
 }

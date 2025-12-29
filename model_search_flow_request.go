@@ -20,13 +20,13 @@ var _ MappedNullable = &SearchFlowRequest{}
 
 // SearchFlowRequest Request to search submitted flows.
 type SearchFlowRequest struct {
-	UpdatedAfter NullableTime `json:"updated_after,omitempty"`
-	UpdatedBefore NullableTime `json:"updated_before,omitempty"`
-	FlowTypes []FlowType `json:"flow_types,omitempty"`
-	FlowDirections []FlowDirection `json:"flow_directions,omitempty"`
-	TrackingId NullableString `json:"tracking_id,omitempty"`
-	FlowId NullableString `json:"flow_id,omitempty"`
-	AcknowledgmentStatus NullableAcknowledgmentStatus `json:"acknowledgment_status,omitempty"`
+	UpdatedAfter NullableTime `json:"updatedAfter,omitempty"`
+	UpdatedBefore NullableTime `json:"updatedBefore,omitempty"`
+	FlowTypes []FlowType `json:"flowTypes,omitempty"`
+	FlowDirections []FlowDirection `json:"flowDirections,omitempty"`
+	TrackingId NullableString `json:"trackingId,omitempty"`
+	FlowId NullableString `json:"flowId,omitempty"`
+	AcknowledgmentStatus NullableAcknowledgmentStatus `json:"acknowledgmentStatus,omitempty"`
 	// Offset for pagination
 	Offset *int32 `json:"offset,omitempty"`
 	// Maximum number of results (max 100)
@@ -409,25 +409,25 @@ func (o SearchFlowRequest) MarshalJSON() ([]byte, error) {
 func (o SearchFlowRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.UpdatedAfter.IsSet() {
-		toSerialize["updated_after"] = o.UpdatedAfter.Get()
+		toSerialize["updatedAfter"] = o.UpdatedAfter.Get()
 	}
 	if o.UpdatedBefore.IsSet() {
-		toSerialize["updated_before"] = o.UpdatedBefore.Get()
+		toSerialize["updatedBefore"] = o.UpdatedBefore.Get()
 	}
 	if o.FlowTypes != nil {
-		toSerialize["flow_types"] = o.FlowTypes
+		toSerialize["flowTypes"] = o.FlowTypes
 	}
 	if o.FlowDirections != nil {
-		toSerialize["flow_directions"] = o.FlowDirections
+		toSerialize["flowDirections"] = o.FlowDirections
 	}
 	if o.TrackingId.IsSet() {
-		toSerialize["tracking_id"] = o.TrackingId.Get()
+		toSerialize["trackingId"] = o.TrackingId.Get()
 	}
 	if o.FlowId.IsSet() {
-		toSerialize["flow_id"] = o.FlowId.Get()
+		toSerialize["flowId"] = o.FlowId.Get()
 	}
 	if o.AcknowledgmentStatus.IsSet() {
-		toSerialize["acknowledgment_status"] = o.AcknowledgmentStatus.Get()
+		toSerialize["acknowledgmentStatus"] = o.AcknowledgmentStatus.Get()
 	}
 	if !IsNil(o.Offset) {
 		toSerialize["offset"] = o.Offset

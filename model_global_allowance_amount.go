@@ -16,7 +16,7 @@ import (
 )
 
 
-// GlobalAllowanceAmount Global allowance amount (including tax). (Accepte number, string ou integer)
+// GlobalAllowanceAmount Global allowance amount (legacy - use allowance_total_amount). (Accepte number, string ou integer)
 type GlobalAllowanceAmount struct {
 	Float32 *float32
 	String *string

@@ -16,7 +16,7 @@ import (
 )
 
 
-// ManualVatRate Manual VAT rate value. (Accepte number, string ou integer)
+// ManualVatRate Line VAT rate percentage (BT-152). (Accepte number, string ou integer)
 type ManualVatRate struct {
 	Float32 *float32
 	String *string

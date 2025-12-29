@@ -22,14 +22,14 @@ var _ MappedNullable = &PDPCredentials{}
 // PDPCredentials PDP credentials for zero-storage strategy (Strategy B).  Allows providing PDP credentials directly in the request instead of storing them in Django.  Useful for: - Ad-hoc tests without persisting credentials - Temporary integrations - Development environments
 type PDPCredentials struct {
 	// Base URL of the AFNOR Flow Service
-	FlowServiceUrl string `json:"flow_service_url"`
-	DirectoryServiceUrl NullableString `json:"directory_service_url,omitempty"`
+	FlowServiceUrl string `json:"flowServiceUrl"`
+	DirectoryServiceUrl NullableString `json:"directoryServiceUrl,omitempty"`
 	// OAuth2 server URL
-	TokenUrl string `json:"token_url"`
+	TokenUrl string `json:"tokenUrl"`
 	// OAuth2 Client ID
-	ClientId string `json:"client_id"`
+	ClientId string `json:"clientId"`
 	// OAuth2 Client Secret (sensitive)
-	ClientSecret string `json:"client_secret"`
+	ClientSecret string `json:"clientSecret"`
 }
 
 type _PDPCredentials PDPCredentials
@@ -203,13 +203,13 @@ func (o PDPCredentials) MarshalJSON() ([]byte, error) {
 
 func (o PDPCredentials) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["flow_service_url"] = o.FlowServiceUrl
+	toSerialize["flowServiceUrl"] = o.FlowServiceUrl
 	if o.DirectoryServiceUrl.IsSet() {
-		toSerialize["directory_service_url"] = o.DirectoryServiceUrl.Get()
+		toSerialize["directoryServiceUrl"] = o.DirectoryServiceUrl.Get()
 	}
-	toSerialize["token_url"] = o.TokenUrl
-	toSerialize["client_id"] = o.ClientId
-	toSerialize["client_secret"] = o.ClientSecret
+	toSerialize["tokenUrl"] = o.TokenUrl
+	toSerialize["clientId"] = o.ClientId
+	toSerialize["clientSecret"] = o.ClientSecret
 	return toSerialize, nil
 }
 
@@ -218,10 +218,10 @@ func (o *PDPCredentials) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"flow_service_url",
-		"token_url",
-		"client_id",
-		"client_secret",
+		"flowServiceUrl",
+		"tokenUrl",
+		"clientId",
+		"clientSecret",
 	}
 
 	allProperties := make(map[string]interface{})

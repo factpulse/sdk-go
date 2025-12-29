@@ -23,7 +23,7 @@ var _ MappedNullable = &GetInvoiceRequest{}
 type GetInvoiceRequest struct {
 	Credentials NullableFactureElectroniqueRestApiSchemasChorusProChorusProCredentials `json:"credentials,omitempty"`
 	// Chorus Pro invoice ID
-	ChorusInvoiceId int32 `json:"chorus_invoice_id"`
+	ChorusInvoiceId int32 `json:"chorusInvoiceId"`
 }
 
 type _GetInvoiceRequest GetInvoiceRequest
@@ -125,7 +125,7 @@ func (o GetInvoiceRequest) ToMap() (map[string]interface{}, error) {
 	if o.Credentials.IsSet() {
 		toSerialize["credentials"] = o.Credentials.Get()
 	}
-	toSerialize["chorus_invoice_id"] = o.ChorusInvoiceId
+	toSerialize["chorusInvoiceId"] = o.ChorusInvoiceId
 	return toSerialize, nil
 }
 
@@ -134,7 +134,7 @@ func (o *GetInvoiceRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"chorus_invoice_id",
+		"chorusInvoiceId",
 	}
 
 	allProperties := make(map[string]interface{})

@@ -20,6 +20,20 @@ Name | Type | Description | Notes
 **CurrentUserId** | Pointer to **NullableInt32** |  | [optional] 
 **SupplementaryAttachments** | Pointer to [**[]SupplementaryAttachment**](SupplementaryAttachment.md) |  | [optional] 
 **Payee** | Pointer to [**NullablePayee**](Payee.md) |  | [optional] 
+**DeliveryParty** | Pointer to [**NullableDeliveryParty**](DeliveryParty.md) |  | [optional] 
+**TaxRepresentative** | Pointer to [**NullableTaxRepresentative**](TaxRepresentative.md) |  | [optional] 
+**DeliveryDate** | Pointer to **NullableString** |  | [optional] 
+**BillingPeriodStart** | Pointer to **NullableString** |  | [optional] 
+**BillingPeriodEnd** | Pointer to **NullableString** |  | [optional] 
+**PaymentReference** | Pointer to **NullableString** |  | [optional] 
+**CreditorReferenceId** | Pointer to **NullableString** |  | [optional] 
+**DirectDebitMandateId** | Pointer to **NullableString** |  | [optional] 
+**DebtorIban** | Pointer to **NullableString** |  | [optional] 
+**PaymentTerms** | Pointer to **NullableString** |  | [optional] 
+**AllowancesCharges** | Pointer to [**[]AllowanceCharge**](AllowanceCharge.md) |  | [optional] 
+**AdditionalDocuments** | Pointer to [**[]AdditionalDocument**](AdditionalDocument.md) |  | [optional] 
+**BuyerAccountingReference** | Pointer to **NullableString** |  | [optional] 
+**PaymentCard** | Pointer to [**NullablePaymentCard**](PaymentCard.md) |  | [optional] 
 
 ## Methods
 
@@ -440,6 +454,496 @@ HasPayee returns a boolean if a field has been set.
 `func (o *FacturXInvoice) UnsetPayee()`
 
 UnsetPayee ensures that no value is present for Payee, not even an explicit nil
+### GetDeliveryParty
+
+`func (o *FacturXInvoice) GetDeliveryParty() DeliveryParty`
+
+GetDeliveryParty returns the DeliveryParty field if non-nil, zero value otherwise.
+
+### GetDeliveryPartyOk
+
+`func (o *FacturXInvoice) GetDeliveryPartyOk() (*DeliveryParty, bool)`
+
+GetDeliveryPartyOk returns a tuple with the DeliveryParty field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeliveryParty
+
+`func (o *FacturXInvoice) SetDeliveryParty(v DeliveryParty)`
+
+SetDeliveryParty sets DeliveryParty field to given value.
+
+### HasDeliveryParty
+
+`func (o *FacturXInvoice) HasDeliveryParty() bool`
+
+HasDeliveryParty returns a boolean if a field has been set.
+
+### SetDeliveryPartyNil
+
+`func (o *FacturXInvoice) SetDeliveryPartyNil(b bool)`
+
+ SetDeliveryPartyNil sets the value for DeliveryParty to be an explicit nil
+
+### UnsetDeliveryParty
+`func (o *FacturXInvoice) UnsetDeliveryParty()`
+
+UnsetDeliveryParty ensures that no value is present for DeliveryParty, not even an explicit nil
+### GetTaxRepresentative
+
+`func (o *FacturXInvoice) GetTaxRepresentative() TaxRepresentative`
+
+GetTaxRepresentative returns the TaxRepresentative field if non-nil, zero value otherwise.
+
+### GetTaxRepresentativeOk
+
+`func (o *FacturXInvoice) GetTaxRepresentativeOk() (*TaxRepresentative, bool)`
+
+GetTaxRepresentativeOk returns a tuple with the TaxRepresentative field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaxRepresentative
+
+`func (o *FacturXInvoice) SetTaxRepresentative(v TaxRepresentative)`
+
+SetTaxRepresentative sets TaxRepresentative field to given value.
+
+### HasTaxRepresentative
+
+`func (o *FacturXInvoice) HasTaxRepresentative() bool`
+
+HasTaxRepresentative returns a boolean if a field has been set.
+
+### SetTaxRepresentativeNil
+
+`func (o *FacturXInvoice) SetTaxRepresentativeNil(b bool)`
+
+ SetTaxRepresentativeNil sets the value for TaxRepresentative to be an explicit nil
+
+### UnsetTaxRepresentative
+`func (o *FacturXInvoice) UnsetTaxRepresentative()`
+
+UnsetTaxRepresentative ensures that no value is present for TaxRepresentative, not even an explicit nil
+### GetDeliveryDate
+
+`func (o *FacturXInvoice) GetDeliveryDate() string`
+
+GetDeliveryDate returns the DeliveryDate field if non-nil, zero value otherwise.
+
+### GetDeliveryDateOk
+
+`func (o *FacturXInvoice) GetDeliveryDateOk() (*string, bool)`
+
+GetDeliveryDateOk returns a tuple with the DeliveryDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeliveryDate
+
+`func (o *FacturXInvoice) SetDeliveryDate(v string)`
+
+SetDeliveryDate sets DeliveryDate field to given value.
+
+### HasDeliveryDate
+
+`func (o *FacturXInvoice) HasDeliveryDate() bool`
+
+HasDeliveryDate returns a boolean if a field has been set.
+
+### SetDeliveryDateNil
+
+`func (o *FacturXInvoice) SetDeliveryDateNil(b bool)`
+
+ SetDeliveryDateNil sets the value for DeliveryDate to be an explicit nil
+
+### UnsetDeliveryDate
+`func (o *FacturXInvoice) UnsetDeliveryDate()`
+
+UnsetDeliveryDate ensures that no value is present for DeliveryDate, not even an explicit nil
+### GetBillingPeriodStart
+
+`func (o *FacturXInvoice) GetBillingPeriodStart() string`
+
+GetBillingPeriodStart returns the BillingPeriodStart field if non-nil, zero value otherwise.
+
+### GetBillingPeriodStartOk
+
+`func (o *FacturXInvoice) GetBillingPeriodStartOk() (*string, bool)`
+
+GetBillingPeriodStartOk returns a tuple with the BillingPeriodStart field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBillingPeriodStart
+
+`func (o *FacturXInvoice) SetBillingPeriodStart(v string)`
+
+SetBillingPeriodStart sets BillingPeriodStart field to given value.
+
+### HasBillingPeriodStart
+
+`func (o *FacturXInvoice) HasBillingPeriodStart() bool`
+
+HasBillingPeriodStart returns a boolean if a field has been set.
+
+### SetBillingPeriodStartNil
+
+`func (o *FacturXInvoice) SetBillingPeriodStartNil(b bool)`
+
+ SetBillingPeriodStartNil sets the value for BillingPeriodStart to be an explicit nil
+
+### UnsetBillingPeriodStart
+`func (o *FacturXInvoice) UnsetBillingPeriodStart()`
+
+UnsetBillingPeriodStart ensures that no value is present for BillingPeriodStart, not even an explicit nil
+### GetBillingPeriodEnd
+
+`func (o *FacturXInvoice) GetBillingPeriodEnd() string`
+
+GetBillingPeriodEnd returns the BillingPeriodEnd field if non-nil, zero value otherwise.
+
+### GetBillingPeriodEndOk
+
+`func (o *FacturXInvoice) GetBillingPeriodEndOk() (*string, bool)`
+
+GetBillingPeriodEndOk returns a tuple with the BillingPeriodEnd field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBillingPeriodEnd
+
+`func (o *FacturXInvoice) SetBillingPeriodEnd(v string)`
+
+SetBillingPeriodEnd sets BillingPeriodEnd field to given value.
+
+### HasBillingPeriodEnd
+
+`func (o *FacturXInvoice) HasBillingPeriodEnd() bool`
+
+HasBillingPeriodEnd returns a boolean if a field has been set.
+
+### SetBillingPeriodEndNil
+
+`func (o *FacturXInvoice) SetBillingPeriodEndNil(b bool)`
+
+ SetBillingPeriodEndNil sets the value for BillingPeriodEnd to be an explicit nil
+
+### UnsetBillingPeriodEnd
+`func (o *FacturXInvoice) UnsetBillingPeriodEnd()`
+
+UnsetBillingPeriodEnd ensures that no value is present for BillingPeriodEnd, not even an explicit nil
+### GetPaymentReference
+
+`func (o *FacturXInvoice) GetPaymentReference() string`
+
+GetPaymentReference returns the PaymentReference field if non-nil, zero value otherwise.
+
+### GetPaymentReferenceOk
+
+`func (o *FacturXInvoice) GetPaymentReferenceOk() (*string, bool)`
+
+GetPaymentReferenceOk returns a tuple with the PaymentReference field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentReference
+
+`func (o *FacturXInvoice) SetPaymentReference(v string)`
+
+SetPaymentReference sets PaymentReference field to given value.
+
+### HasPaymentReference
+
+`func (o *FacturXInvoice) HasPaymentReference() bool`
+
+HasPaymentReference returns a boolean if a field has been set.
+
+### SetPaymentReferenceNil
+
+`func (o *FacturXInvoice) SetPaymentReferenceNil(b bool)`
+
+ SetPaymentReferenceNil sets the value for PaymentReference to be an explicit nil
+
+### UnsetPaymentReference
+`func (o *FacturXInvoice) UnsetPaymentReference()`
+
+UnsetPaymentReference ensures that no value is present for PaymentReference, not even an explicit nil
+### GetCreditorReferenceId
+
+`func (o *FacturXInvoice) GetCreditorReferenceId() string`
+
+GetCreditorReferenceId returns the CreditorReferenceId field if non-nil, zero value otherwise.
+
+### GetCreditorReferenceIdOk
+
+`func (o *FacturXInvoice) GetCreditorReferenceIdOk() (*string, bool)`
+
+GetCreditorReferenceIdOk returns a tuple with the CreditorReferenceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreditorReferenceId
+
+`func (o *FacturXInvoice) SetCreditorReferenceId(v string)`
+
+SetCreditorReferenceId sets CreditorReferenceId field to given value.
+
+### HasCreditorReferenceId
+
+`func (o *FacturXInvoice) HasCreditorReferenceId() bool`
+
+HasCreditorReferenceId returns a boolean if a field has been set.
+
+### SetCreditorReferenceIdNil
+
+`func (o *FacturXInvoice) SetCreditorReferenceIdNil(b bool)`
+
+ SetCreditorReferenceIdNil sets the value for CreditorReferenceId to be an explicit nil
+
+### UnsetCreditorReferenceId
+`func (o *FacturXInvoice) UnsetCreditorReferenceId()`
+
+UnsetCreditorReferenceId ensures that no value is present for CreditorReferenceId, not even an explicit nil
+### GetDirectDebitMandateId
+
+`func (o *FacturXInvoice) GetDirectDebitMandateId() string`
+
+GetDirectDebitMandateId returns the DirectDebitMandateId field if non-nil, zero value otherwise.
+
+### GetDirectDebitMandateIdOk
+
+`func (o *FacturXInvoice) GetDirectDebitMandateIdOk() (*string, bool)`
+
+GetDirectDebitMandateIdOk returns a tuple with the DirectDebitMandateId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDirectDebitMandateId
+
+`func (o *FacturXInvoice) SetDirectDebitMandateId(v string)`
+
+SetDirectDebitMandateId sets DirectDebitMandateId field to given value.
+
+### HasDirectDebitMandateId
+
+`func (o *FacturXInvoice) HasDirectDebitMandateId() bool`
+
+HasDirectDebitMandateId returns a boolean if a field has been set.
+
+### SetDirectDebitMandateIdNil
+
+`func (o *FacturXInvoice) SetDirectDebitMandateIdNil(b bool)`
+
+ SetDirectDebitMandateIdNil sets the value for DirectDebitMandateId to be an explicit nil
+
+### UnsetDirectDebitMandateId
+`func (o *FacturXInvoice) UnsetDirectDebitMandateId()`
+
+UnsetDirectDebitMandateId ensures that no value is present for DirectDebitMandateId, not even an explicit nil
+### GetDebtorIban
+
+`func (o *FacturXInvoice) GetDebtorIban() string`
+
+GetDebtorIban returns the DebtorIban field if non-nil, zero value otherwise.
+
+### GetDebtorIbanOk
+
+`func (o *FacturXInvoice) GetDebtorIbanOk() (*string, bool)`
+
+GetDebtorIbanOk returns a tuple with the DebtorIban field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDebtorIban
+
+`func (o *FacturXInvoice) SetDebtorIban(v string)`
+
+SetDebtorIban sets DebtorIban field to given value.
+
+### HasDebtorIban
+
+`func (o *FacturXInvoice) HasDebtorIban() bool`
+
+HasDebtorIban returns a boolean if a field has been set.
+
+### SetDebtorIbanNil
+
+`func (o *FacturXInvoice) SetDebtorIbanNil(b bool)`
+
+ SetDebtorIbanNil sets the value for DebtorIban to be an explicit nil
+
+### UnsetDebtorIban
+`func (o *FacturXInvoice) UnsetDebtorIban()`
+
+UnsetDebtorIban ensures that no value is present for DebtorIban, not even an explicit nil
+### GetPaymentTerms
+
+`func (o *FacturXInvoice) GetPaymentTerms() string`
+
+GetPaymentTerms returns the PaymentTerms field if non-nil, zero value otherwise.
+
+### GetPaymentTermsOk
+
+`func (o *FacturXInvoice) GetPaymentTermsOk() (*string, bool)`
+
+GetPaymentTermsOk returns a tuple with the PaymentTerms field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentTerms
+
+`func (o *FacturXInvoice) SetPaymentTerms(v string)`
+
+SetPaymentTerms sets PaymentTerms field to given value.
+
+### HasPaymentTerms
+
+`func (o *FacturXInvoice) HasPaymentTerms() bool`
+
+HasPaymentTerms returns a boolean if a field has been set.
+
+### SetPaymentTermsNil
+
+`func (o *FacturXInvoice) SetPaymentTermsNil(b bool)`
+
+ SetPaymentTermsNil sets the value for PaymentTerms to be an explicit nil
+
+### UnsetPaymentTerms
+`func (o *FacturXInvoice) UnsetPaymentTerms()`
+
+UnsetPaymentTerms ensures that no value is present for PaymentTerms, not even an explicit nil
+### GetAllowancesCharges
+
+`func (o *FacturXInvoice) GetAllowancesCharges() []AllowanceCharge`
+
+GetAllowancesCharges returns the AllowancesCharges field if non-nil, zero value otherwise.
+
+### GetAllowancesChargesOk
+
+`func (o *FacturXInvoice) GetAllowancesChargesOk() (*[]AllowanceCharge, bool)`
+
+GetAllowancesChargesOk returns a tuple with the AllowancesCharges field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowancesCharges
+
+`func (o *FacturXInvoice) SetAllowancesCharges(v []AllowanceCharge)`
+
+SetAllowancesCharges sets AllowancesCharges field to given value.
+
+### HasAllowancesCharges
+
+`func (o *FacturXInvoice) HasAllowancesCharges() bool`
+
+HasAllowancesCharges returns a boolean if a field has been set.
+
+### SetAllowancesChargesNil
+
+`func (o *FacturXInvoice) SetAllowancesChargesNil(b bool)`
+
+ SetAllowancesChargesNil sets the value for AllowancesCharges to be an explicit nil
+
+### UnsetAllowancesCharges
+`func (o *FacturXInvoice) UnsetAllowancesCharges()`
+
+UnsetAllowancesCharges ensures that no value is present for AllowancesCharges, not even an explicit nil
+### GetAdditionalDocuments
+
+`func (o *FacturXInvoice) GetAdditionalDocuments() []AdditionalDocument`
+
+GetAdditionalDocuments returns the AdditionalDocuments field if non-nil, zero value otherwise.
+
+### GetAdditionalDocumentsOk
+
+`func (o *FacturXInvoice) GetAdditionalDocumentsOk() (*[]AdditionalDocument, bool)`
+
+GetAdditionalDocumentsOk returns a tuple with the AdditionalDocuments field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAdditionalDocuments
+
+`func (o *FacturXInvoice) SetAdditionalDocuments(v []AdditionalDocument)`
+
+SetAdditionalDocuments sets AdditionalDocuments field to given value.
+
+### HasAdditionalDocuments
+
+`func (o *FacturXInvoice) HasAdditionalDocuments() bool`
+
+HasAdditionalDocuments returns a boolean if a field has been set.
+
+### SetAdditionalDocumentsNil
+
+`func (o *FacturXInvoice) SetAdditionalDocumentsNil(b bool)`
+
+ SetAdditionalDocumentsNil sets the value for AdditionalDocuments to be an explicit nil
+
+### UnsetAdditionalDocuments
+`func (o *FacturXInvoice) UnsetAdditionalDocuments()`
+
+UnsetAdditionalDocuments ensures that no value is present for AdditionalDocuments, not even an explicit nil
+### GetBuyerAccountingReference
+
+`func (o *FacturXInvoice) GetBuyerAccountingReference() string`
+
+GetBuyerAccountingReference returns the BuyerAccountingReference field if non-nil, zero value otherwise.
+
+### GetBuyerAccountingReferenceOk
+
+`func (o *FacturXInvoice) GetBuyerAccountingReferenceOk() (*string, bool)`
+
+GetBuyerAccountingReferenceOk returns a tuple with the BuyerAccountingReference field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBuyerAccountingReference
+
+`func (o *FacturXInvoice) SetBuyerAccountingReference(v string)`
+
+SetBuyerAccountingReference sets BuyerAccountingReference field to given value.
+
+### HasBuyerAccountingReference
+
+`func (o *FacturXInvoice) HasBuyerAccountingReference() bool`
+
+HasBuyerAccountingReference returns a boolean if a field has been set.
+
+### SetBuyerAccountingReferenceNil
+
+`func (o *FacturXInvoice) SetBuyerAccountingReferenceNil(b bool)`
+
+ SetBuyerAccountingReferenceNil sets the value for BuyerAccountingReference to be an explicit nil
+
+### UnsetBuyerAccountingReference
+`func (o *FacturXInvoice) UnsetBuyerAccountingReference()`
+
+UnsetBuyerAccountingReference ensures that no value is present for BuyerAccountingReference, not even an explicit nil
+### GetPaymentCard
+
+`func (o *FacturXInvoice) GetPaymentCard() PaymentCard`
+
+GetPaymentCard returns the PaymentCard field if non-nil, zero value otherwise.
+
+### GetPaymentCardOk
+
+`func (o *FacturXInvoice) GetPaymentCardOk() (*PaymentCard, bool)`
+
+GetPaymentCardOk returns a tuple with the PaymentCard field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentCard
+
+`func (o *FacturXInvoice) SetPaymentCard(v PaymentCard)`
+
+SetPaymentCard sets PaymentCard field to given value.
+
+### HasPaymentCard
+
+`func (o *FacturXInvoice) HasPaymentCard() bool`
+
+HasPaymentCard returns a boolean if a field has been set.
+
+### SetPaymentCardNil
+
+`func (o *FacturXInvoice) SetPaymentCardNil(b bool)`
+
+ SetPaymentCardNil sets the value for PaymentCard to be an explicit nil
+
+### UnsetPaymentCard
+`func (o *FacturXInvoice) UnsetPaymentCard()`
+
+UnsetPaymentCard ensures that no value is present for PaymentCard, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

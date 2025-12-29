@@ -16,7 +16,7 @@ import (
 )
 
 
-// TaxableAmount Taxable amount (base) for this VAT line. (Accepte number, string ou integer)
+// TaxableAmount VAT category taxable amount (BT-116). Can be negative for correction invoices.
 type TaxableAmount struct {
 	Float32 *float32
 	String *string

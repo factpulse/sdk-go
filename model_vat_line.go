@@ -19,13 +19,14 @@ import (
 // checks if the VATLine type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VATLine{}
 
-// VATLine Represents a VAT breakdown line by rate.  For exemptions (categories E, AE, K, G, O), the fields `exemption_reason` and `vatex_code` are required per EN16931.
+// VATLine Represents a VAT breakdown line by rate (BG-23).  For exemptions (categories E, AE, K, G, O), the fields `exemption_reason` and `vatex_code` are required per EN16931.
 type VATLine struct {
 	TaxableAmount TaxableAmount `json:"taxable_amount"`
 	VatAmount VATAmount `json:"vat_amount"`
 	Rate NullableString `json:"rate,omitempty"`
 	ManualRate *ManualRate `json:"manual_rate,omitempty"`
 	Category NullableVATCategory `json:"category,omitempty"`
+	DueDateTypeCode NullableVATPointDateCode `json:"due_date_type_code,omitempty"`
 	ExemptionReason NullableString `json:"exemption_reason,omitempty"`
 	VatexCode NullableString `json:"vatex_code,omitempty"`
 }
@@ -215,6 +216,48 @@ func (o *VATLine) UnsetCategory() {
 	o.Category.Unset()
 }
 
+// GetDueDateTypeCode returns the DueDateTypeCode field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *VATLine) GetDueDateTypeCode() VATPointDateCode {
+	if o == nil || IsNil(o.DueDateTypeCode.Get()) {
+		var ret VATPointDateCode
+		return ret
+	}
+	return *o.DueDateTypeCode.Get()
+}
+
+// GetDueDateTypeCodeOk returns a tuple with the DueDateTypeCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VATLine) GetDueDateTypeCodeOk() (*VATPointDateCode, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DueDateTypeCode.Get(), o.DueDateTypeCode.IsSet()
+}
+
+// HasDueDateTypeCode returns a boolean if a field has been set.
+func (o *VATLine) HasDueDateTypeCode() bool {
+	if o != nil && o.DueDateTypeCode.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDueDateTypeCode gets a reference to the given NullableVATPointDateCode and assigns it to the DueDateTypeCode field.
+func (o *VATLine) SetDueDateTypeCode(v VATPointDateCode) {
+	o.DueDateTypeCode.Set(&v)
+}
+// SetDueDateTypeCodeNil sets the value for DueDateTypeCode to be an explicit nil
+func (o *VATLine) SetDueDateTypeCodeNil() {
+	o.DueDateTypeCode.Set(nil)
+}
+
+// UnsetDueDateTypeCode ensures that no value is present for DueDateTypeCode, not even an explicit nil
+func (o *VATLine) UnsetDueDateTypeCode() {
+	o.DueDateTypeCode.Unset()
+}
+
 // GetExemptionReason returns the ExemptionReason field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VATLine) GetExemptionReason() string {
 	if o == nil || IsNil(o.ExemptionReason.Get()) {
@@ -319,6 +362,9 @@ func (o VATLine) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Category.IsSet() {
 		toSerialize["category"] = o.Category.Get()
+	}
+	if o.DueDateTypeCode.IsSet() {
+		toSerialize["due_date_type_code"] = o.DueDateTypeCode.Get()
 	}
 	if o.ExemptionReason.IsSet() {
 		toSerialize["exemption_reason"] = o.ExemptionReason.Get()

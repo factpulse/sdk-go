@@ -31,14 +31,14 @@ type GenerateCertificateRequest struct {
 	State *string `json:"state,omitempty"`
 	Email NullableString `json:"email,omitempty"`
 	// Validity duration in days
-	ValidityDays *int32 `json:"validity_days,omitempty"`
+	ValidityDays *int32 `json:"validityDays,omitempty"`
 	// RSA key size in bits
-	KeySize *int32 `json:"key_size,omitempty"`
-	KeyPassphrase NullableString `json:"key_passphrase,omitempty"`
+	KeySize *int32 `json:"keySize,omitempty"`
+	KeyPassphrase NullableString `json:"keyPassphrase,omitempty"`
 	// Also generate a PKCS#12 (.p12) file
-	GenerateP12 *bool `json:"generate_p12,omitempty"`
+	GenerateP12 *bool `json:"generateP12,omitempty"`
 	// Passphrase for PKCS#12 file
-	P12Passphrase *string `json:"p12_passphrase,omitempty"`
+	P12Passphrase *string `json:"p12Passphrase,omitempty"`
 }
 
 // NewGenerateCertificateRequest instantiates a new GenerateCertificateRequest object
@@ -495,19 +495,19 @@ func (o GenerateCertificateRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["email"] = o.Email.Get()
 	}
 	if !IsNil(o.ValidityDays) {
-		toSerialize["validity_days"] = o.ValidityDays
+		toSerialize["validityDays"] = o.ValidityDays
 	}
 	if !IsNil(o.KeySize) {
-		toSerialize["key_size"] = o.KeySize
+		toSerialize["keySize"] = o.KeySize
 	}
 	if o.KeyPassphrase.IsSet() {
-		toSerialize["key_passphrase"] = o.KeyPassphrase.Get()
+		toSerialize["keyPassphrase"] = o.KeyPassphrase.Get()
 	}
 	if !IsNil(o.GenerateP12) {
-		toSerialize["generate_p12"] = o.GenerateP12
+		toSerialize["generateP12"] = o.GenerateP12
 	}
 	if !IsNil(o.P12Passphrase) {
-		toSerialize["p12_passphrase"] = o.P12Passphrase
+		toSerialize["p12Passphrase"] = o.P12Passphrase
 	}
 	return toSerialize, nil
 }

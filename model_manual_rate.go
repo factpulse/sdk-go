@@ -16,7 +16,7 @@ import (
 )
 
 
-// ManualRate Manual VAT rate value. (Accepte number, string ou integer)
+// ManualRate VAT category rate (BT-119). (Accepte number, string ou integer)
 type ManualRate struct {
 	Float32 *float32
 	String *string

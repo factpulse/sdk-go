@@ -37,6 +37,20 @@ type FacturXInvoice struct {
 	CurrentUserId NullableInt32 `json:"current_user_id,omitempty"`
 	SupplementaryAttachments []SupplementaryAttachment `json:"supplementary_attachments,omitempty"`
 	Payee NullablePayee `json:"payee,omitempty"`
+	DeliveryParty NullableDeliveryParty `json:"delivery_party,omitempty"`
+	TaxRepresentative NullableTaxRepresentative `json:"tax_representative,omitempty"`
+	DeliveryDate NullableString `json:"delivery_date,omitempty"`
+	BillingPeriodStart NullableString `json:"billing_period_start,omitempty"`
+	BillingPeriodEnd NullableString `json:"billing_period_end,omitempty"`
+	PaymentReference NullableString `json:"payment_reference,omitempty"`
+	CreditorReferenceId NullableString `json:"creditor_reference_id,omitempty"`
+	DirectDebitMandateId NullableString `json:"direct_debit_mandate_id,omitempty"`
+	DebtorIban NullableString `json:"debtor_iban,omitempty"`
+	PaymentTerms NullableString `json:"payment_terms,omitempty"`
+	AllowancesCharges []AllowanceCharge `json:"allowances_charges,omitempty"`
+	AdditionalDocuments []AdditionalDocument `json:"additional_documents,omitempty"`
+	BuyerAccountingReference NullableString `json:"buyer_accounting_reference,omitempty"`
+	PaymentCard NullablePaymentCard `json:"payment_card,omitempty"`
 }
 
 type _FacturXInvoice FacturXInvoice
@@ -545,6 +559,576 @@ func (o *FacturXInvoice) UnsetPayee() {
 	o.Payee.Unset()
 }
 
+// GetDeliveryParty returns the DeliveryParty field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FacturXInvoice) GetDeliveryParty() DeliveryParty {
+	if o == nil || IsNil(o.DeliveryParty.Get()) {
+		var ret DeliveryParty
+		return ret
+	}
+	return *o.DeliveryParty.Get()
+}
+
+// GetDeliveryPartyOk returns a tuple with the DeliveryParty field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FacturXInvoice) GetDeliveryPartyOk() (*DeliveryParty, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DeliveryParty.Get(), o.DeliveryParty.IsSet()
+}
+
+// HasDeliveryParty returns a boolean if a field has been set.
+func (o *FacturXInvoice) HasDeliveryParty() bool {
+	if o != nil && o.DeliveryParty.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDeliveryParty gets a reference to the given NullableDeliveryParty and assigns it to the DeliveryParty field.
+func (o *FacturXInvoice) SetDeliveryParty(v DeliveryParty) {
+	o.DeliveryParty.Set(&v)
+}
+// SetDeliveryPartyNil sets the value for DeliveryParty to be an explicit nil
+func (o *FacturXInvoice) SetDeliveryPartyNil() {
+	o.DeliveryParty.Set(nil)
+}
+
+// UnsetDeliveryParty ensures that no value is present for DeliveryParty, not even an explicit nil
+func (o *FacturXInvoice) UnsetDeliveryParty() {
+	o.DeliveryParty.Unset()
+}
+
+// GetTaxRepresentative returns the TaxRepresentative field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FacturXInvoice) GetTaxRepresentative() TaxRepresentative {
+	if o == nil || IsNil(o.TaxRepresentative.Get()) {
+		var ret TaxRepresentative
+		return ret
+	}
+	return *o.TaxRepresentative.Get()
+}
+
+// GetTaxRepresentativeOk returns a tuple with the TaxRepresentative field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FacturXInvoice) GetTaxRepresentativeOk() (*TaxRepresentative, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TaxRepresentative.Get(), o.TaxRepresentative.IsSet()
+}
+
+// HasTaxRepresentative returns a boolean if a field has been set.
+func (o *FacturXInvoice) HasTaxRepresentative() bool {
+	if o != nil && o.TaxRepresentative.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTaxRepresentative gets a reference to the given NullableTaxRepresentative and assigns it to the TaxRepresentative field.
+func (o *FacturXInvoice) SetTaxRepresentative(v TaxRepresentative) {
+	o.TaxRepresentative.Set(&v)
+}
+// SetTaxRepresentativeNil sets the value for TaxRepresentative to be an explicit nil
+func (o *FacturXInvoice) SetTaxRepresentativeNil() {
+	o.TaxRepresentative.Set(nil)
+}
+
+// UnsetTaxRepresentative ensures that no value is present for TaxRepresentative, not even an explicit nil
+func (o *FacturXInvoice) UnsetTaxRepresentative() {
+	o.TaxRepresentative.Unset()
+}
+
+// GetDeliveryDate returns the DeliveryDate field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FacturXInvoice) GetDeliveryDate() string {
+	if o == nil || IsNil(o.DeliveryDate.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.DeliveryDate.Get()
+}
+
+// GetDeliveryDateOk returns a tuple with the DeliveryDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FacturXInvoice) GetDeliveryDateOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DeliveryDate.Get(), o.DeliveryDate.IsSet()
+}
+
+// HasDeliveryDate returns a boolean if a field has been set.
+func (o *FacturXInvoice) HasDeliveryDate() bool {
+	if o != nil && o.DeliveryDate.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDeliveryDate gets a reference to the given NullableString and assigns it to the DeliveryDate field.
+func (o *FacturXInvoice) SetDeliveryDate(v string) {
+	o.DeliveryDate.Set(&v)
+}
+// SetDeliveryDateNil sets the value for DeliveryDate to be an explicit nil
+func (o *FacturXInvoice) SetDeliveryDateNil() {
+	o.DeliveryDate.Set(nil)
+}
+
+// UnsetDeliveryDate ensures that no value is present for DeliveryDate, not even an explicit nil
+func (o *FacturXInvoice) UnsetDeliveryDate() {
+	o.DeliveryDate.Unset()
+}
+
+// GetBillingPeriodStart returns the BillingPeriodStart field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FacturXInvoice) GetBillingPeriodStart() string {
+	if o == nil || IsNil(o.BillingPeriodStart.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.BillingPeriodStart.Get()
+}
+
+// GetBillingPeriodStartOk returns a tuple with the BillingPeriodStart field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FacturXInvoice) GetBillingPeriodStartOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.BillingPeriodStart.Get(), o.BillingPeriodStart.IsSet()
+}
+
+// HasBillingPeriodStart returns a boolean if a field has been set.
+func (o *FacturXInvoice) HasBillingPeriodStart() bool {
+	if o != nil && o.BillingPeriodStart.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetBillingPeriodStart gets a reference to the given NullableString and assigns it to the BillingPeriodStart field.
+func (o *FacturXInvoice) SetBillingPeriodStart(v string) {
+	o.BillingPeriodStart.Set(&v)
+}
+// SetBillingPeriodStartNil sets the value for BillingPeriodStart to be an explicit nil
+func (o *FacturXInvoice) SetBillingPeriodStartNil() {
+	o.BillingPeriodStart.Set(nil)
+}
+
+// UnsetBillingPeriodStart ensures that no value is present for BillingPeriodStart, not even an explicit nil
+func (o *FacturXInvoice) UnsetBillingPeriodStart() {
+	o.BillingPeriodStart.Unset()
+}
+
+// GetBillingPeriodEnd returns the BillingPeriodEnd field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FacturXInvoice) GetBillingPeriodEnd() string {
+	if o == nil || IsNil(o.BillingPeriodEnd.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.BillingPeriodEnd.Get()
+}
+
+// GetBillingPeriodEndOk returns a tuple with the BillingPeriodEnd field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FacturXInvoice) GetBillingPeriodEndOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.BillingPeriodEnd.Get(), o.BillingPeriodEnd.IsSet()
+}
+
+// HasBillingPeriodEnd returns a boolean if a field has been set.
+func (o *FacturXInvoice) HasBillingPeriodEnd() bool {
+	if o != nil && o.BillingPeriodEnd.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetBillingPeriodEnd gets a reference to the given NullableString and assigns it to the BillingPeriodEnd field.
+func (o *FacturXInvoice) SetBillingPeriodEnd(v string) {
+	o.BillingPeriodEnd.Set(&v)
+}
+// SetBillingPeriodEndNil sets the value for BillingPeriodEnd to be an explicit nil
+func (o *FacturXInvoice) SetBillingPeriodEndNil() {
+	o.BillingPeriodEnd.Set(nil)
+}
+
+// UnsetBillingPeriodEnd ensures that no value is present for BillingPeriodEnd, not even an explicit nil
+func (o *FacturXInvoice) UnsetBillingPeriodEnd() {
+	o.BillingPeriodEnd.Unset()
+}
+
+// GetPaymentReference returns the PaymentReference field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FacturXInvoice) GetPaymentReference() string {
+	if o == nil || IsNil(o.PaymentReference.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.PaymentReference.Get()
+}
+
+// GetPaymentReferenceOk returns a tuple with the PaymentReference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FacturXInvoice) GetPaymentReferenceOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PaymentReference.Get(), o.PaymentReference.IsSet()
+}
+
+// HasPaymentReference returns a boolean if a field has been set.
+func (o *FacturXInvoice) HasPaymentReference() bool {
+	if o != nil && o.PaymentReference.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentReference gets a reference to the given NullableString and assigns it to the PaymentReference field.
+func (o *FacturXInvoice) SetPaymentReference(v string) {
+	o.PaymentReference.Set(&v)
+}
+// SetPaymentReferenceNil sets the value for PaymentReference to be an explicit nil
+func (o *FacturXInvoice) SetPaymentReferenceNil() {
+	o.PaymentReference.Set(nil)
+}
+
+// UnsetPaymentReference ensures that no value is present for PaymentReference, not even an explicit nil
+func (o *FacturXInvoice) UnsetPaymentReference() {
+	o.PaymentReference.Unset()
+}
+
+// GetCreditorReferenceId returns the CreditorReferenceId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FacturXInvoice) GetCreditorReferenceId() string {
+	if o == nil || IsNil(o.CreditorReferenceId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.CreditorReferenceId.Get()
+}
+
+// GetCreditorReferenceIdOk returns a tuple with the CreditorReferenceId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FacturXInvoice) GetCreditorReferenceIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CreditorReferenceId.Get(), o.CreditorReferenceId.IsSet()
+}
+
+// HasCreditorReferenceId returns a boolean if a field has been set.
+func (o *FacturXInvoice) HasCreditorReferenceId() bool {
+	if o != nil && o.CreditorReferenceId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCreditorReferenceId gets a reference to the given NullableString and assigns it to the CreditorReferenceId field.
+func (o *FacturXInvoice) SetCreditorReferenceId(v string) {
+	o.CreditorReferenceId.Set(&v)
+}
+// SetCreditorReferenceIdNil sets the value for CreditorReferenceId to be an explicit nil
+func (o *FacturXInvoice) SetCreditorReferenceIdNil() {
+	o.CreditorReferenceId.Set(nil)
+}
+
+// UnsetCreditorReferenceId ensures that no value is present for CreditorReferenceId, not even an explicit nil
+func (o *FacturXInvoice) UnsetCreditorReferenceId() {
+	o.CreditorReferenceId.Unset()
+}
+
+// GetDirectDebitMandateId returns the DirectDebitMandateId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FacturXInvoice) GetDirectDebitMandateId() string {
+	if o == nil || IsNil(o.DirectDebitMandateId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.DirectDebitMandateId.Get()
+}
+
+// GetDirectDebitMandateIdOk returns a tuple with the DirectDebitMandateId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FacturXInvoice) GetDirectDebitMandateIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DirectDebitMandateId.Get(), o.DirectDebitMandateId.IsSet()
+}
+
+// HasDirectDebitMandateId returns a boolean if a field has been set.
+func (o *FacturXInvoice) HasDirectDebitMandateId() bool {
+	if o != nil && o.DirectDebitMandateId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDirectDebitMandateId gets a reference to the given NullableString and assigns it to the DirectDebitMandateId field.
+func (o *FacturXInvoice) SetDirectDebitMandateId(v string) {
+	o.DirectDebitMandateId.Set(&v)
+}
+// SetDirectDebitMandateIdNil sets the value for DirectDebitMandateId to be an explicit nil
+func (o *FacturXInvoice) SetDirectDebitMandateIdNil() {
+	o.DirectDebitMandateId.Set(nil)
+}
+
+// UnsetDirectDebitMandateId ensures that no value is present for DirectDebitMandateId, not even an explicit nil
+func (o *FacturXInvoice) UnsetDirectDebitMandateId() {
+	o.DirectDebitMandateId.Unset()
+}
+
+// GetDebtorIban returns the DebtorIban field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FacturXInvoice) GetDebtorIban() string {
+	if o == nil || IsNil(o.DebtorIban.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.DebtorIban.Get()
+}
+
+// GetDebtorIbanOk returns a tuple with the DebtorIban field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FacturXInvoice) GetDebtorIbanOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DebtorIban.Get(), o.DebtorIban.IsSet()
+}
+
+// HasDebtorIban returns a boolean if a field has been set.
+func (o *FacturXInvoice) HasDebtorIban() bool {
+	if o != nil && o.DebtorIban.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDebtorIban gets a reference to the given NullableString and assigns it to the DebtorIban field.
+func (o *FacturXInvoice) SetDebtorIban(v string) {
+	o.DebtorIban.Set(&v)
+}
+// SetDebtorIbanNil sets the value for DebtorIban to be an explicit nil
+func (o *FacturXInvoice) SetDebtorIbanNil() {
+	o.DebtorIban.Set(nil)
+}
+
+// UnsetDebtorIban ensures that no value is present for DebtorIban, not even an explicit nil
+func (o *FacturXInvoice) UnsetDebtorIban() {
+	o.DebtorIban.Unset()
+}
+
+// GetPaymentTerms returns the PaymentTerms field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FacturXInvoice) GetPaymentTerms() string {
+	if o == nil || IsNil(o.PaymentTerms.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.PaymentTerms.Get()
+}
+
+// GetPaymentTermsOk returns a tuple with the PaymentTerms field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FacturXInvoice) GetPaymentTermsOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PaymentTerms.Get(), o.PaymentTerms.IsSet()
+}
+
+// HasPaymentTerms returns a boolean if a field has been set.
+func (o *FacturXInvoice) HasPaymentTerms() bool {
+	if o != nil && o.PaymentTerms.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentTerms gets a reference to the given NullableString and assigns it to the PaymentTerms field.
+func (o *FacturXInvoice) SetPaymentTerms(v string) {
+	o.PaymentTerms.Set(&v)
+}
+// SetPaymentTermsNil sets the value for PaymentTerms to be an explicit nil
+func (o *FacturXInvoice) SetPaymentTermsNil() {
+	o.PaymentTerms.Set(nil)
+}
+
+// UnsetPaymentTerms ensures that no value is present for PaymentTerms, not even an explicit nil
+func (o *FacturXInvoice) UnsetPaymentTerms() {
+	o.PaymentTerms.Unset()
+}
+
+// GetAllowancesCharges returns the AllowancesCharges field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FacturXInvoice) GetAllowancesCharges() []AllowanceCharge {
+	if o == nil {
+		var ret []AllowanceCharge
+		return ret
+	}
+	return o.AllowancesCharges
+}
+
+// GetAllowancesChargesOk returns a tuple with the AllowancesCharges field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FacturXInvoice) GetAllowancesChargesOk() ([]AllowanceCharge, bool) {
+	if o == nil || IsNil(o.AllowancesCharges) {
+		return nil, false
+	}
+	return o.AllowancesCharges, true
+}
+
+// HasAllowancesCharges returns a boolean if a field has been set.
+func (o *FacturXInvoice) HasAllowancesCharges() bool {
+	if o != nil && !IsNil(o.AllowancesCharges) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowancesCharges gets a reference to the given []AllowanceCharge and assigns it to the AllowancesCharges field.
+func (o *FacturXInvoice) SetAllowancesCharges(v []AllowanceCharge) {
+	o.AllowancesCharges = v
+}
+
+// GetAdditionalDocuments returns the AdditionalDocuments field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FacturXInvoice) GetAdditionalDocuments() []AdditionalDocument {
+	if o == nil {
+		var ret []AdditionalDocument
+		return ret
+	}
+	return o.AdditionalDocuments
+}
+
+// GetAdditionalDocumentsOk returns a tuple with the AdditionalDocuments field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FacturXInvoice) GetAdditionalDocumentsOk() ([]AdditionalDocument, bool) {
+	if o == nil || IsNil(o.AdditionalDocuments) {
+		return nil, false
+	}
+	return o.AdditionalDocuments, true
+}
+
+// HasAdditionalDocuments returns a boolean if a field has been set.
+func (o *FacturXInvoice) HasAdditionalDocuments() bool {
+	if o != nil && !IsNil(o.AdditionalDocuments) {
+		return true
+	}
+
+	return false
+}
+
+// SetAdditionalDocuments gets a reference to the given []AdditionalDocument and assigns it to the AdditionalDocuments field.
+func (o *FacturXInvoice) SetAdditionalDocuments(v []AdditionalDocument) {
+	o.AdditionalDocuments = v
+}
+
+// GetBuyerAccountingReference returns the BuyerAccountingReference field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FacturXInvoice) GetBuyerAccountingReference() string {
+	if o == nil || IsNil(o.BuyerAccountingReference.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.BuyerAccountingReference.Get()
+}
+
+// GetBuyerAccountingReferenceOk returns a tuple with the BuyerAccountingReference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FacturXInvoice) GetBuyerAccountingReferenceOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.BuyerAccountingReference.Get(), o.BuyerAccountingReference.IsSet()
+}
+
+// HasBuyerAccountingReference returns a boolean if a field has been set.
+func (o *FacturXInvoice) HasBuyerAccountingReference() bool {
+	if o != nil && o.BuyerAccountingReference.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetBuyerAccountingReference gets a reference to the given NullableString and assigns it to the BuyerAccountingReference field.
+func (o *FacturXInvoice) SetBuyerAccountingReference(v string) {
+	o.BuyerAccountingReference.Set(&v)
+}
+// SetBuyerAccountingReferenceNil sets the value for BuyerAccountingReference to be an explicit nil
+func (o *FacturXInvoice) SetBuyerAccountingReferenceNil() {
+	o.BuyerAccountingReference.Set(nil)
+}
+
+// UnsetBuyerAccountingReference ensures that no value is present for BuyerAccountingReference, not even an explicit nil
+func (o *FacturXInvoice) UnsetBuyerAccountingReference() {
+	o.BuyerAccountingReference.Unset()
+}
+
+// GetPaymentCard returns the PaymentCard field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FacturXInvoice) GetPaymentCard() PaymentCard {
+	if o == nil || IsNil(o.PaymentCard.Get()) {
+		var ret PaymentCard
+		return ret
+	}
+	return *o.PaymentCard.Get()
+}
+
+// GetPaymentCardOk returns a tuple with the PaymentCard field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FacturXInvoice) GetPaymentCardOk() (*PaymentCard, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PaymentCard.Get(), o.PaymentCard.IsSet()
+}
+
+// HasPaymentCard returns a boolean if a field has been set.
+func (o *FacturXInvoice) HasPaymentCard() bool {
+	if o != nil && o.PaymentCard.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentCard gets a reference to the given NullablePaymentCard and assigns it to the PaymentCard field.
+func (o *FacturXInvoice) SetPaymentCard(v PaymentCard) {
+	o.PaymentCard.Set(&v)
+}
+// SetPaymentCardNil sets the value for PaymentCard to be an explicit nil
+func (o *FacturXInvoice) SetPaymentCardNil() {
+	o.PaymentCard.Set(nil)
+}
+
+// UnsetPaymentCard ensures that no value is present for PaymentCard, not even an explicit nil
+func (o *FacturXInvoice) UnsetPaymentCard() {
+	o.PaymentCard.Unset()
+}
+
 func (o FacturXInvoice) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -586,6 +1170,48 @@ func (o FacturXInvoice) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Payee.IsSet() {
 		toSerialize["payee"] = o.Payee.Get()
+	}
+	if o.DeliveryParty.IsSet() {
+		toSerialize["delivery_party"] = o.DeliveryParty.Get()
+	}
+	if o.TaxRepresentative.IsSet() {
+		toSerialize["tax_representative"] = o.TaxRepresentative.Get()
+	}
+	if o.DeliveryDate.IsSet() {
+		toSerialize["delivery_date"] = o.DeliveryDate.Get()
+	}
+	if o.BillingPeriodStart.IsSet() {
+		toSerialize["billing_period_start"] = o.BillingPeriodStart.Get()
+	}
+	if o.BillingPeriodEnd.IsSet() {
+		toSerialize["billing_period_end"] = o.BillingPeriodEnd.Get()
+	}
+	if o.PaymentReference.IsSet() {
+		toSerialize["payment_reference"] = o.PaymentReference.Get()
+	}
+	if o.CreditorReferenceId.IsSet() {
+		toSerialize["creditor_reference_id"] = o.CreditorReferenceId.Get()
+	}
+	if o.DirectDebitMandateId.IsSet() {
+		toSerialize["direct_debit_mandate_id"] = o.DirectDebitMandateId.Get()
+	}
+	if o.DebtorIban.IsSet() {
+		toSerialize["debtor_iban"] = o.DebtorIban.Get()
+	}
+	if o.PaymentTerms.IsSet() {
+		toSerialize["payment_terms"] = o.PaymentTerms.Get()
+	}
+	if o.AllowancesCharges != nil {
+		toSerialize["allowances_charges"] = o.AllowancesCharges
+	}
+	if o.AdditionalDocuments != nil {
+		toSerialize["additional_documents"] = o.AdditionalDocuments
+	}
+	if o.BuyerAccountingReference.IsSet() {
+		toSerialize["buyer_accounting_reference"] = o.BuyerAccountingReference.Get()
+	}
+	if o.PaymentCard.IsSet() {
+		toSerialize["payment_card"] = o.PaymentCard.Get()
 	}
 	return toSerialize, nil
 }

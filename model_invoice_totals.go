@@ -19,13 +19,17 @@ import (
 // checks if the InvoiceTotals type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &InvoiceTotals{}
 
-// InvoiceTotals Contains all invoice total amounts.
+// InvoiceTotals Contains all invoice total amounts (BG-22).
 type InvoiceTotals struct {
+	LineTotalAmount NullableLineTotalAmount `json:"line_total_amount,omitempty"`
+	AllowanceTotalAmount NullableAllowanceTotalAmount `json:"allowance_total_amount,omitempty"`
+	ChargeTotalAmount NullableChargeTotalAmount `json:"charge_total_amount,omitempty"`
 	TotalNetAmount TotalNetAmount `json:"total_net_amount"`
 	VatAmount TotalVATAmount `json:"vat_amount"`
 	TotalGrossAmount TotalGrossAmount `json:"total_gross_amount"`
-	AmountDue AmountDue `json:"amount_due"`
 	Prepayment NullableInvoiceTotalsPrepayment `json:"prepayment,omitempty"`
+	RoundingAmount NullableRoundingAmount `json:"rounding_amount,omitempty"`
+	AmountDue AmountDue `json:"amount_due"`
 	GlobalAllowanceAmount *GlobalAllowanceAmount `json:"globalAllowanceAmount,omitempty"`
 	GlobalAllowanceReason NullableString `json:"globalAllowanceReason,omitempty"`
 }
@@ -51,6 +55,132 @@ func NewInvoiceTotals(totalNetAmount TotalNetAmount, vatAmount TotalVATAmount, t
 func NewInvoiceTotalsWithDefaults() *InvoiceTotals {
 	this := InvoiceTotals{}
 	return &this
+}
+
+// GetLineTotalAmount returns the LineTotalAmount field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceTotals) GetLineTotalAmount() LineTotalAmount {
+	if o == nil || IsNil(o.LineTotalAmount.Get()) {
+		var ret LineTotalAmount
+		return ret
+	}
+	return *o.LineTotalAmount.Get()
+}
+
+// GetLineTotalAmountOk returns a tuple with the LineTotalAmount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceTotals) GetLineTotalAmountOk() (*LineTotalAmount, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LineTotalAmount.Get(), o.LineTotalAmount.IsSet()
+}
+
+// HasLineTotalAmount returns a boolean if a field has been set.
+func (o *InvoiceTotals) HasLineTotalAmount() bool {
+	if o != nil && o.LineTotalAmount.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLineTotalAmount gets a reference to the given NullableLineTotalAmount and assigns it to the LineTotalAmount field.
+func (o *InvoiceTotals) SetLineTotalAmount(v LineTotalAmount) {
+	o.LineTotalAmount.Set(&v)
+}
+// SetLineTotalAmountNil sets the value for LineTotalAmount to be an explicit nil
+func (o *InvoiceTotals) SetLineTotalAmountNil() {
+	o.LineTotalAmount.Set(nil)
+}
+
+// UnsetLineTotalAmount ensures that no value is present for LineTotalAmount, not even an explicit nil
+func (o *InvoiceTotals) UnsetLineTotalAmount() {
+	o.LineTotalAmount.Unset()
+}
+
+// GetAllowanceTotalAmount returns the AllowanceTotalAmount field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceTotals) GetAllowanceTotalAmount() AllowanceTotalAmount {
+	if o == nil || IsNil(o.AllowanceTotalAmount.Get()) {
+		var ret AllowanceTotalAmount
+		return ret
+	}
+	return *o.AllowanceTotalAmount.Get()
+}
+
+// GetAllowanceTotalAmountOk returns a tuple with the AllowanceTotalAmount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceTotals) GetAllowanceTotalAmountOk() (*AllowanceTotalAmount, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AllowanceTotalAmount.Get(), o.AllowanceTotalAmount.IsSet()
+}
+
+// HasAllowanceTotalAmount returns a boolean if a field has been set.
+func (o *InvoiceTotals) HasAllowanceTotalAmount() bool {
+	if o != nil && o.AllowanceTotalAmount.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowanceTotalAmount gets a reference to the given NullableAllowanceTotalAmount and assigns it to the AllowanceTotalAmount field.
+func (o *InvoiceTotals) SetAllowanceTotalAmount(v AllowanceTotalAmount) {
+	o.AllowanceTotalAmount.Set(&v)
+}
+// SetAllowanceTotalAmountNil sets the value for AllowanceTotalAmount to be an explicit nil
+func (o *InvoiceTotals) SetAllowanceTotalAmountNil() {
+	o.AllowanceTotalAmount.Set(nil)
+}
+
+// UnsetAllowanceTotalAmount ensures that no value is present for AllowanceTotalAmount, not even an explicit nil
+func (o *InvoiceTotals) UnsetAllowanceTotalAmount() {
+	o.AllowanceTotalAmount.Unset()
+}
+
+// GetChargeTotalAmount returns the ChargeTotalAmount field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceTotals) GetChargeTotalAmount() ChargeTotalAmount {
+	if o == nil || IsNil(o.ChargeTotalAmount.Get()) {
+		var ret ChargeTotalAmount
+		return ret
+	}
+	return *o.ChargeTotalAmount.Get()
+}
+
+// GetChargeTotalAmountOk returns a tuple with the ChargeTotalAmount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceTotals) GetChargeTotalAmountOk() (*ChargeTotalAmount, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ChargeTotalAmount.Get(), o.ChargeTotalAmount.IsSet()
+}
+
+// HasChargeTotalAmount returns a boolean if a field has been set.
+func (o *InvoiceTotals) HasChargeTotalAmount() bool {
+	if o != nil && o.ChargeTotalAmount.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetChargeTotalAmount gets a reference to the given NullableChargeTotalAmount and assigns it to the ChargeTotalAmount field.
+func (o *InvoiceTotals) SetChargeTotalAmount(v ChargeTotalAmount) {
+	o.ChargeTotalAmount.Set(&v)
+}
+// SetChargeTotalAmountNil sets the value for ChargeTotalAmount to be an explicit nil
+func (o *InvoiceTotals) SetChargeTotalAmountNil() {
+	o.ChargeTotalAmount.Set(nil)
+}
+
+// UnsetChargeTotalAmount ensures that no value is present for ChargeTotalAmount, not even an explicit nil
+func (o *InvoiceTotals) UnsetChargeTotalAmount() {
+	o.ChargeTotalAmount.Unset()
 }
 
 // GetTotalNetAmount returns the TotalNetAmount field value
@@ -125,30 +255,6 @@ func (o *InvoiceTotals) SetTotalGrossAmount(v TotalGrossAmount) {
 	o.TotalGrossAmount = v
 }
 
-// GetAmountDue returns the AmountDue field value
-func (o *InvoiceTotals) GetAmountDue() AmountDue {
-	if o == nil {
-		var ret AmountDue
-		return ret
-	}
-
-	return o.AmountDue
-}
-
-// GetAmountDueOk returns a tuple with the AmountDue field value
-// and a boolean to check if the value has been set.
-func (o *InvoiceTotals) GetAmountDueOk() (*AmountDue, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.AmountDue, true
-}
-
-// SetAmountDue sets field value
-func (o *InvoiceTotals) SetAmountDue(v AmountDue) {
-	o.AmountDue = v
-}
-
 // GetPrepayment returns the Prepayment field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InvoiceTotals) GetPrepayment() InvoiceTotalsPrepayment {
 	if o == nil || IsNil(o.Prepayment.Get()) {
@@ -189,6 +295,72 @@ func (o *InvoiceTotals) SetPrepaymentNil() {
 // UnsetPrepayment ensures that no value is present for Prepayment, not even an explicit nil
 func (o *InvoiceTotals) UnsetPrepayment() {
 	o.Prepayment.Unset()
+}
+
+// GetRoundingAmount returns the RoundingAmount field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceTotals) GetRoundingAmount() RoundingAmount {
+	if o == nil || IsNil(o.RoundingAmount.Get()) {
+		var ret RoundingAmount
+		return ret
+	}
+	return *o.RoundingAmount.Get()
+}
+
+// GetRoundingAmountOk returns a tuple with the RoundingAmount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceTotals) GetRoundingAmountOk() (*RoundingAmount, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RoundingAmount.Get(), o.RoundingAmount.IsSet()
+}
+
+// HasRoundingAmount returns a boolean if a field has been set.
+func (o *InvoiceTotals) HasRoundingAmount() bool {
+	if o != nil && o.RoundingAmount.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRoundingAmount gets a reference to the given NullableRoundingAmount and assigns it to the RoundingAmount field.
+func (o *InvoiceTotals) SetRoundingAmount(v RoundingAmount) {
+	o.RoundingAmount.Set(&v)
+}
+// SetRoundingAmountNil sets the value for RoundingAmount to be an explicit nil
+func (o *InvoiceTotals) SetRoundingAmountNil() {
+	o.RoundingAmount.Set(nil)
+}
+
+// UnsetRoundingAmount ensures that no value is present for RoundingAmount, not even an explicit nil
+func (o *InvoiceTotals) UnsetRoundingAmount() {
+	o.RoundingAmount.Unset()
+}
+
+// GetAmountDue returns the AmountDue field value
+func (o *InvoiceTotals) GetAmountDue() AmountDue {
+	if o == nil {
+		var ret AmountDue
+		return ret
+	}
+
+	return o.AmountDue
+}
+
+// GetAmountDueOk returns a tuple with the AmountDue field value
+// and a boolean to check if the value has been set.
+func (o *InvoiceTotals) GetAmountDueOk() (*AmountDue, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AmountDue, true
+}
+
+// SetAmountDue sets field value
+func (o *InvoiceTotals) SetAmountDue(v AmountDue) {
+	o.AmountDue = v
 }
 
 // GetGlobalAllowanceAmount returns the GlobalAllowanceAmount field value if set, zero value otherwise.
@@ -275,13 +447,25 @@ func (o InvoiceTotals) MarshalJSON() ([]byte, error) {
 
 func (o InvoiceTotals) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if o.LineTotalAmount.IsSet() {
+		toSerialize["line_total_amount"] = o.LineTotalAmount.Get()
+	}
+	if o.AllowanceTotalAmount.IsSet() {
+		toSerialize["allowance_total_amount"] = o.AllowanceTotalAmount.Get()
+	}
+	if o.ChargeTotalAmount.IsSet() {
+		toSerialize["charge_total_amount"] = o.ChargeTotalAmount.Get()
+	}
 	toSerialize["total_net_amount"] = o.TotalNetAmount
 	toSerialize["vat_amount"] = o.VatAmount
 	toSerialize["total_gross_amount"] = o.TotalGrossAmount
-	toSerialize["amount_due"] = o.AmountDue
 	if o.Prepayment.IsSet() {
 		toSerialize["prepayment"] = o.Prepayment.Get()
 	}
+	if o.RoundingAmount.IsSet() {
+		toSerialize["rounding_amount"] = o.RoundingAmount.Get()
+	}
+	toSerialize["amount_due"] = o.AmountDue
 	if !IsNil(o.GlobalAllowanceAmount) {
 		toSerialize["globalAllowanceAmount"] = o.GlobalAllowanceAmount
 	}

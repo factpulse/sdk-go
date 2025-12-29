@@ -17,13 +17,15 @@ import (
 // checks if the PostalAddress type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PostalAddress{}
 
-// PostalAddress Represents a postal address.
+// PostalAddress Represents a postal address (BG-5, BG-8, BG-12, BG-15).
 type PostalAddress struct {
 	PostalCode NullableString `json:"postalCode,omitempty"`
 	LineOne NullableString `json:"lineOne,omitempty"`
 	LineTwo NullableString `json:"lineTwo,omitempty"`
+	LineThree NullableString `json:"lineThree,omitempty"`
 	City NullableString `json:"city,omitempty"`
 	CountryCode NullableString `json:"countryCode,omitempty"`
+	CountrySubdivision NullableString `json:"countrySubdivision,omitempty"`
 }
 
 // NewPostalAddress instantiates a new PostalAddress object
@@ -169,6 +171,48 @@ func (o *PostalAddress) UnsetLineTwo() {
 	o.LineTwo.Unset()
 }
 
+// GetLineThree returns the LineThree field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PostalAddress) GetLineThree() string {
+	if o == nil || IsNil(o.LineThree.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.LineThree.Get()
+}
+
+// GetLineThreeOk returns a tuple with the LineThree field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PostalAddress) GetLineThreeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LineThree.Get(), o.LineThree.IsSet()
+}
+
+// HasLineThree returns a boolean if a field has been set.
+func (o *PostalAddress) HasLineThree() bool {
+	if o != nil && o.LineThree.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLineThree gets a reference to the given NullableString and assigns it to the LineThree field.
+func (o *PostalAddress) SetLineThree(v string) {
+	o.LineThree.Set(&v)
+}
+// SetLineThreeNil sets the value for LineThree to be an explicit nil
+func (o *PostalAddress) SetLineThreeNil() {
+	o.LineThree.Set(nil)
+}
+
+// UnsetLineThree ensures that no value is present for LineThree, not even an explicit nil
+func (o *PostalAddress) UnsetLineThree() {
+	o.LineThree.Unset()
+}
+
 // GetCity returns the City field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PostalAddress) GetCity() string {
 	if o == nil || IsNil(o.City.Get()) {
@@ -253,6 +297,48 @@ func (o *PostalAddress) UnsetCountryCode() {
 	o.CountryCode.Unset()
 }
 
+// GetCountrySubdivision returns the CountrySubdivision field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PostalAddress) GetCountrySubdivision() string {
+	if o == nil || IsNil(o.CountrySubdivision.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.CountrySubdivision.Get()
+}
+
+// GetCountrySubdivisionOk returns a tuple with the CountrySubdivision field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PostalAddress) GetCountrySubdivisionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CountrySubdivision.Get(), o.CountrySubdivision.IsSet()
+}
+
+// HasCountrySubdivision returns a boolean if a field has been set.
+func (o *PostalAddress) HasCountrySubdivision() bool {
+	if o != nil && o.CountrySubdivision.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCountrySubdivision gets a reference to the given NullableString and assigns it to the CountrySubdivision field.
+func (o *PostalAddress) SetCountrySubdivision(v string) {
+	o.CountrySubdivision.Set(&v)
+}
+// SetCountrySubdivisionNil sets the value for CountrySubdivision to be an explicit nil
+func (o *PostalAddress) SetCountrySubdivisionNil() {
+	o.CountrySubdivision.Set(nil)
+}
+
+// UnsetCountrySubdivision ensures that no value is present for CountrySubdivision, not even an explicit nil
+func (o *PostalAddress) UnsetCountrySubdivision() {
+	o.CountrySubdivision.Unset()
+}
+
 func (o PostalAddress) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -272,11 +358,17 @@ func (o PostalAddress) ToMap() (map[string]interface{}, error) {
 	if o.LineTwo.IsSet() {
 		toSerialize["lineTwo"] = o.LineTwo.Get()
 	}
+	if o.LineThree.IsSet() {
+		toSerialize["lineThree"] = o.LineThree.Get()
+	}
 	if o.City.IsSet() {
 		toSerialize["city"] = o.City.Get()
 	}
 	if o.CountryCode.IsSet() {
 		toSerialize["countryCode"] = o.CountryCode.Get()
+	}
+	if o.CountrySubdivision.IsSet() {
+		toSerialize["countrySubdivision"] = o.CountrySubdivision.Get()
 	}
 	return toSerialize, nil
 }

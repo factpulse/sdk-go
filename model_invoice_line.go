@@ -19,23 +19,43 @@ import (
 // checks if the InvoiceLine type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &InvoiceLine{}
 
-// InvoiceLine Represents a line item in an invoice.
+// InvoiceLine Represents an invoice line item (BG-25).
 type InvoiceLine struct {
+	// Invoice line identifier (BT-126).
 	LineNumber int32 `json:"line_number"`
+	LineNote NullableString `json:"line_note,omitempty"`
 	Reference NullableString `json:"reference,omitempty"`
+	BuyerAssignedId NullableString `json:"buyer_assigned_id,omitempty"`
+	ProductGlobalId NullableString `json:"product_global_id,omitempty"`
+	ProductGlobalIdScheme NullableString `json:"product_global_id_scheme,omitempty"`
+	// Item name (BT-153).
 	ItemName string `json:"item_name"`
+	ItemDescription NullableString `json:"item_description,omitempty"`
+	OriginCountry NullableString `json:"origin_country,omitempty"`
+	Characteristics []ProductCharacteristic `json:"characteristics,omitempty"`
+	Classifications []ProductClassification `json:"classifications,omitempty"`
 	Quantity Quantity `json:"quantity"`
+	// Invoiced quantity unit of measure code (BT-130).
 	Unit UnitOfMeasure `json:"unit"`
+	GrossUnitPrice NullableGrossUnitPrice `json:"gross_unit_price,omitempty"`
 	UnitNetPrice UnitNetPrice `json:"unit_net_price"`
+	PriceBasisQuantity NullablePriceBasisQuantity `json:"price_basis_quantity,omitempty"`
+	PriceBasisUnit NullableString `json:"price_basis_unit,omitempty"`
+	PriceAllowanceAmount NullablePriceAllowanceAmount `json:"price_allowance_amount,omitempty"`
+	LineNetAmount NullableLineNetAmount `json:"lineNetAmount,omitempty"`
 	AllowanceAmount NullableInvoiceLineAllowanceAmount `json:"allowanceAmount,omitempty"`
-	LineNetAmount *LineNetAmount `json:"lineNetAmount,omitempty"`
+	AllowanceReasonCode NullableAllowanceReasonCode `json:"allowanceReasonCode,omitempty"`
+	AllowanceReason NullableString `json:"allowanceReason,omitempty"`
+	AllowancesCharges []AllowanceCharge `json:"allowances_charges,omitempty"`
 	VatRate NullableString `json:"vat_rate,omitempty"`
 	ManualVatRate *ManualVatRate `json:"manual_vat_rate,omitempty"`
 	VatCategory NullableVATCategory `json:"vat_category,omitempty"`
-	PeriodStartDate NullableString `json:"periodStartDate,omitempty"`
-	PeriodEndDate NullableString `json:"periodEndDate,omitempty"`
-	AllowanceReasonCode NullableAllowanceReasonCode `json:"allowanceReasonCode,omitempty"`
-	AllowanceReason NullableString `json:"allowanceReason,omitempty"`
+	PeriodStartDate NullableString `json:"period_start_date,omitempty"`
+	PeriodEndDate NullableString `json:"period_end_date,omitempty"`
+	PurchaseOrderLineRef NullableString `json:"purchase_order_line_ref,omitempty"`
+	AccountingAccount NullableString `json:"accounting_account,omitempty"`
+	AdditionalDocuments []AdditionalDocument `json:"additional_documents,omitempty"`
+	LineNotes []InvoiceNote `json:"line_notes,omitempty"`
 }
 
 type _InvoiceLine InvoiceLine
@@ -86,6 +106,48 @@ func (o *InvoiceLine) SetLineNumber(v int32) {
 	o.LineNumber = v
 }
 
+// GetLineNote returns the LineNote field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceLine) GetLineNote() string {
+	if o == nil || IsNil(o.LineNote.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.LineNote.Get()
+}
+
+// GetLineNoteOk returns a tuple with the LineNote field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceLine) GetLineNoteOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LineNote.Get(), o.LineNote.IsSet()
+}
+
+// HasLineNote returns a boolean if a field has been set.
+func (o *InvoiceLine) HasLineNote() bool {
+	if o != nil && o.LineNote.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLineNote gets a reference to the given NullableString and assigns it to the LineNote field.
+func (o *InvoiceLine) SetLineNote(v string) {
+	o.LineNote.Set(&v)
+}
+// SetLineNoteNil sets the value for LineNote to be an explicit nil
+func (o *InvoiceLine) SetLineNoteNil() {
+	o.LineNote.Set(nil)
+}
+
+// UnsetLineNote ensures that no value is present for LineNote, not even an explicit nil
+func (o *InvoiceLine) UnsetLineNote() {
+	o.LineNote.Unset()
+}
+
 // GetReference returns the Reference field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InvoiceLine) GetReference() string {
 	if o == nil || IsNil(o.Reference.Get()) {
@@ -128,6 +190,132 @@ func (o *InvoiceLine) UnsetReference() {
 	o.Reference.Unset()
 }
 
+// GetBuyerAssignedId returns the BuyerAssignedId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceLine) GetBuyerAssignedId() string {
+	if o == nil || IsNil(o.BuyerAssignedId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.BuyerAssignedId.Get()
+}
+
+// GetBuyerAssignedIdOk returns a tuple with the BuyerAssignedId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceLine) GetBuyerAssignedIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.BuyerAssignedId.Get(), o.BuyerAssignedId.IsSet()
+}
+
+// HasBuyerAssignedId returns a boolean if a field has been set.
+func (o *InvoiceLine) HasBuyerAssignedId() bool {
+	if o != nil && o.BuyerAssignedId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetBuyerAssignedId gets a reference to the given NullableString and assigns it to the BuyerAssignedId field.
+func (o *InvoiceLine) SetBuyerAssignedId(v string) {
+	o.BuyerAssignedId.Set(&v)
+}
+// SetBuyerAssignedIdNil sets the value for BuyerAssignedId to be an explicit nil
+func (o *InvoiceLine) SetBuyerAssignedIdNil() {
+	o.BuyerAssignedId.Set(nil)
+}
+
+// UnsetBuyerAssignedId ensures that no value is present for BuyerAssignedId, not even an explicit nil
+func (o *InvoiceLine) UnsetBuyerAssignedId() {
+	o.BuyerAssignedId.Unset()
+}
+
+// GetProductGlobalId returns the ProductGlobalId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceLine) GetProductGlobalId() string {
+	if o == nil || IsNil(o.ProductGlobalId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ProductGlobalId.Get()
+}
+
+// GetProductGlobalIdOk returns a tuple with the ProductGlobalId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceLine) GetProductGlobalIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ProductGlobalId.Get(), o.ProductGlobalId.IsSet()
+}
+
+// HasProductGlobalId returns a boolean if a field has been set.
+func (o *InvoiceLine) HasProductGlobalId() bool {
+	if o != nil && o.ProductGlobalId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetProductGlobalId gets a reference to the given NullableString and assigns it to the ProductGlobalId field.
+func (o *InvoiceLine) SetProductGlobalId(v string) {
+	o.ProductGlobalId.Set(&v)
+}
+// SetProductGlobalIdNil sets the value for ProductGlobalId to be an explicit nil
+func (o *InvoiceLine) SetProductGlobalIdNil() {
+	o.ProductGlobalId.Set(nil)
+}
+
+// UnsetProductGlobalId ensures that no value is present for ProductGlobalId, not even an explicit nil
+func (o *InvoiceLine) UnsetProductGlobalId() {
+	o.ProductGlobalId.Unset()
+}
+
+// GetProductGlobalIdScheme returns the ProductGlobalIdScheme field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceLine) GetProductGlobalIdScheme() string {
+	if o == nil || IsNil(o.ProductGlobalIdScheme.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ProductGlobalIdScheme.Get()
+}
+
+// GetProductGlobalIdSchemeOk returns a tuple with the ProductGlobalIdScheme field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceLine) GetProductGlobalIdSchemeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ProductGlobalIdScheme.Get(), o.ProductGlobalIdScheme.IsSet()
+}
+
+// HasProductGlobalIdScheme returns a boolean if a field has been set.
+func (o *InvoiceLine) HasProductGlobalIdScheme() bool {
+	if o != nil && o.ProductGlobalIdScheme.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetProductGlobalIdScheme gets a reference to the given NullableString and assigns it to the ProductGlobalIdScheme field.
+func (o *InvoiceLine) SetProductGlobalIdScheme(v string) {
+	o.ProductGlobalIdScheme.Set(&v)
+}
+// SetProductGlobalIdSchemeNil sets the value for ProductGlobalIdScheme to be an explicit nil
+func (o *InvoiceLine) SetProductGlobalIdSchemeNil() {
+	o.ProductGlobalIdScheme.Set(nil)
+}
+
+// UnsetProductGlobalIdScheme ensures that no value is present for ProductGlobalIdScheme, not even an explicit nil
+func (o *InvoiceLine) UnsetProductGlobalIdScheme() {
+	o.ProductGlobalIdScheme.Unset()
+}
+
 // GetItemName returns the ItemName field value
 func (o *InvoiceLine) GetItemName() string {
 	if o == nil {
@@ -150,6 +338,156 @@ func (o *InvoiceLine) GetItemNameOk() (*string, bool) {
 // SetItemName sets field value
 func (o *InvoiceLine) SetItemName(v string) {
 	o.ItemName = v
+}
+
+// GetItemDescription returns the ItemDescription field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceLine) GetItemDescription() string {
+	if o == nil || IsNil(o.ItemDescription.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ItemDescription.Get()
+}
+
+// GetItemDescriptionOk returns a tuple with the ItemDescription field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceLine) GetItemDescriptionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ItemDescription.Get(), o.ItemDescription.IsSet()
+}
+
+// HasItemDescription returns a boolean if a field has been set.
+func (o *InvoiceLine) HasItemDescription() bool {
+	if o != nil && o.ItemDescription.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetItemDescription gets a reference to the given NullableString and assigns it to the ItemDescription field.
+func (o *InvoiceLine) SetItemDescription(v string) {
+	o.ItemDescription.Set(&v)
+}
+// SetItemDescriptionNil sets the value for ItemDescription to be an explicit nil
+func (o *InvoiceLine) SetItemDescriptionNil() {
+	o.ItemDescription.Set(nil)
+}
+
+// UnsetItemDescription ensures that no value is present for ItemDescription, not even an explicit nil
+func (o *InvoiceLine) UnsetItemDescription() {
+	o.ItemDescription.Unset()
+}
+
+// GetOriginCountry returns the OriginCountry field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceLine) GetOriginCountry() string {
+	if o == nil || IsNil(o.OriginCountry.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.OriginCountry.Get()
+}
+
+// GetOriginCountryOk returns a tuple with the OriginCountry field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceLine) GetOriginCountryOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.OriginCountry.Get(), o.OriginCountry.IsSet()
+}
+
+// HasOriginCountry returns a boolean if a field has been set.
+func (o *InvoiceLine) HasOriginCountry() bool {
+	if o != nil && o.OriginCountry.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOriginCountry gets a reference to the given NullableString and assigns it to the OriginCountry field.
+func (o *InvoiceLine) SetOriginCountry(v string) {
+	o.OriginCountry.Set(&v)
+}
+// SetOriginCountryNil sets the value for OriginCountry to be an explicit nil
+func (o *InvoiceLine) SetOriginCountryNil() {
+	o.OriginCountry.Set(nil)
+}
+
+// UnsetOriginCountry ensures that no value is present for OriginCountry, not even an explicit nil
+func (o *InvoiceLine) UnsetOriginCountry() {
+	o.OriginCountry.Unset()
+}
+
+// GetCharacteristics returns the Characteristics field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceLine) GetCharacteristics() []ProductCharacteristic {
+	if o == nil {
+		var ret []ProductCharacteristic
+		return ret
+	}
+	return o.Characteristics
+}
+
+// GetCharacteristicsOk returns a tuple with the Characteristics field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceLine) GetCharacteristicsOk() ([]ProductCharacteristic, bool) {
+	if o == nil || IsNil(o.Characteristics) {
+		return nil, false
+	}
+	return o.Characteristics, true
+}
+
+// HasCharacteristics returns a boolean if a field has been set.
+func (o *InvoiceLine) HasCharacteristics() bool {
+	if o != nil && !IsNil(o.Characteristics) {
+		return true
+	}
+
+	return false
+}
+
+// SetCharacteristics gets a reference to the given []ProductCharacteristic and assigns it to the Characteristics field.
+func (o *InvoiceLine) SetCharacteristics(v []ProductCharacteristic) {
+	o.Characteristics = v
+}
+
+// GetClassifications returns the Classifications field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceLine) GetClassifications() []ProductClassification {
+	if o == nil {
+		var ret []ProductClassification
+		return ret
+	}
+	return o.Classifications
+}
+
+// GetClassificationsOk returns a tuple with the Classifications field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceLine) GetClassificationsOk() ([]ProductClassification, bool) {
+	if o == nil || IsNil(o.Classifications) {
+		return nil, false
+	}
+	return o.Classifications, true
+}
+
+// HasClassifications returns a boolean if a field has been set.
+func (o *InvoiceLine) HasClassifications() bool {
+	if o != nil && !IsNil(o.Classifications) {
+		return true
+	}
+
+	return false
+}
+
+// SetClassifications gets a reference to the given []ProductClassification and assigns it to the Classifications field.
+func (o *InvoiceLine) SetClassifications(v []ProductClassification) {
+	o.Classifications = v
 }
 
 // GetQuantity returns the Quantity field value
@@ -200,6 +538,48 @@ func (o *InvoiceLine) SetUnit(v UnitOfMeasure) {
 	o.Unit = v
 }
 
+// GetGrossUnitPrice returns the GrossUnitPrice field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceLine) GetGrossUnitPrice() GrossUnitPrice {
+	if o == nil || IsNil(o.GrossUnitPrice.Get()) {
+		var ret GrossUnitPrice
+		return ret
+	}
+	return *o.GrossUnitPrice.Get()
+}
+
+// GetGrossUnitPriceOk returns a tuple with the GrossUnitPrice field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceLine) GetGrossUnitPriceOk() (*GrossUnitPrice, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.GrossUnitPrice.Get(), o.GrossUnitPrice.IsSet()
+}
+
+// HasGrossUnitPrice returns a boolean if a field has been set.
+func (o *InvoiceLine) HasGrossUnitPrice() bool {
+	if o != nil && o.GrossUnitPrice.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetGrossUnitPrice gets a reference to the given NullableGrossUnitPrice and assigns it to the GrossUnitPrice field.
+func (o *InvoiceLine) SetGrossUnitPrice(v GrossUnitPrice) {
+	o.GrossUnitPrice.Set(&v)
+}
+// SetGrossUnitPriceNil sets the value for GrossUnitPrice to be an explicit nil
+func (o *InvoiceLine) SetGrossUnitPriceNil() {
+	o.GrossUnitPrice.Set(nil)
+}
+
+// UnsetGrossUnitPrice ensures that no value is present for GrossUnitPrice, not even an explicit nil
+func (o *InvoiceLine) UnsetGrossUnitPrice() {
+	o.GrossUnitPrice.Unset()
+}
+
 // GetUnitNetPrice returns the UnitNetPrice field value
 func (o *InvoiceLine) GetUnitNetPrice() UnitNetPrice {
 	if o == nil {
@@ -222,6 +602,174 @@ func (o *InvoiceLine) GetUnitNetPriceOk() (*UnitNetPrice, bool) {
 // SetUnitNetPrice sets field value
 func (o *InvoiceLine) SetUnitNetPrice(v UnitNetPrice) {
 	o.UnitNetPrice = v
+}
+
+// GetPriceBasisQuantity returns the PriceBasisQuantity field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceLine) GetPriceBasisQuantity() PriceBasisQuantity {
+	if o == nil || IsNil(o.PriceBasisQuantity.Get()) {
+		var ret PriceBasisQuantity
+		return ret
+	}
+	return *o.PriceBasisQuantity.Get()
+}
+
+// GetPriceBasisQuantityOk returns a tuple with the PriceBasisQuantity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceLine) GetPriceBasisQuantityOk() (*PriceBasisQuantity, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PriceBasisQuantity.Get(), o.PriceBasisQuantity.IsSet()
+}
+
+// HasPriceBasisQuantity returns a boolean if a field has been set.
+func (o *InvoiceLine) HasPriceBasisQuantity() bool {
+	if o != nil && o.PriceBasisQuantity.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPriceBasisQuantity gets a reference to the given NullablePriceBasisQuantity and assigns it to the PriceBasisQuantity field.
+func (o *InvoiceLine) SetPriceBasisQuantity(v PriceBasisQuantity) {
+	o.PriceBasisQuantity.Set(&v)
+}
+// SetPriceBasisQuantityNil sets the value for PriceBasisQuantity to be an explicit nil
+func (o *InvoiceLine) SetPriceBasisQuantityNil() {
+	o.PriceBasisQuantity.Set(nil)
+}
+
+// UnsetPriceBasisQuantity ensures that no value is present for PriceBasisQuantity, not even an explicit nil
+func (o *InvoiceLine) UnsetPriceBasisQuantity() {
+	o.PriceBasisQuantity.Unset()
+}
+
+// GetPriceBasisUnit returns the PriceBasisUnit field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceLine) GetPriceBasisUnit() string {
+	if o == nil || IsNil(o.PriceBasisUnit.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.PriceBasisUnit.Get()
+}
+
+// GetPriceBasisUnitOk returns a tuple with the PriceBasisUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceLine) GetPriceBasisUnitOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PriceBasisUnit.Get(), o.PriceBasisUnit.IsSet()
+}
+
+// HasPriceBasisUnit returns a boolean if a field has been set.
+func (o *InvoiceLine) HasPriceBasisUnit() bool {
+	if o != nil && o.PriceBasisUnit.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPriceBasisUnit gets a reference to the given NullableString and assigns it to the PriceBasisUnit field.
+func (o *InvoiceLine) SetPriceBasisUnit(v string) {
+	o.PriceBasisUnit.Set(&v)
+}
+// SetPriceBasisUnitNil sets the value for PriceBasisUnit to be an explicit nil
+func (o *InvoiceLine) SetPriceBasisUnitNil() {
+	o.PriceBasisUnit.Set(nil)
+}
+
+// UnsetPriceBasisUnit ensures that no value is present for PriceBasisUnit, not even an explicit nil
+func (o *InvoiceLine) UnsetPriceBasisUnit() {
+	o.PriceBasisUnit.Unset()
+}
+
+// GetPriceAllowanceAmount returns the PriceAllowanceAmount field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceLine) GetPriceAllowanceAmount() PriceAllowanceAmount {
+	if o == nil || IsNil(o.PriceAllowanceAmount.Get()) {
+		var ret PriceAllowanceAmount
+		return ret
+	}
+	return *o.PriceAllowanceAmount.Get()
+}
+
+// GetPriceAllowanceAmountOk returns a tuple with the PriceAllowanceAmount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceLine) GetPriceAllowanceAmountOk() (*PriceAllowanceAmount, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PriceAllowanceAmount.Get(), o.PriceAllowanceAmount.IsSet()
+}
+
+// HasPriceAllowanceAmount returns a boolean if a field has been set.
+func (o *InvoiceLine) HasPriceAllowanceAmount() bool {
+	if o != nil && o.PriceAllowanceAmount.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPriceAllowanceAmount gets a reference to the given NullablePriceAllowanceAmount and assigns it to the PriceAllowanceAmount field.
+func (o *InvoiceLine) SetPriceAllowanceAmount(v PriceAllowanceAmount) {
+	o.PriceAllowanceAmount.Set(&v)
+}
+// SetPriceAllowanceAmountNil sets the value for PriceAllowanceAmount to be an explicit nil
+func (o *InvoiceLine) SetPriceAllowanceAmountNil() {
+	o.PriceAllowanceAmount.Set(nil)
+}
+
+// UnsetPriceAllowanceAmount ensures that no value is present for PriceAllowanceAmount, not even an explicit nil
+func (o *InvoiceLine) UnsetPriceAllowanceAmount() {
+	o.PriceAllowanceAmount.Unset()
+}
+
+// GetLineNetAmount returns the LineNetAmount field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceLine) GetLineNetAmount() LineNetAmount {
+	if o == nil || IsNil(o.LineNetAmount.Get()) {
+		var ret LineNetAmount
+		return ret
+	}
+	return *o.LineNetAmount.Get()
+}
+
+// GetLineNetAmountOk returns a tuple with the LineNetAmount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceLine) GetLineNetAmountOk() (*LineNetAmount, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LineNetAmount.Get(), o.LineNetAmount.IsSet()
+}
+
+// HasLineNetAmount returns a boolean if a field has been set.
+func (o *InvoiceLine) HasLineNetAmount() bool {
+	if o != nil && o.LineNetAmount.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLineNetAmount gets a reference to the given NullableLineNetAmount and assigns it to the LineNetAmount field.
+func (o *InvoiceLine) SetLineNetAmount(v LineNetAmount) {
+	o.LineNetAmount.Set(&v)
+}
+// SetLineNetAmountNil sets the value for LineNetAmount to be an explicit nil
+func (o *InvoiceLine) SetLineNetAmountNil() {
+	o.LineNetAmount.Set(nil)
+}
+
+// UnsetLineNetAmount ensures that no value is present for LineNetAmount, not even an explicit nil
+func (o *InvoiceLine) UnsetLineNetAmount() {
+	o.LineNetAmount.Unset()
 }
 
 // GetAllowanceAmount returns the AllowanceAmount field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -266,36 +814,121 @@ func (o *InvoiceLine) UnsetAllowanceAmount() {
 	o.AllowanceAmount.Unset()
 }
 
-// GetLineNetAmount returns the LineNetAmount field value if set, zero value otherwise.
-func (o *InvoiceLine) GetLineNetAmount() LineNetAmount {
-	if o == nil || IsNil(o.LineNetAmount) {
-		var ret LineNetAmount
+// GetAllowanceReasonCode returns the AllowanceReasonCode field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceLine) GetAllowanceReasonCode() AllowanceReasonCode {
+	if o == nil || IsNil(o.AllowanceReasonCode.Get()) {
+		var ret AllowanceReasonCode
 		return ret
 	}
-	return *o.LineNetAmount
+	return *o.AllowanceReasonCode.Get()
 }
 
-// GetLineNetAmountOk returns a tuple with the LineNetAmount field value if set, nil otherwise
+// GetAllowanceReasonCodeOk returns a tuple with the AllowanceReasonCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InvoiceLine) GetLineNetAmountOk() (*LineNetAmount, bool) {
-	if o == nil || IsNil(o.LineNetAmount) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceLine) GetAllowanceReasonCodeOk() (*AllowanceReasonCode, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LineNetAmount, true
+	return o.AllowanceReasonCode.Get(), o.AllowanceReasonCode.IsSet()
 }
 
-// HasLineNetAmount returns a boolean if a field has been set.
-func (o *InvoiceLine) HasLineNetAmount() bool {
-	if o != nil && !IsNil(o.LineNetAmount) {
+// HasAllowanceReasonCode returns a boolean if a field has been set.
+func (o *InvoiceLine) HasAllowanceReasonCode() bool {
+	if o != nil && o.AllowanceReasonCode.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLineNetAmount gets a reference to the given LineNetAmount and assigns it to the LineNetAmount field.
-func (o *InvoiceLine) SetLineNetAmount(v LineNetAmount) {
-	o.LineNetAmount = &v
+// SetAllowanceReasonCode gets a reference to the given NullableAllowanceReasonCode and assigns it to the AllowanceReasonCode field.
+func (o *InvoiceLine) SetAllowanceReasonCode(v AllowanceReasonCode) {
+	o.AllowanceReasonCode.Set(&v)
+}
+// SetAllowanceReasonCodeNil sets the value for AllowanceReasonCode to be an explicit nil
+func (o *InvoiceLine) SetAllowanceReasonCodeNil() {
+	o.AllowanceReasonCode.Set(nil)
+}
+
+// UnsetAllowanceReasonCode ensures that no value is present for AllowanceReasonCode, not even an explicit nil
+func (o *InvoiceLine) UnsetAllowanceReasonCode() {
+	o.AllowanceReasonCode.Unset()
+}
+
+// GetAllowanceReason returns the AllowanceReason field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceLine) GetAllowanceReason() string {
+	if o == nil || IsNil(o.AllowanceReason.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.AllowanceReason.Get()
+}
+
+// GetAllowanceReasonOk returns a tuple with the AllowanceReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceLine) GetAllowanceReasonOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AllowanceReason.Get(), o.AllowanceReason.IsSet()
+}
+
+// HasAllowanceReason returns a boolean if a field has been set.
+func (o *InvoiceLine) HasAllowanceReason() bool {
+	if o != nil && o.AllowanceReason.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowanceReason gets a reference to the given NullableString and assigns it to the AllowanceReason field.
+func (o *InvoiceLine) SetAllowanceReason(v string) {
+	o.AllowanceReason.Set(&v)
+}
+// SetAllowanceReasonNil sets the value for AllowanceReason to be an explicit nil
+func (o *InvoiceLine) SetAllowanceReasonNil() {
+	o.AllowanceReason.Set(nil)
+}
+
+// UnsetAllowanceReason ensures that no value is present for AllowanceReason, not even an explicit nil
+func (o *InvoiceLine) UnsetAllowanceReason() {
+	o.AllowanceReason.Unset()
+}
+
+// GetAllowancesCharges returns the AllowancesCharges field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceLine) GetAllowancesCharges() []AllowanceCharge {
+	if o == nil {
+		var ret []AllowanceCharge
+		return ret
+	}
+	return o.AllowancesCharges
+}
+
+// GetAllowancesChargesOk returns a tuple with the AllowancesCharges field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceLine) GetAllowancesChargesOk() ([]AllowanceCharge, bool) {
+	if o == nil || IsNil(o.AllowancesCharges) {
+		return nil, false
+	}
+	return o.AllowancesCharges, true
+}
+
+// HasAllowancesCharges returns a boolean if a field has been set.
+func (o *InvoiceLine) HasAllowancesCharges() bool {
+	if o != nil && !IsNil(o.AllowancesCharges) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowancesCharges gets a reference to the given []AllowanceCharge and assigns it to the AllowancesCharges field.
+func (o *InvoiceLine) SetAllowancesCharges(v []AllowanceCharge) {
+	o.AllowancesCharges = v
 }
 
 // GetVatRate returns the VatRate field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -498,88 +1131,154 @@ func (o *InvoiceLine) UnsetPeriodEndDate() {
 	o.PeriodEndDate.Unset()
 }
 
-// GetAllowanceReasonCode returns the AllowanceReasonCode field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *InvoiceLine) GetAllowanceReasonCode() AllowanceReasonCode {
-	if o == nil || IsNil(o.AllowanceReasonCode.Get()) {
-		var ret AllowanceReasonCode
-		return ret
-	}
-	return *o.AllowanceReasonCode.Get()
-}
-
-// GetAllowanceReasonCodeOk returns a tuple with the AllowanceReasonCode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *InvoiceLine) GetAllowanceReasonCodeOk() (*AllowanceReasonCode, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.AllowanceReasonCode.Get(), o.AllowanceReasonCode.IsSet()
-}
-
-// HasAllowanceReasonCode returns a boolean if a field has been set.
-func (o *InvoiceLine) HasAllowanceReasonCode() bool {
-	if o != nil && o.AllowanceReasonCode.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetAllowanceReasonCode gets a reference to the given NullableAllowanceReasonCode and assigns it to the AllowanceReasonCode field.
-func (o *InvoiceLine) SetAllowanceReasonCode(v AllowanceReasonCode) {
-	o.AllowanceReasonCode.Set(&v)
-}
-// SetAllowanceReasonCodeNil sets the value for AllowanceReasonCode to be an explicit nil
-func (o *InvoiceLine) SetAllowanceReasonCodeNil() {
-	o.AllowanceReasonCode.Set(nil)
-}
-
-// UnsetAllowanceReasonCode ensures that no value is present for AllowanceReasonCode, not even an explicit nil
-func (o *InvoiceLine) UnsetAllowanceReasonCode() {
-	o.AllowanceReasonCode.Unset()
-}
-
-// GetAllowanceReason returns the AllowanceReason field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *InvoiceLine) GetAllowanceReason() string {
-	if o == nil || IsNil(o.AllowanceReason.Get()) {
+// GetPurchaseOrderLineRef returns the PurchaseOrderLineRef field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceLine) GetPurchaseOrderLineRef() string {
+	if o == nil || IsNil(o.PurchaseOrderLineRef.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.AllowanceReason.Get()
+	return *o.PurchaseOrderLineRef.Get()
 }
 
-// GetAllowanceReasonOk returns a tuple with the AllowanceReason field value if set, nil otherwise
+// GetPurchaseOrderLineRefOk returns a tuple with the PurchaseOrderLineRef field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *InvoiceLine) GetAllowanceReasonOk() (*string, bool) {
+func (o *InvoiceLine) GetPurchaseOrderLineRefOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.AllowanceReason.Get(), o.AllowanceReason.IsSet()
+	return o.PurchaseOrderLineRef.Get(), o.PurchaseOrderLineRef.IsSet()
 }
 
-// HasAllowanceReason returns a boolean if a field has been set.
-func (o *InvoiceLine) HasAllowanceReason() bool {
-	if o != nil && o.AllowanceReason.IsSet() {
+// HasPurchaseOrderLineRef returns a boolean if a field has been set.
+func (o *InvoiceLine) HasPurchaseOrderLineRef() bool {
+	if o != nil && o.PurchaseOrderLineRef.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAllowanceReason gets a reference to the given NullableString and assigns it to the AllowanceReason field.
-func (o *InvoiceLine) SetAllowanceReason(v string) {
-	o.AllowanceReason.Set(&v)
+// SetPurchaseOrderLineRef gets a reference to the given NullableString and assigns it to the PurchaseOrderLineRef field.
+func (o *InvoiceLine) SetPurchaseOrderLineRef(v string) {
+	o.PurchaseOrderLineRef.Set(&v)
 }
-// SetAllowanceReasonNil sets the value for AllowanceReason to be an explicit nil
-func (o *InvoiceLine) SetAllowanceReasonNil() {
-	o.AllowanceReason.Set(nil)
+// SetPurchaseOrderLineRefNil sets the value for PurchaseOrderLineRef to be an explicit nil
+func (o *InvoiceLine) SetPurchaseOrderLineRefNil() {
+	o.PurchaseOrderLineRef.Set(nil)
 }
 
-// UnsetAllowanceReason ensures that no value is present for AllowanceReason, not even an explicit nil
-func (o *InvoiceLine) UnsetAllowanceReason() {
-	o.AllowanceReason.Unset()
+// UnsetPurchaseOrderLineRef ensures that no value is present for PurchaseOrderLineRef, not even an explicit nil
+func (o *InvoiceLine) UnsetPurchaseOrderLineRef() {
+	o.PurchaseOrderLineRef.Unset()
+}
+
+// GetAccountingAccount returns the AccountingAccount field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceLine) GetAccountingAccount() string {
+	if o == nil || IsNil(o.AccountingAccount.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.AccountingAccount.Get()
+}
+
+// GetAccountingAccountOk returns a tuple with the AccountingAccount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceLine) GetAccountingAccountOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AccountingAccount.Get(), o.AccountingAccount.IsSet()
+}
+
+// HasAccountingAccount returns a boolean if a field has been set.
+func (o *InvoiceLine) HasAccountingAccount() bool {
+	if o != nil && o.AccountingAccount.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAccountingAccount gets a reference to the given NullableString and assigns it to the AccountingAccount field.
+func (o *InvoiceLine) SetAccountingAccount(v string) {
+	o.AccountingAccount.Set(&v)
+}
+// SetAccountingAccountNil sets the value for AccountingAccount to be an explicit nil
+func (o *InvoiceLine) SetAccountingAccountNil() {
+	o.AccountingAccount.Set(nil)
+}
+
+// UnsetAccountingAccount ensures that no value is present for AccountingAccount, not even an explicit nil
+func (o *InvoiceLine) UnsetAccountingAccount() {
+	o.AccountingAccount.Unset()
+}
+
+// GetAdditionalDocuments returns the AdditionalDocuments field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceLine) GetAdditionalDocuments() []AdditionalDocument {
+	if o == nil {
+		var ret []AdditionalDocument
+		return ret
+	}
+	return o.AdditionalDocuments
+}
+
+// GetAdditionalDocumentsOk returns a tuple with the AdditionalDocuments field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceLine) GetAdditionalDocumentsOk() ([]AdditionalDocument, bool) {
+	if o == nil || IsNil(o.AdditionalDocuments) {
+		return nil, false
+	}
+	return o.AdditionalDocuments, true
+}
+
+// HasAdditionalDocuments returns a boolean if a field has been set.
+func (o *InvoiceLine) HasAdditionalDocuments() bool {
+	if o != nil && !IsNil(o.AdditionalDocuments) {
+		return true
+	}
+
+	return false
+}
+
+// SetAdditionalDocuments gets a reference to the given []AdditionalDocument and assigns it to the AdditionalDocuments field.
+func (o *InvoiceLine) SetAdditionalDocuments(v []AdditionalDocument) {
+	o.AdditionalDocuments = v
+}
+
+// GetLineNotes returns the LineNotes field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceLine) GetLineNotes() []InvoiceNote {
+	if o == nil {
+		var ret []InvoiceNote
+		return ret
+	}
+	return o.LineNotes
+}
+
+// GetLineNotesOk returns a tuple with the LineNotes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceLine) GetLineNotesOk() ([]InvoiceNote, bool) {
+	if o == nil || IsNil(o.LineNotes) {
+		return nil, false
+	}
+	return o.LineNotes, true
+}
+
+// HasLineNotes returns a boolean if a field has been set.
+func (o *InvoiceLine) HasLineNotes() bool {
+	if o != nil && !IsNil(o.LineNotes) {
+		return true
+	}
+
+	return false
+}
+
+// SetLineNotes gets a reference to the given []InvoiceNote and assigns it to the LineNotes field.
+func (o *InvoiceLine) SetLineNotes(v []InvoiceNote) {
+	o.LineNotes = v
 }
 
 func (o InvoiceLine) MarshalJSON() ([]byte, error) {
@@ -593,18 +1292,63 @@ func (o InvoiceLine) MarshalJSON() ([]byte, error) {
 func (o InvoiceLine) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["line_number"] = o.LineNumber
+	if o.LineNote.IsSet() {
+		toSerialize["line_note"] = o.LineNote.Get()
+	}
 	if o.Reference.IsSet() {
 		toSerialize["reference"] = o.Reference.Get()
 	}
+	if o.BuyerAssignedId.IsSet() {
+		toSerialize["buyer_assigned_id"] = o.BuyerAssignedId.Get()
+	}
+	if o.ProductGlobalId.IsSet() {
+		toSerialize["product_global_id"] = o.ProductGlobalId.Get()
+	}
+	if o.ProductGlobalIdScheme.IsSet() {
+		toSerialize["product_global_id_scheme"] = o.ProductGlobalIdScheme.Get()
+	}
 	toSerialize["item_name"] = o.ItemName
+	if o.ItemDescription.IsSet() {
+		toSerialize["item_description"] = o.ItemDescription.Get()
+	}
+	if o.OriginCountry.IsSet() {
+		toSerialize["origin_country"] = o.OriginCountry.Get()
+	}
+	if o.Characteristics != nil {
+		toSerialize["characteristics"] = o.Characteristics
+	}
+	if o.Classifications != nil {
+		toSerialize["classifications"] = o.Classifications
+	}
 	toSerialize["quantity"] = o.Quantity
 	toSerialize["unit"] = o.Unit
+	if o.GrossUnitPrice.IsSet() {
+		toSerialize["gross_unit_price"] = o.GrossUnitPrice.Get()
+	}
 	toSerialize["unit_net_price"] = o.UnitNetPrice
+	if o.PriceBasisQuantity.IsSet() {
+		toSerialize["price_basis_quantity"] = o.PriceBasisQuantity.Get()
+	}
+	if o.PriceBasisUnit.IsSet() {
+		toSerialize["price_basis_unit"] = o.PriceBasisUnit.Get()
+	}
+	if o.PriceAllowanceAmount.IsSet() {
+		toSerialize["price_allowance_amount"] = o.PriceAllowanceAmount.Get()
+	}
+	if o.LineNetAmount.IsSet() {
+		toSerialize["lineNetAmount"] = o.LineNetAmount.Get()
+	}
 	if o.AllowanceAmount.IsSet() {
 		toSerialize["allowanceAmount"] = o.AllowanceAmount.Get()
 	}
-	if !IsNil(o.LineNetAmount) {
-		toSerialize["lineNetAmount"] = o.LineNetAmount
+	if o.AllowanceReasonCode.IsSet() {
+		toSerialize["allowanceReasonCode"] = o.AllowanceReasonCode.Get()
+	}
+	if o.AllowanceReason.IsSet() {
+		toSerialize["allowanceReason"] = o.AllowanceReason.Get()
+	}
+	if o.AllowancesCharges != nil {
+		toSerialize["allowances_charges"] = o.AllowancesCharges
 	}
 	if o.VatRate.IsSet() {
 		toSerialize["vat_rate"] = o.VatRate.Get()
@@ -616,16 +1360,22 @@ func (o InvoiceLine) ToMap() (map[string]interface{}, error) {
 		toSerialize["vat_category"] = o.VatCategory.Get()
 	}
 	if o.PeriodStartDate.IsSet() {
-		toSerialize["periodStartDate"] = o.PeriodStartDate.Get()
+		toSerialize["period_start_date"] = o.PeriodStartDate.Get()
 	}
 	if o.PeriodEndDate.IsSet() {
-		toSerialize["periodEndDate"] = o.PeriodEndDate.Get()
+		toSerialize["period_end_date"] = o.PeriodEndDate.Get()
 	}
-	if o.AllowanceReasonCode.IsSet() {
-		toSerialize["allowanceReasonCode"] = o.AllowanceReasonCode.Get()
+	if o.PurchaseOrderLineRef.IsSet() {
+		toSerialize["purchase_order_line_ref"] = o.PurchaseOrderLineRef.Get()
 	}
-	if o.AllowanceReason.IsSet() {
-		toSerialize["allowanceReason"] = o.AllowanceReason.Get()
+	if o.AccountingAccount.IsSet() {
+		toSerialize["accounting_account"] = o.AccountingAccount.Get()
+	}
+	if o.AdditionalDocuments != nil {
+		toSerialize["additional_documents"] = o.AdditionalDocuments
+	}
+	if o.LineNotes != nil {
+		toSerialize["line_notes"] = o.LineNotes
 	}
 	return toSerialize, nil
 }

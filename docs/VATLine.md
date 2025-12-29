@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Rate** | Pointer to **NullableString** |  | [optional] 
 **ManualRate** | Pointer to [**ManualRate**](ManualRate.md) |  | [optional] 
 **Category** | Pointer to [**NullableVATCategory**](VATCategory.md) |  | [optional] 
+**DueDateTypeCode** | Pointer to [**NullableVATPointDateCode**](VATPointDateCode.md) |  | [optional] 
 **ExemptionReason** | Pointer to **NullableString** |  | [optional] 
 **VatexCode** | Pointer to **NullableString** |  | [optional] 
 
@@ -166,6 +167,41 @@ HasCategory returns a boolean if a field has been set.
 `func (o *VATLine) UnsetCategory()`
 
 UnsetCategory ensures that no value is present for Category, not even an explicit nil
+### GetDueDateTypeCode
+
+`func (o *VATLine) GetDueDateTypeCode() VATPointDateCode`
+
+GetDueDateTypeCode returns the DueDateTypeCode field if non-nil, zero value otherwise.
+
+### GetDueDateTypeCodeOk
+
+`func (o *VATLine) GetDueDateTypeCodeOk() (*VATPointDateCode, bool)`
+
+GetDueDateTypeCodeOk returns a tuple with the DueDateTypeCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDueDateTypeCode
+
+`func (o *VATLine) SetDueDateTypeCode(v VATPointDateCode)`
+
+SetDueDateTypeCode sets DueDateTypeCode field to given value.
+
+### HasDueDateTypeCode
+
+`func (o *VATLine) HasDueDateTypeCode() bool`
+
+HasDueDateTypeCode returns a boolean if a field has been set.
+
+### SetDueDateTypeCodeNil
+
+`func (o *VATLine) SetDueDateTypeCodeNil(b bool)`
+
+ SetDueDateTypeCodeNil sets the value for DueDateTypeCode to be an explicit nil
+
+### UnsetDueDateTypeCode
+`func (o *VATLine) UnsetDueDateTypeCode()`
+
+UnsetDueDateTypeCode ensures that no value is present for DueDateTypeCode, not even an explicit nil
 ### GetExemptionReason
 
 `func (o *VATLine) GetExemptionReason() string`

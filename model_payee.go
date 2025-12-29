@@ -23,11 +23,13 @@ var _ MappedNullable = &Payee{}
 type Payee struct {
 	// Payee name (BT-59). Mandatory.
 	Nom string `json:"nom"`
+	PayeeId NullableString `json:"payeeId,omitempty"`
 	Siret NullableString `json:"siret,omitempty" validate:"regexp=^\\\\d{14}$"`
 	Siren NullableString `json:"siren,omitempty" validate:"regexp=^\\\\d{9}$"`
 	ElectronicAddress NullableElectronicAddress `json:"electronicAddress,omitempty"`
 	Iban NullableString `json:"iban,omitempty"`
 	Bic NullableString `json:"bic,omitempty"`
+	GlobalIds []ElectronicAddress `json:"global_ids,omitempty"`
 }
 
 type _Payee Payee
@@ -72,6 +74,48 @@ func (o *Payee) GetNomOk() (*string, bool) {
 // SetNom sets field value
 func (o *Payee) SetNom(v string) {
 	o.Nom = v
+}
+
+// GetPayeeId returns the PayeeId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Payee) GetPayeeId() string {
+	if o == nil || IsNil(o.PayeeId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.PayeeId.Get()
+}
+
+// GetPayeeIdOk returns a tuple with the PayeeId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Payee) GetPayeeIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PayeeId.Get(), o.PayeeId.IsSet()
+}
+
+// HasPayeeId returns a boolean if a field has been set.
+func (o *Payee) HasPayeeId() bool {
+	if o != nil && o.PayeeId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPayeeId gets a reference to the given NullableString and assigns it to the PayeeId field.
+func (o *Payee) SetPayeeId(v string) {
+	o.PayeeId.Set(&v)
+}
+// SetPayeeIdNil sets the value for PayeeId to be an explicit nil
+func (o *Payee) SetPayeeIdNil() {
+	o.PayeeId.Set(nil)
+}
+
+// UnsetPayeeId ensures that no value is present for PayeeId, not even an explicit nil
+func (o *Payee) UnsetPayeeId() {
+	o.PayeeId.Unset()
 }
 
 // GetSiret returns the Siret field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -284,6 +328,39 @@ func (o *Payee) UnsetBic() {
 	o.Bic.Unset()
 }
 
+// GetGlobalIds returns the GlobalIds field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Payee) GetGlobalIds() []ElectronicAddress {
+	if o == nil {
+		var ret []ElectronicAddress
+		return ret
+	}
+	return o.GlobalIds
+}
+
+// GetGlobalIdsOk returns a tuple with the GlobalIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Payee) GetGlobalIdsOk() ([]ElectronicAddress, bool) {
+	if o == nil || IsNil(o.GlobalIds) {
+		return nil, false
+	}
+	return o.GlobalIds, true
+}
+
+// HasGlobalIds returns a boolean if a field has been set.
+func (o *Payee) HasGlobalIds() bool {
+	if o != nil && !IsNil(o.GlobalIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetGlobalIds gets a reference to the given []ElectronicAddress and assigns it to the GlobalIds field.
+func (o *Payee) SetGlobalIds(v []ElectronicAddress) {
+	o.GlobalIds = v
+}
+
 func (o Payee) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -295,6 +372,9 @@ func (o Payee) MarshalJSON() ([]byte, error) {
 func (o Payee) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["nom"] = o.Nom
+	if o.PayeeId.IsSet() {
+		toSerialize["payeeId"] = o.PayeeId.Get()
+	}
 	if o.Siret.IsSet() {
 		toSerialize["siret"] = o.Siret.Get()
 	}
@@ -309,6 +389,9 @@ func (o Payee) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Bic.IsSet() {
 		toSerialize["bic"] = o.Bic.Get()
+	}
+	if o.GlobalIds != nil {
+		toSerialize["global_ids"] = o.GlobalIds
 	}
 	return toSerialize, nil
 }

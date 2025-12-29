@@ -16,7 +16,7 @@ import (
 )
 
 
-// AmountDue Amount due for payment. (Accepte number, string ou integer)
+// AmountDue Amount due for payment (BT-115). Can be negative for correction invoices.
 type AmountDue struct {
 	Float32 *float32
 	String *string

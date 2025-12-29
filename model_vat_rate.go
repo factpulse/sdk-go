@@ -15,101 +15,98 @@ import (
 	"fmt"
 )
 
-// APIProfile Factur-X profile for API requests.
-type APIProfile string
 
-// List of APIProfile
-const (
-	MINIMUM APIProfile = "MINIMUM"
-	BASIC APIProfile = "BASIC"
-	EN16931 APIProfile = "EN16931"
-	EXTENDED APIProfile = "EXTENDED"
-)
-
-// All allowed values of APIProfile enum
-var AllowedAPIProfileEnumValues = []APIProfile{
-	"MINIMUM",
-	"BASIC",
-	"EN16931",
-	"EXTENDED",
+// VatRate VAT rate applicable to this allowance/charge (BT-96/103).
+type VatRate struct {
+	Float32 *float32
+	String *string
 }
 
-func (v *APIProfile) UnmarshalJSON(src []byte) error {
-	var value string
-	err := json.Unmarshal(src, &value)
-	if err != nil {
-		return err
+// Unmarshal JSON data into any of the pointers in the struct
+func (dst *VatRate) UnmarshalJSON(data []byte) error {
+	var err error
+	// this object is nullable so check if the payload is null or empty string
+	if string(data) == "" || string(data) == "{}" {
+		return nil
 	}
-	enumTypeValue := APIProfile(value)
-	for _, existing := range AllowedAPIProfileEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
+
+	// try to unmarshal JSON data into Float32
+	err = json.Unmarshal(data, &dst.Float32);
+	if err == nil {
+		jsonFloat32, _ := json.Marshal(dst.Float32)
+		if string(jsonFloat32) == "{}" { // empty struct
+			dst.Float32 = nil
+		} else {
+			return nil // data stored in dst.Float32, return on the first match
 		}
-	}
-
-	return fmt.Errorf("%+v is not a valid APIProfile", value)
-}
-
-// NewAPIProfileFromValue returns a pointer to a valid APIProfile
-// for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewAPIProfileFromValue(v string) (*APIProfile, error) {
-	ev := APIProfile(v)
-	if ev.IsValid() {
-		return &ev, nil
 	} else {
-		return nil, fmt.Errorf("invalid value '%v' for APIProfile: valid values are %v", v, AllowedAPIProfileEnumValues)
+		dst.Float32 = nil
 	}
-}
 
-// IsValid return true if the value is valid for the enum, false otherwise
-func (v APIProfile) IsValid() bool {
-	for _, existing := range AllowedAPIProfileEnumValues {
-		if existing == v {
-			return true
+	// try to unmarshal JSON data into String
+	err = json.Unmarshal(data, &dst.String);
+	if err == nil {
+		jsonString, _ := json.Marshal(dst.String)
+		if string(jsonString) == "{}" { // empty struct
+			dst.String = nil
+		} else {
+			return nil // data stored in dst.String, return on the first match
 		}
+	} else {
+		dst.String = nil
 	}
-	return false
+
+	return fmt.Errorf("data failed to match schemas in anyOf(VatRate)")
 }
 
-// Ptr returns reference to APIProfile value
-func (v APIProfile) Ptr() *APIProfile {
-	return &v
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src VatRate) MarshalJSON() ([]byte, error) {
+	if src.Float32 != nil {
+		return json.Marshal(&src.Float32)
+	}
+
+	if src.String != nil {
+		return json.Marshal(&src.String)
+	}
+
+	return nil, nil // no data in anyOf schemas
 }
 
-type NullableAPIProfile struct {
-	value *APIProfile
+
+type NullableVatRate struct {
+	value *VatRate
 	isSet bool
 }
 
-func (v NullableAPIProfile) Get() *APIProfile {
+func (v NullableVatRate) Get() *VatRate {
 	return v.value
 }
 
-func (v *NullableAPIProfile) Set(val *APIProfile) {
+func (v *NullableVatRate) Set(val *VatRate) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAPIProfile) IsSet() bool {
+func (v NullableVatRate) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAPIProfile) Unset() {
+func (v *NullableVatRate) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAPIProfile(val *APIProfile) *NullableAPIProfile {
-	return &NullableAPIProfile{value: val, isSet: true}
+func NewNullableVatRate(val *VatRate) *NullableVatRate {
+	return &NullableVatRate{value: val, isSet: true}
 }
 
-func (v NullableAPIProfile) MarshalJSON() ([]byte, error) {
+func (v NullableVatRate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAPIProfile) UnmarshalJSON(src []byte) error {
+func (v *NullableVatRate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
 

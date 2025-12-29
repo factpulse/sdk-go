@@ -16,7 +16,7 @@ import (
 )
 
 
-// Quantity Invoiced quantity for this line.
+// Quantity Invoiced quantity (BT-129). Can be negative for correction invoices.
 type Quantity struct {
 	Float32 *float32
 	String *string

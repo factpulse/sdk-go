@@ -20,11 +20,11 @@ var _ MappedNullable = &ProcessingOptions{}
 // ProcessingOptions Processing options for generation and submission.
 type ProcessingOptions struct {
 	// Factur-X profile to use
-	FacturxProfile *APIProfile `json:"facturxProfile,omitempty"`
+	FacturxProfile *FacturXProfile `json:"facturxProfile,omitempty"`
 	// Auto-enrich data (Company APIs, Chorus Pro, etc.)
 	AutoEnrich *bool `json:"autoEnrich,omitempty"`
 	// Validate Factur-X XML with Schematron
-	Validate *bool `json:"validate,omitempty"`
+	ValidateXml *bool `json:"validateXml,omitempty"`
 	// Verify required parameters for destination (e.g., service_code for Chorus)
 	VerifyDestinationParameters *bool `json:"verifyDestinationParameters,omitempty"`
 }
@@ -35,12 +35,12 @@ type ProcessingOptions struct {
 // will change when the set of required properties is changed
 func NewProcessingOptions() *ProcessingOptions {
 	this := ProcessingOptions{}
-	var facturxProfile APIProfile = EN16931
+	var facturxProfile FacturXProfile = EN16931
 	this.FacturxProfile = &facturxProfile
 	var autoEnrich bool = true
 	this.AutoEnrich = &autoEnrich
-	var validate bool = true
-	this.Validate = &validate
+	var validateXml bool = true
+	this.ValidateXml = &validateXml
 	var verifyDestinationParameters bool = true
 	this.VerifyDestinationParameters = &verifyDestinationParameters
 	return &this
@@ -51,21 +51,21 @@ func NewProcessingOptions() *ProcessingOptions {
 // but it doesn't guarantee that properties required by API are set
 func NewProcessingOptionsWithDefaults() *ProcessingOptions {
 	this := ProcessingOptions{}
-	var facturxProfile APIProfile = EN16931
+	var facturxProfile FacturXProfile = EN16931
 	this.FacturxProfile = &facturxProfile
 	var autoEnrich bool = true
 	this.AutoEnrich = &autoEnrich
-	var validate bool = true
-	this.Validate = &validate
+	var validateXml bool = true
+	this.ValidateXml = &validateXml
 	var verifyDestinationParameters bool = true
 	this.VerifyDestinationParameters = &verifyDestinationParameters
 	return &this
 }
 
 // GetFacturxProfile returns the FacturxProfile field value if set, zero value otherwise.
-func (o *ProcessingOptions) GetFacturxProfile() APIProfile {
+func (o *ProcessingOptions) GetFacturxProfile() FacturXProfile {
 	if o == nil || IsNil(o.FacturxProfile) {
-		var ret APIProfile
+		var ret FacturXProfile
 		return ret
 	}
 	return *o.FacturxProfile
@@ -73,7 +73,7 @@ func (o *ProcessingOptions) GetFacturxProfile() APIProfile {
 
 // GetFacturxProfileOk returns a tuple with the FacturxProfile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProcessingOptions) GetFacturxProfileOk() (*APIProfile, bool) {
+func (o *ProcessingOptions) GetFacturxProfileOk() (*FacturXProfile, bool) {
 	if o == nil || IsNil(o.FacturxProfile) {
 		return nil, false
 	}
@@ -89,8 +89,8 @@ func (o *ProcessingOptions) HasFacturxProfile() bool {
 	return false
 }
 
-// SetFacturxProfile gets a reference to the given APIProfile and assigns it to the FacturxProfile field.
-func (o *ProcessingOptions) SetFacturxProfile(v APIProfile) {
+// SetFacturxProfile gets a reference to the given FacturXProfile and assigns it to the FacturxProfile field.
+func (o *ProcessingOptions) SetFacturxProfile(v FacturXProfile) {
 	o.FacturxProfile = &v
 }
 
@@ -126,36 +126,36 @@ func (o *ProcessingOptions) SetAutoEnrich(v bool) {
 	o.AutoEnrich = &v
 }
 
-// GetValidate returns the Validate field value if set, zero value otherwise.
-func (o *ProcessingOptions) GetValidate() bool {
-	if o == nil || IsNil(o.Validate) {
+// GetValidateXml returns the ValidateXml field value if set, zero value otherwise.
+func (o *ProcessingOptions) GetValidateXml() bool {
+	if o == nil || IsNil(o.ValidateXml) {
 		var ret bool
 		return ret
 	}
-	return *o.Validate
+	return *o.ValidateXml
 }
 
-// GetValidateOk returns a tuple with the Validate field value if set, nil otherwise
+// GetValidateXmlOk returns a tuple with the ValidateXml field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProcessingOptions) GetValidateOk() (*bool, bool) {
-	if o == nil || IsNil(o.Validate) {
+func (o *ProcessingOptions) GetValidateXmlOk() (*bool, bool) {
+	if o == nil || IsNil(o.ValidateXml) {
 		return nil, false
 	}
-	return o.Validate, true
+	return o.ValidateXml, true
 }
 
-// HasValidate returns a boolean if a field has been set.
-func (o *ProcessingOptions) HasValidate() bool {
-	if o != nil && !IsNil(o.Validate) {
+// HasValidateXml returns a boolean if a field has been set.
+func (o *ProcessingOptions) HasValidateXml() bool {
+	if o != nil && !IsNil(o.ValidateXml) {
 		return true
 	}
 
 	return false
 }
 
-// SetValidate gets a reference to the given bool and assigns it to the Validate field.
-func (o *ProcessingOptions) SetValidate(v bool) {
-	o.Validate = &v
+// SetValidateXml gets a reference to the given bool and assigns it to the ValidateXml field.
+func (o *ProcessingOptions) SetValidateXml(v bool) {
+	o.ValidateXml = &v
 }
 
 // GetVerifyDestinationParameters returns the VerifyDestinationParameters field value if set, zero value otherwise.
@@ -206,8 +206,8 @@ func (o ProcessingOptions) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AutoEnrich) {
 		toSerialize["autoEnrich"] = o.AutoEnrich
 	}
-	if !IsNil(o.Validate) {
-		toSerialize["validate"] = o.Validate
+	if !IsNil(o.ValidateXml) {
+		toSerialize["validateXml"] = o.ValidateXml
 	}
 	if !IsNil(o.VerifyDestinationParameters) {
 		toSerialize["verifyDestinationParameters"] = o.VerifyDestinationParameters

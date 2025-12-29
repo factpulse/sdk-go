@@ -19,14 +19,17 @@ import (
 // checks if the Recipient type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Recipient{}
 
-// Recipient Information about the invoice recipient (the customer).
+// Recipient Information about the invoice recipient / buyer (BG-7).
 type Recipient struct {
 	ElectronicAddress NullableElectronicAddress `json:"electronic_address"`
 	ExecutingServiceCode NullableString `json:"executing_service_code,omitempty"`
 	Name NullableString `json:"name,omitempty"`
 	Siren NullableString `json:"siren,omitempty"`
 	Siret NullableString `json:"siret,omitempty"`
+	VatNumber NullableString `json:"vat_number,omitempty"`
 	PostalAddress NullablePostalAddress `json:"postal_address,omitempty"`
+	Contact NullableContact `json:"contact,omitempty"`
+	GlobalIds []ElectronicAddress `json:"global_ids,omitempty"`
 }
 
 type _Recipient Recipient
@@ -243,6 +246,48 @@ func (o *Recipient) UnsetSiret() {
 	o.Siret.Unset()
 }
 
+// GetVatNumber returns the VatNumber field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Recipient) GetVatNumber() string {
+	if o == nil || IsNil(o.VatNumber.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.VatNumber.Get()
+}
+
+// GetVatNumberOk returns a tuple with the VatNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Recipient) GetVatNumberOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.VatNumber.Get(), o.VatNumber.IsSet()
+}
+
+// HasVatNumber returns a boolean if a field has been set.
+func (o *Recipient) HasVatNumber() bool {
+	if o != nil && o.VatNumber.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetVatNumber gets a reference to the given NullableString and assigns it to the VatNumber field.
+func (o *Recipient) SetVatNumber(v string) {
+	o.VatNumber.Set(&v)
+}
+// SetVatNumberNil sets the value for VatNumber to be an explicit nil
+func (o *Recipient) SetVatNumberNil() {
+	o.VatNumber.Set(nil)
+}
+
+// UnsetVatNumber ensures that no value is present for VatNumber, not even an explicit nil
+func (o *Recipient) UnsetVatNumber() {
+	o.VatNumber.Unset()
+}
+
 // GetPostalAddress returns the PostalAddress field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Recipient) GetPostalAddress() PostalAddress {
 	if o == nil || IsNil(o.PostalAddress.Get()) {
@@ -285,6 +330,81 @@ func (o *Recipient) UnsetPostalAddress() {
 	o.PostalAddress.Unset()
 }
 
+// GetContact returns the Contact field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Recipient) GetContact() Contact {
+	if o == nil || IsNil(o.Contact.Get()) {
+		var ret Contact
+		return ret
+	}
+	return *o.Contact.Get()
+}
+
+// GetContactOk returns a tuple with the Contact field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Recipient) GetContactOk() (*Contact, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Contact.Get(), o.Contact.IsSet()
+}
+
+// HasContact returns a boolean if a field has been set.
+func (o *Recipient) HasContact() bool {
+	if o != nil && o.Contact.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetContact gets a reference to the given NullableContact and assigns it to the Contact field.
+func (o *Recipient) SetContact(v Contact) {
+	o.Contact.Set(&v)
+}
+// SetContactNil sets the value for Contact to be an explicit nil
+func (o *Recipient) SetContactNil() {
+	o.Contact.Set(nil)
+}
+
+// UnsetContact ensures that no value is present for Contact, not even an explicit nil
+func (o *Recipient) UnsetContact() {
+	o.Contact.Unset()
+}
+
+// GetGlobalIds returns the GlobalIds field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Recipient) GetGlobalIds() []ElectronicAddress {
+	if o == nil {
+		var ret []ElectronicAddress
+		return ret
+	}
+	return o.GlobalIds
+}
+
+// GetGlobalIdsOk returns a tuple with the GlobalIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Recipient) GetGlobalIdsOk() ([]ElectronicAddress, bool) {
+	if o == nil || IsNil(o.GlobalIds) {
+		return nil, false
+	}
+	return o.GlobalIds, true
+}
+
+// HasGlobalIds returns a boolean if a field has been set.
+func (o *Recipient) HasGlobalIds() bool {
+	if o != nil && !IsNil(o.GlobalIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetGlobalIds gets a reference to the given []ElectronicAddress and assigns it to the GlobalIds field.
+func (o *Recipient) SetGlobalIds(v []ElectronicAddress) {
+	o.GlobalIds = v
+}
+
 func (o Recipient) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -308,8 +428,17 @@ func (o Recipient) ToMap() (map[string]interface{}, error) {
 	if o.Siret.IsSet() {
 		toSerialize["siret"] = o.Siret.Get()
 	}
+	if o.VatNumber.IsSet() {
+		toSerialize["vat_number"] = o.VatNumber.Get()
+	}
 	if o.PostalAddress.IsSet() {
 		toSerialize["postal_address"] = o.PostalAddress.Get()
+	}
+	if o.Contact.IsSet() {
+		toSerialize["contact"] = o.Contact.Get()
+	}
+	if o.GlobalIds != nil {
+		toSerialize["global_ids"] = o.GlobalIds
 	}
 	return toSerialize, nil
 }

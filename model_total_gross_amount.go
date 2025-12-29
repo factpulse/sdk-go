@@ -16,7 +16,7 @@ import (
 )
 
 
-// TotalGrossAmount Total gross amount (including tax). (Accepte number, string ou integer)
+// TotalGrossAmount Invoice total amount with VAT (BT-112). Can be negative for correction invoices.
 type TotalGrossAmount struct {
 	Float32 *float32
 	String *string

@@ -5,11 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Nom** | **string** | Payee name (BT-59). Mandatory. | 
+**PayeeId** | Pointer to **NullableString** |  | [optional] 
 **Siret** | Pointer to **NullableString** |  | [optional] 
 **Siren** | Pointer to **NullableString** |  | [optional] 
 **ElectronicAddress** | Pointer to [**NullableElectronicAddress**](ElectronicAddress.md) |  | [optional] 
 **Iban** | Pointer to **NullableString** |  | [optional] 
 **Bic** | Pointer to **NullableString** |  | [optional] 
+**GlobalIds** | Pointer to [**[]ElectronicAddress**](ElectronicAddress.md) |  | [optional] 
 
 ## Methods
 
@@ -50,6 +52,41 @@ and a boolean to check if the value has been set.
 SetNom sets Nom field to given value.
 
 
+### GetPayeeId
+
+`func (o *Payee) GetPayeeId() string`
+
+GetPayeeId returns the PayeeId field if non-nil, zero value otherwise.
+
+### GetPayeeIdOk
+
+`func (o *Payee) GetPayeeIdOk() (*string, bool)`
+
+GetPayeeIdOk returns a tuple with the PayeeId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPayeeId
+
+`func (o *Payee) SetPayeeId(v string)`
+
+SetPayeeId sets PayeeId field to given value.
+
+### HasPayeeId
+
+`func (o *Payee) HasPayeeId() bool`
+
+HasPayeeId returns a boolean if a field has been set.
+
+### SetPayeeIdNil
+
+`func (o *Payee) SetPayeeIdNil(b bool)`
+
+ SetPayeeIdNil sets the value for PayeeId to be an explicit nil
+
+### UnsetPayeeId
+`func (o *Payee) UnsetPayeeId()`
+
+UnsetPayeeId ensures that no value is present for PayeeId, not even an explicit nil
 ### GetSiret
 
 `func (o *Payee) GetSiret() string`
@@ -225,6 +262,41 @@ HasBic returns a boolean if a field has been set.
 `func (o *Payee) UnsetBic()`
 
 UnsetBic ensures that no value is present for Bic, not even an explicit nil
+### GetGlobalIds
+
+`func (o *Payee) GetGlobalIds() []ElectronicAddress`
+
+GetGlobalIds returns the GlobalIds field if non-nil, zero value otherwise.
+
+### GetGlobalIdsOk
+
+`func (o *Payee) GetGlobalIdsOk() (*[]ElectronicAddress, bool)`
+
+GetGlobalIdsOk returns a tuple with the GlobalIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGlobalIds
+
+`func (o *Payee) SetGlobalIds(v []ElectronicAddress)`
+
+SetGlobalIds sets GlobalIds field to given value.
+
+### HasGlobalIds
+
+`func (o *Payee) HasGlobalIds() bool`
+
+HasGlobalIds returns a boolean if a field has been set.
+
+### SetGlobalIdsNil
+
+`func (o *Payee) SetGlobalIdsNil(b bool)`
+
+ SetGlobalIdsNil sets the value for GlobalIds to be an explicit nil
+
+### UnsetGlobalIds
+`func (o *Payee) UnsetGlobalIds()`
+
+UnsetGlobalIds ensures that no value is present for GlobalIds, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

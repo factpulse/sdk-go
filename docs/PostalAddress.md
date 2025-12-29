@@ -7,8 +7,10 @@ Name | Type | Description | Notes
 **PostalCode** | Pointer to **NullableString** |  | [optional] 
 **LineOne** | Pointer to **NullableString** |  | [optional] 
 **LineTwo** | Pointer to **NullableString** |  | [optional] 
+**LineThree** | Pointer to **NullableString** |  | [optional] 
 **City** | Pointer to **NullableString** |  | [optional] 
 **CountryCode** | Pointer to **NullableString** |  | [optional] 
+**CountrySubdivision** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
@@ -134,6 +136,41 @@ HasLineTwo returns a boolean if a field has been set.
 `func (o *PostalAddress) UnsetLineTwo()`
 
 UnsetLineTwo ensures that no value is present for LineTwo, not even an explicit nil
+### GetLineThree
+
+`func (o *PostalAddress) GetLineThree() string`
+
+GetLineThree returns the LineThree field if non-nil, zero value otherwise.
+
+### GetLineThreeOk
+
+`func (o *PostalAddress) GetLineThreeOk() (*string, bool)`
+
+GetLineThreeOk returns a tuple with the LineThree field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLineThree
+
+`func (o *PostalAddress) SetLineThree(v string)`
+
+SetLineThree sets LineThree field to given value.
+
+### HasLineThree
+
+`func (o *PostalAddress) HasLineThree() bool`
+
+HasLineThree returns a boolean if a field has been set.
+
+### SetLineThreeNil
+
+`func (o *PostalAddress) SetLineThreeNil(b bool)`
+
+ SetLineThreeNil sets the value for LineThree to be an explicit nil
+
+### UnsetLineThree
+`func (o *PostalAddress) UnsetLineThree()`
+
+UnsetLineThree ensures that no value is present for LineThree, not even an explicit nil
 ### GetCity
 
 `func (o *PostalAddress) GetCity() string`
@@ -204,6 +241,41 @@ HasCountryCode returns a boolean if a field has been set.
 `func (o *PostalAddress) UnsetCountryCode()`
 
 UnsetCountryCode ensures that no value is present for CountryCode, not even an explicit nil
+### GetCountrySubdivision
+
+`func (o *PostalAddress) GetCountrySubdivision() string`
+
+GetCountrySubdivision returns the CountrySubdivision field if non-nil, zero value otherwise.
+
+### GetCountrySubdivisionOk
+
+`func (o *PostalAddress) GetCountrySubdivisionOk() (*string, bool)`
+
+GetCountrySubdivisionOk returns a tuple with the CountrySubdivision field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCountrySubdivision
+
+`func (o *PostalAddress) SetCountrySubdivision(v string)`
+
+SetCountrySubdivision sets CountrySubdivision field to given value.
+
+### HasCountrySubdivision
+
+`func (o *PostalAddress) HasCountrySubdivision() bool`
+
+HasCountrySubdivision returns a boolean if a field has been set.
+
+### SetCountrySubdivisionNil
+
+`func (o *PostalAddress) SetCountrySubdivisionNil(b bool)`
+
+ SetCountrySubdivisionNil sets the value for CountrySubdivision to be an explicit nil
+
+### UnsetCountrySubdivision
+`func (o *PostalAddress) UnsetCountrySubdivision()`
+
+UnsetCountrySubdivision ensures that no value is present for CountrySubdivision, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -25,7 +25,7 @@ type GetChorusProIdRequest struct {
 	// Structure SIRET (14 digits)
 	Siret string `json:"siret"`
 	// Identifier type (SIRET, SIREN, UE_HORS_FRANCE, etc.)
-	IdentifierType *string `json:"identifier_type,omitempty"`
+	IdentifierType *string `json:"identifierType,omitempty"`
 }
 
 type _GetChorusProIdRequest GetChorusProIdRequest
@@ -165,7 +165,7 @@ func (o GetChorusProIdRequest) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["siret"] = o.Siret
 	if !IsNil(o.IdentifierType) {
-		toSerialize["identifier_type"] = o.IdentifierType
+		toSerialize["identifierType"] = o.IdentifierType
 	}
 	return toSerialize, nil
 }

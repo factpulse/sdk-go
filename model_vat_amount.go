@@ -16,7 +16,7 @@ import (
 )
 
 
-// VATAmount VAT amount for this line. (Accepte number, string ou integer)
+// VATAmount VAT category tax amount (BT-117). Can be negative for correction invoices.
 type VATAmount struct {
 	Float32 *float32
 	String *string

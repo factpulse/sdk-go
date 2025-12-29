@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **FlowId** | Pointer to **NullableString** |  | [optional] 
 **SourceFormat** | [**InvoiceFormat**](InvoiceFormat.md) | Invoice source format | 
 **SupplierReference** | **string** | Invoice number issued by the supplier (BT-1) | 
-**DocumentType** | Pointer to [**DocumentType**](DocumentType.md) | Document type (BT-3) | [optional] [default to INVOICE]
+**DocumentType** | Pointer to [**InvoiceTypeCode**](InvoiceTypeCode.md) | Document type (BT-3) | [optional] [default to INVOICE]
 **Supplier** | [**IncomingSupplier**](IncomingSupplier.md) | Invoice issuer (SellerTradeParty) | 
 **BillingSiteName** | **string** | Recipient name / your company (BT-44) | 
 **BillingSiteSiret** | Pointer to **NullableString** |  | [optional] 
@@ -120,20 +120,20 @@ SetSupplierReference sets SupplierReference field to given value.
 
 ### GetDocumentType
 
-`func (o *IncomingInvoice) GetDocumentType() DocumentType`
+`func (o *IncomingInvoice) GetDocumentType() InvoiceTypeCode`
 
 GetDocumentType returns the DocumentType field if non-nil, zero value otherwise.
 
 ### GetDocumentTypeOk
 
-`func (o *IncomingInvoice) GetDocumentTypeOk() (*DocumentType, bool)`
+`func (o *IncomingInvoice) GetDocumentTypeOk() (*InvoiceTypeCode, bool)`
 
 GetDocumentTypeOk returns a tuple with the DocumentType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDocumentType
 
-`func (o *IncomingInvoice) SetDocumentType(v DocumentType)`
+`func (o *IncomingInvoice) SetDocumentType(v InvoiceTypeCode)`
 
 SetDocumentType sets DocumentType field to given value.
 

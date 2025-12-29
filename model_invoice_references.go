@@ -21,14 +21,27 @@ var _ MappedNullable = &InvoiceReferences{}
 
 // InvoiceReferences Contains various invoice references (currency, type, etc.).
 type InvoiceReferences struct {
+	BusinessProcessId NullableString `json:"business_process_id,omitempty"`
+	// Invoice currency code (BT-5). ISO 4217.
 	InvoiceCurrency *string `json:"invoice_currency,omitempty"`
+	// Payment means type code (BT-81).
 	PaymentMeans PaymentMeans `json:"payment_means"`
+	PaymentMeansText NullableString `json:"payment_means_text,omitempty"`
 	InvoiceType InvoiceTypeCode `json:"invoice_type"`
+	// VAT accounting code.
 	VatAccountingCode VATAccountingCode `json:"vat_accounting_code"`
+	BuyerReference NullableString `json:"buyer_reference,omitempty"`
 	ContractReference NullableString `json:"contract_reference,omitempty"`
-	VatExemptionReason NullableString `json:"vat_exemption_reason,omitempty"`
 	PurchaseOrderReference NullableString `json:"purchase_order_reference,omitempty"`
+	SellerOrderReference NullableString `json:"seller_order_reference,omitempty"`
+	ReceivingAdviceReference NullableString `json:"receiving_advice_reference,omitempty"`
+	DespatchAdviceReference NullableString `json:"despatch_advice_reference,omitempty"`
+	TenderReference NullableString `json:"tender_reference,omitempty"`
 	PrecedingInvoiceReference NullableString `json:"preceding_invoice_reference,omitempty"`
+	PrecedingInvoiceDate NullableString `json:"preceding_invoice_date,omitempty"`
+	ProjectReference NullableString `json:"project_reference,omitempty"`
+	ProjectName NullableString `json:"project_name,omitempty"`
+	VatExemptionReason NullableString `json:"vat_exemption_reason,omitempty"`
 }
 
 type _InvoiceReferences InvoiceReferences
@@ -55,6 +68,48 @@ func NewInvoiceReferencesWithDefaults() *InvoiceReferences {
 	var invoiceCurrency string = "EUR"
 	this.InvoiceCurrency = &invoiceCurrency
 	return &this
+}
+
+// GetBusinessProcessId returns the BusinessProcessId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceReferences) GetBusinessProcessId() string {
+	if o == nil || IsNil(o.BusinessProcessId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.BusinessProcessId.Get()
+}
+
+// GetBusinessProcessIdOk returns a tuple with the BusinessProcessId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceReferences) GetBusinessProcessIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.BusinessProcessId.Get(), o.BusinessProcessId.IsSet()
+}
+
+// HasBusinessProcessId returns a boolean if a field has been set.
+func (o *InvoiceReferences) HasBusinessProcessId() bool {
+	if o != nil && o.BusinessProcessId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetBusinessProcessId gets a reference to the given NullableString and assigns it to the BusinessProcessId field.
+func (o *InvoiceReferences) SetBusinessProcessId(v string) {
+	o.BusinessProcessId.Set(&v)
+}
+// SetBusinessProcessIdNil sets the value for BusinessProcessId to be an explicit nil
+func (o *InvoiceReferences) SetBusinessProcessIdNil() {
+	o.BusinessProcessId.Set(nil)
+}
+
+// UnsetBusinessProcessId ensures that no value is present for BusinessProcessId, not even an explicit nil
+func (o *InvoiceReferences) UnsetBusinessProcessId() {
+	o.BusinessProcessId.Unset()
 }
 
 // GetInvoiceCurrency returns the InvoiceCurrency field value if set, zero value otherwise.
@@ -113,6 +168,48 @@ func (o *InvoiceReferences) SetPaymentMeans(v PaymentMeans) {
 	o.PaymentMeans = v
 }
 
+// GetPaymentMeansText returns the PaymentMeansText field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceReferences) GetPaymentMeansText() string {
+	if o == nil || IsNil(o.PaymentMeansText.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.PaymentMeansText.Get()
+}
+
+// GetPaymentMeansTextOk returns a tuple with the PaymentMeansText field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceReferences) GetPaymentMeansTextOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PaymentMeansText.Get(), o.PaymentMeansText.IsSet()
+}
+
+// HasPaymentMeansText returns a boolean if a field has been set.
+func (o *InvoiceReferences) HasPaymentMeansText() bool {
+	if o != nil && o.PaymentMeansText.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentMeansText gets a reference to the given NullableString and assigns it to the PaymentMeansText field.
+func (o *InvoiceReferences) SetPaymentMeansText(v string) {
+	o.PaymentMeansText.Set(&v)
+}
+// SetPaymentMeansTextNil sets the value for PaymentMeansText to be an explicit nil
+func (o *InvoiceReferences) SetPaymentMeansTextNil() {
+	o.PaymentMeansText.Set(nil)
+}
+
+// UnsetPaymentMeansText ensures that no value is present for PaymentMeansText, not even an explicit nil
+func (o *InvoiceReferences) UnsetPaymentMeansText() {
+	o.PaymentMeansText.Unset()
+}
+
 // GetInvoiceType returns the InvoiceType field value
 func (o *InvoiceReferences) GetInvoiceType() InvoiceTypeCode {
 	if o == nil {
@@ -161,6 +258,48 @@ func (o *InvoiceReferences) SetVatAccountingCode(v VATAccountingCode) {
 	o.VatAccountingCode = v
 }
 
+// GetBuyerReference returns the BuyerReference field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceReferences) GetBuyerReference() string {
+	if o == nil || IsNil(o.BuyerReference.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.BuyerReference.Get()
+}
+
+// GetBuyerReferenceOk returns a tuple with the BuyerReference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceReferences) GetBuyerReferenceOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.BuyerReference.Get(), o.BuyerReference.IsSet()
+}
+
+// HasBuyerReference returns a boolean if a field has been set.
+func (o *InvoiceReferences) HasBuyerReference() bool {
+	if o != nil && o.BuyerReference.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetBuyerReference gets a reference to the given NullableString and assigns it to the BuyerReference field.
+func (o *InvoiceReferences) SetBuyerReference(v string) {
+	o.BuyerReference.Set(&v)
+}
+// SetBuyerReferenceNil sets the value for BuyerReference to be an explicit nil
+func (o *InvoiceReferences) SetBuyerReferenceNil() {
+	o.BuyerReference.Set(nil)
+}
+
+// UnsetBuyerReference ensures that no value is present for BuyerReference, not even an explicit nil
+func (o *InvoiceReferences) UnsetBuyerReference() {
+	o.BuyerReference.Unset()
+}
+
 // GetContractReference returns the ContractReference field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InvoiceReferences) GetContractReference() string {
 	if o == nil || IsNil(o.ContractReference.Get()) {
@@ -201,48 +340,6 @@ func (o *InvoiceReferences) SetContractReferenceNil() {
 // UnsetContractReference ensures that no value is present for ContractReference, not even an explicit nil
 func (o *InvoiceReferences) UnsetContractReference() {
 	o.ContractReference.Unset()
-}
-
-// GetVatExemptionReason returns the VatExemptionReason field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *InvoiceReferences) GetVatExemptionReason() string {
-	if o == nil || IsNil(o.VatExemptionReason.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.VatExemptionReason.Get()
-}
-
-// GetVatExemptionReasonOk returns a tuple with the VatExemptionReason field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *InvoiceReferences) GetVatExemptionReasonOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.VatExemptionReason.Get(), o.VatExemptionReason.IsSet()
-}
-
-// HasVatExemptionReason returns a boolean if a field has been set.
-func (o *InvoiceReferences) HasVatExemptionReason() bool {
-	if o != nil && o.VatExemptionReason.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetVatExemptionReason gets a reference to the given NullableString and assigns it to the VatExemptionReason field.
-func (o *InvoiceReferences) SetVatExemptionReason(v string) {
-	o.VatExemptionReason.Set(&v)
-}
-// SetVatExemptionReasonNil sets the value for VatExemptionReason to be an explicit nil
-func (o *InvoiceReferences) SetVatExemptionReasonNil() {
-	o.VatExemptionReason.Set(nil)
-}
-
-// UnsetVatExemptionReason ensures that no value is present for VatExemptionReason, not even an explicit nil
-func (o *InvoiceReferences) UnsetVatExemptionReason() {
-	o.VatExemptionReason.Unset()
 }
 
 // GetPurchaseOrderReference returns the PurchaseOrderReference field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -287,6 +384,174 @@ func (o *InvoiceReferences) UnsetPurchaseOrderReference() {
 	o.PurchaseOrderReference.Unset()
 }
 
+// GetSellerOrderReference returns the SellerOrderReference field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceReferences) GetSellerOrderReference() string {
+	if o == nil || IsNil(o.SellerOrderReference.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.SellerOrderReference.Get()
+}
+
+// GetSellerOrderReferenceOk returns a tuple with the SellerOrderReference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceReferences) GetSellerOrderReferenceOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SellerOrderReference.Get(), o.SellerOrderReference.IsSet()
+}
+
+// HasSellerOrderReference returns a boolean if a field has been set.
+func (o *InvoiceReferences) HasSellerOrderReference() bool {
+	if o != nil && o.SellerOrderReference.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSellerOrderReference gets a reference to the given NullableString and assigns it to the SellerOrderReference field.
+func (o *InvoiceReferences) SetSellerOrderReference(v string) {
+	o.SellerOrderReference.Set(&v)
+}
+// SetSellerOrderReferenceNil sets the value for SellerOrderReference to be an explicit nil
+func (o *InvoiceReferences) SetSellerOrderReferenceNil() {
+	o.SellerOrderReference.Set(nil)
+}
+
+// UnsetSellerOrderReference ensures that no value is present for SellerOrderReference, not even an explicit nil
+func (o *InvoiceReferences) UnsetSellerOrderReference() {
+	o.SellerOrderReference.Unset()
+}
+
+// GetReceivingAdviceReference returns the ReceivingAdviceReference field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceReferences) GetReceivingAdviceReference() string {
+	if o == nil || IsNil(o.ReceivingAdviceReference.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ReceivingAdviceReference.Get()
+}
+
+// GetReceivingAdviceReferenceOk returns a tuple with the ReceivingAdviceReference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceReferences) GetReceivingAdviceReferenceOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ReceivingAdviceReference.Get(), o.ReceivingAdviceReference.IsSet()
+}
+
+// HasReceivingAdviceReference returns a boolean if a field has been set.
+func (o *InvoiceReferences) HasReceivingAdviceReference() bool {
+	if o != nil && o.ReceivingAdviceReference.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetReceivingAdviceReference gets a reference to the given NullableString and assigns it to the ReceivingAdviceReference field.
+func (o *InvoiceReferences) SetReceivingAdviceReference(v string) {
+	o.ReceivingAdviceReference.Set(&v)
+}
+// SetReceivingAdviceReferenceNil sets the value for ReceivingAdviceReference to be an explicit nil
+func (o *InvoiceReferences) SetReceivingAdviceReferenceNil() {
+	o.ReceivingAdviceReference.Set(nil)
+}
+
+// UnsetReceivingAdviceReference ensures that no value is present for ReceivingAdviceReference, not even an explicit nil
+func (o *InvoiceReferences) UnsetReceivingAdviceReference() {
+	o.ReceivingAdviceReference.Unset()
+}
+
+// GetDespatchAdviceReference returns the DespatchAdviceReference field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceReferences) GetDespatchAdviceReference() string {
+	if o == nil || IsNil(o.DespatchAdviceReference.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.DespatchAdviceReference.Get()
+}
+
+// GetDespatchAdviceReferenceOk returns a tuple with the DespatchAdviceReference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceReferences) GetDespatchAdviceReferenceOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DespatchAdviceReference.Get(), o.DespatchAdviceReference.IsSet()
+}
+
+// HasDespatchAdviceReference returns a boolean if a field has been set.
+func (o *InvoiceReferences) HasDespatchAdviceReference() bool {
+	if o != nil && o.DespatchAdviceReference.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDespatchAdviceReference gets a reference to the given NullableString and assigns it to the DespatchAdviceReference field.
+func (o *InvoiceReferences) SetDespatchAdviceReference(v string) {
+	o.DespatchAdviceReference.Set(&v)
+}
+// SetDespatchAdviceReferenceNil sets the value for DespatchAdviceReference to be an explicit nil
+func (o *InvoiceReferences) SetDespatchAdviceReferenceNil() {
+	o.DespatchAdviceReference.Set(nil)
+}
+
+// UnsetDespatchAdviceReference ensures that no value is present for DespatchAdviceReference, not even an explicit nil
+func (o *InvoiceReferences) UnsetDespatchAdviceReference() {
+	o.DespatchAdviceReference.Unset()
+}
+
+// GetTenderReference returns the TenderReference field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceReferences) GetTenderReference() string {
+	if o == nil || IsNil(o.TenderReference.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.TenderReference.Get()
+}
+
+// GetTenderReferenceOk returns a tuple with the TenderReference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceReferences) GetTenderReferenceOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TenderReference.Get(), o.TenderReference.IsSet()
+}
+
+// HasTenderReference returns a boolean if a field has been set.
+func (o *InvoiceReferences) HasTenderReference() bool {
+	if o != nil && o.TenderReference.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTenderReference gets a reference to the given NullableString and assigns it to the TenderReference field.
+func (o *InvoiceReferences) SetTenderReference(v string) {
+	o.TenderReference.Set(&v)
+}
+// SetTenderReferenceNil sets the value for TenderReference to be an explicit nil
+func (o *InvoiceReferences) SetTenderReferenceNil() {
+	o.TenderReference.Set(nil)
+}
+
+// UnsetTenderReference ensures that no value is present for TenderReference, not even an explicit nil
+func (o *InvoiceReferences) UnsetTenderReference() {
+	o.TenderReference.Unset()
+}
+
 // GetPrecedingInvoiceReference returns the PrecedingInvoiceReference field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InvoiceReferences) GetPrecedingInvoiceReference() string {
 	if o == nil || IsNil(o.PrecedingInvoiceReference.Get()) {
@@ -329,6 +594,174 @@ func (o *InvoiceReferences) UnsetPrecedingInvoiceReference() {
 	o.PrecedingInvoiceReference.Unset()
 }
 
+// GetPrecedingInvoiceDate returns the PrecedingInvoiceDate field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceReferences) GetPrecedingInvoiceDate() string {
+	if o == nil || IsNil(o.PrecedingInvoiceDate.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.PrecedingInvoiceDate.Get()
+}
+
+// GetPrecedingInvoiceDateOk returns a tuple with the PrecedingInvoiceDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceReferences) GetPrecedingInvoiceDateOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PrecedingInvoiceDate.Get(), o.PrecedingInvoiceDate.IsSet()
+}
+
+// HasPrecedingInvoiceDate returns a boolean if a field has been set.
+func (o *InvoiceReferences) HasPrecedingInvoiceDate() bool {
+	if o != nil && o.PrecedingInvoiceDate.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPrecedingInvoiceDate gets a reference to the given NullableString and assigns it to the PrecedingInvoiceDate field.
+func (o *InvoiceReferences) SetPrecedingInvoiceDate(v string) {
+	o.PrecedingInvoiceDate.Set(&v)
+}
+// SetPrecedingInvoiceDateNil sets the value for PrecedingInvoiceDate to be an explicit nil
+func (o *InvoiceReferences) SetPrecedingInvoiceDateNil() {
+	o.PrecedingInvoiceDate.Set(nil)
+}
+
+// UnsetPrecedingInvoiceDate ensures that no value is present for PrecedingInvoiceDate, not even an explicit nil
+func (o *InvoiceReferences) UnsetPrecedingInvoiceDate() {
+	o.PrecedingInvoiceDate.Unset()
+}
+
+// GetProjectReference returns the ProjectReference field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceReferences) GetProjectReference() string {
+	if o == nil || IsNil(o.ProjectReference.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ProjectReference.Get()
+}
+
+// GetProjectReferenceOk returns a tuple with the ProjectReference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceReferences) GetProjectReferenceOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ProjectReference.Get(), o.ProjectReference.IsSet()
+}
+
+// HasProjectReference returns a boolean if a field has been set.
+func (o *InvoiceReferences) HasProjectReference() bool {
+	if o != nil && o.ProjectReference.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetProjectReference gets a reference to the given NullableString and assigns it to the ProjectReference field.
+func (o *InvoiceReferences) SetProjectReference(v string) {
+	o.ProjectReference.Set(&v)
+}
+// SetProjectReferenceNil sets the value for ProjectReference to be an explicit nil
+func (o *InvoiceReferences) SetProjectReferenceNil() {
+	o.ProjectReference.Set(nil)
+}
+
+// UnsetProjectReference ensures that no value is present for ProjectReference, not even an explicit nil
+func (o *InvoiceReferences) UnsetProjectReference() {
+	o.ProjectReference.Unset()
+}
+
+// GetProjectName returns the ProjectName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceReferences) GetProjectName() string {
+	if o == nil || IsNil(o.ProjectName.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ProjectName.Get()
+}
+
+// GetProjectNameOk returns a tuple with the ProjectName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceReferences) GetProjectNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ProjectName.Get(), o.ProjectName.IsSet()
+}
+
+// HasProjectName returns a boolean if a field has been set.
+func (o *InvoiceReferences) HasProjectName() bool {
+	if o != nil && o.ProjectName.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetProjectName gets a reference to the given NullableString and assigns it to the ProjectName field.
+func (o *InvoiceReferences) SetProjectName(v string) {
+	o.ProjectName.Set(&v)
+}
+// SetProjectNameNil sets the value for ProjectName to be an explicit nil
+func (o *InvoiceReferences) SetProjectNameNil() {
+	o.ProjectName.Set(nil)
+}
+
+// UnsetProjectName ensures that no value is present for ProjectName, not even an explicit nil
+func (o *InvoiceReferences) UnsetProjectName() {
+	o.ProjectName.Unset()
+}
+
+// GetVatExemptionReason returns the VatExemptionReason field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceReferences) GetVatExemptionReason() string {
+	if o == nil || IsNil(o.VatExemptionReason.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.VatExemptionReason.Get()
+}
+
+// GetVatExemptionReasonOk returns a tuple with the VatExemptionReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceReferences) GetVatExemptionReasonOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.VatExemptionReason.Get(), o.VatExemptionReason.IsSet()
+}
+
+// HasVatExemptionReason returns a boolean if a field has been set.
+func (o *InvoiceReferences) HasVatExemptionReason() bool {
+	if o != nil && o.VatExemptionReason.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetVatExemptionReason gets a reference to the given NullableString and assigns it to the VatExemptionReason field.
+func (o *InvoiceReferences) SetVatExemptionReason(v string) {
+	o.VatExemptionReason.Set(&v)
+}
+// SetVatExemptionReasonNil sets the value for VatExemptionReason to be an explicit nil
+func (o *InvoiceReferences) SetVatExemptionReasonNil() {
+	o.VatExemptionReason.Set(nil)
+}
+
+// UnsetVatExemptionReason ensures that no value is present for VatExemptionReason, not even an explicit nil
+func (o *InvoiceReferences) UnsetVatExemptionReason() {
+	o.VatExemptionReason.Unset()
+}
+
 func (o InvoiceReferences) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -339,23 +772,53 @@ func (o InvoiceReferences) MarshalJSON() ([]byte, error) {
 
 func (o InvoiceReferences) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if o.BusinessProcessId.IsSet() {
+		toSerialize["business_process_id"] = o.BusinessProcessId.Get()
+	}
 	if !IsNil(o.InvoiceCurrency) {
 		toSerialize["invoice_currency"] = o.InvoiceCurrency
 	}
 	toSerialize["payment_means"] = o.PaymentMeans
+	if o.PaymentMeansText.IsSet() {
+		toSerialize["payment_means_text"] = o.PaymentMeansText.Get()
+	}
 	toSerialize["invoice_type"] = o.InvoiceType
 	toSerialize["vat_accounting_code"] = o.VatAccountingCode
+	if o.BuyerReference.IsSet() {
+		toSerialize["buyer_reference"] = o.BuyerReference.Get()
+	}
 	if o.ContractReference.IsSet() {
 		toSerialize["contract_reference"] = o.ContractReference.Get()
-	}
-	if o.VatExemptionReason.IsSet() {
-		toSerialize["vat_exemption_reason"] = o.VatExemptionReason.Get()
 	}
 	if o.PurchaseOrderReference.IsSet() {
 		toSerialize["purchase_order_reference"] = o.PurchaseOrderReference.Get()
 	}
+	if o.SellerOrderReference.IsSet() {
+		toSerialize["seller_order_reference"] = o.SellerOrderReference.Get()
+	}
+	if o.ReceivingAdviceReference.IsSet() {
+		toSerialize["receiving_advice_reference"] = o.ReceivingAdviceReference.Get()
+	}
+	if o.DespatchAdviceReference.IsSet() {
+		toSerialize["despatch_advice_reference"] = o.DespatchAdviceReference.Get()
+	}
+	if o.TenderReference.IsSet() {
+		toSerialize["tender_reference"] = o.TenderReference.Get()
+	}
 	if o.PrecedingInvoiceReference.IsSet() {
 		toSerialize["preceding_invoice_reference"] = o.PrecedingInvoiceReference.Get()
+	}
+	if o.PrecedingInvoiceDate.IsSet() {
+		toSerialize["preceding_invoice_date"] = o.PrecedingInvoiceDate.Get()
+	}
+	if o.ProjectReference.IsSet() {
+		toSerialize["project_reference"] = o.ProjectReference.Get()
+	}
+	if o.ProjectName.IsSet() {
+		toSerialize["project_name"] = o.ProjectName.Get()
+	}
+	if o.VatExemptionReason.IsSet() {
+		toSerialize["vat_exemption_reason"] = o.VatExemptionReason.Get()
 	}
 	return toSerialize, nil
 }

@@ -16,7 +16,7 @@ import (
 )
 
 
-// TotalVATAmount Total VAT amount. (Accepte number, string ou integer)
+// TotalVATAmount Invoice total VAT amount (BT-110). Can be negative for correction invoices.
 type TotalVATAmount struct {
 	Float32 *float32
 	String *string

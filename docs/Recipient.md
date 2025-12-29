@@ -9,7 +9,10 @@ Name | Type | Description | Notes
 **Name** | Pointer to **NullableString** |  | [optional] 
 **Siren** | Pointer to **NullableString** |  | [optional] 
 **Siret** | Pointer to **NullableString** |  | [optional] 
+**VatNumber** | Pointer to **NullableString** |  | [optional] 
 **PostalAddress** | Pointer to [**NullablePostalAddress**](PostalAddress.md) |  | [optional] 
+**Contact** | Pointer to [**NullableContact**](Contact.md) |  | [optional] 
+**GlobalIds** | Pointer to [**[]ElectronicAddress**](ElectronicAddress.md) |  | [optional] 
 
 ## Methods
 
@@ -200,6 +203,41 @@ HasSiret returns a boolean if a field has been set.
 `func (o *Recipient) UnsetSiret()`
 
 UnsetSiret ensures that no value is present for Siret, not even an explicit nil
+### GetVatNumber
+
+`func (o *Recipient) GetVatNumber() string`
+
+GetVatNumber returns the VatNumber field if non-nil, zero value otherwise.
+
+### GetVatNumberOk
+
+`func (o *Recipient) GetVatNumberOk() (*string, bool)`
+
+GetVatNumberOk returns a tuple with the VatNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVatNumber
+
+`func (o *Recipient) SetVatNumber(v string)`
+
+SetVatNumber sets VatNumber field to given value.
+
+### HasVatNumber
+
+`func (o *Recipient) HasVatNumber() bool`
+
+HasVatNumber returns a boolean if a field has been set.
+
+### SetVatNumberNil
+
+`func (o *Recipient) SetVatNumberNil(b bool)`
+
+ SetVatNumberNil sets the value for VatNumber to be an explicit nil
+
+### UnsetVatNumber
+`func (o *Recipient) UnsetVatNumber()`
+
+UnsetVatNumber ensures that no value is present for VatNumber, not even an explicit nil
 ### GetPostalAddress
 
 `func (o *Recipient) GetPostalAddress() PostalAddress`
@@ -235,6 +273,76 @@ HasPostalAddress returns a boolean if a field has been set.
 `func (o *Recipient) UnsetPostalAddress()`
 
 UnsetPostalAddress ensures that no value is present for PostalAddress, not even an explicit nil
+### GetContact
+
+`func (o *Recipient) GetContact() Contact`
+
+GetContact returns the Contact field if non-nil, zero value otherwise.
+
+### GetContactOk
+
+`func (o *Recipient) GetContactOk() (*Contact, bool)`
+
+GetContactOk returns a tuple with the Contact field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContact
+
+`func (o *Recipient) SetContact(v Contact)`
+
+SetContact sets Contact field to given value.
+
+### HasContact
+
+`func (o *Recipient) HasContact() bool`
+
+HasContact returns a boolean if a field has been set.
+
+### SetContactNil
+
+`func (o *Recipient) SetContactNil(b bool)`
+
+ SetContactNil sets the value for Contact to be an explicit nil
+
+### UnsetContact
+`func (o *Recipient) UnsetContact()`
+
+UnsetContact ensures that no value is present for Contact, not even an explicit nil
+### GetGlobalIds
+
+`func (o *Recipient) GetGlobalIds() []ElectronicAddress`
+
+GetGlobalIds returns the GlobalIds field if non-nil, zero value otherwise.
+
+### GetGlobalIdsOk
+
+`func (o *Recipient) GetGlobalIdsOk() (*[]ElectronicAddress, bool)`
+
+GetGlobalIdsOk returns a tuple with the GlobalIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGlobalIds
+
+`func (o *Recipient) SetGlobalIds(v []ElectronicAddress)`
+
+SetGlobalIds sets GlobalIds field to given value.
+
+### HasGlobalIds
+
+`func (o *Recipient) HasGlobalIds() bool`
+
+HasGlobalIds returns a boolean if a field has been set.
+
+### SetGlobalIdsNil
+
+`func (o *Recipient) SetGlobalIdsNil(b bool)`
+
+ SetGlobalIdsNil sets the value for GlobalIds to be an explicit nil
+
+### UnsetGlobalIds
+`func (o *Recipient) UnsetGlobalIds()`
+
+UnsetGlobalIds ensures that no value is present for GlobalIds, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

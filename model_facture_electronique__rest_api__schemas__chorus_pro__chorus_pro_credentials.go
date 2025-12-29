@@ -22,13 +22,13 @@ var _ MappedNullable = &FactureElectroniqueRestApiSchemasChorusProChorusProCrede
 // FactureElectroniqueRestApiSchemasChorusProChorusProCredentials Chorus Pro credentials for Zero-Trust mode.  **Zero-Trust Mode**: Credentials are passed in each request and are NEVER stored.  **Security**: - Credentials are never persisted in the database - They are used only for the duration of the request - Secure transmission via HTTPS  **Use cases**: - High-security environments (banks, administrations) - Strict GDPR compliance - Tests with temporary credentials - Users who don't want to store their credentials
 type FactureElectroniqueRestApiSchemasChorusProChorusProCredentials struct {
 	// PISTE Client ID (government API portal)
-	PisteClientId string `json:"piste_client_id"`
+	PisteClientId string `json:"pisteClientId"`
 	// PISTE Client Secret
-	PisteClientSecret string `json:"piste_client_secret"`
+	PisteClientSecret string `json:"pisteClientSecret"`
 	// Chorus Pro login
-	ChorusProLogin string `json:"chorus_pro_login"`
+	ChorusProLogin string `json:"chorusProLogin"`
 	// Chorus Pro password
-	ChorusProPassword string `json:"chorus_pro_password"`
+	ChorusProPassword string `json:"chorusProPassword"`
 	// Use sandbox environment (true) or production (false)
 	Sandbox *bool `json:"sandbox,omitempty"`
 }
@@ -198,10 +198,10 @@ func (o FactureElectroniqueRestApiSchemasChorusProChorusProCredentials) MarshalJ
 
 func (o FactureElectroniqueRestApiSchemasChorusProChorusProCredentials) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["piste_client_id"] = o.PisteClientId
-	toSerialize["piste_client_secret"] = o.PisteClientSecret
-	toSerialize["chorus_pro_login"] = o.ChorusProLogin
-	toSerialize["chorus_pro_password"] = o.ChorusProPassword
+	toSerialize["pisteClientId"] = o.PisteClientId
+	toSerialize["pisteClientSecret"] = o.PisteClientSecret
+	toSerialize["chorusProLogin"] = o.ChorusProLogin
+	toSerialize["chorusProPassword"] = o.ChorusProPassword
 	if !IsNil(o.Sandbox) {
 		toSerialize["sandbox"] = o.Sandbox
 	}
@@ -213,10 +213,10 @@ func (o *FactureElectroniqueRestApiSchemasChorusProChorusProCredentials) Unmarsh
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"piste_client_id",
-		"piste_client_secret",
-		"chorus_pro_login",
-		"chorus_pro_password",
+		"pisteClientId",
+		"pisteClientSecret",
+		"chorusProLogin",
+		"chorusProPassword",
 	}
 
 	allProperties := make(map[string]interface{})

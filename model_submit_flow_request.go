@@ -22,13 +22,13 @@ var _ MappedNullable = &SubmitFlowRequest{}
 // SubmitFlowRequest Request to submit an invoice to a PDP/PA via AFNOR.
 type SubmitFlowRequest struct {
 	// Flow name (e.g., 'Invoice 2025-001')
-	FlowName string `json:"flow_name"`
+	FlowName string `json:"flowName"`
 	// Flow syntax (CII for Factur-X)
-	FlowSyntax *FlowSyntax `json:"flow_syntax,omitempty"`
-	FlowProfile NullableFlowProfile `json:"flow_profile,omitempty"`
-	TrackingId NullableString `json:"tracking_id,omitempty"`
-	RequestId NullableString `json:"request_id,omitempty"`
-	PdpCredentials NullablePDPCredentials `json:"pdp_credentials,omitempty"`
+	FlowSyntax *FlowSyntax `json:"flowSyntax,omitempty"`
+	FlowProfile NullableFlowProfile `json:"flowProfile,omitempty"`
+	TrackingId NullableString `json:"trackingId,omitempty"`
+	RequestId NullableString `json:"requestId,omitempty"`
+	PdpCredentials NullablePDPCredentials `json:"pdpCredentials,omitempty"`
 }
 
 type _SubmitFlowRequest SubmitFlowRequest
@@ -289,21 +289,21 @@ func (o SubmitFlowRequest) MarshalJSON() ([]byte, error) {
 
 func (o SubmitFlowRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["flow_name"] = o.FlowName
+	toSerialize["flowName"] = o.FlowName
 	if !IsNil(o.FlowSyntax) {
-		toSerialize["flow_syntax"] = o.FlowSyntax
+		toSerialize["flowSyntax"] = o.FlowSyntax
 	}
 	if o.FlowProfile.IsSet() {
-		toSerialize["flow_profile"] = o.FlowProfile.Get()
+		toSerialize["flowProfile"] = o.FlowProfile.Get()
 	}
 	if o.TrackingId.IsSet() {
-		toSerialize["tracking_id"] = o.TrackingId.Get()
+		toSerialize["trackingId"] = o.TrackingId.Get()
 	}
 	if o.RequestId.IsSet() {
-		toSerialize["request_id"] = o.RequestId.Get()
+		toSerialize["requestId"] = o.RequestId.Get()
 	}
 	if o.PdpCredentials.IsSet() {
-		toSerialize["pdp_credentials"] = o.PdpCredentials.Get()
+		toSerialize["pdpCredentials"] = o.PdpCredentials.Get()
 	}
 	return toSerialize, nil
 }
@@ -313,7 +313,7 @@ func (o *SubmitFlowRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"flow_name",
+		"flowName",
 	}
 
 	allProperties := make(map[string]interface{})

@@ -16,7 +16,7 @@ import (
 )
 
 
-// TotalNetAmount Total net amount (before tax). (Accepte number, string ou integer)
+// TotalNetAmount Invoice total amount without VAT (BT-109). Can be negative for correction invoices.
 type TotalNetAmount struct {
 	Float32 *float32
 	String *string

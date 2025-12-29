@@ -15,103 +15,98 @@ import (
 	"fmt"
 )
 
-// DocumentType Commercial document types (UNTDID 1001).  | Code | Name | Description | |------|------|-------------| | 380 | INVOICE | Commercial invoice | | 381 | CREDIT_NOTE | Credit note | | 384 | CORRECTED_INVOICE | Corrected invoice | | 386 | PREPAYMENT | Prepayment invoice | | 389 | SELF_BILLED | Self-billed invoice |
-type DocumentType string
 
-// List of DocumentType
-const (
-	INVOICE DocumentType = "380"
-	CREDIT_NOTE DocumentType = "381"
-	CORRECTED_INVOICE DocumentType = "384"
-	PREPAYMENT DocumentType = "386"
-	SELF_BILLED DocumentType = "389"
-)
-
-// All allowed values of DocumentType enum
-var AllowedDocumentTypeEnumValues = []DocumentType{
-	"380",
-	"381",
-	"384",
-	"386",
-	"389",
+// RoundingAmount Rounding amount added to total (BT-114).
+type RoundingAmount struct {
+	Float32 *float32
+	String *string
 }
 
-func (v *DocumentType) UnmarshalJSON(src []byte) error {
-	var value string
-	err := json.Unmarshal(src, &value)
-	if err != nil {
-		return err
+// Unmarshal JSON data into any of the pointers in the struct
+func (dst *RoundingAmount) UnmarshalJSON(data []byte) error {
+	var err error
+	// this object is nullable so check if the payload is null or empty string
+	if string(data) == "" || string(data) == "{}" {
+		return nil
 	}
-	enumTypeValue := DocumentType(value)
-	for _, existing := range AllowedDocumentTypeEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
+
+	// try to unmarshal JSON data into Float32
+	err = json.Unmarshal(data, &dst.Float32);
+	if err == nil {
+		jsonFloat32, _ := json.Marshal(dst.Float32)
+		if string(jsonFloat32) == "{}" { // empty struct
+			dst.Float32 = nil
+		} else {
+			return nil // data stored in dst.Float32, return on the first match
 		}
-	}
-
-	return fmt.Errorf("%+v is not a valid DocumentType", value)
-}
-
-// NewDocumentTypeFromValue returns a pointer to a valid DocumentType
-// for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewDocumentTypeFromValue(v string) (*DocumentType, error) {
-	ev := DocumentType(v)
-	if ev.IsValid() {
-		return &ev, nil
 	} else {
-		return nil, fmt.Errorf("invalid value '%v' for DocumentType: valid values are %v", v, AllowedDocumentTypeEnumValues)
+		dst.Float32 = nil
 	}
-}
 
-// IsValid return true if the value is valid for the enum, false otherwise
-func (v DocumentType) IsValid() bool {
-	for _, existing := range AllowedDocumentTypeEnumValues {
-		if existing == v {
-			return true
+	// try to unmarshal JSON data into String
+	err = json.Unmarshal(data, &dst.String);
+	if err == nil {
+		jsonString, _ := json.Marshal(dst.String)
+		if string(jsonString) == "{}" { // empty struct
+			dst.String = nil
+		} else {
+			return nil // data stored in dst.String, return on the first match
 		}
+	} else {
+		dst.String = nil
 	}
-	return false
+
+	return fmt.Errorf("data failed to match schemas in anyOf(RoundingAmount)")
 }
 
-// Ptr returns reference to DocumentType value
-func (v DocumentType) Ptr() *DocumentType {
-	return &v
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src RoundingAmount) MarshalJSON() ([]byte, error) {
+	if src.Float32 != nil {
+		return json.Marshal(&src.Float32)
+	}
+
+	if src.String != nil {
+		return json.Marshal(&src.String)
+	}
+
+	return nil, nil // no data in anyOf schemas
 }
 
-type NullableDocumentType struct {
-	value *DocumentType
+
+type NullableRoundingAmount struct {
+	value *RoundingAmount
 	isSet bool
 }
 
-func (v NullableDocumentType) Get() *DocumentType {
+func (v NullableRoundingAmount) Get() *RoundingAmount {
 	return v.value
 }
 
-func (v *NullableDocumentType) Set(val *DocumentType) {
+func (v *NullableRoundingAmount) Set(val *RoundingAmount) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableDocumentType) IsSet() bool {
+func (v NullableRoundingAmount) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableDocumentType) Unset() {
+func (v *NullableRoundingAmount) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableDocumentType(val *DocumentType) *NullableDocumentType {
-	return &NullableDocumentType{value: val, isSet: true}
+func NewNullableRoundingAmount(val *RoundingAmount) *NullableRoundingAmount {
+	return &NullableRoundingAmount{value: val, isSet: true}
 }
 
-func (v NullableDocumentType) MarshalJSON() ([]byte, error) {
+func (v NullableRoundingAmount) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableDocumentType) UnmarshalJSON(src []byte) error {
+func (v *NullableRoundingAmount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
 

@@ -16,7 +16,7 @@ import (
 )
 
 
-// InvoiceTotalsPrepayment Prepayment amount. (Accepte number, string ou integer)
+// InvoiceTotalsPrepayment Sum of amounts already paid (BT-113). Can be negative for correction invoices.
 type InvoiceTotalsPrepayment struct {
 	Float32 *float32
 	String *string

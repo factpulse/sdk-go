@@ -16,7 +16,7 @@ import (
 )
 
 
-// LineNetAmount Line net amount (quantity × unit price - allowance). (Accepte number, string ou integer)
+// LineNetAmount Invoice line net amount (BT-131). Can be negative for correction invoices.
 type LineNetAmount struct {
 	Float32 *float32
 	String *string
@@ -25,6 +25,11 @@ type LineNetAmount struct {
 // Unmarshal JSON data into any of the pointers in the struct
 func (dst *LineNetAmount) UnmarshalJSON(data []byte) error {
 	var err error
+	// this object is nullable so check if the payload is null or empty string
+	if string(data) == "" || string(data) == "{}" {
+		return nil
+	}
+
 	// try to unmarshal JSON data into Float32
 	err = json.Unmarshal(data, &dst.Float32);
 	if err == nil {

@@ -27,7 +27,7 @@ type IncomingInvoice struct {
 	// Invoice number issued by the supplier (BT-1)
 	SupplierReference string `json:"supplierReference"`
 	// Document type (BT-3)
-	DocumentType *DocumentType `json:"documentType,omitempty"`
+	DocumentType *InvoiceTypeCode `json:"documentType,omitempty"`
 	// Invoice issuer (SellerTradeParty)
 	Supplier IncomingSupplier `json:"supplier"`
 	// Recipient name / your company (BT-44)
@@ -62,7 +62,7 @@ func NewIncomingInvoice(sourceFormat InvoiceFormat, supplierReference string, su
 	this := IncomingInvoice{}
 	this.SourceFormat = sourceFormat
 	this.SupplierReference = supplierReference
-	var documentType DocumentType = INVOICE
+	var documentType InvoiceTypeCode = INVOICE
 	this.DocumentType = &documentType
 	this.Supplier = supplier
 	this.BillingSiteName = billingSiteName
@@ -80,7 +80,7 @@ func NewIncomingInvoice(sourceFormat InvoiceFormat, supplierReference string, su
 // but it doesn't guarantee that properties required by API are set
 func NewIncomingInvoiceWithDefaults() *IncomingInvoice {
 	this := IncomingInvoice{}
-	var documentType DocumentType = INVOICE
+	var documentType InvoiceTypeCode = INVOICE
 	this.DocumentType = &documentType
 	var currency string = "EUR"
 	this.Currency = &currency
@@ -178,9 +178,9 @@ func (o *IncomingInvoice) SetSupplierReference(v string) {
 }
 
 // GetDocumentType returns the DocumentType field value if set, zero value otherwise.
-func (o *IncomingInvoice) GetDocumentType() DocumentType {
+func (o *IncomingInvoice) GetDocumentType() InvoiceTypeCode {
 	if o == nil || IsNil(o.DocumentType) {
-		var ret DocumentType
+		var ret InvoiceTypeCode
 		return ret
 	}
 	return *o.DocumentType
@@ -188,7 +188,7 @@ func (o *IncomingInvoice) GetDocumentType() DocumentType {
 
 // GetDocumentTypeOk returns a tuple with the DocumentType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncomingInvoice) GetDocumentTypeOk() (*DocumentType, bool) {
+func (o *IncomingInvoice) GetDocumentTypeOk() (*InvoiceTypeCode, bool) {
 	if o == nil || IsNil(o.DocumentType) {
 		return nil, false
 	}
@@ -204,8 +204,8 @@ func (o *IncomingInvoice) HasDocumentType() bool {
 	return false
 }
 
-// SetDocumentType gets a reference to the given DocumentType and assigns it to the DocumentType field.
-func (o *IncomingInvoice) SetDocumentType(v DocumentType) {
+// SetDocumentType gets a reference to the given InvoiceTypeCode and assigns it to the DocumentType field.
+func (o *IncomingInvoice) SetDocumentType(v InvoiceTypeCode) {
 	o.DocumentType = &v
 }
 

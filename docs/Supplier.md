@@ -6,14 +6,22 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ElectronicAddress** | [**NullableElectronicAddress**](ElectronicAddress.md) |  | 
 **SupplierId** | **int32** |  | 
+**PrivateId** | Pointer to **NullableString** |  | [optional] 
 **SupplierBankAccountCode** | Pointer to **NullableInt32** |  | [optional] 
 **SupplierServiceId** | Pointer to **NullableInt32** |  | [optional] 
 **Name** | Pointer to **NullableString** |  | [optional] 
+**TradingBusinessName** | Pointer to **NullableString** |  | [optional] 
+**LegalDescription** | Pointer to **NullableString** |  | [optional] 
 **Siren** | Pointer to **NullableString** |  | [optional] 
 **Siret** | Pointer to **NullableString** |  | [optional] 
 **VatNumber** | Pointer to **NullableString** |  | [optional] 
 **Iban** | Pointer to **NullableString** |  | [optional] 
+**Bic** | Pointer to **NullableString** |  | [optional] 
+**BankAccountName** | Pointer to **NullableString** |  | [optional] 
+**ProprietaryId** | Pointer to **NullableString** |  | [optional] 
 **PostalAddress** | Pointer to [**NullablePostalAddress**](PostalAddress.md) |  | [optional] 
+**Contact** | Pointer to [**NullableContact**](Contact.md) |  | [optional] 
+**GlobalIds** | Pointer to [**[]ElectronicAddress**](ElectronicAddress.md) |  | [optional] 
 
 ## Methods
 
@@ -84,6 +92,41 @@ and a boolean to check if the value has been set.
 SetSupplierId sets SupplierId field to given value.
 
 
+### GetPrivateId
+
+`func (o *Supplier) GetPrivateId() string`
+
+GetPrivateId returns the PrivateId field if non-nil, zero value otherwise.
+
+### GetPrivateIdOk
+
+`func (o *Supplier) GetPrivateIdOk() (*string, bool)`
+
+GetPrivateIdOk returns a tuple with the PrivateId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrivateId
+
+`func (o *Supplier) SetPrivateId(v string)`
+
+SetPrivateId sets PrivateId field to given value.
+
+### HasPrivateId
+
+`func (o *Supplier) HasPrivateId() bool`
+
+HasPrivateId returns a boolean if a field has been set.
+
+### SetPrivateIdNil
+
+`func (o *Supplier) SetPrivateIdNil(b bool)`
+
+ SetPrivateIdNil sets the value for PrivateId to be an explicit nil
+
+### UnsetPrivateId
+`func (o *Supplier) UnsetPrivateId()`
+
+UnsetPrivateId ensures that no value is present for PrivateId, not even an explicit nil
 ### GetSupplierBankAccountCode
 
 `func (o *Supplier) GetSupplierBankAccountCode() int32`
@@ -189,6 +232,76 @@ HasName returns a boolean if a field has been set.
 `func (o *Supplier) UnsetName()`
 
 UnsetName ensures that no value is present for Name, not even an explicit nil
+### GetTradingBusinessName
+
+`func (o *Supplier) GetTradingBusinessName() string`
+
+GetTradingBusinessName returns the TradingBusinessName field if non-nil, zero value otherwise.
+
+### GetTradingBusinessNameOk
+
+`func (o *Supplier) GetTradingBusinessNameOk() (*string, bool)`
+
+GetTradingBusinessNameOk returns a tuple with the TradingBusinessName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTradingBusinessName
+
+`func (o *Supplier) SetTradingBusinessName(v string)`
+
+SetTradingBusinessName sets TradingBusinessName field to given value.
+
+### HasTradingBusinessName
+
+`func (o *Supplier) HasTradingBusinessName() bool`
+
+HasTradingBusinessName returns a boolean if a field has been set.
+
+### SetTradingBusinessNameNil
+
+`func (o *Supplier) SetTradingBusinessNameNil(b bool)`
+
+ SetTradingBusinessNameNil sets the value for TradingBusinessName to be an explicit nil
+
+### UnsetTradingBusinessName
+`func (o *Supplier) UnsetTradingBusinessName()`
+
+UnsetTradingBusinessName ensures that no value is present for TradingBusinessName, not even an explicit nil
+### GetLegalDescription
+
+`func (o *Supplier) GetLegalDescription() string`
+
+GetLegalDescription returns the LegalDescription field if non-nil, zero value otherwise.
+
+### GetLegalDescriptionOk
+
+`func (o *Supplier) GetLegalDescriptionOk() (*string, bool)`
+
+GetLegalDescriptionOk returns a tuple with the LegalDescription field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLegalDescription
+
+`func (o *Supplier) SetLegalDescription(v string)`
+
+SetLegalDescription sets LegalDescription field to given value.
+
+### HasLegalDescription
+
+`func (o *Supplier) HasLegalDescription() bool`
+
+HasLegalDescription returns a boolean if a field has been set.
+
+### SetLegalDescriptionNil
+
+`func (o *Supplier) SetLegalDescriptionNil(b bool)`
+
+ SetLegalDescriptionNil sets the value for LegalDescription to be an explicit nil
+
+### UnsetLegalDescription
+`func (o *Supplier) UnsetLegalDescription()`
+
+UnsetLegalDescription ensures that no value is present for LegalDescription, not even an explicit nil
 ### GetSiren
 
 `func (o *Supplier) GetSiren() string`
@@ -329,6 +442,111 @@ HasIban returns a boolean if a field has been set.
 `func (o *Supplier) UnsetIban()`
 
 UnsetIban ensures that no value is present for Iban, not even an explicit nil
+### GetBic
+
+`func (o *Supplier) GetBic() string`
+
+GetBic returns the Bic field if non-nil, zero value otherwise.
+
+### GetBicOk
+
+`func (o *Supplier) GetBicOk() (*string, bool)`
+
+GetBicOk returns a tuple with the Bic field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBic
+
+`func (o *Supplier) SetBic(v string)`
+
+SetBic sets Bic field to given value.
+
+### HasBic
+
+`func (o *Supplier) HasBic() bool`
+
+HasBic returns a boolean if a field has been set.
+
+### SetBicNil
+
+`func (o *Supplier) SetBicNil(b bool)`
+
+ SetBicNil sets the value for Bic to be an explicit nil
+
+### UnsetBic
+`func (o *Supplier) UnsetBic()`
+
+UnsetBic ensures that no value is present for Bic, not even an explicit nil
+### GetBankAccountName
+
+`func (o *Supplier) GetBankAccountName() string`
+
+GetBankAccountName returns the BankAccountName field if non-nil, zero value otherwise.
+
+### GetBankAccountNameOk
+
+`func (o *Supplier) GetBankAccountNameOk() (*string, bool)`
+
+GetBankAccountNameOk returns a tuple with the BankAccountName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBankAccountName
+
+`func (o *Supplier) SetBankAccountName(v string)`
+
+SetBankAccountName sets BankAccountName field to given value.
+
+### HasBankAccountName
+
+`func (o *Supplier) HasBankAccountName() bool`
+
+HasBankAccountName returns a boolean if a field has been set.
+
+### SetBankAccountNameNil
+
+`func (o *Supplier) SetBankAccountNameNil(b bool)`
+
+ SetBankAccountNameNil sets the value for BankAccountName to be an explicit nil
+
+### UnsetBankAccountName
+`func (o *Supplier) UnsetBankAccountName()`
+
+UnsetBankAccountName ensures that no value is present for BankAccountName, not even an explicit nil
+### GetProprietaryId
+
+`func (o *Supplier) GetProprietaryId() string`
+
+GetProprietaryId returns the ProprietaryId field if non-nil, zero value otherwise.
+
+### GetProprietaryIdOk
+
+`func (o *Supplier) GetProprietaryIdOk() (*string, bool)`
+
+GetProprietaryIdOk returns a tuple with the ProprietaryId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProprietaryId
+
+`func (o *Supplier) SetProprietaryId(v string)`
+
+SetProprietaryId sets ProprietaryId field to given value.
+
+### HasProprietaryId
+
+`func (o *Supplier) HasProprietaryId() bool`
+
+HasProprietaryId returns a boolean if a field has been set.
+
+### SetProprietaryIdNil
+
+`func (o *Supplier) SetProprietaryIdNil(b bool)`
+
+ SetProprietaryIdNil sets the value for ProprietaryId to be an explicit nil
+
+### UnsetProprietaryId
+`func (o *Supplier) UnsetProprietaryId()`
+
+UnsetProprietaryId ensures that no value is present for ProprietaryId, not even an explicit nil
 ### GetPostalAddress
 
 `func (o *Supplier) GetPostalAddress() PostalAddress`
@@ -364,6 +582,76 @@ HasPostalAddress returns a boolean if a field has been set.
 `func (o *Supplier) UnsetPostalAddress()`
 
 UnsetPostalAddress ensures that no value is present for PostalAddress, not even an explicit nil
+### GetContact
+
+`func (o *Supplier) GetContact() Contact`
+
+GetContact returns the Contact field if non-nil, zero value otherwise.
+
+### GetContactOk
+
+`func (o *Supplier) GetContactOk() (*Contact, bool)`
+
+GetContactOk returns a tuple with the Contact field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContact
+
+`func (o *Supplier) SetContact(v Contact)`
+
+SetContact sets Contact field to given value.
+
+### HasContact
+
+`func (o *Supplier) HasContact() bool`
+
+HasContact returns a boolean if a field has been set.
+
+### SetContactNil
+
+`func (o *Supplier) SetContactNil(b bool)`
+
+ SetContactNil sets the value for Contact to be an explicit nil
+
+### UnsetContact
+`func (o *Supplier) UnsetContact()`
+
+UnsetContact ensures that no value is present for Contact, not even an explicit nil
+### GetGlobalIds
+
+`func (o *Supplier) GetGlobalIds() []ElectronicAddress`
+
+GetGlobalIds returns the GlobalIds field if non-nil, zero value otherwise.
+
+### GetGlobalIdsOk
+
+`func (o *Supplier) GetGlobalIdsOk() (*[]ElectronicAddress, bool)`
+
+GetGlobalIdsOk returns a tuple with the GlobalIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGlobalIds
+
+`func (o *Supplier) SetGlobalIds(v []ElectronicAddress)`
+
+SetGlobalIds sets GlobalIds field to given value.
+
+### HasGlobalIds
+
+`func (o *Supplier) HasGlobalIds() bool`
+
+HasGlobalIds returns a boolean if a field has been set.
+
+### SetGlobalIdsNil
+
+`func (o *Supplier) SetGlobalIdsNil(b bool)`
+
+ SetGlobalIdsNil sets the value for GlobalIds to be an explicit nil
+
+### UnsetGlobalIds
+`func (o *Supplier) UnsetGlobalIds()`
+
+UnsetGlobalIds ensures that no value is present for GlobalIds, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

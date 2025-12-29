@@ -16,7 +16,7 @@ import (
 )
 
 
-// UnitNetPrice Unit net price (before tax).
+// UnitNetPrice Item net price after line discount (BT-146).
 type UnitNetPrice struct {
 	Float32 *float32
 	String *string

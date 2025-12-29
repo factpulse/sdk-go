@@ -4,11 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**LineTotalAmount** | Pointer to [**NullableLineTotalAmount**](LineTotalAmount.md) |  | [optional] 
+**AllowanceTotalAmount** | Pointer to [**NullableAllowanceTotalAmount**](AllowanceTotalAmount.md) |  | [optional] 
+**ChargeTotalAmount** | Pointer to [**NullableChargeTotalAmount**](ChargeTotalAmount.md) |  | [optional] 
 **TotalNetAmount** | [**TotalNetAmount**](TotalNetAmount.md) |  | 
 **VatAmount** | [**TotalVATAmount**](TotalVATAmount.md) |  | 
 **TotalGrossAmount** | [**TotalGrossAmount**](TotalGrossAmount.md) |  | 
-**AmountDue** | [**AmountDue**](AmountDue.md) |  | 
 **Prepayment** | Pointer to [**NullableInvoiceTotalsPrepayment**](InvoiceTotalsPrepayment.md) |  | [optional] 
+**RoundingAmount** | Pointer to [**NullableRoundingAmount**](RoundingAmount.md) |  | [optional] 
+**AmountDue** | [**AmountDue**](AmountDue.md) |  | 
 **GlobalAllowanceAmount** | Pointer to [**GlobalAllowanceAmount**](GlobalAllowanceAmount.md) |  | [optional] 
 **GlobalAllowanceReason** | Pointer to **NullableString** |  | [optional] 
 
@@ -31,6 +35,111 @@ NewInvoiceTotalsWithDefaults instantiates a new InvoiceTotals object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetLineTotalAmount
+
+`func (o *InvoiceTotals) GetLineTotalAmount() LineTotalAmount`
+
+GetLineTotalAmount returns the LineTotalAmount field if non-nil, zero value otherwise.
+
+### GetLineTotalAmountOk
+
+`func (o *InvoiceTotals) GetLineTotalAmountOk() (*LineTotalAmount, bool)`
+
+GetLineTotalAmountOk returns a tuple with the LineTotalAmount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLineTotalAmount
+
+`func (o *InvoiceTotals) SetLineTotalAmount(v LineTotalAmount)`
+
+SetLineTotalAmount sets LineTotalAmount field to given value.
+
+### HasLineTotalAmount
+
+`func (o *InvoiceTotals) HasLineTotalAmount() bool`
+
+HasLineTotalAmount returns a boolean if a field has been set.
+
+### SetLineTotalAmountNil
+
+`func (o *InvoiceTotals) SetLineTotalAmountNil(b bool)`
+
+ SetLineTotalAmountNil sets the value for LineTotalAmount to be an explicit nil
+
+### UnsetLineTotalAmount
+`func (o *InvoiceTotals) UnsetLineTotalAmount()`
+
+UnsetLineTotalAmount ensures that no value is present for LineTotalAmount, not even an explicit nil
+### GetAllowanceTotalAmount
+
+`func (o *InvoiceTotals) GetAllowanceTotalAmount() AllowanceTotalAmount`
+
+GetAllowanceTotalAmount returns the AllowanceTotalAmount field if non-nil, zero value otherwise.
+
+### GetAllowanceTotalAmountOk
+
+`func (o *InvoiceTotals) GetAllowanceTotalAmountOk() (*AllowanceTotalAmount, bool)`
+
+GetAllowanceTotalAmountOk returns a tuple with the AllowanceTotalAmount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowanceTotalAmount
+
+`func (o *InvoiceTotals) SetAllowanceTotalAmount(v AllowanceTotalAmount)`
+
+SetAllowanceTotalAmount sets AllowanceTotalAmount field to given value.
+
+### HasAllowanceTotalAmount
+
+`func (o *InvoiceTotals) HasAllowanceTotalAmount() bool`
+
+HasAllowanceTotalAmount returns a boolean if a field has been set.
+
+### SetAllowanceTotalAmountNil
+
+`func (o *InvoiceTotals) SetAllowanceTotalAmountNil(b bool)`
+
+ SetAllowanceTotalAmountNil sets the value for AllowanceTotalAmount to be an explicit nil
+
+### UnsetAllowanceTotalAmount
+`func (o *InvoiceTotals) UnsetAllowanceTotalAmount()`
+
+UnsetAllowanceTotalAmount ensures that no value is present for AllowanceTotalAmount, not even an explicit nil
+### GetChargeTotalAmount
+
+`func (o *InvoiceTotals) GetChargeTotalAmount() ChargeTotalAmount`
+
+GetChargeTotalAmount returns the ChargeTotalAmount field if non-nil, zero value otherwise.
+
+### GetChargeTotalAmountOk
+
+`func (o *InvoiceTotals) GetChargeTotalAmountOk() (*ChargeTotalAmount, bool)`
+
+GetChargeTotalAmountOk returns a tuple with the ChargeTotalAmount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChargeTotalAmount
+
+`func (o *InvoiceTotals) SetChargeTotalAmount(v ChargeTotalAmount)`
+
+SetChargeTotalAmount sets ChargeTotalAmount field to given value.
+
+### HasChargeTotalAmount
+
+`func (o *InvoiceTotals) HasChargeTotalAmount() bool`
+
+HasChargeTotalAmount returns a boolean if a field has been set.
+
+### SetChargeTotalAmountNil
+
+`func (o *InvoiceTotals) SetChargeTotalAmountNil(b bool)`
+
+ SetChargeTotalAmountNil sets the value for ChargeTotalAmount to be an explicit nil
+
+### UnsetChargeTotalAmount
+`func (o *InvoiceTotals) UnsetChargeTotalAmount()`
+
+UnsetChargeTotalAmount ensures that no value is present for ChargeTotalAmount, not even an explicit nil
 ### GetTotalNetAmount
 
 `func (o *InvoiceTotals) GetTotalNetAmount() TotalNetAmount`
@@ -91,26 +200,6 @@ and a boolean to check if the value has been set.
 SetTotalGrossAmount sets TotalGrossAmount field to given value.
 
 
-### GetAmountDue
-
-`func (o *InvoiceTotals) GetAmountDue() AmountDue`
-
-GetAmountDue returns the AmountDue field if non-nil, zero value otherwise.
-
-### GetAmountDueOk
-
-`func (o *InvoiceTotals) GetAmountDueOk() (*AmountDue, bool)`
-
-GetAmountDueOk returns a tuple with the AmountDue field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAmountDue
-
-`func (o *InvoiceTotals) SetAmountDue(v AmountDue)`
-
-SetAmountDue sets AmountDue field to given value.
-
-
 ### GetPrepayment
 
 `func (o *InvoiceTotals) GetPrepayment() InvoiceTotalsPrepayment`
@@ -146,6 +235,61 @@ HasPrepayment returns a boolean if a field has been set.
 `func (o *InvoiceTotals) UnsetPrepayment()`
 
 UnsetPrepayment ensures that no value is present for Prepayment, not even an explicit nil
+### GetRoundingAmount
+
+`func (o *InvoiceTotals) GetRoundingAmount() RoundingAmount`
+
+GetRoundingAmount returns the RoundingAmount field if non-nil, zero value otherwise.
+
+### GetRoundingAmountOk
+
+`func (o *InvoiceTotals) GetRoundingAmountOk() (*RoundingAmount, bool)`
+
+GetRoundingAmountOk returns a tuple with the RoundingAmount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRoundingAmount
+
+`func (o *InvoiceTotals) SetRoundingAmount(v RoundingAmount)`
+
+SetRoundingAmount sets RoundingAmount field to given value.
+
+### HasRoundingAmount
+
+`func (o *InvoiceTotals) HasRoundingAmount() bool`
+
+HasRoundingAmount returns a boolean if a field has been set.
+
+### SetRoundingAmountNil
+
+`func (o *InvoiceTotals) SetRoundingAmountNil(b bool)`
+
+ SetRoundingAmountNil sets the value for RoundingAmount to be an explicit nil
+
+### UnsetRoundingAmount
+`func (o *InvoiceTotals) UnsetRoundingAmount()`
+
+UnsetRoundingAmount ensures that no value is present for RoundingAmount, not even an explicit nil
+### GetAmountDue
+
+`func (o *InvoiceTotals) GetAmountDue() AmountDue`
+
+GetAmountDue returns the AmountDue field if non-nil, zero value otherwise.
+
+### GetAmountDueOk
+
+`func (o *InvoiceTotals) GetAmountDueOk() (*AmountDue, bool)`
+
+GetAmountDueOk returns a tuple with the AmountDue field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAmountDue
+
+`func (o *InvoiceTotals) SetAmountDue(v AmountDue)`
+
+SetAmountDue sets AmountDue field to given value.
+
+
 ### GetGlobalAllowanceAmount
 
 `func (o *InvoiceTotals) GetGlobalAllowanceAmount() GlobalAllowanceAmount`

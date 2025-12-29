@@ -57,6 +57,8 @@ type APIClient struct {
 
 	ChorusProAPI *ChorusProAPIService
 
+	DocumentConversionAPI *DocumentConversionAPIService
+
 	HealthAPI *HealthAPIService
 
 	InvoiceProcessingAPI *InvoiceProcessingAPIService
@@ -86,6 +88,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AFNORPDPPADirectoryServiceAPI = (*AFNORPDPPADirectoryServiceAPIService)(&c.common)
 	c.AFNORPDPPAFlowServiceAPI = (*AFNORPDPPAFlowServiceAPIService)(&c.common)
 	c.ChorusProAPI = (*ChorusProAPIService)(&c.common)
+	c.DocumentConversionAPI = (*DocumentConversionAPIService)(&c.common)
 	c.HealthAPI = (*HealthAPIService)(&c.common)
 	c.InvoiceProcessingAPI = (*InvoiceProcessingAPIService)(&c.common)
 	c.PDFXMLVerificationAPI = (*PDFXMLVerificationAPIService)(&c.common)

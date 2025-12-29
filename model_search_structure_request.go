@@ -20,11 +20,11 @@ var _ MappedNullable = &SearchStructureRequest{}
 // SearchStructureRequest Search structures by criteria.
 type SearchStructureRequest struct {
 	Credentials NullableFactureElectroniqueRestApiSchemasChorusProChorusProCredentials `json:"credentials,omitempty"`
-	StructureIdentifier NullableString `json:"structure_identifier,omitempty"`
-	StructureIdentifierType NullableString `json:"structure_identifier_type,omitempty"`
-	CompanyName NullableString `json:"company_name,omitempty"`
+	StructureIdentifier NullableString `json:"structureIdentifier,omitempty"`
+	StructureIdentifierType NullableString `json:"structureIdentifierType,omitempty"`
+	CompanyName NullableString `json:"companyName,omitempty"`
 	// Limit search to private structures only
-	RestrictPrivateStructures *bool `json:"restrict_private_structures,omitempty"`
+	RestrictPrivateStructures *bool `json:"restrictPrivateStructures,omitempty"`
 }
 
 // NewSearchStructureRequest instantiates a new SearchStructureRequest object
@@ -262,16 +262,16 @@ func (o SearchStructureRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["credentials"] = o.Credentials.Get()
 	}
 	if o.StructureIdentifier.IsSet() {
-		toSerialize["structure_identifier"] = o.StructureIdentifier.Get()
+		toSerialize["structureIdentifier"] = o.StructureIdentifier.Get()
 	}
 	if o.StructureIdentifierType.IsSet() {
-		toSerialize["structure_identifier_type"] = o.StructureIdentifierType.Get()
+		toSerialize["structureIdentifierType"] = o.StructureIdentifierType.Get()
 	}
 	if o.CompanyName.IsSet() {
-		toSerialize["company_name"] = o.CompanyName.Get()
+		toSerialize["companyName"] = o.CompanyName.Get()
 	}
 	if !IsNil(o.RestrictPrivateStructures) {
-		toSerialize["restrict_private_structures"] = o.RestrictPrivateStructures
+		toSerialize["restrictPrivateStructures"] = o.RestrictPrivateStructures
 	}
 	return toSerialize, nil
 }

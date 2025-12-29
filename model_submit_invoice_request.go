@@ -23,22 +23,22 @@ var _ MappedNullable = &SubmitInvoiceRequest{}
 type SubmitInvoiceRequest struct {
 	Credentials NullableFactureElectroniqueRestApiSchemasChorusProChorusProCredentials `json:"credentials,omitempty"`
 	// Invoice number
-	InvoiceNumber string `json:"invoice_number"`
+	InvoiceNumber string `json:"invoiceNumber"`
 	// Invoice date (ISO format: YYYY-MM-DD)
-	InvoiceDate string `json:"invoice_date"`
-	PaymentDueDate NullableString `json:"payment_due_date,omitempty"`
+	InvoiceDate string `json:"invoiceDate"`
+	PaymentDueDate NullableString `json:"paymentDueDate,omitempty"`
 	// Chorus Pro recipient structure ID
-	StructureId int32 `json:"structure_id"`
-	ServiceCode NullableString `json:"service_code,omitempty"`
-	EngagementNumber NullableString `json:"engagement_number,omitempty"`
-	TotalNetAmount SubmitNetAmount `json:"total_net_amount"`
-	VatAmount SubmitVatAmount `json:"vat_amount"`
-	TotalGrossAmount SubmitGrossAmount `json:"total_gross_amount"`
-	MainAttachmentId NullableInt32 `json:"main_attachment_id,omitempty"`
-	MainAttachmentLabel NullableString `json:"main_attachment_label,omitempty"`
+	StructureId int32 `json:"structureId"`
+	ServiceCode NullableString `json:"serviceCode,omitempty"`
+	EngagementNumber NullableString `json:"engagementNumber,omitempty"`
+	TotalNetAmount SubmitNetAmount `json:"totalNetAmount"`
+	VatAmount SubmitVatAmount `json:"vatAmount"`
+	TotalGrossAmount SubmitGrossAmount `json:"totalGrossAmount"`
+	MainAttachmentId NullableInt32 `json:"mainAttachmentId,omitempty"`
+	MainAttachmentLabel NullableString `json:"mainAttachmentLabel,omitempty"`
 	Comment NullableString `json:"comment,omitempty"`
-	PurchaseOrderReference NullableString `json:"purchase_order_reference,omitempty"`
-	ContractReference NullableString `json:"contract_reference,omitempty"`
+	PurchaseOrderReference NullableString `json:"purchaseOrderReference,omitempty"`
+	ContractReference NullableString `json:"contractReference,omitempty"`
 }
 
 type _SubmitInvoiceRequest SubmitInvoiceRequest
@@ -601,35 +601,35 @@ func (o SubmitInvoiceRequest) ToMap() (map[string]interface{}, error) {
 	if o.Credentials.IsSet() {
 		toSerialize["credentials"] = o.Credentials.Get()
 	}
-	toSerialize["invoice_number"] = o.InvoiceNumber
-	toSerialize["invoice_date"] = o.InvoiceDate
+	toSerialize["invoiceNumber"] = o.InvoiceNumber
+	toSerialize["invoiceDate"] = o.InvoiceDate
 	if o.PaymentDueDate.IsSet() {
-		toSerialize["payment_due_date"] = o.PaymentDueDate.Get()
+		toSerialize["paymentDueDate"] = o.PaymentDueDate.Get()
 	}
-	toSerialize["structure_id"] = o.StructureId
+	toSerialize["structureId"] = o.StructureId
 	if o.ServiceCode.IsSet() {
-		toSerialize["service_code"] = o.ServiceCode.Get()
+		toSerialize["serviceCode"] = o.ServiceCode.Get()
 	}
 	if o.EngagementNumber.IsSet() {
-		toSerialize["engagement_number"] = o.EngagementNumber.Get()
+		toSerialize["engagementNumber"] = o.EngagementNumber.Get()
 	}
-	toSerialize["total_net_amount"] = o.TotalNetAmount
-	toSerialize["vat_amount"] = o.VatAmount
-	toSerialize["total_gross_amount"] = o.TotalGrossAmount
+	toSerialize["totalNetAmount"] = o.TotalNetAmount
+	toSerialize["vatAmount"] = o.VatAmount
+	toSerialize["totalGrossAmount"] = o.TotalGrossAmount
 	if o.MainAttachmentId.IsSet() {
-		toSerialize["main_attachment_id"] = o.MainAttachmentId.Get()
+		toSerialize["mainAttachmentId"] = o.MainAttachmentId.Get()
 	}
 	if o.MainAttachmentLabel.IsSet() {
-		toSerialize["main_attachment_label"] = o.MainAttachmentLabel.Get()
+		toSerialize["mainAttachmentLabel"] = o.MainAttachmentLabel.Get()
 	}
 	if o.Comment.IsSet() {
 		toSerialize["comment"] = o.Comment.Get()
 	}
 	if o.PurchaseOrderReference.IsSet() {
-		toSerialize["purchase_order_reference"] = o.PurchaseOrderReference.Get()
+		toSerialize["purchaseOrderReference"] = o.PurchaseOrderReference.Get()
 	}
 	if o.ContractReference.IsSet() {
-		toSerialize["contract_reference"] = o.ContractReference.Get()
+		toSerialize["contractReference"] = o.ContractReference.Get()
 	}
 	return toSerialize, nil
 }
@@ -639,12 +639,12 @@ func (o *SubmitInvoiceRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"invoice_number",
-		"invoice_date",
-		"structure_id",
-		"total_net_amount",
-		"vat_amount",
-		"total_gross_amount",
+		"invoiceNumber",
+		"invoiceDate",
+		"structureId",
+		"totalNetAmount",
+		"vatAmount",
+		"totalGrossAmount",
 	}
 
 	allProperties := make(map[string]interface{})

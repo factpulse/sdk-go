@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FacturxProfile** | Pointer to [**APIProfile**](APIProfile.md) | Factur-X profile to use | [optional] [default to EN16931]
+**FacturxProfile** | Pointer to [**FacturXProfile**](FacturXProfile.md) | Factur-X profile to use | [optional] [default to EN16931]
 **AutoEnrich** | Pointer to **bool** | Auto-enrich data (Company APIs, Chorus Pro, etc.) | [optional] [default to true]
-**Validate** | Pointer to **bool** | Validate Factur-X XML with Schematron | [optional] [default to true]
+**ValidateXml** | Pointer to **bool** | Validate Factur-X XML with Schematron | [optional] [default to true]
 **VerifyDestinationParameters** | Pointer to **bool** | Verify required parameters for destination (e.g., service_code for Chorus) | [optional] [default to true]
 
 ## Methods
@@ -30,20 +30,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetFacturxProfile
 
-`func (o *ProcessingOptions) GetFacturxProfile() APIProfile`
+`func (o *ProcessingOptions) GetFacturxProfile() FacturXProfile`
 
 GetFacturxProfile returns the FacturxProfile field if non-nil, zero value otherwise.
 
 ### GetFacturxProfileOk
 
-`func (o *ProcessingOptions) GetFacturxProfileOk() (*APIProfile, bool)`
+`func (o *ProcessingOptions) GetFacturxProfileOk() (*FacturXProfile, bool)`
 
 GetFacturxProfileOk returns a tuple with the FacturxProfile field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFacturxProfile
 
-`func (o *ProcessingOptions) SetFacturxProfile(v APIProfile)`
+`func (o *ProcessingOptions) SetFacturxProfile(v FacturXProfile)`
 
 SetFacturxProfile sets FacturxProfile field to given value.
 
@@ -78,30 +78,30 @@ SetAutoEnrich sets AutoEnrich field to given value.
 
 HasAutoEnrich returns a boolean if a field has been set.
 
-### GetValidate
+### GetValidateXml
 
-`func (o *ProcessingOptions) GetValidate() bool`
+`func (o *ProcessingOptions) GetValidateXml() bool`
 
-GetValidate returns the Validate field if non-nil, zero value otherwise.
+GetValidateXml returns the ValidateXml field if non-nil, zero value otherwise.
 
-### GetValidateOk
+### GetValidateXmlOk
 
-`func (o *ProcessingOptions) GetValidateOk() (*bool, bool)`
+`func (o *ProcessingOptions) GetValidateXmlOk() (*bool, bool)`
 
-GetValidateOk returns a tuple with the Validate field if it's non-nil, zero value otherwise
+GetValidateXmlOk returns a tuple with the ValidateXml field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetValidate
+### SetValidateXml
 
-`func (o *ProcessingOptions) SetValidate(v bool)`
+`func (o *ProcessingOptions) SetValidateXml(v bool)`
 
-SetValidate sets Validate field to given value.
+SetValidateXml sets ValidateXml field to given value.
 
-### HasValidate
+### HasValidateXml
 
-`func (o *ProcessingOptions) HasValidate() bool`
+`func (o *ProcessingOptions) HasValidateXml() bool`
 
-HasValidate returns a boolean if a field has been set.
+HasValidateXml returns a boolean if a field has been set.
 
 ### GetVerifyDestinationParameters
 
