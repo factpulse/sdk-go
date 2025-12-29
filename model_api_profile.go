@@ -15,56 +15,56 @@ import (
 	"fmt"
 )
 
-// FacturXProfile Profil Factur-X pour la reponse API.  Note: Simplifie par rapport a utils/facturx.FacturXProfile qui contient aussi les configurations XSLT. Celui-ci est pour l'API.
-type FacturXProfile string
+// APIProfile Factur-X profile for API responses.  Note: Simplified compared to utils/facturx.ProfilFacturX which also contains XSLT configurations. This one is for the API.
+type APIProfile string
 
-// List of FacturXProfile
+// List of APIProfile
 const (
-	MINIMUM FacturXProfile = "MINIMUM"
-	BASIC FacturXProfile = "BASIC"
-	EN16931 FacturXProfile = "EN16931"
-	EXTENDED FacturXProfile = "EXTENDED"
+	MINIMUM APIProfile = "MINIMUM"
+	BASIC APIProfile = "BASIC"
+	EN16931 APIProfile = "EN16931"
+	EXTENDED APIProfile = "EXTENDED"
 )
 
-// All allowed values of FacturXProfile enum
-var AllowedFacturXProfileEnumValues = []FacturXProfile{
+// All allowed values of APIProfile enum
+var AllowedAPIProfileEnumValues = []APIProfile{
 	"MINIMUM",
 	"BASIC",
 	"EN16931",
 	"EXTENDED",
 }
 
-func (v *FacturXProfile) UnmarshalJSON(src []byte) error {
+func (v *APIProfile) UnmarshalJSON(src []byte) error {
 	var value string
 	err := json.Unmarshal(src, &value)
 	if err != nil {
 		return err
 	}
-	enumTypeValue := FacturXProfile(value)
-	for _, existing := range AllowedFacturXProfileEnumValues {
+	enumTypeValue := APIProfile(value)
+	for _, existing := range AllowedAPIProfileEnumValues {
 		if existing == enumTypeValue {
 			*v = enumTypeValue
 			return nil
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid FacturXProfile", value)
+	return fmt.Errorf("%+v is not a valid APIProfile", value)
 }
 
-// NewFacturXProfileFromValue returns a pointer to a valid FacturXProfile
+// NewAPIProfileFromValue returns a pointer to a valid APIProfile
 // for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewFacturXProfileFromValue(v string) (*FacturXProfile, error) {
-	ev := FacturXProfile(v)
+func NewAPIProfileFromValue(v string) (*APIProfile, error) {
+	ev := APIProfile(v)
 	if ev.IsValid() {
 		return &ev, nil
 	} else {
-		return nil, fmt.Errorf("invalid value '%v' for FacturXProfile: valid values are %v", v, AllowedFacturXProfileEnumValues)
+		return nil, fmt.Errorf("invalid value '%v' for APIProfile: valid values are %v", v, AllowedAPIProfileEnumValues)
 	}
 }
 
 // IsValid return true if the value is valid for the enum, false otherwise
-func (v FacturXProfile) IsValid() bool {
-	for _, existing := range AllowedFacturXProfileEnumValues {
+func (v APIProfile) IsValid() bool {
+	for _, existing := range AllowedAPIProfileEnumValues {
 		if existing == v {
 			return true
 		}
@@ -72,43 +72,43 @@ func (v FacturXProfile) IsValid() bool {
 	return false
 }
 
-// Ptr returns reference to FacturXProfile value
-func (v FacturXProfile) Ptr() *FacturXProfile {
+// Ptr returns reference to APIProfile value
+func (v APIProfile) Ptr() *APIProfile {
 	return &v
 }
 
-type NullableFacturXProfile struct {
-	value *FacturXProfile
+type NullableAPIProfile struct {
+	value *APIProfile
 	isSet bool
 }
 
-func (v NullableFacturXProfile) Get() *FacturXProfile {
+func (v NullableAPIProfile) Get() *APIProfile {
 	return v.value
 }
 
-func (v *NullableFacturXProfile) Set(val *FacturXProfile) {
+func (v *NullableAPIProfile) Set(val *APIProfile) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFacturXProfile) IsSet() bool {
+func (v NullableAPIProfile) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFacturXProfile) Unset() {
+func (v *NullableAPIProfile) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFacturXProfile(val *FacturXProfile) *NullableFacturXProfile {
-	return &NullableFacturXProfile{value: val, isSet: true}
+func NewNullableAPIProfile(val *APIProfile) *NullableAPIProfile {
+	return &NullableAPIProfile{value: val, isSet: true}
 }
 
-func (v NullableFacturXProfile) MarshalJSON() ([]byte, error) {
+func (v NullableAPIProfile) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFacturXProfile) UnmarshalJSON(src []byte) error {
+func (v *NullableAPIProfile) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

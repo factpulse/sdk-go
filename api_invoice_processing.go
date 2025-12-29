@@ -28,7 +28,7 @@ type ApiGenerateInvoiceApiV1ProcessingGenerateInvoicePostRequest struct {
 	ctx context.Context
 	ApiService *InvoiceProcessingAPIService
 	invoiceData *string
-	profile *FacturXProfile
+	profile *APIProfile
 	outputFormat *OutputFormat
 	autoEnrich *bool
 	sourcePdf *os.File
@@ -41,7 +41,7 @@ func (r ApiGenerateInvoiceApiV1ProcessingGenerateInvoicePostRequest) InvoiceData
 }
 
 // Factur-X profile: MINIMUM, BASIC, EN16931 or EXTENDED.
-func (r ApiGenerateInvoiceApiV1ProcessingGenerateInvoicePostRequest) Profile(profile FacturXProfile) ApiGenerateInvoiceApiV1ProcessingGenerateInvoicePostRequest {
+func (r ApiGenerateInvoiceApiV1ProcessingGenerateInvoicePostRequest) Profile(profile APIProfile) ApiGenerateInvoiceApiV1ProcessingGenerateInvoicePostRequest {
 	r.profile = &profile
 	return r
 }
@@ -1323,7 +1323,7 @@ type ApiValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostRequest struct {
 	ctx context.Context
 	ApiService *InvoiceProcessingAPIService
 	pdfFile *os.File
-	profile *FacturXProfile
+	profile *APIProfile
 	useVerapdf *bool
 }
 
@@ -1333,7 +1333,7 @@ func (r ApiValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostRequest) PdfFi
 	return r
 }
 
-func (r ApiValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostRequest) Profile(profile FacturXProfile) ApiValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostRequest {
+func (r ApiValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostRequest) Profile(profile APIProfile) ApiValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostRequest {
 	r.profile = &profile
 	return r
 }
@@ -1609,7 +1609,7 @@ type ApiValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostRequest st
 	ctx context.Context
 	ApiService *InvoiceProcessingAPIService
 	pdfFile *os.File
-	profile *FacturXProfile
+	profile *APIProfile
 	useVerapdf *bool
 }
 
@@ -1619,7 +1619,7 @@ func (r ApiValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostRequest
 	return r
 }
 
-func (r ApiValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostRequest) Profile(profile FacturXProfile) ApiValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostRequest {
+func (r ApiValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostRequest) Profile(profile APIProfile) ApiValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostRequest {
 	r.profile = &profile
 	return r
 }
@@ -1997,7 +1997,7 @@ type ApiValidateXmlApiV1ProcessingValidateXmlPostRequest struct {
 	ctx context.Context
 	ApiService *InvoiceProcessingAPIService
 	xmlFile *os.File
-	profile *FacturXProfile
+	profile *APIProfile
 }
 
 // Factur-X XML file to validate (.xml format).
@@ -2007,7 +2007,7 @@ func (r ApiValidateXmlApiV1ProcessingValidateXmlPostRequest) XmlFile(xmlFile *os
 }
 
 // Validation profile (MINIMUM, BASIC, EN16931, EXTENDED).
-func (r ApiValidateXmlApiV1ProcessingValidateXmlPostRequest) Profile(profile FacturXProfile) ApiValidateXmlApiV1ProcessingValidateXmlPostRequest {
+func (r ApiValidateXmlApiV1ProcessingValidateXmlPostRequest) Profile(profile APIProfile) ApiValidateXmlApiV1ProcessingValidateXmlPostRequest {
 	r.profile = &profile
 	return r
 }

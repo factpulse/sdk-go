@@ -20,7 +20,7 @@ var _ MappedNullable = &ProcessingOptions{}
 // ProcessingOptions Processing options for generation and submission.
 type ProcessingOptions struct {
 	// Factur-X profile to use
-	FacturxProfile *FacturXProfile `json:"facturxProfile,omitempty"`
+	FacturxProfile *APIProfile `json:"facturxProfile,omitempty"`
 	// Auto-enrich data (Company APIs, Chorus Pro, etc.)
 	AutoEnrich *bool `json:"autoEnrich,omitempty"`
 	// Validate Factur-X XML with Schematron
@@ -35,7 +35,7 @@ type ProcessingOptions struct {
 // will change when the set of required properties is changed
 func NewProcessingOptions() *ProcessingOptions {
 	this := ProcessingOptions{}
-	var facturxProfile FacturXProfile = EN16931
+	var facturxProfile APIProfile = EN16931
 	this.FacturxProfile = &facturxProfile
 	var autoEnrich bool = true
 	this.AutoEnrich = &autoEnrich
@@ -51,7 +51,7 @@ func NewProcessingOptions() *ProcessingOptions {
 // but it doesn't guarantee that properties required by API are set
 func NewProcessingOptionsWithDefaults() *ProcessingOptions {
 	this := ProcessingOptions{}
-	var facturxProfile FacturXProfile = EN16931
+	var facturxProfile APIProfile = EN16931
 	this.FacturxProfile = &facturxProfile
 	var autoEnrich bool = true
 	this.AutoEnrich = &autoEnrich
@@ -63,9 +63,9 @@ func NewProcessingOptionsWithDefaults() *ProcessingOptions {
 }
 
 // GetFacturxProfile returns the FacturxProfile field value if set, zero value otherwise.
-func (o *ProcessingOptions) GetFacturxProfile() FacturXProfile {
+func (o *ProcessingOptions) GetFacturxProfile() APIProfile {
 	if o == nil || IsNil(o.FacturxProfile) {
-		var ret FacturXProfile
+		var ret APIProfile
 		return ret
 	}
 	return *o.FacturxProfile
@@ -73,7 +73,7 @@ func (o *ProcessingOptions) GetFacturxProfile() FacturXProfile {
 
 // GetFacturxProfileOk returns a tuple with the FacturxProfile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProcessingOptions) GetFacturxProfileOk() (*FacturXProfile, bool) {
+func (o *ProcessingOptions) GetFacturxProfileOk() (*APIProfile, bool) {
 	if o == nil || IsNil(o.FacturxProfile) {
 		return nil, false
 	}
@@ -89,8 +89,8 @@ func (o *ProcessingOptions) HasFacturxProfile() bool {
 	return false
 }
 
-// SetFacturxProfile gets a reference to the given FacturXProfile and assigns it to the FacturxProfile field.
-func (o *ProcessingOptions) SetFacturxProfile(v FacturXProfile) {
+// SetFacturxProfile gets a reference to the given APIProfile and assigns it to the FacturxProfile field.
+func (o *ProcessingOptions) SetFacturxProfile(v APIProfile) {
 	o.FacturxProfile = &v
 }
 

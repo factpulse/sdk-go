@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FacturxProfile** | Pointer to [**FacturXProfile**](FacturXProfile.md) | Factur-X profile to use | [optional] [default to EN16931]
+**FacturxProfile** | Pointer to [**APIProfile**](APIProfile.md) | Factur-X profile to use | [optional] [default to EN16931]
 **AutoEnrich** | Pointer to **bool** | Auto-enrich data (Company APIs, Chorus Pro, etc.) | [optional] [default to true]
 **ValidateXml** | Pointer to **bool** | Validate Factur-X XML with Schematron | [optional] [default to true]
 **VerifyDestinationParameters** | Pointer to **bool** | Verify required parameters for destination (e.g., service_code for Chorus) | [optional] [default to true]
@@ -30,20 +30,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetFacturxProfile
 
-`func (o *ProcessingOptions) GetFacturxProfile() FacturXProfile`
+`func (o *ProcessingOptions) GetFacturxProfile() APIProfile`
 
 GetFacturxProfile returns the FacturxProfile field if non-nil, zero value otherwise.
 
 ### GetFacturxProfileOk
 
-`func (o *ProcessingOptions) GetFacturxProfileOk() (*FacturXProfile, bool)`
+`func (o *ProcessingOptions) GetFacturxProfileOk() (*APIProfile, bool)`
 
 GetFacturxProfileOk returns a tuple with the FacturxProfile field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFacturxProfile
 
-`func (o *ProcessingOptions) SetFacturxProfile(v FacturXProfile)`
+`func (o *ProcessingOptions) SetFacturxProfile(v APIProfile)`
 
 SetFacturxProfile sets FacturxProfile field to given value.
 

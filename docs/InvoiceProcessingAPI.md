@@ -40,7 +40,7 @@ import (
 
 func main() {
 	invoiceData := "invoiceData_example" // string | Invoice data in JSON format.              Two formats accepted:             1. **Classic format**: Complete FactureFacturX structure (all fields)             2. **Simplified format** (🆕 P0.1): Minimal structure with auto-enrichment              Format is detected automatically!             
-	profile := openapiclient.FacturXProfile("MINIMUM") // FacturXProfile | Factur-X profile: MINIMUM, BASIC, EN16931 or EXTENDED. (optional) (default to "EXTENDED")
+	profile := openapiclient.APIProfile("MINIMUM") // APIProfile | Factur-X profile: MINIMUM, BASIC, EN16931 or EXTENDED. (optional) (default to "EXTENDED")
 	outputFormat := openapiclient.OutputFormat("xml") // OutputFormat | Output format: 'xml' (XML only) or 'pdf' (Factur-X PDF with embedded XML). (optional) (default to "xml")
 	autoEnrich := true // bool | 🆕 Enable auto-enrichment from SIRET/SIREN (simplified format only) (optional) (default to true)
 	sourcePdf := os.NewFile(1234, "some_file") // *os.File |  (optional)
@@ -69,7 +69,7 @@ Other parameters are passed through a pointer to a apiGenerateInvoiceApiV1Proces
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **invoiceData** | **string** | Invoice data in JSON format.              Two formats accepted:             1. **Classic format**: Complete FactureFacturX structure (all fields)             2. **Simplified format** (🆕 P0.1): Minimal structure with auto-enrichment              Format is detected automatically!              | 
- **profile** | [**FacturXProfile**](FacturXProfile.md) | Factur-X profile: MINIMUM, BASIC, EN16931 or EXTENDED. | [default to &quot;EXTENDED&quot;]
+ **profile** | [**APIProfile**](APIProfile.md) | Factur-X profile: MINIMUM, BASIC, EN16931 or EXTENDED. | [default to &quot;EXTENDED&quot;]
  **outputFormat** | [**OutputFormat**](OutputFormat.md) | Output format: &#39;xml&#39; (XML only) or &#39;pdf&#39; (Factur-X PDF with embedded XML). | [default to &quot;xml&quot;]
  **autoEnrich** | **bool** | 🆕 Enable auto-enrichment from SIRET/SIREN (simplified format only) | [default to true]
  **sourcePdf** | ***os.File** |  | 
@@ -538,7 +538,7 @@ import (
 
 func main() {
 	pdfFile := os.NewFile(1234, "some_file") // *os.File | Factur-X PDF file to validate (.pdf format).
-	profile := openapiclient.FacturXProfile("MINIMUM") // FacturXProfile |  (optional)
+	profile := openapiclient.APIProfile("MINIMUM") // APIProfile |  (optional)
 	useVerapdf := true // bool | Enable strict PDF/A validation with VeraPDF (recommended for production). If False, uses basic metadata validation. (optional) (default to false)
 
 	configuration := openapiclient.NewConfiguration()
@@ -565,7 +565,7 @@ Other parameters are passed through a pointer to a apiValidateFacturxPdfApiV1Pro
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pdfFile** | ***os.File** | Factur-X PDF file to validate (.pdf format). | 
- **profile** | [**FacturXProfile**](FacturXProfile.md) |  | 
+ **profile** | [**APIProfile**](APIProfile.md) |  | 
  **useVerapdf** | **bool** | Enable strict PDF/A validation with VeraPDF (recommended for production). If False, uses basic metadata validation. | [default to false]
 
 ### Return type
@@ -608,7 +608,7 @@ import (
 
 func main() {
 	pdfFile := os.NewFile(1234, "some_file") // *os.File | Factur-X PDF file to validate (.pdf format).
-	profile := openapiclient.FacturXProfile("MINIMUM") // FacturXProfile |  (optional)
+	profile := openapiclient.APIProfile("MINIMUM") // APIProfile |  (optional)
 	useVerapdf := true // bool | Enable strict PDF/A validation with VeraPDF (recommended for production). May take several seconds. (optional) (default to false)
 
 	configuration := openapiclient.NewConfiguration()
@@ -635,7 +635,7 @@ Other parameters are passed through a pointer to a apiValidateFacturxPdfAsyncApi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pdfFile** | ***os.File** | Factur-X PDF file to validate (.pdf format). | 
- **profile** | [**FacturXProfile**](FacturXProfile.md) |  | 
+ **profile** | [**APIProfile**](APIProfile.md) |  | 
  **useVerapdf** | **bool** | Enable strict PDF/A validation with VeraPDF (recommended for production). May take several seconds. | [default to false]
 
 ### Return type
@@ -744,7 +744,7 @@ import (
 
 func main() {
 	xmlFile := os.NewFile(1234, "some_file") // *os.File | Factur-X XML file to validate (.xml format).
-	profile := openapiclient.FacturXProfile("MINIMUM") // FacturXProfile | Validation profile (MINIMUM, BASIC, EN16931, EXTENDED). (optional) (default to "EXTENDED")
+	profile := openapiclient.APIProfile("MINIMUM") // APIProfile | Validation profile (MINIMUM, BASIC, EN16931, EXTENDED). (optional) (default to "EXTENDED")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -770,7 +770,7 @@ Other parameters are passed through a pointer to a apiValidateXmlApiV1Processing
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **xmlFile** | ***os.File** | Factur-X XML file to validate (.xml format). | 
- **profile** | [**FacturXProfile**](FacturXProfile.md) | Validation profile (MINIMUM, BASIC, EN16931, EXTENDED). | [default to &quot;EXTENDED&quot;]
+ **profile** | [**APIProfile**](APIProfile.md) | Validation profile (MINIMUM, BASIC, EN16931, EXTENDED). | [default to &quot;EXTENDED&quot;]
 
 ### Return type
 
