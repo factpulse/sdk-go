@@ -166,7 +166,7 @@ docs/FacturXInvoice.md
 docs/FacturXPDFInfo.md
 docs/FactureElectroniqueModelsInvoiceTypeCode.md
 docs/FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.md
-docs/FactureElectroniqueRestApiSchemasConvertValidationError.md
+docs/FactureElectroniqueRestApiSchemasEreportingValidationError.md
 docs/FieldStatus.md
 docs/FileInfo.md
 docs/FilesInfo.md
@@ -450,7 +450,7 @@ model_factur_x_invoice.go
 model_factur_xpdf_info.go
 model_facture_electronique__models__invoice_type_code.go
 model_facture_electronique__rest_api__schemas__chorus_pro__chorus_pro_credentials.go
-model_facture_electronique__rest_api__schemas__convert__validation_error.go
+model_facture_electronique__rest_api__schemas__ereporting__validation_error.go
 model_field_status.go
 model_file_info.go
 model_files_info.go

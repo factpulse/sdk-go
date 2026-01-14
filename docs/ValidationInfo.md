@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **SchematronRulesTotal** | **int32** | Total regles | 
 **PdfaCompliant** | Pointer to **bool** | PDF/A-3 conforme | [optional] [default to true]
 **XmlEmbedded** | Pointer to **bool** | XML embarque dans PDF | [optional] [default to true]
-**Errors** | Pointer to [**[]FactureElectroniqueRestApiSchemasConvertValidationError**](FactureElectroniqueRestApiSchemasConvertValidationError.md) |  | [optional] 
+**Errors** | Pointer to [**[]ValidationError**](ValidationError.md) |  | [optional] 
 
 ## Methods
 
@@ -142,20 +142,20 @@ HasXmlEmbedded returns a boolean if a field has been set.
 
 ### GetErrors
 
-`func (o *ValidationInfo) GetErrors() []FactureElectroniqueRestApiSchemasConvertValidationError`
+`func (o *ValidationInfo) GetErrors() []ValidationError`
 
 GetErrors returns the Errors field if non-nil, zero value otherwise.
 
 ### GetErrorsOk
 
-`func (o *ValidationInfo) GetErrorsOk() (*[]FactureElectroniqueRestApiSchemasConvertValidationError, bool)`
+`func (o *ValidationInfo) GetErrorsOk() (*[]ValidationError, bool)`
 
 GetErrorsOk returns a tuple with the Errors field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetErrors
 
-`func (o *ValidationInfo) SetErrors(v []FactureElectroniqueRestApiSchemasConvertValidationError)`
+`func (o *ValidationInfo) SetErrors(v []ValidationError)`
 
 SetErrors sets Errors field to given value.
 
