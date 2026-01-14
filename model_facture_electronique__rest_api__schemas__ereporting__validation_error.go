@@ -17,186 +17,65 @@ import (
 	"fmt"
 )
 
-// checks if the ValidateEReportingResponse type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ValidateEReportingResponse{}
+// checks if the FactureElectroniqueRestApiSchemasEreportingValidationError type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FactureElectroniqueRestApiSchemasEreportingValidationError{}
 
-// ValidateEReportingResponse Response after validating e-reporting data.
-type ValidateEReportingResponse struct {
-	// Whether the data is valid
-	Valid bool `json:"valid"`
-	// Report identifier
-	ReportId string `json:"reportId"`
-	// Flux type
-	FlowType string `json:"flowType"`
-	// List of validation errors (if any)
-	Errors []FactureElectroniqueRestApiSchemasEreportingValidationError `json:"errors,omitempty"`
-	// List of validation warnings (if any)
-	Warnings []FactureElectroniqueRestApiSchemasEreportingValidationError `json:"warnings,omitempty"`
-	// Status message
+// FactureElectroniqueRestApiSchemasEreportingValidationError Validation error detail.
+type FactureElectroniqueRestApiSchemasEreportingValidationError struct {
+	// Field path with error
+	Field string `json:"field"`
+	// Error message
 	Message string `json:"message"`
+	Code NullableString `json:"code,omitempty"`
 }
 
-type _ValidateEReportingResponse ValidateEReportingResponse
+type _FactureElectroniqueRestApiSchemasEreportingValidationError FactureElectroniqueRestApiSchemasEreportingValidationError
 
-// NewValidateEReportingResponse instantiates a new ValidateEReportingResponse object
+// NewFactureElectroniqueRestApiSchemasEreportingValidationError instantiates a new FactureElectroniqueRestApiSchemasEreportingValidationError object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewValidateEReportingResponse(valid bool, reportId string, flowType string, message string) *ValidateEReportingResponse {
-	this := ValidateEReportingResponse{}
-	this.Valid = valid
-	this.ReportId = reportId
-	this.FlowType = flowType
+func NewFactureElectroniqueRestApiSchemasEreportingValidationError(field string, message string) *FactureElectroniqueRestApiSchemasEreportingValidationError {
+	this := FactureElectroniqueRestApiSchemasEreportingValidationError{}
+	this.Field = field
 	this.Message = message
 	return &this
 }
 
-// NewValidateEReportingResponseWithDefaults instantiates a new ValidateEReportingResponse object
+// NewFactureElectroniqueRestApiSchemasEreportingValidationErrorWithDefaults instantiates a new FactureElectroniqueRestApiSchemasEreportingValidationError object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewValidateEReportingResponseWithDefaults() *ValidateEReportingResponse {
-	this := ValidateEReportingResponse{}
+func NewFactureElectroniqueRestApiSchemasEreportingValidationErrorWithDefaults() *FactureElectroniqueRestApiSchemasEreportingValidationError {
+	this := FactureElectroniqueRestApiSchemasEreportingValidationError{}
 	return &this
 }
 
-// GetValid returns the Valid field value
-func (o *ValidateEReportingResponse) GetValid() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Valid
-}
-
-// GetValidOk returns a tuple with the Valid field value
-// and a boolean to check if the value has been set.
-func (o *ValidateEReportingResponse) GetValidOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Valid, true
-}
-
-// SetValid sets field value
-func (o *ValidateEReportingResponse) SetValid(v bool) {
-	o.Valid = v
-}
-
-// GetReportId returns the ReportId field value
-func (o *ValidateEReportingResponse) GetReportId() string {
+// GetField returns the Field field value
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) GetField() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.ReportId
+	return o.Field
 }
 
-// GetReportIdOk returns a tuple with the ReportId field value
+// GetFieldOk returns a tuple with the Field field value
 // and a boolean to check if the value has been set.
-func (o *ValidateEReportingResponse) GetReportIdOk() (*string, bool) {
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) GetFieldOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ReportId, true
+	return &o.Field, true
 }
 
-// SetReportId sets field value
-func (o *ValidateEReportingResponse) SetReportId(v string) {
-	o.ReportId = v
-}
-
-// GetFlowType returns the FlowType field value
-func (o *ValidateEReportingResponse) GetFlowType() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.FlowType
-}
-
-// GetFlowTypeOk returns a tuple with the FlowType field value
-// and a boolean to check if the value has been set.
-func (o *ValidateEReportingResponse) GetFlowTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FlowType, true
-}
-
-// SetFlowType sets field value
-func (o *ValidateEReportingResponse) SetFlowType(v string) {
-	o.FlowType = v
-}
-
-// GetErrors returns the Errors field value if set, zero value otherwise.
-func (o *ValidateEReportingResponse) GetErrors() []FactureElectroniqueRestApiSchemasEreportingValidationError {
-	if o == nil || IsNil(o.Errors) {
-		var ret []FactureElectroniqueRestApiSchemasEreportingValidationError
-		return ret
-	}
-	return o.Errors
-}
-
-// GetErrorsOk returns a tuple with the Errors field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ValidateEReportingResponse) GetErrorsOk() ([]FactureElectroniqueRestApiSchemasEreportingValidationError, bool) {
-	if o == nil || IsNil(o.Errors) {
-		return nil, false
-	}
-	return o.Errors, true
-}
-
-// HasErrors returns a boolean if a field has been set.
-func (o *ValidateEReportingResponse) HasErrors() bool {
-	if o != nil && !IsNil(o.Errors) {
-		return true
-	}
-
-	return false
-}
-
-// SetErrors gets a reference to the given []FactureElectroniqueRestApiSchemasEreportingValidationError and assigns it to the Errors field.
-func (o *ValidateEReportingResponse) SetErrors(v []FactureElectroniqueRestApiSchemasEreportingValidationError) {
-	o.Errors = v
-}
-
-// GetWarnings returns the Warnings field value if set, zero value otherwise.
-func (o *ValidateEReportingResponse) GetWarnings() []FactureElectroniqueRestApiSchemasEreportingValidationError {
-	if o == nil || IsNil(o.Warnings) {
-		var ret []FactureElectroniqueRestApiSchemasEreportingValidationError
-		return ret
-	}
-	return o.Warnings
-}
-
-// GetWarningsOk returns a tuple with the Warnings field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ValidateEReportingResponse) GetWarningsOk() ([]FactureElectroniqueRestApiSchemasEreportingValidationError, bool) {
-	if o == nil || IsNil(o.Warnings) {
-		return nil, false
-	}
-	return o.Warnings, true
-}
-
-// HasWarnings returns a boolean if a field has been set.
-func (o *ValidateEReportingResponse) HasWarnings() bool {
-	if o != nil && !IsNil(o.Warnings) {
-		return true
-	}
-
-	return false
-}
-
-// SetWarnings gets a reference to the given []FactureElectroniqueRestApiSchemasEreportingValidationError and assigns it to the Warnings field.
-func (o *ValidateEReportingResponse) SetWarnings(v []FactureElectroniqueRestApiSchemasEreportingValidationError) {
-	o.Warnings = v
+// SetField sets field value
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) SetField(v string) {
+	o.Field = v
 }
 
 // GetMessage returns the Message field value
-func (o *ValidateEReportingResponse) GetMessage() string {
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) GetMessage() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -207,7 +86,7 @@ func (o *ValidateEReportingResponse) GetMessage() string {
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *ValidateEReportingResponse) GetMessageOk() (*string, bool) {
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) GetMessageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -215,11 +94,53 @@ func (o *ValidateEReportingResponse) GetMessageOk() (*string, bool) {
 }
 
 // SetMessage sets field value
-func (o *ValidateEReportingResponse) SetMessage(v string) {
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) SetMessage(v string) {
 	o.Message = v
 }
 
-func (o ValidateEReportingResponse) MarshalJSON() ([]byte, error) {
+// GetCode returns the Code field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) GetCode() string {
+	if o == nil || IsNil(o.Code.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Code.Get()
+}
+
+// GetCodeOk returns a tuple with the Code field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) GetCodeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Code.Get(), o.Code.IsSet()
+}
+
+// HasCode returns a boolean if a field has been set.
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) HasCode() bool {
+	if o != nil && o.Code.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCode gets a reference to the given NullableString and assigns it to the Code field.
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) SetCode(v string) {
+	o.Code.Set(&v)
+}
+// SetCodeNil sets the value for Code to be an explicit nil
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) SetCodeNil() {
+	o.Code.Set(nil)
+}
+
+// UnsetCode ensures that no value is present for Code, not even an explicit nil
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) UnsetCode() {
+	o.Code.Unset()
+}
+
+func (o FactureElectroniqueRestApiSchemasEreportingValidationError) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -227,29 +148,22 @@ func (o ValidateEReportingResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ValidateEReportingResponse) ToMap() (map[string]interface{}, error) {
+func (o FactureElectroniqueRestApiSchemasEreportingValidationError) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["valid"] = o.Valid
-	toSerialize["reportId"] = o.ReportId
-	toSerialize["flowType"] = o.FlowType
-	if !IsNil(o.Errors) {
-		toSerialize["errors"] = o.Errors
-	}
-	if !IsNil(o.Warnings) {
-		toSerialize["warnings"] = o.Warnings
-	}
+	toSerialize["field"] = o.Field
 	toSerialize["message"] = o.Message
+	if o.Code.IsSet() {
+		toSerialize["code"] = o.Code.Get()
+	}
 	return toSerialize, nil
 }
 
-func (o *ValidateEReportingResponse) UnmarshalJSON(data []byte) (err error) {
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"valid",
-		"reportId",
-		"flowType",
+		"field",
 		"message",
 	}
 
@@ -267,53 +181,53 @@ func (o *ValidateEReportingResponse) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varValidateEReportingResponse := _ValidateEReportingResponse{}
+	varFactureElectroniqueRestApiSchemasEreportingValidationError := _FactureElectroniqueRestApiSchemasEreportingValidationError{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varValidateEReportingResponse)
+	err = decoder.Decode(&varFactureElectroniqueRestApiSchemasEreportingValidationError)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ValidateEReportingResponse(varValidateEReportingResponse)
+	*o = FactureElectroniqueRestApiSchemasEreportingValidationError(varFactureElectroniqueRestApiSchemasEreportingValidationError)
 
 	return err
 }
 
-type NullableValidateEReportingResponse struct {
-	value *ValidateEReportingResponse
+type NullableFactureElectroniqueRestApiSchemasEreportingValidationError struct {
+	value *FactureElectroniqueRestApiSchemasEreportingValidationError
 	isSet bool
 }
 
-func (v NullableValidateEReportingResponse) Get() *ValidateEReportingResponse {
+func (v NullableFactureElectroniqueRestApiSchemasEreportingValidationError) Get() *FactureElectroniqueRestApiSchemasEreportingValidationError {
 	return v.value
 }
 
-func (v *NullableValidateEReportingResponse) Set(val *ValidateEReportingResponse) {
+func (v *NullableFactureElectroniqueRestApiSchemasEreportingValidationError) Set(val *FactureElectroniqueRestApiSchemasEreportingValidationError) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableValidateEReportingResponse) IsSet() bool {
+func (v NullableFactureElectroniqueRestApiSchemasEreportingValidationError) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableValidateEReportingResponse) Unset() {
+func (v *NullableFactureElectroniqueRestApiSchemasEreportingValidationError) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableValidateEReportingResponse(val *ValidateEReportingResponse) *NullableValidateEReportingResponse {
-	return &NullableValidateEReportingResponse{value: val, isSet: true}
+func NewNullableFactureElectroniqueRestApiSchemasEreportingValidationError(val *FactureElectroniqueRestApiSchemasEreportingValidationError) *NullableFactureElectroniqueRestApiSchemasEreportingValidationError {
+	return &NullableFactureElectroniqueRestApiSchemasEreportingValidationError{value: val, isSet: true}
 }
 
-func (v NullableValidateEReportingResponse) MarshalJSON() ([]byte, error) {
+func (v NullableFactureElectroniqueRestApiSchemasEreportingValidationError) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableValidateEReportingResponse) UnmarshalJSON(src []byte) error {
+func (v *NullableFactureElectroniqueRestApiSchemasEreportingValidationError) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

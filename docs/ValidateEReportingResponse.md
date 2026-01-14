@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **Valid** | **bool** | Whether the data is valid | 
 **ReportId** | **string** | Report identifier | 
 **FlowType** | **string** | Flux type | 
-**Errors** | Pointer to [**[]ValidationError**](ValidationError.md) | List of validation errors (if any) | [optional] 
-**Warnings** | Pointer to [**[]ValidationError**](ValidationError.md) | List of validation warnings (if any) | [optional] 
+**Errors** | Pointer to [**[]FactureElectroniqueRestApiSchemasEreportingValidationError**](FactureElectroniqueRestApiSchemasEreportingValidationError.md) | List of validation errors (if any) | [optional] 
+**Warnings** | Pointer to [**[]FactureElectroniqueRestApiSchemasEreportingValidationError**](FactureElectroniqueRestApiSchemasEreportingValidationError.md) | List of validation warnings (if any) | [optional] 
 **Message** | **string** | Status message | 
 
 ## Methods
@@ -92,20 +92,20 @@ SetFlowType sets FlowType field to given value.
 
 ### GetErrors
 
-`func (o *ValidateEReportingResponse) GetErrors() []ValidationError`
+`func (o *ValidateEReportingResponse) GetErrors() []FactureElectroniqueRestApiSchemasEreportingValidationError`
 
 GetErrors returns the Errors field if non-nil, zero value otherwise.
 
 ### GetErrorsOk
 
-`func (o *ValidateEReportingResponse) GetErrorsOk() (*[]ValidationError, bool)`
+`func (o *ValidateEReportingResponse) GetErrorsOk() (*[]FactureElectroniqueRestApiSchemasEreportingValidationError, bool)`
 
 GetErrorsOk returns a tuple with the Errors field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetErrors
 
-`func (o *ValidateEReportingResponse) SetErrors(v []ValidationError)`
+`func (o *ValidateEReportingResponse) SetErrors(v []FactureElectroniqueRestApiSchemasEreportingValidationError)`
 
 SetErrors sets Errors field to given value.
 
@@ -117,20 +117,20 @@ HasErrors returns a boolean if a field has been set.
 
 ### GetWarnings
 
-`func (o *ValidateEReportingResponse) GetWarnings() []ValidationError`
+`func (o *ValidateEReportingResponse) GetWarnings() []FactureElectroniqueRestApiSchemasEreportingValidationError`
 
 GetWarnings returns the Warnings field if non-nil, zero value otherwise.
 
 ### GetWarningsOk
 
-`func (o *ValidateEReportingResponse) GetWarningsOk() (*[]ValidationError, bool)`
+`func (o *ValidateEReportingResponse) GetWarningsOk() (*[]FactureElectroniqueRestApiSchemasEreportingValidationError, bool)`
 
 GetWarningsOk returns a tuple with the Warnings field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetWarnings
 
-`func (o *ValidateEReportingResponse) SetWarnings(v []ValidationError)`
+`func (o *ValidateEReportingResponse) SetWarnings(v []FactureElectroniqueRestApiSchemasEreportingValidationError)`
 
 SetWarnings sets Warnings field to given value.
 
