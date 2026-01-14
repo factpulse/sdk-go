@@ -32,7 +32,7 @@ type ValidationInfo struct {
 	PdfaCompliant *bool `json:"pdfa_compliant,omitempty"`
 	// XML embarque dans PDF
 	XmlEmbedded *bool `json:"xml_embedded,omitempty"`
-	Errors []ValidationError `json:"errors,omitempty"`
+	Errors []FactureElectroniqueRestApiSchemasConvertValidationError `json:"errors,omitempty"`
 }
 
 type _ValidationInfo ValidationInfo
@@ -202,9 +202,9 @@ func (o *ValidationInfo) SetXmlEmbedded(v bool) {
 }
 
 // GetErrors returns the Errors field value if set, zero value otherwise.
-func (o *ValidationInfo) GetErrors() []ValidationError {
+func (o *ValidationInfo) GetErrors() []FactureElectroniqueRestApiSchemasConvertValidationError {
 	if o == nil || IsNil(o.Errors) {
-		var ret []ValidationError
+		var ret []FactureElectroniqueRestApiSchemasConvertValidationError
 		return ret
 	}
 	return o.Errors
@@ -212,7 +212,7 @@ func (o *ValidationInfo) GetErrors() []ValidationError {
 
 // GetErrorsOk returns a tuple with the Errors field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ValidationInfo) GetErrorsOk() ([]ValidationError, bool) {
+func (o *ValidationInfo) GetErrorsOk() ([]FactureElectroniqueRestApiSchemasConvertValidationError, bool) {
 	if o == nil || IsNil(o.Errors) {
 		return nil, false
 	}
@@ -228,8 +228,8 @@ func (o *ValidationInfo) HasErrors() bool {
 	return false
 }
 
-// SetErrors gets a reference to the given []ValidationError and assigns it to the Errors field.
-func (o *ValidationInfo) SetErrors(v []ValidationError) {
+// SetErrors gets a reference to the given []FactureElectroniqueRestApiSchemasConvertValidationError and assigns it to the Errors field.
+func (o *ValidationInfo) SetErrors(v []FactureElectroniqueRestApiSchemasConvertValidationError) {
 	o.Errors = v
 }
 
