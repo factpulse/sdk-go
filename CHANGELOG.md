@@ -1,13 +1,28 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+Toutes les modifications notables de ce projet seront documentées dans ce fichier.
 
-## [3.0.21] - 2026-01-14
+Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
+et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+## [3.0.22] - 2026-01-14
 
 ### Added
-- Initial release
-- Factur-X generation and validation
-- AFNOR PDP/PA integration (XP Z12-013)
-- Chorus Pro integration
-- Electronic signature (PAdES)
-- FactPulseClient helper with JWT auth and polling
+- Version initiale du SDK go
+- Support complet de l'API FactPulse v1.0.0
+- Endpoints Factur-X (génération, validation)
+- Endpoints AFNOR PDP/PA (Flow Service, Directory Service)
+- Endpoints Chorus Pro (recherche entreprise, soumission factures)
+- Endpoints Signature électronique (PAdES-B-B, PAdES-B-T, PAdES-B-LT)
+- Support des deux modes d'authentification (stored credentials et zero-trust)
+- Documentation complète et exemples
+
+### Documentation
+- README.md avec quickstart et exemples
+- Guide d'authentification JWT
+- Configuration avancée (timeout, proxy, debug)
+
+[Unreleased]: https://github.com/factpulse/sdk-go/compare/v3.0.22...HEAD
+[3.0.22]: https://github.com/factpulse/sdk-go/releases/tag/v3.0.22
