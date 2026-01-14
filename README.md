@@ -40,8 +40,10 @@ func main() {
 
     // Build the invoice with helpers
     invoiceData := map[string]interface{}{
-        "number": "INV-2025-001",
-        "date":   "2025-01-15",
+        "invoiceNumber": "INV-2025-001",
+        "issueDate":     "2025-01-15",
+        "dueDate":       "2025-02-15",
+        "currencyCode":  "EUR",
         "supplier": helpers.Supplier(
             "My Company SAS", "12345678901234",
             "123 Example Street", "75001", "Paris", nil,
@@ -50,7 +52,7 @@ func main() {
             "Client SARL", "98765432109876",
             "456 Test Avenue", "69001", "Lyon", nil,
         ),
-        "totalAmount": helpers.TotalAmount(1000.00, 200.00, 1200.00, 1200.00),
+        "totals": helpers.TotalAmount(1000.00, 200.00, 1200.00, 1200.00),
         "lines": []interface{}{
             helpers.InvoiceLine(1, "Consulting services", 10, 100.00, 1000.00),
         },
