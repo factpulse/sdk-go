@@ -20,7 +20,7 @@ var _ MappedNullable = &SearchStructureRequest{}
 
 // SearchStructureRequest Search structures by criteria.
 type SearchStructureRequest struct {
-	Credentials NullableFactureElectroniqueRestApiSchemasChorusProChorusProCredentials `json:"credentials,omitempty"`
+	Credentials NullableChorusProCredentials `json:"credentials,omitempty"`
 	StructureIdentifier NullableString `json:"structureIdentifier,omitempty"`
 	StructureIdentifierType NullableString `json:"structureIdentifierType,omitempty"`
 	CompanyName NullableString `json:"companyName,omitempty"`
@@ -50,9 +50,9 @@ func NewSearchStructureRequestWithDefaults() *SearchStructureRequest {
 }
 
 // GetCredentials returns the Credentials field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SearchStructureRequest) GetCredentials() FactureElectroniqueRestApiSchemasChorusProChorusProCredentials {
+func (o *SearchStructureRequest) GetCredentials() ChorusProCredentials {
 	if o == nil || IsNil(o.Credentials.Get()) {
-		var ret FactureElectroniqueRestApiSchemasChorusProChorusProCredentials
+		var ret ChorusProCredentials
 		return ret
 	}
 	return *o.Credentials.Get()
@@ -61,7 +61,7 @@ func (o *SearchStructureRequest) GetCredentials() FactureElectroniqueRestApiSche
 // GetCredentialsOk returns a tuple with the Credentials field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SearchStructureRequest) GetCredentialsOk() (*FactureElectroniqueRestApiSchemasChorusProChorusProCredentials, bool) {
+func (o *SearchStructureRequest) GetCredentialsOk() (*ChorusProCredentials, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -77,8 +77,8 @@ func (o *SearchStructureRequest) HasCredentials() bool {
 	return false
 }
 
-// SetCredentials gets a reference to the given NullableFactureElectroniqueRestApiSchemasChorusProChorusProCredentials and assigns it to the Credentials field.
-func (o *SearchStructureRequest) SetCredentials(v FactureElectroniqueRestApiSchemasChorusProChorusProCredentials) {
+// SetCredentials gets a reference to the given NullableChorusProCredentials and assigns it to the Credentials field.
+func (o *SearchStructureRequest) SetCredentials(v ChorusProCredentials) {
 	o.Credentials.Set(&v)
 }
 // SetCredentialsNil sets the value for Credentials to be an explicit nil
