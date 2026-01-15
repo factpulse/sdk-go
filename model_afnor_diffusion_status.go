@@ -21,8 +21,8 @@ type AFNORDiffusionStatus string
 
 // List of AFNOR_diffusionStatus
 const (
-	O AFNORDiffusionStatus = "O"
-	P AFNORDiffusionStatus = "P"
+	AFNORDIFFUSIONSTATUS_O AFNORDiffusionStatus = "O"
+	AFNORDIFFUSIONSTATUS_P AFNORDiffusionStatus = "P"
 )
 
 // All allowed values of AFNORDiffusionStatus enum

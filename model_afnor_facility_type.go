@@ -21,8 +21,8 @@ type AFNORFacilityType string
 
 // List of AFNOR_facilityType
 const (
-	P AFNORFacilityType = "P"
-	S AFNORFacilityType = "S"
+	AFNORFACILITYTYPE_P AFNORFacilityType = "P"
+	AFNORFACILITYTYPE_S AFNORFacilityType = "S"
 )
 
 // All allowed values of AFNORFacilityType enum

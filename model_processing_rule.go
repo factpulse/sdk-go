@@ -21,12 +21,12 @@ type ProcessingRule string
 
 // List of ProcessingRule
 const (
-	B2_B ProcessingRule = "B2B"
-	B2_B_INT ProcessingRule = "B2BInt"
-	B2_C ProcessingRule = "B2C"
-	OUT_OF_SCOPE ProcessingRule = "OutOfScope"
-	ARCHIVE_ONLY ProcessingRule = "ArchiveOnly"
-	NOT_APPLICABLE ProcessingRule = "NotApplicable"
+	PROCESSINGRULE_B2_B ProcessingRule = "B2B"
+	PROCESSINGRULE_B2_B_INT ProcessingRule = "B2BInt"
+	PROCESSINGRULE_B2_C ProcessingRule = "B2C"
+	PROCESSINGRULE_OUT_OF_SCOPE ProcessingRule = "OutOfScope"
+	PROCESSINGRULE_ARCHIVE_ONLY ProcessingRule = "ArchiveOnly"
+	PROCESSINGRULE_NOT_APPLICABLE ProcessingRule = "NotApplicable"
 )
 
 // All allowed values of ProcessingRule enum

@@ -21,8 +21,8 @@ type OutputFormat string
 
 // List of OutputFormat
 const (
-	XML OutputFormat = "xml"
-	PDF OutputFormat = "pdf"
+	OUTPUTFORMAT_XML OutputFormat = "xml"
+	OUTPUTFORMAT_PDF OutputFormat = "pdf"
 )
 
 // All allowed values of OutputFormat enum

@@ -21,14 +21,14 @@ type ErrorSource string
 
 // List of ErrorSource
 const (
-	SCHEMATRON ErrorSource = "schematron"
-	PDFA ErrorSource = "pdfa"
-	PYDANTIC ErrorSource = "pydantic"
-	XMP ErrorSource = "xmp"
-	SIGNATURE ErrorSource = "signature"
-	AFNOR ErrorSource = "afnor"
-	CHORUS_PRO ErrorSource = "chorus_pro"
-	SYSTEM ErrorSource = "system"
+	ERRORSOURCE_SCHEMATRON ErrorSource = "schematron"
+	ERRORSOURCE_PDFA ErrorSource = "pdfa"
+	ERRORSOURCE_PYDANTIC ErrorSource = "pydantic"
+	ERRORSOURCE_XMP ErrorSource = "xmp"
+	ERRORSOURCE_SIGNATURE ErrorSource = "signature"
+	ERRORSOURCE_AFNOR ErrorSource = "afnor"
+	ERRORSOURCE_CHORUS_PRO ErrorSource = "chorus_pro"
+	ERRORSOURCE_SYSTEM ErrorSource = "system"
 )
 
 // All allowed values of ErrorSource enum

@@ -49,8 +49,6 @@ func NewCreateEReportingRequest(reportId string, flowType EReportingFlowType, se
 	this := CreateEReportingRequest{}
 	this.ReportId = reportId
 	this.FlowType = flowType
-	var transmissionType TransmissionTypeCode = IN
-	this.TransmissionType = &transmissionType
 	this.Sender = sender
 	this.Period = period
 	return &this
@@ -61,8 +59,6 @@ func NewCreateEReportingRequest(reportId string, flowType EReportingFlowType, se
 // but it doesn't guarantee that properties required by API are set
 func NewCreateEReportingRequestWithDefaults() *CreateEReportingRequest {
 	this := CreateEReportingRequest{}
-	var transmissionType TransmissionTypeCode = IN
-	this.TransmissionType = &transmissionType
 	return &this
 }
 

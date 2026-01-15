@@ -40,8 +40,6 @@ type _ValidationErrorDetail ValidationErrorDetail
 // will change when the set of required properties is changed
 func NewValidationErrorDetail(item string, reason string) *ValidationErrorDetail {
 	this := ValidationErrorDetail{}
-	var level ErrorLevel = ERROR
-	this.Level = &level
 	this.Item = item
 	this.Reason = reason
 	return &this
@@ -52,8 +50,6 @@ func NewValidationErrorDetail(item string, reason string) *ValidationErrorDetail
 // but it doesn't guarantee that properties required by API are set
 func NewValidationErrorDetailWithDefaults() *ValidationErrorDetail {
 	this := ValidationErrorDetail{}
-	var level ErrorLevel = ERROR
-	this.Level = &level
 	return &this
 }
 

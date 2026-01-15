@@ -21,8 +21,8 @@ type AFNORLegalUnitAdministrativeStatus string
 
 // List of AFNOR_legalUnitAdministrativeStatus
 const (
-	A AFNORLegalUnitAdministrativeStatus = "A"
-	C AFNORLegalUnitAdministrativeStatus = "C"
+	AFNORLEGALUNITADMINISTRATIVESTATUS_A AFNORLegalUnitAdministrativeStatus = "A"
+	AFNORLEGALUNITADMINISTRATIVESTATUS_C AFNORLegalUnitAdministrativeStatus = "C"
 )
 
 // All allowed values of AFNORLegalUnitAdministrativeStatus enum

@@ -55,13 +55,7 @@ func NewInvoiceInput(invoiceId string, issueDate string, sellerSiren string, buy
 	this := InvoiceInput{}
 	this.InvoiceId = invoiceId
 	this.IssueDate = issueDate
-	var typeCode InvoiceTypeCode = _380
-	this.TypeCode = &typeCode
-	var currency Currency = EUR
-	this.Currency = &currency
 	this.SellerSiren = sellerSiren
-	var sellerCountry Sellercountry = FR
-	this.SellerCountry = &sellerCountry
 	this.BuyerCountry = buyerCountry
 	this.TaxExclusiveAmount = taxExclusiveAmount
 	this.TaxAmount = taxAmount
@@ -74,12 +68,6 @@ func NewInvoiceInput(invoiceId string, issueDate string, sellerSiren string, buy
 // but it doesn't guarantee that properties required by API are set
 func NewInvoiceInputWithDefaults() *InvoiceInput {
 	this := InvoiceInput{}
-	var typeCode InvoiceTypeCode = _380
-	this.TypeCode = &typeCode
-	var currency Currency = EUR
-	this.Currency = &currency
-	var sellerCountry Sellercountry = FR
-	this.SellerCountry = &sellerCountry
 	return &this
 }
 

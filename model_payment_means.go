@@ -21,12 +21,12 @@ type PaymentMeans string
 
 // List of PaymentMeans
 const (
-	CHEQUE PaymentMeans = "CHEQUE"
-	PRELEVEMENT PaymentMeans = "PRELEVEMENT"
-	VIREMENT PaymentMeans = "VIREMENT"
-	ESPECE PaymentMeans = "ESPECE"
-	AUTRE PaymentMeans = "AUTRE"
-	REPORT PaymentMeans = "REPORT"
+	PAYMENTMEANS_CHEQUE PaymentMeans = "CHEQUE"
+	PAYMENTMEANS_PRELEVEMENT PaymentMeans = "PRELEVEMENT"
+	PAYMENTMEANS_VIREMENT PaymentMeans = "VIREMENT"
+	PAYMENTMEANS_ESPECE PaymentMeans = "ESPECE"
+	PAYMENTMEANS_AUTRE PaymentMeans = "AUTRE"
+	PAYMENTMEANS_REPORT PaymentMeans = "REPORT"
 )
 
 // All allowed values of PaymentMeans enum

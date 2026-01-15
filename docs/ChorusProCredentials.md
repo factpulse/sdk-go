@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PisteClientId** | **string** | PISTE Client ID (government API portal) | 
-**PisteClientSecret** | **string** | PISTE Client Secret | 
-**ChorusProLogin** | **string** | Chorus Pro login | 
-**ChorusProPassword** | **string** | Chorus Pro password | 
-**Sandbox** | Pointer to **bool** | Use sandbox environment (true) or production (false) | [optional] [default to true]
+**PisteClientId** | Pointer to **NullableString** |  | [optional] 
+**PisteClientSecret** | Pointer to **NullableString** |  | [optional] 
+**ChorusLogin** | Pointer to **NullableString** |  | [optional] 
+**ChorusPassword** | Pointer to **NullableString** |  | [optional] 
+**SandboxMode** | Pointer to **bool** | [MODE 2] Use sandbox mode (default: True) | [optional] [default to true]
 
 ## Methods
 
 ### NewChorusProCredentials
 
-`func NewChorusProCredentials(pisteClientId string, pisteClientSecret string, chorusProLogin string, chorusProPassword string, ) *ChorusProCredentials`
+`func NewChorusProCredentials() *ChorusProCredentials`
 
 NewChorusProCredentials instantiates a new ChorusProCredentials object
 This constructor will assign default values to properties that have it defined,
@@ -48,7 +48,22 @@ and a boolean to check if the value has been set.
 
 SetPisteClientId sets PisteClientId field to given value.
 
+### HasPisteClientId
 
+`func (o *ChorusProCredentials) HasPisteClientId() bool`
+
+HasPisteClientId returns a boolean if a field has been set.
+
+### SetPisteClientIdNil
+
+`func (o *ChorusProCredentials) SetPisteClientIdNil(b bool)`
+
+ SetPisteClientIdNil sets the value for PisteClientId to be an explicit nil
+
+### UnsetPisteClientId
+`func (o *ChorusProCredentials) UnsetPisteClientId()`
+
+UnsetPisteClientId ensures that no value is present for PisteClientId, not even an explicit nil
 ### GetPisteClientSecret
 
 `func (o *ChorusProCredentials) GetPisteClientSecret() string`
@@ -68,71 +83,116 @@ and a boolean to check if the value has been set.
 
 SetPisteClientSecret sets PisteClientSecret field to given value.
 
+### HasPisteClientSecret
 
-### GetChorusProLogin
+`func (o *ChorusProCredentials) HasPisteClientSecret() bool`
 
-`func (o *ChorusProCredentials) GetChorusProLogin() string`
+HasPisteClientSecret returns a boolean if a field has been set.
 
-GetChorusProLogin returns the ChorusProLogin field if non-nil, zero value otherwise.
+### SetPisteClientSecretNil
 
-### GetChorusProLoginOk
+`func (o *ChorusProCredentials) SetPisteClientSecretNil(b bool)`
 
-`func (o *ChorusProCredentials) GetChorusProLoginOk() (*string, bool)`
+ SetPisteClientSecretNil sets the value for PisteClientSecret to be an explicit nil
 
-GetChorusProLoginOk returns a tuple with the ChorusProLogin field if it's non-nil, zero value otherwise
+### UnsetPisteClientSecret
+`func (o *ChorusProCredentials) UnsetPisteClientSecret()`
+
+UnsetPisteClientSecret ensures that no value is present for PisteClientSecret, not even an explicit nil
+### GetChorusLogin
+
+`func (o *ChorusProCredentials) GetChorusLogin() string`
+
+GetChorusLogin returns the ChorusLogin field if non-nil, zero value otherwise.
+
+### GetChorusLoginOk
+
+`func (o *ChorusProCredentials) GetChorusLoginOk() (*string, bool)`
+
+GetChorusLoginOk returns a tuple with the ChorusLogin field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetChorusProLogin
+### SetChorusLogin
 
-`func (o *ChorusProCredentials) SetChorusProLogin(v string)`
+`func (o *ChorusProCredentials) SetChorusLogin(v string)`
 
-SetChorusProLogin sets ChorusProLogin field to given value.
+SetChorusLogin sets ChorusLogin field to given value.
 
+### HasChorusLogin
 
-### GetChorusProPassword
+`func (o *ChorusProCredentials) HasChorusLogin() bool`
 
-`func (o *ChorusProCredentials) GetChorusProPassword() string`
+HasChorusLogin returns a boolean if a field has been set.
 
-GetChorusProPassword returns the ChorusProPassword field if non-nil, zero value otherwise.
+### SetChorusLoginNil
 
-### GetChorusProPasswordOk
+`func (o *ChorusProCredentials) SetChorusLoginNil(b bool)`
 
-`func (o *ChorusProCredentials) GetChorusProPasswordOk() (*string, bool)`
+ SetChorusLoginNil sets the value for ChorusLogin to be an explicit nil
 
-GetChorusProPasswordOk returns a tuple with the ChorusProPassword field if it's non-nil, zero value otherwise
+### UnsetChorusLogin
+`func (o *ChorusProCredentials) UnsetChorusLogin()`
+
+UnsetChorusLogin ensures that no value is present for ChorusLogin, not even an explicit nil
+### GetChorusPassword
+
+`func (o *ChorusProCredentials) GetChorusPassword() string`
+
+GetChorusPassword returns the ChorusPassword field if non-nil, zero value otherwise.
+
+### GetChorusPasswordOk
+
+`func (o *ChorusProCredentials) GetChorusPasswordOk() (*string, bool)`
+
+GetChorusPasswordOk returns a tuple with the ChorusPassword field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetChorusProPassword
+### SetChorusPassword
 
-`func (o *ChorusProCredentials) SetChorusProPassword(v string)`
+`func (o *ChorusProCredentials) SetChorusPassword(v string)`
 
-SetChorusProPassword sets ChorusProPassword field to given value.
+SetChorusPassword sets ChorusPassword field to given value.
 
+### HasChorusPassword
 
-### GetSandbox
+`func (o *ChorusProCredentials) HasChorusPassword() bool`
 
-`func (o *ChorusProCredentials) GetSandbox() bool`
+HasChorusPassword returns a boolean if a field has been set.
 
-GetSandbox returns the Sandbox field if non-nil, zero value otherwise.
+### SetChorusPasswordNil
 
-### GetSandboxOk
+`func (o *ChorusProCredentials) SetChorusPasswordNil(b bool)`
 
-`func (o *ChorusProCredentials) GetSandboxOk() (*bool, bool)`
+ SetChorusPasswordNil sets the value for ChorusPassword to be an explicit nil
 
-GetSandboxOk returns a tuple with the Sandbox field if it's non-nil, zero value otherwise
+### UnsetChorusPassword
+`func (o *ChorusProCredentials) UnsetChorusPassword()`
+
+UnsetChorusPassword ensures that no value is present for ChorusPassword, not even an explicit nil
+### GetSandboxMode
+
+`func (o *ChorusProCredentials) GetSandboxMode() bool`
+
+GetSandboxMode returns the SandboxMode field if non-nil, zero value otherwise.
+
+### GetSandboxModeOk
+
+`func (o *ChorusProCredentials) GetSandboxModeOk() (*bool, bool)`
+
+GetSandboxModeOk returns a tuple with the SandboxMode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSandbox
+### SetSandboxMode
 
-`func (o *ChorusProCredentials) SetSandbox(v bool)`
+`func (o *ChorusProCredentials) SetSandboxMode(v bool)`
 
-SetSandbox sets Sandbox field to given value.
+SetSandboxMode sets SandboxMode field to given value.
 
-### HasSandbox
+### HasSandboxMode
 
-`func (o *ChorusProCredentials) HasSandbox() bool`
+`func (o *ChorusProCredentials) HasSandboxMode() bool`
 
-HasSandbox returns a boolean if a field has been set.
+HasSandboxMode returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

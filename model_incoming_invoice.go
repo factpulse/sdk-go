@@ -63,8 +63,6 @@ func NewIncomingInvoice(sourceFormat InvoiceFormat, supplierReference string, su
 	this := IncomingInvoice{}
 	this.SourceFormat = sourceFormat
 	this.SupplierReference = supplierReference
-	var documentType InvoiceTypeCodeOutput = INVOICE
-	this.DocumentType = &documentType
 	this.Supplier = supplier
 	this.BillingSiteName = billingSiteName
 	this.IssueDate = issueDate
@@ -81,8 +79,6 @@ func NewIncomingInvoice(sourceFormat InvoiceFormat, supplierReference string, su
 // but it doesn't guarantee that properties required by API are set
 func NewIncomingInvoiceWithDefaults() *IncomingInvoice {
 	this := IncomingInvoice{}
-	var documentType InvoiceTypeCodeOutput = INVOICE
-	this.DocumentType = &documentType
 	var currency string = "EUR"
 	this.Currency = &currency
 	return &this

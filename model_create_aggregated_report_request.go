@@ -46,8 +46,6 @@ type _CreateAggregatedReportRequest CreateAggregatedReportRequest
 func NewCreateAggregatedReportRequest(reportId string, sender ReportSender, period ReportPeriod) *CreateAggregatedReportRequest {
 	this := CreateAggregatedReportRequest{}
 	this.ReportId = reportId
-	var transmissionType TransmissionTypeCode = IN
-	this.TransmissionType = &transmissionType
 	this.Sender = sender
 	this.Period = period
 	return &this
@@ -58,8 +56,6 @@ func NewCreateAggregatedReportRequest(reportId string, sender ReportSender, peri
 // but it doesn't guarantee that properties required by API are set
 func NewCreateAggregatedReportRequestWithDefaults() *CreateAggregatedReportRequest {
 	this := CreateAggregatedReportRequest{}
-	var transmissionType TransmissionTypeCode = IN
-	this.TransmissionType = &transmissionType
 	return &this
 }
 

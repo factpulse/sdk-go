@@ -21,11 +21,11 @@ type InvoiceTypeCode string
 
 // List of InvoiceTypeCode
 const (
-	_380 InvoiceTypeCode = "380"
-	_381 InvoiceTypeCode = "381"
-	_384 InvoiceTypeCode = "384"
-	_389 InvoiceTypeCode = "389"
-	_386 InvoiceTypeCode = "386"
+	INVOICETYPECODE__380 InvoiceTypeCode = "380"
+	INVOICETYPECODE__381 InvoiceTypeCode = "381"
+	INVOICETYPECODE__384 InvoiceTypeCode = "384"
+	INVOICETYPECODE__389 InvoiceTypeCode = "389"
+	INVOICETYPECODE__386 InvoiceTypeCode = "386"
 )
 
 // All allowed values of InvoiceTypeCode enum

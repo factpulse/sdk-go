@@ -21,9 +21,9 @@ type AFNORFlowProfile string
 
 // List of AFNOR_FlowProfile
 const (
-	BASIC AFNORFlowProfile = "Basic"
-	CIUS AFNORFlowProfile = "CIUS"
-	EXTENDED_CTC_FR AFNORFlowProfile = "Extended-CTC-FR"
+	AFNORFLOWPROFILE_BASIC AFNORFlowProfile = "Basic"
+	AFNORFLOWPROFILE_CIUS AFNORFlowProfile = "CIUS"
+	AFNORFLOWPROFILE_EXTENDED_CTC_FR AFNORFlowProfile = "Extended-CTC-FR"
 )
 
 // All allowed values of AFNORFlowProfile enum

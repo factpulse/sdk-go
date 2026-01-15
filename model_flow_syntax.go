@@ -21,11 +21,11 @@ type FlowSyntax string
 
 // List of FlowSyntax
 const (
-	CII FlowSyntax = "CII"
-	UBL FlowSyntax = "UBL"
-	FACTUR_X FlowSyntax = "Factur-X"
-	CDAR FlowSyntax = "CDAR"
-	FRR FlowSyntax = "FRR"
+	FLOWSYNTAX_CII FlowSyntax = "CII"
+	FLOWSYNTAX_UBL FlowSyntax = "UBL"
+	FLOWSYNTAX_FACTUR_X FlowSyntax = "Factur-X"
+	FLOWSYNTAX_CDAR FlowSyntax = "CDAR"
+	FLOWSYNTAX_FRR FlowSyntax = "FRR"
 )
 
 // All allowed values of FlowSyntax enum

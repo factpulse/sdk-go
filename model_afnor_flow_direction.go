@@ -21,8 +21,8 @@ type AFNORFlowDirection string
 
 // List of AFNOR_FlowDirection
 const (
-	IN AFNORFlowDirection = "In"
-	OUT AFNORFlowDirection = "Out"
+	AFNORFLOWDIRECTION_IN AFNORFlowDirection = "In"
+	AFNORFLOWDIRECTION_OUT AFNORFlowDirection = "Out"
 )
 
 // All allowed values of AFNORFlowDirection enum

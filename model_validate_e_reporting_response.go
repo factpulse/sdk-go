@@ -29,9 +29,9 @@ type ValidateEReportingResponse struct {
 	// Flux type
 	FlowType string `json:"flowType"`
 	// List of validation errors (if any)
-	Errors []ValidationError `json:"errors,omitempty"`
+	Errors []FactureElectroniqueRestApiSchemasEreportingValidationError `json:"errors,omitempty"`
 	// List of validation warnings (if any)
-	Warnings []ValidationError `json:"warnings,omitempty"`
+	Warnings []FactureElectroniqueRestApiSchemasEreportingValidationError `json:"warnings,omitempty"`
 	// Status message
 	Message string `json:"message"`
 }
@@ -132,9 +132,9 @@ func (o *ValidateEReportingResponse) SetFlowType(v string) {
 }
 
 // GetErrors returns the Errors field value if set, zero value otherwise.
-func (o *ValidateEReportingResponse) GetErrors() []ValidationError {
+func (o *ValidateEReportingResponse) GetErrors() []FactureElectroniqueRestApiSchemasEreportingValidationError {
 	if o == nil || IsNil(o.Errors) {
-		var ret []ValidationError
+		var ret []FactureElectroniqueRestApiSchemasEreportingValidationError
 		return ret
 	}
 	return o.Errors
@@ -142,7 +142,7 @@ func (o *ValidateEReportingResponse) GetErrors() []ValidationError {
 
 // GetErrorsOk returns a tuple with the Errors field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ValidateEReportingResponse) GetErrorsOk() ([]ValidationError, bool) {
+func (o *ValidateEReportingResponse) GetErrorsOk() ([]FactureElectroniqueRestApiSchemasEreportingValidationError, bool) {
 	if o == nil || IsNil(o.Errors) {
 		return nil, false
 	}
@@ -158,15 +158,15 @@ func (o *ValidateEReportingResponse) HasErrors() bool {
 	return false
 }
 
-// SetErrors gets a reference to the given []ValidationError and assigns it to the Errors field.
-func (o *ValidateEReportingResponse) SetErrors(v []ValidationError) {
+// SetErrors gets a reference to the given []FactureElectroniqueRestApiSchemasEreportingValidationError and assigns it to the Errors field.
+func (o *ValidateEReportingResponse) SetErrors(v []FactureElectroniqueRestApiSchemasEreportingValidationError) {
 	o.Errors = v
 }
 
 // GetWarnings returns the Warnings field value if set, zero value otherwise.
-func (o *ValidateEReportingResponse) GetWarnings() []ValidationError {
+func (o *ValidateEReportingResponse) GetWarnings() []FactureElectroniqueRestApiSchemasEreportingValidationError {
 	if o == nil || IsNil(o.Warnings) {
-		var ret []ValidationError
+		var ret []FactureElectroniqueRestApiSchemasEreportingValidationError
 		return ret
 	}
 	return o.Warnings
@@ -174,7 +174,7 @@ func (o *ValidateEReportingResponse) GetWarnings() []ValidationError {
 
 // GetWarningsOk returns a tuple with the Warnings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ValidateEReportingResponse) GetWarningsOk() ([]ValidationError, bool) {
+func (o *ValidateEReportingResponse) GetWarningsOk() ([]FactureElectroniqueRestApiSchemasEreportingValidationError, bool) {
 	if o == nil || IsNil(o.Warnings) {
 		return nil, false
 	}
@@ -190,8 +190,8 @@ func (o *ValidateEReportingResponse) HasWarnings() bool {
 	return false
 }
 
-// SetWarnings gets a reference to the given []ValidationError and assigns it to the Warnings field.
-func (o *ValidateEReportingResponse) SetWarnings(v []ValidationError) {
+// SetWarnings gets a reference to the given []FactureElectroniqueRestApiSchemasEreportingValidationError and assigns it to the Warnings field.
+func (o *ValidateEReportingResponse) SetWarnings(v []FactureElectroniqueRestApiSchemasEreportingValidationError) {
 	o.Warnings = v
 }
 

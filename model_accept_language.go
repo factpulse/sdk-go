@@ -21,8 +21,8 @@ type AcceptLanguage string
 
 // List of AcceptLanguage
 const (
-	FR AcceptLanguage = "fr"
-	EN AcceptLanguage = "en"
+	ACCEPTLANGUAGE_FR AcceptLanguage = "fr"
+	ACCEPTLANGUAGE_EN AcceptLanguage = "en"
 )
 
 // All allowed values of AcceptLanguage enum

@@ -45,8 +45,6 @@ func NewAggregatedTransactionInput(date string, categoryCode TransactionCategory
 	this := AggregatedTransactionInput{}
 	this.Date = date
 	this.CategoryCode = categoryCode
-	var currency Currency = EUR
-	this.Currency = &currency
 	this.TaxExclusiveAmount = taxExclusiveAmount
 	this.TaxAmount = taxAmount
 	this.TaxBreakdown = taxBreakdown
@@ -58,8 +56,6 @@ func NewAggregatedTransactionInput(date string, categoryCode TransactionCategory
 // but it doesn't guarantee that properties required by API are set
 func NewAggregatedTransactionInputWithDefaults() *AggregatedTransactionInput {
 	this := AggregatedTransactionInput{}
-	var currency Currency = EUR
-	this.Currency = &currency
 	return &this
 }
 

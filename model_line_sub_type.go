@@ -21,9 +21,9 @@ type LineSubType string
 
 // List of LineSubType
 const (
-	DETAIL LineSubType = "DETAIL"
-	INFORMATION LineSubType = "INFORMATION"
-	GROUP LineSubType = "GROUP"
+	LINESUBTYPE_DETAIL LineSubType = "DETAIL"
+	LINESUBTYPE_INFORMATION LineSubType = "INFORMATION"
+	LINESUBTYPE_GROUP LineSubType = "GROUP"
 )
 
 // All allowed values of LineSubType enum

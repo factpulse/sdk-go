@@ -21,9 +21,9 @@ type AcknowledgmentStatus string
 
 // List of AcknowledgmentStatus
 const (
-	PENDING AcknowledgmentStatus = "Pending"
-	OK AcknowledgmentStatus = "Ok"
-	ERROR AcknowledgmentStatus = "Error"
+	ACKNOWLEDGMENTSTATUS_PENDING AcknowledgmentStatus = "Pending"
+	ACKNOWLEDGMENTSTATUS_OK AcknowledgmentStatus = "Ok"
+	ACKNOWLEDGMENTSTATUS_ERROR AcknowledgmentStatus = "Error"
 )
 
 // All allowed values of AcknowledgmentStatus enum

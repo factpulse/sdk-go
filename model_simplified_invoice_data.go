@@ -57,8 +57,6 @@ func NewSimplifiedInvoiceData(number string, supplier map[string]interface{}, re
 	this.Lines = lines
 	var dueDays int32 = 30
 	this.DueDays = &dueDays
-	var invoiceType FactureElectroniqueModelsInvoiceTypeCode = INVOICE
-	this.InvoiceType = &invoiceType
 	return &this
 }
 
@@ -69,8 +67,6 @@ func NewSimplifiedInvoiceDataWithDefaults() *SimplifiedInvoiceData {
 	this := SimplifiedInvoiceData{}
 	var dueDays int32 = 30
 	this.DueDays = &dueDays
-	var invoiceType FactureElectroniqueModelsInvoiceTypeCode = INVOICE
-	this.InvoiceType = &invoiceType
 	return &this
 }
 

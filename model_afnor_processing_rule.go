@@ -21,12 +21,12 @@ type AFNORProcessingRule string
 
 // List of AFNOR_ProcessingRule
 const (
-	B2_B AFNORProcessingRule = "B2B"
-	B2_B_INT AFNORProcessingRule = "B2BInt"
-	B2_C AFNORProcessingRule = "B2C"
-	OUT_OF_SCOPE AFNORProcessingRule = "OutOfScope"
-	ARCHIVE_ONLY AFNORProcessingRule = "ArchiveOnly"
-	NOT_APPLICABLE AFNORProcessingRule = "NotApplicable"
+	AFNORPROCESSINGRULE_B2_B AFNORProcessingRule = "B2B"
+	AFNORPROCESSINGRULE_B2_B_INT AFNORProcessingRule = "B2BInt"
+	AFNORPROCESSINGRULE_B2_C AFNORProcessingRule = "B2C"
+	AFNORPROCESSINGRULE_OUT_OF_SCOPE AFNORProcessingRule = "OutOfScope"
+	AFNORPROCESSINGRULE_ARCHIVE_ONLY AFNORProcessingRule = "ArchiveOnly"
+	AFNORPROCESSINGRULE_NOT_APPLICABLE AFNORProcessingRule = "NotApplicable"
 )
 
 // All allowed values of AFNORProcessingRule enum

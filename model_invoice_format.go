@@ -21,9 +21,9 @@ type InvoiceFormat string
 
 // List of InvoiceFormat
 const (
-	CII InvoiceFormat = "CII"
-	UBL InvoiceFormat = "UBL"
-	FACTUR_X InvoiceFormat = "Factur-X"
+	INVOICEFORMAT_CII InvoiceFormat = "CII"
+	INVOICEFORMAT_UBL InvoiceFormat = "UBL"
+	INVOICEFORMAT_FACTUR_X InvoiceFormat = "Factur-X"
 )
 
 // All allowed values of InvoiceFormat enum

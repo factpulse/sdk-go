@@ -21,7 +21,7 @@ type AFNORContainsOperator string
 
 // List of AFNOR_containsOperator
 const (
-	CONTAINS AFNORContainsOperator = "contains"
+	AFNORCONTAINSOPERATOR_CONTAINS AFNORContainsOperator = "contains"
 )
 
 // All allowed values of AFNORContainsOperator enum

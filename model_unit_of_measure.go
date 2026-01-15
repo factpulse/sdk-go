@@ -21,12 +21,12 @@ type UnitOfMeasure string
 
 // List of UnitOfMeasure
 const (
-	PIECE UnitOfMeasure = "PIECE"
-	HEURE UnitOfMeasure = "HEURE"
-	JOUR UnitOfMeasure = "JOUR"
-	KILOGRAMME UnitOfMeasure = "KILOGRAMME"
-	LITRE UnitOfMeasure = "LITRE"
-	FORFAIT UnitOfMeasure = "FORFAIT"
+	UNITOFMEASURE_PIECE UnitOfMeasure = "PIECE"
+	UNITOFMEASURE_HEURE UnitOfMeasure = "HEURE"
+	UNITOFMEASURE_JOUR UnitOfMeasure = "JOUR"
+	UNITOFMEASURE_KILOGRAMME UnitOfMeasure = "KILOGRAMME"
+	UNITOFMEASURE_LITRE UnitOfMeasure = "LITRE"
+	UNITOFMEASURE_FORFAIT UnitOfMeasure = "FORFAIT"
 )
 
 // All allowed values of UnitOfMeasure enum

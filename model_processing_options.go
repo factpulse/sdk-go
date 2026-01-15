@@ -36,8 +36,6 @@ type ProcessingOptions struct {
 // will change when the set of required properties is changed
 func NewProcessingOptions() *ProcessingOptions {
 	this := ProcessingOptions{}
-	var facturxProfile APIProfile = EN16931
-	this.FacturxProfile = &facturxProfile
 	var autoEnrich bool = true
 	this.AutoEnrich = &autoEnrich
 	var validateXml bool = true
@@ -52,8 +50,6 @@ func NewProcessingOptions() *ProcessingOptions {
 // but it doesn't guarantee that properties required by API are set
 func NewProcessingOptionsWithDefaults() *ProcessingOptions {
 	this := ProcessingOptions{}
-	var facturxProfile APIProfile = EN16931
-	this.FacturxProfile = &facturxProfile
 	var autoEnrich bool = true
 	this.AutoEnrich = &autoEnrich
 	var validateXml bool = true

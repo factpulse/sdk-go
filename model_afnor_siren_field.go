@@ -21,11 +21,11 @@ type AFNORSirenField string
 
 // List of AFNOR_sirenField
 const (
-	SIREN AFNORSirenField = "siren"
-	BUSINESS_NAME AFNORSirenField = "businessName"
-	ENTITY_TYPE AFNORSirenField = "entityType"
-	ADMINISTRATIVE_STATUS AFNORSirenField = "administrativeStatus"
-	ID_INSTANCE AFNORSirenField = "idInstance"
+	AFNORSIRENFIELD_SIREN AFNORSirenField = "siren"
+	AFNORSIRENFIELD_BUSINESS_NAME AFNORSirenField = "businessName"
+	AFNORSIRENFIELD_ENTITY_TYPE AFNORSirenField = "entityType"
+	AFNORSIRENFIELD_ADMINISTRATIVE_STATUS AFNORSirenField = "administrativeStatus"
+	AFNORSIRENFIELD_ID_INSTANCE AFNORSirenField = "idInstance"
 )
 
 // All allowed values of AFNORSirenField enum

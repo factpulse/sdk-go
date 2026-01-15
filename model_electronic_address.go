@@ -37,8 +37,6 @@ type _ElectronicAddress ElectronicAddress
 func NewElectronicAddress(identifier string) *ElectronicAddress {
 	this := ElectronicAddress{}
 	this.Identifier = identifier
-	var schemeId SchemeID = FR_SIREN
-	this.SchemeId = &schemeId
 	return &this
 }
 
@@ -47,8 +45,6 @@ func NewElectronicAddress(identifier string) *ElectronicAddress {
 // but it doesn't guarantee that properties required by API are set
 func NewElectronicAddressWithDefaults() *ElectronicAddress {
 	this := ElectronicAddress{}
-	var schemeId SchemeID = FR_SIREN
-	this.SchemeId = &schemeId
 	return &this
 }
 

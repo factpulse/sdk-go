@@ -21,8 +21,8 @@ type AFNORFacilityNature string
 
 // List of AFNOR_facilityNature
 const (
-	PRIVATE AFNORFacilityNature = "Private"
-	PUBLIC AFNORFacilityNature = "Public"
+	AFNORFACILITYNATURE_PRIVATE AFNORFacilityNature = "Private"
+	AFNORFACILITYNATURE_PUBLIC AFNORFacilityNature = "Public"
 )
 
 // All allowed values of AFNORFacilityNature enum

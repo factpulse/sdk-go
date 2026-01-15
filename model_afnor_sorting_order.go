@@ -21,8 +21,8 @@ type AFNORSortingOrder string
 
 // List of AFNOR_sortingOrder
 const (
-	ASCENDING AFNORSortingOrder = "ascending"
-	DESCENDING AFNORSortingOrder = "descending"
+	AFNORSORTINGORDER_ASCENDING AFNORSortingOrder = "ascending"
+	AFNORSORTINGORDER_DESCENDING AFNORSortingOrder = "descending"
 )
 
 // All allowed values of AFNORSortingOrder enum

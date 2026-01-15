@@ -21,10 +21,10 @@ type DirectoryLineInclude string
 
 // List of DirectoryLineInclude
 const (
-	SIREN DirectoryLineInclude = "siren"
-	SIRET DirectoryLineInclude = "siret"
-	ROUTING_CODE DirectoryLineInclude = "routingCode"
-	PLATFORM DirectoryLineInclude = "platform"
+	DIRECTORYLINEINCLUDE_SIREN DirectoryLineInclude = "siren"
+	DIRECTORYLINEINCLUDE_SIRET DirectoryLineInclude = "siret"
+	DIRECTORYLINEINCLUDE_ROUTING_CODE DirectoryLineInclude = "routingCode"
+	DIRECTORYLINEINCLUDE_PLATFORM DirectoryLineInclude = "platform"
 )
 
 // All allowed values of DirectoryLineInclude enum

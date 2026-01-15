@@ -44,8 +44,6 @@ func NewInvoicePaymentInput(invoiceId string, invoiceDate string, paymentDate st
 	this.InvoiceId = invoiceId
 	this.InvoiceDate = invoiceDate
 	this.PaymentDate = paymentDate
-	var currency Currency = EUR
-	this.Currency = &currency
 	this.AmountsByRate = amountsByRate
 	return &this
 }
@@ -55,8 +53,6 @@ func NewInvoicePaymentInput(invoiceId string, invoiceDate string, paymentDate st
 // but it doesn't guarantee that properties required by API are set
 func NewInvoicePaymentInputWithDefaults() *InvoicePaymentInput {
 	this := InvoicePaymentInput{}
-	var currency Currency = EUR
-	this.Currency = &currency
 	return &this
 }
 

@@ -21,8 +21,8 @@ type AFNORPlatformStatus string
 
 // List of AFNOR_platformStatus
 const (
-	ENABLED AFNORPlatformStatus = "Enabled"
-	DISABLED AFNORPlatformStatus = "Disabled"
+	AFNORPLATFORMSTATUS_ENABLED AFNORPlatformStatus = "Enabled"
+	AFNORPLATFORMSTATUS_DISABLED AFNORPlatformStatus = "Disabled"
 )
 
 // All allowed values of AFNORPlatformStatus enum

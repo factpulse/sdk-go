@@ -21,14 +21,14 @@ type AFNORRoutingCodeField string
 
 // List of AFNOR_routingCodeField
 const (
-	SIRET AFNORRoutingCodeField = "siret"
-	ROUTING_IDENTIFIER_TYPE AFNORRoutingCodeField = "routingIdentifierType"
-	ROUTING_CODE_NAME AFNORRoutingCodeField = "routingCodeName"
-	ROUTING_IDENTIFIER AFNORRoutingCodeField = "routingIdentifier"
-	MANAGES_LEGAL_COMMITMENT_CODE AFNORRoutingCodeField = "managesLegalCommitmentCode"
-	ADMINISTRATIVE_STATUS AFNORRoutingCodeField = "administrativeStatus"
-	ADDRESS AFNORRoutingCodeField = "address"
-	ID_INSTANCE AFNORRoutingCodeField = "idInstance"
+	AFNORROUTINGCODEFIELD_SIRET AFNORRoutingCodeField = "siret"
+	AFNORROUTINGCODEFIELD_ROUTING_IDENTIFIER_TYPE AFNORRoutingCodeField = "routingIdentifierType"
+	AFNORROUTINGCODEFIELD_ROUTING_CODE_NAME AFNORRoutingCodeField = "routingCodeName"
+	AFNORROUTINGCODEFIELD_ROUTING_IDENTIFIER AFNORRoutingCodeField = "routingIdentifier"
+	AFNORROUTINGCODEFIELD_MANAGES_LEGAL_COMMITMENT_CODE AFNORRoutingCodeField = "managesLegalCommitmentCode"
+	AFNORROUTINGCODEFIELD_ADMINISTRATIVE_STATUS AFNORRoutingCodeField = "administrativeStatus"
+	AFNORROUTINGCODEFIELD_ADDRESS AFNORRoutingCodeField = "address"
+	AFNORROUTINGCODEFIELD_ID_INSTANCE AFNORRoutingCodeField = "idInstance"
 )
 
 // All allowed values of AFNORRoutingCodeField enum

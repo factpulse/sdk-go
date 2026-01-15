@@ -21,9 +21,9 @@ type SubmissionMode string
 
 // List of SubmissionMode
 const (
-	SAISIE_API SubmissionMode = "SAISIE_API"
-	DEPOT_PDF_API SubmissionMode = "DEPOT_PDF_API"
-	DEPOT_PDF_SIGNE_API SubmissionMode = "DEPOT_PDF_SIGNE_API"
+	SUBMISSIONMODE_SAISIE_API SubmissionMode = "SAISIE_API"
+	SUBMISSIONMODE_DEPOT_PDF_API SubmissionMode = "DEPOT_PDF_API"
+	SUBMISSIONMODE_DEPOT_PDF_SIGNE_API SubmissionMode = "DEPOT_PDF_SIGNE_API"
 )
 
 // All allowed values of SubmissionMode enum

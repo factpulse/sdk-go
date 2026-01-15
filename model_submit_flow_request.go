@@ -41,8 +41,6 @@ type _SubmitFlowRequest SubmitFlowRequest
 func NewSubmitFlowRequest(flowName string) *SubmitFlowRequest {
 	this := SubmitFlowRequest{}
 	this.FlowName = flowName
-	var flowSyntax FlowSyntax = CII
-	this.FlowSyntax = &flowSyntax
 	return &this
 }
 
@@ -51,8 +49,6 @@ func NewSubmitFlowRequest(flowName string) *SubmitFlowRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewSubmitFlowRequestWithDefaults() *SubmitFlowRequest {
 	this := SubmitFlowRequest{}
-	var flowSyntax FlowSyntax = CII
-	this.FlowSyntax = &flowSyntax
 	return &this
 }
 

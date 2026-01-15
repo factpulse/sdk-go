@@ -21,8 +21,8 @@ type AFNOREntityType string
 
 // List of AFNOR_entityType
 const (
-	PUBLIC AFNOREntityType = "Public"
-	PRIVATE_VAT_REGISTERED AFNOREntityType = "PrivateVatRegistered"
+	AFNORENTITYTYPE_PUBLIC AFNOREntityType = "Public"
+	AFNORENTITYTYPE_PRIVATE_VAT_REGISTERED AFNOREntityType = "PrivateVatRegistered"
 )
 
 // All allowed values of AFNOREntityType enum

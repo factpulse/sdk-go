@@ -21,9 +21,9 @@ type AFNORFlowAckStatus string
 
 // List of AFNOR_FlowAckStatus
 const (
-	PENDING AFNORFlowAckStatus = "Pending"
-	OK AFNORFlowAckStatus = "Ok"
-	ERROR AFNORFlowAckStatus = "Error"
+	AFNORFLOWACKSTATUS_PENDING AFNORFlowAckStatus = "Pending"
+	AFNORFLOWACKSTATUS_OK AFNORFlowAckStatus = "Ok"
+	AFNORFLOWACKSTATUS_ERROR AFNORFlowAckStatus = "Error"
 )
 
 // All allowed values of AFNORFlowAckStatus enum

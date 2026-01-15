@@ -21,10 +21,10 @@ type DocType string
 
 // List of DocType
 const (
-	METADATA DocType = "Metadata"
-	ORIGINAL DocType = "Original"
-	CONVERTED DocType = "Converted"
-	READABLE_VIEW DocType = "ReadableView"
+	DOCTYPE_METADATA DocType = "Metadata"
+	DOCTYPE_ORIGINAL DocType = "Original"
+	DOCTYPE_CONVERTED DocType = "Converted"
+	DOCTYPE_READABLE_VIEW DocType = "ReadableView"
 )
 
 // All allowed values of DocType enum

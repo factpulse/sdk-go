@@ -44,8 +44,6 @@ func NewMandatoryNoteSchema(subjectCode string, label string) *MandatoryNoteSche
 	this := MandatoryNoteSchema{}
 	this.SubjectCode = subjectCode
 	this.Label = label
-	var status FieldStatus = NOT_VERIFIED
-	this.Status = &status
 	return &this
 }
 
@@ -54,8 +52,6 @@ func NewMandatoryNoteSchema(subjectCode string, label string) *MandatoryNoteSche
 // but it doesn't guarantee that properties required by API are set
 func NewMandatoryNoteSchemaWithDefaults() *MandatoryNoteSchema {
 	this := MandatoryNoteSchema{}
-	var status FieldStatus = NOT_VERIFIED
-	this.Status = &status
 	return &this
 }
 

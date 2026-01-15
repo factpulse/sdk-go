@@ -21,7 +21,7 @@ type AFNORStrictOperator string
 
 // List of AFNOR_strictOperator
 const (
-	STRICT AFNORStrictOperator = "strict"
+	AFNORSTRICTOPERATOR_STRICT AFNORStrictOperator = "strict"
 )
 
 // All allowed values of AFNORStrictOperator enum

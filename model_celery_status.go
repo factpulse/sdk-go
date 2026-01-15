@@ -21,11 +21,11 @@ type CeleryStatus string
 
 // List of CeleryStatus
 const (
-	PENDING CeleryStatus = "PENDING"
-	STARTED CeleryStatus = "STARTED"
-	SUCCESS CeleryStatus = "SUCCESS"
-	FAILURE CeleryStatus = "FAILURE"
-	RETRY CeleryStatus = "RETRY"
+	CELERYSTATUS_PENDING CeleryStatus = "PENDING"
+	CELERYSTATUS_STARTED CeleryStatus = "STARTED"
+	CELERYSTATUS_SUCCESS CeleryStatus = "SUCCESS"
+	CELERYSTATUS_FAILURE CeleryStatus = "FAILURE"
+	CELERYSTATUS_RETRY CeleryStatus = "RETRY"
 )
 
 // All allowed values of CeleryStatus enum

@@ -21,8 +21,8 @@ type AFNORRecipientPlatformType string
 
 // List of AFNOR_recipientPlatformType
 const (
-	WK AFNORRecipientPlatformType = "WK"
-	DFH AFNORRecipientPlatformType = "DFH"
+	AFNORRECIPIENTPLATFORMTYPE_WK AFNORRecipientPlatformType = "WK"
+	AFNORRECIPIENTPLATFORMTYPE_DFH AFNORRecipientPlatformType = "DFH"
 )
 
 // All allowed values of AFNORRecipientPlatformType enum

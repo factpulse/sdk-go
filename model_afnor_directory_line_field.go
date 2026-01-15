@@ -21,12 +21,12 @@ type AFNORDirectoryLineField string
 
 // List of AFNOR_directoryLineField
 const (
-	ADDRESSING_IDENTIFIER AFNORDirectoryLineField = "addressingIdentifier"
-	SIREN AFNORDirectoryLineField = "siren"
-	SIRET AFNORDirectoryLineField = "siret"
-	ROUTING_IDENTIFIER AFNORDirectoryLineField = "routingIdentifier"
-	ADDRESSING_SUFFIX AFNORDirectoryLineField = "addressingSuffix"
-	ID_INSTANCE AFNORDirectoryLineField = "idInstance"
+	AFNORDIRECTORYLINEFIELD_ADDRESSING_IDENTIFIER AFNORDirectoryLineField = "addressingIdentifier"
+	AFNORDIRECTORYLINEFIELD_SIREN AFNORDirectoryLineField = "siren"
+	AFNORDIRECTORYLINEFIELD_SIRET AFNORDirectoryLineField = "siret"
+	AFNORDIRECTORYLINEFIELD_ROUTING_IDENTIFIER AFNORDirectoryLineField = "routingIdentifier"
+	AFNORDIRECTORYLINEFIELD_ADDRESSING_SUFFIX AFNORDirectoryLineField = "addressingSuffix"
+	AFNORDIRECTORYLINEFIELD_ID_INSTANCE AFNORDirectoryLineField = "idInstance"
 )
 
 // All allowed values of AFNORDirectoryLineField enum

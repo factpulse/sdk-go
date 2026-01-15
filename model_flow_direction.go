@@ -21,8 +21,8 @@ type FlowDirection string
 
 // List of FlowDirection
 const (
-	IN FlowDirection = "In"
-	OUT FlowDirection = "Out"
+	FLOWDIRECTION_IN FlowDirection = "In"
+	FLOWDIRECTION_OUT FlowDirection = "Out"
 )
 
 // All allowed values of FlowDirection enum

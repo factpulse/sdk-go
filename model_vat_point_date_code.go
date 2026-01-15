@@ -21,9 +21,9 @@ type VATPointDateCode string
 
 // List of VATPointDateCode
 const (
-	_5 VATPointDateCode = "5"
-	_29 VATPointDateCode = "29"
-	_72 VATPointDateCode = "72"
+	VATPOINTDATECODE__5 VATPointDateCode = "5"
+	VATPOINTDATECODE__29 VATPointDateCode = "29"
+	VATPOINTDATECODE__72 VATPointDateCode = "72"
 )
 
 // All allowed values of VATPointDateCode enum

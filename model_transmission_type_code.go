@@ -21,8 +21,8 @@ type TransmissionTypeCode string
 
 // List of TransmissionTypeCode
 const (
-	IN TransmissionTypeCode = "IN"
-	RE TransmissionTypeCode = "RE"
+	TRANSMISSIONTYPECODE_IN TransmissionTypeCode = "IN"
+	TRANSMISSIONTYPECODE_RE TransmissionTypeCode = "RE"
 )
 
 // All allowed values of TransmissionTypeCode enum

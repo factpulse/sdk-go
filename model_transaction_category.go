@@ -21,10 +21,10 @@ type TransactionCategory string
 
 // List of TransactionCategory
 const (
-	TLB1 TransactionCategory = "TLB1"
-	TPS1 TransactionCategory = "TPS1"
-	TNT1 TransactionCategory = "TNT1"
-	TMA1 TransactionCategory = "TMA1"
+	TRANSACTIONCATEGORY_TLB1 TransactionCategory = "TLB1"
+	TRANSACTIONCATEGORY_TPS1 TransactionCategory = "TPS1"
+	TRANSACTIONCATEGORY_TNT1 TransactionCategory = "TNT1"
+	TRANSACTIONCATEGORY_TMA1 TransactionCategory = "TMA1"
 )
 
 // All allowed values of TransactionCategory enum

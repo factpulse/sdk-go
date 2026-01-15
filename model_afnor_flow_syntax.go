@@ -21,11 +21,11 @@ type AFNORFlowSyntax string
 
 // List of AFNOR_FlowSyntax
 const (
-	CII AFNORFlowSyntax = "CII"
-	UBL AFNORFlowSyntax = "UBL"
-	FACTUR_X AFNORFlowSyntax = "Factur-X"
-	CDAR AFNORFlowSyntax = "CDAR"
-	FRR AFNORFlowSyntax = "FRR"
+	AFNORFLOWSYNTAX_CII AFNORFlowSyntax = "CII"
+	AFNORFLOWSYNTAX_UBL AFNORFlowSyntax = "UBL"
+	AFNORFLOWSYNTAX_FACTUR_X AFNORFlowSyntax = "Factur-X"
+	AFNORFLOWSYNTAX_CDAR AFNORFlowSyntax = "CDAR"
+	AFNORFLOWSYNTAX_FRR AFNORFlowSyntax = "FRR"
 )
 
 // All allowed values of AFNORFlowSyntax enum

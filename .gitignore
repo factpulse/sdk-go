@@ -1,3 +1,4 @@
+# Go
 *.exe
 *.exe~
 *.dll
@@ -6,4 +7,14 @@
 *.test
 *.out
 vendor/
-go.sum
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

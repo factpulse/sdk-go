@@ -17,141 +17,130 @@ import (
 	"fmt"
 )
 
-// checks if the GetStructureRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetStructureRequest{}
+// checks if the FactureElectroniqueRestApiSchemasEreportingValidationError type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FactureElectroniqueRestApiSchemasEreportingValidationError{}
 
-// GetStructureRequest Get structure details.
-type GetStructureRequest struct {
-	Credentials NullableFactureElectroniqueRestApiSchemasChorusProChorusProCredentials `json:"credentials,omitempty"`
-	// Chorus Pro structure ID
-	StructureId int32 `json:"structureId"`
-	// Language code (fr, en)
-	LanguageCode *string `json:"languageCode,omitempty"`
+// FactureElectroniqueRestApiSchemasEreportingValidationError Validation error detail.
+type FactureElectroniqueRestApiSchemasEreportingValidationError struct {
+	// Field path with error
+	Field string `json:"field"`
+	// Error message
+	Message string `json:"message"`
+	Code NullableString `json:"code,omitempty"`
 }
 
-type _GetStructureRequest GetStructureRequest
+type _FactureElectroniqueRestApiSchemasEreportingValidationError FactureElectroniqueRestApiSchemasEreportingValidationError
 
-// NewGetStructureRequest instantiates a new GetStructureRequest object
+// NewFactureElectroniqueRestApiSchemasEreportingValidationError instantiates a new FactureElectroniqueRestApiSchemasEreportingValidationError object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetStructureRequest(structureId int32) *GetStructureRequest {
-	this := GetStructureRequest{}
-	this.StructureId = structureId
-	var languageCode string = "fr"
-	this.LanguageCode = &languageCode
+func NewFactureElectroniqueRestApiSchemasEreportingValidationError(field string, message string) *FactureElectroniqueRestApiSchemasEreportingValidationError {
+	this := FactureElectroniqueRestApiSchemasEreportingValidationError{}
+	this.Field = field
+	this.Message = message
 	return &this
 }
 
-// NewGetStructureRequestWithDefaults instantiates a new GetStructureRequest object
+// NewFactureElectroniqueRestApiSchemasEreportingValidationErrorWithDefaults instantiates a new FactureElectroniqueRestApiSchemasEreportingValidationError object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetStructureRequestWithDefaults() *GetStructureRequest {
-	this := GetStructureRequest{}
-	var languageCode string = "fr"
-	this.LanguageCode = &languageCode
+func NewFactureElectroniqueRestApiSchemasEreportingValidationErrorWithDefaults() *FactureElectroniqueRestApiSchemasEreportingValidationError {
+	this := FactureElectroniqueRestApiSchemasEreportingValidationError{}
 	return &this
 }
 
-// GetCredentials returns the Credentials field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *GetStructureRequest) GetCredentials() FactureElectroniqueRestApiSchemasChorusProChorusProCredentials {
-	if o == nil || IsNil(o.Credentials.Get()) {
-		var ret FactureElectroniqueRestApiSchemasChorusProChorusProCredentials
-		return ret
-	}
-	return *o.Credentials.Get()
-}
-
-// GetCredentialsOk returns a tuple with the Credentials field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GetStructureRequest) GetCredentialsOk() (*FactureElectroniqueRestApiSchemasChorusProChorusProCredentials, bool) {
+// GetField returns the Field field value
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) GetField() string {
 	if o == nil {
-		return nil, false
-	}
-	return o.Credentials.Get(), o.Credentials.IsSet()
-}
-
-// HasCredentials returns a boolean if a field has been set.
-func (o *GetStructureRequest) HasCredentials() bool {
-	if o != nil && o.Credentials.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCredentials gets a reference to the given NullableFactureElectroniqueRestApiSchemasChorusProChorusProCredentials and assigns it to the Credentials field.
-func (o *GetStructureRequest) SetCredentials(v FactureElectroniqueRestApiSchemasChorusProChorusProCredentials) {
-	o.Credentials.Set(&v)
-}
-// SetCredentialsNil sets the value for Credentials to be an explicit nil
-func (o *GetStructureRequest) SetCredentialsNil() {
-	o.Credentials.Set(nil)
-}
-
-// UnsetCredentials ensures that no value is present for Credentials, not even an explicit nil
-func (o *GetStructureRequest) UnsetCredentials() {
-	o.Credentials.Unset()
-}
-
-// GetStructureId returns the StructureId field value
-func (o *GetStructureRequest) GetStructureId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.StructureId
-}
-
-// GetStructureIdOk returns a tuple with the StructureId field value
-// and a boolean to check if the value has been set.
-func (o *GetStructureRequest) GetStructureIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.StructureId, true
-}
-
-// SetStructureId sets field value
-func (o *GetStructureRequest) SetStructureId(v int32) {
-	o.StructureId = v
-}
-
-// GetLanguageCode returns the LanguageCode field value if set, zero value otherwise.
-func (o *GetStructureRequest) GetLanguageCode() string {
-	if o == nil || IsNil(o.LanguageCode) {
 		var ret string
 		return ret
 	}
-	return *o.LanguageCode
+
+	return o.Field
 }
 
-// GetLanguageCodeOk returns a tuple with the LanguageCode field value if set, nil otherwise
+// GetFieldOk returns a tuple with the Field field value
 // and a boolean to check if the value has been set.
-func (o *GetStructureRequest) GetLanguageCodeOk() (*string, bool) {
-	if o == nil || IsNil(o.LanguageCode) {
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) GetFieldOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LanguageCode, true
+	return &o.Field, true
 }
 
-// HasLanguageCode returns a boolean if a field has been set.
-func (o *GetStructureRequest) HasLanguageCode() bool {
-	if o != nil && !IsNil(o.LanguageCode) {
+// SetField sets field value
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) SetField(v string) {
+	o.Field = v
+}
+
+// GetMessage returns the Message field value
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) GetMessage() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Message
+}
+
+// GetMessageOk returns a tuple with the Message field value
+// and a boolean to check if the value has been set.
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) GetMessageOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Message, true
+}
+
+// SetMessage sets field value
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) SetMessage(v string) {
+	o.Message = v
+}
+
+// GetCode returns the Code field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) GetCode() string {
+	if o == nil || IsNil(o.Code.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Code.Get()
+}
+
+// GetCodeOk returns a tuple with the Code field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) GetCodeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Code.Get(), o.Code.IsSet()
+}
+
+// HasCode returns a boolean if a field has been set.
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) HasCode() bool {
+	if o != nil && o.Code.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLanguageCode gets a reference to the given string and assigns it to the LanguageCode field.
-func (o *GetStructureRequest) SetLanguageCode(v string) {
-	o.LanguageCode = &v
+// SetCode gets a reference to the given NullableString and assigns it to the Code field.
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) SetCode(v string) {
+	o.Code.Set(&v)
+}
+// SetCodeNil sets the value for Code to be an explicit nil
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) SetCodeNil() {
+	o.Code.Set(nil)
 }
 
-func (o GetStructureRequest) MarshalJSON() ([]byte, error) {
+// UnsetCode ensures that no value is present for Code, not even an explicit nil
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) UnsetCode() {
+	o.Code.Unset()
+}
+
+func (o FactureElectroniqueRestApiSchemasEreportingValidationError) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -159,24 +148,23 @@ func (o GetStructureRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetStructureRequest) ToMap() (map[string]interface{}, error) {
+func (o FactureElectroniqueRestApiSchemasEreportingValidationError) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Credentials.IsSet() {
-		toSerialize["credentials"] = o.Credentials.Get()
-	}
-	toSerialize["structureId"] = o.StructureId
-	if !IsNil(o.LanguageCode) {
-		toSerialize["languageCode"] = o.LanguageCode
+	toSerialize["field"] = o.Field
+	toSerialize["message"] = o.Message
+	if o.Code.IsSet() {
+		toSerialize["code"] = o.Code.Get()
 	}
 	return toSerialize, nil
 }
 
-func (o *GetStructureRequest) UnmarshalJSON(data []byte) (err error) {
+func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"structureId",
+		"field",
+		"message",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -193,53 +181,53 @@ func (o *GetStructureRequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varGetStructureRequest := _GetStructureRequest{}
+	varFactureElectroniqueRestApiSchemasEreportingValidationError := _FactureElectroniqueRestApiSchemasEreportingValidationError{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetStructureRequest)
+	err = decoder.Decode(&varFactureElectroniqueRestApiSchemasEreportingValidationError)
 
 	if err != nil {
 		return err
 	}
 
-	*o = GetStructureRequest(varGetStructureRequest)
+	*o = FactureElectroniqueRestApiSchemasEreportingValidationError(varFactureElectroniqueRestApiSchemasEreportingValidationError)
 
 	return err
 }
 
-type NullableGetStructureRequest struct {
-	value *GetStructureRequest
+type NullableFactureElectroniqueRestApiSchemasEreportingValidationError struct {
+	value *FactureElectroniqueRestApiSchemasEreportingValidationError
 	isSet bool
 }
 
-func (v NullableGetStructureRequest) Get() *GetStructureRequest {
+func (v NullableFactureElectroniqueRestApiSchemasEreportingValidationError) Get() *FactureElectroniqueRestApiSchemasEreportingValidationError {
 	return v.value
 }
 
-func (v *NullableGetStructureRequest) Set(val *GetStructureRequest) {
+func (v *NullableFactureElectroniqueRestApiSchemasEreportingValidationError) Set(val *FactureElectroniqueRestApiSchemasEreportingValidationError) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetStructureRequest) IsSet() bool {
+func (v NullableFactureElectroniqueRestApiSchemasEreportingValidationError) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetStructureRequest) Unset() {
+func (v *NullableFactureElectroniqueRestApiSchemasEreportingValidationError) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetStructureRequest(val *GetStructureRequest) *NullableGetStructureRequest {
-	return &NullableGetStructureRequest{value: val, isSet: true}
+func NewNullableFactureElectroniqueRestApiSchemasEreportingValidationError(val *FactureElectroniqueRestApiSchemasEreportingValidationError) *NullableFactureElectroniqueRestApiSchemasEreportingValidationError {
+	return &NullableFactureElectroniqueRestApiSchemasEreportingValidationError{value: val, isSet: true}
 }
 
-func (v NullableGetStructureRequest) MarshalJSON() ([]byte, error) {
+func (v NullableFactureElectroniqueRestApiSchemasEreportingValidationError) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetStructureRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableFactureElectroniqueRestApiSchemasEreportingValidationError) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

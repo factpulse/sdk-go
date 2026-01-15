@@ -21,11 +21,11 @@ type APIProfile string
 
 // List of APIProfile
 const (
-	MINIMUM APIProfile = "MINIMUM"
-	BASICWL APIProfile = "BASICWL"
-	BASIC APIProfile = "BASIC"
-	EN16931 APIProfile = "EN16931"
-	EXTENDED APIProfile = "EXTENDED"
+	APIPROFILE_MINIMUM APIProfile = "MINIMUM"
+	APIPROFILE_BASICWL APIProfile = "BASICWL"
+	APIPROFILE_BASIC APIProfile = "BASIC"
+	APIPROFILE_EN16931 APIProfile = "EN16931"
+	APIPROFILE_EXTENDED APIProfile = "EXTENDED"
 )
 
 // All allowed values of APIProfile enum

@@ -21,21 +21,21 @@ type AFNORReasonCodeEnum string
 
 // List of AFNOR_ReasonCodeEnum
 const (
-	EMPTY_ATTACHEMENT AFNORReasonCodeEnum = "EmptyAttachement"
-	ATTACHMENT_TYPE_ERROR AFNORReasonCodeEnum = "AttachmentTypeError"
-	EMPTY_FLOW AFNORReasonCodeEnum = "EmptyFlow"
-	OTHER_TECHNICAL_ERROR AFNORReasonCodeEnum = "OtherTechnicalError"
-	INVALID_SCHEMA AFNORReasonCodeEnum = "InvalidSchema"
-	FILE_SIZE_EXCEEDED AFNORReasonCodeEnum = "FileSizeExceeded"
-	FLOW_TYPE_ERROR AFNORReasonCodeEnum = "FlowTypeError"
-	ALREADY_EXISTING_FLOW AFNORReasonCodeEnum = "AlreadyExistingFlow"
-	VIRUS_FOUND AFNORReasonCodeEnum = "VirusFound"
-	CHECKSUM_MISMATCH AFNORReasonCodeEnum = "ChecksumMismatch"
-	INVOICE_LC_INVALID_STATUS AFNORReasonCodeEnum = "InvoiceLCInvalidStatus"
-	INVOICE_LC_STATUS_ERROR AFNORReasonCodeEnum = "InvoiceLCStatusError"
-	INVOICE_LC_RULE_ERROR AFNORReasonCodeEnum = "InvoiceLCRuleError"
-	INVOICE_LC_ACCESS_DENIED AFNORReasonCodeEnum = "InvoiceLCAccessDenied"
-	INVOICE_LC_AMOUNT_ERROR AFNORReasonCodeEnum = "InvoiceLCAmountError"
+	AFNORREASONCODEENUM_EMPTY_ATTACHEMENT AFNORReasonCodeEnum = "EmptyAttachement"
+	AFNORREASONCODEENUM_ATTACHMENT_TYPE_ERROR AFNORReasonCodeEnum = "AttachmentTypeError"
+	AFNORREASONCODEENUM_EMPTY_FLOW AFNORReasonCodeEnum = "EmptyFlow"
+	AFNORREASONCODEENUM_OTHER_TECHNICAL_ERROR AFNORReasonCodeEnum = "OtherTechnicalError"
+	AFNORREASONCODEENUM_INVALID_SCHEMA AFNORReasonCodeEnum = "InvalidSchema"
+	AFNORREASONCODEENUM_FILE_SIZE_EXCEEDED AFNORReasonCodeEnum = "FileSizeExceeded"
+	AFNORREASONCODEENUM_FLOW_TYPE_ERROR AFNORReasonCodeEnum = "FlowTypeError"
+	AFNORREASONCODEENUM_ALREADY_EXISTING_FLOW AFNORReasonCodeEnum = "AlreadyExistingFlow"
+	AFNORREASONCODEENUM_VIRUS_FOUND AFNORReasonCodeEnum = "VirusFound"
+	AFNORREASONCODEENUM_CHECKSUM_MISMATCH AFNORReasonCodeEnum = "ChecksumMismatch"
+	AFNORREASONCODEENUM_INVOICE_LC_INVALID_STATUS AFNORReasonCodeEnum = "InvoiceLCInvalidStatus"
+	AFNORREASONCODEENUM_INVOICE_LC_STATUS_ERROR AFNORReasonCodeEnum = "InvoiceLCStatusError"
+	AFNORREASONCODEENUM_INVOICE_LC_RULE_ERROR AFNORReasonCodeEnum = "InvoiceLCRuleError"
+	AFNORREASONCODEENUM_INVOICE_LC_ACCESS_DENIED AFNORReasonCodeEnum = "InvoiceLCAccessDenied"
+	AFNORREASONCODEENUM_INVOICE_LC_AMOUNT_ERROR AFNORReasonCodeEnum = "InvoiceLCAmountError"
 )
 
 // All allowed values of AFNORReasonCodeEnum enum

@@ -21,8 +21,8 @@ type RoutingCodeInclude string
 
 // List of RoutingCodeInclude
 const (
-	SIREN RoutingCodeInclude = "siren"
-	SIRET RoutingCodeInclude = "siret"
+	ROUTINGCODEINCLUDE_SIREN RoutingCodeInclude = "siren"
+	ROUTINGCODEINCLUDE_SIRET RoutingCodeInclude = "siret"
 )
 
 // All allowed values of RoutingCodeInclude enum

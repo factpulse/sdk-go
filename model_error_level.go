@@ -21,8 +21,8 @@ type ErrorLevel string
 
 // List of ErrorLevel
 const (
-	ERROR ErrorLevel = "Error"
-	WARNING ErrorLevel = "Warning"
+	ERRORLEVEL_ERROR ErrorLevel = "Error"
+	ERRORLEVEL_WARNING ErrorLevel = "Warning"
 )
 
 // All allowed values of ErrorLevel enum

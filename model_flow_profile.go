@@ -21,9 +21,9 @@ type FlowProfile string
 
 // List of FlowProfile
 const (
-	BASIC FlowProfile = "Basic"
-	CIUS FlowProfile = "CIUS"
-	EXTENDED_CTC_FR FlowProfile = "Extended-CTC-FR"
+	FLOWPROFILE_BASIC FlowProfile = "Basic"
+	FLOWPROFILE_CIUS FlowProfile = "CIUS"
+	FLOWPROFILE_EXTENDED_CTC_FR FlowProfile = "Extended-CTC-FR"
 )
 
 // All allowed values of FlowProfile enum

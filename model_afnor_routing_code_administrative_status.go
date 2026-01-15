@@ -21,8 +21,8 @@ type AFNORRoutingCodeAdministrativeStatus string
 
 // List of AFNOR_routingCodeAdministrativeStatus
 const (
-	A AFNORRoutingCodeAdministrativeStatus = "A"
-	C AFNORRoutingCodeAdministrativeStatus = "C"
+	AFNORROUTINGCODEADMINISTRATIVESTATUS_A AFNORRoutingCodeAdministrativeStatus = "A"
+	AFNORROUTINGCODEADMINISTRATIVESTATUS_C AFNORRoutingCodeAdministrativeStatus = "C"
 )
 
 // All allowed values of AFNORRoutingCodeAdministrativeStatus enum

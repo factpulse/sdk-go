@@ -36,8 +36,6 @@ func NewAFNORDestination() *AFNORDestination {
 	this := AFNORDestination{}
 	var type_ string = "afnor"
 	this.Type = &type_
-	var flowSyntax FlowSyntax = FACTUR_X
-	this.FlowSyntax = &flowSyntax
 	return &this
 }
 
@@ -48,8 +46,6 @@ func NewAFNORDestinationWithDefaults() *AFNORDestination {
 	this := AFNORDestination{}
 	var type_ string = "afnor"
 	this.Type = &type_
-	var flowSyntax FlowSyntax = FACTUR_X
-	this.FlowSyntax = &flowSyntax
 	return &this
 }
 

@@ -21,8 +21,8 @@ type AFNORFacilityAdministrativeStatus string
 
 // List of AFNOR_facilityAdministrativeStatus
 const (
-	A AFNORFacilityAdministrativeStatus = "A"
-	C AFNORFacilityAdministrativeStatus = "C"
+	AFNORFACILITYADMINISTRATIVESTATUS_A AFNORFacilityAdministrativeStatus = "A"
+	AFNORFACILITYADMINISTRATIVESTATUS_C AFNORFacilityAdministrativeStatus = "C"
 )
 
 // All allowed values of AFNORFacilityAdministrativeStatus enum

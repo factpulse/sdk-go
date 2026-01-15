@@ -21,22 +21,22 @@ type FactureElectroniqueModelsInvoiceTypeCode string
 
 // List of facture_electronique__models__InvoiceTypeCode
 const (
-	INVOICE FactureElectroniqueModelsInvoiceTypeCode = "380"
-	SELF_BILLED_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "389"
-	FACTORED_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "393"
-	SELF_BILLED_FACTORED_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "501"
-	PREPAYMENT_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "386"
-	SELF_BILLED_PREPAYMENT_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "500"
-	CORRECTIVE_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "384"
-	SELF_BILLED_CORRECTIVE_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "471"
-	FACTORED_CORRECTIVE_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "472"
-	SELF_BILLED_FACTORED_CORRECTIVE_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "473"
-	CREDIT_NOTE FactureElectroniqueModelsInvoiceTypeCode = "381"
-	SELF_BILLED_CREDIT_NOTE FactureElectroniqueModelsInvoiceTypeCode = "261"
-	GLOBAL_ALLOWANCE_CREDIT_NOTE FactureElectroniqueModelsInvoiceTypeCode = "262"
-	FACTORED_CREDIT_NOTE FactureElectroniqueModelsInvoiceTypeCode = "396"
-	SELF_BILLED_FACTORED_CREDIT_NOTE FactureElectroniqueModelsInvoiceTypeCode = "502"
-	PREPAYMENT_CREDIT_NOTE FactureElectroniqueModelsInvoiceTypeCode = "503"
+	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "380"
+	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_SELF_BILLED_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "389"
+	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_FACTORED_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "393"
+	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_SELF_BILLED_FACTORED_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "501"
+	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_PREPAYMENT_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "386"
+	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_SELF_BILLED_PREPAYMENT_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "500"
+	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_CORRECTIVE_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "384"
+	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_SELF_BILLED_CORRECTIVE_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "471"
+	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_FACTORED_CORRECTIVE_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "472"
+	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_SELF_BILLED_FACTORED_CORRECTIVE_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "473"
+	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_CREDIT_NOTE FactureElectroniqueModelsInvoiceTypeCode = "381"
+	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_SELF_BILLED_CREDIT_NOTE FactureElectroniqueModelsInvoiceTypeCode = "261"
+	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_GLOBAL_ALLOWANCE_CREDIT_NOTE FactureElectroniqueModelsInvoiceTypeCode = "262"
+	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_FACTORED_CREDIT_NOTE FactureElectroniqueModelsInvoiceTypeCode = "396"
+	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_SELF_BILLED_FACTORED_CREDIT_NOTE FactureElectroniqueModelsInvoiceTypeCode = "502"
+	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_PREPAYMENT_CREDIT_NOTE FactureElectroniqueModelsInvoiceTypeCode = "503"
 )
 
 // All allowed values of FactureElectroniqueModelsInvoiceTypeCode enum

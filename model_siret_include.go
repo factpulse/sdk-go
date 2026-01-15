@@ -21,7 +21,7 @@ type SiretInclude string
 
 // List of SiretInclude
 const (
-	SIREN SiretInclude = "siren"
+	SIRETINCLUDE_SIREN SiretInclude = "siren"
 )
 
 // All allowed values of SiretInclude enum
