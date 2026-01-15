@@ -284,8 +284,8 @@ func (c *Client) PollTask(taskID string, timeout, interval *int64) (map[string]i
         defer resp.Body.Close()
         if resp.StatusCode == 401 { c.ResetAuth(); continue }
         body, _ := io.ReadAll(resp.Body); var data map[string]interface{}; json.Unmarshal(body, &data)
-        statut, _ := data["statut"].(string)
-        if statut == "SUCCESS" { if r, ok := data["resultat"].(map[string]interface{}); ok { return r, nil }; return map[string]interface{}{}, nil }
+        statut, _ := data["status"].(string)
+        if statut == "SUCCESS" { if r, ok := data["result"].(map[string]interface{}); ok { return r, nil }; return map[string]interface{}{}, nil }
         if statut == "FAILURE" { return nil, NewFactPulseValidationError("Task failed", nil) }
         time.Sleep(time.Duration(currentInterval) * time.Millisecond); currentInterval = minFloat(currentInterval*1.5, 10000)
     }
