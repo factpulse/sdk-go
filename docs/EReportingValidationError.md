@@ -1,4 +1,4 @@
-# FactureElectroniqueRestApiSchemasEreportingValidationError
+# EReportingValidationError
 
 ## Properties
 
@@ -10,96 +10,96 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewFactureElectroniqueRestApiSchemasEreportingValidationError
+### NewEReportingValidationError
 
-`func NewFactureElectroniqueRestApiSchemasEreportingValidationError(field string, message string, ) *FactureElectroniqueRestApiSchemasEreportingValidationError`
+`func NewEReportingValidationError(field string, message string, ) *EReportingValidationError`
 
-NewFactureElectroniqueRestApiSchemasEreportingValidationError instantiates a new FactureElectroniqueRestApiSchemasEreportingValidationError object
+NewEReportingValidationError instantiates a new EReportingValidationError object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewFactureElectroniqueRestApiSchemasEreportingValidationErrorWithDefaults
+### NewEReportingValidationErrorWithDefaults
 
-`func NewFactureElectroniqueRestApiSchemasEreportingValidationErrorWithDefaults() *FactureElectroniqueRestApiSchemasEreportingValidationError`
+`func NewEReportingValidationErrorWithDefaults() *EReportingValidationError`
 
-NewFactureElectroniqueRestApiSchemasEreportingValidationErrorWithDefaults instantiates a new FactureElectroniqueRestApiSchemasEreportingValidationError object
+NewEReportingValidationErrorWithDefaults instantiates a new EReportingValidationError object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetField
 
-`func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) GetField() string`
+`func (o *EReportingValidationError) GetField() string`
 
 GetField returns the Field field if non-nil, zero value otherwise.
 
 ### GetFieldOk
 
-`func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) GetFieldOk() (*string, bool)`
+`func (o *EReportingValidationError) GetFieldOk() (*string, bool)`
 
 GetFieldOk returns a tuple with the Field field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetField
 
-`func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) SetField(v string)`
+`func (o *EReportingValidationError) SetField(v string)`
 
 SetField sets Field field to given value.
 
 
 ### GetMessage
 
-`func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) GetMessage() string`
+`func (o *EReportingValidationError) GetMessage() string`
 
 GetMessage returns the Message field if non-nil, zero value otherwise.
 
 ### GetMessageOk
 
-`func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) GetMessageOk() (*string, bool)`
+`func (o *EReportingValidationError) GetMessageOk() (*string, bool)`
 
 GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMessage
 
-`func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) SetMessage(v string)`
+`func (o *EReportingValidationError) SetMessage(v string)`
 
 SetMessage sets Message field to given value.
 
 
 ### GetCode
 
-`func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) GetCode() string`
+`func (o *EReportingValidationError) GetCode() string`
 
 GetCode returns the Code field if non-nil, zero value otherwise.
 
 ### GetCodeOk
 
-`func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) GetCodeOk() (*string, bool)`
+`func (o *EReportingValidationError) GetCodeOk() (*string, bool)`
 
 GetCodeOk returns a tuple with the Code field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCode
 
-`func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) SetCode(v string)`
+`func (o *EReportingValidationError) SetCode(v string)`
 
 SetCode sets Code field to given value.
 
 ### HasCode
 
-`func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) HasCode() bool`
+`func (o *EReportingValidationError) HasCode() bool`
 
 HasCode returns a boolean if a field has been set.
 
 ### SetCodeNil
 
-`func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) SetCodeNil(b bool)`
+`func (o *EReportingValidationError) SetCodeNil(b bool)`
 
  SetCodeNil sets the value for Code to be an explicit nil
 
 ### UnsetCode
-`func (o *FactureElectroniqueRestApiSchemasEreportingValidationError) UnsetCode()`
+`func (o *EReportingValidationError) UnsetCode()`
 
 UnsetCode ensures that no value is present for Code, not even an explicit nil
 

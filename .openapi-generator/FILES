@@ -157,6 +157,7 @@ docs/DocumentTypeInfo.md
 docs/DownloadsAPI.md
 docs/EReportingAPI.md
 docs/EReportingFlowType.md
+docs/EReportingValidationError.md
 docs/ElectronicAddress.md
 docs/EnrichedInvoiceInfo.md
 docs/ErrorLevel.md
@@ -164,8 +165,7 @@ docs/ErrorSource.md
 docs/ExtractionInfo.md
 docs/FacturXInvoice.md
 docs/FacturXPDFInfo.md
-docs/FactureElectroniqueModelsInvoiceTypeCode.md
-docs/FactureElectroniqueRestApiSchemasEreportingValidationError.md
+docs/FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode.md
 docs/FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.md
 docs/FieldStatus.md
 docs/FileInfo.md
@@ -240,6 +240,7 @@ docs/ReportPeriod.md
 docs/ReportSender.md
 docs/RoundingAmount.md
 docs/RoutingCodeInclude.md
+docs/SchematronValidationError.md
 docs/SchemeID.md
 docs/SearchFlowRequest.md
 docs/SearchFlowResponse.md
@@ -441,6 +442,7 @@ model_directory_line_include.go
 model_doc_type.go
 model_document_type_info.go
 model_e_reporting_flow_type.go
+model_e_reporting_validation_error.go
 model_electronic_address.go
 model_enriched_invoice_info.go
 model_error_level.go
@@ -448,8 +450,7 @@ model_error_source.go
 model_extraction_info.go
 model_factur_x_invoice.go
 model_factur_xpdf_info.go
-model_facture_electronique__models__invoice_type_code.go
-model_facture_electronique__rest_api__schemas__ereporting__validation_error.go
+model_facture_electronique__rest_api__schemas__ereporting__invoice_type_code.go
 model_facture_electronique__rest_api__schemas__processing__chorus_pro_credentials.go
 model_field_status.go
 model_file_info.go
@@ -521,6 +522,7 @@ model_report_period.go
 model_report_sender.go
 model_rounding_amount.go
 model_routing_code_include.go
+model_schematron_validation_error.go
 model_scheme_id.go
 model_search_flow_request.go
 model_search_flow_response.go
