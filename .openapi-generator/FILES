@@ -165,8 +165,8 @@ docs/ErrorSource.md
 docs/ExtractionInfo.md
 docs/FacturXInvoice.md
 docs/FacturXPDFInfo.md
+docs/FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.md
 docs/FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode.md
-docs/FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.md
 docs/FieldStatus.md
 docs/FileInfo.md
 docs/FilesInfo.md
@@ -450,8 +450,8 @@ model_error_source.go
 model_extraction_info.go
 model_factur_x_invoice.go
 model_factur_xpdf_info.go
+model_facture_electronique__rest_api__schemas__chorus_pro__chorus_pro_credentials.go
 model_facture_electronique__rest_api__schemas__ereporting__invoice_type_code.go
-model_facture_electronique__rest_api__schemas__processing__chorus_pro_credentials.go
 model_field_status.go
 model_file_info.go
 model_files_info.go

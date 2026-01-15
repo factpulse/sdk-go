@@ -592,19 +592,35 @@ func (c *Client) HealthcheckAfnor() (map[string]interface{}, error) {
 
 // ==================== AFNOR Directory ====================
 
-// SearchSiretAfnor searches for a company by SIRET in the AFNOR directory
-func (c *Client) SearchSiretAfnor(siret string) (map[string]interface{}, error) {
-    return c.makeAfnorRequest("GET", fmt.Sprintf("/directory/siret/%s", siret), nil, nil, "")
+// GetSiretAfnor gets a facility by SIRET in the AFNOR directory
+func (c *Client) GetSiretAfnor(siret string) (map[string]interface{}, error) {
+    return c.makeAfnorRequest("GET", fmt.Sprintf("/directory/v1/siret/code-insee:%s", siret), nil, nil, "")
 }
 
-// SearchSirenAfnor searches for a company by SIREN in the AFNOR directory
-func (c *Client) SearchSirenAfnor(siren string) (map[string]interface{}, error) {
-    return c.makeAfnorRequest("GET", fmt.Sprintf("/directory/siren/%s", siren), nil, nil, "")
+// GetSirenAfnor gets a legal unit by SIREN in the AFNOR directory
+func (c *Client) GetSirenAfnor(siren string) (map[string]interface{}, error) {
+    return c.makeAfnorRequest("GET", fmt.Sprintf("/directory/v1/siren/code-insee:%s", siren), nil, nil, "")
 }
 
-// ListRoutingCodesAfnor lists available routing codes for a SIREN
-func (c *Client) ListRoutingCodesAfnor(siren string) (map[string]interface{}, error) {
-    return c.makeAfnorRequest("GET", fmt.Sprintf("/directory/siren/%s/routing-codes", siren), nil, nil, "")
+// SearchSirenAfnor searches for legal units (SIREN) in the AFNOR directory
+func (c *Client) SearchSirenAfnor(filters map[string]interface{}, limit int) (map[string]interface{}, error) {
+    if limit <= 0 { limit = 25 }
+    if filters == nil { filters = map[string]interface{}{} }
+    searchBody := map[string]interface{}{"filters": filters, "limit": limit}
+    return c.makeAfnorRequest("POST", "/directory/v1/siren/search", searchBody, nil, "")
+}
+
+// SearchRoutingCodesAfnor searches for routing codes in the AFNOR directory
+func (c *Client) SearchRoutingCodesAfnor(filters map[string]interface{}, limit int) (map[string]interface{}, error) {
+    if limit <= 0 { limit = 25 }
+    if filters == nil { filters = map[string]interface{}{} }
+    searchBody := map[string]interface{}{"filters": filters, "limit": limit}
+    return c.makeAfnorRequest("POST", "/directory/v1/routing-code/search", searchBody, nil, "")
+}
+
+// GetRoutingCodeAfnor gets a routing code by SIRET and routing identifier
+func (c *Client) GetRoutingCodeAfnor(siret, routingIdentifier string) (map[string]interface{}, error) {
+    return c.makeAfnorRequest("GET", fmt.Sprintf("/directory/v1/routing-code/siret:%s/code:%s", siret, routingIdentifier), nil, nil, "")
 }
 
 // =========================================================================
