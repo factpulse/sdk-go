@@ -390,7 +390,7 @@ func (c *Client) GenerateFacturxWithOptions(invoiceData interface{}, pdfPath, pr
     json.Unmarshal(respBody, &data)
 
     if sync {
-        if taskID, ok := data["task_id"].(string); ok {
+        if taskID, ok := data["taskId"].(string); ok {
             result, err := c.PollTask(taskID, timeout, nil)
             if err != nil { return nil, err }
             if contenuB64, ok := result["contenu_b64"].(string); ok {

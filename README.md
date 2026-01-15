@@ -24,7 +24,6 @@ The `helpers` package provides a simplified API with automatic authentication an
 package main
 
 import (
-    "context"
     "log"
     "os"
 
@@ -38,32 +37,30 @@ func main() {
         "your_password",
     )
 
-    // Build the invoice with helpers
+    // Build the invoice using simplified format (auto-calculates totals)
     invoiceData := map[string]interface{}{
-        "invoiceNumber": "INV-2025-001",
-        "issueDate":     "2025-01-15",
-        "dueDate":       "2025-02-15",
-        "currencyCode":  "EUR",
-        "supplier": helpers.Supplier(
-            "My Company SAS", "12345678901234",
-            "123 Example Street", "75001", "Paris", nil,
-        ),
-        "recipient": helpers.Recipient(
-            "Client SARL", "98765432109876",
-            "456 Test Avenue", "69001", "Lyon", nil,
-        ),
-        "totals": helpers.TotalAmount(1000.00, 200.00, 1200.00, 1200.00),
-        "lines": []interface{}{
-            helpers.InvoiceLine(1, "Consulting services", 10, 100.00, 1000.00),
+        "number": "INV-2025-001",
+        "supplier": map[string]interface{}{
+            "name":  "My Company SAS",
+            "siret": "12345678901234",
+            "iban":  "FR7630001007941234567890185",
         },
-        "vatLines": []interface{}{
-            helpers.VatLine(1000.00, 200.00, nil),
+        "recipient": map[string]interface{}{
+            "name":  "Client SARL",
+            "siret": "98765432109876",
+        },
+        "lines": []map[string]interface{}{
+            {
+                "description": "Consulting services",
+                "quantity":    10,
+                "unitPrice":   100.0,
+                "vatRate":     20,
+            },
         },
     }
 
     // Generate the Factur-X PDF
-    ctx := context.Background()
-    pdfBytes, err := client.GenerateFacturx(ctx, invoiceData, "source_invoice.pdf", "EN16931")
+    pdfBytes, err := client.GenerateFacturx(invoiceData, "source_invoice.pdf")
     if err != nil {
         log.Fatal(err)
     }
