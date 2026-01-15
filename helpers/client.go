@@ -393,11 +393,11 @@ func (c *Client) GenerateFacturxWithOptions(invoiceData interface{}, pdfPath, pr
         if taskID, ok := data["taskId"].(string); ok {
             result, err := c.PollTask(taskID, timeout, nil)
             if err != nil { return nil, err }
-            if contenuB64, ok := result["contenu_b64"].(string); ok {
-                decoded, _ := base64.StdEncoding.DecodeString(contenuB64)
+            if contentB64, ok := result["content_b64"].(string); ok {
+                decoded, _ := base64.StdEncoding.DecodeString(contentB64)
                 return decoded, nil
             }
-            if xml, ok := result["contenu_xml"].(string); ok {
+            if xml, ok := result["content_xml"].(string); ok {
                 return []byte(xml), nil
             }
             return nil, NewFactPulseValidationError("Unexpected result", nil)
