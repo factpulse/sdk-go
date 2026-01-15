@@ -116,7 +116,6 @@ docs/AFNORUpdatePutRoutingCodeBody.md
 docs/AFNORWebhookCallbackContent.md
 docs/APIError.md
 docs/APIProfile.md
-docs/AcceptLanguage.md
 docs/AcknowledgmentStatus.md
 docs/AdditionalDocument.md
 docs/AggregatedPaymentInput.md
@@ -150,7 +149,6 @@ docs/Currency.md
 docs/CurrencyCode.md
 docs/DeliveryParty.md
 docs/Destination.md
-docs/DirectoryLineInclude.md
 docs/DocType.md
 docs/DocumentConversionAPI.md
 docs/DocumentTypeInfo.md
@@ -165,8 +163,8 @@ docs/ErrorSource.md
 docs/ExtractionInfo.md
 docs/FacturXInvoice.md
 docs/FacturXPDFInfo.md
+docs/FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.md
 docs/FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode.md
-docs/FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.md
 docs/FieldStatus.md
 docs/FileInfo.md
 docs/FilesInfo.md
@@ -239,7 +237,6 @@ docs/Recipient.md
 docs/ReportPeriod.md
 docs/ReportSender.md
 docs/RoundingAmount.md
-docs/RoutingCodeInclude.md
 docs/SchematronValidationError.md
 docs/SchemeID.md
 docs/SearchFlowRequest.md
@@ -252,7 +249,6 @@ docs/SignatureInfo.md
 docs/SignatureInfoAPI.md
 docs/SignatureParameters.md
 docs/SimplifiedInvoiceData.md
-docs/SiretInclude.md
 docs/StructureInfo.md
 docs/StructureParameters.md
 docs/StructureService.md
@@ -308,7 +304,6 @@ docs/VerifiedFieldSchema.md
 git_push.sh
 go.mod
 go.sum
-model_accept_language.go
 model_acknowledgment_status.go
 model_additional_document.go
 model_afnor_acknowledgement.go
@@ -438,7 +433,6 @@ model_currency.go
 model_currency_code.go
 model_delivery_party.go
 model_destination.go
-model_directory_line_include.go
 model_doc_type.go
 model_document_type_info.go
 model_e_reporting_flow_type.go
@@ -450,8 +444,8 @@ model_error_source.go
 model_extraction_info.go
 model_factur_x_invoice.go
 model_factur_xpdf_info.go
+model_facture_electronique__rest_api__schemas__chorus_pro__chorus_pro_credentials.go
 model_facture_electronique__rest_api__schemas__ereporting__invoice_type_code.go
-model_facture_electronique__rest_api__schemas__processing__chorus_pro_credentials.go
 model_field_status.go
 model_file_info.go
 model_files_info.go
@@ -521,7 +515,6 @@ model_recipient.go
 model_report_period.go
 model_report_sender.go
 model_rounding_amount.go
-model_routing_code_include.go
 model_schematron_validation_error.go
 model_scheme_id.go
 model_search_flow_request.go
@@ -534,7 +527,6 @@ model_signature_info.go
 model_signature_info_api.go
 model_signature_parameters.go
 model_simplified_invoice_data.go
-model_siret_include.go
 model_structure_info.go
 model_structure_parameters.go
 model_structure_service.go

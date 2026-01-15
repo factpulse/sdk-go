@@ -18,7 +18,6 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"reflect"
 )
 
 
@@ -28,13 +27,6 @@ type AFNORPDPPADirectoryServiceAPIService service
 type ApiCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostRequest struct {
 	ctx context.Context
 	ApiService *AFNORPDPPADirectoryServiceAPIService
-	acceptLanguage *AcceptLanguage
-}
-
-// Specifies the language in which the resource is requested.
-func (r ApiCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostRequest) AcceptLanguage(acceptLanguage AcceptLanguage) ApiCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostRequest {
-	r.acceptLanguage = &acceptLanguage
-	return r
 }
 
 func (r ApiCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostRequest) Execute() (interface{}, *http.Response, error) {
@@ -94,9 +86,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) CreateDirectoryLineProxyApiV1Afno
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.acceptLanguage != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "simple", "")
-	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -137,13 +126,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) CreateDirectoryLineProxyApiV1Afno
 type ApiCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostRequest struct {
 	ctx context.Context
 	ApiService *AFNORPDPPADirectoryServiceAPIService
-	acceptLanguage *AcceptLanguage
-}
-
-// Specifies the language in which the resource is requested.
-func (r ApiCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostRequest) AcceptLanguage(acceptLanguage AcceptLanguage) ApiCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostRequest {
-	r.acceptLanguage = &acceptLanguage
-	return r
 }
 
 func (r ApiCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostRequest) Execute() (interface{}, *http.Response, error) {
@@ -203,9 +185,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) CreateRoutingCodeProxyApiV1AfnorD
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.acceptLanguage != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "simple", "")
-	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -247,13 +226,6 @@ type ApiDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdIn
 	ctx context.Context
 	ApiService *AFNORPDPPADirectoryServiceAPIService
 	idInstance string
-	acceptLanguage *AcceptLanguage
-}
-
-// Specifies the language in which the resource is requested.
-func (r ApiDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteRequest) AcceptLanguage(acceptLanguage AcceptLanguage) ApiDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteRequest {
-	r.acceptLanguage = &acceptLanguage
-	return r
 }
 
 func (r ApiDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteRequest) Execute() (interface{}, *http.Response, error) {
@@ -315,9 +287,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) DeleteDirectoryLineProxyApiV1Afno
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.acceptLanguage != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -459,27 +428,6 @@ type ApiGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddress
 	ctx context.Context
 	ApiService *AFNORPDPPADirectoryServiceAPIService
 	addressingIdentifier string
-	fields *[]string
-	include *[]DirectoryLineInclude
-	acceptLanguage *AcceptLanguage
-}
-
-// Fields of the Directory Line resource.
-func (r ApiGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetRequest) Fields(fields []string) ApiGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetRequest {
-	r.fields = &fields
-	return r
-}
-
-// Relations to include in the response.
-func (r ApiGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetRequest) Include(include []DirectoryLineInclude) ApiGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetRequest {
-	r.include = &include
-	return r
-}
-
-// Specifies the language in which the resource is requested.
-func (r ApiGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetRequest) AcceptLanguage(acceptLanguage AcceptLanguage) ApiGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetRequest {
-	r.acceptLanguage = &acceptLanguage
-	return r
 }
 
 func (r ApiGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetRequest) Execute() (*AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode, *http.Response, error) {
@@ -525,28 +473,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) GetDirectoryLineByCodeProxyApiV1A
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.fields != nil {
-		t := *r.fields
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "fields", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "fields", t, "form", "multi")
-		}
-	}
-	if r.include != nil {
-		t := *r.include
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "include", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "include", t, "form", "multi")
-		}
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -563,9 +489,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) GetDirectoryLineByCodeProxyApiV1A
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.acceptLanguage != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -608,20 +531,6 @@ type ApiGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdIns
 	ctx context.Context
 	ApiService *AFNORPDPPADirectoryServiceAPIService
 	idInstance string
-	fields *[]string
-	acceptLanguage *AcceptLanguage
-}
-
-// Fields of the Directory Line resource.
-func (r ApiGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetRequest) Fields(fields []string) ApiGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetRequest {
-	r.fields = &fields
-	return r
-}
-
-// Specifies the language in which the resource is requested.
-func (r ApiGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetRequest) AcceptLanguage(acceptLanguage AcceptLanguage) ApiGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetRequest {
-	r.acceptLanguage = &acceptLanguage
-	return r
 }
 
 func (r ApiGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetRequest) Execute() (*AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode, *http.Response, error) {
@@ -667,17 +576,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) GetDirectoryLineByIdInstanceProxy
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.fields != nil {
-		t := *r.fields
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "fields", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "fields", t, "form", "multi")
-		}
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -694,9 +592,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) GetDirectoryLineByIdInstanceProxy
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.acceptLanguage != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -739,20 +634,6 @@ type ApiGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanc
 	ctx context.Context
 	ApiService *AFNORPDPPADirectoryServiceAPIService
 	idInstance string
-	fields *[]string
-	acceptLanguage *AcceptLanguage
-}
-
-// Fields of the Routing Code resource
-func (r ApiGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetRequest) Fields(fields []string) ApiGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetRequest {
-	r.fields = &fields
-	return r
-}
-
-// Specifies the language in which the resource is requested.
-func (r ApiGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetRequest) AcceptLanguage(acceptLanguage AcceptLanguage) ApiGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetRequest {
-	r.acceptLanguage = &acceptLanguage
-	return r
 }
 
 func (r ApiGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetRequest) Execute() (*AFNORRoutingCodePayloadHistoryLegalUnitFacility, *http.Response, error) {
@@ -798,17 +679,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) GetRoutingCodeByIdInstanceProxyAp
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.fields != nil {
-		t := *r.fields
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "fields", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "fields", t, "form", "multi")
-		}
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -825,9 +695,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) GetRoutingCodeByIdInstanceProxyAp
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.acceptLanguage != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -871,27 +738,6 @@ type ApiGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSi
 	ApiService *AFNORPDPPADirectoryServiceAPIService
 	siret string
 	routingIdentifier string
-	fields *[]string
-	include *[]RoutingCodeInclude
-	acceptLanguage *AcceptLanguage
-}
-
-// Fields of the Routing Code resource
-func (r ApiGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetRequest) Fields(fields []string) ApiGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetRequest {
-	r.fields = &fields
-	return r
-}
-
-// Relations to include in the response.
-func (r ApiGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetRequest) Include(include []RoutingCodeInclude) ApiGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetRequest {
-	r.include = &include
-	return r
-}
-
-// Specifies the language in which the resource is requested.
-func (r ApiGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetRequest) AcceptLanguage(acceptLanguage AcceptLanguage) ApiGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetRequest {
-	r.acceptLanguage = &acceptLanguage
-	return r
 }
 
 func (r ApiGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetRequest) Execute() (*AFNORRoutingCodePayloadHistoryLegalUnitFacility, *http.Response, error) {
@@ -940,28 +786,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) GetRoutingCodeBySiretAndCodeProxy
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.fields != nil {
-		t := *r.fields
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "fields", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "fields", t, "form", "multi")
-		}
-	}
-	if r.include != nil {
-		t := *r.include
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "include", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "include", t, "form", "multi")
-		}
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -978,9 +802,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) GetRoutingCodeBySiretAndCodeProxy
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.acceptLanguage != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -1023,20 +844,6 @@ type ApiGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetReque
 	ctx context.Context
 	ApiService *AFNORPDPPADirectoryServiceAPIService
 	siren string
-	fields *[]*string
-	acceptLanguage *AcceptLanguage
-}
-
-// Fields of the SIREN resource
-func (r ApiGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetRequest) Fields(fields []*string) ApiGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetRequest {
-	r.fields = &fields
-	return r
-}
-
-// Specifies the language in which the resource is requested.
-func (r ApiGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetRequest) AcceptLanguage(acceptLanguage AcceptLanguage) ApiGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetRequest {
-	r.acceptLanguage = &acceptLanguage
-	return r
 }
 
 func (r ApiGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetRequest) Execute() (*AFNORLegalUnitPayloadHistory, *http.Response, error) {
@@ -1082,17 +889,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) GetSirenByCodeInseeProxyApiV1Afno
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.fields != nil {
-		t := *r.fields
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "fields", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "fields", t, "form", "multi")
-		}
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1109,9 +905,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) GetSirenByCodeInseeProxyApiV1Afno
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.acceptLanguage != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -1154,20 +947,6 @@ type ApiGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceG
 	ctx context.Context
 	ApiService *AFNORPDPPADirectoryServiceAPIService
 	idInstance string
-	fields *[]string
-	acceptLanguage *AcceptLanguage
-}
-
-// Fields of the SIREN resource
-func (r ApiGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetRequest) Fields(fields []string) ApiGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetRequest {
-	r.fields = &fields
-	return r
-}
-
-// Specifies the language in which the resource is requested.
-func (r ApiGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetRequest) AcceptLanguage(acceptLanguage AcceptLanguage) ApiGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetRequest {
-	r.acceptLanguage = &acceptLanguage
-	return r
 }
 
 func (r ApiGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetRequest) Execute() (*AFNORLegalUnitPayloadHistory, *http.Response, error) {
@@ -1213,17 +992,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) GetSirenByIdInstanceProxyApiV1Afn
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.fields != nil {
-		t := *r.fields
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "fields", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "fields", t, "form", "multi")
-		}
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1240,9 +1008,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) GetSirenByIdInstanceProxyApiV1Afn
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.acceptLanguage != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -1285,27 +1050,6 @@ type ApiGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetReque
 	ctx context.Context
 	ApiService *AFNORPDPPADirectoryServiceAPIService
 	siret string
-	fields *[]string
-	include *[]SiretInclude
-	acceptLanguage *AcceptLanguage
-}
-
-// Fields of a SIRET resource.
-func (r ApiGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetRequest) Fields(fields []string) ApiGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetRequest {
-	r.fields = &fields
-	return r
-}
-
-// Relations to include in the response.
-func (r ApiGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetRequest) Include(include []SiretInclude) ApiGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetRequest {
-	r.include = &include
-	return r
-}
-
-// Specifies the language in which the resource is requested.
-func (r ApiGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetRequest) AcceptLanguage(acceptLanguage AcceptLanguage) ApiGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetRequest {
-	r.acceptLanguage = &acceptLanguage
-	return r
 }
 
 func (r ApiGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetRequest) Execute() (*AFNORFacilityPayloadHistory, *http.Response, error) {
@@ -1351,28 +1095,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) GetSiretByCodeInseeProxyApiV1Afno
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.fields != nil {
-		t := *r.fields
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "fields", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "fields", t, "form", "multi")
-		}
-	}
-	if r.include != nil {
-		t := *r.include
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "include", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "include", t, "form", "multi")
-		}
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1389,9 +1111,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) GetSiretByCodeInseeProxyApiV1Afno
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.acceptLanguage != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -1434,20 +1153,6 @@ type ApiGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceG
 	ctx context.Context
 	ApiService *AFNORPDPPADirectoryServiceAPIService
 	idInstance string
-	fields *[]string
-	acceptLanguage *AcceptLanguage
-}
-
-// Fields of a SIRET resource.
-func (r ApiGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetRequest) Fields(fields []string) ApiGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetRequest {
-	r.fields = &fields
-	return r
-}
-
-// Specifies the language in which the resource is requested.
-func (r ApiGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetRequest) AcceptLanguage(acceptLanguage AcceptLanguage) ApiGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetRequest {
-	r.acceptLanguage = &acceptLanguage
-	return r
 }
 
 func (r ApiGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetRequest) Execute() (*AFNORFacilityPayloadHistory, *http.Response, error) {
@@ -1493,17 +1198,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) GetSiretByIdInstanceProxyApiV1Afn
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.fields != nil {
-		t := *r.fields
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "fields", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "fields", t, "form", "multi")
-		}
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1520,9 +1214,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) GetSiretByIdInstanceProxyApiV1Afn
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.acceptLanguage != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -1565,13 +1256,6 @@ type ApiPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdIns
 	ctx context.Context
 	ApiService *AFNORPDPPADirectoryServiceAPIService
 	idInstance string
-	acceptLanguage *AcceptLanguage
-}
-
-// Specifies the language in which the resource is requested.
-func (r ApiPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchRequest) AcceptLanguage(acceptLanguage AcceptLanguage) ApiPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchRequest {
-	r.acceptLanguage = &acceptLanguage
-	return r
 }
 
 func (r ApiPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchRequest) Execute() (*AFNORDirectoryLinePost201Response, *http.Response, error) {
@@ -1634,9 +1318,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) PatchDirectoryLineProxyApiV1Afnor
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.acceptLanguage != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "simple", "")
-	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1678,13 +1359,6 @@ type ApiPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanc
 	ctx context.Context
 	ApiService *AFNORPDPPADirectoryServiceAPIService
 	idInstance string
-	acceptLanguage *AcceptLanguage
-}
-
-// Specifies the language in which the resource is requested.
-func (r ApiPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchRequest) AcceptLanguage(acceptLanguage AcceptLanguage) ApiPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchRequest {
-	r.acceptLanguage = &acceptLanguage
-	return r
 }
 
 func (r ApiPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchRequest) Execute() (*AFNORRoutingCodePost201Response, *http.Response, error) {
@@ -1747,9 +1421,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) PatchRoutingCodeProxyApiV1AfnorDi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.acceptLanguage != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "simple", "")
-	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1791,13 +1462,6 @@ type ApiPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceP
 	ctx context.Context
 	ApiService *AFNORPDPPADirectoryServiceAPIService
 	idInstance string
-	acceptLanguage *AcceptLanguage
-}
-
-// Specifies the language in which the resource is requested.
-func (r ApiPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutRequest) AcceptLanguage(acceptLanguage AcceptLanguage) ApiPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutRequest {
-	r.acceptLanguage = &acceptLanguage
-	return r
 }
 
 func (r ApiPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutRequest) Execute() (*AFNORRoutingCodePost201Response, *http.Response, error) {
@@ -1860,9 +1524,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) PutRoutingCodeProxyApiV1AfnorDire
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.acceptLanguage != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "simple", "")
-	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1903,13 +1564,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) PutRoutingCodeProxyApiV1AfnorDire
 type ApiSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostRequest struct {
 	ctx context.Context
 	ApiService *AFNORPDPPADirectoryServiceAPIService
-	acceptLanguage *AcceptLanguage
-}
-
-// Specifies the language in which the resource is requested.
-func (r ApiSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostRequest) AcceptLanguage(acceptLanguage AcceptLanguage) ApiSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostRequest {
-	r.acceptLanguage = &acceptLanguage
-	return r
 }
 
 func (r ApiSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostRequest) Execute() (*AFNORDirectoryLineSearchPost200Response, *http.Response, error) {
@@ -1969,9 +1623,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) SearchDirectoryLineProxyApiV1Afno
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.acceptLanguage != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "simple", "")
-	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -2012,13 +1663,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) SearchDirectoryLineProxyApiV1Afno
 type ApiSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostRequest struct {
 	ctx context.Context
 	ApiService *AFNORPDPPADirectoryServiceAPIService
-	acceptLanguage *AcceptLanguage
-}
-
-// Specifies the language in which the resource is requested.
-func (r ApiSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostRequest) AcceptLanguage(acceptLanguage AcceptLanguage) ApiSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostRequest {
-	r.acceptLanguage = &acceptLanguage
-	return r
 }
 
 func (r ApiSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostRequest) Execute() (*AFNORRoutingCodeSearchPost200Response, *http.Response, error) {
@@ -2078,9 +1722,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) SearchRoutingCodeProxyApiV1AfnorD
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.acceptLanguage != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "simple", "")
-	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -2121,13 +1762,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) SearchRoutingCodeProxyApiV1AfnorD
 type ApiSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostRequest struct {
 	ctx context.Context
 	ApiService *AFNORPDPPADirectoryServiceAPIService
-	acceptLanguage *AcceptLanguage
-}
-
-// Specifies the language in which the resource is requested.
-func (r ApiSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostRequest) AcceptLanguage(acceptLanguage AcceptLanguage) ApiSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostRequest {
-	r.acceptLanguage = &acceptLanguage
-	return r
 }
 
 func (r ApiSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostRequest) Execute() (*AFNORSirenSearchPost200Response, *http.Response, error) {
@@ -2187,9 +1821,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) SearchSirenProxyApiV1AfnorDirecto
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.acceptLanguage != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "simple", "")
-	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -2230,13 +1861,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) SearchSirenProxyApiV1AfnorDirecto
 type ApiSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostRequest struct {
 	ctx context.Context
 	ApiService *AFNORPDPPADirectoryServiceAPIService
-	acceptLanguage *AcceptLanguage
-}
-
-// Specifies the language in which the resource is requested.
-func (r ApiSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostRequest) AcceptLanguage(acceptLanguage AcceptLanguage) ApiSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostRequest {
-	r.acceptLanguage = &acceptLanguage
-	return r
 }
 
 func (r ApiSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostRequest) Execute() (*AFNORSiretSearchPost200Response, *http.Response, error) {
@@ -2295,9 +1919,6 @@ func (a *AFNORPDPPADirectoryServiceAPIService) SearchSiretProxyApiV1AfnorDirecto
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.acceptLanguage != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

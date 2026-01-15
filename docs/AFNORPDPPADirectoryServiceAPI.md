@@ -28,7 +28,7 @@ Method | HTTP request | Description
 
 ## CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost
 
-> interface{} CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost(ctx).AcceptLanguage(acceptLanguage).Execute()
+> interface{} CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost(ctx).Execute()
 
 Creating a directory line
 
@@ -47,11 +47,10 @@ import (
 )
 
 func main() {
-	acceptLanguage := openapiclient.AcceptLanguage("fr") // AcceptLanguage | Specifies the language in which the resource is requested. (optional) (default to "fr")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost(context.Background()).AcceptLanguage(acceptLanguage).Execute()
+	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost(context.Background()).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPADirectoryServiceAPI.CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -63,16 +62,12 @@ func main() {
 
 ### Path Parameters
 
-
+This endpoint does not need any parameter.
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostRequest struct via the builder pattern
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **acceptLanguage** | [**AcceptLanguage**](AcceptLanguage.md) | Specifies the language in which the resource is requested. | [default to &quot;fr&quot;]
 
 ### Return type
 
@@ -80,7 +75,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -94,7 +89,7 @@ Name | Type | Description  | Notes
 
 ## CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost
 
-> interface{} CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost(ctx).AcceptLanguage(acceptLanguage).Execute()
+> interface{} CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost(ctx).Execute()
 
 Create a routing code
 
@@ -113,11 +108,10 @@ import (
 )
 
 func main() {
-	acceptLanguage := openapiclient.AcceptLanguage("fr") // AcceptLanguage | Specifies the language in which the resource is requested. (optional) (default to "fr")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost(context.Background()).AcceptLanguage(acceptLanguage).Execute()
+	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost(context.Background()).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPADirectoryServiceAPI.CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -129,16 +123,12 @@ func main() {
 
 ### Path Parameters
 
-
+This endpoint does not need any parameter.
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostRequest struct via the builder pattern
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **acceptLanguage** | [**AcceptLanguage**](AcceptLanguage.md) | Specifies the language in which the resource is requested. | [default to &quot;fr&quot;]
 
 ### Return type
 
@@ -146,7 +136,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -160,7 +150,7 @@ Name | Type | Description  | Notes
 
 ## DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete
 
-> interface{} DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete(ctx, idInstance).AcceptLanguage(acceptLanguage).Execute()
+> interface{} DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete(ctx, idInstance).Execute()
 
 Delete a directory line
 
@@ -180,11 +170,10 @@ import (
 
 func main() {
 	idInstance := "idInstance_example" // string | AFNOR instance ID (UUID)
-	acceptLanguage := openapiclient.AcceptLanguage("fr") // AcceptLanguage | Specifies the language in which the resource is requested. (optional) (default to "fr")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete(context.Background(), idInstance).AcceptLanguage(acceptLanguage).Execute()
+	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete(context.Background(), idInstance).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPADirectoryServiceAPI.DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -210,7 +199,6 @@ Other parameters are passed through a pointer to a apiDeleteDirectoryLineProxyAp
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **acceptLanguage** | [**AcceptLanguage**](AcceptLanguage.md) | Specifies the language in which the resource is requested. | [default to &quot;fr&quot;]
 
 ### Return type
 
@@ -218,7 +206,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -293,7 +281,7 @@ No authorization required
 
 ## GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet
 
-> AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet(ctx, addressingIdentifier).Fields(fields).Include(include).AcceptLanguage(acceptLanguage).Execute()
+> AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet(ctx, addressingIdentifier).Execute()
 
 Get a directory line.
 
@@ -313,13 +301,10 @@ import (
 
 func main() {
 	addressingIdentifier := "addressingIdentifier_example" // string | Addressing identifier (SIREN, SIRET or routing code)
-	fields := []string{"Inner_example"} // []string | Fields of the Directory Line resource. (optional)
-	include := []openapiclient.DirectoryLineInclude{openapiclient.DirectoryLineInclude("siren")} // []DirectoryLineInclude | Relations to include in the response. (optional)
-	acceptLanguage := openapiclient.AcceptLanguage("fr") // AcceptLanguage | Specifies the language in which the resource is requested. (optional) (default to "fr")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet(context.Background(), addressingIdentifier).Fields(fields).Include(include).AcceptLanguage(acceptLanguage).Execute()
+	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet(context.Background(), addressingIdentifier).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPADirectoryServiceAPI.GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -345,9 +330,6 @@ Other parameters are passed through a pointer to a apiGetDirectoryLineByCodeProx
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **fields** | **[]string** | Fields of the Directory Line resource. | 
- **include** | [**[]DirectoryLineInclude**](DirectoryLineInclude.md) | Relations to include in the response. | 
- **acceptLanguage** | [**AcceptLanguage**](AcceptLanguage.md) | Specifies the language in which the resource is requested. | [default to &quot;fr&quot;]
 
 ### Return type
 
@@ -355,7 +337,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -369,7 +351,7 @@ Name | Type | Description  | Notes
 
 ## GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet
 
-> AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet(ctx, idInstance).Fields(fields).AcceptLanguage(acceptLanguage).Execute()
+> AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet(ctx, idInstance).Execute()
 
 Get a directory line.
 
@@ -389,12 +371,10 @@ import (
 
 func main() {
 	idInstance := "idInstance_example" // string | AFNOR instance ID (UUID)
-	fields := []string{"Inner_example"} // []string | Fields of the Directory Line resource. (optional)
-	acceptLanguage := openapiclient.AcceptLanguage("fr") // AcceptLanguage | Specifies the language in which the resource is requested. (optional) (default to "fr")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet(context.Background(), idInstance).Fields(fields).AcceptLanguage(acceptLanguage).Execute()
+	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet(context.Background(), idInstance).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPADirectoryServiceAPI.GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -420,8 +400,6 @@ Other parameters are passed through a pointer to a apiGetDirectoryLineByIdInstan
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **fields** | **[]string** | Fields of the Directory Line resource. | 
- **acceptLanguage** | [**AcceptLanguage**](AcceptLanguage.md) | Specifies the language in which the resource is requested. | [default to &quot;fr&quot;]
 
 ### Return type
 
@@ -429,7 +407,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -443,7 +421,7 @@ Name | Type | Description  | Notes
 
 ## GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet
 
-> AFNORRoutingCodePayloadHistoryLegalUnitFacility GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet(ctx, idInstance).Fields(fields).AcceptLanguage(acceptLanguage).Execute()
+> AFNORRoutingCodePayloadHistoryLegalUnitFacility GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet(ctx, idInstance).Execute()
 
 Get a routing code by instance-id.
 
@@ -463,12 +441,10 @@ import (
 
 func main() {
 	idInstance := "idInstance_example" // string | AFNOR instance ID (UUID)
-	fields := []string{"Inner_example"} // []string | Fields of the Routing Code resource (optional)
-	acceptLanguage := openapiclient.AcceptLanguage("fr") // AcceptLanguage | Specifies the language in which the resource is requested. (optional) (default to "fr")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet(context.Background(), idInstance).Fields(fields).AcceptLanguage(acceptLanguage).Execute()
+	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet(context.Background(), idInstance).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPADirectoryServiceAPI.GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -494,8 +470,6 @@ Other parameters are passed through a pointer to a apiGetRoutingCodeByIdInstance
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **fields** | **[]string** | Fields of the Routing Code resource | 
- **acceptLanguage** | [**AcceptLanguage**](AcceptLanguage.md) | Specifies the language in which the resource is requested. | [default to &quot;fr&quot;]
 
 ### Return type
 
@@ -503,7 +477,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -517,7 +491,7 @@ Name | Type | Description  | Notes
 
 ## GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet
 
-> AFNORRoutingCodePayloadHistoryLegalUnitFacility GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet(ctx, siret, routingIdentifier).Fields(fields).Include(include).AcceptLanguage(acceptLanguage).Execute()
+> AFNORRoutingCodePayloadHistoryLegalUnitFacility GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet(ctx, siret, routingIdentifier).Execute()
 
 Get a routing code by SIRET and routing identifier
 
@@ -538,13 +512,10 @@ import (
 func main() {
 	siret := "siret_example" // string | 14-digit SIRET number (INSEE establishment identifier)
 	routingIdentifier := "routingIdentifier_example" // string | Routing code identifier
-	fields := []string{"Inner_example"} // []string | Fields of the Routing Code resource (optional)
-	include := []openapiclient.RoutingCodeInclude{openapiclient.RoutingCodeInclude("siren")} // []RoutingCodeInclude | Relations to include in the response. (optional)
-	acceptLanguage := openapiclient.AcceptLanguage("fr") // AcceptLanguage | Specifies the language in which the resource is requested. (optional) (default to "fr")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet(context.Background(), siret, routingIdentifier).Fields(fields).Include(include).AcceptLanguage(acceptLanguage).Execute()
+	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet(context.Background(), siret, routingIdentifier).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPADirectoryServiceAPI.GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -572,9 +543,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **fields** | **[]string** | Fields of the Routing Code resource | 
- **include** | [**[]RoutingCodeInclude**](RoutingCodeInclude.md) | Relations to include in the response. | 
- **acceptLanguage** | [**AcceptLanguage**](AcceptLanguage.md) | Specifies the language in which the resource is requested. | [default to &quot;fr&quot;]
 
 ### Return type
 
@@ -582,7 +550,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -596,7 +564,7 @@ Name | Type | Description  | Notes
 
 ## GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet
 
-> AFNORLegalUnitPayloadHistory GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet(ctx, siren).Fields(fields).AcceptLanguage(acceptLanguage).Execute()
+> AFNORLegalUnitPayloadHistory GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet(ctx, siren).Execute()
 
 Consult a siren (legal unit) by SIREN number
 
@@ -616,12 +584,10 @@ import (
 
 func main() {
 	siren := "siren_example" // string | 9-digit SIREN number (INSEE company identifier)
-	fields := []*string{"Inner_example"} // []*string | Fields of the SIREN resource (optional)
-	acceptLanguage := openapiclient.AcceptLanguage("fr") // AcceptLanguage | Specifies the language in which the resource is requested. (optional) (default to "fr")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet(context.Background(), siren).Fields(fields).AcceptLanguage(acceptLanguage).Execute()
+	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet(context.Background(), siren).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPADirectoryServiceAPI.GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -647,8 +613,6 @@ Other parameters are passed through a pointer to a apiGetSirenByCodeInseeProxyAp
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **fields** | **[]string** | Fields of the SIREN resource | 
- **acceptLanguage** | [**AcceptLanguage**](AcceptLanguage.md) | Specifies the language in which the resource is requested. | [default to &quot;fr&quot;]
 
 ### Return type
 
@@ -656,7 +620,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -670,7 +634,7 @@ Name | Type | Description  | Notes
 
 ## GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet
 
-> AFNORLegalUnitPayloadHistory GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet(ctx, idInstance).Fields(fields).AcceptLanguage(acceptLanguage).Execute()
+> AFNORLegalUnitPayloadHistory GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet(ctx, idInstance).Execute()
 
 Gets a siren (legal unit) by instance ID
 
@@ -690,12 +654,10 @@ import (
 
 func main() {
 	idInstance := "idInstance_example" // string | AFNOR instance ID (UUID)
-	fields := []string{"Inner_example"} // []string | Fields of the SIREN resource (optional)
-	acceptLanguage := openapiclient.AcceptLanguage("fr") // AcceptLanguage | Specifies the language in which the resource is requested. (optional) (default to "fr")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet(context.Background(), idInstance).Fields(fields).AcceptLanguage(acceptLanguage).Execute()
+	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet(context.Background(), idInstance).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPADirectoryServiceAPI.GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -721,8 +683,6 @@ Other parameters are passed through a pointer to a apiGetSirenByIdInstanceProxyA
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **fields** | **[]string** | Fields of the SIREN resource | 
- **acceptLanguage** | [**AcceptLanguage**](AcceptLanguage.md) | Specifies the language in which the resource is requested. | [default to &quot;fr&quot;]
 
 ### Return type
 
@@ -730,7 +690,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -744,7 +704,7 @@ Name | Type | Description  | Notes
 
 ## GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet
 
-> AFNORFacilityPayloadHistory GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet(ctx, siret).Fields(fields).Include(include).AcceptLanguage(acceptLanguage).Execute()
+> AFNORFacilityPayloadHistory GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet(ctx, siret).Execute()
 
 Gets a siret (facility) by SIRET number
 
@@ -764,13 +724,10 @@ import (
 
 func main() {
 	siret := "siret_example" // string | 14-digit SIRET number (INSEE establishment identifier)
-	fields := []string{"Inner_example"} // []string | Fields of a SIRET resource. (optional)
-	include := []openapiclient.SiretInclude{openapiclient.SiretInclude("siren")} // []SiretInclude | Relations to include in the response. (optional)
-	acceptLanguage := openapiclient.AcceptLanguage("fr") // AcceptLanguage | Specifies the language in which the resource is requested. (optional) (default to "fr")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet(context.Background(), siret).Fields(fields).Include(include).AcceptLanguage(acceptLanguage).Execute()
+	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet(context.Background(), siret).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPADirectoryServiceAPI.GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -796,9 +753,6 @@ Other parameters are passed through a pointer to a apiGetSiretByCodeInseeProxyAp
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **fields** | **[]string** | Fields of a SIRET resource. | 
- **include** | [**[]SiretInclude**](SiretInclude.md) | Relations to include in the response. | 
- **acceptLanguage** | [**AcceptLanguage**](AcceptLanguage.md) | Specifies the language in which the resource is requested. | [default to &quot;fr&quot;]
 
 ### Return type
 
@@ -806,7 +760,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -820,7 +774,7 @@ Name | Type | Description  | Notes
 
 ## GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet
 
-> AFNORFacilityPayloadHistory GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet(ctx, idInstance).Fields(fields).AcceptLanguage(acceptLanguage).Execute()
+> AFNORFacilityPayloadHistory GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet(ctx, idInstance).Execute()
 
 Gets a siret (facility) by id-instance
 
@@ -840,12 +794,10 @@ import (
 
 func main() {
 	idInstance := "idInstance_example" // string | AFNOR instance ID (UUID)
-	fields := []string{"Inner_example"} // []string | Fields of a SIRET resource. (optional)
-	acceptLanguage := openapiclient.AcceptLanguage("fr") // AcceptLanguage | Specifies the language in which the resource is requested. (optional) (default to "fr")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet(context.Background(), idInstance).Fields(fields).AcceptLanguage(acceptLanguage).Execute()
+	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet(context.Background(), idInstance).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPADirectoryServiceAPI.GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -871,8 +823,6 @@ Other parameters are passed through a pointer to a apiGetSiretByIdInstanceProxyA
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **fields** | **[]string** | Fields of a SIRET resource. | 
- **acceptLanguage** | [**AcceptLanguage**](AcceptLanguage.md) | Specifies the language in which the resource is requested. | [default to &quot;fr&quot;]
 
 ### Return type
 
@@ -880,7 +830,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -894,7 +844,7 @@ Name | Type | Description  | Notes
 
 ## PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch
 
-> AFNORDirectoryLinePost201Response PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch(ctx, idInstance).AcceptLanguage(acceptLanguage).Execute()
+> AFNORDirectoryLinePost201Response PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch(ctx, idInstance).Execute()
 
 Partially updates a directory line..
 
@@ -914,11 +864,10 @@ import (
 
 func main() {
 	idInstance := "idInstance_example" // string | AFNOR instance ID (UUID)
-	acceptLanguage := openapiclient.AcceptLanguage("fr") // AcceptLanguage | Specifies the language in which the resource is requested. (optional) (default to "fr")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch(context.Background(), idInstance).AcceptLanguage(acceptLanguage).Execute()
+	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch(context.Background(), idInstance).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPADirectoryServiceAPI.PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -944,7 +893,6 @@ Other parameters are passed through a pointer to a apiPatchDirectoryLineProxyApi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **acceptLanguage** | [**AcceptLanguage**](AcceptLanguage.md) | Specifies the language in which the resource is requested. | [default to &quot;fr&quot;]
 
 ### Return type
 
@@ -952,7 +900,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -966,7 +914,7 @@ Name | Type | Description  | Notes
 
 ## PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch
 
-> AFNORRoutingCodePost201Response PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch(ctx, idInstance).AcceptLanguage(acceptLanguage).Execute()
+> AFNORRoutingCodePost201Response PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch(ctx, idInstance).Execute()
 
 Partially update a private routing code.
 
@@ -986,11 +934,10 @@ import (
 
 func main() {
 	idInstance := "idInstance_example" // string | AFNOR instance ID (UUID)
-	acceptLanguage := openapiclient.AcceptLanguage("fr") // AcceptLanguage | Specifies the language in which the resource is requested. (optional) (default to "fr")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch(context.Background(), idInstance).AcceptLanguage(acceptLanguage).Execute()
+	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch(context.Background(), idInstance).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPADirectoryServiceAPI.PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1016,7 +963,6 @@ Other parameters are passed through a pointer to a apiPatchRoutingCodeProxyApiV1
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **acceptLanguage** | [**AcceptLanguage**](AcceptLanguage.md) | Specifies the language in which the resource is requested. | [default to &quot;fr&quot;]
 
 ### Return type
 
@@ -1024,7 +970,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -1038,7 +984,7 @@ Name | Type | Description  | Notes
 
 ## PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut
 
-> AFNORRoutingCodePost201Response PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut(ctx, idInstance).AcceptLanguage(acceptLanguage).Execute()
+> AFNORRoutingCodePost201Response PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut(ctx, idInstance).Execute()
 
 Completely update a private routing code.
 
@@ -1058,11 +1004,10 @@ import (
 
 func main() {
 	idInstance := "idInstance_example" // string | AFNOR instance ID (UUID)
-	acceptLanguage := openapiclient.AcceptLanguage("fr") // AcceptLanguage | Specifies the language in which the resource is requested. (optional) (default to "fr")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut(context.Background(), idInstance).AcceptLanguage(acceptLanguage).Execute()
+	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut(context.Background(), idInstance).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPADirectoryServiceAPI.PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1088,7 +1033,6 @@ Other parameters are passed through a pointer to a apiPutRoutingCodeProxyApiV1Af
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **acceptLanguage** | [**AcceptLanguage**](AcceptLanguage.md) | Specifies the language in which the resource is requested. | [default to &quot;fr&quot;]
 
 ### Return type
 
@@ -1096,7 +1040,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -1110,7 +1054,7 @@ Name | Type | Description  | Notes
 
 ## SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost
 
-> AFNORDirectoryLineSearchPost200Response SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost(ctx).AcceptLanguage(acceptLanguage).Execute()
+> AFNORDirectoryLineSearchPost200Response SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost(ctx).Execute()
 
 Search for a directory line
 
@@ -1129,11 +1073,10 @@ import (
 )
 
 func main() {
-	acceptLanguage := openapiclient.AcceptLanguage("fr") // AcceptLanguage | Specifies the language in which the resource is requested. (optional) (default to "fr")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost(context.Background()).AcceptLanguage(acceptLanguage).Execute()
+	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost(context.Background()).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPADirectoryServiceAPI.SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1145,16 +1088,12 @@ func main() {
 
 ### Path Parameters
 
-
+This endpoint does not need any parameter.
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostRequest struct via the builder pattern
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **acceptLanguage** | [**AcceptLanguage**](AcceptLanguage.md) | Specifies the language in which the resource is requested. | [default to &quot;fr&quot;]
 
 ### Return type
 
@@ -1162,7 +1101,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -1176,7 +1115,7 @@ Name | Type | Description  | Notes
 
 ## SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost
 
-> AFNORRoutingCodeSearchPost200Response SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost(ctx).AcceptLanguage(acceptLanguage).Execute()
+> AFNORRoutingCodeSearchPost200Response SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost(ctx).Execute()
 
 Search for a routing code
 
@@ -1195,11 +1134,10 @@ import (
 )
 
 func main() {
-	acceptLanguage := openapiclient.AcceptLanguage("fr") // AcceptLanguage | Specifies the language in which the resource is requested. (optional) (default to "fr")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost(context.Background()).AcceptLanguage(acceptLanguage).Execute()
+	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost(context.Background()).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPADirectoryServiceAPI.SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1211,16 +1149,12 @@ func main() {
 
 ### Path Parameters
 
-
+This endpoint does not need any parameter.
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostRequest struct via the builder pattern
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **acceptLanguage** | [**AcceptLanguage**](AcceptLanguage.md) | Specifies the language in which the resource is requested. | [default to &quot;fr&quot;]
 
 ### Return type
 
@@ -1228,7 +1162,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -1242,7 +1176,7 @@ Name | Type | Description  | Notes
 
 ## SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost
 
-> AFNORSirenSearchPost200Response SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost(ctx).AcceptLanguage(acceptLanguage).Execute()
+> AFNORSirenSearchPost200Response SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost(ctx).Execute()
 
 SIREN search (or legal unit)
 
@@ -1261,11 +1195,10 @@ import (
 )
 
 func main() {
-	acceptLanguage := openapiclient.AcceptLanguage("fr") // AcceptLanguage | Specifies the language in which the resource is requested. (optional) (default to "fr")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost(context.Background()).AcceptLanguage(acceptLanguage).Execute()
+	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost(context.Background()).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPADirectoryServiceAPI.SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1277,16 +1210,12 @@ func main() {
 
 ### Path Parameters
 
-
+This endpoint does not need any parameter.
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostRequest struct via the builder pattern
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **acceptLanguage** | [**AcceptLanguage**](AcceptLanguage.md) | Specifies the language in which the resource is requested. | [default to &quot;fr&quot;]
 
 ### Return type
 
@@ -1294,7 +1223,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -1308,7 +1237,7 @@ Name | Type | Description  | Notes
 
 ## SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost
 
-> AFNORSiretSearchPost200Response SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost(ctx).AcceptLanguage(acceptLanguage).Execute()
+> AFNORSiretSearchPost200Response SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost(ctx).Execute()
 
 Search for a SIRET (facility)
 
@@ -1327,11 +1256,10 @@ import (
 )
 
 func main() {
-	acceptLanguage := openapiclient.AcceptLanguage("fr") // AcceptLanguage | Specifies the language in which the resource is requested. (optional) (default to "fr")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost(context.Background()).AcceptLanguage(acceptLanguage).Execute()
+	resp, r, err := apiClient.AFNORPDPPADirectoryServiceAPI.SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost(context.Background()).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPADirectoryServiceAPI.SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1343,16 +1271,12 @@ func main() {
 
 ### Path Parameters
 
-
+This endpoint does not need any parameter.
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostRequest struct via the builder pattern
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **acceptLanguage** | [**AcceptLanguage**](AcceptLanguage.md) | Specifies the language in which the resource is requested. | [default to &quot;fr&quot;]
 
 ### Return type
 
@@ -1360,7 +1284,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
