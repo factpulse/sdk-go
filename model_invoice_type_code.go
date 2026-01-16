@@ -16,25 +16,47 @@ import (
 	"fmt"
 )
 
-// InvoiceTypeCode Invoice type codes (UNTDID 1001).
+// InvoiceTypeCode Document type according to BR-FR-04 (UNTDID 1001 codes).  | Code | Name | Description | |------|------|-------------| | 380 | INVOICE | Commercial invoice | | 389 | SELF_BILLED_INVOICE | Self-billed invoice | | 393 | FACTORED_INVOICE | Factored invoice | | 501 | SELF_BILLED_FACTORED_INVOICE | Self-billed factored invoice | | 386 | PREPAYMENT_INVOICE | Prepayment invoice | | 500 | SELF_BILLED_PREPAYMENT_INVOICE | Self-billed prepayment invoice | | 384 | CORRECTIVE_INVOICE | Corrective invoice | | 471 | SELF_BILLED_CORRECTIVE_INVOICE | Self-billed corrective invoice | | 472 | FACTORED_CORRECTIVE_INVOICE | Factored corrective invoice | | 473 | SELF_BILLED_FACTORED_CORRECTIVE_INVOICE | Self-billed factored corrective invoice | | 381 | CREDIT_NOTE | Credit note | | 261 | SELF_BILLED_CREDIT_NOTE | Self-billed credit note | | 262 | GLOBAL_ALLOWANCE_CREDIT_NOTE | Credit note for global allowance | | 396 | FACTORED_CREDIT_NOTE | Factored credit note | | 502 | SELF_BILLED_FACTORED_CREDIT_NOTE | Self-billed factored credit note | | 503 | PREPAYMENT_CREDIT_NOTE | Credit note for prepayment invoice |
 type InvoiceTypeCode string
 
 // List of InvoiceTypeCode
 const (
-	INVOICETYPECODE__380 InvoiceTypeCode = "380"
-	INVOICETYPECODE__381 InvoiceTypeCode = "381"
-	INVOICETYPECODE__384 InvoiceTypeCode = "384"
-	INVOICETYPECODE__389 InvoiceTypeCode = "389"
-	INVOICETYPECODE__386 InvoiceTypeCode = "386"
+	INVOICETYPECODE_INVOICE InvoiceTypeCode = "380"
+	INVOICETYPECODE_SELF_BILLED_INVOICE InvoiceTypeCode = "389"
+	INVOICETYPECODE_FACTORED_INVOICE InvoiceTypeCode = "393"
+	INVOICETYPECODE_SELF_BILLED_FACTORED_INVOICE InvoiceTypeCode = "501"
+	INVOICETYPECODE_PREPAYMENT_INVOICE InvoiceTypeCode = "386"
+	INVOICETYPECODE_SELF_BILLED_PREPAYMENT_INVOICE InvoiceTypeCode = "500"
+	INVOICETYPECODE_CORRECTIVE_INVOICE InvoiceTypeCode = "384"
+	INVOICETYPECODE_SELF_BILLED_CORRECTIVE_INVOICE InvoiceTypeCode = "471"
+	INVOICETYPECODE_FACTORED_CORRECTIVE_INVOICE InvoiceTypeCode = "472"
+	INVOICETYPECODE_SELF_BILLED_FACTORED_CORRECTIVE_INVOICE InvoiceTypeCode = "473"
+	INVOICETYPECODE_CREDIT_NOTE InvoiceTypeCode = "381"
+	INVOICETYPECODE_SELF_BILLED_CREDIT_NOTE InvoiceTypeCode = "261"
+	INVOICETYPECODE_GLOBAL_ALLOWANCE_CREDIT_NOTE InvoiceTypeCode = "262"
+	INVOICETYPECODE_FACTORED_CREDIT_NOTE InvoiceTypeCode = "396"
+	INVOICETYPECODE_SELF_BILLED_FACTORED_CREDIT_NOTE InvoiceTypeCode = "502"
+	INVOICETYPECODE_PREPAYMENT_CREDIT_NOTE InvoiceTypeCode = "503"
 )
 
 // All allowed values of InvoiceTypeCode enum
 var AllowedInvoiceTypeCodeEnumValues = []InvoiceTypeCode{
 	"380",
-	"381",
-	"384",
 	"389",
+	"393",
+	"501",
 	"386",
+	"500",
+	"384",
+	"471",
+	"472",
+	"473",
+	"381",
+	"261",
+	"262",
+	"396",
+	"502",
+	"503",
 }
 
 func (v *InvoiceTypeCode) UnmarshalJSON(src []byte) error {
