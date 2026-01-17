@@ -323,7 +323,12 @@ func (c *Client) GenerateFacturxWithOptions(invoiceData interface{}, pdfPath, pr
     // Build multipart request
     var body bytes.Buffer
     writer := multipart.NewWriter(&body)
-    writer.WriteField("invoice_data", jsonData)
+    // invoice_data with application/json content-type
+    h := make(textproto.MIMEHeader)
+    h.Set("Content-Disposition", `form-data; name="invoice_data"; filename="invoice.json"`)
+    h.Set("Content-Type", "application/json")
+    invoicePart, _ := writer.CreatePart(h)
+    invoicePart.Write([]byte(jsonData))
     writer.WriteField("profile", profile)
     writer.WriteField("output_format", outputFormat)
     part, _ := writer.CreateFormFile("source_pdf", filepath.Base(pdfPath))
