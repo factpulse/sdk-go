@@ -17,141 +17,114 @@ import (
 	"fmt"
 )
 
-// checks if the GetStructureRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetStructureRequest{}
+// checks if the ActionCodeInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ActionCodeInfo{}
 
-// GetStructureRequest Get structure details.
-type GetStructureRequest struct {
-	Credentials NullableFactureElectroniqueRestApiSchemasChorusProChorusProCredentials `json:"credentials,omitempty"`
-	// Chorus Pro structure ID
-	StructureId int32 `json:"structureId"`
-	// Language code (fr, en)
-	LanguageCode *string `json:"languageCode,omitempty"`
+// ActionCodeInfo Information sur un code action.
+type ActionCodeInfo struct {
+	// Code
+	Code string `json:"code"`
+	// Nom Python de l'enum
+	Name string `json:"name"`
+	// Description
+	Description string `json:"description"`
 }
 
-type _GetStructureRequest GetStructureRequest
+type _ActionCodeInfo ActionCodeInfo
 
-// NewGetStructureRequest instantiates a new GetStructureRequest object
+// NewActionCodeInfo instantiates a new ActionCodeInfo object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetStructureRequest(structureId int32) *GetStructureRequest {
-	this := GetStructureRequest{}
-	this.StructureId = structureId
-	var languageCode string = "fr"
-	this.LanguageCode = &languageCode
+func NewActionCodeInfo(code string, name string, description string) *ActionCodeInfo {
+	this := ActionCodeInfo{}
+	this.Code = code
+	this.Name = name
+	this.Description = description
 	return &this
 }
 
-// NewGetStructureRequestWithDefaults instantiates a new GetStructureRequest object
+// NewActionCodeInfoWithDefaults instantiates a new ActionCodeInfo object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetStructureRequestWithDefaults() *GetStructureRequest {
-	this := GetStructureRequest{}
-	var languageCode string = "fr"
-	this.LanguageCode = &languageCode
+func NewActionCodeInfoWithDefaults() *ActionCodeInfo {
+	this := ActionCodeInfo{}
 	return &this
 }
 
-// GetCredentials returns the Credentials field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *GetStructureRequest) GetCredentials() FactureElectroniqueRestApiSchemasChorusProChorusProCredentials {
-	if o == nil || IsNil(o.Credentials.Get()) {
-		var ret FactureElectroniqueRestApiSchemasChorusProChorusProCredentials
-		return ret
-	}
-	return *o.Credentials.Get()
-}
-
-// GetCredentialsOk returns a tuple with the Credentials field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GetStructureRequest) GetCredentialsOk() (*FactureElectroniqueRestApiSchemasChorusProChorusProCredentials, bool) {
+// GetCode returns the Code field value
+func (o *ActionCodeInfo) GetCode() string {
 	if o == nil {
-		return nil, false
-	}
-	return o.Credentials.Get(), o.Credentials.IsSet()
-}
-
-// HasCredentials returns a boolean if a field has been set.
-func (o *GetStructureRequest) HasCredentials() bool {
-	if o != nil && o.Credentials.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCredentials gets a reference to the given NullableFactureElectroniqueRestApiSchemasChorusProChorusProCredentials and assigns it to the Credentials field.
-func (o *GetStructureRequest) SetCredentials(v FactureElectroniqueRestApiSchemasChorusProChorusProCredentials) {
-	o.Credentials.Set(&v)
-}
-// SetCredentialsNil sets the value for Credentials to be an explicit nil
-func (o *GetStructureRequest) SetCredentialsNil() {
-	o.Credentials.Set(nil)
-}
-
-// UnsetCredentials ensures that no value is present for Credentials, not even an explicit nil
-func (o *GetStructureRequest) UnsetCredentials() {
-	o.Credentials.Unset()
-}
-
-// GetStructureId returns the StructureId field value
-func (o *GetStructureRequest) GetStructureId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.StructureId
-}
-
-// GetStructureIdOk returns a tuple with the StructureId field value
-// and a boolean to check if the value has been set.
-func (o *GetStructureRequest) GetStructureIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.StructureId, true
-}
-
-// SetStructureId sets field value
-func (o *GetStructureRequest) SetStructureId(v int32) {
-	o.StructureId = v
-}
-
-// GetLanguageCode returns the LanguageCode field value if set, zero value otherwise.
-func (o *GetStructureRequest) GetLanguageCode() string {
-	if o == nil || IsNil(o.LanguageCode) {
 		var ret string
 		return ret
 	}
-	return *o.LanguageCode
+
+	return o.Code
 }
 
-// GetLanguageCodeOk returns a tuple with the LanguageCode field value if set, nil otherwise
+// GetCodeOk returns a tuple with the Code field value
 // and a boolean to check if the value has been set.
-func (o *GetStructureRequest) GetLanguageCodeOk() (*string, bool) {
-	if o == nil || IsNil(o.LanguageCode) {
+func (o *ActionCodeInfo) GetCodeOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LanguageCode, true
+	return &o.Code, true
 }
 
-// HasLanguageCode returns a boolean if a field has been set.
-func (o *GetStructureRequest) HasLanguageCode() bool {
-	if o != nil && !IsNil(o.LanguageCode) {
-		return true
+// SetCode sets field value
+func (o *ActionCodeInfo) SetCode(v string) {
+	o.Code = v
+}
+
+// GetName returns the Name field value
+func (o *ActionCodeInfo) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
 	}
 
-	return false
+	return o.Name
 }
 
-// SetLanguageCode gets a reference to the given string and assigns it to the LanguageCode field.
-func (o *GetStructureRequest) SetLanguageCode(v string) {
-	o.LanguageCode = &v
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *ActionCodeInfo) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
 }
 
-func (o GetStructureRequest) MarshalJSON() ([]byte, error) {
+// SetName sets field value
+func (o *ActionCodeInfo) SetName(v string) {
+	o.Name = v
+}
+
+// GetDescription returns the Description field value
+func (o *ActionCodeInfo) GetDescription() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value
+// and a boolean to check if the value has been set.
+func (o *ActionCodeInfo) GetDescriptionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Description, true
+}
+
+// SetDescription sets field value
+func (o *ActionCodeInfo) SetDescription(v string) {
+	o.Description = v
+}
+
+func (o ActionCodeInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -159,24 +132,22 @@ func (o GetStructureRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetStructureRequest) ToMap() (map[string]interface{}, error) {
+func (o ActionCodeInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Credentials.IsSet() {
-		toSerialize["credentials"] = o.Credentials.Get()
-	}
-	toSerialize["structureId"] = o.StructureId
-	if !IsNil(o.LanguageCode) {
-		toSerialize["languageCode"] = o.LanguageCode
-	}
+	toSerialize["code"] = o.Code
+	toSerialize["name"] = o.Name
+	toSerialize["description"] = o.Description
 	return toSerialize, nil
 }
 
-func (o *GetStructureRequest) UnmarshalJSON(data []byte) (err error) {
+func (o *ActionCodeInfo) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"structureId",
+		"code",
+		"name",
+		"description",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -193,53 +164,53 @@ func (o *GetStructureRequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varGetStructureRequest := _GetStructureRequest{}
+	varActionCodeInfo := _ActionCodeInfo{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetStructureRequest)
+	err = decoder.Decode(&varActionCodeInfo)
 
 	if err != nil {
 		return err
 	}
 
-	*o = GetStructureRequest(varGetStructureRequest)
+	*o = ActionCodeInfo(varActionCodeInfo)
 
 	return err
 }
 
-type NullableGetStructureRequest struct {
-	value *GetStructureRequest
+type NullableActionCodeInfo struct {
+	value *ActionCodeInfo
 	isSet bool
 }
 
-func (v NullableGetStructureRequest) Get() *GetStructureRequest {
+func (v NullableActionCodeInfo) Get() *ActionCodeInfo {
 	return v.value
 }
 
-func (v *NullableGetStructureRequest) Set(val *GetStructureRequest) {
+func (v *NullableActionCodeInfo) Set(val *ActionCodeInfo) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetStructureRequest) IsSet() bool {
+func (v NullableActionCodeInfo) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetStructureRequest) Unset() {
+func (v *NullableActionCodeInfo) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetStructureRequest(val *GetStructureRequest) *NullableGetStructureRequest {
-	return &NullableGetStructureRequest{value: val, isSet: true}
+func NewNullableActionCodeInfo(val *ActionCodeInfo) *NullableActionCodeInfo {
+	return &NullableActionCodeInfo{value: val, isSet: true}
 }
 
-func (v NullableGetStructureRequest) MarshalJSON() ([]byte, error) {
+func (v NullableActionCodeInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetStructureRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableActionCodeInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

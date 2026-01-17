@@ -17,141 +17,102 @@ import (
 	"fmt"
 )
 
-// checks if the GetStructureRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetStructureRequest{}
+// checks if the BodySubmitCdarApiV1CdarSubmitPost type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BodySubmitCdarApiV1CdarSubmitPost{}
 
-// GetStructureRequest Get structure details.
-type GetStructureRequest struct {
-	Credentials NullableFactureElectroniqueRestApiSchemasChorusProChorusProCredentials `json:"credentials,omitempty"`
-	// Chorus Pro structure ID
-	StructureId int32 `json:"structureId"`
-	// Language code (fr, en)
-	LanguageCode *string `json:"languageCode,omitempty"`
+// BodySubmitCdarApiV1CdarSubmitPost struct for BodySubmitCdarApiV1CdarSubmitPost
+type BodySubmitCdarApiV1CdarSubmitPost struct {
+	Request SubmitCDARRequest `json:"request"`
+	PdpCredentials NullablePDPCredentials `json:"pdp_credentials,omitempty"`
 }
 
-type _GetStructureRequest GetStructureRequest
+type _BodySubmitCdarApiV1CdarSubmitPost BodySubmitCdarApiV1CdarSubmitPost
 
-// NewGetStructureRequest instantiates a new GetStructureRequest object
+// NewBodySubmitCdarApiV1CdarSubmitPost instantiates a new BodySubmitCdarApiV1CdarSubmitPost object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetStructureRequest(structureId int32) *GetStructureRequest {
-	this := GetStructureRequest{}
-	this.StructureId = structureId
-	var languageCode string = "fr"
-	this.LanguageCode = &languageCode
+func NewBodySubmitCdarApiV1CdarSubmitPost(request SubmitCDARRequest) *BodySubmitCdarApiV1CdarSubmitPost {
+	this := BodySubmitCdarApiV1CdarSubmitPost{}
+	this.Request = request
 	return &this
 }
 
-// NewGetStructureRequestWithDefaults instantiates a new GetStructureRequest object
+// NewBodySubmitCdarApiV1CdarSubmitPostWithDefaults instantiates a new BodySubmitCdarApiV1CdarSubmitPost object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetStructureRequestWithDefaults() *GetStructureRequest {
-	this := GetStructureRequest{}
-	var languageCode string = "fr"
-	this.LanguageCode = &languageCode
+func NewBodySubmitCdarApiV1CdarSubmitPostWithDefaults() *BodySubmitCdarApiV1CdarSubmitPost {
+	this := BodySubmitCdarApiV1CdarSubmitPost{}
 	return &this
 }
 
-// GetCredentials returns the Credentials field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *GetStructureRequest) GetCredentials() FactureElectroniqueRestApiSchemasChorusProChorusProCredentials {
-	if o == nil || IsNil(o.Credentials.Get()) {
-		var ret FactureElectroniqueRestApiSchemasChorusProChorusProCredentials
+// GetRequest returns the Request field value
+func (o *BodySubmitCdarApiV1CdarSubmitPost) GetRequest() SubmitCDARRequest {
+	if o == nil {
+		var ret SubmitCDARRequest
 		return ret
 	}
-	return *o.Credentials.Get()
+
+	return o.Request
 }
 
-// GetCredentialsOk returns a tuple with the Credentials field value if set, nil otherwise
+// GetRequestOk returns a tuple with the Request field value
+// and a boolean to check if the value has been set.
+func (o *BodySubmitCdarApiV1CdarSubmitPost) GetRequestOk() (*SubmitCDARRequest, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Request, true
+}
+
+// SetRequest sets field value
+func (o *BodySubmitCdarApiV1CdarSubmitPost) SetRequest(v SubmitCDARRequest) {
+	o.Request = v
+}
+
+// GetPdpCredentials returns the PdpCredentials field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BodySubmitCdarApiV1CdarSubmitPost) GetPdpCredentials() PDPCredentials {
+	if o == nil || IsNil(o.PdpCredentials.Get()) {
+		var ret PDPCredentials
+		return ret
+	}
+	return *o.PdpCredentials.Get()
+}
+
+// GetPdpCredentialsOk returns a tuple with the PdpCredentials field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GetStructureRequest) GetCredentialsOk() (*FactureElectroniqueRestApiSchemasChorusProChorusProCredentials, bool) {
+func (o *BodySubmitCdarApiV1CdarSubmitPost) GetPdpCredentialsOk() (*PDPCredentials, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Credentials.Get(), o.Credentials.IsSet()
+	return o.PdpCredentials.Get(), o.PdpCredentials.IsSet()
 }
 
-// HasCredentials returns a boolean if a field has been set.
-func (o *GetStructureRequest) HasCredentials() bool {
-	if o != nil && o.Credentials.IsSet() {
+// HasPdpCredentials returns a boolean if a field has been set.
+func (o *BodySubmitCdarApiV1CdarSubmitPost) HasPdpCredentials() bool {
+	if o != nil && o.PdpCredentials.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCredentials gets a reference to the given NullableFactureElectroniqueRestApiSchemasChorusProChorusProCredentials and assigns it to the Credentials field.
-func (o *GetStructureRequest) SetCredentials(v FactureElectroniqueRestApiSchemasChorusProChorusProCredentials) {
-	o.Credentials.Set(&v)
+// SetPdpCredentials gets a reference to the given NullablePDPCredentials and assigns it to the PdpCredentials field.
+func (o *BodySubmitCdarApiV1CdarSubmitPost) SetPdpCredentials(v PDPCredentials) {
+	o.PdpCredentials.Set(&v)
 }
-// SetCredentialsNil sets the value for Credentials to be an explicit nil
-func (o *GetStructureRequest) SetCredentialsNil() {
-	o.Credentials.Set(nil)
-}
-
-// UnsetCredentials ensures that no value is present for Credentials, not even an explicit nil
-func (o *GetStructureRequest) UnsetCredentials() {
-	o.Credentials.Unset()
+// SetPdpCredentialsNil sets the value for PdpCredentials to be an explicit nil
+func (o *BodySubmitCdarApiV1CdarSubmitPost) SetPdpCredentialsNil() {
+	o.PdpCredentials.Set(nil)
 }
 
-// GetStructureId returns the StructureId field value
-func (o *GetStructureRequest) GetStructureId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.StructureId
+// UnsetPdpCredentials ensures that no value is present for PdpCredentials, not even an explicit nil
+func (o *BodySubmitCdarApiV1CdarSubmitPost) UnsetPdpCredentials() {
+	o.PdpCredentials.Unset()
 }
 
-// GetStructureIdOk returns a tuple with the StructureId field value
-// and a boolean to check if the value has been set.
-func (o *GetStructureRequest) GetStructureIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.StructureId, true
-}
-
-// SetStructureId sets field value
-func (o *GetStructureRequest) SetStructureId(v int32) {
-	o.StructureId = v
-}
-
-// GetLanguageCode returns the LanguageCode field value if set, zero value otherwise.
-func (o *GetStructureRequest) GetLanguageCode() string {
-	if o == nil || IsNil(o.LanguageCode) {
-		var ret string
-		return ret
-	}
-	return *o.LanguageCode
-}
-
-// GetLanguageCodeOk returns a tuple with the LanguageCode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetStructureRequest) GetLanguageCodeOk() (*string, bool) {
-	if o == nil || IsNil(o.LanguageCode) {
-		return nil, false
-	}
-	return o.LanguageCode, true
-}
-
-// HasLanguageCode returns a boolean if a field has been set.
-func (o *GetStructureRequest) HasLanguageCode() bool {
-	if o != nil && !IsNil(o.LanguageCode) {
-		return true
-	}
-
-	return false
-}
-
-// SetLanguageCode gets a reference to the given string and assigns it to the LanguageCode field.
-func (o *GetStructureRequest) SetLanguageCode(v string) {
-	o.LanguageCode = &v
-}
-
-func (o GetStructureRequest) MarshalJSON() ([]byte, error) {
+func (o BodySubmitCdarApiV1CdarSubmitPost) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -159,24 +120,21 @@ func (o GetStructureRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetStructureRequest) ToMap() (map[string]interface{}, error) {
+func (o BodySubmitCdarApiV1CdarSubmitPost) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Credentials.IsSet() {
-		toSerialize["credentials"] = o.Credentials.Get()
-	}
-	toSerialize["structureId"] = o.StructureId
-	if !IsNil(o.LanguageCode) {
-		toSerialize["languageCode"] = o.LanguageCode
+	toSerialize["request"] = o.Request
+	if o.PdpCredentials.IsSet() {
+		toSerialize["pdp_credentials"] = o.PdpCredentials.Get()
 	}
 	return toSerialize, nil
 }
 
-func (o *GetStructureRequest) UnmarshalJSON(data []byte) (err error) {
+func (o *BodySubmitCdarApiV1CdarSubmitPost) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"structureId",
+		"request",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -193,53 +151,53 @@ func (o *GetStructureRequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varGetStructureRequest := _GetStructureRequest{}
+	varBodySubmitCdarApiV1CdarSubmitPost := _BodySubmitCdarApiV1CdarSubmitPost{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetStructureRequest)
+	err = decoder.Decode(&varBodySubmitCdarApiV1CdarSubmitPost)
 
 	if err != nil {
 		return err
 	}
 
-	*o = GetStructureRequest(varGetStructureRequest)
+	*o = BodySubmitCdarApiV1CdarSubmitPost(varBodySubmitCdarApiV1CdarSubmitPost)
 
 	return err
 }
 
-type NullableGetStructureRequest struct {
-	value *GetStructureRequest
+type NullableBodySubmitCdarApiV1CdarSubmitPost struct {
+	value *BodySubmitCdarApiV1CdarSubmitPost
 	isSet bool
 }
 
-func (v NullableGetStructureRequest) Get() *GetStructureRequest {
+func (v NullableBodySubmitCdarApiV1CdarSubmitPost) Get() *BodySubmitCdarApiV1CdarSubmitPost {
 	return v.value
 }
 
-func (v *NullableGetStructureRequest) Set(val *GetStructureRequest) {
+func (v *NullableBodySubmitCdarApiV1CdarSubmitPost) Set(val *BodySubmitCdarApiV1CdarSubmitPost) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetStructureRequest) IsSet() bool {
+func (v NullableBodySubmitCdarApiV1CdarSubmitPost) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetStructureRequest) Unset() {
+func (v *NullableBodySubmitCdarApiV1CdarSubmitPost) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetStructureRequest(val *GetStructureRequest) *NullableGetStructureRequest {
-	return &NullableGetStructureRequest{value: val, isSet: true}
+func NewNullableBodySubmitCdarApiV1CdarSubmitPost(val *BodySubmitCdarApiV1CdarSubmitPost) *NullableBodySubmitCdarApiV1CdarSubmitPost {
+	return &NullableBodySubmitCdarApiV1CdarSubmitPost{value: val, isSet: true}
 }
 
-func (v NullableGetStructureRequest) MarshalJSON() ([]byte, error) {
+func (v NullableBodySubmitCdarApiV1CdarSubmitPost) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetStructureRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableBodySubmitCdarApiV1CdarSubmitPost) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

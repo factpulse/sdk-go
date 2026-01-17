@@ -17,141 +17,167 @@ import (
 	"fmt"
 )
 
-// checks if the GetStructureRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetStructureRequest{}
+// checks if the GenerateCDARResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GenerateCDARResponse{}
 
-// GetStructureRequest Get structure details.
-type GetStructureRequest struct {
-	Credentials NullableFactureElectroniqueRestApiSchemasChorusProChorusProCredentials `json:"credentials,omitempty"`
-	// Chorus Pro structure ID
-	StructureId int32 `json:"structureId"`
-	// Language code (fr, en)
-	LanguageCode *string `json:"languageCode,omitempty"`
+// GenerateCDARResponse Réponse de génération de message CDAR.
+type GenerateCDARResponse struct {
+	DocumentId string `json:"documentId"`
+	// XML CDAR généré
+	Xml string `json:"xml"`
+	// Taille du XML en octets
+	XmlSize int32 `json:"xmlSize"`
+	// Hash SHA256 du XML
+	Sha256 string `json:"sha256"`
+	// Message de succès
+	Message string `json:"message"`
 }
 
-type _GetStructureRequest GetStructureRequest
+type _GenerateCDARResponse GenerateCDARResponse
 
-// NewGetStructureRequest instantiates a new GetStructureRequest object
+// NewGenerateCDARResponse instantiates a new GenerateCDARResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetStructureRequest(structureId int32) *GetStructureRequest {
-	this := GetStructureRequest{}
-	this.StructureId = structureId
-	var languageCode string = "fr"
-	this.LanguageCode = &languageCode
+func NewGenerateCDARResponse(documentId string, xml string, xmlSize int32, sha256 string, message string) *GenerateCDARResponse {
+	this := GenerateCDARResponse{}
+	this.DocumentId = documentId
+	this.Xml = xml
+	this.XmlSize = xmlSize
+	this.Sha256 = sha256
+	this.Message = message
 	return &this
 }
 
-// NewGetStructureRequestWithDefaults instantiates a new GetStructureRequest object
+// NewGenerateCDARResponseWithDefaults instantiates a new GenerateCDARResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetStructureRequestWithDefaults() *GetStructureRequest {
-	this := GetStructureRequest{}
-	var languageCode string = "fr"
-	this.LanguageCode = &languageCode
+func NewGenerateCDARResponseWithDefaults() *GenerateCDARResponse {
+	this := GenerateCDARResponse{}
 	return &this
 }
 
-// GetCredentials returns the Credentials field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *GetStructureRequest) GetCredentials() FactureElectroniqueRestApiSchemasChorusProChorusProCredentials {
-	if o == nil || IsNil(o.Credentials.Get()) {
-		var ret FactureElectroniqueRestApiSchemasChorusProChorusProCredentials
+// GetDocumentId returns the DocumentId field value
+func (o *GenerateCDARResponse) GetDocumentId() string {
+	if o == nil {
+		var ret string
 		return ret
 	}
-	return *o.Credentials.Get()
+
+	return o.DocumentId
 }
 
-// GetCredentialsOk returns a tuple with the Credentials field value if set, nil otherwise
+// GetDocumentIdOk returns a tuple with the DocumentId field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GetStructureRequest) GetCredentialsOk() (*FactureElectroniqueRestApiSchemasChorusProChorusProCredentials, bool) {
+func (o *GenerateCDARResponse) GetDocumentIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Credentials.Get(), o.Credentials.IsSet()
+	return &o.DocumentId, true
 }
 
-// HasCredentials returns a boolean if a field has been set.
-func (o *GetStructureRequest) HasCredentials() bool {
-	if o != nil && o.Credentials.IsSet() {
-		return true
+// SetDocumentId sets field value
+func (o *GenerateCDARResponse) SetDocumentId(v string) {
+	o.DocumentId = v
+}
+
+// GetXml returns the Xml field value
+func (o *GenerateCDARResponse) GetXml() string {
+	if o == nil {
+		var ret string
+		return ret
 	}
 
-	return false
+	return o.Xml
 }
 
-// SetCredentials gets a reference to the given NullableFactureElectroniqueRestApiSchemasChorusProChorusProCredentials and assigns it to the Credentials field.
-func (o *GetStructureRequest) SetCredentials(v FactureElectroniqueRestApiSchemasChorusProChorusProCredentials) {
-	o.Credentials.Set(&v)
-}
-// SetCredentialsNil sets the value for Credentials to be an explicit nil
-func (o *GetStructureRequest) SetCredentialsNil() {
-	o.Credentials.Set(nil)
-}
-
-// UnsetCredentials ensures that no value is present for Credentials, not even an explicit nil
-func (o *GetStructureRequest) UnsetCredentials() {
-	o.Credentials.Unset()
+// GetXmlOk returns a tuple with the Xml field value
+// and a boolean to check if the value has been set.
+func (o *GenerateCDARResponse) GetXmlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Xml, true
 }
 
-// GetStructureId returns the StructureId field value
-func (o *GetStructureRequest) GetStructureId() int32 {
+// SetXml sets field value
+func (o *GenerateCDARResponse) SetXml(v string) {
+	o.Xml = v
+}
+
+// GetXmlSize returns the XmlSize field value
+func (o *GenerateCDARResponse) GetXmlSize() int32 {
 	if o == nil {
 		var ret int32
 		return ret
 	}
 
-	return o.StructureId
+	return o.XmlSize
 }
 
-// GetStructureIdOk returns a tuple with the StructureId field value
+// GetXmlSizeOk returns a tuple with the XmlSize field value
 // and a boolean to check if the value has been set.
-func (o *GetStructureRequest) GetStructureIdOk() (*int32, bool) {
+func (o *GenerateCDARResponse) GetXmlSizeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.StructureId, true
+	return &o.XmlSize, true
 }
 
-// SetStructureId sets field value
-func (o *GetStructureRequest) SetStructureId(v int32) {
-	o.StructureId = v
+// SetXmlSize sets field value
+func (o *GenerateCDARResponse) SetXmlSize(v int32) {
+	o.XmlSize = v
 }
 
-// GetLanguageCode returns the LanguageCode field value if set, zero value otherwise.
-func (o *GetStructureRequest) GetLanguageCode() string {
-	if o == nil || IsNil(o.LanguageCode) {
+// GetSha256 returns the Sha256 field value
+func (o *GenerateCDARResponse) GetSha256() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.LanguageCode
+
+	return o.Sha256
 }
 
-// GetLanguageCodeOk returns a tuple with the LanguageCode field value if set, nil otherwise
+// GetSha256Ok returns a tuple with the Sha256 field value
 // and a boolean to check if the value has been set.
-func (o *GetStructureRequest) GetLanguageCodeOk() (*string, bool) {
-	if o == nil || IsNil(o.LanguageCode) {
+func (o *GenerateCDARResponse) GetSha256Ok() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LanguageCode, true
+	return &o.Sha256, true
 }
 
-// HasLanguageCode returns a boolean if a field has been set.
-func (o *GetStructureRequest) HasLanguageCode() bool {
-	if o != nil && !IsNil(o.LanguageCode) {
-		return true
+// SetSha256 sets field value
+func (o *GenerateCDARResponse) SetSha256(v string) {
+	o.Sha256 = v
+}
+
+// GetMessage returns the Message field value
+func (o *GenerateCDARResponse) GetMessage() string {
+	if o == nil {
+		var ret string
+		return ret
 	}
 
-	return false
+	return o.Message
 }
 
-// SetLanguageCode gets a reference to the given string and assigns it to the LanguageCode field.
-func (o *GetStructureRequest) SetLanguageCode(v string) {
-	o.LanguageCode = &v
+// GetMessageOk returns a tuple with the Message field value
+// and a boolean to check if the value has been set.
+func (o *GenerateCDARResponse) GetMessageOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Message, true
 }
 
-func (o GetStructureRequest) MarshalJSON() ([]byte, error) {
+// SetMessage sets field value
+func (o *GenerateCDARResponse) SetMessage(v string) {
+	o.Message = v
+}
+
+func (o GenerateCDARResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -159,24 +185,26 @@ func (o GetStructureRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetStructureRequest) ToMap() (map[string]interface{}, error) {
+func (o GenerateCDARResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Credentials.IsSet() {
-		toSerialize["credentials"] = o.Credentials.Get()
-	}
-	toSerialize["structureId"] = o.StructureId
-	if !IsNil(o.LanguageCode) {
-		toSerialize["languageCode"] = o.LanguageCode
-	}
+	toSerialize["documentId"] = o.DocumentId
+	toSerialize["xml"] = o.Xml
+	toSerialize["xmlSize"] = o.XmlSize
+	toSerialize["sha256"] = o.Sha256
+	toSerialize["message"] = o.Message
 	return toSerialize, nil
 }
 
-func (o *GetStructureRequest) UnmarshalJSON(data []byte) (err error) {
+func (o *GenerateCDARResponse) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"structureId",
+		"documentId",
+		"xml",
+		"xmlSize",
+		"sha256",
+		"message",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -193,53 +221,53 @@ func (o *GetStructureRequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varGetStructureRequest := _GetStructureRequest{}
+	varGenerateCDARResponse := _GenerateCDARResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetStructureRequest)
+	err = decoder.Decode(&varGenerateCDARResponse)
 
 	if err != nil {
 		return err
 	}
 
-	*o = GetStructureRequest(varGetStructureRequest)
+	*o = GenerateCDARResponse(varGenerateCDARResponse)
 
 	return err
 }
 
-type NullableGetStructureRequest struct {
-	value *GetStructureRequest
+type NullableGenerateCDARResponse struct {
+	value *GenerateCDARResponse
 	isSet bool
 }
 
-func (v NullableGetStructureRequest) Get() *GetStructureRequest {
+func (v NullableGenerateCDARResponse) Get() *GenerateCDARResponse {
 	return v.value
 }
 
-func (v *NullableGetStructureRequest) Set(val *GetStructureRequest) {
+func (v *NullableGenerateCDARResponse) Set(val *GenerateCDARResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetStructureRequest) IsSet() bool {
+func (v NullableGenerateCDARResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetStructureRequest) Unset() {
+func (v *NullableGenerateCDARResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetStructureRequest(val *GetStructureRequest) *NullableGetStructureRequest {
-	return &NullableGetStructureRequest{value: val, isSet: true}
+func NewNullableGenerateCDARResponse(val *GenerateCDARResponse) *NullableGenerateCDARResponse {
+	return &NullableGenerateCDARResponse{value: val, isSet: true}
 }
 
-func (v NullableGetStructureRequest) MarshalJSON() ([]byte, error) {
+func (v NullableGenerateCDARResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetStructureRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableGenerateCDARResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

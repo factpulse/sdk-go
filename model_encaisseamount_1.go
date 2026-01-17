@@ -13,163 +13,99 @@ package factpulse
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
-// checks if the ChorusProDestination type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ChorusProDestination{}
 
-// ChorusProDestination Specific configuration for Chorus Pro destination.
-type ChorusProDestination struct {
-	Type *string `json:"type,omitempty"`
-	Credentials NullableChorusProCredentials `json:"credentials,omitempty"`
+// Encaisseamount1 struct for Encaisseamount1
+type Encaisseamount1 struct {
+	Float32 *float32
+	String *string
 }
 
-// NewChorusProDestination instantiates a new ChorusProDestination object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewChorusProDestination() *ChorusProDestination {
-	this := ChorusProDestination{}
-	var type_ string = "chorus_pro"
-	this.Type = &type_
-	return &this
-}
-
-// NewChorusProDestinationWithDefaults instantiates a new ChorusProDestination object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewChorusProDestinationWithDefaults() *ChorusProDestination {
-	this := ChorusProDestination{}
-	var type_ string = "chorus_pro"
-	this.Type = &type_
-	return &this
-}
-
-// GetType returns the Type field value if set, zero value otherwise.
-func (o *ChorusProDestination) GetType() string {
-	if o == nil || IsNil(o.Type) {
-		var ret string
-		return ret
-	}
-	return *o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ChorusProDestination) GetTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.Type) {
-		return nil, false
-	}
-	return o.Type, true
-}
-
-// HasType returns a boolean if a field has been set.
-func (o *ChorusProDestination) HasType() bool {
-	if o != nil && !IsNil(o.Type) {
-		return true
+// Unmarshal JSON data into any of the pointers in the struct
+func (dst *Encaisseamount1) UnmarshalJSON(data []byte) error {
+	var err error
+	// this object is nullable so check if the payload is null or empty string
+	if string(data) == "" || string(data) == "{}" {
+		return nil
 	}
 
-	return false
-}
-
-// SetType gets a reference to the given string and assigns it to the Type field.
-func (o *ChorusProDestination) SetType(v string) {
-	o.Type = &v
-}
-
-// GetCredentials returns the Credentials field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ChorusProDestination) GetCredentials() ChorusProCredentials {
-	if o == nil || IsNil(o.Credentials.Get()) {
-		var ret ChorusProCredentials
-		return ret
-	}
-	return *o.Credentials.Get()
-}
-
-// GetCredentialsOk returns a tuple with the Credentials field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ChorusProDestination) GetCredentialsOk() (*ChorusProCredentials, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Credentials.Get(), o.Credentials.IsSet()
-}
-
-// HasCredentials returns a boolean if a field has been set.
-func (o *ChorusProDestination) HasCredentials() bool {
-	if o != nil && o.Credentials.IsSet() {
-		return true
+	// try to unmarshal JSON data into Float32
+	err = json.Unmarshal(data, &dst.Float32);
+	if err == nil {
+		jsonFloat32, _ := json.Marshal(dst.Float32)
+		if string(jsonFloat32) == "{}" { // empty struct
+			dst.Float32 = nil
+		} else {
+			return nil // data stored in dst.Float32, return on the first match
+		}
+	} else {
+		dst.Float32 = nil
 	}
 
-	return false
-}
-
-// SetCredentials gets a reference to the given NullableChorusProCredentials and assigns it to the Credentials field.
-func (o *ChorusProDestination) SetCredentials(v ChorusProCredentials) {
-	o.Credentials.Set(&v)
-}
-// SetCredentialsNil sets the value for Credentials to be an explicit nil
-func (o *ChorusProDestination) SetCredentialsNil() {
-	o.Credentials.Set(nil)
-}
-
-// UnsetCredentials ensures that no value is present for Credentials, not even an explicit nil
-func (o *ChorusProDestination) UnsetCredentials() {
-	o.Credentials.Unset()
-}
-
-func (o ChorusProDestination) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	// try to unmarshal JSON data into String
+	err = json.Unmarshal(data, &dst.String);
+	if err == nil {
+		jsonString, _ := json.Marshal(dst.String)
+		if string(jsonString) == "{}" { // empty struct
+			dst.String = nil
+		} else {
+			return nil // data stored in dst.String, return on the first match
+		}
+	} else {
+		dst.String = nil
 	}
-	return json.Marshal(toSerialize)
+
+	return fmt.Errorf("data failed to match schemas in anyOf(Encaisseamount1)")
 }
 
-func (o ChorusProDestination) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Type) {
-		toSerialize["type"] = o.Type
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src Encaisseamount1) MarshalJSON() ([]byte, error) {
+	if src.Float32 != nil {
+		return json.Marshal(&src.Float32)
 	}
-	if o.Credentials.IsSet() {
-		toSerialize["credentials"] = o.Credentials.Get()
+
+	if src.String != nil {
+		return json.Marshal(&src.String)
 	}
-	return toSerialize, nil
+
+	return nil, nil // no data in anyOf schemas
 }
 
-type NullableChorusProDestination struct {
-	value *ChorusProDestination
+
+type NullableEncaisseamount1 struct {
+	value *Encaisseamount1
 	isSet bool
 }
 
-func (v NullableChorusProDestination) Get() *ChorusProDestination {
+func (v NullableEncaisseamount1) Get() *Encaisseamount1 {
 	return v.value
 }
 
-func (v *NullableChorusProDestination) Set(val *ChorusProDestination) {
+func (v *NullableEncaisseamount1) Set(val *Encaisseamount1) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableChorusProDestination) IsSet() bool {
+func (v NullableEncaisseamount1) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableChorusProDestination) Unset() {
+func (v *NullableEncaisseamount1) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableChorusProDestination(val *ChorusProDestination) *NullableChorusProDestination {
-	return &NullableChorusProDestination{value: val, isSet: true}
+func NewNullableEncaisseamount1(val *Encaisseamount1) *NullableEncaisseamount1 {
+	return &NullableEncaisseamount1{value: val, isSet: true}
 }
 
-func (v NullableChorusProDestination) MarshalJSON() ([]byte, error) {
+func (v NullableEncaisseamount1) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableChorusProDestination) UnmarshalJSON(src []byte) error {
+func (v *NullableEncaisseamount1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

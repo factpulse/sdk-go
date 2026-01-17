@@ -20,10 +20,15 @@ import (
 // checks if the ValidationErrorResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ValidationErrorResponse{}
 
-// ValidationErrorResponse Response for validation errors.
+// ValidationErrorResponse Erreur de validation.
 type ValidationErrorResponse struct {
-	// List of detected validation errors.
-	Detail []string `json:"detail"`
+	// Champ concerné
+	Field string `json:"field"`
+	// Message d'erreur
+	Message string `json:"message"`
+	Rule NullableString `json:"rule,omitempty"`
+	// Sévérité (error/warning)
+	Severity *string `json:"severity,omitempty"`
 }
 
 type _ValidationErrorResponse ValidationErrorResponse
@@ -32,9 +37,12 @@ type _ValidationErrorResponse ValidationErrorResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewValidationErrorResponse(detail []string) *ValidationErrorResponse {
+func NewValidationErrorResponse(field string, message string) *ValidationErrorResponse {
 	this := ValidationErrorResponse{}
-	this.Detail = detail
+	this.Field = field
+	this.Message = message
+	var severity string = "error"
+	this.Severity = &severity
 	return &this
 }
 
@@ -43,31 +51,131 @@ func NewValidationErrorResponse(detail []string) *ValidationErrorResponse {
 // but it doesn't guarantee that properties required by API are set
 func NewValidationErrorResponseWithDefaults() *ValidationErrorResponse {
 	this := ValidationErrorResponse{}
+	var severity string = "error"
+	this.Severity = &severity
 	return &this
 }
 
-// GetDetail returns the Detail field value
-func (o *ValidationErrorResponse) GetDetail() []string {
+// GetField returns the Field field value
+func (o *ValidationErrorResponse) GetField() string {
 	if o == nil {
-		var ret []string
+		var ret string
 		return ret
 	}
 
-	return o.Detail
+	return o.Field
 }
 
-// GetDetailOk returns a tuple with the Detail field value
+// GetFieldOk returns a tuple with the Field field value
 // and a boolean to check if the value has been set.
-func (o *ValidationErrorResponse) GetDetailOk() ([]string, bool) {
+func (o *ValidationErrorResponse) GetFieldOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Detail, true
+	return &o.Field, true
 }
 
-// SetDetail sets field value
-func (o *ValidationErrorResponse) SetDetail(v []string) {
-	o.Detail = v
+// SetField sets field value
+func (o *ValidationErrorResponse) SetField(v string) {
+	o.Field = v
+}
+
+// GetMessage returns the Message field value
+func (o *ValidationErrorResponse) GetMessage() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Message
+}
+
+// GetMessageOk returns a tuple with the Message field value
+// and a boolean to check if the value has been set.
+func (o *ValidationErrorResponse) GetMessageOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Message, true
+}
+
+// SetMessage sets field value
+func (o *ValidationErrorResponse) SetMessage(v string) {
+	o.Message = v
+}
+
+// GetRule returns the Rule field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ValidationErrorResponse) GetRule() string {
+	if o == nil || IsNil(o.Rule.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Rule.Get()
+}
+
+// GetRuleOk returns a tuple with the Rule field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ValidationErrorResponse) GetRuleOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Rule.Get(), o.Rule.IsSet()
+}
+
+// HasRule returns a boolean if a field has been set.
+func (o *ValidationErrorResponse) HasRule() bool {
+	if o != nil && o.Rule.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRule gets a reference to the given NullableString and assigns it to the Rule field.
+func (o *ValidationErrorResponse) SetRule(v string) {
+	o.Rule.Set(&v)
+}
+// SetRuleNil sets the value for Rule to be an explicit nil
+func (o *ValidationErrorResponse) SetRuleNil() {
+	o.Rule.Set(nil)
+}
+
+// UnsetRule ensures that no value is present for Rule, not even an explicit nil
+func (o *ValidationErrorResponse) UnsetRule() {
+	o.Rule.Unset()
+}
+
+// GetSeverity returns the Severity field value if set, zero value otherwise.
+func (o *ValidationErrorResponse) GetSeverity() string {
+	if o == nil || IsNil(o.Severity) {
+		var ret string
+		return ret
+	}
+	return *o.Severity
+}
+
+// GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ValidationErrorResponse) GetSeverityOk() (*string, bool) {
+	if o == nil || IsNil(o.Severity) {
+		return nil, false
+	}
+	return o.Severity, true
+}
+
+// HasSeverity returns a boolean if a field has been set.
+func (o *ValidationErrorResponse) HasSeverity() bool {
+	if o != nil && !IsNil(o.Severity) {
+		return true
+	}
+
+	return false
+}
+
+// SetSeverity gets a reference to the given string and assigns it to the Severity field.
+func (o *ValidationErrorResponse) SetSeverity(v string) {
+	o.Severity = &v
 }
 
 func (o ValidationErrorResponse) MarshalJSON() ([]byte, error) {
@@ -80,7 +188,14 @@ func (o ValidationErrorResponse) MarshalJSON() ([]byte, error) {
 
 func (o ValidationErrorResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["detail"] = o.Detail
+	toSerialize["field"] = o.Field
+	toSerialize["message"] = o.Message
+	if o.Rule.IsSet() {
+		toSerialize["rule"] = o.Rule.Get()
+	}
+	if !IsNil(o.Severity) {
+		toSerialize["severity"] = o.Severity
+	}
 	return toSerialize, nil
 }
 
@@ -89,7 +204,8 @@ func (o *ValidationErrorResponse) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"detail",
+		"field",
+		"message",
 	}
 
 	allProperties := make(map[string]interface{})

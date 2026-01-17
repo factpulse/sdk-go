@@ -895,7 +895,7 @@ func (c *Client) GenerateFacturxComplete(invoice map[string]interface{}, pdfSour
         validation, err := c.ValidateFacturxPdf(tempFile.Name(), &ValidateFacturxPdfOptions{Profile: profile})
         if err != nil { return nil, err }
         result["validation"] = validation
-        if isCompliant, ok := validation["is_compliant"].(bool); !ok || !isCompliant {
+        if isCompliant, ok := validation["isCompliant"].(bool); !ok || !isCompliant {
             if opts.OutputPath != "" {
                 os.WriteFile(opts.OutputPath, pdfBytes, 0644)
                 result["pdfPath"] = opts.OutputPath
@@ -916,7 +916,7 @@ func (c *Client) GenerateFacturxComplete(invoice map[string]interface{}, pdfSour
 
     // 4. AFNOR submission
     if opts.SubmitAfnor {
-        invoiceNumber := getStringOrDefault(invoice, "number", getStringOrDefault(invoice, "invoice_number", "INVOICE"))
+        invoiceNumber := getStringOrDefault(invoice, "invoiceNumber", getStringOrDefault(invoice, "number", "INVOICE"))
         flowName := ifEmpty(opts.AfnorFlowName, fmt.Sprintf("Invoice %s", invoiceNumber))
         trackingID := ifEmpty(opts.AfnorTrackingID, invoiceNumber)
         afnorResult, err := c.SubmitInvoiceAfnor(tempFile.Name(), flowName, &SubmitInvoiceAfnorOptions{TrackingID: trackingID})
