@@ -393,6 +393,30 @@ func (c *Client) GenerateFacturxWithOptions(invoiceData interface{}, pdfPath, pr
         if taskID, ok := data["taskId"].(string); ok {
             result, err := c.PollTask(taskID, timeout, nil)
             if err != nil { return nil, err }
+
+            // Check for business error (task succeeded but business result is ERROR)
+            if status, ok := result["status"].(string); ok && status == "ERROR" {
+                errorMsg := "Business error"
+                if msg, ok := result["errorMessage"].(string); ok {
+                    errorMsg = msg
+                }
+                var errors []ValidationErrorDetail
+                if details, ok := result["details"].([]interface{}); ok {
+                    for _, d := range details {
+                        if det, ok := d.(map[string]interface{}); ok {
+                            errors = append(errors, ValidationErrorDetail{
+                                Level:  getStringOrDefault(det, "level", "ERROR"),
+                                Item:   getStringOrDefault(det, "item", ""),
+                                Reason: getStringOrDefault(det, "reason", ""),
+                                Source: getStringOrDefault(det, "source", ""),
+                                Code:   getStringOrDefault(det, "code", ""),
+                            })
+                        }
+                    }
+                }
+                return nil, NewFactPulseValidationError(errorMsg, errors)
+            }
+
             if contentB64, ok := result["content_b64"].(string); ok {
                 decoded, _ := base64.StdEncoding.DecodeString(contentB64)
                 return decoded, nil
