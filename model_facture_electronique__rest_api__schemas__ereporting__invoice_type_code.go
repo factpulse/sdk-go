@@ -16,80 +16,58 @@ import (
 	"fmt"
 )
 
-// FactureElectroniqueModelsInvoiceTypeCode Document type according to BR-FR-04 (UNTDID 1001 codes).  | Code | Name | Description | |------|------|-------------| | 380 | INVOICE | Commercial invoice | | 389 | SELF_BILLED_INVOICE | Self-billed invoice | | 393 | FACTORED_INVOICE | Factored invoice | | 501 | SELF_BILLED_FACTORED_INVOICE | Self-billed factored invoice | | 386 | PREPAYMENT_INVOICE | Prepayment invoice | | 500 | SELF_BILLED_PREPAYMENT_INVOICE | Self-billed prepayment invoice | | 384 | CORRECTIVE_INVOICE | Corrective invoice | | 471 | SELF_BILLED_CORRECTIVE_INVOICE | Self-billed corrective invoice | | 472 | FACTORED_CORRECTIVE_INVOICE | Factored corrective invoice | | 473 | SELF_BILLED_FACTORED_CORRECTIVE_INVOICE | Self-billed factored corrective invoice | | 381 | CREDIT_NOTE | Credit note | | 261 | SELF_BILLED_CREDIT_NOTE | Self-billed credit note | | 262 | GLOBAL_ALLOWANCE_CREDIT_NOTE | Credit note for global allowance | | 396 | FACTORED_CREDIT_NOTE | Factored credit note | | 502 | SELF_BILLED_FACTORED_CREDIT_NOTE | Self-billed factored credit note | | 503 | PREPAYMENT_CREDIT_NOTE | Credit note for prepayment invoice |
-type FactureElectroniqueModelsInvoiceTypeCode string
+// FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode Invoice type codes (UNTDID 1001).
+type FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode string
 
-// List of facture_electronique__models__InvoiceTypeCode
+// List of facture_electronique__rest_api__schemas__ereporting__InvoiceTypeCode
 const (
-	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "380"
-	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_SELF_BILLED_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "389"
-	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_FACTORED_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "393"
-	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_SELF_BILLED_FACTORED_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "501"
-	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_PREPAYMENT_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "386"
-	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_SELF_BILLED_PREPAYMENT_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "500"
-	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_CORRECTIVE_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "384"
-	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_SELF_BILLED_CORRECTIVE_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "471"
-	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_FACTORED_CORRECTIVE_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "472"
-	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_SELF_BILLED_FACTORED_CORRECTIVE_INVOICE FactureElectroniqueModelsInvoiceTypeCode = "473"
-	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_CREDIT_NOTE FactureElectroniqueModelsInvoiceTypeCode = "381"
-	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_SELF_BILLED_CREDIT_NOTE FactureElectroniqueModelsInvoiceTypeCode = "261"
-	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_GLOBAL_ALLOWANCE_CREDIT_NOTE FactureElectroniqueModelsInvoiceTypeCode = "262"
-	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_FACTORED_CREDIT_NOTE FactureElectroniqueModelsInvoiceTypeCode = "396"
-	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_SELF_BILLED_FACTORED_CREDIT_NOTE FactureElectroniqueModelsInvoiceTypeCode = "502"
-	FACTUREELECTRONIQUEMODELSINVOICETYPECODE_PREPAYMENT_CREDIT_NOTE FactureElectroniqueModelsInvoiceTypeCode = "503"
+	FACTUREELECTRONIQUERESTAPISCHEMASEREPORTINGINVOICETYPECODE__380 FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode = "380"
+	FACTUREELECTRONIQUERESTAPISCHEMASEREPORTINGINVOICETYPECODE__381 FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode = "381"
+	FACTUREELECTRONIQUERESTAPISCHEMASEREPORTINGINVOICETYPECODE__384 FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode = "384"
+	FACTUREELECTRONIQUERESTAPISCHEMASEREPORTINGINVOICETYPECODE__389 FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode = "389"
+	FACTUREELECTRONIQUERESTAPISCHEMASEREPORTINGINVOICETYPECODE__386 FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode = "386"
 )
 
-// All allowed values of FactureElectroniqueModelsInvoiceTypeCode enum
-var AllowedFactureElectroniqueModelsInvoiceTypeCodeEnumValues = []FactureElectroniqueModelsInvoiceTypeCode{
+// All allowed values of FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode enum
+var AllowedFactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeEnumValues = []FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode{
 	"380",
-	"389",
-	"393",
-	"501",
-	"386",
-	"500",
-	"384",
-	"471",
-	"472",
-	"473",
 	"381",
-	"261",
-	"262",
-	"396",
-	"502",
-	"503",
+	"384",
+	"389",
+	"386",
 }
 
-func (v *FactureElectroniqueModelsInvoiceTypeCode) UnmarshalJSON(src []byte) error {
+func (v *FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode) UnmarshalJSON(src []byte) error {
 	var value string
 	err := json.Unmarshal(src, &value)
 	if err != nil {
 		return err
 	}
-	enumTypeValue := FactureElectroniqueModelsInvoiceTypeCode(value)
-	for _, existing := range AllowedFactureElectroniqueModelsInvoiceTypeCodeEnumValues {
+	enumTypeValue := FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode(value)
+	for _, existing := range AllowedFactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeEnumValues {
 		if existing == enumTypeValue {
 			*v = enumTypeValue
 			return nil
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid FactureElectroniqueModelsInvoiceTypeCode", value)
+	return fmt.Errorf("%+v is not a valid FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode", value)
 }
 
-// NewFactureElectroniqueModelsInvoiceTypeCodeFromValue returns a pointer to a valid FactureElectroniqueModelsInvoiceTypeCode
+// NewFactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeFromValue returns a pointer to a valid FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode
 // for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewFactureElectroniqueModelsInvoiceTypeCodeFromValue(v string) (*FactureElectroniqueModelsInvoiceTypeCode, error) {
-	ev := FactureElectroniqueModelsInvoiceTypeCode(v)
+func NewFactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeFromValue(v string) (*FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode, error) {
+	ev := FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode(v)
 	if ev.IsValid() {
 		return &ev, nil
 	} else {
-		return nil, fmt.Errorf("invalid value '%v' for FactureElectroniqueModelsInvoiceTypeCode: valid values are %v", v, AllowedFactureElectroniqueModelsInvoiceTypeCodeEnumValues)
+		return nil, fmt.Errorf("invalid value '%v' for FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode: valid values are %v", v, AllowedFactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeEnumValues)
 	}
 }
 
 // IsValid return true if the value is valid for the enum, false otherwise
-func (v FactureElectroniqueModelsInvoiceTypeCode) IsValid() bool {
-	for _, existing := range AllowedFactureElectroniqueModelsInvoiceTypeCodeEnumValues {
+func (v FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode) IsValid() bool {
+	for _, existing := range AllowedFactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeEnumValues {
 		if existing == v {
 			return true
 		}
@@ -97,43 +75,43 @@ func (v FactureElectroniqueModelsInvoiceTypeCode) IsValid() bool {
 	return false
 }
 
-// Ptr returns reference to facture_electronique__models__InvoiceTypeCode value
-func (v FactureElectroniqueModelsInvoiceTypeCode) Ptr() *FactureElectroniqueModelsInvoiceTypeCode {
+// Ptr returns reference to facture_electronique__rest_api__schemas__ereporting__InvoiceTypeCode value
+func (v FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode) Ptr() *FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode {
 	return &v
 }
 
-type NullableFactureElectroniqueModelsInvoiceTypeCode struct {
-	value *FactureElectroniqueModelsInvoiceTypeCode
+type NullableFactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode struct {
+	value *FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode
 	isSet bool
 }
 
-func (v NullableFactureElectroniqueModelsInvoiceTypeCode) Get() *FactureElectroniqueModelsInvoiceTypeCode {
+func (v NullableFactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode) Get() *FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode {
 	return v.value
 }
 
-func (v *NullableFactureElectroniqueModelsInvoiceTypeCode) Set(val *FactureElectroniqueModelsInvoiceTypeCode) {
+func (v *NullableFactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode) Set(val *FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFactureElectroniqueModelsInvoiceTypeCode) IsSet() bool {
+func (v NullableFactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFactureElectroniqueModelsInvoiceTypeCode) Unset() {
+func (v *NullableFactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFactureElectroniqueModelsInvoiceTypeCode(val *FactureElectroniqueModelsInvoiceTypeCode) *NullableFactureElectroniqueModelsInvoiceTypeCode {
-	return &NullableFactureElectroniqueModelsInvoiceTypeCode{value: val, isSet: true}
+func NewNullableFactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode(val *FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode) *NullableFactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode {
+	return &NullableFactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode{value: val, isSet: true}
 }
 
-func (v NullableFactureElectroniqueModelsInvoiceTypeCode) MarshalJSON() ([]byte, error) {
+func (v NullableFactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFactureElectroniqueModelsInvoiceTypeCode) UnmarshalJSON(src []byte) error {
+func (v *NullableFactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

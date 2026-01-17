@@ -323,9 +323,9 @@ func (c *Client) GenerateFacturxWithOptions(invoiceData interface{}, pdfPath, pr
     // Build multipart request
     var body bytes.Buffer
     writer := multipart.NewWriter(&body)
-    // invoice_data with application/json content-type
+    // invoice_data with application/json content-type (no filename = form field, not file)
     h := make(textproto.MIMEHeader)
-    h.Set("Content-Disposition", `form-data; name="invoice_data"; filename="invoice.json"`)
+    h.Set("Content-Disposition", `form-data; name="invoice_data"`)
     h.Set("Content-Type", "application/json")
     invoicePart, _ := writer.CreatePart(h)
     invoicePart.Write([]byte(jsonData))
