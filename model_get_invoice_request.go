@@ -22,7 +22,7 @@ var _ MappedNullable = &GetInvoiceRequest{}
 
 // GetInvoiceRequest Get an invoice.
 type GetInvoiceRequest struct {
-	Credentials NullableFactureElectroniqueRestApiSchemasChorusProChorusProCredentials `json:"credentials,omitempty"`
+	Credentials NullableChorusProCredentials `json:"credentials,omitempty"`
 	// Chorus Pro invoice ID
 	ChorusInvoiceId int32 `json:"chorusInvoiceId"`
 }
@@ -48,9 +48,9 @@ func NewGetInvoiceRequestWithDefaults() *GetInvoiceRequest {
 }
 
 // GetCredentials returns the Credentials field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *GetInvoiceRequest) GetCredentials() FactureElectroniqueRestApiSchemasChorusProChorusProCredentials {
+func (o *GetInvoiceRequest) GetCredentials() ChorusProCredentials {
 	if o == nil || IsNil(o.Credentials.Get()) {
-		var ret FactureElectroniqueRestApiSchemasChorusProChorusProCredentials
+		var ret ChorusProCredentials
 		return ret
 	}
 	return *o.Credentials.Get()
@@ -59,7 +59,7 @@ func (o *GetInvoiceRequest) GetCredentials() FactureElectroniqueRestApiSchemasCh
 // GetCredentialsOk returns a tuple with the Credentials field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GetInvoiceRequest) GetCredentialsOk() (*FactureElectroniqueRestApiSchemasChorusProChorusProCredentials, bool) {
+func (o *GetInvoiceRequest) GetCredentialsOk() (*ChorusProCredentials, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -75,8 +75,8 @@ func (o *GetInvoiceRequest) HasCredentials() bool {
 	return false
 }
 
-// SetCredentials gets a reference to the given NullableFactureElectroniqueRestApiSchemasChorusProChorusProCredentials and assigns it to the Credentials field.
-func (o *GetInvoiceRequest) SetCredentials(v FactureElectroniqueRestApiSchemasChorusProChorusProCredentials) {
+// SetCredentials gets a reference to the given NullableChorusProCredentials and assigns it to the Credentials field.
+func (o *GetInvoiceRequest) SetCredentials(v ChorusProCredentials) {
 	o.Credentials.Set(&v)
 }
 // SetCredentialsNil sets the value for Credentials to be an explicit nil
