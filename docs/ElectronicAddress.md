@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Identifier** | **string** | Electronic address identifier (e.g., SIREN, SIRET, routing code) | 
-**SchemeId** | Pointer to [**SchemeID**](SchemeID.md) | Identification scheme (EAS code) | [optional] [default to FR_SIREN]
+**SchemeId** | Pointer to [**SchemeID**](SchemeID.md) | Identification scheme (EAS code) | [optional] [default to FR_ELECTRONIC_ADDRESS]
 
 ## Methods
 

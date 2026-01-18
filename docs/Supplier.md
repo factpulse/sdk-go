@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ElectronicAddress** | [**NullableElectronicAddress**](ElectronicAddress.md) |  | 
+**ElectronicAddress** | Pointer to [**NullableElectronicAddress**](ElectronicAddress.md) |  | [optional] 
 **SupplierId** | **int32** |  | 
 **PrivateId** | Pointer to **NullableString** |  | [optional] 
 **SupplierBankAccountCode** | Pointer to **NullableInt32** |  | [optional] 
@@ -27,7 +27,7 @@ Name | Type | Description | Notes
 
 ### NewSupplier
 
-`func NewSupplier(electronicAddress NullableElectronicAddress, supplierId int32, ) *Supplier`
+`func NewSupplier(supplierId int32, ) *Supplier`
 
 NewSupplier instantiates a new Supplier object
 This constructor will assign default values to properties that have it defined,
@@ -61,6 +61,11 @@ and a boolean to check if the value has been set.
 
 SetElectronicAddress sets ElectronicAddress field to given value.
 
+### HasElectronicAddress
+
+`func (o *Supplier) HasElectronicAddress() bool`
+
+HasElectronicAddress returns a boolean if a field has been set.
 
 ### SetElectronicAddressNil
 

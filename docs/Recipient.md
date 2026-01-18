@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ElectronicAddress** | [**NullableElectronicAddress**](ElectronicAddress.md) |  | 
+**ElectronicAddress** | Pointer to [**NullableElectronicAddress**](ElectronicAddress.md) |  | [optional] 
 **ExecutingServiceCode** | Pointer to **NullableString** |  | [optional] 
 **Name** | Pointer to **NullableString** |  | [optional] 
 **Siren** | Pointer to **NullableString** |  | [optional] 
@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewRecipient
 
-`func NewRecipient(electronicAddress NullableElectronicAddress, ) *Recipient`
+`func NewRecipient() *Recipient`
 
 NewRecipient instantiates a new Recipient object
 This constructor will assign default values to properties that have it defined,
@@ -52,6 +52,11 @@ and a boolean to check if the value has been set.
 
 SetElectronicAddress sets ElectronicAddress field to given value.
 
+### HasElectronicAddress
+
+`func (o *Recipient) HasElectronicAddress() bool`
+
+HasElectronicAddress returns a boolean if a field has been set.
 
 ### SetElectronicAddressNil
 

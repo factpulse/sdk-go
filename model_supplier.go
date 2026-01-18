@@ -22,7 +22,7 @@ var _ MappedNullable = &Supplier{}
 
 // Supplier Information about the supplier / seller (BG-4).
 type Supplier struct {
-	ElectronicAddress NullableElectronicAddress `json:"electronic_address"`
+	ElectronicAddress NullableElectronicAddress `json:"electronic_address,omitempty"`
 	SupplierId int32 `json:"supplier_id"`
 	PrivateId NullableString `json:"private_id,omitempty"`
 	SupplierBankAccountCode NullableInt32 `json:"supplier_bank_account_code,omitempty"`
@@ -48,9 +48,8 @@ type _Supplier Supplier
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSupplier(electronicAddress NullableElectronicAddress, supplierId int32) *Supplier {
+func NewSupplier(supplierId int32) *Supplier {
 	this := Supplier{}
-	this.ElectronicAddress = electronicAddress
 	this.SupplierId = supplierId
 	return &this
 }
@@ -63,18 +62,16 @@ func NewSupplierWithDefaults() *Supplier {
 	return &this
 }
 
-// GetElectronicAddress returns the ElectronicAddress field value
-// If the value is explicit nil, the zero value for ElectronicAddress will be returned
+// GetElectronicAddress returns the ElectronicAddress field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Supplier) GetElectronicAddress() ElectronicAddress {
-	if o == nil || o.ElectronicAddress.Get() == nil {
+	if o == nil || IsNil(o.ElectronicAddress.Get()) {
 		var ret ElectronicAddress
 		return ret
 	}
-
 	return *o.ElectronicAddress.Get()
 }
 
-// GetElectronicAddressOk returns a tuple with the ElectronicAddress field value
+// GetElectronicAddressOk returns a tuple with the ElectronicAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Supplier) GetElectronicAddressOk() (*ElectronicAddress, bool) {
@@ -84,9 +81,27 @@ func (o *Supplier) GetElectronicAddressOk() (*ElectronicAddress, bool) {
 	return o.ElectronicAddress.Get(), o.ElectronicAddress.IsSet()
 }
 
-// SetElectronicAddress sets field value
+// HasElectronicAddress returns a boolean if a field has been set.
+func (o *Supplier) HasElectronicAddress() bool {
+	if o != nil && o.ElectronicAddress.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetElectronicAddress gets a reference to the given NullableElectronicAddress and assigns it to the ElectronicAddress field.
 func (o *Supplier) SetElectronicAddress(v ElectronicAddress) {
 	o.ElectronicAddress.Set(&v)
+}
+// SetElectronicAddressNil sets the value for ElectronicAddress to be an explicit nil
+func (o *Supplier) SetElectronicAddressNil() {
+	o.ElectronicAddress.Set(nil)
+}
+
+// UnsetElectronicAddress ensures that no value is present for ElectronicAddress, not even an explicit nil
+func (o *Supplier) UnsetElectronicAddress() {
+	o.ElectronicAddress.Unset()
 }
 
 // GetSupplierId returns the SupplierId field value
@@ -786,7 +801,9 @@ func (o Supplier) MarshalJSON() ([]byte, error) {
 
 func (o Supplier) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["electronic_address"] = o.ElectronicAddress.Get()
+	if o.ElectronicAddress.IsSet() {
+		toSerialize["electronic_address"] = o.ElectronicAddress.Get()
+	}
 	toSerialize["supplier_id"] = o.SupplierId
 	if o.PrivateId.IsSet() {
 		toSerialize["private_id"] = o.PrivateId.Get()
@@ -844,7 +861,6 @@ func (o *Supplier) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"electronic_address",
 		"supplier_id",
 	}
 

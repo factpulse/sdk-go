@@ -16,14 +16,14 @@ import (
 	"fmt"
 )
 
-// SchemeID Identification scheme codes (Electronic Address Scheme - EAS), mainly for electronic invoice addressing.  **Possible values:** - `0225`: FR_SIREN - French SIREN (most common for France) - `0009`: FR_SIRET - French SIRET - `0002`: FR_SIREN_OLD - French SIREN (old code, for legal organization ID) - `0088`: GLN - Global Location Number - `0060`: DUNS - Data Universal Numbering System - `9957`: FR_VAT_INTRA - French intra-community VAT number - `0199`: GLEIF - Global Legal Entity Identifier Foundation - `0231`: DT_DIRECTORY_ID - Directory ID for tax administration - `EM`: EMAIL - Email-based electronic address (BT-34/BT-49)
+// SchemeID Identification scheme codes (Electronic Address Scheme - EAS).  **Electronic Address (routing for PDP/Chorus Pro):** - `0225`: FR_ELECTRONIC_ADDRESS - French electronic billing address (BT-34/BT-49)             Format: SIREN or SIREN_SUFFIX (e.g., \"920195229_92019522900017\")  **Legal Identifiers (entity identification):** - `0002`: FR_SIREN - French SIREN (9 digits) for BT-30/BT-47 - `0009`: FR_SIRET - French SIRET (14 digits) for BT-29/BT-46  **Other schemes:** - `0088`: GLN - Global Location Number - `0060`: DUNS - Data Universal Numbering System - `9957`: FR_VAT_INTRA - French intra-community VAT number - `0199`: GLEIF - Global Legal Entity Identifier Foundation - `0231`: DT_DIRECTORY_ID - Directory ID for tax administration - `EM`: EMAIL - Email-based electronic address
 type SchemeID string
 
 // List of SchemeID
 const (
-	SCHEMEID_FR_SIREN SchemeID = "0225"
+	SCHEMEID_FR_ELECTRONIC_ADDRESS SchemeID = "0225"
+	SCHEMEID_FR_SIREN SchemeID = "0002"
 	SCHEMEID_FR_SIRET SchemeID = "0009"
-	SCHEMEID_FR_SIREN_OLD SchemeID = "0002"
 	SCHEMEID_GLN SchemeID = "0088"
 	SCHEMEID_DUNS SchemeID = "0060"
 	SCHEMEID_FR_VAT_INTRA SchemeID = "9957"
@@ -44,8 +44,8 @@ const (
 // All allowed values of SchemeID enum
 var AllowedSchemeIDEnumValues = []SchemeID{
 	"0225",
-	"0009",
 	"0002",
+	"0009",
 	"0088",
 	"0060",
 	"9957",

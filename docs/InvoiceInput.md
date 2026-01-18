@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **InvoiceId** | **string** | Invoice identifier | 
 **IssueDate** | **string** | Invoice issue date | 
-**TypeCode** | Pointer to [**FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode**](FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode.md) | Invoice type code | [optional] [default to _380]
+**TypeCode** | Pointer to [**InvoiceTypeCode**](InvoiceTypeCode.md) | Invoice type code | [optional] [default to _380]
 **Currency** | Pointer to [**Currency**](Currency.md) |  | [optional] [default to EUR]
 **DueDate** | Pointer to **NullableString** |  | [optional] 
 **SellerSiren** | **string** | Seller SIREN/SIRET | 
@@ -82,20 +82,20 @@ SetIssueDate sets IssueDate field to given value.
 
 ### GetTypeCode
 
-`func (o *InvoiceInput) GetTypeCode() FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode`
+`func (o *InvoiceInput) GetTypeCode() InvoiceTypeCode`
 
 GetTypeCode returns the TypeCode field if non-nil, zero value otherwise.
 
 ### GetTypeCodeOk
 
-`func (o *InvoiceInput) GetTypeCodeOk() (*FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode, bool)`
+`func (o *InvoiceInput) GetTypeCodeOk() (*InvoiceTypeCode, bool)`
 
 GetTypeCodeOk returns a tuple with the TypeCode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTypeCode
 
-`func (o *InvoiceInput) SetTypeCode(v FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode)`
+`func (o *InvoiceInput) SetTypeCode(v InvoiceTypeCode)`
 
 SetTypeCode sets TypeCode field to given value.
 

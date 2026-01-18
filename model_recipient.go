@@ -13,8 +13,6 @@ package factpulse
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the Recipient type satisfies the MappedNullable interface at compile time
@@ -22,7 +20,7 @@ var _ MappedNullable = &Recipient{}
 
 // Recipient Information about the invoice recipient / buyer (BG-7).
 type Recipient struct {
-	ElectronicAddress NullableElectronicAddress `json:"electronic_address"`
+	ElectronicAddress NullableElectronicAddress `json:"electronic_address,omitempty"`
 	ExecutingServiceCode NullableString `json:"executing_service_code,omitempty"`
 	Name NullableString `json:"name,omitempty"`
 	Siren NullableString `json:"siren,omitempty"`
@@ -33,15 +31,12 @@ type Recipient struct {
 	GlobalIds []ElectronicAddress `json:"global_ids,omitempty"`
 }
 
-type _Recipient Recipient
-
 // NewRecipient instantiates a new Recipient object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRecipient(electronicAddress NullableElectronicAddress) *Recipient {
+func NewRecipient() *Recipient {
 	this := Recipient{}
-	this.ElectronicAddress = electronicAddress
 	return &this
 }
 
@@ -53,18 +48,16 @@ func NewRecipientWithDefaults() *Recipient {
 	return &this
 }
 
-// GetElectronicAddress returns the ElectronicAddress field value
-// If the value is explicit nil, the zero value for ElectronicAddress will be returned
+// GetElectronicAddress returns the ElectronicAddress field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Recipient) GetElectronicAddress() ElectronicAddress {
-	if o == nil || o.ElectronicAddress.Get() == nil {
+	if o == nil || IsNil(o.ElectronicAddress.Get()) {
 		var ret ElectronicAddress
 		return ret
 	}
-
 	return *o.ElectronicAddress.Get()
 }
 
-// GetElectronicAddressOk returns a tuple with the ElectronicAddress field value
+// GetElectronicAddressOk returns a tuple with the ElectronicAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Recipient) GetElectronicAddressOk() (*ElectronicAddress, bool) {
@@ -74,9 +67,27 @@ func (o *Recipient) GetElectronicAddressOk() (*ElectronicAddress, bool) {
 	return o.ElectronicAddress.Get(), o.ElectronicAddress.IsSet()
 }
 
-// SetElectronicAddress sets field value
+// HasElectronicAddress returns a boolean if a field has been set.
+func (o *Recipient) HasElectronicAddress() bool {
+	if o != nil && o.ElectronicAddress.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetElectronicAddress gets a reference to the given NullableElectronicAddress and assigns it to the ElectronicAddress field.
 func (o *Recipient) SetElectronicAddress(v ElectronicAddress) {
 	o.ElectronicAddress.Set(&v)
+}
+// SetElectronicAddressNil sets the value for ElectronicAddress to be an explicit nil
+func (o *Recipient) SetElectronicAddressNil() {
+	o.ElectronicAddress.Set(nil)
+}
+
+// UnsetElectronicAddress ensures that no value is present for ElectronicAddress, not even an explicit nil
+func (o *Recipient) UnsetElectronicAddress() {
+	o.ElectronicAddress.Unset()
 }
 
 // GetExecutingServiceCode returns the ExecutingServiceCode field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -416,7 +427,9 @@ func (o Recipient) MarshalJSON() ([]byte, error) {
 
 func (o Recipient) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["electronic_address"] = o.ElectronicAddress.Get()
+	if o.ElectronicAddress.IsSet() {
+		toSerialize["electronic_address"] = o.ElectronicAddress.Get()
+	}
 	if o.ExecutingServiceCode.IsSet() {
 		toSerialize["executing_service_code"] = o.ExecutingServiceCode.Get()
 	}
@@ -442,43 +455,6 @@ func (o Recipient) ToMap() (map[string]interface{}, error) {
 		toSerialize["global_ids"] = o.GlobalIds
 	}
 	return toSerialize, nil
-}
-
-func (o *Recipient) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"electronic_address",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varRecipient := _Recipient{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRecipient)
-
-	if err != nil {
-		return err
-	}
-
-	*o = Recipient(varRecipient)
-
-	return err
 }
 
 type NullableRecipient struct {
