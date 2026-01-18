@@ -11,14 +11,14 @@ Name | Type | Description | Notes
 **EnrichedInvoice** | [**EnrichedInvoiceInfo**](EnrichedInvoiceInfo.md) | Enriched invoice data | 
 **FacturxPdf** | [**FacturXPDFInfo**](FacturXPDFInfo.md) | Generated PDF information | 
 **Signature** | Pointer to [**NullableSignatureInfo**](SignatureInfo.md) |  | [optional] 
-**PdfBase64** | **string** | Generated Factur-X PDF (and signed if requested) base64-encoded | 
+**ContentB64** | **string** | Generated Factur-X PDF (and signed if requested) base64-encoded | 
 **Message** | **string** | Return message | 
 
 ## Methods
 
 ### NewSubmitCompleteInvoiceResponse
 
-`func NewSubmitCompleteInvoiceResponse(success bool, destinationType string, enrichedInvoice EnrichedInvoiceInfo, facturxPdf FacturXPDFInfo, pdfBase64 string, message string, ) *SubmitCompleteInvoiceResponse`
+`func NewSubmitCompleteInvoiceResponse(success bool, destinationType string, enrichedInvoice EnrichedInvoiceInfo, facturxPdf FacturXPDFInfo, contentB64 string, message string, ) *SubmitCompleteInvoiceResponse`
 
 NewSubmitCompleteInvoiceResponse instantiates a new SubmitCompleteInvoiceResponse object
 This constructor will assign default values to properties that have it defined,
@@ -218,24 +218,24 @@ HasSignature returns a boolean if a field has been set.
 `func (o *SubmitCompleteInvoiceResponse) UnsetSignature()`
 
 UnsetSignature ensures that no value is present for Signature, not even an explicit nil
-### GetPdfBase64
+### GetContentB64
 
-`func (o *SubmitCompleteInvoiceResponse) GetPdfBase64() string`
+`func (o *SubmitCompleteInvoiceResponse) GetContentB64() string`
 
-GetPdfBase64 returns the PdfBase64 field if non-nil, zero value otherwise.
+GetContentB64 returns the ContentB64 field if non-nil, zero value otherwise.
 
-### GetPdfBase64Ok
+### GetContentB64Ok
 
-`func (o *SubmitCompleteInvoiceResponse) GetPdfBase64Ok() (*string, bool)`
+`func (o *SubmitCompleteInvoiceResponse) GetContentB64Ok() (*string, bool)`
 
-GetPdfBase64Ok returns a tuple with the PdfBase64 field if it's non-nil, zero value otherwise
+GetContentB64Ok returns a tuple with the ContentB64 field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPdfBase64
+### SetContentB64
 
-`func (o *SubmitCompleteInvoiceResponse) SetPdfBase64(v string)`
+`func (o *SubmitCompleteInvoiceResponse) SetContentB64(v string)`
 
-SetPdfBase64 sets PdfBase64 field to given value.
+SetContentB64 sets ContentB64 field to given value.
 
 
 ### GetMessage

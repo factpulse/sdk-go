@@ -97,16 +97,25 @@ func (c *Client) request(method, path string, data map[string]any, retryAuth boo
 		return nil, err
 	}
 
-	// Auto-poll if taskId present
-	if taskID, ok := result["taskId"].(string); ok {
+	// Auto-poll: support both taskId (camelCase) and task_id (snake_case)
+	taskID, _ := result["taskId"].(string)
+	if taskID == "" {
+		taskID, _ = result["task_id"].(string)
+	}
+	if taskID != "" {
 		return c.poll(taskID)
 	}
 
-	// Auto-decode base64
-	if b64, ok := result["content_b64"].(string); ok {
+	// Auto-decode: support both content_b64 and contentB64
+	b64, _ := result["content_b64"].(string)
+	if b64 == "" {
+		b64, _ = result["contentB64"].(string)
+	}
+	if b64 != "" {
 		decoded, _ := base64.StdEncoding.DecodeString(b64)
 		result["content"] = decoded
 		delete(result, "content_b64")
+		delete(result, "contentB64")
 	}
 
 	return result, nil
@@ -189,10 +198,16 @@ func (c *Client) poll(taskID string) (map[string]any, error) {
 			if result == nil {
 				result = map[string]any{}
 			}
-			if b64, ok := result["content_b64"].(string); ok {
+			// Support both content_b64 and contentB64
+			b64, _ := result["content_b64"].(string)
+			if b64 == "" {
+				b64, _ = result["contentB64"].(string)
+			}
+			if b64 != "" {
 				decoded, _ := base64.StdEncoding.DecodeString(b64)
 				result["content"] = decoded
 				delete(result, "content_b64")
+				delete(result, "contentB64")
 			}
 			return result, nil
 		}

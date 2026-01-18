@@ -34,7 +34,7 @@ type SubmitCompleteInvoiceResponse struct {
 	FacturxPdf FacturXPDFInfo `json:"facturxPdf"`
 	Signature NullableSignatureInfo `json:"signature,omitempty"`
 	// Generated Factur-X PDF (and signed if requested) base64-encoded
-	PdfBase64 string `json:"pdfBase64"`
+	ContentB64 string `json:"contentB64"`
 	// Return message
 	Message string `json:"message"`
 }
@@ -45,13 +45,13 @@ type _SubmitCompleteInvoiceResponse SubmitCompleteInvoiceResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSubmitCompleteInvoiceResponse(success bool, destinationType string, enrichedInvoice EnrichedInvoiceInfo, facturxPdf FacturXPDFInfo, pdfBase64 string, message string) *SubmitCompleteInvoiceResponse {
+func NewSubmitCompleteInvoiceResponse(success bool, destinationType string, enrichedInvoice EnrichedInvoiceInfo, facturxPdf FacturXPDFInfo, contentB64 string, message string) *SubmitCompleteInvoiceResponse {
 	this := SubmitCompleteInvoiceResponse{}
 	this.Success = success
 	this.DestinationType = destinationType
 	this.EnrichedInvoice = enrichedInvoice
 	this.FacturxPdf = facturxPdf
-	this.PdfBase64 = pdfBase64
+	this.ContentB64 = contentB64
 	this.Message = message
 	return &this
 }
@@ -286,28 +286,28 @@ func (o *SubmitCompleteInvoiceResponse) UnsetSignature() {
 	o.Signature.Unset()
 }
 
-// GetPdfBase64 returns the PdfBase64 field value
-func (o *SubmitCompleteInvoiceResponse) GetPdfBase64() string {
+// GetContentB64 returns the ContentB64 field value
+func (o *SubmitCompleteInvoiceResponse) GetContentB64() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.PdfBase64
+	return o.ContentB64
 }
 
-// GetPdfBase64Ok returns a tuple with the PdfBase64 field value
+// GetContentB64Ok returns a tuple with the ContentB64 field value
 // and a boolean to check if the value has been set.
-func (o *SubmitCompleteInvoiceResponse) GetPdfBase64Ok() (*string, bool) {
+func (o *SubmitCompleteInvoiceResponse) GetContentB64Ok() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.PdfBase64, true
+	return &o.ContentB64, true
 }
 
-// SetPdfBase64 sets field value
-func (o *SubmitCompleteInvoiceResponse) SetPdfBase64(v string) {
-	o.PdfBase64 = v
+// SetContentB64 sets field value
+func (o *SubmitCompleteInvoiceResponse) SetContentB64(v string) {
+	o.ContentB64 = v
 }
 
 // GetMessage returns the Message field value
@@ -357,7 +357,7 @@ func (o SubmitCompleteInvoiceResponse) ToMap() (map[string]interface{}, error) {
 	if o.Signature.IsSet() {
 		toSerialize["signature"] = o.Signature.Get()
 	}
-	toSerialize["pdfBase64"] = o.PdfBase64
+	toSerialize["contentB64"] = o.ContentB64
 	toSerialize["message"] = o.Message
 	return toSerialize, nil
 }
@@ -371,7 +371,7 @@ func (o *SubmitCompleteInvoiceResponse) UnmarshalJSON(data []byte) (err error) {
 		"destinationType",
 		"enrichedInvoice",
 		"facturxPdf",
-		"pdfBase64",
+		"contentB64",
 		"message",
 	}
 
