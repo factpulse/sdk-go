@@ -2,7 +2,12 @@ package helpers
 
 import "fmt"
 
-type FactPulseError struct { Message string }
+type FactPulseError struct {
+	Message    string
+	StatusCode int
+	Details    []any
+}
+
 func (e *FactPulseError) Error() string { return e.Message }
 
 type FactPulseAuthError struct { FactPulseError }

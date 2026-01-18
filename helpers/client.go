@@ -25,14 +25,6 @@ import (
 
 const DefaultAPIURL = "https://factpulse.fr"
 
-type FactPulseError struct {
-	Message    string
-	StatusCode int
-	Details    []any
-}
-
-func (e *FactPulseError) Error() string { return e.Message }
-
 type Client struct {
 	apiURL, email, password, clientUID string
 	timeout, pollingTimeout time.Duration
