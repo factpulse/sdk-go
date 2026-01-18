@@ -17,179 +17,168 @@ import (
 	"fmt"
 )
 
-// checks if the ChorusProCredentials type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ChorusProCredentials{}
+// checks if the FactureElectroniqueRestApiSchemasCdarValidationErrorResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FactureElectroniqueRestApiSchemasCdarValidationErrorResponse{}
 
-// ChorusProCredentials Chorus Pro credentials for Zero-Trust mode.  **Zero-Trust Mode**: Credentials are passed in each request and are NEVER stored.  **Security**: - Credentials are never persisted in the database - They are used only for the duration of the request - Secure transmission via HTTPS  **Use cases**: - High-security environments (banks, administrations) - Strict GDPR compliance - Tests with temporary credentials - Users who don't want to store their credentials
-type ChorusProCredentials struct {
-	// PISTE Client ID (government API portal)
-	PisteClientId string `json:"pisteClientId"`
-	// PISTE Client Secret
-	PisteClientSecret string `json:"pisteClientSecret"`
-	// Chorus Pro login
-	ChorusProLogin string `json:"chorusProLogin"`
-	// Chorus Pro password
-	ChorusProPassword string `json:"chorusProPassword"`
-	// Use sandbox environment (true) or production (false)
-	Sandbox *bool `json:"sandbox,omitempty"`
+// FactureElectroniqueRestApiSchemasCdarValidationErrorResponse Erreur de validation.
+type FactureElectroniqueRestApiSchemasCdarValidationErrorResponse struct {
+	// Champ concerné
+	Field string `json:"field"`
+	// Message d'erreur
+	Message string `json:"message"`
+	Rule NullableString `json:"rule,omitempty"`
+	// Sévérité (error/warning)
+	Severity *string `json:"severity,omitempty"`
 }
 
-type _ChorusProCredentials ChorusProCredentials
+type _FactureElectroniqueRestApiSchemasCdarValidationErrorResponse FactureElectroniqueRestApiSchemasCdarValidationErrorResponse
 
-// NewChorusProCredentials instantiates a new ChorusProCredentials object
+// NewFactureElectroniqueRestApiSchemasCdarValidationErrorResponse instantiates a new FactureElectroniqueRestApiSchemasCdarValidationErrorResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewChorusProCredentials(pisteClientId string, pisteClientSecret string, chorusProLogin string, chorusProPassword string) *ChorusProCredentials {
-	this := ChorusProCredentials{}
-	this.PisteClientId = pisteClientId
-	this.PisteClientSecret = pisteClientSecret
-	this.ChorusProLogin = chorusProLogin
-	this.ChorusProPassword = chorusProPassword
-	var sandbox bool = true
-	this.Sandbox = &sandbox
+func NewFactureElectroniqueRestApiSchemasCdarValidationErrorResponse(field string, message string) *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse {
+	this := FactureElectroniqueRestApiSchemasCdarValidationErrorResponse{}
+	this.Field = field
+	this.Message = message
+	var severity string = "error"
+	this.Severity = &severity
 	return &this
 }
 
-// NewChorusProCredentialsWithDefaults instantiates a new ChorusProCredentials object
+// NewFactureElectroniqueRestApiSchemasCdarValidationErrorResponseWithDefaults instantiates a new FactureElectroniqueRestApiSchemasCdarValidationErrorResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewChorusProCredentialsWithDefaults() *ChorusProCredentials {
-	this := ChorusProCredentials{}
-	var sandbox bool = true
-	this.Sandbox = &sandbox
+func NewFactureElectroniqueRestApiSchemasCdarValidationErrorResponseWithDefaults() *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse {
+	this := FactureElectroniqueRestApiSchemasCdarValidationErrorResponse{}
+	var severity string = "error"
+	this.Severity = &severity
 	return &this
 }
 
-// GetPisteClientId returns the PisteClientId field value
-func (o *ChorusProCredentials) GetPisteClientId() string {
+// GetField returns the Field field value
+func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) GetField() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.PisteClientId
+	return o.Field
 }
 
-// GetPisteClientIdOk returns a tuple with the PisteClientId field value
+// GetFieldOk returns a tuple with the Field field value
 // and a boolean to check if the value has been set.
-func (o *ChorusProCredentials) GetPisteClientIdOk() (*string, bool) {
+func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) GetFieldOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.PisteClientId, true
+	return &o.Field, true
 }
 
-// SetPisteClientId sets field value
-func (o *ChorusProCredentials) SetPisteClientId(v string) {
-	o.PisteClientId = v
+// SetField sets field value
+func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) SetField(v string) {
+	o.Field = v
 }
 
-// GetPisteClientSecret returns the PisteClientSecret field value
-func (o *ChorusProCredentials) GetPisteClientSecret() string {
+// GetMessage returns the Message field value
+func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) GetMessage() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.PisteClientSecret
+	return o.Message
 }
 
-// GetPisteClientSecretOk returns a tuple with the PisteClientSecret field value
+// GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *ChorusProCredentials) GetPisteClientSecretOk() (*string, bool) {
+func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) GetMessageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.PisteClientSecret, true
+	return &o.Message, true
 }
 
-// SetPisteClientSecret sets field value
-func (o *ChorusProCredentials) SetPisteClientSecret(v string) {
-	o.PisteClientSecret = v
+// SetMessage sets field value
+func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) SetMessage(v string) {
+	o.Message = v
 }
 
-// GetChorusProLogin returns the ChorusProLogin field value
-func (o *ChorusProCredentials) GetChorusProLogin() string {
-	if o == nil {
+// GetRule returns the Rule field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) GetRule() string {
+	if o == nil || IsNil(o.Rule.Get()) {
 		var ret string
 		return ret
 	}
-
-	return o.ChorusProLogin
+	return *o.Rule.Get()
 }
 
-// GetChorusProLoginOk returns a tuple with the ChorusProLogin field value
+// GetRuleOk returns a tuple with the Rule field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ChorusProCredentials) GetChorusProLoginOk() (*string, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) GetRuleOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ChorusProLogin, true
+	return o.Rule.Get(), o.Rule.IsSet()
 }
 
-// SetChorusProLogin sets field value
-func (o *ChorusProCredentials) SetChorusProLogin(v string) {
-	o.ChorusProLogin = v
-}
-
-// GetChorusProPassword returns the ChorusProPassword field value
-func (o *ChorusProCredentials) GetChorusProPassword() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ChorusProPassword
-}
-
-// GetChorusProPasswordOk returns a tuple with the ChorusProPassword field value
-// and a boolean to check if the value has been set.
-func (o *ChorusProCredentials) GetChorusProPasswordOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ChorusProPassword, true
-}
-
-// SetChorusProPassword sets field value
-func (o *ChorusProCredentials) SetChorusProPassword(v string) {
-	o.ChorusProPassword = v
-}
-
-// GetSandbox returns the Sandbox field value if set, zero value otherwise.
-func (o *ChorusProCredentials) GetSandbox() bool {
-	if o == nil || IsNil(o.Sandbox) {
-		var ret bool
-		return ret
-	}
-	return *o.Sandbox
-}
-
-// GetSandboxOk returns a tuple with the Sandbox field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ChorusProCredentials) GetSandboxOk() (*bool, bool) {
-	if o == nil || IsNil(o.Sandbox) {
-		return nil, false
-	}
-	return o.Sandbox, true
-}
-
-// HasSandbox returns a boolean if a field has been set.
-func (o *ChorusProCredentials) HasSandbox() bool {
-	if o != nil && !IsNil(o.Sandbox) {
+// HasRule returns a boolean if a field has been set.
+func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) HasRule() bool {
+	if o != nil && o.Rule.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSandbox gets a reference to the given bool and assigns it to the Sandbox field.
-func (o *ChorusProCredentials) SetSandbox(v bool) {
-	o.Sandbox = &v
+// SetRule gets a reference to the given NullableString and assigns it to the Rule field.
+func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) SetRule(v string) {
+	o.Rule.Set(&v)
+}
+// SetRuleNil sets the value for Rule to be an explicit nil
+func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) SetRuleNil() {
+	o.Rule.Set(nil)
 }
 
-func (o ChorusProCredentials) MarshalJSON() ([]byte, error) {
+// UnsetRule ensures that no value is present for Rule, not even an explicit nil
+func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) UnsetRule() {
+	o.Rule.Unset()
+}
+
+// GetSeverity returns the Severity field value if set, zero value otherwise.
+func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) GetSeverity() string {
+	if o == nil || IsNil(o.Severity) {
+		var ret string
+		return ret
+	}
+	return *o.Severity
+}
+
+// GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) GetSeverityOk() (*string, bool) {
+	if o == nil || IsNil(o.Severity) {
+		return nil, false
+	}
+	return o.Severity, true
+}
+
+// HasSeverity returns a boolean if a field has been set.
+func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) HasSeverity() bool {
+	if o != nil && !IsNil(o.Severity) {
+		return true
+	}
+
+	return false
+}
+
+// SetSeverity gets a reference to the given string and assigns it to the Severity field.
+func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) SetSeverity(v string) {
+	o.Severity = &v
+}
+
+func (o FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -197,27 +186,26 @@ func (o ChorusProCredentials) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ChorusProCredentials) ToMap() (map[string]interface{}, error) {
+func (o FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["pisteClientId"] = o.PisteClientId
-	toSerialize["pisteClientSecret"] = o.PisteClientSecret
-	toSerialize["chorusProLogin"] = o.ChorusProLogin
-	toSerialize["chorusProPassword"] = o.ChorusProPassword
-	if !IsNil(o.Sandbox) {
-		toSerialize["sandbox"] = o.Sandbox
+	toSerialize["field"] = o.Field
+	toSerialize["message"] = o.Message
+	if o.Rule.IsSet() {
+		toSerialize["rule"] = o.Rule.Get()
+	}
+	if !IsNil(o.Severity) {
+		toSerialize["severity"] = o.Severity
 	}
 	return toSerialize, nil
 }
 
-func (o *ChorusProCredentials) UnmarshalJSON(data []byte) (err error) {
+func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"pisteClientId",
-		"pisteClientSecret",
-		"chorusProLogin",
-		"chorusProPassword",
+		"field",
+		"message",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -234,53 +222,53 @@ func (o *ChorusProCredentials) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varChorusProCredentials := _ChorusProCredentials{}
+	varFactureElectroniqueRestApiSchemasCdarValidationErrorResponse := _FactureElectroniqueRestApiSchemasCdarValidationErrorResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varChorusProCredentials)
+	err = decoder.Decode(&varFactureElectroniqueRestApiSchemasCdarValidationErrorResponse)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ChorusProCredentials(varChorusProCredentials)
+	*o = FactureElectroniqueRestApiSchemasCdarValidationErrorResponse(varFactureElectroniqueRestApiSchemasCdarValidationErrorResponse)
 
 	return err
 }
 
-type NullableChorusProCredentials struct {
-	value *ChorusProCredentials
+type NullableFactureElectroniqueRestApiSchemasCdarValidationErrorResponse struct {
+	value *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse
 	isSet bool
 }
 
-func (v NullableChorusProCredentials) Get() *ChorusProCredentials {
+func (v NullableFactureElectroniqueRestApiSchemasCdarValidationErrorResponse) Get() *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse {
 	return v.value
 }
 
-func (v *NullableChorusProCredentials) Set(val *ChorusProCredentials) {
+func (v *NullableFactureElectroniqueRestApiSchemasCdarValidationErrorResponse) Set(val *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableChorusProCredentials) IsSet() bool {
+func (v NullableFactureElectroniqueRestApiSchemasCdarValidationErrorResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableChorusProCredentials) Unset() {
+func (v *NullableFactureElectroniqueRestApiSchemasCdarValidationErrorResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableChorusProCredentials(val *ChorusProCredentials) *NullableChorusProCredentials {
-	return &NullableChorusProCredentials{value: val, isSet: true}
+func NewNullableFactureElectroniqueRestApiSchemasCdarValidationErrorResponse(val *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) *NullableFactureElectroniqueRestApiSchemasCdarValidationErrorResponse {
+	return &NullableFactureElectroniqueRestApiSchemasCdarValidationErrorResponse{value: val, isSet: true}
 }
 
-func (v NullableChorusProCredentials) MarshalJSON() ([]byte, error) {
+func (v NullableFactureElectroniqueRestApiSchemasCdarValidationErrorResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableChorusProCredentials) UnmarshalJSON(src []byte) error {
+func (v *NullableFactureElectroniqueRestApiSchemasCdarValidationErrorResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

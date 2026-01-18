@@ -25,9 +25,9 @@ type ValidateCDARResponse struct {
 	// Résultat de validation
 	Valid bool `json:"valid"`
 	// Liste des erreurs
-	Errors []ValidationErrorResponse `json:"errors,omitempty"`
+	Errors []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse `json:"errors,omitempty"`
 	// Liste des avertissements
-	Warnings []ValidationErrorResponse `json:"warnings,omitempty"`
+	Warnings []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse `json:"warnings,omitempty"`
 }
 
 type _ValidateCDARResponse ValidateCDARResponse
@@ -75,9 +75,9 @@ func (o *ValidateCDARResponse) SetValid(v bool) {
 }
 
 // GetErrors returns the Errors field value if set, zero value otherwise.
-func (o *ValidateCDARResponse) GetErrors() []ValidationErrorResponse {
+func (o *ValidateCDARResponse) GetErrors() []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse {
 	if o == nil || IsNil(o.Errors) {
-		var ret []ValidationErrorResponse
+		var ret []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse
 		return ret
 	}
 	return o.Errors
@@ -85,7 +85,7 @@ func (o *ValidateCDARResponse) GetErrors() []ValidationErrorResponse {
 
 // GetErrorsOk returns a tuple with the Errors field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ValidateCDARResponse) GetErrorsOk() ([]ValidationErrorResponse, bool) {
+func (o *ValidateCDARResponse) GetErrorsOk() ([]FactureElectroniqueRestApiSchemasCdarValidationErrorResponse, bool) {
 	if o == nil || IsNil(o.Errors) {
 		return nil, false
 	}
@@ -101,15 +101,15 @@ func (o *ValidateCDARResponse) HasErrors() bool {
 	return false
 }
 
-// SetErrors gets a reference to the given []ValidationErrorResponse and assigns it to the Errors field.
-func (o *ValidateCDARResponse) SetErrors(v []ValidationErrorResponse) {
+// SetErrors gets a reference to the given []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse and assigns it to the Errors field.
+func (o *ValidateCDARResponse) SetErrors(v []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) {
 	o.Errors = v
 }
 
 // GetWarnings returns the Warnings field value if set, zero value otherwise.
-func (o *ValidateCDARResponse) GetWarnings() []ValidationErrorResponse {
+func (o *ValidateCDARResponse) GetWarnings() []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse {
 	if o == nil || IsNil(o.Warnings) {
-		var ret []ValidationErrorResponse
+		var ret []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse
 		return ret
 	}
 	return o.Warnings
@@ -117,7 +117,7 @@ func (o *ValidateCDARResponse) GetWarnings() []ValidationErrorResponse {
 
 // GetWarningsOk returns a tuple with the Warnings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ValidateCDARResponse) GetWarningsOk() ([]ValidationErrorResponse, bool) {
+func (o *ValidateCDARResponse) GetWarningsOk() ([]FactureElectroniqueRestApiSchemasCdarValidationErrorResponse, bool) {
 	if o == nil || IsNil(o.Warnings) {
 		return nil, false
 	}
@@ -133,8 +133,8 @@ func (o *ValidateCDARResponse) HasWarnings() bool {
 	return false
 }
 
-// SetWarnings gets a reference to the given []ValidationErrorResponse and assigns it to the Warnings field.
-func (o *ValidateCDARResponse) SetWarnings(v []ValidationErrorResponse) {
+// SetWarnings gets a reference to the given []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse and assigns it to the Warnings field.
+func (o *ValidateCDARResponse) SetWarnings(v []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) {
 	o.Warnings = v
 }
 
