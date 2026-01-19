@@ -173,8 +173,8 @@ docs/ExtractionInfo.md
 docs/FacturXInvoice.md
 docs/FacturXPDFInfo.md
 docs/FactureElectroniqueModelsInvoiceTypeCode.md
+docs/FactureElectroniqueRestApiSchemasCdarValidationErrorResponse.md
 docs/FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.md
-docs/FactureElectroniqueRestApiSchemasValidationValidationErrorResponse.md
 docs/FieldStatus.md
 docs/FileInfo.md
 docs/FilesInfo.md
@@ -473,8 +473,8 @@ model_extraction_info.go
 model_factur_x_invoice.go
 model_factur_xpdf_info.go
 model_facture_electronique__models__invoice_type_code.go
+model_facture_electronique__rest_api__schemas__cdar__validation_error_response.go
 model_facture_electronique__rest_api__schemas__processing__chorus_pro_credentials.go
-model_facture_electronique__rest_api__schemas__validation__validation_error_response.go
 model_field_status.go
 model_file_info.go
 model_files_info.go

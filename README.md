@@ -49,11 +49,11 @@ func main() {
             "supplier": map[string]interface{}{
                 "siret":          "12345678901234",
                 "iban":           "FR7630001007941234567890185",
-                "routingAddress": "12345678901234",
+                "routing_address": "12345678901234",
             },
             "recipient": map[string]interface{}{
                 "siret":          "98765432109876",
-                "routingAddress": "98765432109876",
+                "routing_address": "98765432109876",
             },
             "lines": []map[string]interface{}{
                 {
