@@ -27,7 +27,7 @@ type InvoiceInput struct {
 	// Invoice issue date
 	IssueDate string `json:"issueDate"`
 	// Invoice type code
-	TypeCode *FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode `json:"typeCode,omitempty"`
+	TypeCode *InvoiceTypeCode `json:"typeCode,omitempty"`
 	Currency *Currency `json:"currency,omitempty"`
 	DueDate NullableString `json:"dueDate,omitempty"`
 	// Seller SIREN/SIRET
@@ -120,9 +120,9 @@ func (o *InvoiceInput) SetIssueDate(v string) {
 }
 
 // GetTypeCode returns the TypeCode field value if set, zero value otherwise.
-func (o *InvoiceInput) GetTypeCode() FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode {
+func (o *InvoiceInput) GetTypeCode() InvoiceTypeCode {
 	if o == nil || IsNil(o.TypeCode) {
-		var ret FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode
+		var ret InvoiceTypeCode
 		return ret
 	}
 	return *o.TypeCode
@@ -130,7 +130,7 @@ func (o *InvoiceInput) GetTypeCode() FactureElectroniqueRestApiSchemasEreporting
 
 // GetTypeCodeOk returns a tuple with the TypeCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InvoiceInput) GetTypeCodeOk() (*FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode, bool) {
+func (o *InvoiceInput) GetTypeCodeOk() (*InvoiceTypeCode, bool) {
 	if o == nil || IsNil(o.TypeCode) {
 		return nil, false
 	}
@@ -146,8 +146,8 @@ func (o *InvoiceInput) HasTypeCode() bool {
 	return false
 }
 
-// SetTypeCode gets a reference to the given FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode and assigns it to the TypeCode field.
-func (o *InvoiceInput) SetTypeCode(v FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode) {
+// SetTypeCode gets a reference to the given InvoiceTypeCode and assigns it to the TypeCode field.
+func (o *InvoiceInput) SetTypeCode(v InvoiceTypeCode) {
 	o.TypeCode = &v
 }
 
