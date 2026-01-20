@@ -10,6 +10,8 @@ Method | HTTP request | Description
 [**GetStatusCodesApiV1CdarStatusCodesGet**](CDARCycleDeVieAPI.md#GetStatusCodesApiV1CdarStatusCodesGet) | **Get** /api/v1/cdar/status-codes | Liste des codes statut CDAR
 [**SubmitCdarApiV1CdarSubmitPost**](CDARCycleDeVieAPI.md#SubmitCdarApiV1CdarSubmitPost) | **Post** /api/v1/cdar/submit | Générer et soumettre un message CDAR
 [**SubmitCdarXmlApiV1CdarSubmitXmlPost**](CDARCycleDeVieAPI.md#SubmitCdarXmlApiV1CdarSubmitXmlPost) | **Post** /api/v1/cdar/submit-xml | Soumettre un XML CDAR pré-généré
+[**SubmitEncaisseeApiV1CdarEncaisseePost**](CDARCycleDeVieAPI.md#SubmitEncaisseeApiV1CdarEncaisseePost) | **Post** /api/v1/cdar/encaissee | [Simplifié] Soumettre un statut ENCAISSÉE (212)
+[**SubmitRefuseeApiV1CdarRefuseePost**](CDARCycleDeVieAPI.md#SubmitRefuseeApiV1CdarRefuseePost) | **Post** /api/v1/cdar/refusee | [Simplifié] Soumettre un statut REFUSÉE (210)
 [**ValidateCdarApiV1CdarValidatePost**](CDARCycleDeVieAPI.md#ValidateCdarApiV1CdarValidatePost) | **Post** /api/v1/cdar/validate | Valider des données CDAR
 
 
@@ -266,7 +268,7 @@ No authorization required
 
 ## SubmitCdarApiV1CdarSubmitPost
 
-> SubmitCDARResponse SubmitCdarApiV1CdarSubmitPost(ctx).UserId(userId).BodySubmitCdarApiV1CdarSubmitPost(bodySubmitCdarApiV1CdarSubmitPost).JwtToken(jwtToken).ClientUid(clientUid).Execute()
+> SubmitCDARResponse SubmitCdarApiV1CdarSubmitPost(ctx).SubmitCDARRequest(submitCDARRequest).Execute()
 
 Générer et soumettre un message CDAR
 
@@ -286,14 +288,11 @@ import (
 )
 
 func main() {
-	userId := int32(56) // int32 | 
-	bodySubmitCdarApiV1CdarSubmitPost := *openapiclient.NewBodySubmitCdarApiV1CdarSubmitPost(*openapiclient.NewSubmitCDARRequest("DocumentId_example", "SenderSiren_example", "InvoiceId_example", time.Now(), "Status_example")) // BodySubmitCdarApiV1CdarSubmitPost | 
-	jwtToken := "jwtToken_example" // string |  (optional)
-	clientUid := "clientUid_example" // string |  (optional)
+	submitCDARRequest := *openapiclient.NewSubmitCDARRequest("DocumentId_example", "SenderSiren_example", "InvoiceId_example", time.Now(), "Status_example") // SubmitCDARRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CDARCycleDeVieAPI.SubmitCdarApiV1CdarSubmitPost(context.Background()).UserId(userId).BodySubmitCdarApiV1CdarSubmitPost(bodySubmitCdarApiV1CdarSubmitPost).JwtToken(jwtToken).ClientUid(clientUid).Execute()
+	resp, r, err := apiClient.CDARCycleDeVieAPI.SubmitCdarApiV1CdarSubmitPost(context.Background()).SubmitCDARRequest(submitCDARRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CDARCycleDeVieAPI.SubmitCdarApiV1CdarSubmitPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -314,10 +313,7 @@ Other parameters are passed through a pointer to a apiSubmitCdarApiV1CdarSubmitP
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userId** | **int32** |  | 
- **bodySubmitCdarApiV1CdarSubmitPost** | [**BodySubmitCdarApiV1CdarSubmitPost**](BodySubmitCdarApiV1CdarSubmitPost.md) |  | 
- **jwtToken** | **string** |  | 
- **clientUid** | **string** |  | 
+ **submitCDARRequest** | [**SubmitCDARRequest**](SubmitCDARRequest.md) |  | 
 
 ### Return type
 
@@ -339,7 +335,7 @@ Name | Type | Description  | Notes
 
 ## SubmitCdarXmlApiV1CdarSubmitXmlPost
 
-> SubmitCDARResponse SubmitCdarXmlApiV1CdarSubmitXmlPost(ctx).UserId(userId).BodySubmitCdarXmlApiV1CdarSubmitXmlPost(bodySubmitCdarXmlApiV1CdarSubmitXmlPost).JwtToken(jwtToken).ClientUid(clientUid).Execute()
+> SubmitCDARResponse SubmitCdarXmlApiV1CdarSubmitXmlPost(ctx).SubmitCDARXMLRequest(submitCDARXMLRequest).Execute()
 
 Soumettre un XML CDAR pré-généré
 
@@ -358,14 +354,11 @@ import (
 )
 
 func main() {
-	userId := int32(56) // int32 | 
-	bodySubmitCdarXmlApiV1CdarSubmitXmlPost := *openapiclient.NewBodySubmitCdarXmlApiV1CdarSubmitXmlPost(*openapiclient.NewSubmitCDARXMLRequest("Xml_example")) // BodySubmitCdarXmlApiV1CdarSubmitXmlPost | 
-	jwtToken := "jwtToken_example" // string |  (optional)
-	clientUid := "clientUid_example" // string |  (optional)
+	submitCDARXMLRequest := *openapiclient.NewSubmitCDARXMLRequest("Xml_example") // SubmitCDARXMLRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CDARCycleDeVieAPI.SubmitCdarXmlApiV1CdarSubmitXmlPost(context.Background()).UserId(userId).BodySubmitCdarXmlApiV1CdarSubmitXmlPost(bodySubmitCdarXmlApiV1CdarSubmitXmlPost).JwtToken(jwtToken).ClientUid(clientUid).Execute()
+	resp, r, err := apiClient.CDARCycleDeVieAPI.SubmitCdarXmlApiV1CdarSubmitXmlPost(context.Background()).SubmitCDARXMLRequest(submitCDARXMLRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CDARCycleDeVieAPI.SubmitCdarXmlApiV1CdarSubmitXmlPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -386,14 +379,145 @@ Other parameters are passed through a pointer to a apiSubmitCdarXmlApiV1CdarSubm
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userId** | **int32** |  | 
- **bodySubmitCdarXmlApiV1CdarSubmitXmlPost** | [**BodySubmitCdarXmlApiV1CdarSubmitXmlPost**](BodySubmitCdarXmlApiV1CdarSubmitXmlPost.md) |  | 
- **jwtToken** | **string** |  | 
- **clientUid** | **string** |  | 
+ **submitCDARXMLRequest** | [**SubmitCDARXMLRequest**](SubmitCDARXMLRequest.md) |  | 
 
 ### Return type
 
 [**SubmitCDARResponse**](SubmitCDARResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SubmitEncaisseeApiV1CdarEncaisseePost
+
+> SimplifiedCDARResponse SubmitEncaisseeApiV1CdarEncaisseePost(ctx).EncaisseeRequest(encaisseeRequest).Execute()
+
+[Simplifié] Soumettre un statut ENCAISSÉE (212)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/factpulse/sdk-go/v3"
+)
+
+func main() {
+	encaisseeRequest := *openapiclient.NewEncaisseeRequest("InvoiceId_example", time.Now(), *openapiclient.NewAmount()) // EncaisseeRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CDARCycleDeVieAPI.SubmitEncaisseeApiV1CdarEncaisseePost(context.Background()).EncaisseeRequest(encaisseeRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CDARCycleDeVieAPI.SubmitEncaisseeApiV1CdarEncaisseePost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SubmitEncaisseeApiV1CdarEncaisseePost`: SimplifiedCDARResponse
+	fmt.Fprintf(os.Stdout, "Response from `CDARCycleDeVieAPI.SubmitEncaisseeApiV1CdarEncaisseePost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSubmitEncaisseeApiV1CdarEncaisseePostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **encaisseeRequest** | [**EncaisseeRequest**](EncaisseeRequest.md) |  | 
+
+### Return type
+
+[**SimplifiedCDARResponse**](SimplifiedCDARResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SubmitRefuseeApiV1CdarRefuseePost
+
+> SimplifiedCDARResponse SubmitRefuseeApiV1CdarRefuseePost(ctx).RefuseeRequest(refuseeRequest).Execute()
+
+[Simplifié] Soumettre un statut REFUSÉE (210)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/factpulse/sdk-go/v3"
+)
+
+func main() {
+	refuseeRequest := *openapiclient.NewRefuseeRequest("InvoiceId_example", time.Now(), "ReasonCode_example") // RefuseeRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CDARCycleDeVieAPI.SubmitRefuseeApiV1CdarRefuseePost(context.Background()).RefuseeRequest(refuseeRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CDARCycleDeVieAPI.SubmitRefuseeApiV1CdarRefuseePost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SubmitRefuseeApiV1CdarRefuseePost`: SimplifiedCDARResponse
+	fmt.Fprintf(os.Stdout, "Response from `CDARCycleDeVieAPI.SubmitRefuseeApiV1CdarRefuseePost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSubmitRefuseeApiV1CdarRefuseePostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **refuseeRequest** | [**RefuseeRequest**](RefuseeRequest.md) |  | 
+
+### Return type
+
+[**SimplifiedCDARResponse**](SimplifiedCDARResponse.md)
 
 ### Authorization
 

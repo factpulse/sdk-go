@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Rate** | [**Rate**](Rate.md) |  | 
-**Amount** | [**Amount**](Amount.md) |  | 
+**Amount** | [**Amount1**](Amount1.md) |  | 
 
 ## Methods
 
 ### NewPaymentAmountByRate
 
-`func NewPaymentAmountByRate(rate Rate, amount Amount, ) *PaymentAmountByRate`
+`func NewPaymentAmountByRate(rate Rate, amount Amount1, ) *PaymentAmountByRate`
 
 NewPaymentAmountByRate instantiates a new PaymentAmountByRate object
 This constructor will assign default values to properties that have it defined,
@@ -48,20 +48,20 @@ SetRate sets Rate field to given value.
 
 ### GetAmount
 
-`func (o *PaymentAmountByRate) GetAmount() Amount`
+`func (o *PaymentAmountByRate) GetAmount() Amount1`
 
 GetAmount returns the Amount field if non-nil, zero value otherwise.
 
 ### GetAmountOk
 
-`func (o *PaymentAmountByRate) GetAmountOk() (*Amount, bool)`
+`func (o *PaymentAmountByRate) GetAmountOk() (*Amount1, bool)`
 
 GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAmount
 
-`func (o *PaymentAmountByRate) SetAmount(v Amount)`
+`func (o *PaymentAmountByRate) SetAmount(v Amount1)`
 
 SetAmount sets Amount field to given value.
 

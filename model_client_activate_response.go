@@ -13,128 +13,206 @@ package factpulse
 
 import (
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
-// InvoiceTypeCode Document type according to BR-FR-04 (UNTDID 1001 codes).  | Code | Name | Description | |------|------|-------------| | 380 | INVOICE | Commercial invoice | | 389 | SELF_BILLED_INVOICE | Self-billed invoice | | 393 | FACTORED_INVOICE | Factored invoice | | 501 | SELF_BILLED_FACTORED_INVOICE | Self-billed factored invoice | | 386 | PREPAYMENT_INVOICE | Prepayment invoice | | 500 | SELF_BILLED_PREPAYMENT_INVOICE | Self-billed prepayment invoice | | 384 | CORRECTIVE_INVOICE | Corrective invoice | | 471 | SELF_BILLED_CORRECTIVE_INVOICE | Self-billed corrective invoice | | 472 | FACTORED_CORRECTIVE_INVOICE | Factored corrective invoice | | 473 | SELF_BILLED_FACTORED_CORRECTIVE_INVOICE | Self-billed factored corrective invoice | | 381 | CREDIT_NOTE | Credit note | | 261 | SELF_BILLED_CREDIT_NOTE | Self-billed credit note | | 262 | GLOBAL_ALLOWANCE_CREDIT_NOTE | Credit note for global allowance | | 396 | FACTORED_CREDIT_NOTE | Factored credit note | | 502 | SELF_BILLED_FACTORED_CREDIT_NOTE | Self-billed factored credit note | | 503 | PREPAYMENT_CREDIT_NOTE | Credit note for prepayment invoice |
-type InvoiceTypeCode string
+// checks if the ClientActivateResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ClientActivateResponse{}
 
-// List of InvoiceTypeCode
-const (
-	INVOICETYPECODE_INVOICE InvoiceTypeCode = "380"
-	INVOICETYPECODE_SELF_BILLED_INVOICE InvoiceTypeCode = "389"
-	INVOICETYPECODE_FACTORED_INVOICE InvoiceTypeCode = "393"
-	INVOICETYPECODE_SELF_BILLED_FACTORED_INVOICE InvoiceTypeCode = "501"
-	INVOICETYPECODE_PREPAYMENT_INVOICE InvoiceTypeCode = "386"
-	INVOICETYPECODE_SELF_BILLED_PREPAYMENT_INVOICE InvoiceTypeCode = "500"
-	INVOICETYPECODE_CORRECTIVE_INVOICE InvoiceTypeCode = "384"
-	INVOICETYPECODE_SELF_BILLED_CORRECTIVE_INVOICE InvoiceTypeCode = "471"
-	INVOICETYPECODE_FACTORED_CORRECTIVE_INVOICE InvoiceTypeCode = "472"
-	INVOICETYPECODE_SELF_BILLED_FACTORED_CORRECTIVE_INVOICE InvoiceTypeCode = "473"
-	INVOICETYPECODE_CREDIT_NOTE InvoiceTypeCode = "381"
-	INVOICETYPECODE_SELF_BILLED_CREDIT_NOTE InvoiceTypeCode = "261"
-	INVOICETYPECODE_GLOBAL_ALLOWANCE_CREDIT_NOTE InvoiceTypeCode = "262"
-	INVOICETYPECODE_FACTORED_CREDIT_NOTE InvoiceTypeCode = "396"
-	INVOICETYPECODE_SELF_BILLED_FACTORED_CREDIT_NOTE InvoiceTypeCode = "502"
-	INVOICETYPECODE_PREPAYMENT_CREDIT_NOTE InvoiceTypeCode = "503"
-)
-
-// All allowed values of InvoiceTypeCode enum
-var AllowedInvoiceTypeCodeEnumValues = []InvoiceTypeCode{
-	"380",
-	"389",
-	"393",
-	"501",
-	"386",
-	"500",
-	"384",
-	"471",
-	"472",
-	"473",
-	"381",
-	"261",
-	"262",
-	"396",
-	"502",
-	"503",
+// ClientActivateResponse Client activation/deactivation response.
+type ClientActivateResponse struct {
+	// Unique client identifier
+	Uid string `json:"uid"`
+	// New status
+	IsActive bool `json:"isActive"`
+	// Confirmation message
+	Message string `json:"message"`
 }
 
-func (v *InvoiceTypeCode) UnmarshalJSON(src []byte) error {
-	var value string
-	err := json.Unmarshal(src, &value)
+type _ClientActivateResponse ClientActivateResponse
+
+// NewClientActivateResponse instantiates a new ClientActivateResponse object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewClientActivateResponse(uid string, isActive bool, message string) *ClientActivateResponse {
+	this := ClientActivateResponse{}
+	this.Uid = uid
+	this.IsActive = isActive
+	this.Message = message
+	return &this
+}
+
+// NewClientActivateResponseWithDefaults instantiates a new ClientActivateResponse object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewClientActivateResponseWithDefaults() *ClientActivateResponse {
+	this := ClientActivateResponse{}
+	return &this
+}
+
+// GetUid returns the Uid field value
+func (o *ClientActivateResponse) GetUid() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Uid
+}
+
+// GetUidOk returns a tuple with the Uid field value
+// and a boolean to check if the value has been set.
+func (o *ClientActivateResponse) GetUidOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Uid, true
+}
+
+// SetUid sets field value
+func (o *ClientActivateResponse) SetUid(v string) {
+	o.Uid = v
+}
+
+// GetIsActive returns the IsActive field value
+func (o *ClientActivateResponse) GetIsActive() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsActive
+}
+
+// GetIsActiveOk returns a tuple with the IsActive field value
+// and a boolean to check if the value has been set.
+func (o *ClientActivateResponse) GetIsActiveOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsActive, true
+}
+
+// SetIsActive sets field value
+func (o *ClientActivateResponse) SetIsActive(v bool) {
+	o.IsActive = v
+}
+
+// GetMessage returns the Message field value
+func (o *ClientActivateResponse) GetMessage() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Message
+}
+
+// GetMessageOk returns a tuple with the Message field value
+// and a boolean to check if the value has been set.
+func (o *ClientActivateResponse) GetMessageOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Message, true
+}
+
+// SetMessage sets field value
+func (o *ClientActivateResponse) SetMessage(v string) {
+	o.Message = v
+}
+
+func (o ClientActivateResponse) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ClientActivateResponse) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["uid"] = o.Uid
+	toSerialize["isActive"] = o.IsActive
+	toSerialize["message"] = o.Message
+	return toSerialize, nil
+}
+
+func (o *ClientActivateResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"uid",
+		"isActive",
+		"message",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varClientActivateResponse := _ClientActivateResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varClientActivateResponse)
+
 	if err != nil {
 		return err
 	}
-	enumTypeValue := InvoiceTypeCode(value)
-	for _, existing := range AllowedInvoiceTypeCodeEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
 
-	return fmt.Errorf("%+v is not a valid InvoiceTypeCode", value)
+	*o = ClientActivateResponse(varClientActivateResponse)
+
+	return err
 }
 
-// NewInvoiceTypeCodeFromValue returns a pointer to a valid InvoiceTypeCode
-// for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewInvoiceTypeCodeFromValue(v string) (*InvoiceTypeCode, error) {
-	ev := InvoiceTypeCode(v)
-	if ev.IsValid() {
-		return &ev, nil
-	} else {
-		return nil, fmt.Errorf("invalid value '%v' for InvoiceTypeCode: valid values are %v", v, AllowedInvoiceTypeCodeEnumValues)
-	}
-}
-
-// IsValid return true if the value is valid for the enum, false otherwise
-func (v InvoiceTypeCode) IsValid() bool {
-	for _, existing := range AllowedInvoiceTypeCodeEnumValues {
-		if existing == v {
-			return true
-		}
-	}
-	return false
-}
-
-// Ptr returns reference to InvoiceTypeCode value
-func (v InvoiceTypeCode) Ptr() *InvoiceTypeCode {
-	return &v
-}
-
-type NullableInvoiceTypeCode struct {
-	value *InvoiceTypeCode
+type NullableClientActivateResponse struct {
+	value *ClientActivateResponse
 	isSet bool
 }
 
-func (v NullableInvoiceTypeCode) Get() *InvoiceTypeCode {
+func (v NullableClientActivateResponse) Get() *ClientActivateResponse {
 	return v.value
 }
 
-func (v *NullableInvoiceTypeCode) Set(val *InvoiceTypeCode) {
+func (v *NullableClientActivateResponse) Set(val *ClientActivateResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableInvoiceTypeCode) IsSet() bool {
+func (v NullableClientActivateResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableInvoiceTypeCode) Unset() {
+func (v *NullableClientActivateResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableInvoiceTypeCode(val *InvoiceTypeCode) *NullableInvoiceTypeCode {
-	return &NullableInvoiceTypeCode{value: val, isSet: true}
+func NewNullableClientActivateResponse(val *ClientActivateResponse) *NullableClientActivateResponse {
+	return &NullableClientActivateResponse{value: val, isSet: true}
 }
 
-func (v NullableInvoiceTypeCode) MarshalJSON() ([]byte, error) {
+func (v NullableClientActivateResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableInvoiceTypeCode) UnmarshalJSON(src []byte) error {
+func (v *NullableClientActivateResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
 

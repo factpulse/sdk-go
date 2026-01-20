@@ -17,102 +17,141 @@ import (
 	"fmt"
 )
 
-// checks if the BodySubmitCdarXmlApiV1CdarSubmitXmlPost type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &BodySubmitCdarXmlApiV1CdarSubmitXmlPost{}
+// checks if the ClientListResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ClientListResponse{}
 
-// BodySubmitCdarXmlApiV1CdarSubmitXmlPost struct for BodySubmitCdarXmlApiV1CdarSubmitXmlPost
-type BodySubmitCdarXmlApiV1CdarSubmitXmlPost struct {
-	Request SubmitCDARXMLRequest `json:"request"`
-	PdpCredentials NullablePDPCredentials `json:"pdp_credentials,omitempty"`
+// ClientListResponse Paginated client list response.
+type ClientListResponse struct {
+	// List of clients
+	Results []ClientSummary `json:"results"`
+	// Total number of clients
+	Total int32 `json:"total"`
+	// Current page
+	Page int32 `json:"page"`
+	// Page size
+	PageSize int32 `json:"pageSize"`
 }
 
-type _BodySubmitCdarXmlApiV1CdarSubmitXmlPost BodySubmitCdarXmlApiV1CdarSubmitXmlPost
+type _ClientListResponse ClientListResponse
 
-// NewBodySubmitCdarXmlApiV1CdarSubmitXmlPost instantiates a new BodySubmitCdarXmlApiV1CdarSubmitXmlPost object
+// NewClientListResponse instantiates a new ClientListResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBodySubmitCdarXmlApiV1CdarSubmitXmlPost(request SubmitCDARXMLRequest) *BodySubmitCdarXmlApiV1CdarSubmitXmlPost {
-	this := BodySubmitCdarXmlApiV1CdarSubmitXmlPost{}
-	this.Request = request
+func NewClientListResponse(results []ClientSummary, total int32, page int32, pageSize int32) *ClientListResponse {
+	this := ClientListResponse{}
+	this.Results = results
+	this.Total = total
+	this.Page = page
+	this.PageSize = pageSize
 	return &this
 }
 
-// NewBodySubmitCdarXmlApiV1CdarSubmitXmlPostWithDefaults instantiates a new BodySubmitCdarXmlApiV1CdarSubmitXmlPost object
+// NewClientListResponseWithDefaults instantiates a new ClientListResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewBodySubmitCdarXmlApiV1CdarSubmitXmlPostWithDefaults() *BodySubmitCdarXmlApiV1CdarSubmitXmlPost {
-	this := BodySubmitCdarXmlApiV1CdarSubmitXmlPost{}
+func NewClientListResponseWithDefaults() *ClientListResponse {
+	this := ClientListResponse{}
 	return &this
 }
 
-// GetRequest returns the Request field value
-func (o *BodySubmitCdarXmlApiV1CdarSubmitXmlPost) GetRequest() SubmitCDARXMLRequest {
+// GetResults returns the Results field value
+func (o *ClientListResponse) GetResults() []ClientSummary {
 	if o == nil {
-		var ret SubmitCDARXMLRequest
+		var ret []ClientSummary
 		return ret
 	}
 
-	return o.Request
+	return o.Results
 }
 
-// GetRequestOk returns a tuple with the Request field value
+// GetResultsOk returns a tuple with the Results field value
 // and a boolean to check if the value has been set.
-func (o *BodySubmitCdarXmlApiV1CdarSubmitXmlPost) GetRequestOk() (*SubmitCDARXMLRequest, bool) {
+func (o *ClientListResponse) GetResultsOk() ([]ClientSummary, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Request, true
+	return o.Results, true
 }
 
-// SetRequest sets field value
-func (o *BodySubmitCdarXmlApiV1CdarSubmitXmlPost) SetRequest(v SubmitCDARXMLRequest) {
-	o.Request = v
+// SetResults sets field value
+func (o *ClientListResponse) SetResults(v []ClientSummary) {
+	o.Results = v
 }
 
-// GetPdpCredentials returns the PdpCredentials field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BodySubmitCdarXmlApiV1CdarSubmitXmlPost) GetPdpCredentials() PDPCredentials {
-	if o == nil || IsNil(o.PdpCredentials.Get()) {
-		var ret PDPCredentials
+// GetTotal returns the Total field value
+func (o *ClientListResponse) GetTotal() int32 {
+	if o == nil {
+		var ret int32
 		return ret
 	}
-	return *o.PdpCredentials.Get()
+
+	return o.Total
 }
 
-// GetPdpCredentialsOk returns a tuple with the PdpCredentials field value if set, nil otherwise
+// GetTotalOk returns a tuple with the Total field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BodySubmitCdarXmlApiV1CdarSubmitXmlPost) GetPdpCredentialsOk() (*PDPCredentials, bool) {
+func (o *ClientListResponse) GetTotalOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.PdpCredentials.Get(), o.PdpCredentials.IsSet()
+	return &o.Total, true
 }
 
-// HasPdpCredentials returns a boolean if a field has been set.
-func (o *BodySubmitCdarXmlApiV1CdarSubmitXmlPost) HasPdpCredentials() bool {
-	if o != nil && o.PdpCredentials.IsSet() {
-		return true
+// SetTotal sets field value
+func (o *ClientListResponse) SetTotal(v int32) {
+	o.Total = v
+}
+
+// GetPage returns the Page field value
+func (o *ClientListResponse) GetPage() int32 {
+	if o == nil {
+		var ret int32
+		return ret
 	}
 
-	return false
+	return o.Page
 }
 
-// SetPdpCredentials gets a reference to the given NullablePDPCredentials and assigns it to the PdpCredentials field.
-func (o *BodySubmitCdarXmlApiV1CdarSubmitXmlPost) SetPdpCredentials(v PDPCredentials) {
-	o.PdpCredentials.Set(&v)
-}
-// SetPdpCredentialsNil sets the value for PdpCredentials to be an explicit nil
-func (o *BodySubmitCdarXmlApiV1CdarSubmitXmlPost) SetPdpCredentialsNil() {
-	o.PdpCredentials.Set(nil)
-}
-
-// UnsetPdpCredentials ensures that no value is present for PdpCredentials, not even an explicit nil
-func (o *BodySubmitCdarXmlApiV1CdarSubmitXmlPost) UnsetPdpCredentials() {
-	o.PdpCredentials.Unset()
+// GetPageOk returns a tuple with the Page field value
+// and a boolean to check if the value has been set.
+func (o *ClientListResponse) GetPageOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Page, true
 }
 
-func (o BodySubmitCdarXmlApiV1CdarSubmitXmlPost) MarshalJSON() ([]byte, error) {
+// SetPage sets field value
+func (o *ClientListResponse) SetPage(v int32) {
+	o.Page = v
+}
+
+// GetPageSize returns the PageSize field value
+func (o *ClientListResponse) GetPageSize() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.PageSize
+}
+
+// GetPageSizeOk returns a tuple with the PageSize field value
+// and a boolean to check if the value has been set.
+func (o *ClientListResponse) GetPageSizeOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.PageSize, true
+}
+
+// SetPageSize sets field value
+func (o *ClientListResponse) SetPageSize(v int32) {
+	o.PageSize = v
+}
+
+func (o ClientListResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -120,21 +159,24 @@ func (o BodySubmitCdarXmlApiV1CdarSubmitXmlPost) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BodySubmitCdarXmlApiV1CdarSubmitXmlPost) ToMap() (map[string]interface{}, error) {
+func (o ClientListResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["request"] = o.Request
-	if o.PdpCredentials.IsSet() {
-		toSerialize["pdp_credentials"] = o.PdpCredentials.Get()
-	}
+	toSerialize["results"] = o.Results
+	toSerialize["total"] = o.Total
+	toSerialize["page"] = o.Page
+	toSerialize["pageSize"] = o.PageSize
 	return toSerialize, nil
 }
 
-func (o *BodySubmitCdarXmlApiV1CdarSubmitXmlPost) UnmarshalJSON(data []byte) (err error) {
+func (o *ClientListResponse) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"request",
+		"results",
+		"total",
+		"page",
+		"pageSize",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -151,53 +193,53 @@ func (o *BodySubmitCdarXmlApiV1CdarSubmitXmlPost) UnmarshalJSON(data []byte) (er
 		}
 	}
 
-	varBodySubmitCdarXmlApiV1CdarSubmitXmlPost := _BodySubmitCdarXmlApiV1CdarSubmitXmlPost{}
+	varClientListResponse := _ClientListResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBodySubmitCdarXmlApiV1CdarSubmitXmlPost)
+	err = decoder.Decode(&varClientListResponse)
 
 	if err != nil {
 		return err
 	}
 
-	*o = BodySubmitCdarXmlApiV1CdarSubmitXmlPost(varBodySubmitCdarXmlApiV1CdarSubmitXmlPost)
+	*o = ClientListResponse(varClientListResponse)
 
 	return err
 }
 
-type NullableBodySubmitCdarXmlApiV1CdarSubmitXmlPost struct {
-	value *BodySubmitCdarXmlApiV1CdarSubmitXmlPost
+type NullableClientListResponse struct {
+	value *ClientListResponse
 	isSet bool
 }
 
-func (v NullableBodySubmitCdarXmlApiV1CdarSubmitXmlPost) Get() *BodySubmitCdarXmlApiV1CdarSubmitXmlPost {
+func (v NullableClientListResponse) Get() *ClientListResponse {
 	return v.value
 }
 
-func (v *NullableBodySubmitCdarXmlApiV1CdarSubmitXmlPost) Set(val *BodySubmitCdarXmlApiV1CdarSubmitXmlPost) {
+func (v *NullableClientListResponse) Set(val *ClientListResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableBodySubmitCdarXmlApiV1CdarSubmitXmlPost) IsSet() bool {
+func (v NullableClientListResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableBodySubmitCdarXmlApiV1CdarSubmitXmlPost) Unset() {
+func (v *NullableClientListResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableBodySubmitCdarXmlApiV1CdarSubmitXmlPost(val *BodySubmitCdarXmlApiV1CdarSubmitXmlPost) *NullableBodySubmitCdarXmlApiV1CdarSubmitXmlPost {
-	return &NullableBodySubmitCdarXmlApiV1CdarSubmitXmlPost{value: val, isSet: true}
+func NewNullableClientListResponse(val *ClientListResponse) *NullableClientListResponse {
+	return &NullableClientListResponse{value: val, isSet: true}
 }
 
-func (v NullableBodySubmitCdarXmlApiV1CdarSubmitXmlPost) MarshalJSON() ([]byte, error) {
+func (v NullableClientListResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableBodySubmitCdarXmlApiV1CdarSubmitXmlPost) UnmarshalJSON(src []byte) error {
+func (v *NullableClientListResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -17,85 +17,168 @@ import (
 	"fmt"
 )
 
-// checks if the PaymentAmountByRate type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &PaymentAmountByRate{}
+// checks if the SimplifiedCDARResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SimplifiedCDARResponse{}
 
-// PaymentAmountByRate Payment amount for a specific VAT rate.
-type PaymentAmountByRate struct {
-	Rate Rate `json:"rate"`
-	Amount Amount1 `json:"amount"`
+// SimplifiedCDARResponse Réponse pour les endpoints CDAR simplifiés.
+type SimplifiedCDARResponse struct {
+	// Identifiant du flux AFNOR
+	FlowId string `json:"flowId"`
+	// Identifiant du message CDAR généré
+	DocumentId string `json:"documentId"`
+	// Code statut soumis (210 ou 212)
+	Status string `json:"status"`
+	// Identifiant de la facture
+	InvoiceId string `json:"invoiceId"`
+	// Message de confirmation
+	Message string `json:"message"`
 }
 
-type _PaymentAmountByRate PaymentAmountByRate
+type _SimplifiedCDARResponse SimplifiedCDARResponse
 
-// NewPaymentAmountByRate instantiates a new PaymentAmountByRate object
+// NewSimplifiedCDARResponse instantiates a new SimplifiedCDARResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaymentAmountByRate(rate Rate, amount Amount1) *PaymentAmountByRate {
-	this := PaymentAmountByRate{}
-	this.Rate = rate
-	this.Amount = amount
+func NewSimplifiedCDARResponse(flowId string, documentId string, status string, invoiceId string, message string) *SimplifiedCDARResponse {
+	this := SimplifiedCDARResponse{}
+	this.FlowId = flowId
+	this.DocumentId = documentId
+	this.Status = status
+	this.InvoiceId = invoiceId
+	this.Message = message
 	return &this
 }
 
-// NewPaymentAmountByRateWithDefaults instantiates a new PaymentAmountByRate object
+// NewSimplifiedCDARResponseWithDefaults instantiates a new SimplifiedCDARResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewPaymentAmountByRateWithDefaults() *PaymentAmountByRate {
-	this := PaymentAmountByRate{}
+func NewSimplifiedCDARResponseWithDefaults() *SimplifiedCDARResponse {
+	this := SimplifiedCDARResponse{}
 	return &this
 }
 
-// GetRate returns the Rate field value
-func (o *PaymentAmountByRate) GetRate() Rate {
+// GetFlowId returns the FlowId field value
+func (o *SimplifiedCDARResponse) GetFlowId() string {
 	if o == nil {
-		var ret Rate
+		var ret string
 		return ret
 	}
 
-	return o.Rate
+	return o.FlowId
 }
 
-// GetRateOk returns a tuple with the Rate field value
+// GetFlowIdOk returns a tuple with the FlowId field value
 // and a boolean to check if the value has been set.
-func (o *PaymentAmountByRate) GetRateOk() (*Rate, bool) {
+func (o *SimplifiedCDARResponse) GetFlowIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Rate, true
+	return &o.FlowId, true
 }
 
-// SetRate sets field value
-func (o *PaymentAmountByRate) SetRate(v Rate) {
-	o.Rate = v
+// SetFlowId sets field value
+func (o *SimplifiedCDARResponse) SetFlowId(v string) {
+	o.FlowId = v
 }
 
-// GetAmount returns the Amount field value
-func (o *PaymentAmountByRate) GetAmount() Amount1 {
+// GetDocumentId returns the DocumentId field value
+func (o *SimplifiedCDARResponse) GetDocumentId() string {
 	if o == nil {
-		var ret Amount1
+		var ret string
 		return ret
 	}
 
-	return o.Amount
+	return o.DocumentId
 }
 
-// GetAmountOk returns a tuple with the Amount field value
+// GetDocumentIdOk returns a tuple with the DocumentId field value
 // and a boolean to check if the value has been set.
-func (o *PaymentAmountByRate) GetAmountOk() (*Amount1, bool) {
+func (o *SimplifiedCDARResponse) GetDocumentIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Amount, true
+	return &o.DocumentId, true
 }
 
-// SetAmount sets field value
-func (o *PaymentAmountByRate) SetAmount(v Amount1) {
-	o.Amount = v
+// SetDocumentId sets field value
+func (o *SimplifiedCDARResponse) SetDocumentId(v string) {
+	o.DocumentId = v
 }
 
-func (o PaymentAmountByRate) MarshalJSON() ([]byte, error) {
+// GetStatus returns the Status field value
+func (o *SimplifiedCDARResponse) GetStatus() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value
+// and a boolean to check if the value has been set.
+func (o *SimplifiedCDARResponse) GetStatusOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Status, true
+}
+
+// SetStatus sets field value
+func (o *SimplifiedCDARResponse) SetStatus(v string) {
+	o.Status = v
+}
+
+// GetInvoiceId returns the InvoiceId field value
+func (o *SimplifiedCDARResponse) GetInvoiceId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.InvoiceId
+}
+
+// GetInvoiceIdOk returns a tuple with the InvoiceId field value
+// and a boolean to check if the value has been set.
+func (o *SimplifiedCDARResponse) GetInvoiceIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.InvoiceId, true
+}
+
+// SetInvoiceId sets field value
+func (o *SimplifiedCDARResponse) SetInvoiceId(v string) {
+	o.InvoiceId = v
+}
+
+// GetMessage returns the Message field value
+func (o *SimplifiedCDARResponse) GetMessage() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Message
+}
+
+// GetMessageOk returns a tuple with the Message field value
+// and a boolean to check if the value has been set.
+func (o *SimplifiedCDARResponse) GetMessageOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Message, true
+}
+
+// SetMessage sets field value
+func (o *SimplifiedCDARResponse) SetMessage(v string) {
+	o.Message = v
+}
+
+func (o SimplifiedCDARResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -103,20 +186,26 @@ func (o PaymentAmountByRate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentAmountByRate) ToMap() (map[string]interface{}, error) {
+func (o SimplifiedCDARResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["rate"] = o.Rate
-	toSerialize["amount"] = o.Amount
+	toSerialize["flowId"] = o.FlowId
+	toSerialize["documentId"] = o.DocumentId
+	toSerialize["status"] = o.Status
+	toSerialize["invoiceId"] = o.InvoiceId
+	toSerialize["message"] = o.Message
 	return toSerialize, nil
 }
 
-func (o *PaymentAmountByRate) UnmarshalJSON(data []byte) (err error) {
+func (o *SimplifiedCDARResponse) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"rate",
-		"amount",
+		"flowId",
+		"documentId",
+		"status",
+		"invoiceId",
+		"message",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -133,53 +222,53 @@ func (o *PaymentAmountByRate) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varPaymentAmountByRate := _PaymentAmountByRate{}
+	varSimplifiedCDARResponse := _SimplifiedCDARResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPaymentAmountByRate)
+	err = decoder.Decode(&varSimplifiedCDARResponse)
 
 	if err != nil {
 		return err
 	}
 
-	*o = PaymentAmountByRate(varPaymentAmountByRate)
+	*o = SimplifiedCDARResponse(varSimplifiedCDARResponse)
 
 	return err
 }
 
-type NullablePaymentAmountByRate struct {
-	value *PaymentAmountByRate
+type NullableSimplifiedCDARResponse struct {
+	value *SimplifiedCDARResponse
 	isSet bool
 }
 
-func (v NullablePaymentAmountByRate) Get() *PaymentAmountByRate {
+func (v NullableSimplifiedCDARResponse) Get() *SimplifiedCDARResponse {
 	return v.value
 }
 
-func (v *NullablePaymentAmountByRate) Set(val *PaymentAmountByRate) {
+func (v *NullableSimplifiedCDARResponse) Set(val *SimplifiedCDARResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullablePaymentAmountByRate) IsSet() bool {
+func (v NullableSimplifiedCDARResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullablePaymentAmountByRate) Unset() {
+func (v *NullableSimplifiedCDARResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullablePaymentAmountByRate(val *PaymentAmountByRate) *NullablePaymentAmountByRate {
-	return &NullablePaymentAmountByRate{value: val, isSet: true}
+func NewNullableSimplifiedCDARResponse(val *SimplifiedCDARResponse) *NullableSimplifiedCDARResponse {
+	return &NullableSimplifiedCDARResponse{value: val, isSet: true}
 }
 
-func (v NullablePaymentAmountByRate) MarshalJSON() ([]byte, error) {
+func (v NullableSimplifiedCDARResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullablePaymentAmountByRate) UnmarshalJSON(src []byte) error {
+func (v *NullableSimplifiedCDARResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -17,183 +17,59 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 
-// CDARCycleDeVieAPIService CDARCycleDeVieAPI service
-type CDARCycleDeVieAPIService service
+// ClientManagementAPIService ClientManagementAPI service
+type ClientManagementAPIService service
 
-type ApiGenerateCdarApiV1CdarGeneratePostRequest struct {
+type ApiActivateClientApiV1ClientsUidActiverPostRequest struct {
 	ctx context.Context
-	ApiService *CDARCycleDeVieAPIService
-	createCDARRequest *CreateCDARRequest
+	ApiService *ClientManagementAPIService
+	uid string
 }
 
-func (r ApiGenerateCdarApiV1CdarGeneratePostRequest) CreateCDARRequest(createCDARRequest CreateCDARRequest) ApiGenerateCdarApiV1CdarGeneratePostRequest {
-	r.createCDARRequest = &createCDARRequest
-	return r
-}
-
-func (r ApiGenerateCdarApiV1CdarGeneratePostRequest) Execute() (*GenerateCDARResponse, *http.Response, error) {
-	return r.ApiService.GenerateCdarApiV1CdarGeneratePostExecute(r)
+func (r ApiActivateClientApiV1ClientsUidActiverPostRequest) Execute() (*ClientActivateResponse, *http.Response, error) {
+	return r.ApiService.ActivateClientApiV1ClientsUidActiverPostExecute(r)
 }
 
 /*
-GenerateCdarApiV1CdarGeneratePost Générer un message CDAR
+ActivateClientApiV1ClientsUidActiverPost Activate a client
 
-Génère un message XML CDAR (Cross Domain Acknowledgement and Response)
-pour communiquer le statut d'une facture.
+Activate a deactivated client.
 
-**Types de messages:**
-- **23** (Traitement): Message de cycle de vie standard
-- **305** (Transmission): Message de transmission entre plateformes
-
-**Règles métier:**
-- BR-FR-CDV-14: Le statut 212 (ENCAISSEE) requiert un montant encaissé
-- BR-FR-CDV-15: Les statuts 206/207/208/210/213/501 requièrent un code motif
+**Scope**: Client level (JWT with client_uid that must match {uid})
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateCdarApiV1CdarGeneratePostRequest
+ @param uid
+ @return ApiActivateClientApiV1ClientsUidActiverPostRequest
 */
-func (a *CDARCycleDeVieAPIService) GenerateCdarApiV1CdarGeneratePost(ctx context.Context) ApiGenerateCdarApiV1CdarGeneratePostRequest {
-	return ApiGenerateCdarApiV1CdarGeneratePostRequest{
+func (a *ClientManagementAPIService) ActivateClientApiV1ClientsUidActiverPost(ctx context.Context, uid string) ApiActivateClientApiV1ClientsUidActiverPostRequest {
+	return ApiActivateClientApiV1ClientsUidActiverPostRequest{
 		ApiService: a,
 		ctx: ctx,
+		uid: uid,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateCDARResponse
-func (a *CDARCycleDeVieAPIService) GenerateCdarApiV1CdarGeneratePostExecute(r ApiGenerateCdarApiV1CdarGeneratePostRequest) (*GenerateCDARResponse, *http.Response, error) {
+//  @return ClientActivateResponse
+func (a *ClientManagementAPIService) ActivateClientApiV1ClientsUidActiverPostExecute(r ApiActivateClientApiV1ClientsUidActiverPostRequest) (*ClientActivateResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GenerateCDARResponse
+		localVarReturnValue  *ClientActivateResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CDARCycleDeVieAPIService.GenerateCdarApiV1CdarGeneratePost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ClientManagementAPIService.ActivateClientApiV1ClientsUidActiverPost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/cdar/generate"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.createCDARRequest == nil {
-		return localVarReturnValue, nil, reportError("createCDARRequest is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.createCDARRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v APIError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetActionCodesApiV1CdarActionCodesGetRequest struct {
-	ctx context.Context
-	ApiService *CDARCycleDeVieAPIService
-}
-
-func (r ApiGetActionCodesApiV1CdarActionCodesGetRequest) Execute() (*ActionCodesResponse, *http.Response, error) {
-	return r.ApiService.GetActionCodesApiV1CdarActionCodesGetExecute(r)
-}
-
-/*
-GetActionCodesApiV1CdarActionCodesGet Liste des codes action CDAR
-
-Retourne la liste complète des codes action (BR-FR-CDV-CL-10).
-
-Ces codes indiquent l'action demandée sur la facture.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetActionCodesApiV1CdarActionCodesGetRequest
-*/
-func (a *CDARCycleDeVieAPIService) GetActionCodesApiV1CdarActionCodesGet(ctx context.Context) ApiGetActionCodesApiV1CdarActionCodesGetRequest {
-	return ApiGetActionCodesApiV1CdarActionCodesGetRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-// Execute executes the request
-//  @return ActionCodesResponse
-func (a *CDARCycleDeVieAPIService) GetActionCodesApiV1CdarActionCodesGetExecute(r ApiGetActionCodesApiV1CdarActionCodesGetRequest) (*ActionCodesResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ActionCodesResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CDARCycleDeVieAPIService.GetActionCodesApiV1CdarActionCodesGet")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/cdar/action-codes"
+	localVarPath := localBasePath + "/api/v1/clients/{uid}/activer"
+	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", url.PathEscape(parameterValueToString(r.uid, "uid")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -238,6 +114,16 @@ func (a *CDARCycleDeVieAPIService) GetActionCodesApiV1CdarActionCodesGetExecute(
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -253,48 +139,182 @@ func (a *CDARCycleDeVieAPIService) GetActionCodesApiV1CdarActionCodesGetExecute(
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetReasonCodesApiV1CdarReasonCodesGetRequest struct {
+type ApiCreateClientApiV1ClientsPostRequest struct {
 	ctx context.Context
-	ApiService *CDARCycleDeVieAPIService
+	ApiService *ClientManagementAPIService
+	clientCreateRequest *ClientCreateRequest
 }
 
-func (r ApiGetReasonCodesApiV1CdarReasonCodesGetRequest) Execute() (*ReasonCodesResponse, *http.Response, error) {
-	return r.ApiService.GetReasonCodesApiV1CdarReasonCodesGetExecute(r)
+func (r ApiCreateClientApiV1ClientsPostRequest) ClientCreateRequest(clientCreateRequest ClientCreateRequest) ApiCreateClientApiV1ClientsPostRequest {
+	r.clientCreateRequest = &clientCreateRequest
+	return r
+}
+
+func (r ApiCreateClientApiV1ClientsPostRequest) Execute() (*ClientDetail, *http.Response, error) {
+	return r.ApiService.CreateClientApiV1ClientsPostExecute(r)
 }
 
 /*
-GetReasonCodesApiV1CdarReasonCodesGet Liste des codes motif CDAR
+CreateClientApiV1ClientsPost Create a client
 
-Retourne la liste complète des codes motif de statut (BR-FR-CDV-CL-09).
+Create a new client for the account.
 
-Ces codes expliquent la raison d'un statut particulier.
+**Scope**: Account level (JWT without client_uid)
+
+**Fields**:
+- `name`: Client name (required)
+- `description`: Optional description
+- `siret`: Optional SIRET (14 digits)
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetReasonCodesApiV1CdarReasonCodesGetRequest
+ @return ApiCreateClientApiV1ClientsPostRequest
 */
-func (a *CDARCycleDeVieAPIService) GetReasonCodesApiV1CdarReasonCodesGet(ctx context.Context) ApiGetReasonCodesApiV1CdarReasonCodesGetRequest {
-	return ApiGetReasonCodesApiV1CdarReasonCodesGetRequest{
+func (a *ClientManagementAPIService) CreateClientApiV1ClientsPost(ctx context.Context) ApiCreateClientApiV1ClientsPostRequest {
+	return ApiCreateClientApiV1ClientsPostRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ReasonCodesResponse
-func (a *CDARCycleDeVieAPIService) GetReasonCodesApiV1CdarReasonCodesGetExecute(r ApiGetReasonCodesApiV1CdarReasonCodesGetRequest) (*ReasonCodesResponse, *http.Response, error) {
+//  @return ClientDetail
+func (a *ClientManagementAPIService) CreateClientApiV1ClientsPostExecute(r ApiCreateClientApiV1ClientsPostRequest) (*ClientDetail, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ReasonCodesResponse
+		localVarReturnValue  *ClientDetail
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CDARCycleDeVieAPIService.GetReasonCodesApiV1CdarReasonCodesGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ClientManagementAPIService.CreateClientApiV1ClientsPost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/cdar/reason-codes"
+	localVarPath := localBasePath + "/api/v1/clients"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.clientCreateRequest == nil {
+		return localVarReturnValue, nil, reportError("clientCreateRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.clientCreateRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiDeactivateClientApiV1ClientsUidDesactiverPostRequest struct {
+	ctx context.Context
+	ApiService *ClientManagementAPIService
+	uid string
+}
+
+func (r ApiDeactivateClientApiV1ClientsUidDesactiverPostRequest) Execute() (*ClientActivateResponse, *http.Response, error) {
+	return r.ApiService.DeactivateClientApiV1ClientsUidDesactiverPostExecute(r)
+}
+
+/*
+DeactivateClientApiV1ClientsUidDesactiverPost Deactivate a client
+
+Deactivate an active client.
+
+**Scope**: Client level (JWT with client_uid that must match {uid})
+
+**Note**: A deactivated client cannot be used for API calls
+(AFNOR, Chorus Pro, etc.).
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param uid
+ @return ApiDeactivateClientApiV1ClientsUidDesactiverPostRequest
+*/
+func (a *ClientManagementAPIService) DeactivateClientApiV1ClientsUidDesactiverPost(ctx context.Context, uid string) ApiDeactivateClientApiV1ClientsUidDesactiverPostRequest {
+	return ApiDeactivateClientApiV1ClientsUidDesactiverPostRequest{
+		ApiService: a,
+		ctx: ctx,
+		uid: uid,
+	}
+}
+
+// Execute executes the request
+//  @return ClientActivateResponse
+func (a *ClientManagementAPIService) DeactivateClientApiV1ClientsUidDesactiverPostExecute(r ApiDeactivateClientApiV1ClientsUidDesactiverPostRequest) (*ClientActivateResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ClientActivateResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ClientManagementAPIService.DeactivateClientApiV1ClientsUidDesactiverPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/clients/{uid}/desactiver"
+	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", url.PathEscape(parameterValueToString(r.uid, "uid")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -339,6 +359,16 @@ func (a *CDARCycleDeVieAPIService) GetReasonCodesApiV1CdarReasonCodesGetExecute(
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -354,48 +384,55 @@ func (a *CDARCycleDeVieAPIService) GetReasonCodesApiV1CdarReasonCodesGetExecute(
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetStatusCodesApiV1CdarStatusCodesGetRequest struct {
+type ApiGetClientApiV1ClientsUidGetRequest struct {
 	ctx context.Context
-	ApiService *CDARCycleDeVieAPIService
+	ApiService *ClientManagementAPIService
+	uid string
 }
 
-func (r ApiGetStatusCodesApiV1CdarStatusCodesGetRequest) Execute() (*StatusCodesResponse, *http.Response, error) {
-	return r.ApiService.GetStatusCodesApiV1CdarStatusCodesGetExecute(r)
+func (r ApiGetClientApiV1ClientsUidGetRequest) Execute() (*ClientDetail, *http.Response, error) {
+	return r.ApiService.GetClientApiV1ClientsUidGetExecute(r)
 }
 
 /*
-GetStatusCodesApiV1CdarStatusCodesGet Liste des codes statut CDAR
+GetClientApiV1ClientsUidGet Get client details
 
-Retourne la liste complète des codes statut de facture (BR-FR-CDV-CL-06).
+Get details of a client.
 
-Ces codes indiquent l'état du cycle de vie d'une facture.
+**Scope**: Client level (JWT with client_uid that must match {uid})
+
+**Security**: If the JWT contains a client_uid, it must match the {uid}
+in the URL, otherwise a 403 error is returned.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStatusCodesApiV1CdarStatusCodesGetRequest
+ @param uid
+ @return ApiGetClientApiV1ClientsUidGetRequest
 */
-func (a *CDARCycleDeVieAPIService) GetStatusCodesApiV1CdarStatusCodesGet(ctx context.Context) ApiGetStatusCodesApiV1CdarStatusCodesGetRequest {
-	return ApiGetStatusCodesApiV1CdarStatusCodesGetRequest{
+func (a *ClientManagementAPIService) GetClientApiV1ClientsUidGet(ctx context.Context, uid string) ApiGetClientApiV1ClientsUidGetRequest {
+	return ApiGetClientApiV1ClientsUidGetRequest{
 		ApiService: a,
 		ctx: ctx,
+		uid: uid,
 	}
 }
 
 // Execute executes the request
-//  @return StatusCodesResponse
-func (a *CDARCycleDeVieAPIService) GetStatusCodesApiV1CdarStatusCodesGetExecute(r ApiGetStatusCodesApiV1CdarStatusCodesGetRequest) (*StatusCodesResponse, *http.Response, error) {
+//  @return ClientDetail
+func (a *ClientManagementAPIService) GetClientApiV1ClientsUidGetExecute(r ApiGetClientApiV1ClientsUidGetRequest) (*ClientDetail, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *StatusCodesResponse
+		localVarReturnValue  *ClientDetail
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CDARCycleDeVieAPIService.GetStatusCodesApiV1CdarStatusCodesGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ClientManagementAPIService.GetClientApiV1ClientsUidGet")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/cdar/status-codes"
+	localVarPath := localBasePath + "/api/v1/clients/{uid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", url.PathEscape(parameterValueToString(r.uid, "uid")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -440,126 +477,8 @@ func (a *CDARCycleDeVieAPIService) GetStatusCodesApiV1CdarStatusCodesGetExecute(
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiSubmitCdarApiV1CdarSubmitPostRequest struct {
-	ctx context.Context
-	ApiService *CDARCycleDeVieAPIService
-	submitCDARRequest *SubmitCDARRequest
-}
-
-func (r ApiSubmitCdarApiV1CdarSubmitPostRequest) SubmitCDARRequest(submitCDARRequest SubmitCDARRequest) ApiSubmitCdarApiV1CdarSubmitPostRequest {
-	r.submitCDARRequest = &submitCDARRequest
-	return r
-}
-
-func (r ApiSubmitCdarApiV1CdarSubmitPostRequest) Execute() (*SubmitCDARResponse, *http.Response, error) {
-	return r.ApiService.SubmitCdarApiV1CdarSubmitPostExecute(r)
-}
-
-/*
-SubmitCdarApiV1CdarSubmitPost Générer et soumettre un message CDAR
-
-Génère un message CDAR et le soumet à la plateforme PA/PDP.
-
-**Stratégies d'authentification:**
-1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend
-2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête
-
-**Types de flux (flowType):**
-- `CustomerInvoiceLC`: Cycle de vie côté client (acheteur)
-- `SupplierInvoiceLC`: Cycle de vie côté fournisseur (vendeur)
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSubmitCdarApiV1CdarSubmitPostRequest
-*/
-func (a *CDARCycleDeVieAPIService) SubmitCdarApiV1CdarSubmitPost(ctx context.Context) ApiSubmitCdarApiV1CdarSubmitPostRequest {
-	return ApiSubmitCdarApiV1CdarSubmitPostRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-// Execute executes the request
-//  @return SubmitCDARResponse
-func (a *CDARCycleDeVieAPIService) SubmitCdarApiV1CdarSubmitPostExecute(r ApiSubmitCdarApiV1CdarSubmitPostRequest) (*SubmitCDARResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SubmitCDARResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CDARCycleDeVieAPIService.SubmitCdarApiV1CdarSubmitPost")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/cdar/submit"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.submitCDARRequest == nil {
-		return localVarReturnValue, nil, reportError("submitCDARRequest is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.submitCDARRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v APIError
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -583,68 +502,66 @@ func (a *CDARCycleDeVieAPIService) SubmitCdarApiV1CdarSubmitPostExecute(r ApiSub
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSubmitCdarXmlApiV1CdarSubmitXmlPostRequest struct {
+type ApiGetPdpConfigApiV1ClientsUidPdpConfigGetRequest struct {
 	ctx context.Context
-	ApiService *CDARCycleDeVieAPIService
-	submitCDARXMLRequest *SubmitCDARXMLRequest
+	ApiService *ClientManagementAPIService
+	uid string
 }
 
-func (r ApiSubmitCdarXmlApiV1CdarSubmitXmlPostRequest) SubmitCDARXMLRequest(submitCDARXMLRequest SubmitCDARXMLRequest) ApiSubmitCdarXmlApiV1CdarSubmitXmlPostRequest {
-	r.submitCDARXMLRequest = &submitCDARXMLRequest
-	return r
-}
-
-func (r ApiSubmitCdarXmlApiV1CdarSubmitXmlPostRequest) Execute() (*SubmitCDARResponse, *http.Response, error) {
-	return r.ApiService.SubmitCdarXmlApiV1CdarSubmitXmlPostExecute(r)
+func (r ApiGetPdpConfigApiV1ClientsUidPdpConfigGetRequest) Execute() (*PDPConfigResponse, *http.Response, error) {
+	return r.ApiService.GetPdpConfigApiV1ClientsUidPdpConfigGetExecute(r)
 }
 
 /*
-SubmitCdarXmlApiV1CdarSubmitXmlPost Soumettre un XML CDAR pré-généré
+GetPdpConfigApiV1ClientsUidPdpConfigGet Get client PDP configuration
 
-Soumet un message XML CDAR pré-généré à la plateforme PA/PDP.
+Get the PDP (PA/PDP) configuration for a client.
 
-Utile pour soumettre des XML générés par d'autres systèmes.
+**Scope**: Client level (JWT with client_uid that must match {uid})
 
-**Stratégies d'authentification:**
-1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend
-2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête
+**Security**: The client secret is never returned. Only a status
+(`secretStatus`) indicates whether a secret is configured.
+
+**Response**:
+- If configured: all config details (URLs, client_id, secret status)
+- If not configured: `isConfigured: false` with a message
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSubmitCdarXmlApiV1CdarSubmitXmlPostRequest
+ @param uid
+ @return ApiGetPdpConfigApiV1ClientsUidPdpConfigGetRequest
 */
-func (a *CDARCycleDeVieAPIService) SubmitCdarXmlApiV1CdarSubmitXmlPost(ctx context.Context) ApiSubmitCdarXmlApiV1CdarSubmitXmlPostRequest {
-	return ApiSubmitCdarXmlApiV1CdarSubmitXmlPostRequest{
+func (a *ClientManagementAPIService) GetPdpConfigApiV1ClientsUidPdpConfigGet(ctx context.Context, uid string) ApiGetPdpConfigApiV1ClientsUidPdpConfigGetRequest {
+	return ApiGetPdpConfigApiV1ClientsUidPdpConfigGetRequest{
 		ApiService: a,
 		ctx: ctx,
+		uid: uid,
 	}
 }
 
 // Execute executes the request
-//  @return SubmitCDARResponse
-func (a *CDARCycleDeVieAPIService) SubmitCdarXmlApiV1CdarSubmitXmlPostExecute(r ApiSubmitCdarXmlApiV1CdarSubmitXmlPostRequest) (*SubmitCDARResponse, *http.Response, error) {
+//  @return PDPConfigResponse
+func (a *ClientManagementAPIService) GetPdpConfigApiV1ClientsUidPdpConfigGetExecute(r ApiGetPdpConfigApiV1ClientsUidPdpConfigGetRequest) (*PDPConfigResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *SubmitCDARResponse
+		localVarReturnValue  *PDPConfigResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CDARCycleDeVieAPIService.SubmitCdarXmlApiV1CdarSubmitXmlPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ClientManagementAPIService.GetPdpConfigApiV1ClientsUidPdpConfigGet")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/cdar/submit-xml"
+	localVarPath := localBasePath + "/api/v1/clients/{uid}/pdp-config"
+	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", url.PathEscape(parameterValueToString(r.uid, "uid")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.submitCDARXMLRequest == nil {
-		return localVarReturnValue, nil, reportError("submitCDARXMLRequest is required and must be specified")
-	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -660,8 +577,6 @@ func (a *CDARCycleDeVieAPIService) SubmitCdarXmlApiV1CdarSubmitXmlPostExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.submitCDARXMLRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -684,8 +599,8 @@ func (a *CDARCycleDeVieAPIService) SubmitCdarXmlApiV1CdarSubmitXmlPostExecute(r 
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v APIError
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -709,68 +624,87 @@ func (a *CDARCycleDeVieAPIService) SubmitCdarXmlApiV1CdarSubmitXmlPostExecute(r 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSubmitEncaisseeApiV1CdarEncaisseePostRequest struct {
+type ApiListClientsApiV1ClientsGetRequest struct {
 	ctx context.Context
-	ApiService *CDARCycleDeVieAPIService
-	encaisseeRequest *EncaisseeRequest
+	ApiService *ClientManagementAPIService
+	page *int32
+	pageSize *int32
 }
 
-func (r ApiSubmitEncaisseeApiV1CdarEncaisseePostRequest) EncaisseeRequest(encaisseeRequest EncaisseeRequest) ApiSubmitEncaisseeApiV1CdarEncaisseePostRequest {
-	r.encaisseeRequest = &encaisseeRequest
+// Page number
+func (r ApiListClientsApiV1ClientsGetRequest) Page(page int32) ApiListClientsApiV1ClientsGetRequest {
+	r.page = &page
 	return r
 }
 
-func (r ApiSubmitEncaisseeApiV1CdarEncaisseePostRequest) Execute() (*SimplifiedCDARResponse, *http.Response, error) {
-	return r.ApiService.SubmitEncaisseeApiV1CdarEncaisseePostExecute(r)
+// Page size
+func (r ApiListClientsApiV1ClientsGetRequest) PageSize(pageSize int32) ApiListClientsApiV1ClientsGetRequest {
+	r.pageSize = &pageSize
+	return r
+}
+
+func (r ApiListClientsApiV1ClientsGetRequest) Execute() (*ClientListResponse, *http.Response, error) {
+	return r.ApiService.ListClientsApiV1ClientsGetExecute(r)
 }
 
 /*
-SubmitEncaisseeApiV1CdarEncaisseePost [Simplifié] Soumettre un statut ENCAISSÉE (212)
+ListClientsApiV1ClientsGet List clients
 
-**Endpoint simplifié pour OD** - Soumet un statut ENCAISSÉE (212) pour une facture.
+Paginated list of clients for the account.
 
-Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-14 requiert le montant encaissé).
+**Scope**: Account level (JWT without client_uid)
 
-**Cas d'usage:** L'acheteur confirme le paiement d'une facture.
-
-**Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+**Pagination**:
+- `page`: Page number (default: 1)
+- `pageSize`: Page size (default: 20, max: 100)
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSubmitEncaisseeApiV1CdarEncaisseePostRequest
+ @return ApiListClientsApiV1ClientsGetRequest
 */
-func (a *CDARCycleDeVieAPIService) SubmitEncaisseeApiV1CdarEncaisseePost(ctx context.Context) ApiSubmitEncaisseeApiV1CdarEncaisseePostRequest {
-	return ApiSubmitEncaisseeApiV1CdarEncaisseePostRequest{
+func (a *ClientManagementAPIService) ListClientsApiV1ClientsGet(ctx context.Context) ApiListClientsApiV1ClientsGetRequest {
+	return ApiListClientsApiV1ClientsGetRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return SimplifiedCDARResponse
-func (a *CDARCycleDeVieAPIService) SubmitEncaisseeApiV1CdarEncaisseePostExecute(r ApiSubmitEncaisseeApiV1CdarEncaisseePostRequest) (*SimplifiedCDARResponse, *http.Response, error) {
+//  @return ClientListResponse
+func (a *ClientManagementAPIService) ListClientsApiV1ClientsGetExecute(r ApiListClientsApiV1ClientsGetRequest) (*ClientListResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *SimplifiedCDARResponse
+		localVarReturnValue  *ClientListResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CDARCycleDeVieAPIService.SubmitEncaisseeApiV1CdarEncaisseePost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ClientManagementAPIService.ListClientsApiV1ClientsGet")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/cdar/encaissee"
+	localVarPath := localBasePath + "/api/v1/clients"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.encaisseeRequest == nil {
-		return localVarReturnValue, nil, reportError("encaisseeRequest is required and must be specified")
-	}
 
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+	} else {
+		var defaultValue int32 = 1
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", defaultValue, "form", "")
+		r.page = &defaultValue
+	}
+	if r.pageSize != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "form", "")
+	} else {
+		var defaultValue int32 = 20
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", defaultValue, "form", "")
+		r.pageSize = &defaultValue
+	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -786,8 +720,6 @@ func (a *CDARCycleDeVieAPIService) SubmitEncaisseeApiV1CdarEncaisseePostExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.encaisseeRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -810,8 +742,8 @@ func (a *CDARCycleDeVieAPIService) SubmitEncaisseeApiV1CdarEncaisseePostExecute(
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v APIError
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -835,79 +767,71 @@ func (a *CDARCycleDeVieAPIService) SubmitEncaisseeApiV1CdarEncaisseePostExecute(
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSubmitRefuseeApiV1CdarRefuseePostRequest struct {
+type ApiUpdateClientApiV1ClientsUidPatchRequest struct {
 	ctx context.Context
-	ApiService *CDARCycleDeVieAPIService
-	refuseeRequest *RefuseeRequest
+	ApiService *ClientManagementAPIService
+	uid string
+	clientUpdateRequest *ClientUpdateRequest
 }
 
-func (r ApiSubmitRefuseeApiV1CdarRefuseePostRequest) RefuseeRequest(refuseeRequest RefuseeRequest) ApiSubmitRefuseeApiV1CdarRefuseePostRequest {
-	r.refuseeRequest = &refuseeRequest
+func (r ApiUpdateClientApiV1ClientsUidPatchRequest) ClientUpdateRequest(clientUpdateRequest ClientUpdateRequest) ApiUpdateClientApiV1ClientsUidPatchRequest {
+	r.clientUpdateRequest = &clientUpdateRequest
 	return r
 }
 
-func (r ApiSubmitRefuseeApiV1CdarRefuseePostRequest) Execute() (*SimplifiedCDARResponse, *http.Response, error) {
-	return r.ApiService.SubmitRefuseeApiV1CdarRefuseePostExecute(r)
+func (r ApiUpdateClientApiV1ClientsUidPatchRequest) Execute() (*ClientDetail, *http.Response, error) {
+	return r.ApiService.UpdateClientApiV1ClientsUidPatchExecute(r)
 }
 
 /*
-SubmitRefuseeApiV1CdarRefuseePost [Simplifié] Soumettre un statut REFUSÉE (210)
+UpdateClientApiV1ClientsUidPatch Update a client
 
-**Endpoint simplifié pour OD** - Soumet un statut REFUSÉE (210) pour une facture.
+Update client information (partial update).
 
-Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-15 requiert un code motif).
+**Scope**: Client level (JWT with client_uid that must match {uid})
 
-**Cas d'usage:** L'acheteur refuse une facture reçue.
+**Updatable fields**:
+- `name`: Client name
+- `description`: Description
+- `siret`: SIRET (14 digits)
 
-**Codes motif autorisés (BR-FR-CDV-CL-09):**
-- `TX_TVA_ERR`: Taux de TVA erroné
-- `MONTANTTOTAL_ERR`: Montant total erroné
-- `CALCUL_ERR`: Erreur de calcul
-- `NON_CONFORME`: Non conforme
-- `DOUBLON`: Doublon
-- `DEST_ERR`: Destinataire erroné
-- `TRANSAC_INC`: Transaction incomplète
-- `EMMET_INC`: Émetteur inconnu
-- `CONTRAT_TERM`: Contrat terminé
-- `DOUBLE_FACT`: Double facturation
-- `CMD_ERR`: Commande erronée
-- `ADR_ERR`: Adresse erronée
-- `REF_CT_ABSENT`: Référence contrat absente
-
-**Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+Only provided fields are updated.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSubmitRefuseeApiV1CdarRefuseePostRequest
+ @param uid
+ @return ApiUpdateClientApiV1ClientsUidPatchRequest
 */
-func (a *CDARCycleDeVieAPIService) SubmitRefuseeApiV1CdarRefuseePost(ctx context.Context) ApiSubmitRefuseeApiV1CdarRefuseePostRequest {
-	return ApiSubmitRefuseeApiV1CdarRefuseePostRequest{
+func (a *ClientManagementAPIService) UpdateClientApiV1ClientsUidPatch(ctx context.Context, uid string) ApiUpdateClientApiV1ClientsUidPatchRequest {
+	return ApiUpdateClientApiV1ClientsUidPatchRequest{
 		ApiService: a,
 		ctx: ctx,
+		uid: uid,
 	}
 }
 
 // Execute executes the request
-//  @return SimplifiedCDARResponse
-func (a *CDARCycleDeVieAPIService) SubmitRefuseeApiV1CdarRefuseePostExecute(r ApiSubmitRefuseeApiV1CdarRefuseePostRequest) (*SimplifiedCDARResponse, *http.Response, error) {
+//  @return ClientDetail
+func (a *ClientManagementAPIService) UpdateClientApiV1ClientsUidPatchExecute(r ApiUpdateClientApiV1ClientsUidPatchRequest) (*ClientDetail, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *SimplifiedCDARResponse
+		localVarReturnValue  *ClientDetail
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CDARCycleDeVieAPIService.SubmitRefuseeApiV1CdarRefuseePost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ClientManagementAPIService.UpdateClientApiV1ClientsUidPatch")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/cdar/refusee"
+	localVarPath := localBasePath + "/api/v1/clients/{uid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", url.PathEscape(parameterValueToString(r.uid, "uid")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.refuseeRequest == nil {
-		return localVarReturnValue, nil, reportError("refuseeRequest is required and must be specified")
+	if r.clientUpdateRequest == nil {
+		return localVarReturnValue, nil, reportError("clientUpdateRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -928,7 +852,7 @@ func (a *CDARCycleDeVieAPIService) SubmitRefuseeApiV1CdarRefuseePostExecute(r Ap
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.refuseeRequest
+	localVarPostBody = r.clientUpdateRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -951,8 +875,8 @@ func (a *CDARCycleDeVieAPIService) SubmitRefuseeApiV1CdarRefuseePostExecute(r Ap
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v APIError
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -976,63 +900,77 @@ func (a *CDARCycleDeVieAPIService) SubmitRefuseeApiV1CdarRefuseePostExecute(r Ap
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiValidateCdarApiV1CdarValidatePostRequest struct {
+type ApiUpdatePdpConfigApiV1ClientsUidPdpConfigPutRequest struct {
 	ctx context.Context
-	ApiService *CDARCycleDeVieAPIService
-	validateCDARRequest *ValidateCDARRequest
+	ApiService *ClientManagementAPIService
+	uid string
+	pDPConfigUpdateRequest *PDPConfigUpdateRequest
 }
 
-func (r ApiValidateCdarApiV1CdarValidatePostRequest) ValidateCDARRequest(validateCDARRequest ValidateCDARRequest) ApiValidateCdarApiV1CdarValidatePostRequest {
-	r.validateCDARRequest = &validateCDARRequest
+func (r ApiUpdatePdpConfigApiV1ClientsUidPdpConfigPutRequest) PDPConfigUpdateRequest(pDPConfigUpdateRequest PDPConfigUpdateRequest) ApiUpdatePdpConfigApiV1ClientsUidPdpConfigPutRequest {
+	r.pDPConfigUpdateRequest = &pDPConfigUpdateRequest
 	return r
 }
 
-func (r ApiValidateCdarApiV1CdarValidatePostRequest) Execute() (*ValidateCDARResponse, *http.Response, error) {
-	return r.ApiService.ValidateCdarApiV1CdarValidatePostExecute(r)
+func (r ApiUpdatePdpConfigApiV1ClientsUidPdpConfigPutRequest) Execute() (*PDPConfigResponse, *http.Response, error) {
+	return r.ApiService.UpdatePdpConfigApiV1ClientsUidPdpConfigPutExecute(r)
 }
 
 /*
-ValidateCdarApiV1CdarValidatePost Valider des données CDAR
+UpdatePdpConfigApiV1ClientsUidPdpConfigPut Configure client PDP
 
-Valide les données CDAR sans générer le XML.
+Configure or update the PDP (PA/PDP) configuration for a client.
 
-Vérifie:
-- Les formats des champs (SIREN, dates, etc.)
-- Les codes enums (statut, motif, action)
-- Les règles métier BR-FR-CDV-*
+**Scope**: Client level (JWT with client_uid that must match {uid})
+
+**Required fields**:
+- `flowServiceUrl`: PDP Flow Service URL
+- `tokenUrl`: PDP OAuth token URL
+- `oauthClientId`: OAuth Client ID
+- `clientSecret`: OAuth Client Secret (sent but NEVER returned)
+
+**Optional fields**:
+- `isActive`: Enable/disable the config (default: true)
+- `modeSandbox`: Sandbox mode (default: false)
+
+**Security**: The `clientSecret` is stored encrypted on Django side
+and is never returned in API responses.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiValidateCdarApiV1CdarValidatePostRequest
+ @param uid
+ @return ApiUpdatePdpConfigApiV1ClientsUidPdpConfigPutRequest
 */
-func (a *CDARCycleDeVieAPIService) ValidateCdarApiV1CdarValidatePost(ctx context.Context) ApiValidateCdarApiV1CdarValidatePostRequest {
-	return ApiValidateCdarApiV1CdarValidatePostRequest{
+func (a *ClientManagementAPIService) UpdatePdpConfigApiV1ClientsUidPdpConfigPut(ctx context.Context, uid string) ApiUpdatePdpConfigApiV1ClientsUidPdpConfigPutRequest {
+	return ApiUpdatePdpConfigApiV1ClientsUidPdpConfigPutRequest{
 		ApiService: a,
 		ctx: ctx,
+		uid: uid,
 	}
 }
 
 // Execute executes the request
-//  @return ValidateCDARResponse
-func (a *CDARCycleDeVieAPIService) ValidateCdarApiV1CdarValidatePostExecute(r ApiValidateCdarApiV1CdarValidatePostRequest) (*ValidateCDARResponse, *http.Response, error) {
+//  @return PDPConfigResponse
+func (a *ClientManagementAPIService) UpdatePdpConfigApiV1ClientsUidPdpConfigPutExecute(r ApiUpdatePdpConfigApiV1ClientsUidPdpConfigPutRequest) (*PDPConfigResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ValidateCDARResponse
+		localVarReturnValue  *PDPConfigResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CDARCycleDeVieAPIService.ValidateCdarApiV1CdarValidatePost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ClientManagementAPIService.UpdatePdpConfigApiV1ClientsUidPdpConfigPut")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/cdar/validate"
+	localVarPath := localBasePath + "/api/v1/clients/{uid}/pdp-config"
+	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", url.PathEscape(parameterValueToString(r.uid, "uid")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.validateCDARRequest == nil {
-		return localVarReturnValue, nil, reportError("validateCDARRequest is required and must be specified")
+	if r.pDPConfigUpdateRequest == nil {
+		return localVarReturnValue, nil, reportError("pDPConfigUpdateRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1053,7 +991,7 @@ func (a *CDARCycleDeVieAPIService) ValidateCdarApiV1CdarValidatePostExecute(r Ap
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.validateCDARRequest
+	localVarPostBody = r.pDPConfigUpdateRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1076,8 +1014,8 @@ func (a *CDARCycleDeVieAPIService) ValidateCdarApiV1CdarValidatePostExecute(r Ap
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v APIError
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

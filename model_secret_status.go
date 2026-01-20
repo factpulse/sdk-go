@@ -17,102 +17,87 @@ import (
 	"fmt"
 )
 
-// checks if the BodySubmitCdarApiV1CdarSubmitPost type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &BodySubmitCdarApiV1CdarSubmitPost{}
+// checks if the SecretStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SecretStatus{}
 
-// BodySubmitCdarApiV1CdarSubmitPost struct for BodySubmitCdarApiV1CdarSubmitPost
-type BodySubmitCdarApiV1CdarSubmitPost struct {
-	Request SubmitCDARRequest `json:"request"`
-	PdpCredentials NullablePDPCredentials `json:"pdp_credentials,omitempty"`
+// SecretStatus Secret status (never exposes the secret itself).
+type SecretStatus struct {
+	// Secret status: 'active', 'missing', etc.
+	Status string `json:"status"`
+	// Descriptive status message
+	Message string `json:"message"`
 }
 
-type _BodySubmitCdarApiV1CdarSubmitPost BodySubmitCdarApiV1CdarSubmitPost
+type _SecretStatus SecretStatus
 
-// NewBodySubmitCdarApiV1CdarSubmitPost instantiates a new BodySubmitCdarApiV1CdarSubmitPost object
+// NewSecretStatus instantiates a new SecretStatus object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBodySubmitCdarApiV1CdarSubmitPost(request SubmitCDARRequest) *BodySubmitCdarApiV1CdarSubmitPost {
-	this := BodySubmitCdarApiV1CdarSubmitPost{}
-	this.Request = request
+func NewSecretStatus(status string, message string) *SecretStatus {
+	this := SecretStatus{}
+	this.Status = status
+	this.Message = message
 	return &this
 }
 
-// NewBodySubmitCdarApiV1CdarSubmitPostWithDefaults instantiates a new BodySubmitCdarApiV1CdarSubmitPost object
+// NewSecretStatusWithDefaults instantiates a new SecretStatus object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewBodySubmitCdarApiV1CdarSubmitPostWithDefaults() *BodySubmitCdarApiV1CdarSubmitPost {
-	this := BodySubmitCdarApiV1CdarSubmitPost{}
+func NewSecretStatusWithDefaults() *SecretStatus {
+	this := SecretStatus{}
 	return &this
 }
 
-// GetRequest returns the Request field value
-func (o *BodySubmitCdarApiV1CdarSubmitPost) GetRequest() SubmitCDARRequest {
+// GetStatus returns the Status field value
+func (o *SecretStatus) GetStatus() string {
 	if o == nil {
-		var ret SubmitCDARRequest
+		var ret string
 		return ret
 	}
 
-	return o.Request
+	return o.Status
 }
 
-// GetRequestOk returns a tuple with the Request field value
+// GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *BodySubmitCdarApiV1CdarSubmitPost) GetRequestOk() (*SubmitCDARRequest, bool) {
+func (o *SecretStatus) GetStatusOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Request, true
+	return &o.Status, true
 }
 
-// SetRequest sets field value
-func (o *BodySubmitCdarApiV1CdarSubmitPost) SetRequest(v SubmitCDARRequest) {
-	o.Request = v
+// SetStatus sets field value
+func (o *SecretStatus) SetStatus(v string) {
+	o.Status = v
 }
 
-// GetPdpCredentials returns the PdpCredentials field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BodySubmitCdarApiV1CdarSubmitPost) GetPdpCredentials() PDPCredentials {
-	if o == nil || IsNil(o.PdpCredentials.Get()) {
-		var ret PDPCredentials
+// GetMessage returns the Message field value
+func (o *SecretStatus) GetMessage() string {
+	if o == nil {
+		var ret string
 		return ret
 	}
-	return *o.PdpCredentials.Get()
+
+	return o.Message
 }
 
-// GetPdpCredentialsOk returns a tuple with the PdpCredentials field value if set, nil otherwise
+// GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BodySubmitCdarApiV1CdarSubmitPost) GetPdpCredentialsOk() (*PDPCredentials, bool) {
+func (o *SecretStatus) GetMessageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.PdpCredentials.Get(), o.PdpCredentials.IsSet()
+	return &o.Message, true
 }
 
-// HasPdpCredentials returns a boolean if a field has been set.
-func (o *BodySubmitCdarApiV1CdarSubmitPost) HasPdpCredentials() bool {
-	if o != nil && o.PdpCredentials.IsSet() {
-		return true
-	}
-
-	return false
+// SetMessage sets field value
+func (o *SecretStatus) SetMessage(v string) {
+	o.Message = v
 }
 
-// SetPdpCredentials gets a reference to the given NullablePDPCredentials and assigns it to the PdpCredentials field.
-func (o *BodySubmitCdarApiV1CdarSubmitPost) SetPdpCredentials(v PDPCredentials) {
-	o.PdpCredentials.Set(&v)
-}
-// SetPdpCredentialsNil sets the value for PdpCredentials to be an explicit nil
-func (o *BodySubmitCdarApiV1CdarSubmitPost) SetPdpCredentialsNil() {
-	o.PdpCredentials.Set(nil)
-}
-
-// UnsetPdpCredentials ensures that no value is present for PdpCredentials, not even an explicit nil
-func (o *BodySubmitCdarApiV1CdarSubmitPost) UnsetPdpCredentials() {
-	o.PdpCredentials.Unset()
-}
-
-func (o BodySubmitCdarApiV1CdarSubmitPost) MarshalJSON() ([]byte, error) {
+func (o SecretStatus) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -120,21 +105,20 @@ func (o BodySubmitCdarApiV1CdarSubmitPost) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BodySubmitCdarApiV1CdarSubmitPost) ToMap() (map[string]interface{}, error) {
+func (o SecretStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["request"] = o.Request
-	if o.PdpCredentials.IsSet() {
-		toSerialize["pdp_credentials"] = o.PdpCredentials.Get()
-	}
+	toSerialize["status"] = o.Status
+	toSerialize["message"] = o.Message
 	return toSerialize, nil
 }
 
-func (o *BodySubmitCdarApiV1CdarSubmitPost) UnmarshalJSON(data []byte) (err error) {
+func (o *SecretStatus) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"request",
+		"status",
+		"message",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -151,53 +135,53 @@ func (o *BodySubmitCdarApiV1CdarSubmitPost) UnmarshalJSON(data []byte) (err erro
 		}
 	}
 
-	varBodySubmitCdarApiV1CdarSubmitPost := _BodySubmitCdarApiV1CdarSubmitPost{}
+	varSecretStatus := _SecretStatus{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBodySubmitCdarApiV1CdarSubmitPost)
+	err = decoder.Decode(&varSecretStatus)
 
 	if err != nil {
 		return err
 	}
 
-	*o = BodySubmitCdarApiV1CdarSubmitPost(varBodySubmitCdarApiV1CdarSubmitPost)
+	*o = SecretStatus(varSecretStatus)
 
 	return err
 }
 
-type NullableBodySubmitCdarApiV1CdarSubmitPost struct {
-	value *BodySubmitCdarApiV1CdarSubmitPost
+type NullableSecretStatus struct {
+	value *SecretStatus
 	isSet bool
 }
 
-func (v NullableBodySubmitCdarApiV1CdarSubmitPost) Get() *BodySubmitCdarApiV1CdarSubmitPost {
+func (v NullableSecretStatus) Get() *SecretStatus {
 	return v.value
 }
 
-func (v *NullableBodySubmitCdarApiV1CdarSubmitPost) Set(val *BodySubmitCdarApiV1CdarSubmitPost) {
+func (v *NullableSecretStatus) Set(val *SecretStatus) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableBodySubmitCdarApiV1CdarSubmitPost) IsSet() bool {
+func (v NullableSecretStatus) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableBodySubmitCdarApiV1CdarSubmitPost) Unset() {
+func (v *NullableSecretStatus) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableBodySubmitCdarApiV1CdarSubmitPost(val *BodySubmitCdarApiV1CdarSubmitPost) *NullableBodySubmitCdarApiV1CdarSubmitPost {
-	return &NullableBodySubmitCdarApiV1CdarSubmitPost{value: val, isSet: true}
+func NewNullableSecretStatus(val *SecretStatus) *NullableSecretStatus {
+	return &NullableSecretStatus{value: val, isSet: true}
 }
 
-func (v NullableBodySubmitCdarApiV1CdarSubmitPost) MarshalJSON() ([]byte, error) {
+func (v NullableSecretStatus) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableBodySubmitCdarApiV1CdarSubmitPost) UnmarshalJSON(src []byte) error {
+func (v *NullableSecretStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

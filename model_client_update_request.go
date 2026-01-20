@@ -13,89 +13,162 @@ package factpulse
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
-// checks if the PaymentAmountByRate type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &PaymentAmountByRate{}
+// checks if the ClientUpdateRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ClientUpdateRequest{}
 
-// PaymentAmountByRate Payment amount for a specific VAT rate.
-type PaymentAmountByRate struct {
-	Rate Rate `json:"rate"`
-	Amount Amount1 `json:"amount"`
+// ClientUpdateRequest Partial client update request.
+type ClientUpdateRequest struct {
+	Name NullableString `json:"name,omitempty"`
+	Description NullableString `json:"description,omitempty"`
+	Siret NullableString `json:"siret,omitempty" validate:"regexp=^\\\\d{14}$"`
 }
 
-type _PaymentAmountByRate PaymentAmountByRate
-
-// NewPaymentAmountByRate instantiates a new PaymentAmountByRate object
+// NewClientUpdateRequest instantiates a new ClientUpdateRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaymentAmountByRate(rate Rate, amount Amount1) *PaymentAmountByRate {
-	this := PaymentAmountByRate{}
-	this.Rate = rate
-	this.Amount = amount
+func NewClientUpdateRequest() *ClientUpdateRequest {
+	this := ClientUpdateRequest{}
 	return &this
 }
 
-// NewPaymentAmountByRateWithDefaults instantiates a new PaymentAmountByRate object
+// NewClientUpdateRequestWithDefaults instantiates a new ClientUpdateRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewPaymentAmountByRateWithDefaults() *PaymentAmountByRate {
-	this := PaymentAmountByRate{}
+func NewClientUpdateRequestWithDefaults() *ClientUpdateRequest {
+	this := ClientUpdateRequest{}
 	return &this
 }
 
-// GetRate returns the Rate field value
-func (o *PaymentAmountByRate) GetRate() Rate {
-	if o == nil {
-		var ret Rate
+// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ClientUpdateRequest) GetName() string {
+	if o == nil || IsNil(o.Name.Get()) {
+		var ret string
 		return ret
 	}
-
-	return o.Rate
+	return *o.Name.Get()
 }
 
-// GetRateOk returns a tuple with the Rate field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentAmountByRate) GetRateOk() (*Rate, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ClientUpdateRequest) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Rate, true
+	return o.Name.Get(), o.Name.IsSet()
 }
 
-// SetRate sets field value
-func (o *PaymentAmountByRate) SetRate(v Rate) {
-	o.Rate = v
-}
-
-// GetAmount returns the Amount field value
-func (o *PaymentAmountByRate) GetAmount() Amount1 {
-	if o == nil {
-		var ret Amount1
-		return ret
+// HasName returns a boolean if a field has been set.
+func (o *ClientUpdateRequest) HasName() bool {
+	if o != nil && o.Name.IsSet() {
+		return true
 	}
 
-	return o.Amount
+	return false
 }
 
-// GetAmountOk returns a tuple with the Amount field value
+// SetName gets a reference to the given NullableString and assigns it to the Name field.
+func (o *ClientUpdateRequest) SetName(v string) {
+	o.Name.Set(&v)
+}
+// SetNameNil sets the value for Name to be an explicit nil
+func (o *ClientUpdateRequest) SetNameNil() {
+	o.Name.Set(nil)
+}
+
+// UnsetName ensures that no value is present for Name, not even an explicit nil
+func (o *ClientUpdateRequest) UnsetName() {
+	o.Name.Unset()
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ClientUpdateRequest) GetDescription() string {
+	if o == nil || IsNil(o.Description.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Description.Get()
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentAmountByRate) GetAmountOk() (*Amount1, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ClientUpdateRequest) GetDescriptionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Amount, true
+	return o.Description.Get(), o.Description.IsSet()
 }
 
-// SetAmount sets field value
-func (o *PaymentAmountByRate) SetAmount(v Amount1) {
-	o.Amount = v
+// HasDescription returns a boolean if a field has been set.
+func (o *ClientUpdateRequest) HasDescription() bool {
+	if o != nil && o.Description.IsSet() {
+		return true
+	}
+
+	return false
 }
 
-func (o PaymentAmountByRate) MarshalJSON() ([]byte, error) {
+// SetDescription gets a reference to the given NullableString and assigns it to the Description field.
+func (o *ClientUpdateRequest) SetDescription(v string) {
+	o.Description.Set(&v)
+}
+// SetDescriptionNil sets the value for Description to be an explicit nil
+func (o *ClientUpdateRequest) SetDescriptionNil() {
+	o.Description.Set(nil)
+}
+
+// UnsetDescription ensures that no value is present for Description, not even an explicit nil
+func (o *ClientUpdateRequest) UnsetDescription() {
+	o.Description.Unset()
+}
+
+// GetSiret returns the Siret field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ClientUpdateRequest) GetSiret() string {
+	if o == nil || IsNil(o.Siret.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Siret.Get()
+}
+
+// GetSiretOk returns a tuple with the Siret field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ClientUpdateRequest) GetSiretOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Siret.Get(), o.Siret.IsSet()
+}
+
+// HasSiret returns a boolean if a field has been set.
+func (o *ClientUpdateRequest) HasSiret() bool {
+	if o != nil && o.Siret.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSiret gets a reference to the given NullableString and assigns it to the Siret field.
+func (o *ClientUpdateRequest) SetSiret(v string) {
+	o.Siret.Set(&v)
+}
+// SetSiretNil sets the value for Siret to be an explicit nil
+func (o *ClientUpdateRequest) SetSiretNil() {
+	o.Siret.Set(nil)
+}
+
+// UnsetSiret ensures that no value is present for Siret, not even an explicit nil
+func (o *ClientUpdateRequest) UnsetSiret() {
+	o.Siret.Unset()
+}
+
+func (o ClientUpdateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -103,83 +176,52 @@ func (o PaymentAmountByRate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentAmountByRate) ToMap() (map[string]interface{}, error) {
+func (o ClientUpdateRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["rate"] = o.Rate
-	toSerialize["amount"] = o.Amount
+	if o.Name.IsSet() {
+		toSerialize["name"] = o.Name.Get()
+	}
+	if o.Description.IsSet() {
+		toSerialize["description"] = o.Description.Get()
+	}
+	if o.Siret.IsSet() {
+		toSerialize["siret"] = o.Siret.Get()
+	}
 	return toSerialize, nil
 }
 
-func (o *PaymentAmountByRate) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"rate",
-		"amount",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varPaymentAmountByRate := _PaymentAmountByRate{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPaymentAmountByRate)
-
-	if err != nil {
-		return err
-	}
-
-	*o = PaymentAmountByRate(varPaymentAmountByRate)
-
-	return err
-}
-
-type NullablePaymentAmountByRate struct {
-	value *PaymentAmountByRate
+type NullableClientUpdateRequest struct {
+	value *ClientUpdateRequest
 	isSet bool
 }
 
-func (v NullablePaymentAmountByRate) Get() *PaymentAmountByRate {
+func (v NullableClientUpdateRequest) Get() *ClientUpdateRequest {
 	return v.value
 }
 
-func (v *NullablePaymentAmountByRate) Set(val *PaymentAmountByRate) {
+func (v *NullableClientUpdateRequest) Set(val *ClientUpdateRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullablePaymentAmountByRate) IsSet() bool {
+func (v NullableClientUpdateRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullablePaymentAmountByRate) Unset() {
+func (v *NullableClientUpdateRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullablePaymentAmountByRate(val *PaymentAmountByRate) *NullablePaymentAmountByRate {
-	return &NullablePaymentAmountByRate{value: val, isSet: true}
+func NewNullableClientUpdateRequest(val *ClientUpdateRequest) *NullableClientUpdateRequest {
+	return &NullableClientUpdateRequest{value: val, isSet: true}
 }
 
-func (v NullablePaymentAmountByRate) MarshalJSON() ([]byte, error) {
+func (v NullableClientUpdateRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullablePaymentAmountByRate) UnmarshalJSON(src []byte) error {
+func (v *NullableClientUpdateRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -18,6 +18,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"mime/multipart"
 	"net/http"
 	"sync"
 	"time"
@@ -53,9 +54,14 @@ func NewClientWithConfig(email, password, clientUID, apiURL string, timeout, pol
 	}
 }
 
-// Post sends a POST request to /api/v1/{path}
+// Post sends a POST request to /api/v1/{path} (JSON body)
 func (c *Client) Post(path string, data map[string]any) (map[string]any, error) {
 	return c.request("POST", path, data, true)
+}
+
+// PostMultipart sends a POST request with multipart/form-data (for file uploads)
+func (c *Client) PostMultipart(path string, data map[string]string, files map[string][]byte) (map[string]any, error) {
+	return c.requestMultipart(path, data, files, true)
 }
 
 // Get sends a GET request to /api/v1/{path}
@@ -107,6 +113,73 @@ func (c *Client) request(method, path string, data map[string]any, retryAuth boo
 	}
 
 	// Auto-decode: support both content_b64 and contentB64
+	b64, _ := result["content_b64"].(string)
+	if b64 == "" {
+		b64, _ = result["contentB64"].(string)
+	}
+	if b64 != "" {
+		decoded, _ := base64.StdEncoding.DecodeString(b64)
+		result["content"] = decoded
+		delete(result, "content_b64")
+		delete(result, "contentB64")
+	}
+
+	return result, nil
+}
+
+func (c *Client) requestMultipart(path string, data map[string]string, files map[string][]byte, retryAuth bool) (map[string]any, error) {
+	if err := c.ensureAuth(); err != nil {
+		return nil, err
+	}
+
+	url := fmt.Sprintf("%s/api/v1/%s", c.apiURL, path)
+
+	// Create multipart form
+	var buf bytes.Buffer
+	writer := multipart.NewWriter(&buf)
+
+	// Add form fields
+	for key, value := range data {
+		writer.WriteField(key, value)
+	}
+
+	// Add files
+	for key, content := range files {
+		part, _ := writer.CreateFormFile(key, key)
+		part.Write(content)
+	}
+	writer.Close()
+
+	req, _ := http.NewRequest("POST", url, &buf)
+	req.Header.Set("Authorization", "Bearer "+c.token)
+	req.Header.Set("Content-Type", writer.FormDataContentType())
+
+	resp, err := c.httpClient.Do(req)
+	if err != nil {
+		return nil, &FactPulseError{Message: fmt.Sprintf("Network error: %v", err)}
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode == 401 && retryAuth {
+		c.invalidateToken()
+		return c.requestMultipart(path, data, files, false)
+	}
+
+	result, err := c.parseResponse(resp)
+	if err != nil {
+		return nil, err
+	}
+
+	// Auto-poll
+	taskID, _ := result["taskId"].(string)
+	if taskID == "" {
+		taskID, _ = result["task_id"].(string)
+	}
+	if taskID != "" {
+		return c.poll(taskID)
+	}
+
+	// Auto-decode
 	b64, _ := result["content_b64"].(string)
 	if b64 == "" {
 		b64, _ = result["contentB64"].(string)

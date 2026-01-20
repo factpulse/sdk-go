@@ -16,125 +16,93 @@ import (
 	"fmt"
 )
 
-// InvoiceTypeCode Document type according to BR-FR-04 (UNTDID 1001 codes).  | Code | Name | Description | |------|------|-------------| | 380 | INVOICE | Commercial invoice | | 389 | SELF_BILLED_INVOICE | Self-billed invoice | | 393 | FACTORED_INVOICE | Factored invoice | | 501 | SELF_BILLED_FACTORED_INVOICE | Self-billed factored invoice | | 386 | PREPAYMENT_INVOICE | Prepayment invoice | | 500 | SELF_BILLED_PREPAYMENT_INVOICE | Self-billed prepayment invoice | | 384 | CORRECTIVE_INVOICE | Corrective invoice | | 471 | SELF_BILLED_CORRECTIVE_INVOICE | Self-billed corrective invoice | | 472 | FACTORED_CORRECTIVE_INVOICE | Factored corrective invoice | | 473 | SELF_BILLED_FACTORED_CORRECTIVE_INVOICE | Self-billed factored corrective invoice | | 381 | CREDIT_NOTE | Credit note | | 261 | SELF_BILLED_CREDIT_NOTE | Self-billed credit note | | 262 | GLOBAL_ALLOWANCE_CREDIT_NOTE | Credit note for global allowance | | 396 | FACTORED_CREDIT_NOTE | Factored credit note | | 502 | SELF_BILLED_FACTORED_CREDIT_NOTE | Self-billed factored credit note | | 503 | PREPAYMENT_CREDIT_NOTE | Credit note for prepayment invoice |
-type InvoiceTypeCode string
 
-// List of InvoiceTypeCode
-const (
-	INVOICETYPECODE_INVOICE InvoiceTypeCode = "380"
-	INVOICETYPECODE_SELF_BILLED_INVOICE InvoiceTypeCode = "389"
-	INVOICETYPECODE_FACTORED_INVOICE InvoiceTypeCode = "393"
-	INVOICETYPECODE_SELF_BILLED_FACTORED_INVOICE InvoiceTypeCode = "501"
-	INVOICETYPECODE_PREPAYMENT_INVOICE InvoiceTypeCode = "386"
-	INVOICETYPECODE_SELF_BILLED_PREPAYMENT_INVOICE InvoiceTypeCode = "500"
-	INVOICETYPECODE_CORRECTIVE_INVOICE InvoiceTypeCode = "384"
-	INVOICETYPECODE_SELF_BILLED_CORRECTIVE_INVOICE InvoiceTypeCode = "471"
-	INVOICETYPECODE_FACTORED_CORRECTIVE_INVOICE InvoiceTypeCode = "472"
-	INVOICETYPECODE_SELF_BILLED_FACTORED_CORRECTIVE_INVOICE InvoiceTypeCode = "473"
-	INVOICETYPECODE_CREDIT_NOTE InvoiceTypeCode = "381"
-	INVOICETYPECODE_SELF_BILLED_CREDIT_NOTE InvoiceTypeCode = "261"
-	INVOICETYPECODE_GLOBAL_ALLOWANCE_CREDIT_NOTE InvoiceTypeCode = "262"
-	INVOICETYPECODE_FACTORED_CREDIT_NOTE InvoiceTypeCode = "396"
-	INVOICETYPECODE_SELF_BILLED_FACTORED_CREDIT_NOTE InvoiceTypeCode = "502"
-	INVOICETYPECODE_PREPAYMENT_CREDIT_NOTE InvoiceTypeCode = "503"
-)
-
-// All allowed values of InvoiceTypeCode enum
-var AllowedInvoiceTypeCodeEnumValues = []InvoiceTypeCode{
-	"380",
-	"389",
-	"393",
-	"501",
-	"386",
-	"500",
-	"384",
-	"471",
-	"472",
-	"473",
-	"381",
-	"261",
-	"262",
-	"396",
-	"502",
-	"503",
+// Amount2 Allowance/charge amount (BT-92/99/136/141).
+type Amount2 struct {
+	Float32 *float32
+	String *string
 }
 
-func (v *InvoiceTypeCode) UnmarshalJSON(src []byte) error {
-	var value string
-	err := json.Unmarshal(src, &value)
-	if err != nil {
-		return err
-	}
-	enumTypeValue := InvoiceTypeCode(value)
-	for _, existing := range AllowedInvoiceTypeCodeEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
+// Unmarshal JSON data into any of the pointers in the struct
+func (dst *Amount2) UnmarshalJSON(data []byte) error {
+	var err error
+	// try to unmarshal JSON data into Float32
+	err = json.Unmarshal(data, &dst.Float32);
+	if err == nil {
+		jsonFloat32, _ := json.Marshal(dst.Float32)
+		if string(jsonFloat32) == "{}" { // empty struct
+			dst.Float32 = nil
+		} else {
+			return nil // data stored in dst.Float32, return on the first match
 		}
-	}
-
-	return fmt.Errorf("%+v is not a valid InvoiceTypeCode", value)
-}
-
-// NewInvoiceTypeCodeFromValue returns a pointer to a valid InvoiceTypeCode
-// for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewInvoiceTypeCodeFromValue(v string) (*InvoiceTypeCode, error) {
-	ev := InvoiceTypeCode(v)
-	if ev.IsValid() {
-		return &ev, nil
 	} else {
-		return nil, fmt.Errorf("invalid value '%v' for InvoiceTypeCode: valid values are %v", v, AllowedInvoiceTypeCodeEnumValues)
+		dst.Float32 = nil
 	}
-}
 
-// IsValid return true if the value is valid for the enum, false otherwise
-func (v InvoiceTypeCode) IsValid() bool {
-	for _, existing := range AllowedInvoiceTypeCodeEnumValues {
-		if existing == v {
-			return true
+	// try to unmarshal JSON data into String
+	err = json.Unmarshal(data, &dst.String);
+	if err == nil {
+		jsonString, _ := json.Marshal(dst.String)
+		if string(jsonString) == "{}" { // empty struct
+			dst.String = nil
+		} else {
+			return nil // data stored in dst.String, return on the first match
 		}
+	} else {
+		dst.String = nil
 	}
-	return false
+
+	return fmt.Errorf("data failed to match schemas in anyOf(Amount2)")
 }
 
-// Ptr returns reference to InvoiceTypeCode value
-func (v InvoiceTypeCode) Ptr() *InvoiceTypeCode {
-	return &v
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src Amount2) MarshalJSON() ([]byte, error) {
+	if src.Float32 != nil {
+		return json.Marshal(&src.Float32)
+	}
+
+	if src.String != nil {
+		return json.Marshal(&src.String)
+	}
+
+	return nil, nil // no data in anyOf schemas
 }
 
-type NullableInvoiceTypeCode struct {
-	value *InvoiceTypeCode
+
+type NullableAmount2 struct {
+	value *Amount2
 	isSet bool
 }
 
-func (v NullableInvoiceTypeCode) Get() *InvoiceTypeCode {
+func (v NullableAmount2) Get() *Amount2 {
 	return v.value
 }
 
-func (v *NullableInvoiceTypeCode) Set(val *InvoiceTypeCode) {
+func (v *NullableAmount2) Set(val *Amount2) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableInvoiceTypeCode) IsSet() bool {
+func (v NullableAmount2) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableInvoiceTypeCode) Unset() {
+func (v *NullableAmount2) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableInvoiceTypeCode(val *InvoiceTypeCode) *NullableInvoiceTypeCode {
-	return &NullableInvoiceTypeCode{value: val, isSet: true}
+func NewNullableAmount2(val *Amount2) *NullableAmount2 {
+	return &NullableAmount2{value: val, isSet: true}
 }
 
-func (v NullableInvoiceTypeCode) MarshalJSON() ([]byte, error) {
+func (v NullableAmount2) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableInvoiceTypeCode) UnmarshalJSON(src []byte) error {
+func (v *NullableAmount2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
 

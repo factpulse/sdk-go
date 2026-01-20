@@ -17,72 +17,145 @@ import (
 	"fmt"
 )
 
-// checks if the SubmitCDARXMLRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &SubmitCDARXMLRequest{}
+// checks if the RefuseeRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RefuseeRequest{}
 
-// SubmitCDARXMLRequest Requête de soumission d'un XML CDAR pré-généré.
-type SubmitCDARXMLRequest struct {
-	// XML CDAR à soumettre
-	Xml string `json:"xml"`
-	// Type de flux AFNOR
+// RefuseeRequest Requête simplifiée pour soumettre un statut REFUSÉE (210).  Statut obligatoire PPF - Le destinataire refuse la facture. Un code motif est OBLIGATOIRE (BR-FR-CDV-15).  Codes motif autorisés (BR-FR-CDV-CL-09_MDT-113_210): - TX_TVA_ERR: Taux de TVA erroné - MONTANTTOTAL_ERR: Montant total erroné - CALCUL_ERR: Erreur de calcul - NON_CONFORME: Non conforme - DOUBLON: Doublon - DEST_ERR: Destinataire erroné - TRANSAC_INC: Transaction incomplète - EMMET_INC: Émetteur inconnu - CONTRAT_TERM: Contrat terminé - DOUBLE_FACT: Double facturation - CMD_ERR: Commande erronée - ADR_ERR: Adresse erronée - REF_CT_ABSENT: Référence contrat absente
+type RefuseeRequest struct {
+	// Identifiant de la facture (BT-1)
+	InvoiceId string `json:"invoiceId"`
+	// Date d'émission de la facture (YYYY-MM-DD)
+	InvoiceIssueDate string `json:"invoiceIssueDate"`
+	SenderSiren NullableString `json:"senderSiren,omitempty"`
+	// Type de flux: SupplierInvoiceLC (acheteur) ou CustomerInvoiceLC (vendeur)
 	FlowType *string `json:"flowType,omitempty"`
-	Filename NullableString `json:"filename,omitempty"`
 	PdpFlowServiceUrl NullableString `json:"pdpFlowServiceUrl,omitempty"`
 	PdpTokenUrl NullableString `json:"pdpTokenUrl,omitempty"`
 	PdpClientId NullableString `json:"pdpClientId,omitempty"`
 	PdpClientSecret NullableString `json:"pdpClientSecret,omitempty"`
+	// Code motif du refus (obligatoire). Valeurs autorisées: TX_TVA_ERR, MONTANTTOTAL_ERR, CALCUL_ERR, NON_CONFORME, DOUBLON, DEST_ERR, TRANSAC_INC, EMMET_INC, CONTRAT_TERM, DOUBLE_FACT, CMD_ERR, ADR_ERR, REF_CT_ABSENT
+	ReasonCode string `json:"reasonCode"`
+	ReasonText NullableString `json:"reasonText,omitempty"`
 }
 
-type _SubmitCDARXMLRequest SubmitCDARXMLRequest
+type _RefuseeRequest RefuseeRequest
 
-// NewSubmitCDARXMLRequest instantiates a new SubmitCDARXMLRequest object
+// NewRefuseeRequest instantiates a new RefuseeRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSubmitCDARXMLRequest(xml string) *SubmitCDARXMLRequest {
-	this := SubmitCDARXMLRequest{}
-	this.Xml = xml
-	var flowType string = "CustomerInvoiceLC"
+func NewRefuseeRequest(invoiceId string, invoiceIssueDate string, reasonCode string) *RefuseeRequest {
+	this := RefuseeRequest{}
+	this.InvoiceId = invoiceId
+	this.InvoiceIssueDate = invoiceIssueDate
+	var flowType string = "SupplierInvoiceLC"
 	this.FlowType = &flowType
+	this.ReasonCode = reasonCode
 	return &this
 }
 
-// NewSubmitCDARXMLRequestWithDefaults instantiates a new SubmitCDARXMLRequest object
+// NewRefuseeRequestWithDefaults instantiates a new RefuseeRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSubmitCDARXMLRequestWithDefaults() *SubmitCDARXMLRequest {
-	this := SubmitCDARXMLRequest{}
-	var flowType string = "CustomerInvoiceLC"
+func NewRefuseeRequestWithDefaults() *RefuseeRequest {
+	this := RefuseeRequest{}
+	var flowType string = "SupplierInvoiceLC"
 	this.FlowType = &flowType
 	return &this
 }
 
-// GetXml returns the Xml field value
-func (o *SubmitCDARXMLRequest) GetXml() string {
+// GetInvoiceId returns the InvoiceId field value
+func (o *RefuseeRequest) GetInvoiceId() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Xml
+	return o.InvoiceId
 }
 
-// GetXmlOk returns a tuple with the Xml field value
+// GetInvoiceIdOk returns a tuple with the InvoiceId field value
 // and a boolean to check if the value has been set.
-func (o *SubmitCDARXMLRequest) GetXmlOk() (*string, bool) {
+func (o *RefuseeRequest) GetInvoiceIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Xml, true
+	return &o.InvoiceId, true
 }
 
-// SetXml sets field value
-func (o *SubmitCDARXMLRequest) SetXml(v string) {
-	o.Xml = v
+// SetInvoiceId sets field value
+func (o *RefuseeRequest) SetInvoiceId(v string) {
+	o.InvoiceId = v
+}
+
+// GetInvoiceIssueDate returns the InvoiceIssueDate field value
+func (o *RefuseeRequest) GetInvoiceIssueDate() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.InvoiceIssueDate
+}
+
+// GetInvoiceIssueDateOk returns a tuple with the InvoiceIssueDate field value
+// and a boolean to check if the value has been set.
+func (o *RefuseeRequest) GetInvoiceIssueDateOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.InvoiceIssueDate, true
+}
+
+// SetInvoiceIssueDate sets field value
+func (o *RefuseeRequest) SetInvoiceIssueDate(v string) {
+	o.InvoiceIssueDate = v
+}
+
+// GetSenderSiren returns the SenderSiren field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *RefuseeRequest) GetSenderSiren() string {
+	if o == nil || IsNil(o.SenderSiren.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.SenderSiren.Get()
+}
+
+// GetSenderSirenOk returns a tuple with the SenderSiren field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *RefuseeRequest) GetSenderSirenOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SenderSiren.Get(), o.SenderSiren.IsSet()
+}
+
+// HasSenderSiren returns a boolean if a field has been set.
+func (o *RefuseeRequest) HasSenderSiren() bool {
+	if o != nil && o.SenderSiren.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSenderSiren gets a reference to the given NullableString and assigns it to the SenderSiren field.
+func (o *RefuseeRequest) SetSenderSiren(v string) {
+	o.SenderSiren.Set(&v)
+}
+// SetSenderSirenNil sets the value for SenderSiren to be an explicit nil
+func (o *RefuseeRequest) SetSenderSirenNil() {
+	o.SenderSiren.Set(nil)
+}
+
+// UnsetSenderSiren ensures that no value is present for SenderSiren, not even an explicit nil
+func (o *RefuseeRequest) UnsetSenderSiren() {
+	o.SenderSiren.Unset()
 }
 
 // GetFlowType returns the FlowType field value if set, zero value otherwise.
-func (o *SubmitCDARXMLRequest) GetFlowType() string {
+func (o *RefuseeRequest) GetFlowType() string {
 	if o == nil || IsNil(o.FlowType) {
 		var ret string
 		return ret
@@ -92,7 +165,7 @@ func (o *SubmitCDARXMLRequest) GetFlowType() string {
 
 // GetFlowTypeOk returns a tuple with the FlowType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SubmitCDARXMLRequest) GetFlowTypeOk() (*string, bool) {
+func (o *RefuseeRequest) GetFlowTypeOk() (*string, bool) {
 	if o == nil || IsNil(o.FlowType) {
 		return nil, false
 	}
@@ -100,7 +173,7 @@ func (o *SubmitCDARXMLRequest) GetFlowTypeOk() (*string, bool) {
 }
 
 // HasFlowType returns a boolean if a field has been set.
-func (o *SubmitCDARXMLRequest) HasFlowType() bool {
+func (o *RefuseeRequest) HasFlowType() bool {
 	if o != nil && !IsNil(o.FlowType) {
 		return true
 	}
@@ -109,54 +182,12 @@ func (o *SubmitCDARXMLRequest) HasFlowType() bool {
 }
 
 // SetFlowType gets a reference to the given string and assigns it to the FlowType field.
-func (o *SubmitCDARXMLRequest) SetFlowType(v string) {
+func (o *RefuseeRequest) SetFlowType(v string) {
 	o.FlowType = &v
 }
 
-// GetFilename returns the Filename field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SubmitCDARXMLRequest) GetFilename() string {
-	if o == nil || IsNil(o.Filename.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.Filename.Get()
-}
-
-// GetFilenameOk returns a tuple with the Filename field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SubmitCDARXMLRequest) GetFilenameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Filename.Get(), o.Filename.IsSet()
-}
-
-// HasFilename returns a boolean if a field has been set.
-func (o *SubmitCDARXMLRequest) HasFilename() bool {
-	if o != nil && o.Filename.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFilename gets a reference to the given NullableString and assigns it to the Filename field.
-func (o *SubmitCDARXMLRequest) SetFilename(v string) {
-	o.Filename.Set(&v)
-}
-// SetFilenameNil sets the value for Filename to be an explicit nil
-func (o *SubmitCDARXMLRequest) SetFilenameNil() {
-	o.Filename.Set(nil)
-}
-
-// UnsetFilename ensures that no value is present for Filename, not even an explicit nil
-func (o *SubmitCDARXMLRequest) UnsetFilename() {
-	o.Filename.Unset()
-}
-
 // GetPdpFlowServiceUrl returns the PdpFlowServiceUrl field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SubmitCDARXMLRequest) GetPdpFlowServiceUrl() string {
+func (o *RefuseeRequest) GetPdpFlowServiceUrl() string {
 	if o == nil || IsNil(o.PdpFlowServiceUrl.Get()) {
 		var ret string
 		return ret
@@ -167,7 +198,7 @@ func (o *SubmitCDARXMLRequest) GetPdpFlowServiceUrl() string {
 // GetPdpFlowServiceUrlOk returns a tuple with the PdpFlowServiceUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SubmitCDARXMLRequest) GetPdpFlowServiceUrlOk() (*string, bool) {
+func (o *RefuseeRequest) GetPdpFlowServiceUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -175,7 +206,7 @@ func (o *SubmitCDARXMLRequest) GetPdpFlowServiceUrlOk() (*string, bool) {
 }
 
 // HasPdpFlowServiceUrl returns a boolean if a field has been set.
-func (o *SubmitCDARXMLRequest) HasPdpFlowServiceUrl() bool {
+func (o *RefuseeRequest) HasPdpFlowServiceUrl() bool {
 	if o != nil && o.PdpFlowServiceUrl.IsSet() {
 		return true
 	}
@@ -184,21 +215,21 @@ func (o *SubmitCDARXMLRequest) HasPdpFlowServiceUrl() bool {
 }
 
 // SetPdpFlowServiceUrl gets a reference to the given NullableString and assigns it to the PdpFlowServiceUrl field.
-func (o *SubmitCDARXMLRequest) SetPdpFlowServiceUrl(v string) {
+func (o *RefuseeRequest) SetPdpFlowServiceUrl(v string) {
 	o.PdpFlowServiceUrl.Set(&v)
 }
 // SetPdpFlowServiceUrlNil sets the value for PdpFlowServiceUrl to be an explicit nil
-func (o *SubmitCDARXMLRequest) SetPdpFlowServiceUrlNil() {
+func (o *RefuseeRequest) SetPdpFlowServiceUrlNil() {
 	o.PdpFlowServiceUrl.Set(nil)
 }
 
 // UnsetPdpFlowServiceUrl ensures that no value is present for PdpFlowServiceUrl, not even an explicit nil
-func (o *SubmitCDARXMLRequest) UnsetPdpFlowServiceUrl() {
+func (o *RefuseeRequest) UnsetPdpFlowServiceUrl() {
 	o.PdpFlowServiceUrl.Unset()
 }
 
 // GetPdpTokenUrl returns the PdpTokenUrl field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SubmitCDARXMLRequest) GetPdpTokenUrl() string {
+func (o *RefuseeRequest) GetPdpTokenUrl() string {
 	if o == nil || IsNil(o.PdpTokenUrl.Get()) {
 		var ret string
 		return ret
@@ -209,7 +240,7 @@ func (o *SubmitCDARXMLRequest) GetPdpTokenUrl() string {
 // GetPdpTokenUrlOk returns a tuple with the PdpTokenUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SubmitCDARXMLRequest) GetPdpTokenUrlOk() (*string, bool) {
+func (o *RefuseeRequest) GetPdpTokenUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -217,7 +248,7 @@ func (o *SubmitCDARXMLRequest) GetPdpTokenUrlOk() (*string, bool) {
 }
 
 // HasPdpTokenUrl returns a boolean if a field has been set.
-func (o *SubmitCDARXMLRequest) HasPdpTokenUrl() bool {
+func (o *RefuseeRequest) HasPdpTokenUrl() bool {
 	if o != nil && o.PdpTokenUrl.IsSet() {
 		return true
 	}
@@ -226,21 +257,21 @@ func (o *SubmitCDARXMLRequest) HasPdpTokenUrl() bool {
 }
 
 // SetPdpTokenUrl gets a reference to the given NullableString and assigns it to the PdpTokenUrl field.
-func (o *SubmitCDARXMLRequest) SetPdpTokenUrl(v string) {
+func (o *RefuseeRequest) SetPdpTokenUrl(v string) {
 	o.PdpTokenUrl.Set(&v)
 }
 // SetPdpTokenUrlNil sets the value for PdpTokenUrl to be an explicit nil
-func (o *SubmitCDARXMLRequest) SetPdpTokenUrlNil() {
+func (o *RefuseeRequest) SetPdpTokenUrlNil() {
 	o.PdpTokenUrl.Set(nil)
 }
 
 // UnsetPdpTokenUrl ensures that no value is present for PdpTokenUrl, not even an explicit nil
-func (o *SubmitCDARXMLRequest) UnsetPdpTokenUrl() {
+func (o *RefuseeRequest) UnsetPdpTokenUrl() {
 	o.PdpTokenUrl.Unset()
 }
 
 // GetPdpClientId returns the PdpClientId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SubmitCDARXMLRequest) GetPdpClientId() string {
+func (o *RefuseeRequest) GetPdpClientId() string {
 	if o == nil || IsNil(o.PdpClientId.Get()) {
 		var ret string
 		return ret
@@ -251,7 +282,7 @@ func (o *SubmitCDARXMLRequest) GetPdpClientId() string {
 // GetPdpClientIdOk returns a tuple with the PdpClientId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SubmitCDARXMLRequest) GetPdpClientIdOk() (*string, bool) {
+func (o *RefuseeRequest) GetPdpClientIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -259,7 +290,7 @@ func (o *SubmitCDARXMLRequest) GetPdpClientIdOk() (*string, bool) {
 }
 
 // HasPdpClientId returns a boolean if a field has been set.
-func (o *SubmitCDARXMLRequest) HasPdpClientId() bool {
+func (o *RefuseeRequest) HasPdpClientId() bool {
 	if o != nil && o.PdpClientId.IsSet() {
 		return true
 	}
@@ -268,21 +299,21 @@ func (o *SubmitCDARXMLRequest) HasPdpClientId() bool {
 }
 
 // SetPdpClientId gets a reference to the given NullableString and assigns it to the PdpClientId field.
-func (o *SubmitCDARXMLRequest) SetPdpClientId(v string) {
+func (o *RefuseeRequest) SetPdpClientId(v string) {
 	o.PdpClientId.Set(&v)
 }
 // SetPdpClientIdNil sets the value for PdpClientId to be an explicit nil
-func (o *SubmitCDARXMLRequest) SetPdpClientIdNil() {
+func (o *RefuseeRequest) SetPdpClientIdNil() {
 	o.PdpClientId.Set(nil)
 }
 
 // UnsetPdpClientId ensures that no value is present for PdpClientId, not even an explicit nil
-func (o *SubmitCDARXMLRequest) UnsetPdpClientId() {
+func (o *RefuseeRequest) UnsetPdpClientId() {
 	o.PdpClientId.Unset()
 }
 
 // GetPdpClientSecret returns the PdpClientSecret field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SubmitCDARXMLRequest) GetPdpClientSecret() string {
+func (o *RefuseeRequest) GetPdpClientSecret() string {
 	if o == nil || IsNil(o.PdpClientSecret.Get()) {
 		var ret string
 		return ret
@@ -293,7 +324,7 @@ func (o *SubmitCDARXMLRequest) GetPdpClientSecret() string {
 // GetPdpClientSecretOk returns a tuple with the PdpClientSecret field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SubmitCDARXMLRequest) GetPdpClientSecretOk() (*string, bool) {
+func (o *RefuseeRequest) GetPdpClientSecretOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -301,7 +332,7 @@ func (o *SubmitCDARXMLRequest) GetPdpClientSecretOk() (*string, bool) {
 }
 
 // HasPdpClientSecret returns a boolean if a field has been set.
-func (o *SubmitCDARXMLRequest) HasPdpClientSecret() bool {
+func (o *RefuseeRequest) HasPdpClientSecret() bool {
 	if o != nil && o.PdpClientSecret.IsSet() {
 		return true
 	}
@@ -310,20 +341,86 @@ func (o *SubmitCDARXMLRequest) HasPdpClientSecret() bool {
 }
 
 // SetPdpClientSecret gets a reference to the given NullableString and assigns it to the PdpClientSecret field.
-func (o *SubmitCDARXMLRequest) SetPdpClientSecret(v string) {
+func (o *RefuseeRequest) SetPdpClientSecret(v string) {
 	o.PdpClientSecret.Set(&v)
 }
 // SetPdpClientSecretNil sets the value for PdpClientSecret to be an explicit nil
-func (o *SubmitCDARXMLRequest) SetPdpClientSecretNil() {
+func (o *RefuseeRequest) SetPdpClientSecretNil() {
 	o.PdpClientSecret.Set(nil)
 }
 
 // UnsetPdpClientSecret ensures that no value is present for PdpClientSecret, not even an explicit nil
-func (o *SubmitCDARXMLRequest) UnsetPdpClientSecret() {
+func (o *RefuseeRequest) UnsetPdpClientSecret() {
 	o.PdpClientSecret.Unset()
 }
 
-func (o SubmitCDARXMLRequest) MarshalJSON() ([]byte, error) {
+// GetReasonCode returns the ReasonCode field value
+func (o *RefuseeRequest) GetReasonCode() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ReasonCode
+}
+
+// GetReasonCodeOk returns a tuple with the ReasonCode field value
+// and a boolean to check if the value has been set.
+func (o *RefuseeRequest) GetReasonCodeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ReasonCode, true
+}
+
+// SetReasonCode sets field value
+func (o *RefuseeRequest) SetReasonCode(v string) {
+	o.ReasonCode = v
+}
+
+// GetReasonText returns the ReasonText field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *RefuseeRequest) GetReasonText() string {
+	if o == nil || IsNil(o.ReasonText.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ReasonText.Get()
+}
+
+// GetReasonTextOk returns a tuple with the ReasonText field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *RefuseeRequest) GetReasonTextOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ReasonText.Get(), o.ReasonText.IsSet()
+}
+
+// HasReasonText returns a boolean if a field has been set.
+func (o *RefuseeRequest) HasReasonText() bool {
+	if o != nil && o.ReasonText.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetReasonText gets a reference to the given NullableString and assigns it to the ReasonText field.
+func (o *RefuseeRequest) SetReasonText(v string) {
+	o.ReasonText.Set(&v)
+}
+// SetReasonTextNil sets the value for ReasonText to be an explicit nil
+func (o *RefuseeRequest) SetReasonTextNil() {
+	o.ReasonText.Set(nil)
+}
+
+// UnsetReasonText ensures that no value is present for ReasonText, not even an explicit nil
+func (o *RefuseeRequest) UnsetReasonText() {
+	o.ReasonText.Unset()
+}
+
+func (o RefuseeRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -331,14 +428,15 @@ func (o SubmitCDARXMLRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SubmitCDARXMLRequest) ToMap() (map[string]interface{}, error) {
+func (o RefuseeRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["xml"] = o.Xml
+	toSerialize["invoiceId"] = o.InvoiceId
+	toSerialize["invoiceIssueDate"] = o.InvoiceIssueDate
+	if o.SenderSiren.IsSet() {
+		toSerialize["senderSiren"] = o.SenderSiren.Get()
+	}
 	if !IsNil(o.FlowType) {
 		toSerialize["flowType"] = o.FlowType
-	}
-	if o.Filename.IsSet() {
-		toSerialize["filename"] = o.Filename.Get()
 	}
 	if o.PdpFlowServiceUrl.IsSet() {
 		toSerialize["pdpFlowServiceUrl"] = o.PdpFlowServiceUrl.Get()
@@ -352,15 +450,21 @@ func (o SubmitCDARXMLRequest) ToMap() (map[string]interface{}, error) {
 	if o.PdpClientSecret.IsSet() {
 		toSerialize["pdpClientSecret"] = o.PdpClientSecret.Get()
 	}
+	toSerialize["reasonCode"] = o.ReasonCode
+	if o.ReasonText.IsSet() {
+		toSerialize["reasonText"] = o.ReasonText.Get()
+	}
 	return toSerialize, nil
 }
 
-func (o *SubmitCDARXMLRequest) UnmarshalJSON(data []byte) (err error) {
+func (o *RefuseeRequest) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"xml",
+		"invoiceId",
+		"invoiceIssueDate",
+		"reasonCode",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -377,53 +481,53 @@ func (o *SubmitCDARXMLRequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varSubmitCDARXMLRequest := _SubmitCDARXMLRequest{}
+	varRefuseeRequest := _RefuseeRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSubmitCDARXMLRequest)
+	err = decoder.Decode(&varRefuseeRequest)
 
 	if err != nil {
 		return err
 	}
 
-	*o = SubmitCDARXMLRequest(varSubmitCDARXMLRequest)
+	*o = RefuseeRequest(varRefuseeRequest)
 
 	return err
 }
 
-type NullableSubmitCDARXMLRequest struct {
-	value *SubmitCDARXMLRequest
+type NullableRefuseeRequest struct {
+	value *RefuseeRequest
 	isSet bool
 }
 
-func (v NullableSubmitCDARXMLRequest) Get() *SubmitCDARXMLRequest {
+func (v NullableRefuseeRequest) Get() *RefuseeRequest {
 	return v.value
 }
 
-func (v *NullableSubmitCDARXMLRequest) Set(val *SubmitCDARXMLRequest) {
+func (v *NullableRefuseeRequest) Set(val *RefuseeRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSubmitCDARXMLRequest) IsSet() bool {
+func (v NullableRefuseeRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSubmitCDARXMLRequest) Unset() {
+func (v *NullableRefuseeRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSubmitCDARXMLRequest(val *SubmitCDARXMLRequest) *NullableSubmitCDARXMLRequest {
-	return &NullableSubmitCDARXMLRequest{value: val, isSet: true}
+func NewNullableRefuseeRequest(val *RefuseeRequest) *NullableRefuseeRequest {
+	return &NullableRefuseeRequest{value: val, isSet: true}
 }
 
-func (v NullableSubmitCDARXMLRequest) MarshalJSON() ([]byte, error) {
+func (v NullableRefuseeRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSubmitCDARXMLRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableRefuseeRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

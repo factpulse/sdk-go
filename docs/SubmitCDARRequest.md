@@ -23,6 +23,10 @@ Name | Type | Description | Notes
 **ActionCode** | Pointer to **NullableString** |  | [optional] 
 **EncaisseAmount** | Pointer to [**NullableEncaisseamount**](Encaisseamount.md) |  | [optional] 
 **FlowType** | Pointer to **string** | Type de flux AFNOR (CustomerInvoiceLC, SupplierInvoiceLC, etc.) | [optional] [default to "CustomerInvoiceLC"]
+**PdpFlowServiceUrl** | Pointer to **NullableString** |  | [optional] 
+**PdpTokenUrl** | Pointer to **NullableString** |  | [optional] 
+**PdpClientId** | Pointer to **NullableString** |  | [optional] 
+**PdpClientSecret** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
@@ -573,6 +577,146 @@ SetFlowType sets FlowType field to given value.
 
 HasFlowType returns a boolean if a field has been set.
 
+### GetPdpFlowServiceUrl
+
+`func (o *SubmitCDARRequest) GetPdpFlowServiceUrl() string`
+
+GetPdpFlowServiceUrl returns the PdpFlowServiceUrl field if non-nil, zero value otherwise.
+
+### GetPdpFlowServiceUrlOk
+
+`func (o *SubmitCDARRequest) GetPdpFlowServiceUrlOk() (*string, bool)`
+
+GetPdpFlowServiceUrlOk returns a tuple with the PdpFlowServiceUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPdpFlowServiceUrl
+
+`func (o *SubmitCDARRequest) SetPdpFlowServiceUrl(v string)`
+
+SetPdpFlowServiceUrl sets PdpFlowServiceUrl field to given value.
+
+### HasPdpFlowServiceUrl
+
+`func (o *SubmitCDARRequest) HasPdpFlowServiceUrl() bool`
+
+HasPdpFlowServiceUrl returns a boolean if a field has been set.
+
+### SetPdpFlowServiceUrlNil
+
+`func (o *SubmitCDARRequest) SetPdpFlowServiceUrlNil(b bool)`
+
+ SetPdpFlowServiceUrlNil sets the value for PdpFlowServiceUrl to be an explicit nil
+
+### UnsetPdpFlowServiceUrl
+`func (o *SubmitCDARRequest) UnsetPdpFlowServiceUrl()`
+
+UnsetPdpFlowServiceUrl ensures that no value is present for PdpFlowServiceUrl, not even an explicit nil
+### GetPdpTokenUrl
+
+`func (o *SubmitCDARRequest) GetPdpTokenUrl() string`
+
+GetPdpTokenUrl returns the PdpTokenUrl field if non-nil, zero value otherwise.
+
+### GetPdpTokenUrlOk
+
+`func (o *SubmitCDARRequest) GetPdpTokenUrlOk() (*string, bool)`
+
+GetPdpTokenUrlOk returns a tuple with the PdpTokenUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPdpTokenUrl
+
+`func (o *SubmitCDARRequest) SetPdpTokenUrl(v string)`
+
+SetPdpTokenUrl sets PdpTokenUrl field to given value.
+
+### HasPdpTokenUrl
+
+`func (o *SubmitCDARRequest) HasPdpTokenUrl() bool`
+
+HasPdpTokenUrl returns a boolean if a field has been set.
+
+### SetPdpTokenUrlNil
+
+`func (o *SubmitCDARRequest) SetPdpTokenUrlNil(b bool)`
+
+ SetPdpTokenUrlNil sets the value for PdpTokenUrl to be an explicit nil
+
+### UnsetPdpTokenUrl
+`func (o *SubmitCDARRequest) UnsetPdpTokenUrl()`
+
+UnsetPdpTokenUrl ensures that no value is present for PdpTokenUrl, not even an explicit nil
+### GetPdpClientId
+
+`func (o *SubmitCDARRequest) GetPdpClientId() string`
+
+GetPdpClientId returns the PdpClientId field if non-nil, zero value otherwise.
+
+### GetPdpClientIdOk
+
+`func (o *SubmitCDARRequest) GetPdpClientIdOk() (*string, bool)`
+
+GetPdpClientIdOk returns a tuple with the PdpClientId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPdpClientId
+
+`func (o *SubmitCDARRequest) SetPdpClientId(v string)`
+
+SetPdpClientId sets PdpClientId field to given value.
+
+### HasPdpClientId
+
+`func (o *SubmitCDARRequest) HasPdpClientId() bool`
+
+HasPdpClientId returns a boolean if a field has been set.
+
+### SetPdpClientIdNil
+
+`func (o *SubmitCDARRequest) SetPdpClientIdNil(b bool)`
+
+ SetPdpClientIdNil sets the value for PdpClientId to be an explicit nil
+
+### UnsetPdpClientId
+`func (o *SubmitCDARRequest) UnsetPdpClientId()`
+
+UnsetPdpClientId ensures that no value is present for PdpClientId, not even an explicit nil
+### GetPdpClientSecret
+
+`func (o *SubmitCDARRequest) GetPdpClientSecret() string`
+
+GetPdpClientSecret returns the PdpClientSecret field if non-nil, zero value otherwise.
+
+### GetPdpClientSecretOk
+
+`func (o *SubmitCDARRequest) GetPdpClientSecretOk() (*string, bool)`
+
+GetPdpClientSecretOk returns a tuple with the PdpClientSecret field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPdpClientSecret
+
+`func (o *SubmitCDARRequest) SetPdpClientSecret(v string)`
+
+SetPdpClientSecret sets PdpClientSecret field to given value.
+
+### HasPdpClientSecret
+
+`func (o *SubmitCDARRequest) HasPdpClientSecret() bool`
+
+HasPdpClientSecret returns a boolean if a field has been set.
+
+### SetPdpClientSecretNil
+
+`func (o *SubmitCDARRequest) SetPdpClientSecretNil(b bool)`
+
+ SetPdpClientSecretNil sets the value for PdpClientSecret to be an explicit nil
+
+### UnsetPdpClientSecret
+`func (o *SubmitCDARRequest) UnsetPdpClientSecret()`
+
+UnsetPdpClientSecret ensures that no value is present for PdpClientSecret, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

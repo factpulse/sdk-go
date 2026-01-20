@@ -52,6 +52,10 @@ type SubmitCDARRequest struct {
 	EncaisseAmount NullableEncaisseamount `json:"encaisseAmount,omitempty"`
 	// Type de flux AFNOR (CustomerInvoiceLC, SupplierInvoiceLC, etc.)
 	FlowType *string `json:"flowType,omitempty"`
+	PdpFlowServiceUrl NullableString `json:"pdpFlowServiceUrl,omitempty"`
+	PdpTokenUrl NullableString `json:"pdpTokenUrl,omitempty"`
+	PdpClientId NullableString `json:"pdpClientId,omitempty"`
+	PdpClientSecret NullableString `json:"pdpClientSecret,omitempty"`
 }
 
 type _SubmitCDARRequest SubmitCDARRequest
@@ -746,6 +750,174 @@ func (o *SubmitCDARRequest) SetFlowType(v string) {
 	o.FlowType = &v
 }
 
+// GetPdpFlowServiceUrl returns the PdpFlowServiceUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SubmitCDARRequest) GetPdpFlowServiceUrl() string {
+	if o == nil || IsNil(o.PdpFlowServiceUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.PdpFlowServiceUrl.Get()
+}
+
+// GetPdpFlowServiceUrlOk returns a tuple with the PdpFlowServiceUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SubmitCDARRequest) GetPdpFlowServiceUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PdpFlowServiceUrl.Get(), o.PdpFlowServiceUrl.IsSet()
+}
+
+// HasPdpFlowServiceUrl returns a boolean if a field has been set.
+func (o *SubmitCDARRequest) HasPdpFlowServiceUrl() bool {
+	if o != nil && o.PdpFlowServiceUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPdpFlowServiceUrl gets a reference to the given NullableString and assigns it to the PdpFlowServiceUrl field.
+func (o *SubmitCDARRequest) SetPdpFlowServiceUrl(v string) {
+	o.PdpFlowServiceUrl.Set(&v)
+}
+// SetPdpFlowServiceUrlNil sets the value for PdpFlowServiceUrl to be an explicit nil
+func (o *SubmitCDARRequest) SetPdpFlowServiceUrlNil() {
+	o.PdpFlowServiceUrl.Set(nil)
+}
+
+// UnsetPdpFlowServiceUrl ensures that no value is present for PdpFlowServiceUrl, not even an explicit nil
+func (o *SubmitCDARRequest) UnsetPdpFlowServiceUrl() {
+	o.PdpFlowServiceUrl.Unset()
+}
+
+// GetPdpTokenUrl returns the PdpTokenUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SubmitCDARRequest) GetPdpTokenUrl() string {
+	if o == nil || IsNil(o.PdpTokenUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.PdpTokenUrl.Get()
+}
+
+// GetPdpTokenUrlOk returns a tuple with the PdpTokenUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SubmitCDARRequest) GetPdpTokenUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PdpTokenUrl.Get(), o.PdpTokenUrl.IsSet()
+}
+
+// HasPdpTokenUrl returns a boolean if a field has been set.
+func (o *SubmitCDARRequest) HasPdpTokenUrl() bool {
+	if o != nil && o.PdpTokenUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPdpTokenUrl gets a reference to the given NullableString and assigns it to the PdpTokenUrl field.
+func (o *SubmitCDARRequest) SetPdpTokenUrl(v string) {
+	o.PdpTokenUrl.Set(&v)
+}
+// SetPdpTokenUrlNil sets the value for PdpTokenUrl to be an explicit nil
+func (o *SubmitCDARRequest) SetPdpTokenUrlNil() {
+	o.PdpTokenUrl.Set(nil)
+}
+
+// UnsetPdpTokenUrl ensures that no value is present for PdpTokenUrl, not even an explicit nil
+func (o *SubmitCDARRequest) UnsetPdpTokenUrl() {
+	o.PdpTokenUrl.Unset()
+}
+
+// GetPdpClientId returns the PdpClientId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SubmitCDARRequest) GetPdpClientId() string {
+	if o == nil || IsNil(o.PdpClientId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.PdpClientId.Get()
+}
+
+// GetPdpClientIdOk returns a tuple with the PdpClientId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SubmitCDARRequest) GetPdpClientIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PdpClientId.Get(), o.PdpClientId.IsSet()
+}
+
+// HasPdpClientId returns a boolean if a field has been set.
+func (o *SubmitCDARRequest) HasPdpClientId() bool {
+	if o != nil && o.PdpClientId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPdpClientId gets a reference to the given NullableString and assigns it to the PdpClientId field.
+func (o *SubmitCDARRequest) SetPdpClientId(v string) {
+	o.PdpClientId.Set(&v)
+}
+// SetPdpClientIdNil sets the value for PdpClientId to be an explicit nil
+func (o *SubmitCDARRequest) SetPdpClientIdNil() {
+	o.PdpClientId.Set(nil)
+}
+
+// UnsetPdpClientId ensures that no value is present for PdpClientId, not even an explicit nil
+func (o *SubmitCDARRequest) UnsetPdpClientId() {
+	o.PdpClientId.Unset()
+}
+
+// GetPdpClientSecret returns the PdpClientSecret field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SubmitCDARRequest) GetPdpClientSecret() string {
+	if o == nil || IsNil(o.PdpClientSecret.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.PdpClientSecret.Get()
+}
+
+// GetPdpClientSecretOk returns a tuple with the PdpClientSecret field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SubmitCDARRequest) GetPdpClientSecretOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PdpClientSecret.Get(), o.PdpClientSecret.IsSet()
+}
+
+// HasPdpClientSecret returns a boolean if a field has been set.
+func (o *SubmitCDARRequest) HasPdpClientSecret() bool {
+	if o != nil && o.PdpClientSecret.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPdpClientSecret gets a reference to the given NullableString and assigns it to the PdpClientSecret field.
+func (o *SubmitCDARRequest) SetPdpClientSecret(v string) {
+	o.PdpClientSecret.Set(&v)
+}
+// SetPdpClientSecretNil sets the value for PdpClientSecret to be an explicit nil
+func (o *SubmitCDARRequest) SetPdpClientSecretNil() {
+	o.PdpClientSecret.Set(nil)
+}
+
+// UnsetPdpClientSecret ensures that no value is present for PdpClientSecret, not even an explicit nil
+func (o *SubmitCDARRequest) UnsetPdpClientSecret() {
+	o.PdpClientSecret.Unset()
+}
+
 func (o SubmitCDARRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -802,6 +974,18 @@ func (o SubmitCDARRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.FlowType) {
 		toSerialize["flowType"] = o.FlowType
+	}
+	if o.PdpFlowServiceUrl.IsSet() {
+		toSerialize["pdpFlowServiceUrl"] = o.PdpFlowServiceUrl.Get()
+	}
+	if o.PdpTokenUrl.IsSet() {
+		toSerialize["pdpTokenUrl"] = o.PdpTokenUrl.Get()
+	}
+	if o.PdpClientId.IsSet() {
+		toSerialize["pdpClientId"] = o.PdpClientId.Get()
+	}
+	if o.PdpClientSecret.IsSet() {
+		toSerialize["pdpClientSecret"] = o.PdpClientSecret.Get()
 	}
 	return toSerialize, nil
 }
