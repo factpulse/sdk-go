@@ -1,7 +1,7 @@
 /*
 FactPulse REST API
 
- REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X Invoice Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Validation and Compliance - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata, electronic signatures - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules) - **Asynchronous Processing**: Celery support for heavy validations (VeraPDF)  ### 📡 AFNOR PDP/PA Integration (XP Z12-013) - **Flow Submission**: Send invoices to Partner Dematerialization Platforms - **Flow Search**: View submitted invoices - **Download**: Retrieve PDF/A-3 with XML - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user (stored credentials or zero-storage)  ### ✍️ PDF Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification - **Certificate Generation**: Self-signed X.509 certificates for testing  ### 🔄 Asynchronous Processing - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **No timeout**: Ideal for large files or heavy validations  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
+ REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X - Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Factur-X - Validation - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules)  ### ✍️ Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification  ### 📋 Flux 6 - Invoice Lifecycle (CDAR) - **CDAR Messages**: Acknowledgements, invoice statuses - **PPF Statuses**: REFUSED (210), PAID (212)  ### 📊 Flux 10 - E-Reporting - **Tax Declarations**: International B2B, B2C - **Flow Types**: 10.1 (B2B transactions), 10.2 (B2B payments), 10.3 (B2C transactions), 10.4 (B2C payments)  ### 📡 AFNOR PDP/PA (XP Z12-013) - **Flow Service**: Submit and search flows to PDPs - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user  ### 🏛️ Chorus Pro - **Public Sector Invoicing**: Complete API for Chorus Pro  ### ⏳ Async Tasks - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **Webhooks**: Automatic notifications when tasks complete  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
 
 API version: 1.0.0
 Contact: contact@factpulse.fr
@@ -13,41 +13,29 @@ package factpulse
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ChorusProCredentials type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ChorusProCredentials{}
 
-// ChorusProCredentials Chorus Pro credentials for Zero-Trust mode.  **Zero-Trust Mode**: Credentials are passed in each request and are NEVER stored.  **Security**: - Credentials are never persisted in the database - They are used only for the duration of the request - Secure transmission via HTTPS  **Use cases**: - High-security environments (banks, administrations) - Strict GDPR compliance - Tests with temporary credentials - Users who don't want to store their credentials
+// ChorusProCredentials Optional Chorus Pro credentials.  **MODE 1 - JWT retrieval (recommended):** Do not provide this `credentials` field in the payload. Credentials will be automatically retrieved via client_uid from JWT (0-trust).  **MODE 2 - Credentials in payload:** Provide all required fields below. Useful for tests or third-party integrations.
 type ChorusProCredentials struct {
-	// PISTE Client ID (government API portal)
-	PisteClientId string `json:"pisteClientId"`
-	// PISTE Client Secret
-	PisteClientSecret string `json:"pisteClientSecret"`
-	// Chorus Pro login
-	ChorusProLogin string `json:"chorusProLogin"`
-	// Chorus Pro password
-	ChorusProPassword string `json:"chorusProPassword"`
-	// Use sandbox environment (true) or production (false)
-	Sandbox *bool `json:"sandbox,omitempty"`
+	PisteClientId NullableString `json:"pisteClientId,omitempty"`
+	PisteClientSecret NullableString `json:"pisteClientSecret,omitempty"`
+	ChorusLogin NullableString `json:"chorusLogin,omitempty"`
+	ChorusPassword NullableString `json:"chorusPassword,omitempty"`
+	// [MODE 2] Use sandbox mode (default: True)
+	SandboxMode *bool `json:"sandboxMode,omitempty"`
 }
-
-type _ChorusProCredentials ChorusProCredentials
 
 // NewChorusProCredentials instantiates a new ChorusProCredentials object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewChorusProCredentials(pisteClientId string, pisteClientSecret string, chorusProLogin string, chorusProPassword string) *ChorusProCredentials {
+func NewChorusProCredentials() *ChorusProCredentials {
 	this := ChorusProCredentials{}
-	this.PisteClientId = pisteClientId
-	this.PisteClientSecret = pisteClientSecret
-	this.ChorusProLogin = chorusProLogin
-	this.ChorusProPassword = chorusProPassword
-	var sandbox bool = true
-	this.Sandbox = &sandbox
+	var sandboxMode bool = true
+	this.SandboxMode = &sandboxMode
 	return &this
 }
 
@@ -56,137 +44,209 @@ func NewChorusProCredentials(pisteClientId string, pisteClientSecret string, cho
 // but it doesn't guarantee that properties required by API are set
 func NewChorusProCredentialsWithDefaults() *ChorusProCredentials {
 	this := ChorusProCredentials{}
-	var sandbox bool = true
-	this.Sandbox = &sandbox
+	var sandboxMode bool = true
+	this.SandboxMode = &sandboxMode
 	return &this
 }
 
-// GetPisteClientId returns the PisteClientId field value
+// GetPisteClientId returns the PisteClientId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ChorusProCredentials) GetPisteClientId() string {
-	if o == nil {
+	if o == nil || IsNil(o.PisteClientId.Get()) {
 		var ret string
 		return ret
 	}
-
-	return o.PisteClientId
+	return *o.PisteClientId.Get()
 }
 
-// GetPisteClientIdOk returns a tuple with the PisteClientId field value
+// GetPisteClientIdOk returns a tuple with the PisteClientId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ChorusProCredentials) GetPisteClientIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.PisteClientId, true
+	return o.PisteClientId.Get(), o.PisteClientId.IsSet()
 }
 
-// SetPisteClientId sets field value
-func (o *ChorusProCredentials) SetPisteClientId(v string) {
-	o.PisteClientId = v
-}
-
-// GetPisteClientSecret returns the PisteClientSecret field value
-func (o *ChorusProCredentials) GetPisteClientSecret() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.PisteClientSecret
-}
-
-// GetPisteClientSecretOk returns a tuple with the PisteClientSecret field value
-// and a boolean to check if the value has been set.
-func (o *ChorusProCredentials) GetPisteClientSecretOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.PisteClientSecret, true
-}
-
-// SetPisteClientSecret sets field value
-func (o *ChorusProCredentials) SetPisteClientSecret(v string) {
-	o.PisteClientSecret = v
-}
-
-// GetChorusProLogin returns the ChorusProLogin field value
-func (o *ChorusProCredentials) GetChorusProLogin() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ChorusProLogin
-}
-
-// GetChorusProLoginOk returns a tuple with the ChorusProLogin field value
-// and a boolean to check if the value has been set.
-func (o *ChorusProCredentials) GetChorusProLoginOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ChorusProLogin, true
-}
-
-// SetChorusProLogin sets field value
-func (o *ChorusProCredentials) SetChorusProLogin(v string) {
-	o.ChorusProLogin = v
-}
-
-// GetChorusProPassword returns the ChorusProPassword field value
-func (o *ChorusProCredentials) GetChorusProPassword() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ChorusProPassword
-}
-
-// GetChorusProPasswordOk returns a tuple with the ChorusProPassword field value
-// and a boolean to check if the value has been set.
-func (o *ChorusProCredentials) GetChorusProPasswordOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ChorusProPassword, true
-}
-
-// SetChorusProPassword sets field value
-func (o *ChorusProCredentials) SetChorusProPassword(v string) {
-	o.ChorusProPassword = v
-}
-
-// GetSandbox returns the Sandbox field value if set, zero value otherwise.
-func (o *ChorusProCredentials) GetSandbox() bool {
-	if o == nil || IsNil(o.Sandbox) {
-		var ret bool
-		return ret
-	}
-	return *o.Sandbox
-}
-
-// GetSandboxOk returns a tuple with the Sandbox field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ChorusProCredentials) GetSandboxOk() (*bool, bool) {
-	if o == nil || IsNil(o.Sandbox) {
-		return nil, false
-	}
-	return o.Sandbox, true
-}
-
-// HasSandbox returns a boolean if a field has been set.
-func (o *ChorusProCredentials) HasSandbox() bool {
-	if o != nil && !IsNil(o.Sandbox) {
+// HasPisteClientId returns a boolean if a field has been set.
+func (o *ChorusProCredentials) HasPisteClientId() bool {
+	if o != nil && o.PisteClientId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSandbox gets a reference to the given bool and assigns it to the Sandbox field.
-func (o *ChorusProCredentials) SetSandbox(v bool) {
-	o.Sandbox = &v
+// SetPisteClientId gets a reference to the given NullableString and assigns it to the PisteClientId field.
+func (o *ChorusProCredentials) SetPisteClientId(v string) {
+	o.PisteClientId.Set(&v)
+}
+// SetPisteClientIdNil sets the value for PisteClientId to be an explicit nil
+func (o *ChorusProCredentials) SetPisteClientIdNil() {
+	o.PisteClientId.Set(nil)
+}
+
+// UnsetPisteClientId ensures that no value is present for PisteClientId, not even an explicit nil
+func (o *ChorusProCredentials) UnsetPisteClientId() {
+	o.PisteClientId.Unset()
+}
+
+// GetPisteClientSecret returns the PisteClientSecret field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ChorusProCredentials) GetPisteClientSecret() string {
+	if o == nil || IsNil(o.PisteClientSecret.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.PisteClientSecret.Get()
+}
+
+// GetPisteClientSecretOk returns a tuple with the PisteClientSecret field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ChorusProCredentials) GetPisteClientSecretOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PisteClientSecret.Get(), o.PisteClientSecret.IsSet()
+}
+
+// HasPisteClientSecret returns a boolean if a field has been set.
+func (o *ChorusProCredentials) HasPisteClientSecret() bool {
+	if o != nil && o.PisteClientSecret.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPisteClientSecret gets a reference to the given NullableString and assigns it to the PisteClientSecret field.
+func (o *ChorusProCredentials) SetPisteClientSecret(v string) {
+	o.PisteClientSecret.Set(&v)
+}
+// SetPisteClientSecretNil sets the value for PisteClientSecret to be an explicit nil
+func (o *ChorusProCredentials) SetPisteClientSecretNil() {
+	o.PisteClientSecret.Set(nil)
+}
+
+// UnsetPisteClientSecret ensures that no value is present for PisteClientSecret, not even an explicit nil
+func (o *ChorusProCredentials) UnsetPisteClientSecret() {
+	o.PisteClientSecret.Unset()
+}
+
+// GetChorusLogin returns the ChorusLogin field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ChorusProCredentials) GetChorusLogin() string {
+	if o == nil || IsNil(o.ChorusLogin.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ChorusLogin.Get()
+}
+
+// GetChorusLoginOk returns a tuple with the ChorusLogin field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ChorusProCredentials) GetChorusLoginOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ChorusLogin.Get(), o.ChorusLogin.IsSet()
+}
+
+// HasChorusLogin returns a boolean if a field has been set.
+func (o *ChorusProCredentials) HasChorusLogin() bool {
+	if o != nil && o.ChorusLogin.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetChorusLogin gets a reference to the given NullableString and assigns it to the ChorusLogin field.
+func (o *ChorusProCredentials) SetChorusLogin(v string) {
+	o.ChorusLogin.Set(&v)
+}
+// SetChorusLoginNil sets the value for ChorusLogin to be an explicit nil
+func (o *ChorusProCredentials) SetChorusLoginNil() {
+	o.ChorusLogin.Set(nil)
+}
+
+// UnsetChorusLogin ensures that no value is present for ChorusLogin, not even an explicit nil
+func (o *ChorusProCredentials) UnsetChorusLogin() {
+	o.ChorusLogin.Unset()
+}
+
+// GetChorusPassword returns the ChorusPassword field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ChorusProCredentials) GetChorusPassword() string {
+	if o == nil || IsNil(o.ChorusPassword.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ChorusPassword.Get()
+}
+
+// GetChorusPasswordOk returns a tuple with the ChorusPassword field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ChorusProCredentials) GetChorusPasswordOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ChorusPassword.Get(), o.ChorusPassword.IsSet()
+}
+
+// HasChorusPassword returns a boolean if a field has been set.
+func (o *ChorusProCredentials) HasChorusPassword() bool {
+	if o != nil && o.ChorusPassword.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetChorusPassword gets a reference to the given NullableString and assigns it to the ChorusPassword field.
+func (o *ChorusProCredentials) SetChorusPassword(v string) {
+	o.ChorusPassword.Set(&v)
+}
+// SetChorusPasswordNil sets the value for ChorusPassword to be an explicit nil
+func (o *ChorusProCredentials) SetChorusPasswordNil() {
+	o.ChorusPassword.Set(nil)
+}
+
+// UnsetChorusPassword ensures that no value is present for ChorusPassword, not even an explicit nil
+func (o *ChorusProCredentials) UnsetChorusPassword() {
+	o.ChorusPassword.Unset()
+}
+
+// GetSandboxMode returns the SandboxMode field value if set, zero value otherwise.
+func (o *ChorusProCredentials) GetSandboxMode() bool {
+	if o == nil || IsNil(o.SandboxMode) {
+		var ret bool
+		return ret
+	}
+	return *o.SandboxMode
+}
+
+// GetSandboxModeOk returns a tuple with the SandboxMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ChorusProCredentials) GetSandboxModeOk() (*bool, bool) {
+	if o == nil || IsNil(o.SandboxMode) {
+		return nil, false
+	}
+	return o.SandboxMode, true
+}
+
+// HasSandboxMode returns a boolean if a field has been set.
+func (o *ChorusProCredentials) HasSandboxMode() bool {
+	if o != nil && !IsNil(o.SandboxMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetSandboxMode gets a reference to the given bool and assigns it to the SandboxMode field.
+func (o *ChorusProCredentials) SetSandboxMode(v bool) {
+	o.SandboxMode = &v
 }
 
 func (o ChorusProCredentials) MarshalJSON() ([]byte, error) {
@@ -199,54 +259,22 @@ func (o ChorusProCredentials) MarshalJSON() ([]byte, error) {
 
 func (o ChorusProCredentials) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["pisteClientId"] = o.PisteClientId
-	toSerialize["pisteClientSecret"] = o.PisteClientSecret
-	toSerialize["chorusProLogin"] = o.ChorusProLogin
-	toSerialize["chorusProPassword"] = o.ChorusProPassword
-	if !IsNil(o.Sandbox) {
-		toSerialize["sandbox"] = o.Sandbox
+	if o.PisteClientId.IsSet() {
+		toSerialize["pisteClientId"] = o.PisteClientId.Get()
+	}
+	if o.PisteClientSecret.IsSet() {
+		toSerialize["pisteClientSecret"] = o.PisteClientSecret.Get()
+	}
+	if o.ChorusLogin.IsSet() {
+		toSerialize["chorusLogin"] = o.ChorusLogin.Get()
+	}
+	if o.ChorusPassword.IsSet() {
+		toSerialize["chorusPassword"] = o.ChorusPassword.Get()
+	}
+	if !IsNil(o.SandboxMode) {
+		toSerialize["sandboxMode"] = o.SandboxMode
 	}
 	return toSerialize, nil
-}
-
-func (o *ChorusProCredentials) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"pisteClientId",
-		"pisteClientSecret",
-		"chorusProLogin",
-		"chorusProPassword",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varChorusProCredentials := _ChorusProCredentials{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varChorusProCredentials)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ChorusProCredentials(varChorusProCredentials)
-
-	return err
 }
 
 type NullableChorusProCredentials struct {

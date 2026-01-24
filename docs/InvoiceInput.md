@@ -9,7 +9,8 @@ Name | Type | Description | Notes
 **TypeCode** | Pointer to [**FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode**](FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode.md) | Invoice type code | [optional] [default to _380]
 **Currency** | Pointer to [**Currency**](Currency.md) |  | [optional] [default to EUR]
 **DueDate** | Pointer to **NullableString** |  | [optional] 
-**SellerSiren** | **string** | Seller SIREN/SIRET | 
+**SellerId** | Pointer to **NullableString** |  | [optional] 
+**SellerSiren** | Pointer to **NullableString** |  | [optional] 
 **SellerVatId** | Pointer to **NullableString** |  | [optional] 
 **SellerCountry** | Pointer to [**Sellercountry**](Sellercountry.md) |  | [optional] [default to FR]
 **BuyerId** | Pointer to **NullableString** |  | [optional] 
@@ -25,7 +26,7 @@ Name | Type | Description | Notes
 
 ### NewInvoiceInput
 
-`func NewInvoiceInput(invoiceId string, issueDate string, sellerSiren string, buyerCountry Buyercountry, taxExclusiveAmount Taxexclusiveamount1, taxAmount Taxamount1, taxBreakdown []TaxBreakdownInput, ) *InvoiceInput`
+`func NewInvoiceInput(invoiceId string, issueDate string, buyerCountry Buyercountry, taxExclusiveAmount Taxexclusiveamount1, taxAmount Taxamount1, taxBreakdown []TaxBreakdownInput, ) *InvoiceInput`
 
 NewInvoiceInput instantiates a new InvoiceInput object
 This constructor will assign default values to properties that have it defined,
@@ -165,6 +166,41 @@ HasDueDate returns a boolean if a field has been set.
 `func (o *InvoiceInput) UnsetDueDate()`
 
 UnsetDueDate ensures that no value is present for DueDate, not even an explicit nil
+### GetSellerId
+
+`func (o *InvoiceInput) GetSellerId() string`
+
+GetSellerId returns the SellerId field if non-nil, zero value otherwise.
+
+### GetSellerIdOk
+
+`func (o *InvoiceInput) GetSellerIdOk() (*string, bool)`
+
+GetSellerIdOk returns a tuple with the SellerId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSellerId
+
+`func (o *InvoiceInput) SetSellerId(v string)`
+
+SetSellerId sets SellerId field to given value.
+
+### HasSellerId
+
+`func (o *InvoiceInput) HasSellerId() bool`
+
+HasSellerId returns a boolean if a field has been set.
+
+### SetSellerIdNil
+
+`func (o *InvoiceInput) SetSellerIdNil(b bool)`
+
+ SetSellerIdNil sets the value for SellerId to be an explicit nil
+
+### UnsetSellerId
+`func (o *InvoiceInput) UnsetSellerId()`
+
+UnsetSellerId ensures that no value is present for SellerId, not even an explicit nil
 ### GetSellerSiren
 
 `func (o *InvoiceInput) GetSellerSiren() string`
@@ -184,7 +220,22 @@ and a boolean to check if the value has been set.
 
 SetSellerSiren sets SellerSiren field to given value.
 
+### HasSellerSiren
 
+`func (o *InvoiceInput) HasSellerSiren() bool`
+
+HasSellerSiren returns a boolean if a field has been set.
+
+### SetSellerSirenNil
+
+`func (o *InvoiceInput) SetSellerSirenNil(b bool)`
+
+ SetSellerSirenNil sets the value for SellerSiren to be an explicit nil
+
+### UnsetSellerSiren
+`func (o *InvoiceInput) UnsetSellerSiren()`
+
+UnsetSellerSiren ensures that no value is present for SellerSiren, not even an explicit nil
 ### GetSellerVatId
 
 `func (o *InvoiceInput) GetSellerVatId() string`

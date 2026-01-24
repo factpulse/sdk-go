@@ -1,7 +1,7 @@
 /*
 FactPulse REST API
 
- REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X Invoice Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Validation and Compliance - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata, electronic signatures - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules) - **Asynchronous Processing**: Celery support for heavy validations (VeraPDF)  ### 📡 AFNOR PDP/PA Integration (XP Z12-013) - **Flow Submission**: Send invoices to Partner Dematerialization Platforms - **Flow Search**: View submitted invoices - **Download**: Retrieve PDF/A-3 with XML - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user (stored credentials or zero-storage)  ### ✍️ PDF Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification - **Certificate Generation**: Self-signed X.509 certificates for testing  ### 🔄 Asynchronous Processing - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **No timeout**: Ideal for large files or heavy validations  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
+ REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X - Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Factur-X - Validation - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules)  ### ✍️ Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification  ### 📋 Flux 6 - Invoice Lifecycle (CDAR) - **CDAR Messages**: Acknowledgements, invoice statuses - **PPF Statuses**: REFUSED (210), PAID (212)  ### 📊 Flux 10 - E-Reporting - **Tax Declarations**: International B2B, B2C - **Flow Types**: 10.1 (B2B transactions), 10.2 (B2B payments), 10.3 (B2C transactions), 10.4 (B2C payments)  ### 📡 AFNOR PDP/PA (XP Z12-013) - **Flow Service**: Submit and search flows to PDPs - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user  ### 🏛️ Chorus Pro - **Public Sector Invoicing**: Complete API for Chorus Pro  ### ⏳ Async Tasks - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **Webhooks**: Automatic notifications when tasks complete  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
 
 API version: 1.0.0
 Contact: contact@factpulse.fr
@@ -17,15 +17,16 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"os"
 )
 
 
-// CDARCycleDeVieAPIService CDARCycleDeVieAPI service
-type CDARCycleDeVieAPIService service
+// Flux6InvoiceLifecycleCDARAPIService Flux6InvoiceLifecycleCDARAPI service
+type Flux6InvoiceLifecycleCDARAPIService service
 
 type ApiGenerateCdarApiV1CdarGeneratePostRequest struct {
 	ctx context.Context
-	ApiService *CDARCycleDeVieAPIService
+	ApiService *Flux6InvoiceLifecycleCDARAPIService
 	createCDARRequest *CreateCDARRequest
 }
 
@@ -39,23 +40,23 @@ func (r ApiGenerateCdarApiV1CdarGeneratePostRequest) Execute() (*GenerateCDARRes
 }
 
 /*
-GenerateCdarApiV1CdarGeneratePost Générer un message CDAR
+GenerateCdarApiV1CdarGeneratePost Generate a CDAR message
 
-Génère un message XML CDAR (Cross Domain Acknowledgement and Response)
-pour communiquer le statut d'une facture.
+Generate a CDAR XML message (Cross Domain Acknowledgement and Response)
+to communicate the status of an invoice.
 
-**Types de messages:**
-- **23** (Traitement): Message de cycle de vie standard
-- **305** (Transmission): Message de transmission entre plateformes
+**Message types:**
+- **23** (Processing): Standard lifecycle message
+- **305** (Transmission): Inter-platform transmission message
 
-**Règles métier:**
-- BR-FR-CDV-14: Le statut 212 (ENCAISSEE) requiert un montant encaissé
-- BR-FR-CDV-15: Les statuts 206/207/208/210/213/501 requièrent un code motif
+**Business rules:**
+- BR-FR-CDV-14: Status 212 (PAID) requires a paid amount
+- BR-FR-CDV-15: Statuses 206/207/208/210/213/501 require a reason code
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGenerateCdarApiV1CdarGeneratePostRequest
 */
-func (a *CDARCycleDeVieAPIService) GenerateCdarApiV1CdarGeneratePost(ctx context.Context) ApiGenerateCdarApiV1CdarGeneratePostRequest {
+func (a *Flux6InvoiceLifecycleCDARAPIService) GenerateCdarApiV1CdarGeneratePost(ctx context.Context) ApiGenerateCdarApiV1CdarGeneratePostRequest {
 	return ApiGenerateCdarApiV1CdarGeneratePostRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -64,7 +65,7 @@ func (a *CDARCycleDeVieAPIService) GenerateCdarApiV1CdarGeneratePost(ctx context
 
 // Execute executes the request
 //  @return GenerateCDARResponse
-func (a *CDARCycleDeVieAPIService) GenerateCdarApiV1CdarGeneratePostExecute(r ApiGenerateCdarApiV1CdarGeneratePostRequest) (*GenerateCDARResponse, *http.Response, error) {
+func (a *Flux6InvoiceLifecycleCDARAPIService) GenerateCdarApiV1CdarGeneratePostExecute(r ApiGenerateCdarApiV1CdarGeneratePostRequest) (*GenerateCDARResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -72,7 +73,7 @@ func (a *CDARCycleDeVieAPIService) GenerateCdarApiV1CdarGeneratePostExecute(r Ap
 		localVarReturnValue  *GenerateCDARResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CDARCycleDeVieAPIService.GenerateCdarApiV1CdarGeneratePost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Flux6InvoiceLifecycleCDARAPIService.GenerateCdarApiV1CdarGeneratePost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -154,7 +155,7 @@ func (a *CDARCycleDeVieAPIService) GenerateCdarApiV1CdarGeneratePostExecute(r Ap
 
 type ApiGetActionCodesApiV1CdarActionCodesGetRequest struct {
 	ctx context.Context
-	ApiService *CDARCycleDeVieAPIService
+	ApiService *Flux6InvoiceLifecycleCDARAPIService
 }
 
 func (r ApiGetActionCodesApiV1CdarActionCodesGetRequest) Execute() (*ActionCodesResponse, *http.Response, error) {
@@ -162,16 +163,16 @@ func (r ApiGetActionCodesApiV1CdarActionCodesGetRequest) Execute() (*ActionCodes
 }
 
 /*
-GetActionCodesApiV1CdarActionCodesGet Liste des codes action CDAR
+GetActionCodesApiV1CdarActionCodesGet List of CDAR action codes
 
-Retourne la liste complète des codes action (BR-FR-CDV-CL-10).
+Returns the complete list of action codes (BR-FR-CDV-CL-10).
 
-Ces codes indiquent l'action demandée sur la facture.
+These codes indicate the requested action on the invoice.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetActionCodesApiV1CdarActionCodesGetRequest
 */
-func (a *CDARCycleDeVieAPIService) GetActionCodesApiV1CdarActionCodesGet(ctx context.Context) ApiGetActionCodesApiV1CdarActionCodesGetRequest {
+func (a *Flux6InvoiceLifecycleCDARAPIService) GetActionCodesApiV1CdarActionCodesGet(ctx context.Context) ApiGetActionCodesApiV1CdarActionCodesGetRequest {
 	return ApiGetActionCodesApiV1CdarActionCodesGetRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -180,7 +181,7 @@ func (a *CDARCycleDeVieAPIService) GetActionCodesApiV1CdarActionCodesGet(ctx con
 
 // Execute executes the request
 //  @return ActionCodesResponse
-func (a *CDARCycleDeVieAPIService) GetActionCodesApiV1CdarActionCodesGetExecute(r ApiGetActionCodesApiV1CdarActionCodesGetRequest) (*ActionCodesResponse, *http.Response, error) {
+func (a *Flux6InvoiceLifecycleCDARAPIService) GetActionCodesApiV1CdarActionCodesGetExecute(r ApiGetActionCodesApiV1CdarActionCodesGetRequest) (*ActionCodesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -188,7 +189,7 @@ func (a *CDARCycleDeVieAPIService) GetActionCodesApiV1CdarActionCodesGetExecute(
 		localVarReturnValue  *ActionCodesResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CDARCycleDeVieAPIService.GetActionCodesApiV1CdarActionCodesGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Flux6InvoiceLifecycleCDARAPIService.GetActionCodesApiV1CdarActionCodesGet")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -255,7 +256,7 @@ func (a *CDARCycleDeVieAPIService) GetActionCodesApiV1CdarActionCodesGetExecute(
 
 type ApiGetReasonCodesApiV1CdarReasonCodesGetRequest struct {
 	ctx context.Context
-	ApiService *CDARCycleDeVieAPIService
+	ApiService *Flux6InvoiceLifecycleCDARAPIService
 }
 
 func (r ApiGetReasonCodesApiV1CdarReasonCodesGetRequest) Execute() (*ReasonCodesResponse, *http.Response, error) {
@@ -263,16 +264,16 @@ func (r ApiGetReasonCodesApiV1CdarReasonCodesGetRequest) Execute() (*ReasonCodes
 }
 
 /*
-GetReasonCodesApiV1CdarReasonCodesGet Liste des codes motif CDAR
+GetReasonCodesApiV1CdarReasonCodesGet List of CDAR reason codes
 
-Retourne la liste complète des codes motif de statut (BR-FR-CDV-CL-09).
+Returns the complete list of status reason codes (BR-FR-CDV-CL-09).
 
-Ces codes expliquent la raison d'un statut particulier.
+These codes explain the reason for a particular status.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetReasonCodesApiV1CdarReasonCodesGetRequest
 */
-func (a *CDARCycleDeVieAPIService) GetReasonCodesApiV1CdarReasonCodesGet(ctx context.Context) ApiGetReasonCodesApiV1CdarReasonCodesGetRequest {
+func (a *Flux6InvoiceLifecycleCDARAPIService) GetReasonCodesApiV1CdarReasonCodesGet(ctx context.Context) ApiGetReasonCodesApiV1CdarReasonCodesGetRequest {
 	return ApiGetReasonCodesApiV1CdarReasonCodesGetRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -281,7 +282,7 @@ func (a *CDARCycleDeVieAPIService) GetReasonCodesApiV1CdarReasonCodesGet(ctx con
 
 // Execute executes the request
 //  @return ReasonCodesResponse
-func (a *CDARCycleDeVieAPIService) GetReasonCodesApiV1CdarReasonCodesGetExecute(r ApiGetReasonCodesApiV1CdarReasonCodesGetRequest) (*ReasonCodesResponse, *http.Response, error) {
+func (a *Flux6InvoiceLifecycleCDARAPIService) GetReasonCodesApiV1CdarReasonCodesGetExecute(r ApiGetReasonCodesApiV1CdarReasonCodesGetRequest) (*ReasonCodesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -289,7 +290,7 @@ func (a *CDARCycleDeVieAPIService) GetReasonCodesApiV1CdarReasonCodesGetExecute(
 		localVarReturnValue  *ReasonCodesResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CDARCycleDeVieAPIService.GetReasonCodesApiV1CdarReasonCodesGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Flux6InvoiceLifecycleCDARAPIService.GetReasonCodesApiV1CdarReasonCodesGet")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -356,7 +357,7 @@ func (a *CDARCycleDeVieAPIService) GetReasonCodesApiV1CdarReasonCodesGetExecute(
 
 type ApiGetStatusCodesApiV1CdarStatusCodesGetRequest struct {
 	ctx context.Context
-	ApiService *CDARCycleDeVieAPIService
+	ApiService *Flux6InvoiceLifecycleCDARAPIService
 }
 
 func (r ApiGetStatusCodesApiV1CdarStatusCodesGetRequest) Execute() (*StatusCodesResponse, *http.Response, error) {
@@ -364,16 +365,16 @@ func (r ApiGetStatusCodesApiV1CdarStatusCodesGetRequest) Execute() (*StatusCodes
 }
 
 /*
-GetStatusCodesApiV1CdarStatusCodesGet Liste des codes statut CDAR
+GetStatusCodesApiV1CdarStatusCodesGet List of CDAR status codes
 
-Retourne la liste complète des codes statut de facture (BR-FR-CDV-CL-06).
+Returns the complete list of invoice status codes (BR-FR-CDV-CL-06).
 
-Ces codes indiquent l'état du cycle de vie d'une facture.
+These codes indicate the lifecycle state of an invoice.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetStatusCodesApiV1CdarStatusCodesGetRequest
 */
-func (a *CDARCycleDeVieAPIService) GetStatusCodesApiV1CdarStatusCodesGet(ctx context.Context) ApiGetStatusCodesApiV1CdarStatusCodesGetRequest {
+func (a *Flux6InvoiceLifecycleCDARAPIService) GetStatusCodesApiV1CdarStatusCodesGet(ctx context.Context) ApiGetStatusCodesApiV1CdarStatusCodesGetRequest {
 	return ApiGetStatusCodesApiV1CdarStatusCodesGetRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -382,7 +383,7 @@ func (a *CDARCycleDeVieAPIService) GetStatusCodesApiV1CdarStatusCodesGet(ctx con
 
 // Execute executes the request
 //  @return StatusCodesResponse
-func (a *CDARCycleDeVieAPIService) GetStatusCodesApiV1CdarStatusCodesGetExecute(r ApiGetStatusCodesApiV1CdarStatusCodesGetRequest) (*StatusCodesResponse, *http.Response, error) {
+func (a *Flux6InvoiceLifecycleCDARAPIService) GetStatusCodesApiV1CdarStatusCodesGetExecute(r ApiGetStatusCodesApiV1CdarStatusCodesGetRequest) (*StatusCodesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -390,7 +391,7 @@ func (a *CDARCycleDeVieAPIService) GetStatusCodesApiV1CdarStatusCodesGetExecute(
 		localVarReturnValue  *StatusCodesResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CDARCycleDeVieAPIService.GetStatusCodesApiV1CdarStatusCodesGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Flux6InvoiceLifecycleCDARAPIService.GetStatusCodesApiV1CdarStatusCodesGet")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -457,7 +458,7 @@ func (a *CDARCycleDeVieAPIService) GetStatusCodesApiV1CdarStatusCodesGetExecute(
 
 type ApiSubmitCdarApiV1CdarSubmitPostRequest struct {
 	ctx context.Context
-	ApiService *CDARCycleDeVieAPIService
+	ApiService *Flux6InvoiceLifecycleCDARAPIService
 	submitCDARRequest *SubmitCDARRequest
 }
 
@@ -471,22 +472,22 @@ func (r ApiSubmitCdarApiV1CdarSubmitPostRequest) Execute() (*SubmitCDARResponse,
 }
 
 /*
-SubmitCdarApiV1CdarSubmitPost Générer et soumettre un message CDAR
+SubmitCdarApiV1CdarSubmitPost Generate and submit a CDAR message
 
-Génère un message CDAR et le soumet à la plateforme PA/PDP.
+Generate a CDAR message and submit it to the PA/PDP platform.
 
-**Stratégies d'authentification:**
-1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend
-2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête
+**Authentication strategies:**
+1. **JWT with client_uid** (recommended): PDP credentials retrieved from backend
+2. **Zero-storage**: Provide pdpFlowServiceUrl, pdpClientId, pdpClientSecret in the request
 
-**Types de flux (flowType):**
-- `CustomerInvoiceLC`: Cycle de vie côté client (acheteur)
-- `SupplierInvoiceLC`: Cycle de vie côté fournisseur (vendeur)
+**Flow types (flowType):**
+- `CustomerInvoiceLC`: Client-side lifecycle (buyer)
+- `SupplierInvoiceLC`: Supplier-side lifecycle (seller)
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSubmitCdarApiV1CdarSubmitPostRequest
 */
-func (a *CDARCycleDeVieAPIService) SubmitCdarApiV1CdarSubmitPost(ctx context.Context) ApiSubmitCdarApiV1CdarSubmitPostRequest {
+func (a *Flux6InvoiceLifecycleCDARAPIService) SubmitCdarApiV1CdarSubmitPost(ctx context.Context) ApiSubmitCdarApiV1CdarSubmitPostRequest {
 	return ApiSubmitCdarApiV1CdarSubmitPostRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -495,7 +496,7 @@ func (a *CDARCycleDeVieAPIService) SubmitCdarApiV1CdarSubmitPost(ctx context.Con
 
 // Execute executes the request
 //  @return SubmitCDARResponse
-func (a *CDARCycleDeVieAPIService) SubmitCdarApiV1CdarSubmitPostExecute(r ApiSubmitCdarApiV1CdarSubmitPostRequest) (*SubmitCDARResponse, *http.Response, error) {
+func (a *Flux6InvoiceLifecycleCDARAPIService) SubmitCdarApiV1CdarSubmitPostExecute(r ApiSubmitCdarApiV1CdarSubmitPostRequest) (*SubmitCDARResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -503,7 +504,7 @@ func (a *CDARCycleDeVieAPIService) SubmitCdarApiV1CdarSubmitPostExecute(r ApiSub
 		localVarReturnValue  *SubmitCDARResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CDARCycleDeVieAPIService.SubmitCdarApiV1CdarSubmitPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Flux6InvoiceLifecycleCDARAPIService.SubmitCdarApiV1CdarSubmitPost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -585,7 +586,7 @@ func (a *CDARCycleDeVieAPIService) SubmitCdarApiV1CdarSubmitPostExecute(r ApiSub
 
 type ApiSubmitCdarXmlApiV1CdarSubmitXmlPostRequest struct {
 	ctx context.Context
-	ApiService *CDARCycleDeVieAPIService
+	ApiService *Flux6InvoiceLifecycleCDARAPIService
 	submitCDARXMLRequest *SubmitCDARXMLRequest
 }
 
@@ -599,20 +600,24 @@ func (r ApiSubmitCdarXmlApiV1CdarSubmitXmlPostRequest) Execute() (*SubmitCDARRes
 }
 
 /*
-SubmitCdarXmlApiV1CdarSubmitXmlPost Soumettre un XML CDAR pré-généré
+SubmitCdarXmlApiV1CdarSubmitXmlPost Submit a pre-generated CDAR XML
 
-Soumet un message XML CDAR pré-généré à la plateforme PA/PDP.
+Submit a pre-generated CDAR XML message to the PA/PDP platform.
 
-Utile pour soumettre des XML générés par d'autres systèmes.
+Useful for submitting XML generated by other systems.
 
-**Stratégies d'authentification:**
-1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend
-2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête
+**Validation:**
+The XML is validated against XSD and Schematron BR-FR-CDV rules BEFORE submission.
+Invalid XML will be rejected with detailed error messages.
+
+**Authentication strategies:**
+1. **JWT with client_uid** (recommended): PDP credentials retrieved from backend
+2. **Zero-storage**: Provide pdpFlowServiceUrl, pdpClientId, pdpClientSecret in the request
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSubmitCdarXmlApiV1CdarSubmitXmlPostRequest
 */
-func (a *CDARCycleDeVieAPIService) SubmitCdarXmlApiV1CdarSubmitXmlPost(ctx context.Context) ApiSubmitCdarXmlApiV1CdarSubmitXmlPostRequest {
+func (a *Flux6InvoiceLifecycleCDARAPIService) SubmitCdarXmlApiV1CdarSubmitXmlPost(ctx context.Context) ApiSubmitCdarXmlApiV1CdarSubmitXmlPostRequest {
 	return ApiSubmitCdarXmlApiV1CdarSubmitXmlPostRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -621,7 +626,7 @@ func (a *CDARCycleDeVieAPIService) SubmitCdarXmlApiV1CdarSubmitXmlPost(ctx conte
 
 // Execute executes the request
 //  @return SubmitCDARResponse
-func (a *CDARCycleDeVieAPIService) SubmitCdarXmlApiV1CdarSubmitXmlPostExecute(r ApiSubmitCdarXmlApiV1CdarSubmitXmlPostRequest) (*SubmitCDARResponse, *http.Response, error) {
+func (a *Flux6InvoiceLifecycleCDARAPIService) SubmitCdarXmlApiV1CdarSubmitXmlPostExecute(r ApiSubmitCdarXmlApiV1CdarSubmitXmlPostRequest) (*SubmitCDARResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -629,7 +634,7 @@ func (a *CDARCycleDeVieAPIService) SubmitCdarXmlApiV1CdarSubmitXmlPostExecute(r 
 		localVarReturnValue  *SubmitCDARResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CDARCycleDeVieAPIService.SubmitCdarXmlApiV1CdarSubmitXmlPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Flux6InvoiceLifecycleCDARAPIService.SubmitCdarXmlApiV1CdarSubmitXmlPost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -711,7 +716,7 @@ func (a *CDARCycleDeVieAPIService) SubmitCdarXmlApiV1CdarSubmitXmlPostExecute(r 
 
 type ApiSubmitEncaisseeApiV1CdarEncaisseePostRequest struct {
 	ctx context.Context
-	ApiService *CDARCycleDeVieAPIService
+	ApiService *Flux6InvoiceLifecycleCDARAPIService
 	encaisseeRequest *EncaisseeRequest
 }
 
@@ -725,20 +730,26 @@ func (r ApiSubmitEncaisseeApiV1CdarEncaisseePostRequest) Execute() (*SimplifiedC
 }
 
 /*
-SubmitEncaisseeApiV1CdarEncaisseePost [Simplifié] Soumettre un statut ENCAISSÉE (212)
+SubmitEncaisseeApiV1CdarEncaisseePost [Simplified] Submit PAID status (212) - Issued invoice
 
-**Endpoint simplifié pour OD** - Soumet un statut ENCAISSÉE (212) pour une facture.
+**Simplified endpoint for OD** - Submit a PAID status (212) for an **ISSUED** invoice.
 
-Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-14 requiert le montant encaissé).
+This status is **mandatory for PPF** (BR-FR-CDV-14 requires the paid amount).
 
-**Cas d'usage:** L'acheteur confirme le paiement d'une facture.
+**Use case:** The **seller** confirms payment receipt for an invoice they issued.
 
-**Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+**Who issues this status?**
+- **Issuer (IssuerTradeParty):** The seller (SE = Seller) who received payment
+- **Recipient (RecipientTradeParty):** The buyer (BY = Buyer) who paid
+
+**Reference:** XP Z12-014 Annex B, example UC1_F202500003_07-CDV-212_Encaissee.xml
+
+**Authentication:** JWT Bearer (recommended) or PDP credentials in request.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSubmitEncaisseeApiV1CdarEncaisseePostRequest
 */
-func (a *CDARCycleDeVieAPIService) SubmitEncaisseeApiV1CdarEncaisseePost(ctx context.Context) ApiSubmitEncaisseeApiV1CdarEncaisseePostRequest {
+func (a *Flux6InvoiceLifecycleCDARAPIService) SubmitEncaisseeApiV1CdarEncaisseePost(ctx context.Context) ApiSubmitEncaisseeApiV1CdarEncaisseePostRequest {
 	return ApiSubmitEncaisseeApiV1CdarEncaisseePostRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -747,7 +758,7 @@ func (a *CDARCycleDeVieAPIService) SubmitEncaisseeApiV1CdarEncaisseePost(ctx con
 
 // Execute executes the request
 //  @return SimplifiedCDARResponse
-func (a *CDARCycleDeVieAPIService) SubmitEncaisseeApiV1CdarEncaisseePostExecute(r ApiSubmitEncaisseeApiV1CdarEncaisseePostRequest) (*SimplifiedCDARResponse, *http.Response, error) {
+func (a *Flux6InvoiceLifecycleCDARAPIService) SubmitEncaisseeApiV1CdarEncaisseePostExecute(r ApiSubmitEncaisseeApiV1CdarEncaisseePostRequest) (*SimplifiedCDARResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -755,7 +766,7 @@ func (a *CDARCycleDeVieAPIService) SubmitEncaisseeApiV1CdarEncaisseePostExecute(
 		localVarReturnValue  *SimplifiedCDARResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CDARCycleDeVieAPIService.SubmitEncaisseeApiV1CdarEncaisseePost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Flux6InvoiceLifecycleCDARAPIService.SubmitEncaisseeApiV1CdarEncaisseePost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -837,7 +848,7 @@ func (a *CDARCycleDeVieAPIService) SubmitEncaisseeApiV1CdarEncaisseePostExecute(
 
 type ApiSubmitRefuseeApiV1CdarRefuseePostRequest struct {
 	ctx context.Context
-	ApiService *CDARCycleDeVieAPIService
+	ApiService *Flux6InvoiceLifecycleCDARAPIService
 	refuseeRequest *RefuseeRequest
 }
 
@@ -851,35 +862,41 @@ func (r ApiSubmitRefuseeApiV1CdarRefuseePostRequest) Execute() (*SimplifiedCDARR
 }
 
 /*
-SubmitRefuseeApiV1CdarRefuseePost [Simplifié] Soumettre un statut REFUSÉE (210)
+SubmitRefuseeApiV1CdarRefuseePost [Simplified] Submit REFUSED status (210) - Received invoice
 
-**Endpoint simplifié pour OD** - Soumet un statut REFUSÉE (210) pour une facture.
+**Simplified endpoint for OD** - Submit a REFUSED status (210) for a **RECEIVED** invoice.
 
-Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-15 requiert un code motif).
+This status is **mandatory for PPF** (BR-FR-CDV-15 requires a reason code).
 
-**Cas d'usage:** L'acheteur refuse une facture reçue.
+**Use case:** The **buyer** refuses an invoice they received.
 
-**Codes motif autorisés (BR-FR-CDV-CL-09):**
-- `TX_TVA_ERR`: Taux de TVA erroné
-- `MONTANTTOTAL_ERR`: Montant total erroné
-- `CALCUL_ERR`: Erreur de calcul
-- `NON_CONFORME`: Non conforme
-- `DOUBLON`: Doublon
-- `DEST_ERR`: Destinataire erroné
-- `TRANSAC_INC`: Transaction incomplète
-- `EMMET_INC`: Émetteur inconnu
-- `CONTRAT_TERM`: Contrat terminé
-- `DOUBLE_FACT`: Double facturation
-- `CMD_ERR`: Commande erronée
-- `ADR_ERR`: Adresse erronée
-- `REF_CT_ABSENT`: Référence contrat absente
+**Who issues this status?**
+- **Issuer (IssuerTradeParty):** The buyer (BY = Buyer) refusing the invoice
+- **Recipient (RecipientTradeParty):** The seller (SE = Seller) who issued the invoice
 
-**Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+**Reference:** XP Z12-014 Annex B, example UC3_F202500005_04-CDV-210_Refusee.xml
+
+**Allowed reason codes (BR-FR-CDV-CL-09):**
+- `TX_TVA_ERR`: Incorrect VAT rate
+- `MONTANTTOTAL_ERR`: Incorrect total amount
+- `CALCUL_ERR`: Calculation error
+- `NON_CONFORME`: Non-compliant
+- `DOUBLON`: Duplicate
+- `DEST_ERR`: Wrong recipient
+- `TRANSAC_INC`: Incomplete transaction
+- `EMMET_INC`: Unknown issuer
+- `CONTRAT_TERM`: Contract terminated
+- `DOUBLE_FACT`: Double billing
+- `CMD_ERR`: Order error
+- `ADR_ERR`: Address error
+- `REF_CT_ABSENT`: Missing contract reference
+
+**Authentication:** JWT Bearer (recommended) or PDP credentials in request.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSubmitRefuseeApiV1CdarRefuseePostRequest
 */
-func (a *CDARCycleDeVieAPIService) SubmitRefuseeApiV1CdarRefuseePost(ctx context.Context) ApiSubmitRefuseeApiV1CdarRefuseePostRequest {
+func (a *Flux6InvoiceLifecycleCDARAPIService) SubmitRefuseeApiV1CdarRefuseePost(ctx context.Context) ApiSubmitRefuseeApiV1CdarRefuseePostRequest {
 	return ApiSubmitRefuseeApiV1CdarRefuseePostRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -888,7 +905,7 @@ func (a *CDARCycleDeVieAPIService) SubmitRefuseeApiV1CdarRefuseePost(ctx context
 
 // Execute executes the request
 //  @return SimplifiedCDARResponse
-func (a *CDARCycleDeVieAPIService) SubmitRefuseeApiV1CdarRefuseePostExecute(r ApiSubmitRefuseeApiV1CdarRefuseePostRequest) (*SimplifiedCDARResponse, *http.Response, error) {
+func (a *Flux6InvoiceLifecycleCDARAPIService) SubmitRefuseeApiV1CdarRefuseePostExecute(r ApiSubmitRefuseeApiV1CdarRefuseePostRequest) (*SimplifiedCDARResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -896,7 +913,7 @@ func (a *CDARCycleDeVieAPIService) SubmitRefuseeApiV1CdarRefuseePostExecute(r Ap
 		localVarReturnValue  *SimplifiedCDARResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CDARCycleDeVieAPIService.SubmitRefuseeApiV1CdarRefuseePost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Flux6InvoiceLifecycleCDARAPIService.SubmitRefuseeApiV1CdarRefuseePost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -978,7 +995,7 @@ func (a *CDARCycleDeVieAPIService) SubmitRefuseeApiV1CdarRefuseePostExecute(r Ap
 
 type ApiValidateCdarApiV1CdarValidatePostRequest struct {
 	ctx context.Context
-	ApiService *CDARCycleDeVieAPIService
+	ApiService *Flux6InvoiceLifecycleCDARAPIService
 	validateCDARRequest *ValidateCDARRequest
 }
 
@@ -992,19 +1009,22 @@ func (r ApiValidateCdarApiV1CdarValidatePostRequest) Execute() (*ValidateCDARRes
 }
 
 /*
-ValidateCdarApiV1CdarValidatePost Valider des données CDAR
+ValidateCdarApiV1CdarValidatePost Validate CDAR structured data
 
-Valide les données CDAR sans générer le XML.
+Validate CDAR structured data without generating XML.
 
-Vérifie:
-- Les formats des champs (SIREN, dates, etc.)
-- Les codes enums (statut, motif, action)
-- Les règles métier BR-FR-CDV-*
+**Note:** This endpoint validates structured data fields only.
+Use `/validate-xml` to validate a pre-generated CDAR XML file against XSD and Schematron.
+
+Checks:
+- Field formats (SIREN, dates, etc.)
+- Enum codes (status, reason, action)
+- Business rules BR-FR-CDV-*
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiValidateCdarApiV1CdarValidatePostRequest
 */
-func (a *CDARCycleDeVieAPIService) ValidateCdarApiV1CdarValidatePost(ctx context.Context) ApiValidateCdarApiV1CdarValidatePostRequest {
+func (a *Flux6InvoiceLifecycleCDARAPIService) ValidateCdarApiV1CdarValidatePost(ctx context.Context) ApiValidateCdarApiV1CdarValidatePostRequest {
 	return ApiValidateCdarApiV1CdarValidatePostRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1013,7 +1033,7 @@ func (a *CDARCycleDeVieAPIService) ValidateCdarApiV1CdarValidatePost(ctx context
 
 // Execute executes the request
 //  @return ValidateCDARResponse
-func (a *CDARCycleDeVieAPIService) ValidateCdarApiV1CdarValidatePostExecute(r ApiValidateCdarApiV1CdarValidatePostRequest) (*ValidateCDARResponse, *http.Response, error) {
+func (a *Flux6InvoiceLifecycleCDARAPIService) ValidateCdarApiV1CdarValidatePostExecute(r ApiValidateCdarApiV1CdarValidatePostRequest) (*ValidateCDARResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1021,7 +1041,7 @@ func (a *CDARCycleDeVieAPIService) ValidateCdarApiV1CdarValidatePostExecute(r Ap
 		localVarReturnValue  *ValidateCDARResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CDARCycleDeVieAPIService.ValidateCdarApiV1CdarValidatePost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Flux6InvoiceLifecycleCDARAPIService.ValidateCdarApiV1CdarValidatePost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1054,6 +1074,147 @@ func (a *CDARCycleDeVieAPIService) ValidateCdarApiV1CdarValidatePostExecute(r Ap
 	}
 	// body params
 	localVarPostBody = r.validateCDARRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiValidateXmlCdarApiV1CdarValidateXmlPostRequest struct {
+	ctx context.Context
+	ApiService *Flux6InvoiceLifecycleCDARAPIService
+	xmlFile *os.File
+}
+
+// CDAR XML file to validate
+func (r ApiValidateXmlCdarApiV1CdarValidateXmlPostRequest) XmlFile(xmlFile *os.File) ApiValidateXmlCdarApiV1CdarValidateXmlPostRequest {
+	r.xmlFile = xmlFile
+	return r
+}
+
+func (r ApiValidateXmlCdarApiV1CdarValidateXmlPostRequest) Execute() (map[string]interface{}, *http.Response, error) {
+	return r.ApiService.ValidateXmlCdarApiV1CdarValidateXmlPostExecute(r)
+}
+
+/*
+ValidateXmlCdarApiV1CdarValidateXmlPost Validate CDAR XML against XSD and Schematron BR-FR-CDV
+
+Validates a CDAR XML file against:
+
+1. **XSD schema**: UN/CEFACT D22B CrossDomainAcknowledgementAndResponse
+2. **Schematron BR-FR-CDV**: French business rules for invoice lifecycle
+
+Returns validation status and detailed error messages if invalid.
+
+**Note:** Use `/validate` to validate structured data fields (JSON).
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiValidateXmlCdarApiV1CdarValidateXmlPostRequest
+*/
+func (a *Flux6InvoiceLifecycleCDARAPIService) ValidateXmlCdarApiV1CdarValidateXmlPost(ctx context.Context) ApiValidateXmlCdarApiV1CdarValidateXmlPostRequest {
+	return ApiValidateXmlCdarApiV1CdarValidateXmlPostRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return map[string]interface{}
+func (a *Flux6InvoiceLifecycleCDARAPIService) ValidateXmlCdarApiV1CdarValidateXmlPostExecute(r ApiValidateXmlCdarApiV1CdarValidateXmlPostRequest) (map[string]interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Flux6InvoiceLifecycleCDARAPIService.ValidateXmlCdarApiV1CdarValidateXmlPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/cdar/validate-xml"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.xmlFile == nil {
+		return localVarReturnValue, nil, reportError("xmlFile is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"multipart/form-data"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	var xmlFileLocalVarFormFileName string
+	var xmlFileLocalVarFileName     string
+	var xmlFileLocalVarFileBytes    []byte
+
+	xmlFileLocalVarFormFileName = "xml_file"
+	xmlFileLocalVarFile := r.xmlFile
+
+	if xmlFileLocalVarFile != nil {
+		fbs, _ := io.ReadAll(xmlFileLocalVarFile)
+
+		xmlFileLocalVarFileBytes = fbs
+		xmlFileLocalVarFileName = xmlFileLocalVarFile.Name()
+		xmlFileLocalVarFile.Close()
+		formFiles = append(formFiles, formFile{fileBytes: xmlFileLocalVarFileBytes, fileName: xmlFileLocalVarFileName, formFileName: xmlFileLocalVarFormFileName})
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

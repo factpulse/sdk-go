@@ -1,0 +1,219 @@
+# \FacturXPDFXMLVerificationAPI
+
+All URIs are relative to *https://factpulse.fr*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet**](FacturXPDFXMLVerificationAPI.md#GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet) | **Get** /api/v1/verification/verify-async/{task_id}/status | Get status of an asynchronous verification
+[**VerifyPdfAsyncApiV1VerificationVerifyAsyncPost**](FacturXPDFXMLVerificationAPI.md#VerifyPdfAsyncApiV1VerificationVerifyAsyncPost) | **Post** /api/v1/verification/verify-async | Verify PDF/XML Factur-X compliance (asynchronous)
+[**VerifyPdfSyncApiV1VerificationVerifyPost**](FacturXPDFXMLVerificationAPI.md#VerifyPdfSyncApiV1VerificationVerifyPost) | **Post** /api/v1/verification/verify | Verify PDF/XML Factur-X compliance (synchronous)
+
+
+
+## GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet
+
+> AsyncTaskStatus GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet(ctx, taskId).Execute()
+
+Get status of an asynchronous verification
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/factpulse/sdk-go/v3"
+)
+
+func main() {
+	taskId := "taskId_example" // string | Celery task ID returned by /verify-async endpoint
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FacturXPDFXMLVerificationAPI.GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet(context.Background(), taskId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FacturXPDFXMLVerificationAPI.GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet`: AsyncTaskStatus
+	fmt.Fprintf(os.Stdout, "Response from `FacturXPDFXMLVerificationAPI.GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**taskId** | **string** | Celery task ID returned by /verify-async endpoint | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGetRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**AsyncTaskStatus**](AsyncTaskStatus.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## VerifyPdfAsyncApiV1VerificationVerifyAsyncPost
+
+> TaskResponse VerifyPdfAsyncApiV1VerificationVerifyAsyncPost(ctx).PdfFile(pdfFile).ForceOcr(forceOcr).CallbackUrl(callbackUrl).WebhookMode(webhookMode).Execute()
+
+Verify PDF/XML Factur-X compliance (asynchronous)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/factpulse/sdk-go/v3"
+)
+
+func main() {
+	pdfFile := os.NewFile(1234, "some_file") // *os.File | Factur-X PDF file to verify
+	forceOcr := true // bool | Force OCR usage even if PDF contains native text (optional) (default to false)
+	callbackUrl := "callbackUrl_example" // string |  (optional)
+	webhookMode := "webhookMode_example" // string | Webhook content delivery: 'inline' (base64 in payload) or 'download_url' (temporary URL, 1h TTL) (optional) (default to "inline")
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FacturXPDFXMLVerificationAPI.VerifyPdfAsyncApiV1VerificationVerifyAsyncPost(context.Background()).PdfFile(pdfFile).ForceOcr(forceOcr).CallbackUrl(callbackUrl).WebhookMode(webhookMode).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FacturXPDFXMLVerificationAPI.VerifyPdfAsyncApiV1VerificationVerifyAsyncPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `VerifyPdfAsyncApiV1VerificationVerifyAsyncPost`: TaskResponse
+	fmt.Fprintf(os.Stdout, "Response from `FacturXPDFXMLVerificationAPI.VerifyPdfAsyncApiV1VerificationVerifyAsyncPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiVerifyPdfAsyncApiV1VerificationVerifyAsyncPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **pdfFile** | ***os.File** | Factur-X PDF file to verify | 
+ **forceOcr** | **bool** | Force OCR usage even if PDF contains native text | [default to false]
+ **callbackUrl** | **string** |  | 
+ **webhookMode** | **string** | Webhook content delivery: &#39;inline&#39; (base64 in payload) or &#39;download_url&#39; (temporary URL, 1h TTL) | [default to &quot;inline&quot;]
+
+### Return type
+
+[**TaskResponse**](TaskResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+- **Content-Type**: multipart/form-data
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## VerifyPdfSyncApiV1VerificationVerifyPost
+
+> VerificationSuccessResponse VerifyPdfSyncApiV1VerificationVerifyPost(ctx).PdfFile(pdfFile).Execute()
+
+Verify PDF/XML Factur-X compliance (synchronous)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/factpulse/sdk-go/v3"
+)
+
+func main() {
+	pdfFile := os.NewFile(1234, "some_file") // *os.File | Factur-X PDF file to verify
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FacturXPDFXMLVerificationAPI.VerifyPdfSyncApiV1VerificationVerifyPost(context.Background()).PdfFile(pdfFile).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FacturXPDFXMLVerificationAPI.VerifyPdfSyncApiV1VerificationVerifyPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `VerifyPdfSyncApiV1VerificationVerifyPost`: VerificationSuccessResponse
+	fmt.Fprintf(os.Stdout, "Response from `FacturXPDFXMLVerificationAPI.VerifyPdfSyncApiV1VerificationVerifyPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiVerifyPdfSyncApiV1VerificationVerifyPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **pdfFile** | ***os.File** | Factur-X PDF file to verify | 
+
+### Return type
+
+[**VerificationSuccessResponse**](VerificationSuccessResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+- **Content-Type**: multipart/form-data
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+

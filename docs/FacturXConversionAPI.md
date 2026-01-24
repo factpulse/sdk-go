@@ -1,13 +1,13 @@
-# \DocumentConversionAPI
+# \FacturXConversionAPI
 
 All URIs are relative to *https://factpulse.fr*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ConvertDocumentAsyncApiV1ConvertAsyncPost**](DocumentConversionAPI.md#ConvertDocumentAsyncApiV1ConvertAsyncPost) | **Post** /api/v1/convert/async | Convertir un document en Factur-X (mode asynchrone)
-[**DownloadFileApiV1ConvertConversionIdDownloadFilenameGet**](DocumentConversionAPI.md#DownloadFileApiV1ConvertConversionIdDownloadFilenameGet) | **Get** /api/v1/convert/{conversion_id}/download/{filename} | Télécharger un fichier généré
-[**GetConversionStatusApiV1ConvertConversionIdStatusGet**](DocumentConversionAPI.md#GetConversionStatusApiV1ConvertConversionIdStatusGet) | **Get** /api/v1/convert/{conversion_id}/status | Vérifier le statut d&#39;une conversion
-[**ResumeConversionApiV1ConvertConversionIdResumePost**](DocumentConversionAPI.md#ResumeConversionApiV1ConvertConversionIdResumePost) | **Post** /api/v1/convert/{conversion_id}/resume | Reprendre une conversion avec corrections
+[**ConvertDocumentAsyncApiV1ConvertAsyncPost**](FacturXConversionAPI.md#ConvertDocumentAsyncApiV1ConvertAsyncPost) | **Post** /api/v1/convert/async | Convert a document to Factur-X (async mode)
+[**DownloadFileApiV1ConvertConversionIdDownloadFilenameGet**](FacturXConversionAPI.md#DownloadFileApiV1ConvertConversionIdDownloadFilenameGet) | **Get** /api/v1/convert/{conversion_id}/download/{filename} | Download a generated file
+[**GetConversionStatusApiV1ConvertConversionIdStatusGet**](FacturXConversionAPI.md#GetConversionStatusApiV1ConvertConversionIdStatusGet) | **Get** /api/v1/convert/{conversion_id}/status | Check conversion status
+[**ResumeConversionApiV1ConvertConversionIdResumePost**](FacturXConversionAPI.md#ResumeConversionApiV1ConvertConversionIdResumePost) | **Post** /api/v1/convert/{conversion_id}/resume | Resume a conversion with corrections
 
 
 
@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 > interface{} ConvertDocumentAsyncApiV1ConvertAsyncPost(ctx).File(file).Output(output).CallbackUrl(callbackUrl).WebhookMode(webhookMode).Execute()
 
-Convertir un document en Factur-X (mode asynchrone)
+Convert a document to Factur-X (async mode)
 
 
 
@@ -32,20 +32,20 @@ import (
 )
 
 func main() {
-	file := os.NewFile(1234, "some_file") // *os.File | Document à convertir (PDF, DOCX, XLSX, JPG, PNG)
-	output := "output_example" // string | Format de sortie: pdf, xml, both (optional) (default to "pdf")
+	file := os.NewFile(1234, "some_file") // *os.File | Document to convert (PDF, DOCX, XLSX, JPG, PNG)
+	output := "output_example" // string | Output format: pdf, xml, both (optional) (default to "pdf")
 	callbackUrl := "callbackUrl_example" // string |  (optional)
-	webhookMode := "webhookMode_example" // string | Mode de livraison du contenu: 'inline' (base64 dans webhook) ou 'download_url' (URL temporaire 1h) (optional) (default to "inline")
+	webhookMode := "webhookMode_example" // string | Content delivery mode: 'inline' (base64 in webhook) or 'download_url' (temporary URL, 1h TTL) (optional) (default to "inline")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DocumentConversionAPI.ConvertDocumentAsyncApiV1ConvertAsyncPost(context.Background()).File(file).Output(output).CallbackUrl(callbackUrl).WebhookMode(webhookMode).Execute()
+	resp, r, err := apiClient.FacturXConversionAPI.ConvertDocumentAsyncApiV1ConvertAsyncPost(context.Background()).File(file).Output(output).CallbackUrl(callbackUrl).WebhookMode(webhookMode).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `DocumentConversionAPI.ConvertDocumentAsyncApiV1ConvertAsyncPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `FacturXConversionAPI.ConvertDocumentAsyncApiV1ConvertAsyncPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `ConvertDocumentAsyncApiV1ConvertAsyncPost`: interface{}
-	fmt.Fprintf(os.Stdout, "Response from `DocumentConversionAPI.ConvertDocumentAsyncApiV1ConvertAsyncPost`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `FacturXConversionAPI.ConvertDocumentAsyncApiV1ConvertAsyncPost`: %v\n", resp)
 }
 ```
 
@@ -60,10 +60,10 @@ Other parameters are passed through a pointer to a apiConvertDocumentAsyncApiV1C
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file** | ***os.File** | Document à convertir (PDF, DOCX, XLSX, JPG, PNG) | 
- **output** | **string** | Format de sortie: pdf, xml, both | [default to &quot;pdf&quot;]
+ **file** | ***os.File** | Document to convert (PDF, DOCX, XLSX, JPG, PNG) | 
+ **output** | **string** | Output format: pdf, xml, both | [default to &quot;pdf&quot;]
  **callbackUrl** | **string** |  | 
- **webhookMode** | **string** | Mode de livraison du contenu: &#39;inline&#39; (base64 dans webhook) ou &#39;download_url&#39; (URL temporaire 1h) | [default to &quot;inline&quot;]
+ **webhookMode** | **string** | Content delivery mode: &#39;inline&#39; (base64 in webhook) or &#39;download_url&#39; (temporary URL, 1h TTL) | [default to &quot;inline&quot;]
 
 ### Return type
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 > interface{} DownloadFileApiV1ConvertConversionIdDownloadFilenameGet(ctx, conversionId, filename).Execute()
 
-Télécharger un fichier généré
+Download a generated file
 
 
 
@@ -109,13 +109,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DocumentConversionAPI.DownloadFileApiV1ConvertConversionIdDownloadFilenameGet(context.Background(), conversionId, filename).Execute()
+	resp, r, err := apiClient.FacturXConversionAPI.DownloadFileApiV1ConvertConversionIdDownloadFilenameGet(context.Background(), conversionId, filename).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `DocumentConversionAPI.DownloadFileApiV1ConvertConversionIdDownloadFilenameGet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `FacturXConversionAPI.DownloadFileApiV1ConvertConversionIdDownloadFilenameGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `DownloadFileApiV1ConvertConversionIdDownloadFilenameGet`: interface{}
-	fmt.Fprintf(os.Stdout, "Response from `DocumentConversionAPI.DownloadFileApiV1ConvertConversionIdDownloadFilenameGet`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `FacturXConversionAPI.DownloadFileApiV1ConvertConversionIdDownloadFilenameGet`: %v\n", resp)
 }
 ```
 
@@ -160,7 +160,7 @@ Name | Type | Description  | Notes
 
 > map[string]interface{} GetConversionStatusApiV1ConvertConversionIdStatusGet(ctx, conversionId).Execute()
 
-Vérifier le statut d'une conversion
+Check conversion status
 
 
 
@@ -181,13 +181,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DocumentConversionAPI.GetConversionStatusApiV1ConvertConversionIdStatusGet(context.Background(), conversionId).Execute()
+	resp, r, err := apiClient.FacturXConversionAPI.GetConversionStatusApiV1ConvertConversionIdStatusGet(context.Background(), conversionId).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `DocumentConversionAPI.GetConversionStatusApiV1ConvertConversionIdStatusGet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `FacturXConversionAPI.GetConversionStatusApiV1ConvertConversionIdStatusGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GetConversionStatusApiV1ConvertConversionIdStatusGet`: map[string]interface{}
-	fmt.Fprintf(os.Stdout, "Response from `DocumentConversionAPI.GetConversionStatusApiV1ConvertConversionIdStatusGet`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `FacturXConversionAPI.GetConversionStatusApiV1ConvertConversionIdStatusGet`: %v\n", resp)
 }
 ```
 
@@ -230,7 +230,7 @@ Name | Type | Description  | Notes
 
 > ConvertSuccessResponse ResumeConversionApiV1ConvertConversionIdResumePost(ctx, conversionId).ConvertResumeRequest(convertResumeRequest).Execute()
 
-Reprendre une conversion avec corrections
+Resume a conversion with corrections
 
 
 
@@ -252,13 +252,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DocumentConversionAPI.ResumeConversionApiV1ConvertConversionIdResumePost(context.Background(), conversionId).ConvertResumeRequest(convertResumeRequest).Execute()
+	resp, r, err := apiClient.FacturXConversionAPI.ResumeConversionApiV1ConvertConversionIdResumePost(context.Background(), conversionId).ConvertResumeRequest(convertResumeRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `DocumentConversionAPI.ResumeConversionApiV1ConvertConversionIdResumePost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `FacturXConversionAPI.ResumeConversionApiV1ConvertConversionIdResumePost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `ResumeConversionApiV1ConvertConversionIdResumePost`: ConvertSuccessResponse
-	fmt.Fprintf(os.Stdout, "Response from `DocumentConversionAPI.ResumeConversionApiV1ConvertConversionIdResumePost`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `FacturXConversionAPI.ResumeConversionApiV1ConvertConversionIdResumePost`: %v\n", resp)
 }
 ```
 

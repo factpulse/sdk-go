@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **InvoiceNumber** | **string** |  | 
 **PaymentDueDate** | **string** |  | 
 **InvoiceDate** | Pointer to **string** |  | [optional] 
-**SubmissionMode** | [**SubmissionMode**](SubmissionMode.md) |  | 
+**SubmissionMode** | Pointer to [**SubmissionMode**](SubmissionMode.md) |  | [optional] [default to DEPOT_PDF_API]
 **Recipient** | [**Recipient**](Recipient.md) |  | 
 **Supplier** | [**Supplier**](Supplier.md) |  | 
 **InvoicingFramework** | [**InvoicingFramework**](InvoicingFramework.md) |  | 
@@ -39,7 +39,7 @@ Name | Type | Description | Notes
 
 ### NewFacturXInvoice
 
-`func NewFacturXInvoice(invoiceNumber string, paymentDueDate string, submissionMode SubmissionMode, recipient Recipient, supplier Supplier, invoicingFramework InvoicingFramework, references InvoiceReferences, totals InvoiceTotals, ) *FacturXInvoice`
+`func NewFacturXInvoice(invoiceNumber string, paymentDueDate string, recipient Recipient, supplier Supplier, invoicingFramework InvoicingFramework, references InvoiceReferences, totals InvoiceTotals, ) *FacturXInvoice`
 
 NewFacturXInvoice instantiates a new FacturXInvoice object
 This constructor will assign default values to properties that have it defined,
@@ -138,6 +138,11 @@ and a boolean to check if the value has been set.
 
 SetSubmissionMode sets SubmissionMode field to given value.
 
+### HasSubmissionMode
+
+`func (o *FacturXInvoice) HasSubmissionMode() bool`
+
+HasSubmissionMode returns a boolean if a field has been set.
 
 ### GetRecipient
 

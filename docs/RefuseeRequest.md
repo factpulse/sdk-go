@@ -6,20 +6,22 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **InvoiceId** | **string** | Identifiant de la facture (BT-1) | 
 **InvoiceIssueDate** | **string** | Date d&#39;émission de la facture (YYYY-MM-DD) | 
+**InvoiceSellerSiren** | **string** | SIREN du vendeur (destinataire du statut, MDT-129) | 
+**InvoiceSellerElectronicAddress** | **string** | Adresse électronique du vendeur (MDT-73) | 
+**ReasonCode** | **string** | Code motif du refus (obligatoire). Valeurs: TX_TVA_ERR, MONTANTTOTAL_ERR, CALCUL_ERR, NON_CONFORME, DOUBLON, DEST_ERR, TRANSAC_INC, EMMET_INC, CONTRAT_TERM, DOUBLE_FACT, CMD_ERR, ADR_ERR, REF_CT_ABSENT | 
+**ReasonText** | Pointer to **NullableString** |  | [optional] 
 **SenderSiren** | Pointer to **NullableString** |  | [optional] 
-**FlowType** | Pointer to **string** | Type de flux: SupplierInvoiceLC (acheteur) ou CustomerInvoiceLC (vendeur) | [optional] [default to "SupplierInvoiceLC"]
+**FlowType** | Pointer to **string** | Type de flux (SupplierInvoiceLC pour facture reçue) | [optional] [default to "SupplierInvoiceLC"]
 **PdpFlowServiceUrl** | Pointer to **NullableString** |  | [optional] 
 **PdpTokenUrl** | Pointer to **NullableString** |  | [optional] 
 **PdpClientId** | Pointer to **NullableString** |  | [optional] 
 **PdpClientSecret** | Pointer to **NullableString** |  | [optional] 
-**ReasonCode** | **string** | Code motif du refus (obligatoire). Valeurs autorisées: TX_TVA_ERR, MONTANTTOTAL_ERR, CALCUL_ERR, NON_CONFORME, DOUBLON, DEST_ERR, TRANSAC_INC, EMMET_INC, CONTRAT_TERM, DOUBLE_FACT, CMD_ERR, ADR_ERR, REF_CT_ABSENT | 
-**ReasonText** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
 ### NewRefuseeRequest
 
-`func NewRefuseeRequest(invoiceId string, invoiceIssueDate string, reasonCode string, ) *RefuseeRequest`
+`func NewRefuseeRequest(invoiceId string, invoiceIssueDate string, invoiceSellerSiren string, invoiceSellerElectronicAddress string, reasonCode string, ) *RefuseeRequest`
 
 NewRefuseeRequest instantiates a new RefuseeRequest object
 This constructor will assign default values to properties that have it defined,
@@ -74,6 +76,101 @@ and a boolean to check if the value has been set.
 SetInvoiceIssueDate sets InvoiceIssueDate field to given value.
 
 
+### GetInvoiceSellerSiren
+
+`func (o *RefuseeRequest) GetInvoiceSellerSiren() string`
+
+GetInvoiceSellerSiren returns the InvoiceSellerSiren field if non-nil, zero value otherwise.
+
+### GetInvoiceSellerSirenOk
+
+`func (o *RefuseeRequest) GetInvoiceSellerSirenOk() (*string, bool)`
+
+GetInvoiceSellerSirenOk returns a tuple with the InvoiceSellerSiren field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInvoiceSellerSiren
+
+`func (o *RefuseeRequest) SetInvoiceSellerSiren(v string)`
+
+SetInvoiceSellerSiren sets InvoiceSellerSiren field to given value.
+
+
+### GetInvoiceSellerElectronicAddress
+
+`func (o *RefuseeRequest) GetInvoiceSellerElectronicAddress() string`
+
+GetInvoiceSellerElectronicAddress returns the InvoiceSellerElectronicAddress field if non-nil, zero value otherwise.
+
+### GetInvoiceSellerElectronicAddressOk
+
+`func (o *RefuseeRequest) GetInvoiceSellerElectronicAddressOk() (*string, bool)`
+
+GetInvoiceSellerElectronicAddressOk returns a tuple with the InvoiceSellerElectronicAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInvoiceSellerElectronicAddress
+
+`func (o *RefuseeRequest) SetInvoiceSellerElectronicAddress(v string)`
+
+SetInvoiceSellerElectronicAddress sets InvoiceSellerElectronicAddress field to given value.
+
+
+### GetReasonCode
+
+`func (o *RefuseeRequest) GetReasonCode() string`
+
+GetReasonCode returns the ReasonCode field if non-nil, zero value otherwise.
+
+### GetReasonCodeOk
+
+`func (o *RefuseeRequest) GetReasonCodeOk() (*string, bool)`
+
+GetReasonCodeOk returns a tuple with the ReasonCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReasonCode
+
+`func (o *RefuseeRequest) SetReasonCode(v string)`
+
+SetReasonCode sets ReasonCode field to given value.
+
+
+### GetReasonText
+
+`func (o *RefuseeRequest) GetReasonText() string`
+
+GetReasonText returns the ReasonText field if non-nil, zero value otherwise.
+
+### GetReasonTextOk
+
+`func (o *RefuseeRequest) GetReasonTextOk() (*string, bool)`
+
+GetReasonTextOk returns a tuple with the ReasonText field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReasonText
+
+`func (o *RefuseeRequest) SetReasonText(v string)`
+
+SetReasonText sets ReasonText field to given value.
+
+### HasReasonText
+
+`func (o *RefuseeRequest) HasReasonText() bool`
+
+HasReasonText returns a boolean if a field has been set.
+
+### SetReasonTextNil
+
+`func (o *RefuseeRequest) SetReasonTextNil(b bool)`
+
+ SetReasonTextNil sets the value for ReasonText to be an explicit nil
+
+### UnsetReasonText
+`func (o *RefuseeRequest) UnsetReasonText()`
+
+UnsetReasonText ensures that no value is present for ReasonText, not even an explicit nil
 ### GetSenderSiren
 
 `func (o *RefuseeRequest) GetSenderSiren() string`
@@ -274,61 +371,6 @@ HasPdpClientSecret returns a boolean if a field has been set.
 `func (o *RefuseeRequest) UnsetPdpClientSecret()`
 
 UnsetPdpClientSecret ensures that no value is present for PdpClientSecret, not even an explicit nil
-### GetReasonCode
-
-`func (o *RefuseeRequest) GetReasonCode() string`
-
-GetReasonCode returns the ReasonCode field if non-nil, zero value otherwise.
-
-### GetReasonCodeOk
-
-`func (o *RefuseeRequest) GetReasonCodeOk() (*string, bool)`
-
-GetReasonCodeOk returns a tuple with the ReasonCode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetReasonCode
-
-`func (o *RefuseeRequest) SetReasonCode(v string)`
-
-SetReasonCode sets ReasonCode field to given value.
-
-
-### GetReasonText
-
-`func (o *RefuseeRequest) GetReasonText() string`
-
-GetReasonText returns the ReasonText field if non-nil, zero value otherwise.
-
-### GetReasonTextOk
-
-`func (o *RefuseeRequest) GetReasonTextOk() (*string, bool)`
-
-GetReasonTextOk returns a tuple with the ReasonText field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetReasonText
-
-`func (o *RefuseeRequest) SetReasonText(v string)`
-
-SetReasonText sets ReasonText field to given value.
-
-### HasReasonText
-
-`func (o *RefuseeRequest) HasReasonText() bool`
-
-HasReasonText returns a boolean if a field has been set.
-
-### SetReasonTextNil
-
-`func (o *RefuseeRequest) SetReasonTextNil(b bool)`
-
- SetReasonTextNil sets the value for ReasonText to be an explicit nil
-
-### UnsetReasonText
-`func (o *RefuseeRequest) UnsetReasonText()`
-
-UnsetReasonText ensures that no value is present for ReasonText, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -1,18 +1,19 @@
-# \CDARCycleDeVieAPI
+# \Flux6InvoiceLifecycleCDARAPI
 
 All URIs are relative to *https://factpulse.fr*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GenerateCdarApiV1CdarGeneratePost**](CDARCycleDeVieAPI.md#GenerateCdarApiV1CdarGeneratePost) | **Post** /api/v1/cdar/generate | Générer un message CDAR
-[**GetActionCodesApiV1CdarActionCodesGet**](CDARCycleDeVieAPI.md#GetActionCodesApiV1CdarActionCodesGet) | **Get** /api/v1/cdar/action-codes | Liste des codes action CDAR
-[**GetReasonCodesApiV1CdarReasonCodesGet**](CDARCycleDeVieAPI.md#GetReasonCodesApiV1CdarReasonCodesGet) | **Get** /api/v1/cdar/reason-codes | Liste des codes motif CDAR
-[**GetStatusCodesApiV1CdarStatusCodesGet**](CDARCycleDeVieAPI.md#GetStatusCodesApiV1CdarStatusCodesGet) | **Get** /api/v1/cdar/status-codes | Liste des codes statut CDAR
-[**SubmitCdarApiV1CdarSubmitPost**](CDARCycleDeVieAPI.md#SubmitCdarApiV1CdarSubmitPost) | **Post** /api/v1/cdar/submit | Générer et soumettre un message CDAR
-[**SubmitCdarXmlApiV1CdarSubmitXmlPost**](CDARCycleDeVieAPI.md#SubmitCdarXmlApiV1CdarSubmitXmlPost) | **Post** /api/v1/cdar/submit-xml | Soumettre un XML CDAR pré-généré
-[**SubmitEncaisseeApiV1CdarEncaisseePost**](CDARCycleDeVieAPI.md#SubmitEncaisseeApiV1CdarEncaisseePost) | **Post** /api/v1/cdar/encaissee | [Simplifié] Soumettre un statut ENCAISSÉE (212)
-[**SubmitRefuseeApiV1CdarRefuseePost**](CDARCycleDeVieAPI.md#SubmitRefuseeApiV1CdarRefuseePost) | **Post** /api/v1/cdar/refusee | [Simplifié] Soumettre un statut REFUSÉE (210)
-[**ValidateCdarApiV1CdarValidatePost**](CDARCycleDeVieAPI.md#ValidateCdarApiV1CdarValidatePost) | **Post** /api/v1/cdar/validate | Valider des données CDAR
+[**GenerateCdarApiV1CdarGeneratePost**](Flux6InvoiceLifecycleCDARAPI.md#GenerateCdarApiV1CdarGeneratePost) | **Post** /api/v1/cdar/generate | Generate a CDAR message
+[**GetActionCodesApiV1CdarActionCodesGet**](Flux6InvoiceLifecycleCDARAPI.md#GetActionCodesApiV1CdarActionCodesGet) | **Get** /api/v1/cdar/action-codes | List of CDAR action codes
+[**GetReasonCodesApiV1CdarReasonCodesGet**](Flux6InvoiceLifecycleCDARAPI.md#GetReasonCodesApiV1CdarReasonCodesGet) | **Get** /api/v1/cdar/reason-codes | List of CDAR reason codes
+[**GetStatusCodesApiV1CdarStatusCodesGet**](Flux6InvoiceLifecycleCDARAPI.md#GetStatusCodesApiV1CdarStatusCodesGet) | **Get** /api/v1/cdar/status-codes | List of CDAR status codes
+[**SubmitCdarApiV1CdarSubmitPost**](Flux6InvoiceLifecycleCDARAPI.md#SubmitCdarApiV1CdarSubmitPost) | **Post** /api/v1/cdar/submit | Generate and submit a CDAR message
+[**SubmitCdarXmlApiV1CdarSubmitXmlPost**](Flux6InvoiceLifecycleCDARAPI.md#SubmitCdarXmlApiV1CdarSubmitXmlPost) | **Post** /api/v1/cdar/submit-xml | Submit a pre-generated CDAR XML
+[**SubmitEncaisseeApiV1CdarEncaisseePost**](Flux6InvoiceLifecycleCDARAPI.md#SubmitEncaisseeApiV1CdarEncaisseePost) | **Post** /api/v1/cdar/encaissee | [Simplified] Submit PAID status (212) - Issued invoice
+[**SubmitRefuseeApiV1CdarRefuseePost**](Flux6InvoiceLifecycleCDARAPI.md#SubmitRefuseeApiV1CdarRefuseePost) | **Post** /api/v1/cdar/refusee | [Simplified] Submit REFUSED status (210) - Received invoice
+[**ValidateCdarApiV1CdarValidatePost**](Flux6InvoiceLifecycleCDARAPI.md#ValidateCdarApiV1CdarValidatePost) | **Post** /api/v1/cdar/validate | Validate CDAR structured data
+[**ValidateXmlCdarApiV1CdarValidateXmlPost**](Flux6InvoiceLifecycleCDARAPI.md#ValidateXmlCdarApiV1CdarValidateXmlPost) | **Post** /api/v1/cdar/validate-xml | Validate CDAR XML against XSD and Schematron BR-FR-CDV
 
 
 
@@ -20,7 +21,7 @@ Method | HTTP request | Description
 
 > GenerateCDARResponse GenerateCdarApiV1CdarGeneratePost(ctx).CreateCDARRequest(createCDARRequest).Execute()
 
-Générer un message CDAR
+Generate a CDAR message
 
 
 
@@ -42,13 +43,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CDARCycleDeVieAPI.GenerateCdarApiV1CdarGeneratePost(context.Background()).CreateCDARRequest(createCDARRequest).Execute()
+	resp, r, err := apiClient.Flux6InvoiceLifecycleCDARAPI.GenerateCdarApiV1CdarGeneratePost(context.Background()).CreateCDARRequest(createCDARRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CDARCycleDeVieAPI.GenerateCdarApiV1CdarGeneratePost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `Flux6InvoiceLifecycleCDARAPI.GenerateCdarApiV1CdarGeneratePost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GenerateCdarApiV1CdarGeneratePost`: GenerateCDARResponse
-	fmt.Fprintf(os.Stdout, "Response from `CDARCycleDeVieAPI.GenerateCdarApiV1CdarGeneratePost`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `Flux6InvoiceLifecycleCDARAPI.GenerateCdarApiV1CdarGeneratePost`: %v\n", resp)
 }
 ```
 
@@ -87,7 +88,7 @@ Name | Type | Description  | Notes
 
 > ActionCodesResponse GetActionCodesApiV1CdarActionCodesGet(ctx).Execute()
 
-Liste des codes action CDAR
+List of CDAR action codes
 
 
 
@@ -107,13 +108,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CDARCycleDeVieAPI.GetActionCodesApiV1CdarActionCodesGet(context.Background()).Execute()
+	resp, r, err := apiClient.Flux6InvoiceLifecycleCDARAPI.GetActionCodesApiV1CdarActionCodesGet(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CDARCycleDeVieAPI.GetActionCodesApiV1CdarActionCodesGet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `Flux6InvoiceLifecycleCDARAPI.GetActionCodesApiV1CdarActionCodesGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GetActionCodesApiV1CdarActionCodesGet`: ActionCodesResponse
-	fmt.Fprintf(os.Stdout, "Response from `CDARCycleDeVieAPI.GetActionCodesApiV1CdarActionCodesGet`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `Flux6InvoiceLifecycleCDARAPI.GetActionCodesApiV1CdarActionCodesGet`: %v\n", resp)
 }
 ```
 
@@ -148,7 +149,7 @@ No authorization required
 
 > ReasonCodesResponse GetReasonCodesApiV1CdarReasonCodesGet(ctx).Execute()
 
-Liste des codes motif CDAR
+List of CDAR reason codes
 
 
 
@@ -168,13 +169,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CDARCycleDeVieAPI.GetReasonCodesApiV1CdarReasonCodesGet(context.Background()).Execute()
+	resp, r, err := apiClient.Flux6InvoiceLifecycleCDARAPI.GetReasonCodesApiV1CdarReasonCodesGet(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CDARCycleDeVieAPI.GetReasonCodesApiV1CdarReasonCodesGet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `Flux6InvoiceLifecycleCDARAPI.GetReasonCodesApiV1CdarReasonCodesGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GetReasonCodesApiV1CdarReasonCodesGet`: ReasonCodesResponse
-	fmt.Fprintf(os.Stdout, "Response from `CDARCycleDeVieAPI.GetReasonCodesApiV1CdarReasonCodesGet`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `Flux6InvoiceLifecycleCDARAPI.GetReasonCodesApiV1CdarReasonCodesGet`: %v\n", resp)
 }
 ```
 
@@ -209,7 +210,7 @@ No authorization required
 
 > StatusCodesResponse GetStatusCodesApiV1CdarStatusCodesGet(ctx).Execute()
 
-Liste des codes statut CDAR
+List of CDAR status codes
 
 
 
@@ -229,13 +230,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CDARCycleDeVieAPI.GetStatusCodesApiV1CdarStatusCodesGet(context.Background()).Execute()
+	resp, r, err := apiClient.Flux6InvoiceLifecycleCDARAPI.GetStatusCodesApiV1CdarStatusCodesGet(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CDARCycleDeVieAPI.GetStatusCodesApiV1CdarStatusCodesGet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `Flux6InvoiceLifecycleCDARAPI.GetStatusCodesApiV1CdarStatusCodesGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GetStatusCodesApiV1CdarStatusCodesGet`: StatusCodesResponse
-	fmt.Fprintf(os.Stdout, "Response from `CDARCycleDeVieAPI.GetStatusCodesApiV1CdarStatusCodesGet`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `Flux6InvoiceLifecycleCDARAPI.GetStatusCodesApiV1CdarStatusCodesGet`: %v\n", resp)
 }
 ```
 
@@ -270,7 +271,7 @@ No authorization required
 
 > SubmitCDARResponse SubmitCdarApiV1CdarSubmitPost(ctx).SubmitCDARRequest(submitCDARRequest).Execute()
 
-Générer et soumettre un message CDAR
+Generate and submit a CDAR message
 
 
 
@@ -292,13 +293,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CDARCycleDeVieAPI.SubmitCdarApiV1CdarSubmitPost(context.Background()).SubmitCDARRequest(submitCDARRequest).Execute()
+	resp, r, err := apiClient.Flux6InvoiceLifecycleCDARAPI.SubmitCdarApiV1CdarSubmitPost(context.Background()).SubmitCDARRequest(submitCDARRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CDARCycleDeVieAPI.SubmitCdarApiV1CdarSubmitPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `Flux6InvoiceLifecycleCDARAPI.SubmitCdarApiV1CdarSubmitPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `SubmitCdarApiV1CdarSubmitPost`: SubmitCDARResponse
-	fmt.Fprintf(os.Stdout, "Response from `CDARCycleDeVieAPI.SubmitCdarApiV1CdarSubmitPost`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `Flux6InvoiceLifecycleCDARAPI.SubmitCdarApiV1CdarSubmitPost`: %v\n", resp)
 }
 ```
 
@@ -337,7 +338,7 @@ Name | Type | Description  | Notes
 
 > SubmitCDARResponse SubmitCdarXmlApiV1CdarSubmitXmlPost(ctx).SubmitCDARXMLRequest(submitCDARXMLRequest).Execute()
 
-Soumettre un XML CDAR pré-généré
+Submit a pre-generated CDAR XML
 
 
 
@@ -358,13 +359,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CDARCycleDeVieAPI.SubmitCdarXmlApiV1CdarSubmitXmlPost(context.Background()).SubmitCDARXMLRequest(submitCDARXMLRequest).Execute()
+	resp, r, err := apiClient.Flux6InvoiceLifecycleCDARAPI.SubmitCdarXmlApiV1CdarSubmitXmlPost(context.Background()).SubmitCDARXMLRequest(submitCDARXMLRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CDARCycleDeVieAPI.SubmitCdarXmlApiV1CdarSubmitXmlPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `Flux6InvoiceLifecycleCDARAPI.SubmitCdarXmlApiV1CdarSubmitXmlPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `SubmitCdarXmlApiV1CdarSubmitXmlPost`: SubmitCDARResponse
-	fmt.Fprintf(os.Stdout, "Response from `CDARCycleDeVieAPI.SubmitCdarXmlApiV1CdarSubmitXmlPost`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `Flux6InvoiceLifecycleCDARAPI.SubmitCdarXmlApiV1CdarSubmitXmlPost`: %v\n", resp)
 }
 ```
 
@@ -403,7 +404,7 @@ Name | Type | Description  | Notes
 
 > SimplifiedCDARResponse SubmitEncaisseeApiV1CdarEncaisseePost(ctx).EncaisseeRequest(encaisseeRequest).Execute()
 
-[Simplifié] Soumettre un statut ENCAISSÉE (212)
+[Simplified] Submit PAID status (212) - Issued invoice
 
 
 
@@ -421,17 +422,17 @@ import (
 )
 
 func main() {
-	encaisseeRequest := *openapiclient.NewEncaisseeRequest("InvoiceId_example", time.Now(), *openapiclient.NewAmount()) // EncaisseeRequest | 
+	encaisseeRequest := *openapiclient.NewEncaisseeRequest("InvoiceId_example", time.Now(), "InvoiceBuyerSiren_example", "InvoiceBuyerElectronicAddress_example", *openapiclient.NewAmount()) // EncaisseeRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CDARCycleDeVieAPI.SubmitEncaisseeApiV1CdarEncaisseePost(context.Background()).EncaisseeRequest(encaisseeRequest).Execute()
+	resp, r, err := apiClient.Flux6InvoiceLifecycleCDARAPI.SubmitEncaisseeApiV1CdarEncaisseePost(context.Background()).EncaisseeRequest(encaisseeRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CDARCycleDeVieAPI.SubmitEncaisseeApiV1CdarEncaisseePost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `Flux6InvoiceLifecycleCDARAPI.SubmitEncaisseeApiV1CdarEncaisseePost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `SubmitEncaisseeApiV1CdarEncaisseePost`: SimplifiedCDARResponse
-	fmt.Fprintf(os.Stdout, "Response from `CDARCycleDeVieAPI.SubmitEncaisseeApiV1CdarEncaisseePost`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `Flux6InvoiceLifecycleCDARAPI.SubmitEncaisseeApiV1CdarEncaisseePost`: %v\n", resp)
 }
 ```
 
@@ -470,7 +471,7 @@ Name | Type | Description  | Notes
 
 > SimplifiedCDARResponse SubmitRefuseeApiV1CdarRefuseePost(ctx).RefuseeRequest(refuseeRequest).Execute()
 
-[Simplifié] Soumettre un statut REFUSÉE (210)
+[Simplified] Submit REFUSED status (210) - Received invoice
 
 
 
@@ -488,17 +489,17 @@ import (
 )
 
 func main() {
-	refuseeRequest := *openapiclient.NewRefuseeRequest("InvoiceId_example", time.Now(), "ReasonCode_example") // RefuseeRequest | 
+	refuseeRequest := *openapiclient.NewRefuseeRequest("InvoiceId_example", time.Now(), "InvoiceSellerSiren_example", "InvoiceSellerElectronicAddress_example", "ReasonCode_example") // RefuseeRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CDARCycleDeVieAPI.SubmitRefuseeApiV1CdarRefuseePost(context.Background()).RefuseeRequest(refuseeRequest).Execute()
+	resp, r, err := apiClient.Flux6InvoiceLifecycleCDARAPI.SubmitRefuseeApiV1CdarRefuseePost(context.Background()).RefuseeRequest(refuseeRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CDARCycleDeVieAPI.SubmitRefuseeApiV1CdarRefuseePost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `Flux6InvoiceLifecycleCDARAPI.SubmitRefuseeApiV1CdarRefuseePost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `SubmitRefuseeApiV1CdarRefuseePost`: SimplifiedCDARResponse
-	fmt.Fprintf(os.Stdout, "Response from `CDARCycleDeVieAPI.SubmitRefuseeApiV1CdarRefuseePost`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `Flux6InvoiceLifecycleCDARAPI.SubmitRefuseeApiV1CdarRefuseePost`: %v\n", resp)
 }
 ```
 
@@ -537,7 +538,7 @@ Name | Type | Description  | Notes
 
 > ValidateCDARResponse ValidateCdarApiV1CdarValidatePost(ctx).ValidateCDARRequest(validateCDARRequest).Execute()
 
-Valider des données CDAR
+Validate CDAR structured data
 
 
 
@@ -558,13 +559,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CDARCycleDeVieAPI.ValidateCdarApiV1CdarValidatePost(context.Background()).ValidateCDARRequest(validateCDARRequest).Execute()
+	resp, r, err := apiClient.Flux6InvoiceLifecycleCDARAPI.ValidateCdarApiV1CdarValidatePost(context.Background()).ValidateCDARRequest(validateCDARRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CDARCycleDeVieAPI.ValidateCdarApiV1CdarValidatePost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `Flux6InvoiceLifecycleCDARAPI.ValidateCdarApiV1CdarValidatePost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `ValidateCdarApiV1CdarValidatePost`: ValidateCDARResponse
-	fmt.Fprintf(os.Stdout, "Response from `CDARCycleDeVieAPI.ValidateCdarApiV1CdarValidatePost`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `Flux6InvoiceLifecycleCDARAPI.ValidateCdarApiV1CdarValidatePost`: %v\n", resp)
 }
 ```
 
@@ -592,6 +593,72 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ValidateXmlCdarApiV1CdarValidateXmlPost
+
+> map[string]interface{} ValidateXmlCdarApiV1CdarValidateXmlPost(ctx).XmlFile(xmlFile).Execute()
+
+Validate CDAR XML against XSD and Schematron BR-FR-CDV
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/factpulse/sdk-go/v3"
+)
+
+func main() {
+	xmlFile := os.NewFile(1234, "some_file") // *os.File | CDAR XML file to validate
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.Flux6InvoiceLifecycleCDARAPI.ValidateXmlCdarApiV1CdarValidateXmlPost(context.Background()).XmlFile(xmlFile).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `Flux6InvoiceLifecycleCDARAPI.ValidateXmlCdarApiV1CdarValidateXmlPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ValidateXmlCdarApiV1CdarValidateXmlPost`: map[string]interface{}
+	fmt.Fprintf(os.Stdout, "Response from `Flux6InvoiceLifecycleCDARAPI.ValidateXmlCdarApiV1CdarValidateXmlPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiValidateXmlCdarApiV1CdarValidateXmlPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **xmlFile** | ***os.File** | CDAR XML file to validate | 
+
+### Return type
+
+**map[string]interface{}**
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+- **Content-Type**: multipart/form-data
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

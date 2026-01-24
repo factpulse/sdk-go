@@ -1,7 +1,7 @@
 /*
 FactPulse REST API
 
- REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X Invoice Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Validation and Compliance - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata, electronic signatures - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules) - **Asynchronous Processing**: Celery support for heavy validations (VeraPDF)  ### 📡 AFNOR PDP/PA Integration (XP Z12-013) - **Flow Submission**: Send invoices to Partner Dematerialization Platforms - **Flow Search**: View submitted invoices - **Download**: Retrieve PDF/A-3 with XML - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user (stored credentials or zero-storage)  ### ✍️ PDF Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification - **Certificate Generation**: Self-signed X.509 certificates for testing  ### 🔄 Asynchronous Processing - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **No timeout**: Ideal for large files or heavy validations  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
+ REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X - Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Factur-X - Validation - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules)  ### ✍️ Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification  ### 📋 Flux 6 - Invoice Lifecycle (CDAR) - **CDAR Messages**: Acknowledgements, invoice statuses - **PPF Statuses**: REFUSED (210), PAID (212)  ### 📊 Flux 10 - E-Reporting - **Tax Declarations**: International B2B, B2C - **Flow Types**: 10.1 (B2B transactions), 10.2 (B2B payments), 10.3 (B2C transactions), 10.4 (B2C payments)  ### 📡 AFNOR PDP/PA (XP Z12-013) - **Flow Service**: Submit and search flows to PDPs - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user  ### 🏛️ Chorus Pro - **Public Sector Invoicing**: Complete API for Chorus Pro  ### ⏳ Async Tasks - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **Webhooks**: Automatic notifications when tasks complete  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
 
 API version: 1.0.0
 Contact: contact@factpulse.fr
@@ -22,25 +22,25 @@ import (
 )
 
 
-// DocumentConversionAPIService DocumentConversionAPI service
-type DocumentConversionAPIService service
+// FacturXConversionAPIService FacturXConversionAPI service
+type FacturXConversionAPIService service
 
 type ApiConvertDocumentAsyncApiV1ConvertAsyncPostRequest struct {
 	ctx context.Context
-	ApiService *DocumentConversionAPIService
+	ApiService *FacturXConversionAPIService
 	file *os.File
 	output *string
 	callbackUrl *string
 	webhookMode *string
 }
 
-// Document à convertir (PDF, DOCX, XLSX, JPG, PNG)
+// Document to convert (PDF, DOCX, XLSX, JPG, PNG)
 func (r ApiConvertDocumentAsyncApiV1ConvertAsyncPostRequest) File(file *os.File) ApiConvertDocumentAsyncApiV1ConvertAsyncPostRequest {
 	r.file = file
 	return r
 }
 
-// Format de sortie: pdf, xml, both
+// Output format: pdf, xml, both
 func (r ApiConvertDocumentAsyncApiV1ConvertAsyncPostRequest) Output(output string) ApiConvertDocumentAsyncApiV1ConvertAsyncPostRequest {
 	r.output = &output
 	return r
@@ -51,7 +51,7 @@ func (r ApiConvertDocumentAsyncApiV1ConvertAsyncPostRequest) CallbackUrl(callbac
 	return r
 }
 
-// Mode de livraison du contenu: &#39;inline&#39; (base64 dans webhook) ou &#39;download_url&#39; (URL temporaire 1h)
+// Content delivery mode: &#39;inline&#39; (base64 in webhook) or &#39;download_url&#39; (temporary URL, 1h TTL)
 func (r ApiConvertDocumentAsyncApiV1ConvertAsyncPostRequest) WebhookMode(webhookMode string) ApiConvertDocumentAsyncApiV1ConvertAsyncPostRequest {
 	r.webhookMode = &webhookMode
 	return r
@@ -62,25 +62,25 @@ func (r ApiConvertDocumentAsyncApiV1ConvertAsyncPostRequest) Execute() (interfac
 }
 
 /*
-ConvertDocumentAsyncApiV1ConvertAsyncPost Convertir un document en Factur-X (mode asynchrone)
+ConvertDocumentAsyncApiV1ConvertAsyncPost Convert a document to Factur-X (async mode)
 
-Lance une conversion asynchrone via Celery.
+Launch an asynchronous conversion via Celery.
 
 ## Workflow
 
-1. **Upload** : Le document est envoyé en multipart/form-data
-2. **Task Celery** : La tâche est mise en file d'attente
-3. **Callback** : Notification par webhook à la fin
+1. **Upload**: Document is sent as multipart/form-data
+2. **Celery Task**: Task is queued for processing
+3. **Callback**: Webhook notification on completion
 
-## Réponses possibles
+## Possible responses
 
-- **202** : Tâche acceptée, en cours de traitement
-- **400** : Fichier invalide
+- **202**: Task accepted, processing
+- **400**: Invalid file
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiConvertDocumentAsyncApiV1ConvertAsyncPostRequest
 */
-func (a *DocumentConversionAPIService) ConvertDocumentAsyncApiV1ConvertAsyncPost(ctx context.Context) ApiConvertDocumentAsyncApiV1ConvertAsyncPostRequest {
+func (a *FacturXConversionAPIService) ConvertDocumentAsyncApiV1ConvertAsyncPost(ctx context.Context) ApiConvertDocumentAsyncApiV1ConvertAsyncPostRequest {
 	return ApiConvertDocumentAsyncApiV1ConvertAsyncPostRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -89,7 +89,7 @@ func (a *DocumentConversionAPIService) ConvertDocumentAsyncApiV1ConvertAsyncPost
 
 // Execute executes the request
 //  @return interface{}
-func (a *DocumentConversionAPIService) ConvertDocumentAsyncApiV1ConvertAsyncPostExecute(r ApiConvertDocumentAsyncApiV1ConvertAsyncPostRequest) (interface{}, *http.Response, error) {
+func (a *FacturXConversionAPIService) ConvertDocumentAsyncApiV1ConvertAsyncPostExecute(r ApiConvertDocumentAsyncApiV1ConvertAsyncPostRequest) (interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -97,7 +97,7 @@ func (a *DocumentConversionAPIService) ConvertDocumentAsyncApiV1ConvertAsyncPost
 		localVarReturnValue  interface{}
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DocumentConversionAPIService.ConvertDocumentAsyncApiV1ConvertAsyncPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FacturXConversionAPIService.ConvertDocumentAsyncApiV1ConvertAsyncPost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -212,7 +212,7 @@ func (a *DocumentConversionAPIService) ConvertDocumentAsyncApiV1ConvertAsyncPost
 
 type ApiDownloadFileApiV1ConvertConversionIdDownloadFilenameGetRequest struct {
 	ctx context.Context
-	ApiService *DocumentConversionAPIService
+	ApiService *FacturXConversionAPIService
 	conversionId string
 	filename string
 }
@@ -222,23 +222,23 @@ func (r ApiDownloadFileApiV1ConvertConversionIdDownloadFilenameGetRequest) Execu
 }
 
 /*
-DownloadFileApiV1ConvertConversionIdDownloadFilenameGet Télécharger un fichier généré
+DownloadFileApiV1ConvertConversionIdDownloadFilenameGet Download a generated file
 
-Télécharge le fichier Factur-X PDF ou XML généré.
+Download the generated Factur-X PDF or XML file.
 
-## Fichiers disponibles
+## Available files
 
-- `facturx.pdf` : PDF/A-3 avec XML embarqué
-- `facturx.xml` : XML CII seul (Cross Industry Invoice)
+- `facturx.pdf`: PDF/A-3 with embedded XML
+- `facturx.xml`: XML CII only (Cross Industry Invoice)
 
-Les fichiers sont disponibles pendant 24 heures après génération.
+Files are available for 24 hours after generation.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param conversionId Conversion ID returned by POST /convert (UUID format)
  @param filename File to download: 'facturx.pdf' or 'facturx.xml'
  @return ApiDownloadFileApiV1ConvertConversionIdDownloadFilenameGetRequest
 */
-func (a *DocumentConversionAPIService) DownloadFileApiV1ConvertConversionIdDownloadFilenameGet(ctx context.Context, conversionId string, filename string) ApiDownloadFileApiV1ConvertConversionIdDownloadFilenameGetRequest {
+func (a *FacturXConversionAPIService) DownloadFileApiV1ConvertConversionIdDownloadFilenameGet(ctx context.Context, conversionId string, filename string) ApiDownloadFileApiV1ConvertConversionIdDownloadFilenameGetRequest {
 	return ApiDownloadFileApiV1ConvertConversionIdDownloadFilenameGetRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -249,7 +249,7 @@ func (a *DocumentConversionAPIService) DownloadFileApiV1ConvertConversionIdDownl
 
 // Execute executes the request
 //  @return interface{}
-func (a *DocumentConversionAPIService) DownloadFileApiV1ConvertConversionIdDownloadFilenameGetExecute(r ApiDownloadFileApiV1ConvertConversionIdDownloadFilenameGetRequest) (interface{}, *http.Response, error) {
+func (a *FacturXConversionAPIService) DownloadFileApiV1ConvertConversionIdDownloadFilenameGetExecute(r ApiDownloadFileApiV1ConvertConversionIdDownloadFilenameGetRequest) (interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -257,7 +257,7 @@ func (a *DocumentConversionAPIService) DownloadFileApiV1ConvertConversionIdDownl
 		localVarReturnValue  interface{}
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DocumentConversionAPIService.DownloadFileApiV1ConvertConversionIdDownloadFilenameGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FacturXConversionAPIService.DownloadFileApiV1ConvertConversionIdDownloadFilenameGet")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -347,7 +347,7 @@ func (a *DocumentConversionAPIService) DownloadFileApiV1ConvertConversionIdDownl
 
 type ApiGetConversionStatusApiV1ConvertConversionIdStatusGetRequest struct {
 	ctx context.Context
-	ApiService *DocumentConversionAPIService
+	ApiService *FacturXConversionAPIService
 	conversionId string
 }
 
@@ -356,15 +356,15 @@ func (r ApiGetConversionStatusApiV1ConvertConversionIdStatusGetRequest) Execute(
 }
 
 /*
-GetConversionStatusApiV1ConvertConversionIdStatusGet Vérifier le statut d'une conversion
+GetConversionStatusApiV1ConvertConversionIdStatusGet Check conversion status
 
-Retourne le statut actuel d'une conversion asynchrone.
+Returns the current status of an asynchronous conversion.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param conversionId Conversion ID returned by POST /convert (UUID format)
  @return ApiGetConversionStatusApiV1ConvertConversionIdStatusGetRequest
 */
-func (a *DocumentConversionAPIService) GetConversionStatusApiV1ConvertConversionIdStatusGet(ctx context.Context, conversionId string) ApiGetConversionStatusApiV1ConvertConversionIdStatusGetRequest {
+func (a *FacturXConversionAPIService) GetConversionStatusApiV1ConvertConversionIdStatusGet(ctx context.Context, conversionId string) ApiGetConversionStatusApiV1ConvertConversionIdStatusGetRequest {
 	return ApiGetConversionStatusApiV1ConvertConversionIdStatusGetRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -374,7 +374,7 @@ func (a *DocumentConversionAPIService) GetConversionStatusApiV1ConvertConversion
 
 // Execute executes the request
 //  @return map[string]interface{}
-func (a *DocumentConversionAPIService) GetConversionStatusApiV1ConvertConversionIdStatusGetExecute(r ApiGetConversionStatusApiV1ConvertConversionIdStatusGetRequest) (map[string]interface{}, *http.Response, error) {
+func (a *FacturXConversionAPIService) GetConversionStatusApiV1ConvertConversionIdStatusGetExecute(r ApiGetConversionStatusApiV1ConvertConversionIdStatusGetRequest) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -382,7 +382,7 @@ func (a *DocumentConversionAPIService) GetConversionStatusApiV1ConvertConversion
 		localVarReturnValue  map[string]interface{}
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DocumentConversionAPIService.GetConversionStatusApiV1ConvertConversionIdStatusGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FacturXConversionAPIService.GetConversionStatusApiV1ConvertConversionIdStatusGet")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -471,7 +471,7 @@ func (a *DocumentConversionAPIService) GetConversionStatusApiV1ConvertConversion
 
 type ApiResumeConversionApiV1ConvertConversionIdResumePostRequest struct {
 	ctx context.Context
-	ApiService *DocumentConversionAPIService
+	ApiService *FacturXConversionAPIService
 	conversionId string
 	convertResumeRequest *ConvertResumeRequest
 }
@@ -486,18 +486,18 @@ func (r ApiResumeConversionApiV1ConvertConversionIdResumePostRequest) Execute() 
 }
 
 /*
-ResumeConversionApiV1ConvertConversionIdResumePost Reprendre une conversion avec corrections
+ResumeConversionApiV1ConvertConversionIdResumePost Resume a conversion with corrections
 
-Reprend une conversion après complétion des données manquantes ou correction des erreurs.
+Resume a conversion after completing missing data or correcting errors.
 
-L'extraction OCR est conservée, les données sont mises à jour avec les corrections,
-puis une nouvelle validation Schematron est effectuée.
+The OCR extraction is preserved, data is updated with corrections,
+then a new Schematron validation is performed.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param conversionId Conversion ID returned by POST /convert (UUID format)
  @return ApiResumeConversionApiV1ConvertConversionIdResumePostRequest
 */
-func (a *DocumentConversionAPIService) ResumeConversionApiV1ConvertConversionIdResumePost(ctx context.Context, conversionId string) ApiResumeConversionApiV1ConvertConversionIdResumePostRequest {
+func (a *FacturXConversionAPIService) ResumeConversionApiV1ConvertConversionIdResumePost(ctx context.Context, conversionId string) ApiResumeConversionApiV1ConvertConversionIdResumePostRequest {
 	return ApiResumeConversionApiV1ConvertConversionIdResumePostRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -507,7 +507,7 @@ func (a *DocumentConversionAPIService) ResumeConversionApiV1ConvertConversionIdR
 
 // Execute executes the request
 //  @return ConvertSuccessResponse
-func (a *DocumentConversionAPIService) ResumeConversionApiV1ConvertConversionIdResumePostExecute(r ApiResumeConversionApiV1ConvertConversionIdResumePostRequest) (*ConvertSuccessResponse, *http.Response, error) {
+func (a *FacturXConversionAPIService) ResumeConversionApiV1ConvertConversionIdResumePostExecute(r ApiResumeConversionApiV1ConvertConversionIdResumePostRequest) (*ConvertSuccessResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -515,7 +515,7 @@ func (a *DocumentConversionAPIService) ResumeConversionApiV1ConvertConversionIdR
 		localVarReturnValue  *ConvertSuccessResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DocumentConversionAPIService.ResumeConversionApiV1ConvertConversionIdResumePost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FacturXConversionAPIService.ResumeConversionApiV1ConvertConversionIdResumePost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

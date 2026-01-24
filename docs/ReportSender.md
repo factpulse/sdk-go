@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Siren** | **string** | SIREN or SIRET number | 
+**Siren** | **string** | SIREN or SIRET number of the sender (PA or company) | 
 **Name** | **string** | Company name | 
 **VatId** | Pointer to **NullableString** |  | [optional] 
 

@@ -6,20 +6,22 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **InvoiceId** | **string** | Identifiant de la facture (BT-1) | 
 **InvoiceIssueDate** | **string** | Date d&#39;émission de la facture (YYYY-MM-DD) | 
+**InvoiceBuyerSiren** | **string** | SIREN de l&#39;acheteur (destinataire du statut) | 
+**InvoiceBuyerElectronicAddress** | **string** | Adresse électronique de l&#39;acheteur (MDT-73) | 
+**Amount** | [**Amount**](Amount.md) |  | 
+**Currency** | Pointer to **string** | Code devise ISO 4217 | [optional] [default to "EUR"]
 **SenderSiren** | Pointer to **NullableString** |  | [optional] 
-**FlowType** | Pointer to **string** | Type de flux: SupplierInvoiceLC (acheteur) ou CustomerInvoiceLC (vendeur) | [optional] [default to "SupplierInvoiceLC"]
+**FlowType** | Pointer to **string** | Type de flux (CustomerInvoiceLC pour facture émise) | [optional] [default to "CustomerInvoiceLC"]
 **PdpFlowServiceUrl** | Pointer to **NullableString** |  | [optional] 
 **PdpTokenUrl** | Pointer to **NullableString** |  | [optional] 
 **PdpClientId** | Pointer to **NullableString** |  | [optional] 
 **PdpClientSecret** | Pointer to **NullableString** |  | [optional] 
-**Amount** | [**Amount**](Amount.md) |  | 
-**Currency** | Pointer to **string** | Code devise ISO 4217 | [optional] [default to "EUR"]
 
 ## Methods
 
 ### NewEncaisseeRequest
 
-`func NewEncaisseeRequest(invoiceId string, invoiceIssueDate string, amount Amount, ) *EncaisseeRequest`
+`func NewEncaisseeRequest(invoiceId string, invoiceIssueDate string, invoiceBuyerSiren string, invoiceBuyerElectronicAddress string, amount Amount, ) *EncaisseeRequest`
 
 NewEncaisseeRequest instantiates a new EncaisseeRequest object
 This constructor will assign default values to properties that have it defined,
@@ -73,6 +75,91 @@ and a boolean to check if the value has been set.
 
 SetInvoiceIssueDate sets InvoiceIssueDate field to given value.
 
+
+### GetInvoiceBuyerSiren
+
+`func (o *EncaisseeRequest) GetInvoiceBuyerSiren() string`
+
+GetInvoiceBuyerSiren returns the InvoiceBuyerSiren field if non-nil, zero value otherwise.
+
+### GetInvoiceBuyerSirenOk
+
+`func (o *EncaisseeRequest) GetInvoiceBuyerSirenOk() (*string, bool)`
+
+GetInvoiceBuyerSirenOk returns a tuple with the InvoiceBuyerSiren field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInvoiceBuyerSiren
+
+`func (o *EncaisseeRequest) SetInvoiceBuyerSiren(v string)`
+
+SetInvoiceBuyerSiren sets InvoiceBuyerSiren field to given value.
+
+
+### GetInvoiceBuyerElectronicAddress
+
+`func (o *EncaisseeRequest) GetInvoiceBuyerElectronicAddress() string`
+
+GetInvoiceBuyerElectronicAddress returns the InvoiceBuyerElectronicAddress field if non-nil, zero value otherwise.
+
+### GetInvoiceBuyerElectronicAddressOk
+
+`func (o *EncaisseeRequest) GetInvoiceBuyerElectronicAddressOk() (*string, bool)`
+
+GetInvoiceBuyerElectronicAddressOk returns a tuple with the InvoiceBuyerElectronicAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInvoiceBuyerElectronicAddress
+
+`func (o *EncaisseeRequest) SetInvoiceBuyerElectronicAddress(v string)`
+
+SetInvoiceBuyerElectronicAddress sets InvoiceBuyerElectronicAddress field to given value.
+
+
+### GetAmount
+
+`func (o *EncaisseeRequest) GetAmount() Amount`
+
+GetAmount returns the Amount field if non-nil, zero value otherwise.
+
+### GetAmountOk
+
+`func (o *EncaisseeRequest) GetAmountOk() (*Amount, bool)`
+
+GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAmount
+
+`func (o *EncaisseeRequest) SetAmount(v Amount)`
+
+SetAmount sets Amount field to given value.
+
+
+### GetCurrency
+
+`func (o *EncaisseeRequest) GetCurrency() string`
+
+GetCurrency returns the Currency field if non-nil, zero value otherwise.
+
+### GetCurrencyOk
+
+`func (o *EncaisseeRequest) GetCurrencyOk() (*string, bool)`
+
+GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrency
+
+`func (o *EncaisseeRequest) SetCurrency(v string)`
+
+SetCurrency sets Currency field to given value.
+
+### HasCurrency
+
+`func (o *EncaisseeRequest) HasCurrency() bool`
+
+HasCurrency returns a boolean if a field has been set.
 
 ### GetSenderSiren
 
@@ -274,51 +361,6 @@ HasPdpClientSecret returns a boolean if a field has been set.
 `func (o *EncaisseeRequest) UnsetPdpClientSecret()`
 
 UnsetPdpClientSecret ensures that no value is present for PdpClientSecret, not even an explicit nil
-### GetAmount
-
-`func (o *EncaisseeRequest) GetAmount() Amount`
-
-GetAmount returns the Amount field if non-nil, zero value otherwise.
-
-### GetAmountOk
-
-`func (o *EncaisseeRequest) GetAmountOk() (*Amount, bool)`
-
-GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAmount
-
-`func (o *EncaisseeRequest) SetAmount(v Amount)`
-
-SetAmount sets Amount field to given value.
-
-
-### GetCurrency
-
-`func (o *EncaisseeRequest) GetCurrency() string`
-
-GetCurrency returns the Currency field if non-nil, zero value otherwise.
-
-### GetCurrencyOk
-
-`func (o *EncaisseeRequest) GetCurrencyOk() (*string, bool)`
-
-GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCurrency
-
-`func (o *EncaisseeRequest) SetCurrency(v string)`
-
-SetCurrency sets Currency field to given value.
-
-### HasCurrency
-
-`func (o *EncaisseeRequest) HasCurrency() bool`
-
-HasCurrency returns a boolean if a field has been set.
-
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

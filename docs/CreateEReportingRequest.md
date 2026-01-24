@@ -8,7 +8,8 @@ Name | Type | Description | Notes
 **ReportName** | Pointer to **NullableString** |  | [optional] 
 **FlowType** | [**EReportingFlowType**](EReportingFlowType.md) | E-Reporting flux type (for internal routing) | 
 **TransmissionType** | Pointer to [**TransmissionTypeCode**](TransmissionTypeCode.md) | Transmission type (TT-4 TypeCode): IN&#x3D;Initial, RE&#x3D;Rectificative | [optional] [default to IN]
-**Sender** | [**ReportSender**](ReportSender.md) | Report sender (declarant) | 
+**Sender** | [**ReportSender**](ReportSender.md) | Report sender (PA transmitting the report) | 
+**Issuer** | Pointer to [**NullableReportIssuer**](ReportIssuer.md) |  | [optional] 
 **Period** | [**ReportPeriod**](ReportPeriod.md) | Reporting period | 
 **Invoices** | Pointer to [**[]InvoiceInput**](InvoiceInput.md) |  | [optional] 
 **Transactions** | Pointer to [**[]AggregatedTransactionInput**](AggregatedTransactionInput.md) |  | [optional] 
@@ -154,6 +155,41 @@ and a boolean to check if the value has been set.
 SetSender sets Sender field to given value.
 
 
+### GetIssuer
+
+`func (o *CreateEReportingRequest) GetIssuer() ReportIssuer`
+
+GetIssuer returns the Issuer field if non-nil, zero value otherwise.
+
+### GetIssuerOk
+
+`func (o *CreateEReportingRequest) GetIssuerOk() (*ReportIssuer, bool)`
+
+GetIssuerOk returns a tuple with the Issuer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIssuer
+
+`func (o *CreateEReportingRequest) SetIssuer(v ReportIssuer)`
+
+SetIssuer sets Issuer field to given value.
+
+### HasIssuer
+
+`func (o *CreateEReportingRequest) HasIssuer() bool`
+
+HasIssuer returns a boolean if a field has been set.
+
+### SetIssuerNil
+
+`func (o *CreateEReportingRequest) SetIssuerNil(b bool)`
+
+ SetIssuerNil sets the value for Issuer to be an explicit nil
+
+### UnsetIssuer
+`func (o *CreateEReportingRequest) UnsetIssuer()`
+
+UnsetIssuer ensures that no value is present for Issuer, not even an explicit nil
 ### GetPeriod
 
 `func (o *CreateEReportingRequest) GetPeriod() ReportPeriod`

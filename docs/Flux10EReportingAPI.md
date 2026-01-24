@@ -1,20 +1,20 @@
-# \EReportingAPI
+# \Flux10EReportingAPI
 
 All URIs are relative to *https://factpulse.fr*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPost**](EReportingAPI.md#GenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPost) | **Post** /api/v1/ereporting/generate-aggregated | Generate aggregated e-reporting XML (PPF-compliant)
-[**GenerateEreportingApiV1EreportingGeneratePost**](EReportingAPI.md#GenerateEreportingApiV1EreportingGeneratePost) | **Post** /api/v1/ereporting/generate | Generate e-reporting XML
-[**GenerateEreportingDownloadApiV1EreportingGenerateDownloadPost**](EReportingAPI.md#GenerateEreportingDownloadApiV1EreportingGenerateDownloadPost) | **Post** /api/v1/ereporting/generate/download | Generate and download e-reporting XML
-[**ListCategoryCodesApiV1EreportingCategoryCodesGet**](EReportingAPI.md#ListCategoryCodesApiV1EreportingCategoryCodesGet) | **Get** /api/v1/ereporting/category-codes | List PPF-compliant category codes
-[**ListFlowTypesApiV1EreportingFlowTypesGet**](EReportingAPI.md#ListFlowTypesApiV1EreportingFlowTypesGet) | **Get** /api/v1/ereporting/flow-types | List available flow types
-[**SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost**](EReportingAPI.md#SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost) | **Post** /api/v1/ereporting/submit-aggregated | Submit aggregated e-reporting to PA/PDP
-[**SubmitEreportingApiV1EreportingSubmitPost**](EReportingAPI.md#SubmitEreportingApiV1EreportingSubmitPost) | **Post** /api/v1/ereporting/submit | Submit e-reporting to PA/PDP
-[**SubmitXmlEreportingApiV1EreportingSubmitXmlPost**](EReportingAPI.md#SubmitXmlEreportingApiV1EreportingSubmitXmlPost) | **Post** /api/v1/ereporting/submit-xml | Submit pre-generated e-reporting XML
-[**ValidateAggregatedEreportingApiV1EreportingValidateAggregatedPost**](EReportingAPI.md#ValidateAggregatedEreportingApiV1EreportingValidateAggregatedPost) | **Post** /api/v1/ereporting/validate-aggregated | Validate aggregated e-reporting data
-[**ValidateEreportingApiV1EreportingValidatePost**](EReportingAPI.md#ValidateEreportingApiV1EreportingValidatePost) | **Post** /api/v1/ereporting/validate | Validate e-reporting data
-[**ValidateXmlEreportingApiV1EreportingValidateXmlPost**](EReportingAPI.md#ValidateXmlEreportingApiV1EreportingValidateXmlPost) | **Post** /api/v1/ereporting/validate-xml | Validate e-reporting XML against PPF XSD schemas and business rules
+[**GenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPost**](Flux10EReportingAPI.md#GenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPost) | **Post** /api/v1/ereporting/generate-aggregated | Generate aggregated e-reporting XML (PPF-compliant)
+[**GenerateEreportingApiV1EreportingGeneratePost**](Flux10EReportingAPI.md#GenerateEreportingApiV1EreportingGeneratePost) | **Post** /api/v1/ereporting/generate | Generate e-reporting XML
+[**GenerateEreportingDownloadApiV1EreportingGenerateDownloadPost**](Flux10EReportingAPI.md#GenerateEreportingDownloadApiV1EreportingGenerateDownloadPost) | **Post** /api/v1/ereporting/generate/download | Generate and download e-reporting XML
+[**ListCategoryCodesApiV1EreportingCategoryCodesGet**](Flux10EReportingAPI.md#ListCategoryCodesApiV1EreportingCategoryCodesGet) | **Get** /api/v1/ereporting/category-codes | List PPF-compliant category codes
+[**ListFlowTypesApiV1EreportingFlowTypesGet**](Flux10EReportingAPI.md#ListFlowTypesApiV1EreportingFlowTypesGet) | **Get** /api/v1/ereporting/flow-types | List available flow types
+[**SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost**](Flux10EReportingAPI.md#SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost) | **Post** /api/v1/ereporting/submit-aggregated | Submit aggregated e-reporting to PA/PDP
+[**SubmitEreportingApiV1EreportingSubmitPost**](Flux10EReportingAPI.md#SubmitEreportingApiV1EreportingSubmitPost) | **Post** /api/v1/ereporting/submit | Submit e-reporting to PA/PDP
+[**SubmitXmlEreportingApiV1EreportingSubmitXmlPost**](Flux10EReportingAPI.md#SubmitXmlEreportingApiV1EreportingSubmitXmlPost) | **Post** /api/v1/ereporting/submit-xml | Submit pre-generated e-reporting XML
+[**ValidateAggregatedEreportingApiV1EreportingValidateAggregatedPost**](Flux10EReportingAPI.md#ValidateAggregatedEreportingApiV1EreportingValidateAggregatedPost) | **Post** /api/v1/ereporting/validate-aggregated | Validate aggregated e-reporting data
+[**ValidateEreportingApiV1EreportingValidatePost**](Flux10EReportingAPI.md#ValidateEreportingApiV1EreportingValidatePost) | **Post** /api/v1/ereporting/validate | Validate e-reporting data
+[**ValidateXmlEreportingApiV1EreportingValidateXmlPost**](Flux10EReportingAPI.md#ValidateXmlEreportingApiV1EreportingValidateXmlPost) | **Post** /api/v1/ereporting/validate-xml | Validate e-reporting XML (PPF Annexe 6 v1.9 compliant)
 
 
 
@@ -44,13 +44,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EReportingAPI.GenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPost(context.Background()).CreateAggregatedReportRequest(createAggregatedReportRequest).Execute()
+	resp, r, err := apiClient.Flux10EReportingAPI.GenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPost(context.Background()).CreateAggregatedReportRequest(createAggregatedReportRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `EReportingAPI.GenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `Flux10EReportingAPI.GenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPost`: GenerateAggregatedReportResponse
-	fmt.Fprintf(os.Stdout, "Response from `EReportingAPI.GenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPost`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `Flux10EReportingAPI.GenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPost`: %v\n", resp)
 }
 ```
 
@@ -111,13 +111,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EReportingAPI.GenerateEreportingApiV1EreportingGeneratePost(context.Background()).CreateEReportingRequest(createEReportingRequest).Execute()
+	resp, r, err := apiClient.Flux10EReportingAPI.GenerateEreportingApiV1EreportingGeneratePost(context.Background()).CreateEReportingRequest(createEReportingRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `EReportingAPI.GenerateEreportingApiV1EreportingGeneratePost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `Flux10EReportingAPI.GenerateEreportingApiV1EreportingGeneratePost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GenerateEreportingApiV1EreportingGeneratePost`: GenerateEReportingResponse
-	fmt.Fprintf(os.Stdout, "Response from `EReportingAPI.GenerateEreportingApiV1EreportingGeneratePost`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `Flux10EReportingAPI.GenerateEreportingApiV1EreportingGeneratePost`: %v\n", resp)
 }
 ```
 
@@ -179,9 +179,9 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.EReportingAPI.GenerateEreportingDownloadApiV1EreportingGenerateDownloadPost(context.Background()).CreateEReportingRequest(createEReportingRequest).Filename(filename).Execute()
+	r, err := apiClient.Flux10EReportingAPI.GenerateEreportingDownloadApiV1EreportingGenerateDownloadPost(context.Background()).CreateEReportingRequest(createEReportingRequest).Filename(filename).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `EReportingAPI.GenerateEreportingDownloadApiV1EreportingGenerateDownloadPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `Flux10EReportingAPI.GenerateEreportingDownloadApiV1EreportingGenerateDownloadPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -243,13 +243,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EReportingAPI.ListCategoryCodesApiV1EreportingCategoryCodesGet(context.Background()).Execute()
+	resp, r, err := apiClient.Flux10EReportingAPI.ListCategoryCodesApiV1EreportingCategoryCodesGet(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `EReportingAPI.ListCategoryCodesApiV1EreportingCategoryCodesGet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `Flux10EReportingAPI.ListCategoryCodesApiV1EreportingCategoryCodesGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `ListCategoryCodesApiV1EreportingCategoryCodesGet`: map[string]interface{}
-	fmt.Fprintf(os.Stdout, "Response from `EReportingAPI.ListCategoryCodesApiV1EreportingCategoryCodesGet`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `Flux10EReportingAPI.ListCategoryCodesApiV1EreportingCategoryCodesGet`: %v\n", resp)
 }
 ```
 
@@ -304,13 +304,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EReportingAPI.ListFlowTypesApiV1EreportingFlowTypesGet(context.Background()).Execute()
+	resp, r, err := apiClient.Flux10EReportingAPI.ListFlowTypesApiV1EreportingFlowTypesGet(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `EReportingAPI.ListFlowTypesApiV1EreportingFlowTypesGet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `Flux10EReportingAPI.ListFlowTypesApiV1EreportingFlowTypesGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `ListFlowTypesApiV1EreportingFlowTypesGet`: map[string]interface{}
-	fmt.Fprintf(os.Stdout, "Response from `EReportingAPI.ListFlowTypesApiV1EreportingFlowTypesGet`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `Flux10EReportingAPI.ListFlowTypesApiV1EreportingFlowTypesGet`: %v\n", resp)
 }
 ```
 
@@ -367,13 +367,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EReportingAPI.SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(context.Background()).SubmitAggregatedReportRequest(submitAggregatedReportRequest).Execute()
+	resp, r, err := apiClient.Flux10EReportingAPI.SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(context.Background()).SubmitAggregatedReportRequest(submitAggregatedReportRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `EReportingAPI.SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `Flux10EReportingAPI.SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost`: SubmitEReportingResponse
-	fmt.Fprintf(os.Stdout, "Response from `EReportingAPI.SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `Flux10EReportingAPI.SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost`: %v\n", resp)
 }
 ```
 
@@ -434,13 +434,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EReportingAPI.SubmitEreportingApiV1EreportingSubmitPost(context.Background()).SubmitEReportingRequest(submitEReportingRequest).Execute()
+	resp, r, err := apiClient.Flux10EReportingAPI.SubmitEreportingApiV1EreportingSubmitPost(context.Background()).SubmitEReportingRequest(submitEReportingRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `EReportingAPI.SubmitEreportingApiV1EreportingSubmitPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `Flux10EReportingAPI.SubmitEreportingApiV1EreportingSubmitPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `SubmitEreportingApiV1EreportingSubmitPost`: SubmitEReportingResponse
-	fmt.Fprintf(os.Stdout, "Response from `EReportingAPI.SubmitEreportingApiV1EreportingSubmitPost`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `Flux10EReportingAPI.SubmitEreportingApiV1EreportingSubmitPost`: %v\n", resp)
 }
 ```
 
@@ -506,13 +506,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EReportingAPI.SubmitXmlEreportingApiV1EreportingSubmitXmlPost(context.Background()).XmlFile(xmlFile).TrackingId(trackingId).SkipValidation(skipValidation).PdpFlowServiceUrl(pdpFlowServiceUrl).PdpTokenUrl(pdpTokenUrl).PdpClientId(pdpClientId).PdpClientSecret(pdpClientSecret).Execute()
+	resp, r, err := apiClient.Flux10EReportingAPI.SubmitXmlEreportingApiV1EreportingSubmitXmlPost(context.Background()).XmlFile(xmlFile).TrackingId(trackingId).SkipValidation(skipValidation).PdpFlowServiceUrl(pdpFlowServiceUrl).PdpTokenUrl(pdpTokenUrl).PdpClientId(pdpClientId).PdpClientSecret(pdpClientSecret).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `EReportingAPI.SubmitXmlEreportingApiV1EreportingSubmitXmlPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `Flux10EReportingAPI.SubmitXmlEreportingApiV1EreportingSubmitXmlPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `SubmitXmlEreportingApiV1EreportingSubmitXmlPost`: SubmitEReportingResponse
-	fmt.Fprintf(os.Stdout, "Response from `EReportingAPI.SubmitXmlEreportingApiV1EreportingSubmitXmlPost`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `Flux10EReportingAPI.SubmitXmlEreportingApiV1EreportingSubmitXmlPost`: %v\n", resp)
 }
 ```
 
@@ -579,13 +579,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EReportingAPI.ValidateAggregatedEreportingApiV1EreportingValidateAggregatedPost(context.Background()).CreateAggregatedReportRequest(createAggregatedReportRequest).Execute()
+	resp, r, err := apiClient.Flux10EReportingAPI.ValidateAggregatedEreportingApiV1EreportingValidateAggregatedPost(context.Background()).CreateAggregatedReportRequest(createAggregatedReportRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `EReportingAPI.ValidateAggregatedEreportingApiV1EreportingValidateAggregatedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `Flux10EReportingAPI.ValidateAggregatedEreportingApiV1EreportingValidateAggregatedPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `ValidateAggregatedEreportingApiV1EreportingValidateAggregatedPost`: map[string]interface{}
-	fmt.Fprintf(os.Stdout, "Response from `EReportingAPI.ValidateAggregatedEreportingApiV1EreportingValidateAggregatedPost`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `Flux10EReportingAPI.ValidateAggregatedEreportingApiV1EreportingValidateAggregatedPost`: %v\n", resp)
 }
 ```
 
@@ -646,13 +646,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EReportingAPI.ValidateEreportingApiV1EreportingValidatePost(context.Background()).ValidateEReportingRequest(validateEReportingRequest).Execute()
+	resp, r, err := apiClient.Flux10EReportingAPI.ValidateEreportingApiV1EreportingValidatePost(context.Background()).ValidateEReportingRequest(validateEReportingRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `EReportingAPI.ValidateEreportingApiV1EreportingValidatePost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `Flux10EReportingAPI.ValidateEreportingApiV1EreportingValidatePost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `ValidateEreportingApiV1EreportingValidatePost`: ValidateEReportingResponse
-	fmt.Fprintf(os.Stdout, "Response from `EReportingAPI.ValidateEreportingApiV1EreportingValidatePost`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `Flux10EReportingAPI.ValidateEreportingApiV1EreportingValidatePost`: %v\n", resp)
 }
 ```
 
@@ -689,9 +689,9 @@ Name | Type | Description  | Notes
 
 ## ValidateXmlEreportingApiV1EreportingValidateXmlPost
 
-> map[string]interface{} ValidateXmlEreportingApiV1EreportingValidateXmlPost(ctx).XmlFile(xmlFile).ValidateBusinessRules(validateBusinessRules).Execute()
+> map[string]interface{} ValidateXmlEreportingApiV1EreportingValidateXmlPost(ctx).XmlFile(xmlFile).ValidateCoherence(validateCoherence).ValidatePeriod(validatePeriod).Execute()
 
-Validate e-reporting XML against PPF XSD schemas and business rules
+Validate e-reporting XML (PPF Annexe 6 v1.9 compliant)
 
 
 
@@ -709,17 +709,18 @@ import (
 
 func main() {
 	xmlFile := os.NewFile(1234, "some_file") // *os.File | E-reporting XML file to validate
-	validateBusinessRules := true // bool | Also validate business rules (ISO codes, enums) (optional) (default to true)
+	validateCoherence := true // bool | Validate data coherence (REJ_COH) (optional) (default to true)
+	validatePeriod := true // bool | Validate period coherence (REJ_PER) (optional) (default to true)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EReportingAPI.ValidateXmlEreportingApiV1EreportingValidateXmlPost(context.Background()).XmlFile(xmlFile).ValidateBusinessRules(validateBusinessRules).Execute()
+	resp, r, err := apiClient.Flux10EReportingAPI.ValidateXmlEreportingApiV1EreportingValidateXmlPost(context.Background()).XmlFile(xmlFile).ValidateCoherence(validateCoherence).ValidatePeriod(validatePeriod).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `EReportingAPI.ValidateXmlEreportingApiV1EreportingValidateXmlPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `Flux10EReportingAPI.ValidateXmlEreportingApiV1EreportingValidateXmlPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `ValidateXmlEreportingApiV1EreportingValidateXmlPost`: map[string]interface{}
-	fmt.Fprintf(os.Stdout, "Response from `EReportingAPI.ValidateXmlEreportingApiV1EreportingValidateXmlPost`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `Flux10EReportingAPI.ValidateXmlEreportingApiV1EreportingValidateXmlPost`: %v\n", resp)
 }
 ```
 
@@ -735,7 +736,8 @@ Other parameters are passed through a pointer to a apiValidateXmlEreportingApiV1
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **xmlFile** | ***os.File** | E-reporting XML file to validate | 
- **validateBusinessRules** | **bool** | Also validate business rules (ISO codes, enums) | [default to true]
+ **validateCoherence** | **bool** | Validate data coherence (REJ_COH) | [default to true]
+ **validatePeriod** | **bool** | Validate period coherence (REJ_PER) | [default to true]
 
 ### Return type
 

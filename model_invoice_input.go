@@ -1,7 +1,7 @@
 /*
 FactPulse REST API
 
- REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X Invoice Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Validation and Compliance - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata, electronic signatures - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules) - **Asynchronous Processing**: Celery support for heavy validations (VeraPDF)  ### 📡 AFNOR PDP/PA Integration (XP Z12-013) - **Flow Submission**: Send invoices to Partner Dematerialization Platforms - **Flow Search**: View submitted invoices - **Download**: Retrieve PDF/A-3 with XML - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user (stored credentials or zero-storage)  ### ✍️ PDF Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification - **Certificate Generation**: Self-signed X.509 certificates for testing  ### 🔄 Asynchronous Processing - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **No timeout**: Ideal for large files or heavy validations  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
+ REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X - Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Factur-X - Validation - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules)  ### ✍️ Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification  ### 📋 Flux 6 - Invoice Lifecycle (CDAR) - **CDAR Messages**: Acknowledgements, invoice statuses - **PPF Statuses**: REFUSED (210), PAID (212)  ### 📊 Flux 10 - E-Reporting - **Tax Declarations**: International B2B, B2C - **Flow Types**: 10.1 (B2B transactions), 10.2 (B2B payments), 10.3 (B2C transactions), 10.4 (B2C payments)  ### 📡 AFNOR PDP/PA (XP Z12-013) - **Flow Service**: Submit and search flows to PDPs - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user  ### 🏛️ Chorus Pro - **Public Sector Invoicing**: Complete API for Chorus Pro  ### ⏳ Async Tasks - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **Webhooks**: Automatic notifications when tasks complete  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
 
 API version: 1.0.0
 Contact: contact@factpulse.fr
@@ -20,7 +20,7 @@ import (
 // checks if the InvoiceInput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &InvoiceInput{}
 
-// InvoiceInput Invoice for B2B international reporting (flux 10.1).  Used for unitary declaration of international B2B invoices.
+// InvoiceInput Invoice for B2B international reporting (flux 10.1).  Used for unitary declaration of international B2B invoices. Supports three scenarios: - B2Bi: French seller → Foreign buyer (issuer role = SE) - Bi2B: Foreign seller → French buyer (issuer role = BY) - Bi2Bi: Foreign seller → Foreign buyer (issuer role = SE or BY)  Source: Annexe 6 v1.9, bloc TG-8 \"Invoice\"
 type InvoiceInput struct {
 	// Invoice identifier
 	InvoiceId string `json:"invoiceId"`
@@ -30,8 +30,8 @@ type InvoiceInput struct {
 	TypeCode *FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode `json:"typeCode,omitempty"`
 	Currency *Currency `json:"currency,omitempty"`
 	DueDate NullableString `json:"dueDate,omitempty"`
-	// Seller SIREN/SIRET
-	SellerSiren string `json:"sellerSiren"`
+	SellerId NullableString `json:"sellerId,omitempty"`
+	SellerSiren NullableString `json:"sellerSiren,omitempty"`
 	SellerVatId NullableString `json:"sellerVatId,omitempty"`
 	SellerCountry *Sellercountry `json:"sellerCountry,omitempty"`
 	BuyerId NullableString `json:"buyerId,omitempty"`
@@ -51,11 +51,10 @@ type _InvoiceInput InvoiceInput
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInvoiceInput(invoiceId string, issueDate string, sellerSiren string, buyerCountry Buyercountry, taxExclusiveAmount Taxexclusiveamount1, taxAmount Taxamount1, taxBreakdown []TaxBreakdownInput) *InvoiceInput {
+func NewInvoiceInput(invoiceId string, issueDate string, buyerCountry Buyercountry, taxExclusiveAmount Taxexclusiveamount1, taxAmount Taxamount1, taxBreakdown []TaxBreakdownInput) *InvoiceInput {
 	this := InvoiceInput{}
 	this.InvoiceId = invoiceId
 	this.IssueDate = issueDate
-	this.SellerSiren = sellerSiren
 	this.BuyerCountry = buyerCountry
 	this.TaxExclusiveAmount = taxExclusiveAmount
 	this.TaxAmount = taxAmount
@@ -225,28 +224,88 @@ func (o *InvoiceInput) UnsetDueDate() {
 	o.DueDate.Unset()
 }
 
-// GetSellerSiren returns the SellerSiren field value
-func (o *InvoiceInput) GetSellerSiren() string {
-	if o == nil {
+// GetSellerId returns the SellerId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceInput) GetSellerId() string {
+	if o == nil || IsNil(o.SellerId.Get()) {
 		var ret string
 		return ret
 	}
-
-	return o.SellerSiren
+	return *o.SellerId.Get()
 }
 
-// GetSellerSirenOk returns a tuple with the SellerSiren field value
+// GetSellerIdOk returns a tuple with the SellerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceInput) GetSellerIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SellerId.Get(), o.SellerId.IsSet()
+}
+
+// HasSellerId returns a boolean if a field has been set.
+func (o *InvoiceInput) HasSellerId() bool {
+	if o != nil && o.SellerId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSellerId gets a reference to the given NullableString and assigns it to the SellerId field.
+func (o *InvoiceInput) SetSellerId(v string) {
+	o.SellerId.Set(&v)
+}
+// SetSellerIdNil sets the value for SellerId to be an explicit nil
+func (o *InvoiceInput) SetSellerIdNil() {
+	o.SellerId.Set(nil)
+}
+
+// UnsetSellerId ensures that no value is present for SellerId, not even an explicit nil
+func (o *InvoiceInput) UnsetSellerId() {
+	o.SellerId.Unset()
+}
+
+// GetSellerSiren returns the SellerSiren field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceInput) GetSellerSiren() string {
+	if o == nil || IsNil(o.SellerSiren.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.SellerSiren.Get()
+}
+
+// GetSellerSirenOk returns a tuple with the SellerSiren field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InvoiceInput) GetSellerSirenOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.SellerSiren, true
+	return o.SellerSiren.Get(), o.SellerSiren.IsSet()
 }
 
-// SetSellerSiren sets field value
+// HasSellerSiren returns a boolean if a field has been set.
+func (o *InvoiceInput) HasSellerSiren() bool {
+	if o != nil && o.SellerSiren.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSellerSiren gets a reference to the given NullableString and assigns it to the SellerSiren field.
 func (o *InvoiceInput) SetSellerSiren(v string) {
-	o.SellerSiren = v
+	o.SellerSiren.Set(&v)
+}
+// SetSellerSirenNil sets the value for SellerSiren to be an explicit nil
+func (o *InvoiceInput) SetSellerSirenNil() {
+	o.SellerSiren.Set(nil)
+}
+
+// UnsetSellerSiren ensures that no value is present for SellerSiren, not even an explicit nil
+func (o *InvoiceInput) UnsetSellerSiren() {
+	o.SellerSiren.Unset()
 }
 
 // GetSellerVatId returns the SellerVatId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -608,7 +667,12 @@ func (o InvoiceInput) ToMap() (map[string]interface{}, error) {
 	if o.DueDate.IsSet() {
 		toSerialize["dueDate"] = o.DueDate.Get()
 	}
-	toSerialize["sellerSiren"] = o.SellerSiren
+	if o.SellerId.IsSet() {
+		toSerialize["sellerId"] = o.SellerId.Get()
+	}
+	if o.SellerSiren.IsSet() {
+		toSerialize["sellerSiren"] = o.SellerSiren.Get()
+	}
 	if o.SellerVatId.IsSet() {
 		toSerialize["sellerVatId"] = o.SellerVatId.Get()
 	}
@@ -641,7 +705,6 @@ func (o *InvoiceInput) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"invoiceId",
 		"issueDate",
-		"sellerSiren",
 		"buyerCountry",
 		"taxExclusiveAmount",
 		"taxAmount",

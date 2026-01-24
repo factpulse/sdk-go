@@ -1,7 +1,7 @@
 /*
 FactPulse REST API
 
- REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X Invoice Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Validation and Compliance - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata, electronic signatures - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules) - **Asynchronous Processing**: Celery support for heavy validations (VeraPDF)  ### 📡 AFNOR PDP/PA Integration (XP Z12-013) - **Flow Submission**: Send invoices to Partner Dematerialization Platforms - **Flow Search**: View submitted invoices - **Download**: Retrieve PDF/A-3 with XML - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user (stored credentials or zero-storage)  ### ✍️ PDF Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification - **Certificate Generation**: Self-signed X.509 certificates for testing  ### 🔄 Asynchronous Processing - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **No timeout**: Ideal for large files or heavy validations  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
+ REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X - Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Factur-X - Validation - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules)  ### ✍️ Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification  ### 📋 Flux 6 - Invoice Lifecycle (CDAR) - **CDAR Messages**: Acknowledgements, invoice statuses - **PPF Statuses**: REFUSED (210), PAID (212)  ### 📊 Flux 10 - E-Reporting - **Tax Declarations**: International B2B, B2C - **Flow Types**: 10.1 (B2B transactions), 10.2 (B2B payments), 10.3 (B2C transactions), 10.4 (B2C payments)  ### 📡 AFNOR PDP/PA (XP Z12-013) - **Flow Service**: Submit and search flows to PDPs - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user  ### 🏛️ Chorus Pro - **Public Sector Invoicing**: Complete API for Chorus Pro  ### ⏳ Async Tasks - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **Webhooks**: Automatic notifications when tasks complete  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
 
 API version: 1.0.0
 Contact: contact@factpulse.fr
@@ -21,12 +21,12 @@ import (
 )
 
 
-// EReportingAPIService EReportingAPI service
-type EReportingAPIService service
+// Flux10EReportingAPIService Flux10EReportingAPI service
+type Flux10EReportingAPIService service
 
 type ApiGenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPostRequest struct {
 	ctx context.Context
-	ApiService *EReportingAPIService
+	ApiService *Flux10EReportingAPIService
 	createAggregatedReportRequest *CreateAggregatedReportRequest
 }
 
@@ -61,7 +61,7 @@ The AFNOR FlowType is automatically determined based on content:
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPostRequest
 */
-func (a *EReportingAPIService) GenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPost(ctx context.Context) ApiGenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPostRequest {
+func (a *Flux10EReportingAPIService) GenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPost(ctx context.Context) ApiGenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPostRequest {
 	return ApiGenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPostRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -70,7 +70,7 @@ func (a *EReportingAPIService) GenerateAggregatedEreportingApiV1EreportingGenera
 
 // Execute executes the request
 //  @return GenerateAggregatedReportResponse
-func (a *EReportingAPIService) GenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPostExecute(r ApiGenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPostRequest) (*GenerateAggregatedReportResponse, *http.Response, error) {
+func (a *Flux10EReportingAPIService) GenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPostExecute(r ApiGenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPostRequest) (*GenerateAggregatedReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -78,7 +78,7 @@ func (a *EReportingAPIService) GenerateAggregatedEreportingApiV1EreportingGenera
 		localVarReturnValue  *GenerateAggregatedReportResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EReportingAPIService.GenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Flux10EReportingAPIService.GenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -160,7 +160,7 @@ func (a *EReportingAPIService) GenerateAggregatedEreportingApiV1EreportingGenera
 
 type ApiGenerateEreportingApiV1EreportingGeneratePostRequest struct {
 	ctx context.Context
-	ApiService *EReportingAPIService
+	ApiService *Flux10EReportingAPIService
 	createEReportingRequest *CreateEReportingRequest
 }
 
@@ -190,7 +190,7 @@ for submission to a PA (Plateforme Agréée).
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGenerateEreportingApiV1EreportingGeneratePostRequest
 */
-func (a *EReportingAPIService) GenerateEreportingApiV1EreportingGeneratePost(ctx context.Context) ApiGenerateEreportingApiV1EreportingGeneratePostRequest {
+func (a *Flux10EReportingAPIService) GenerateEreportingApiV1EreportingGeneratePost(ctx context.Context) ApiGenerateEreportingApiV1EreportingGeneratePostRequest {
 	return ApiGenerateEreportingApiV1EreportingGeneratePostRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -199,7 +199,7 @@ func (a *EReportingAPIService) GenerateEreportingApiV1EreportingGeneratePost(ctx
 
 // Execute executes the request
 //  @return GenerateEReportingResponse
-func (a *EReportingAPIService) GenerateEreportingApiV1EreportingGeneratePostExecute(r ApiGenerateEreportingApiV1EreportingGeneratePostRequest) (*GenerateEReportingResponse, *http.Response, error) {
+func (a *Flux10EReportingAPIService) GenerateEreportingApiV1EreportingGeneratePostExecute(r ApiGenerateEreportingApiV1EreportingGeneratePostRequest) (*GenerateEReportingResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -207,7 +207,7 @@ func (a *EReportingAPIService) GenerateEreportingApiV1EreportingGeneratePostExec
 		localVarReturnValue  *GenerateEReportingResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EReportingAPIService.GenerateEreportingApiV1EreportingGeneratePost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Flux10EReportingAPIService.GenerateEreportingApiV1EreportingGeneratePost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -289,7 +289,7 @@ func (a *EReportingAPIService) GenerateEreportingApiV1EreportingGeneratePostExec
 
 type ApiGenerateEreportingDownloadApiV1EreportingGenerateDownloadPostRequest struct {
 	ctx context.Context
-	ApiService *EReportingAPIService
+	ApiService *Flux10EReportingAPIService
 	createEReportingRequest *CreateEReportingRequest
 	filename *string
 }
@@ -317,7 +317,7 @@ Generate e-reporting XML and return as downloadable file.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGenerateEreportingDownloadApiV1EreportingGenerateDownloadPostRequest
 */
-func (a *EReportingAPIService) GenerateEreportingDownloadApiV1EreportingGenerateDownloadPost(ctx context.Context) ApiGenerateEreportingDownloadApiV1EreportingGenerateDownloadPostRequest {
+func (a *Flux10EReportingAPIService) GenerateEreportingDownloadApiV1EreportingGenerateDownloadPost(ctx context.Context) ApiGenerateEreportingDownloadApiV1EreportingGenerateDownloadPostRequest {
 	return ApiGenerateEreportingDownloadApiV1EreportingGenerateDownloadPostRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -325,14 +325,14 @@ func (a *EReportingAPIService) GenerateEreportingDownloadApiV1EreportingGenerate
 }
 
 // Execute executes the request
-func (a *EReportingAPIService) GenerateEreportingDownloadApiV1EreportingGenerateDownloadPostExecute(r ApiGenerateEreportingDownloadApiV1EreportingGenerateDownloadPostRequest) (*http.Response, error) {
+func (a *Flux10EReportingAPIService) GenerateEreportingDownloadApiV1EreportingGenerateDownloadPostExecute(r ApiGenerateEreportingDownloadApiV1EreportingGenerateDownloadPostRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EReportingAPIService.GenerateEreportingDownloadApiV1EreportingGenerateDownloadPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Flux10EReportingAPIService.GenerateEreportingDownloadApiV1EreportingGenerateDownloadPost")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -408,7 +408,7 @@ func (a *EReportingAPIService) GenerateEreportingDownloadApiV1EreportingGenerate
 
 type ApiListCategoryCodesApiV1EreportingCategoryCodesGetRequest struct {
 	ctx context.Context
-	ApiService *EReportingAPIService
+	ApiService *Flux10EReportingAPIService
 }
 
 func (r ApiListCategoryCodesApiV1EreportingCategoryCodesGetRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -425,7 +425,7 @@ Source: Annexe 6 - Format sémantique FE e-reporting v1.9
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiListCategoryCodesApiV1EreportingCategoryCodesGetRequest
 */
-func (a *EReportingAPIService) ListCategoryCodesApiV1EreportingCategoryCodesGet(ctx context.Context) ApiListCategoryCodesApiV1EreportingCategoryCodesGetRequest {
+func (a *Flux10EReportingAPIService) ListCategoryCodesApiV1EreportingCategoryCodesGet(ctx context.Context) ApiListCategoryCodesApiV1EreportingCategoryCodesGetRequest {
 	return ApiListCategoryCodesApiV1EreportingCategoryCodesGetRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -434,7 +434,7 @@ func (a *EReportingAPIService) ListCategoryCodesApiV1EreportingCategoryCodesGet(
 
 // Execute executes the request
 //  @return map[string]interface{}
-func (a *EReportingAPIService) ListCategoryCodesApiV1EreportingCategoryCodesGetExecute(r ApiListCategoryCodesApiV1EreportingCategoryCodesGetRequest) (map[string]interface{}, *http.Response, error) {
+func (a *Flux10EReportingAPIService) ListCategoryCodesApiV1EreportingCategoryCodesGetExecute(r ApiListCategoryCodesApiV1EreportingCategoryCodesGetRequest) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -442,7 +442,7 @@ func (a *EReportingAPIService) ListCategoryCodesApiV1EreportingCategoryCodesGetE
 		localVarReturnValue  map[string]interface{}
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EReportingAPIService.ListCategoryCodesApiV1EreportingCategoryCodesGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Flux10EReportingAPIService.ListCategoryCodesApiV1EreportingCategoryCodesGet")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -509,7 +509,7 @@ func (a *EReportingAPIService) ListCategoryCodesApiV1EreportingCategoryCodesGetE
 
 type ApiListFlowTypesApiV1EreportingFlowTypesGetRequest struct {
 	ctx context.Context
-	ApiService *EReportingAPIService
+	ApiService *Flux10EReportingAPIService
 }
 
 func (r ApiListFlowTypesApiV1EreportingFlowTypesGetRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -524,7 +524,7 @@ Returns the list of supported e-reporting flow types with descriptions.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiListFlowTypesApiV1EreportingFlowTypesGetRequest
 */
-func (a *EReportingAPIService) ListFlowTypesApiV1EreportingFlowTypesGet(ctx context.Context) ApiListFlowTypesApiV1EreportingFlowTypesGetRequest {
+func (a *Flux10EReportingAPIService) ListFlowTypesApiV1EreportingFlowTypesGet(ctx context.Context) ApiListFlowTypesApiV1EreportingFlowTypesGetRequest {
 	return ApiListFlowTypesApiV1EreportingFlowTypesGetRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -533,7 +533,7 @@ func (a *EReportingAPIService) ListFlowTypesApiV1EreportingFlowTypesGet(ctx cont
 
 // Execute executes the request
 //  @return map[string]interface{}
-func (a *EReportingAPIService) ListFlowTypesApiV1EreportingFlowTypesGetExecute(r ApiListFlowTypesApiV1EreportingFlowTypesGetRequest) (map[string]interface{}, *http.Response, error) {
+func (a *Flux10EReportingAPIService) ListFlowTypesApiV1EreportingFlowTypesGetExecute(r ApiListFlowTypesApiV1EreportingFlowTypesGetRequest) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -541,7 +541,7 @@ func (a *EReportingAPIService) ListFlowTypesApiV1EreportingFlowTypesGetExecute(r
 		localVarReturnValue  map[string]interface{}
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EReportingAPIService.ListFlowTypesApiV1EreportingFlowTypesGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Flux10EReportingAPIService.ListFlowTypesApiV1EreportingFlowTypesGet")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -608,7 +608,7 @@ func (a *EReportingAPIService) ListFlowTypesApiV1EreportingFlowTypesGetExecute(r
 
 type ApiSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostRequest struct {
 	ctx context.Context
-	ApiService *EReportingAPIService
+	ApiService *Flux10EReportingAPIService
 	submitAggregatedReportRequest *SubmitAggregatedReportRequest
 }
 
@@ -632,7 +632,7 @@ Automatically determines the AFNOR FlowType based on content.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostRequest
 */
-func (a *EReportingAPIService) SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(ctx context.Context) ApiSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostRequest {
+func (a *Flux10EReportingAPIService) SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(ctx context.Context) ApiSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostRequest {
 	return ApiSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -641,7 +641,7 @@ func (a *EReportingAPIService) SubmitAggregatedEreportingApiV1EreportingSubmitAg
 
 // Execute executes the request
 //  @return SubmitEReportingResponse
-func (a *EReportingAPIService) SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostExecute(r ApiSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostRequest) (*SubmitEReportingResponse, *http.Response, error) {
+func (a *Flux10EReportingAPIService) SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostExecute(r ApiSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostRequest) (*SubmitEReportingResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -649,7 +649,7 @@ func (a *EReportingAPIService) SubmitAggregatedEreportingApiV1EreportingSubmitAg
 		localVarReturnValue  *SubmitEReportingResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EReportingAPIService.SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Flux10EReportingAPIService.SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -731,7 +731,7 @@ func (a *EReportingAPIService) SubmitAggregatedEreportingApiV1EreportingSubmitAg
 
 type ApiSubmitEreportingApiV1EreportingSubmitPostRequest struct {
 	ctx context.Context
-	ApiService *EReportingAPIService
+	ApiService *Flux10EReportingAPIService
 	submitEReportingRequest *SubmitEReportingRequest
 }
 
@@ -759,7 +759,7 @@ with syntax=FRR (FRench Reporting).
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSubmitEreportingApiV1EreportingSubmitPostRequest
 */
-func (a *EReportingAPIService) SubmitEreportingApiV1EreportingSubmitPost(ctx context.Context) ApiSubmitEreportingApiV1EreportingSubmitPostRequest {
+func (a *Flux10EReportingAPIService) SubmitEreportingApiV1EreportingSubmitPost(ctx context.Context) ApiSubmitEreportingApiV1EreportingSubmitPostRequest {
 	return ApiSubmitEreportingApiV1EreportingSubmitPostRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -768,7 +768,7 @@ func (a *EReportingAPIService) SubmitEreportingApiV1EreportingSubmitPost(ctx con
 
 // Execute executes the request
 //  @return SubmitEReportingResponse
-func (a *EReportingAPIService) SubmitEreportingApiV1EreportingSubmitPostExecute(r ApiSubmitEreportingApiV1EreportingSubmitPostRequest) (*SubmitEReportingResponse, *http.Response, error) {
+func (a *Flux10EReportingAPIService) SubmitEreportingApiV1EreportingSubmitPostExecute(r ApiSubmitEreportingApiV1EreportingSubmitPostRequest) (*SubmitEReportingResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -776,7 +776,7 @@ func (a *EReportingAPIService) SubmitEreportingApiV1EreportingSubmitPostExecute(
 		localVarReturnValue  *SubmitEReportingResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EReportingAPIService.SubmitEreportingApiV1EreportingSubmitPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Flux10EReportingAPIService.SubmitEreportingApiV1EreportingSubmitPost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -858,7 +858,7 @@ func (a *EReportingAPIService) SubmitEreportingApiV1EreportingSubmitPostExecute(
 
 type ApiSubmitXmlEreportingApiV1EreportingSubmitXmlPostRequest struct {
 	ctx context.Context
-	ApiService *EReportingAPIService
+	ApiService *Flux10EReportingAPIService
 	xmlFile *os.File
 	trackingId *string
 	skipValidation *bool
@@ -928,7 +928,7 @@ and only need FactPulse for the PDP submission.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSubmitXmlEreportingApiV1EreportingSubmitXmlPostRequest
 */
-func (a *EReportingAPIService) SubmitXmlEreportingApiV1EreportingSubmitXmlPost(ctx context.Context) ApiSubmitXmlEreportingApiV1EreportingSubmitXmlPostRequest {
+func (a *Flux10EReportingAPIService) SubmitXmlEreportingApiV1EreportingSubmitXmlPost(ctx context.Context) ApiSubmitXmlEreportingApiV1EreportingSubmitXmlPostRequest {
 	return ApiSubmitXmlEreportingApiV1EreportingSubmitXmlPostRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -937,7 +937,7 @@ func (a *EReportingAPIService) SubmitXmlEreportingApiV1EreportingSubmitXmlPost(c
 
 // Execute executes the request
 //  @return SubmitEReportingResponse
-func (a *EReportingAPIService) SubmitXmlEreportingApiV1EreportingSubmitXmlPostExecute(r ApiSubmitXmlEreportingApiV1EreportingSubmitXmlPostRequest) (*SubmitEReportingResponse, *http.Response, error) {
+func (a *Flux10EReportingAPIService) SubmitXmlEreportingApiV1EreportingSubmitXmlPostExecute(r ApiSubmitXmlEreportingApiV1EreportingSubmitXmlPostRequest) (*SubmitEReportingResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -945,7 +945,7 @@ func (a *EReportingAPIService) SubmitXmlEreportingApiV1EreportingSubmitXmlPostEx
 		localVarReturnValue  *SubmitEReportingResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EReportingAPIService.SubmitXmlEreportingApiV1EreportingSubmitXmlPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Flux10EReportingAPIService.SubmitXmlEreportingApiV1EreportingSubmitXmlPost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1058,7 +1058,7 @@ func (a *EReportingAPIService) SubmitXmlEreportingApiV1EreportingSubmitXmlPostEx
 
 type ApiValidateAggregatedEreportingApiV1EreportingValidateAggregatedPostRequest struct {
 	ctx context.Context
-	ApiService *EReportingAPIService
+	ApiService *Flux10EReportingAPIService
 	createAggregatedReportRequest *CreateAggregatedReportRequest
 }
 
@@ -1079,7 +1079,7 @@ Validates aggregated e-reporting data without generating XML.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiValidateAggregatedEreportingApiV1EreportingValidateAggregatedPostRequest
 */
-func (a *EReportingAPIService) ValidateAggregatedEreportingApiV1EreportingValidateAggregatedPost(ctx context.Context) ApiValidateAggregatedEreportingApiV1EreportingValidateAggregatedPostRequest {
+func (a *Flux10EReportingAPIService) ValidateAggregatedEreportingApiV1EreportingValidateAggregatedPost(ctx context.Context) ApiValidateAggregatedEreportingApiV1EreportingValidateAggregatedPostRequest {
 	return ApiValidateAggregatedEreportingApiV1EreportingValidateAggregatedPostRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1088,7 +1088,7 @@ func (a *EReportingAPIService) ValidateAggregatedEreportingApiV1EreportingValida
 
 // Execute executes the request
 //  @return map[string]interface{}
-func (a *EReportingAPIService) ValidateAggregatedEreportingApiV1EreportingValidateAggregatedPostExecute(r ApiValidateAggregatedEreportingApiV1EreportingValidateAggregatedPostRequest) (map[string]interface{}, *http.Response, error) {
+func (a *Flux10EReportingAPIService) ValidateAggregatedEreportingApiV1EreportingValidateAggregatedPostExecute(r ApiValidateAggregatedEreportingApiV1EreportingValidateAggregatedPostRequest) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1096,7 +1096,7 @@ func (a *EReportingAPIService) ValidateAggregatedEreportingApiV1EreportingValida
 		localVarReturnValue  map[string]interface{}
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EReportingAPIService.ValidateAggregatedEreportingApiV1EreportingValidateAggregatedPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Flux10EReportingAPIService.ValidateAggregatedEreportingApiV1EreportingValidateAggregatedPost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1178,7 +1178,7 @@ func (a *EReportingAPIService) ValidateAggregatedEreportingApiV1EreportingValida
 
 type ApiValidateEreportingApiV1EreportingValidatePostRequest struct {
 	ctx context.Context
-	ApiService *EReportingAPIService
+	ApiService *Flux10EReportingAPIService
 	validateEReportingRequest *ValidateEReportingRequest
 }
 
@@ -1206,7 +1206,7 @@ Returns validation errors and warnings.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiValidateEreportingApiV1EreportingValidatePostRequest
 */
-func (a *EReportingAPIService) ValidateEreportingApiV1EreportingValidatePost(ctx context.Context) ApiValidateEreportingApiV1EreportingValidatePostRequest {
+func (a *Flux10EReportingAPIService) ValidateEreportingApiV1EreportingValidatePost(ctx context.Context) ApiValidateEreportingApiV1EreportingValidatePostRequest {
 	return ApiValidateEreportingApiV1EreportingValidatePostRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1215,7 +1215,7 @@ func (a *EReportingAPIService) ValidateEreportingApiV1EreportingValidatePost(ctx
 
 // Execute executes the request
 //  @return ValidateEReportingResponse
-func (a *EReportingAPIService) ValidateEreportingApiV1EreportingValidatePostExecute(r ApiValidateEreportingApiV1EreportingValidatePostRequest) (*ValidateEReportingResponse, *http.Response, error) {
+func (a *Flux10EReportingAPIService) ValidateEreportingApiV1EreportingValidatePostExecute(r ApiValidateEreportingApiV1EreportingValidatePostRequest) (*ValidateEReportingResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1223,7 +1223,7 @@ func (a *EReportingAPIService) ValidateEreportingApiV1EreportingValidatePostExec
 		localVarReturnValue  *ValidateEReportingResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EReportingAPIService.ValidateEreportingApiV1EreportingValidatePost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Flux10EReportingAPIService.ValidateEreportingApiV1EreportingValidatePost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1305,9 +1305,10 @@ func (a *EReportingAPIService) ValidateEreportingApiV1EreportingValidatePostExec
 
 type ApiValidateXmlEreportingApiV1EreportingValidateXmlPostRequest struct {
 	ctx context.Context
-	ApiService *EReportingAPIService
+	ApiService *Flux10EReportingAPIService
 	xmlFile *os.File
-	validateBusinessRules *bool
+	validateCoherence *bool
+	validatePeriod *bool
 }
 
 // E-reporting XML file to validate
@@ -1316,9 +1317,15 @@ func (r ApiValidateXmlEreportingApiV1EreportingValidateXmlPostRequest) XmlFile(x
 	return r
 }
 
-// Also validate business rules (ISO codes, enums)
-func (r ApiValidateXmlEreportingApiV1EreportingValidateXmlPostRequest) ValidateBusinessRules(validateBusinessRules bool) ApiValidateXmlEreportingApiV1EreportingValidateXmlPostRequest {
-	r.validateBusinessRules = &validateBusinessRules
+// Validate data coherence (REJ_COH)
+func (r ApiValidateXmlEreportingApiV1EreportingValidateXmlPostRequest) ValidateCoherence(validateCoherence bool) ApiValidateXmlEreportingApiV1EreportingValidateXmlPostRequest {
+	r.validateCoherence = &validateCoherence
+	return r
+}
+
+// Validate period coherence (REJ_PER)
+func (r ApiValidateXmlEreportingApiV1EreportingValidateXmlPostRequest) ValidatePeriod(validatePeriod bool) ApiValidateXmlEreportingApiV1EreportingValidateXmlPostRequest {
+	r.validatePeriod = &validatePeriod
 	return r
 }
 
@@ -1327,23 +1334,29 @@ func (r ApiValidateXmlEreportingApiV1EreportingValidateXmlPostRequest) Execute()
 }
 
 /*
-ValidateXmlEreportingApiV1EreportingValidateXmlPost Validate e-reporting XML against PPF XSD schemas and business rules
+ValidateXmlEreportingApiV1EreportingValidateXmlPost Validate e-reporting XML (PPF Annexe 6 v1.9 compliant)
 
-Validates an e-reporting XML file against:
+Validates an e-reporting XML file against PPF specifications (Annexe 6 v1.9):
 
-1. **XSD schemas**: Official PPF e-reporting XSD (structure, types, cardinality)
-2. **Business rules**: ISO codes and enum validation
-   - Currency codes (ISO 4217: EUR, USD, GBP, etc.)
-   - Country codes (ISO 3166-1 alpha-2: FR, DE, US, etc.)
-   - Scheme IDs (0009=SIRET, 0002=SIREN, etc.)
-   - Role codes (UNCL 3035: SE=Seller, BY=Buyer, WK=Working party, etc.)
+**Validation levels:**
+1. **XSD (REJ_SEMAN)**: Structure, types, cardinality
+2. **Semantic (REJ_SEMAN)**: Authorized values from codelists
+3. **Coherence (REJ_COH)**: Data consistency (totals = sum of breakdowns)
+4. **Period (REJ_PER)**: Transaction dates within declared period
 
-Returns validation status and detailed error messages if invalid.
+**Validated codes:**
+- SchemeID (ISO 6523): 0002=SIREN, 0009=SIRET, 0224=RoutingCode, etc.
+- RoleCode (UNCL 3035): SE=Seller, BY=Buyer, WK=Working party
+- CategoryCode (TT-81): TLB1, TPS1, TNT1, TMA1
+- TaxCategoryCode (UNTDID 5305): S, Z, E, AE, K, G, O
+- Currency (ISO 4217), Country (ISO 3166-1)
+
+Returns structured validation errors with PPF rejection codes.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiValidateXmlEreportingApiV1EreportingValidateXmlPostRequest
 */
-func (a *EReportingAPIService) ValidateXmlEreportingApiV1EreportingValidateXmlPost(ctx context.Context) ApiValidateXmlEreportingApiV1EreportingValidateXmlPostRequest {
+func (a *Flux10EReportingAPIService) ValidateXmlEreportingApiV1EreportingValidateXmlPost(ctx context.Context) ApiValidateXmlEreportingApiV1EreportingValidateXmlPostRequest {
 	return ApiValidateXmlEreportingApiV1EreportingValidateXmlPostRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1352,7 +1365,7 @@ func (a *EReportingAPIService) ValidateXmlEreportingApiV1EreportingValidateXmlPo
 
 // Execute executes the request
 //  @return map[string]interface{}
-func (a *EReportingAPIService) ValidateXmlEreportingApiV1EreportingValidateXmlPostExecute(r ApiValidateXmlEreportingApiV1EreportingValidateXmlPostRequest) (map[string]interface{}, *http.Response, error) {
+func (a *Flux10EReportingAPIService) ValidateXmlEreportingApiV1EreportingValidateXmlPostExecute(r ApiValidateXmlEreportingApiV1EreportingValidateXmlPostRequest) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1360,7 +1373,7 @@ func (a *EReportingAPIService) ValidateXmlEreportingApiV1EreportingValidateXmlPo
 		localVarReturnValue  map[string]interface{}
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EReportingAPIService.ValidateXmlEreportingApiV1EreportingValidateXmlPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Flux10EReportingAPIService.ValidateXmlEreportingApiV1EreportingValidateXmlPost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1374,12 +1387,19 @@ func (a *EReportingAPIService) ValidateXmlEreportingApiV1EreportingValidateXmlPo
 		return localVarReturnValue, nil, reportError("xmlFile is required and must be specified")
 	}
 
-	if r.validateBusinessRules != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "validate_business_rules", r.validateBusinessRules, "form", "")
+	if r.validateCoherence != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "validate_coherence", r.validateCoherence, "form", "")
 	} else {
 		var defaultValue bool = true
-		parameterAddToHeaderOrQuery(localVarQueryParams, "validate_business_rules", defaultValue, "form", "")
-		r.validateBusinessRules = &defaultValue
+		parameterAddToHeaderOrQuery(localVarQueryParams, "validate_coherence", defaultValue, "form", "")
+		r.validateCoherence = &defaultValue
+	}
+	if r.validatePeriod != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "validate_period", r.validatePeriod, "form", "")
+	} else {
+		var defaultValue bool = true
+		parameterAddToHeaderOrQuery(localVarQueryParams, "validate_period", defaultValue, "form", "")
+		r.validatePeriod = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"multipart/form-data"}
