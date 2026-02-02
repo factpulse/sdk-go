@@ -17,71 +17,64 @@ import (
 	"fmt"
 )
 
-// checks if the FactureElectroniqueRestApiSchemasCdarValidationErrorResponse type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &FactureElectroniqueRestApiSchemasCdarValidationErrorResponse{}
+// checks if the WebhookSecretDeleteResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WebhookSecretDeleteResponse{}
 
-// FactureElectroniqueRestApiSchemasCdarValidationErrorResponse Erreur de validation.
-type FactureElectroniqueRestApiSchemasCdarValidationErrorResponse struct {
-	// Champ concerné
-	Field string `json:"field"`
-	// Message d'erreur
+// WebhookSecretDeleteResponse Response after deleting webhook secret.
+type WebhookSecretDeleteResponse struct {
+	// Whether the secret was deleted successfully
+	Success bool `json:"success"`
+	// Result message
 	Message string `json:"message"`
-	Rule NullableString `json:"rule,omitempty"`
-	// Sévérité (error/warning)
-	Severity *string `json:"severity,omitempty"`
 }
 
-type _FactureElectroniqueRestApiSchemasCdarValidationErrorResponse FactureElectroniqueRestApiSchemasCdarValidationErrorResponse
+type _WebhookSecretDeleteResponse WebhookSecretDeleteResponse
 
-// NewFactureElectroniqueRestApiSchemasCdarValidationErrorResponse instantiates a new FactureElectroniqueRestApiSchemasCdarValidationErrorResponse object
+// NewWebhookSecretDeleteResponse instantiates a new WebhookSecretDeleteResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFactureElectroniqueRestApiSchemasCdarValidationErrorResponse(field string, message string) *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse {
-	this := FactureElectroniqueRestApiSchemasCdarValidationErrorResponse{}
-	this.Field = field
+func NewWebhookSecretDeleteResponse(success bool, message string) *WebhookSecretDeleteResponse {
+	this := WebhookSecretDeleteResponse{}
+	this.Success = success
 	this.Message = message
-	var severity string = "error"
-	this.Severity = &severity
 	return &this
 }
 
-// NewFactureElectroniqueRestApiSchemasCdarValidationErrorResponseWithDefaults instantiates a new FactureElectroniqueRestApiSchemasCdarValidationErrorResponse object
+// NewWebhookSecretDeleteResponseWithDefaults instantiates a new WebhookSecretDeleteResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFactureElectroniqueRestApiSchemasCdarValidationErrorResponseWithDefaults() *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse {
-	this := FactureElectroniqueRestApiSchemasCdarValidationErrorResponse{}
-	var severity string = "error"
-	this.Severity = &severity
+func NewWebhookSecretDeleteResponseWithDefaults() *WebhookSecretDeleteResponse {
+	this := WebhookSecretDeleteResponse{}
 	return &this
 }
 
-// GetField returns the Field field value
-func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) GetField() string {
+// GetSuccess returns the Success field value
+func (o *WebhookSecretDeleteResponse) GetSuccess() bool {
 	if o == nil {
-		var ret string
+		var ret bool
 		return ret
 	}
 
-	return o.Field
+	return o.Success
 }
 
-// GetFieldOk returns a tuple with the Field field value
+// GetSuccessOk returns a tuple with the Success field value
 // and a boolean to check if the value has been set.
-func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) GetFieldOk() (*string, bool) {
+func (o *WebhookSecretDeleteResponse) GetSuccessOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Field, true
+	return &o.Success, true
 }
 
-// SetField sets field value
-func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) SetField(v string) {
-	o.Field = v
+// SetSuccess sets field value
+func (o *WebhookSecretDeleteResponse) SetSuccess(v bool) {
+	o.Success = v
 }
 
 // GetMessage returns the Message field value
-func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) GetMessage() string {
+func (o *WebhookSecretDeleteResponse) GetMessage() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -92,7 +85,7 @@ func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) GetMessag
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) GetMessageOk() (*string, bool) {
+func (o *WebhookSecretDeleteResponse) GetMessageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -100,85 +93,11 @@ func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) GetMessag
 }
 
 // SetMessage sets field value
-func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) SetMessage(v string) {
+func (o *WebhookSecretDeleteResponse) SetMessage(v string) {
 	o.Message = v
 }
 
-// GetRule returns the Rule field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) GetRule() string {
-	if o == nil || IsNil(o.Rule.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.Rule.Get()
-}
-
-// GetRuleOk returns a tuple with the Rule field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) GetRuleOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Rule.Get(), o.Rule.IsSet()
-}
-
-// HasRule returns a boolean if a field has been set.
-func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) HasRule() bool {
-	if o != nil && o.Rule.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetRule gets a reference to the given NullableString and assigns it to the Rule field.
-func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) SetRule(v string) {
-	o.Rule.Set(&v)
-}
-// SetRuleNil sets the value for Rule to be an explicit nil
-func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) SetRuleNil() {
-	o.Rule.Set(nil)
-}
-
-// UnsetRule ensures that no value is present for Rule, not even an explicit nil
-func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) UnsetRule() {
-	o.Rule.Unset()
-}
-
-// GetSeverity returns the Severity field value if set, zero value otherwise.
-func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) GetSeverity() string {
-	if o == nil || IsNil(o.Severity) {
-		var ret string
-		return ret
-	}
-	return *o.Severity
-}
-
-// GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) GetSeverityOk() (*string, bool) {
-	if o == nil || IsNil(o.Severity) {
-		return nil, false
-	}
-	return o.Severity, true
-}
-
-// HasSeverity returns a boolean if a field has been set.
-func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) HasSeverity() bool {
-	if o != nil && !IsNil(o.Severity) {
-		return true
-	}
-
-	return false
-}
-
-// SetSeverity gets a reference to the given string and assigns it to the Severity field.
-func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) SetSeverity(v string) {
-	o.Severity = &v
-}
-
-func (o FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) MarshalJSON() ([]byte, error) {
+func (o WebhookSecretDeleteResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -186,25 +105,19 @@ func (o FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) MarshalJSO
 	return json.Marshal(toSerialize)
 }
 
-func (o FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) ToMap() (map[string]interface{}, error) {
+func (o WebhookSecretDeleteResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["field"] = o.Field
+	toSerialize["success"] = o.Success
 	toSerialize["message"] = o.Message
-	if o.Rule.IsSet() {
-		toSerialize["rule"] = o.Rule.Get()
-	}
-	if !IsNil(o.Severity) {
-		toSerialize["severity"] = o.Severity
-	}
 	return toSerialize, nil
 }
 
-func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) UnmarshalJSON(data []byte) (err error) {
+func (o *WebhookSecretDeleteResponse) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"field",
+		"success",
 		"message",
 	}
 
@@ -222,53 +135,53 @@ func (o *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) Unmarshal
 		}
 	}
 
-	varFactureElectroniqueRestApiSchemasCdarValidationErrorResponse := _FactureElectroniqueRestApiSchemasCdarValidationErrorResponse{}
+	varWebhookSecretDeleteResponse := _WebhookSecretDeleteResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFactureElectroniqueRestApiSchemasCdarValidationErrorResponse)
+	err = decoder.Decode(&varWebhookSecretDeleteResponse)
 
 	if err != nil {
 		return err
 	}
 
-	*o = FactureElectroniqueRestApiSchemasCdarValidationErrorResponse(varFactureElectroniqueRestApiSchemasCdarValidationErrorResponse)
+	*o = WebhookSecretDeleteResponse(varWebhookSecretDeleteResponse)
 
 	return err
 }
 
-type NullableFactureElectroniqueRestApiSchemasCdarValidationErrorResponse struct {
-	value *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse
+type NullableWebhookSecretDeleteResponse struct {
+	value *WebhookSecretDeleteResponse
 	isSet bool
 }
 
-func (v NullableFactureElectroniqueRestApiSchemasCdarValidationErrorResponse) Get() *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse {
+func (v NullableWebhookSecretDeleteResponse) Get() *WebhookSecretDeleteResponse {
 	return v.value
 }
 
-func (v *NullableFactureElectroniqueRestApiSchemasCdarValidationErrorResponse) Set(val *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) {
+func (v *NullableWebhookSecretDeleteResponse) Set(val *WebhookSecretDeleteResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFactureElectroniqueRestApiSchemasCdarValidationErrorResponse) IsSet() bool {
+func (v NullableWebhookSecretDeleteResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFactureElectroniqueRestApiSchemasCdarValidationErrorResponse) Unset() {
+func (v *NullableWebhookSecretDeleteResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFactureElectroniqueRestApiSchemasCdarValidationErrorResponse(val *FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) *NullableFactureElectroniqueRestApiSchemasCdarValidationErrorResponse {
-	return &NullableFactureElectroniqueRestApiSchemasCdarValidationErrorResponse{value: val, isSet: true}
+func NewNullableWebhookSecretDeleteResponse(val *WebhookSecretDeleteResponse) *NullableWebhookSecretDeleteResponse {
+	return &NullableWebhookSecretDeleteResponse{value: val, isSet: true}
 }
 
-func (v NullableFactureElectroniqueRestApiSchemasCdarValidationErrorResponse) MarshalJSON() ([]byte, error) {
+func (v NullableWebhookSecretDeleteResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFactureElectroniqueRestApiSchemasCdarValidationErrorResponse) UnmarshalJSON(src []byte) error {
+func (v *NullableWebhookSecretDeleteResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

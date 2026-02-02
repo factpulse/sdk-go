@@ -26,6 +26,8 @@ type SecretStatus struct {
 	Status string `json:"status"`
 	// Descriptive status message
 	Message string `json:"message"`
+	EncryptionMode NullableString `json:"encryptionMode,omitempty"`
+	RequiresClientKey NullableBool `json:"requiresClientKey,omitempty"`
 }
 
 type _SecretStatus SecretStatus
@@ -97,6 +99,90 @@ func (o *SecretStatus) SetMessage(v string) {
 	o.Message = v
 }
 
+// GetEncryptionMode returns the EncryptionMode field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SecretStatus) GetEncryptionMode() string {
+	if o == nil || IsNil(o.EncryptionMode.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.EncryptionMode.Get()
+}
+
+// GetEncryptionModeOk returns a tuple with the EncryptionMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SecretStatus) GetEncryptionModeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.EncryptionMode.Get(), o.EncryptionMode.IsSet()
+}
+
+// HasEncryptionMode returns a boolean if a field has been set.
+func (o *SecretStatus) HasEncryptionMode() bool {
+	if o != nil && o.EncryptionMode.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetEncryptionMode gets a reference to the given NullableString and assigns it to the EncryptionMode field.
+func (o *SecretStatus) SetEncryptionMode(v string) {
+	o.EncryptionMode.Set(&v)
+}
+// SetEncryptionModeNil sets the value for EncryptionMode to be an explicit nil
+func (o *SecretStatus) SetEncryptionModeNil() {
+	o.EncryptionMode.Set(nil)
+}
+
+// UnsetEncryptionMode ensures that no value is present for EncryptionMode, not even an explicit nil
+func (o *SecretStatus) UnsetEncryptionMode() {
+	o.EncryptionMode.Unset()
+}
+
+// GetRequiresClientKey returns the RequiresClientKey field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SecretStatus) GetRequiresClientKey() bool {
+	if o == nil || IsNil(o.RequiresClientKey.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.RequiresClientKey.Get()
+}
+
+// GetRequiresClientKeyOk returns a tuple with the RequiresClientKey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SecretStatus) GetRequiresClientKeyOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RequiresClientKey.Get(), o.RequiresClientKey.IsSet()
+}
+
+// HasRequiresClientKey returns a boolean if a field has been set.
+func (o *SecretStatus) HasRequiresClientKey() bool {
+	if o != nil && o.RequiresClientKey.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRequiresClientKey gets a reference to the given NullableBool and assigns it to the RequiresClientKey field.
+func (o *SecretStatus) SetRequiresClientKey(v bool) {
+	o.RequiresClientKey.Set(&v)
+}
+// SetRequiresClientKeyNil sets the value for RequiresClientKey to be an explicit nil
+func (o *SecretStatus) SetRequiresClientKeyNil() {
+	o.RequiresClientKey.Set(nil)
+}
+
+// UnsetRequiresClientKey ensures that no value is present for RequiresClientKey, not even an explicit nil
+func (o *SecretStatus) UnsetRequiresClientKey() {
+	o.RequiresClientKey.Unset()
+}
+
 func (o SecretStatus) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -109,6 +195,12 @@ func (o SecretStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["status"] = o.Status
 	toSerialize["message"] = o.Message
+	if o.EncryptionMode.IsSet() {
+		toSerialize["encryptionMode"] = o.EncryptionMode.Get()
+	}
+	if o.RequiresClientKey.IsSet() {
+		toSerialize["requiresClientKey"] = o.RequiresClientKey.Get()
+	}
 	return toSerialize, nil
 }
 

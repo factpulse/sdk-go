@@ -185,9 +185,9 @@ docs/FacturXInvoice.md
 docs/FacturXPDFInfo.md
 docs/FacturXPDFXMLVerificationAPI.md
 docs/FacturXValidationAPI.md
-docs/FactureElectroniqueRestApiSchemasCdarValidationErrorResponse.md
-docs/FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.md
 docs/FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode.md
+docs/FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.md
+docs/FactureElectroniqueRestApiSchemasValidationValidationErrorResponse.md
 docs/FieldStatus.md
 docs/FileInfo.md
 docs/FilesInfo.md
@@ -230,6 +230,8 @@ docs/InvoiceTypeCodeOutput.md
 docs/InvoicingFramework.md
 docs/InvoicingFrameworkCode.md
 docs/IssuerRoleCode.md
+docs/KeyRotationRequest.md
+docs/KeyRotationResponse.md
 docs/LineNetAmount.md
 docs/LineSubType.md
 docs/LineTotalAmount.md
@@ -341,6 +343,9 @@ docs/ValidationSuccessResponse.md
 docs/VatRate.md
 docs/VerificationSuccessResponse.md
 docs/VerifiedFieldSchema.md
+docs/WebhookSecretDeleteResponse.md
+docs/WebhookSecretGenerateResponse.md
+docs/WebhookSecretStatusResponse.md
 git_push.sh
 go.mod
 go.sum
@@ -497,9 +502,9 @@ model_error_source.go
 model_extraction_info.go
 model_factur_x_invoice.go
 model_factur_xpdf_info.go
-model_facture_electronique__rest_api__schemas__cdar__validation_error_response.go
-model_facture_electronique__rest_api__schemas__chorus_pro__chorus_pro_credentials.go
 model_facture_electronique__rest_api__schemas__ereporting__invoice_type_code.go
+model_facture_electronique__rest_api__schemas__processing__chorus_pro_credentials.go
+model_facture_electronique__rest_api__schemas__validation__validation_error_response.go
 model_field_status.go
 model_file_info.go
 model_files_info.go
@@ -539,6 +544,8 @@ model_invoice_type_code_output.go
 model_invoicing_framework.go
 model_invoicing_framework_code.go
 model_issuer_role_code.go
+model_key_rotation_request.go
+model_key_rotation_response.go
 model_line_net_amount.go
 model_line_sub_type.go
 model_line_total_amount.go
@@ -650,6 +657,9 @@ model_vat_point_date_code.go
 model_vat_rate.go
 model_verification_success_response.go
 model_verified_field_schema.go
+model_webhook_secret_delete_response.go
+model_webhook_secret_generate_response.go
+model_webhook_secret_status_response.go
 response.go
 test/api_afnorpdppa_directory_service_test.go
 test/api_afnorpdppa_flow_service_test.go

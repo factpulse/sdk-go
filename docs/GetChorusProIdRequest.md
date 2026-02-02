@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Credentials** | Pointer to [**NullableFactureElectroniqueRestApiSchemasChorusProChorusProCredentials**](FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.md) |  | [optional] 
+**Credentials** | Pointer to [**NullableChorusProCredentials**](ChorusProCredentials.md) |  | [optional] 
 **Siret** | **string** | Structure SIRET (14 digits) | 
 **IdentifierType** | Pointer to **string** | Identifier type (SIRET, SIREN, UE_HORS_FRANCE, etc.) | [optional] [default to "SIRET"]
 
@@ -29,20 +29,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetCredentials
 
-`func (o *GetChorusProIdRequest) GetCredentials() FactureElectroniqueRestApiSchemasChorusProChorusProCredentials`
+`func (o *GetChorusProIdRequest) GetCredentials() ChorusProCredentials`
 
 GetCredentials returns the Credentials field if non-nil, zero value otherwise.
 
 ### GetCredentialsOk
 
-`func (o *GetChorusProIdRequest) GetCredentialsOk() (*FactureElectroniqueRestApiSchemasChorusProChorusProCredentials, bool)`
+`func (o *GetChorusProIdRequest) GetCredentialsOk() (*ChorusProCredentials, bool)`
 
 GetCredentialsOk returns a tuple with the Credentials field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCredentials
 
-`func (o *GetChorusProIdRequest) SetCredentials(v FactureElectroniqueRestApiSchemasChorusProChorusProCredentials)`
+`func (o *GetChorusProIdRequest) SetCredentials(v ChorusProCredentials)`
 
 SetCredentials sets Credentials field to given value.
 

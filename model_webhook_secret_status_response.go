@@ -13,183 +13,108 @@ package factpulse
 
 import (
 	"encoding/json"
+	"time"
 	"bytes"
 	"fmt"
 )
 
-// checks if the ChorusProCredentials type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ChorusProCredentials{}
+// checks if the WebhookSecretStatusResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WebhookSecretStatusResponse{}
 
-// ChorusProCredentials Chorus Pro credentials for Zero-Trust mode.  **Zero-Trust Mode**: Credentials are passed in each request and are NEVER stored.  **Security**: - Credentials are never persisted in the database - They are used only for the duration of the request - Secure transmission via HTTPS  **Use cases**: - High-security environments (banks, administrations) - Strict GDPR compliance - Tests with temporary credentials - Users who don't want to store their credentials
-type ChorusProCredentials struct {
-	// PISTE Client ID (government API portal)
-	PisteClientId string `json:"pisteClientId"`
-	// PISTE Client Secret
-	PisteClientSecret string `json:"pisteClientSecret"`
-	// Chorus Pro login
-	ChorusProLogin string `json:"chorusProLogin"`
-	// Chorus Pro password
-	ChorusProPassword string `json:"chorusProPassword"`
-	// Use sandbox environment (true) or production (false)
-	Sandbox *bool `json:"sandbox,omitempty"`
+// WebhookSecretStatusResponse Webhook secret status for a client.
+type WebhookSecretStatusResponse struct {
+	// Whether a webhook secret is configured
+	HasSecret bool `json:"hasSecret"`
+	CreatedAt NullableTime `json:"createdAt,omitempty"`
 }
 
-type _ChorusProCredentials ChorusProCredentials
+type _WebhookSecretStatusResponse WebhookSecretStatusResponse
 
-// NewChorusProCredentials instantiates a new ChorusProCredentials object
+// NewWebhookSecretStatusResponse instantiates a new WebhookSecretStatusResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewChorusProCredentials(pisteClientId string, pisteClientSecret string, chorusProLogin string, chorusProPassword string) *ChorusProCredentials {
-	this := ChorusProCredentials{}
-	this.PisteClientId = pisteClientId
-	this.PisteClientSecret = pisteClientSecret
-	this.ChorusProLogin = chorusProLogin
-	this.ChorusProPassword = chorusProPassword
-	var sandbox bool = true
-	this.Sandbox = &sandbox
+func NewWebhookSecretStatusResponse(hasSecret bool) *WebhookSecretStatusResponse {
+	this := WebhookSecretStatusResponse{}
+	this.HasSecret = hasSecret
 	return &this
 }
 
-// NewChorusProCredentialsWithDefaults instantiates a new ChorusProCredentials object
+// NewWebhookSecretStatusResponseWithDefaults instantiates a new WebhookSecretStatusResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewChorusProCredentialsWithDefaults() *ChorusProCredentials {
-	this := ChorusProCredentials{}
-	var sandbox bool = true
-	this.Sandbox = &sandbox
+func NewWebhookSecretStatusResponseWithDefaults() *WebhookSecretStatusResponse {
+	this := WebhookSecretStatusResponse{}
 	return &this
 }
 
-// GetPisteClientId returns the PisteClientId field value
-func (o *ChorusProCredentials) GetPisteClientId() string {
+// GetHasSecret returns the HasSecret field value
+func (o *WebhookSecretStatusResponse) GetHasSecret() bool {
 	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.PisteClientId
-}
-
-// GetPisteClientIdOk returns a tuple with the PisteClientId field value
-// and a boolean to check if the value has been set.
-func (o *ChorusProCredentials) GetPisteClientIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.PisteClientId, true
-}
-
-// SetPisteClientId sets field value
-func (o *ChorusProCredentials) SetPisteClientId(v string) {
-	o.PisteClientId = v
-}
-
-// GetPisteClientSecret returns the PisteClientSecret field value
-func (o *ChorusProCredentials) GetPisteClientSecret() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.PisteClientSecret
-}
-
-// GetPisteClientSecretOk returns a tuple with the PisteClientSecret field value
-// and a boolean to check if the value has been set.
-func (o *ChorusProCredentials) GetPisteClientSecretOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.PisteClientSecret, true
-}
-
-// SetPisteClientSecret sets field value
-func (o *ChorusProCredentials) SetPisteClientSecret(v string) {
-	o.PisteClientSecret = v
-}
-
-// GetChorusProLogin returns the ChorusProLogin field value
-func (o *ChorusProCredentials) GetChorusProLogin() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ChorusProLogin
-}
-
-// GetChorusProLoginOk returns a tuple with the ChorusProLogin field value
-// and a boolean to check if the value has been set.
-func (o *ChorusProCredentials) GetChorusProLoginOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ChorusProLogin, true
-}
-
-// SetChorusProLogin sets field value
-func (o *ChorusProCredentials) SetChorusProLogin(v string) {
-	o.ChorusProLogin = v
-}
-
-// GetChorusProPassword returns the ChorusProPassword field value
-func (o *ChorusProCredentials) GetChorusProPassword() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ChorusProPassword
-}
-
-// GetChorusProPasswordOk returns a tuple with the ChorusProPassword field value
-// and a boolean to check if the value has been set.
-func (o *ChorusProCredentials) GetChorusProPasswordOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ChorusProPassword, true
-}
-
-// SetChorusProPassword sets field value
-func (o *ChorusProCredentials) SetChorusProPassword(v string) {
-	o.ChorusProPassword = v
-}
-
-// GetSandbox returns the Sandbox field value if set, zero value otherwise.
-func (o *ChorusProCredentials) GetSandbox() bool {
-	if o == nil || IsNil(o.Sandbox) {
 		var ret bool
 		return ret
 	}
-	return *o.Sandbox
+
+	return o.HasSecret
 }
 
-// GetSandboxOk returns a tuple with the Sandbox field value if set, nil otherwise
+// GetHasSecretOk returns a tuple with the HasSecret field value
 // and a boolean to check if the value has been set.
-func (o *ChorusProCredentials) GetSandboxOk() (*bool, bool) {
-	if o == nil || IsNil(o.Sandbox) {
+func (o *WebhookSecretStatusResponse) GetHasSecretOk() (*bool, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Sandbox, true
+	return &o.HasSecret, true
 }
 
-// HasSandbox returns a boolean if a field has been set.
-func (o *ChorusProCredentials) HasSandbox() bool {
-	if o != nil && !IsNil(o.Sandbox) {
+// SetHasSecret sets field value
+func (o *WebhookSecretStatusResponse) SetHasSecret(v bool) {
+	o.HasSecret = v
+}
+
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WebhookSecretStatusResponse) GetCreatedAt() time.Time {
+	if o == nil || IsNil(o.CreatedAt.Get()) {
+		var ret time.Time
+		return ret
+	}
+	return *o.CreatedAt.Get()
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WebhookSecretStatusResponse) GetCreatedAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CreatedAt.Get(), o.CreatedAt.IsSet()
+}
+
+// HasCreatedAt returns a boolean if a field has been set.
+func (o *WebhookSecretStatusResponse) HasCreatedAt() bool {
+	if o != nil && o.CreatedAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSandbox gets a reference to the given bool and assigns it to the Sandbox field.
-func (o *ChorusProCredentials) SetSandbox(v bool) {
-	o.Sandbox = &v
+// SetCreatedAt gets a reference to the given NullableTime and assigns it to the CreatedAt field.
+func (o *WebhookSecretStatusResponse) SetCreatedAt(v time.Time) {
+	o.CreatedAt.Set(&v)
+}
+// SetCreatedAtNil sets the value for CreatedAt to be an explicit nil
+func (o *WebhookSecretStatusResponse) SetCreatedAtNil() {
+	o.CreatedAt.Set(nil)
 }
 
-func (o ChorusProCredentials) MarshalJSON() ([]byte, error) {
+// UnsetCreatedAt ensures that no value is present for CreatedAt, not even an explicit nil
+func (o *WebhookSecretStatusResponse) UnsetCreatedAt() {
+	o.CreatedAt.Unset()
+}
+
+func (o WebhookSecretStatusResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -197,27 +122,21 @@ func (o ChorusProCredentials) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ChorusProCredentials) ToMap() (map[string]interface{}, error) {
+func (o WebhookSecretStatusResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["pisteClientId"] = o.PisteClientId
-	toSerialize["pisteClientSecret"] = o.PisteClientSecret
-	toSerialize["chorusProLogin"] = o.ChorusProLogin
-	toSerialize["chorusProPassword"] = o.ChorusProPassword
-	if !IsNil(o.Sandbox) {
-		toSerialize["sandbox"] = o.Sandbox
+	toSerialize["hasSecret"] = o.HasSecret
+	if o.CreatedAt.IsSet() {
+		toSerialize["createdAt"] = o.CreatedAt.Get()
 	}
 	return toSerialize, nil
 }
 
-func (o *ChorusProCredentials) UnmarshalJSON(data []byte) (err error) {
+func (o *WebhookSecretStatusResponse) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"pisteClientId",
-		"pisteClientSecret",
-		"chorusProLogin",
-		"chorusProPassword",
+		"hasSecret",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -234,53 +153,53 @@ func (o *ChorusProCredentials) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varChorusProCredentials := _ChorusProCredentials{}
+	varWebhookSecretStatusResponse := _WebhookSecretStatusResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varChorusProCredentials)
+	err = decoder.Decode(&varWebhookSecretStatusResponse)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ChorusProCredentials(varChorusProCredentials)
+	*o = WebhookSecretStatusResponse(varWebhookSecretStatusResponse)
 
 	return err
 }
 
-type NullableChorusProCredentials struct {
-	value *ChorusProCredentials
+type NullableWebhookSecretStatusResponse struct {
+	value *WebhookSecretStatusResponse
 	isSet bool
 }
 
-func (v NullableChorusProCredentials) Get() *ChorusProCredentials {
+func (v NullableWebhookSecretStatusResponse) Get() *WebhookSecretStatusResponse {
 	return v.value
 }
 
-func (v *NullableChorusProCredentials) Set(val *ChorusProCredentials) {
+func (v *NullableWebhookSecretStatusResponse) Set(val *WebhookSecretStatusResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableChorusProCredentials) IsSet() bool {
+func (v NullableWebhookSecretStatusResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableChorusProCredentials) Unset() {
+func (v *NullableWebhookSecretStatusResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableChorusProCredentials(val *ChorusProCredentials) *NullableChorusProCredentials {
-	return &NullableChorusProCredentials{value: val, isSet: true}
+func NewNullableWebhookSecretStatusResponse(val *WebhookSecretStatusResponse) *NullableWebhookSecretStatusResponse {
+	return &NullableWebhookSecretStatusResponse{value: val, isSet: true}
 }
 
-func (v NullableChorusProCredentials) MarshalJSON() ([]byte, error) {
+func (v NullableWebhookSecretStatusResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableChorusProCredentials) UnmarshalJSON(src []byte) error {
+func (v *NullableWebhookSecretStatusResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

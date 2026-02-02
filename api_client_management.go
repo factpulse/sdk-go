@@ -92,6 +92,20 @@ func (a *ClientManagementAPIService) ActivateClientApiV1ClientsUidActiverPostExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -219,6 +233,20 @@ func (a *ClientManagementAPIService) CreateClientApiV1ClientsPostExecute(r ApiCr
 	}
 	// body params
 	localVarPostBody = r.clientCreateRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -337,6 +365,286 @@ func (a *ClientManagementAPIService) DeactivateClientApiV1ClientsUidDesactiverPo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteRequest struct {
+	ctx context.Context
+	ApiService *ClientManagementAPIService
+	uid string
+}
+
+func (r ApiDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteRequest) Execute() (*WebhookSecretDeleteResponse, *http.Response, error) {
+	return r.ApiService.DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteExecute(r)
+}
+
+/*
+DeleteWebhookSecretApiV1ClientsUidWebhookSecretDelete Delete webhook secret
+
+Delete the webhook secret for a client.
+
+**Scope**: Client level (JWT with client_uid that must match {uid})
+
+**After deletion**: Webhooks for this client will use the global server key
+for HMAC signature instead of a client-specific key.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param uid
+ @return ApiDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteRequest
+*/
+func (a *ClientManagementAPIService) DeleteWebhookSecretApiV1ClientsUidWebhookSecretDelete(ctx context.Context, uid string) ApiDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteRequest {
+	return ApiDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteRequest{
+		ApiService: a,
+		ctx: ctx,
+		uid: uid,
+	}
+}
+
+// Execute executes the request
+//  @return WebhookSecretDeleteResponse
+func (a *ClientManagementAPIService) DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteExecute(r ApiDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteRequest) (*WebhookSecretDeleteResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *WebhookSecretDeleteResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ClientManagementAPIService.DeleteWebhookSecretApiV1ClientsUidWebhookSecretDelete")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/clients/{uid}/webhook-secret"
+	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", url.PathEscape(parameterValueToString(r.uid, "uid")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostRequest struct {
+	ctx context.Context
+	ApiService *ClientManagementAPIService
+	uid string
+}
+
+func (r ApiGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostRequest) Execute() (*WebhookSecretGenerateResponse, *http.Response, error) {
+	return r.ApiService.GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostExecute(r)
+}
+
+/*
+GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost Generate webhook secret
+
+Generate or regenerate the webhook secret for a client.
+
+**Scope**: Client level (JWT with client_uid that must match {uid})
+
+**Important**: Save the returned secret immediately - it will never be shown again.
+The secret is used to sign webhooks sent by the server (HMAC-SHA256).
+
+**If a secret already exists**: It will be replaced by the new one.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param uid
+ @return ApiGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostRequest
+*/
+func (a *ClientManagementAPIService) GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost(ctx context.Context, uid string) ApiGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostRequest {
+	return ApiGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostRequest{
+		ApiService: a,
+		ctx: ctx,
+		uid: uid,
+	}
+}
+
+// Execute executes the request
+//  @return WebhookSecretGenerateResponse
+func (a *ClientManagementAPIService) GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostExecute(r ApiGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostRequest) (*WebhookSecretGenerateResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *WebhookSecretGenerateResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ClientManagementAPIService.GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/clients/{uid}/webhook-secret/generate"
+	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", url.PathEscape(parameterValueToString(r.uid, "uid")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -454,6 +762,20 @@ func (a *ClientManagementAPIService) GetClientApiV1ClientsUidGetExecute(r ApiGet
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -576,6 +898,155 @@ func (a *ClientManagementAPIService) GetPdpConfigApiV1ClientsUidPdpConfigGetExec
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetRequest struct {
+	ctx context.Context
+	ApiService *ClientManagementAPIService
+	uid string
+}
+
+func (r ApiGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetRequest) Execute() (*WebhookSecretStatusResponse, *http.Response, error) {
+	return r.ApiService.GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetExecute(r)
+}
+
+/*
+GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet Get webhook secret status
+
+Check if a webhook secret is configured for a client.
+
+**Scope**: Client level (JWT with client_uid that must match {uid})
+
+**Response**:
+- `hasSecret`: Whether a webhook secret is configured
+- `createdAt`: When the secret was created (if exists)
+
+**Note**: The secret value is never returned, only its status.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param uid
+ @return ApiGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetRequest
+*/
+func (a *ClientManagementAPIService) GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet(ctx context.Context, uid string) ApiGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetRequest {
+	return ApiGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetRequest{
+		ApiService: a,
+		ctx: ctx,
+		uid: uid,
+	}
+}
+
+// Execute executes the request
+//  @return WebhookSecretStatusResponse
+func (a *ClientManagementAPIService) GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetExecute(r ApiGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetRequest) (*WebhookSecretStatusResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *WebhookSecretStatusResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ClientManagementAPIService.GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/clients/{uid}/webhook-secret/status"
+	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", url.PathEscape(parameterValueToString(r.uid, "uid")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -720,6 +1191,176 @@ func (a *ClientManagementAPIService) ListClientsApiV1ClientsGetExecute(r ApiList
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostRequest struct {
+	ctx context.Context
+	ApiService *ClientManagementAPIService
+	uid string
+	keyRotationRequest *KeyRotationRequest
+}
+
+func (r ApiRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostRequest) KeyRotationRequest(keyRotationRequest KeyRotationRequest) ApiRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostRequest {
+	r.keyRotationRequest = &keyRotationRequest
+	return r
+}
+
+func (r ApiRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostRequest) Execute() (*KeyRotationResponse, *http.Response, error) {
+	return r.ApiService.RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostExecute(r)
+}
+
+/*
+RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost Rotate client encryption key
+
+Rotate the client encryption key for all secrets in double encryption mode.
+
+**Scope**: Client level (JWT with client_uid that must match {uid})
+
+**What this does**:
+1. Decrypts all secrets (PDP, Chorus Pro) using the old key
+2. Re-encrypts them using the new key
+3. Saves to database
+
+**Important notes**:
+- Both keys must be base64-encoded AES-256 keys (32 bytes each)
+- The old key becomes invalid immediately after rotation
+- Only secrets encrypted with `encryptionMode: "double"` are affected
+- If the client has no double-encrypted secrets, returns 404
+
+**Security**:
+- The old key must be valid (decryption is verified)
+- If decryption fails, rotation is aborted (atomic operation)
+- Neither key is logged or stored by the server
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param uid
+ @return ApiRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostRequest
+*/
+func (a *ClientManagementAPIService) RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost(ctx context.Context, uid string) ApiRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostRequest {
+	return ApiRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostRequest{
+		ApiService: a,
+		ctx: ctx,
+		uid: uid,
+	}
+}
+
+// Execute executes the request
+//  @return KeyRotationResponse
+func (a *ClientManagementAPIService) RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostExecute(r ApiRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostRequest) (*KeyRotationResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *KeyRotationResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ClientManagementAPIService.RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/clients/{uid}/rotate-encryption-key"
+	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", url.PathEscape(parameterValueToString(r.uid, "uid")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.keyRotationRequest == nil {
+		return localVarReturnValue, nil, reportError("keyRotationRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.keyRotationRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -853,6 +1494,20 @@ func (a *ClientManagementAPIService) UpdateClientApiV1ClientsUidPatchExecute(r A
 	}
 	// body params
 	localVarPostBody = r.clientUpdateRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -905,10 +1560,17 @@ type ApiUpdatePdpConfigApiV1ClientsUidPdpConfigPutRequest struct {
 	ApiService *ClientManagementAPIService
 	uid string
 	pDPConfigUpdateRequest *PDPConfigUpdateRequest
+	xEncryptionKey *string
 }
 
 func (r ApiUpdatePdpConfigApiV1ClientsUidPdpConfigPutRequest) PDPConfigUpdateRequest(pDPConfigUpdateRequest PDPConfigUpdateRequest) ApiUpdatePdpConfigApiV1ClientsUidPdpConfigPutRequest {
 	r.pDPConfigUpdateRequest = &pDPConfigUpdateRequest
+	return r
+}
+
+// Client encryption key for double encryption mode. Must be a base64-encoded AES-256 key (32 bytes). Required only when accessing resources encrypted with encryption_mode&#x3D;&#39;double&#39;.
+func (r ApiUpdatePdpConfigApiV1ClientsUidPdpConfigPutRequest) XEncryptionKey(xEncryptionKey string) ApiUpdatePdpConfigApiV1ClientsUidPdpConfigPutRequest {
+	r.xEncryptionKey = &xEncryptionKey
 	return r
 }
 
@@ -932,6 +1594,16 @@ Configure or update the PDP (PA/PDP) configuration for a client.
 **Optional fields**:
 - `isActive`: Enable/disable the config (default: true)
 - `modeSandbox`: Sandbox mode (default: false)
+- `encryptionMode`: Encryption mode (default: "fernet")
+  - "fernet": Server-side encryption only
+  - "double": Client AES-256-GCM + Server Fernet (requires X-Encryption-Key header)
+
+**Double Encryption Mode**:
+When `encryptionMode` is set to "double", you MUST also provide the
+`X-Encryption-Key` header containing a base64-encoded AES-256 key (32 bytes).
+This key is used to encrypt the `clientSecret` on the client side before
+the server encrypts it again with Fernet. The server cannot decrypt the
+secret without the client key.
 
 **Security**: The `clientSecret` is stored encrypted on Django side
 and is never returned in API responses.
@@ -990,8 +1662,25 @@ func (a *ClientManagementAPIService) UpdatePdpConfigApiV1ClientsUidPdpConfigPutE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xEncryptionKey != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Encryption-Key", r.xEncryptionKey, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.pDPConfigUpdateRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

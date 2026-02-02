@@ -31,6 +31,7 @@ type PDPConfigResponse struct {
 	FlowServiceUrl NullableString `json:"flowServiceUrl,omitempty"`
 	TokenUrl NullableString `json:"tokenUrl,omitempty"`
 	OauthClientId NullableString `json:"oauthClientId,omitempty"`
+	EncryptionMode NullableString `json:"encryptionMode,omitempty"`
 	SecretStatus NullableSecretStatus `json:"secretStatus,omitempty"`
 	LastTestAt NullableTime `json:"lastTestAt,omitempty"`
 	LastTestSuccess NullableBool `json:"lastTestSuccess,omitempty"`
@@ -334,6 +335,48 @@ func (o *PDPConfigResponse) SetOauthClientIdNil() {
 // UnsetOauthClientId ensures that no value is present for OauthClientId, not even an explicit nil
 func (o *PDPConfigResponse) UnsetOauthClientId() {
 	o.OauthClientId.Unset()
+}
+
+// GetEncryptionMode returns the EncryptionMode field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PDPConfigResponse) GetEncryptionMode() string {
+	if o == nil || IsNil(o.EncryptionMode.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.EncryptionMode.Get()
+}
+
+// GetEncryptionModeOk returns a tuple with the EncryptionMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PDPConfigResponse) GetEncryptionModeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.EncryptionMode.Get(), o.EncryptionMode.IsSet()
+}
+
+// HasEncryptionMode returns a boolean if a field has been set.
+func (o *PDPConfigResponse) HasEncryptionMode() bool {
+	if o != nil && o.EncryptionMode.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetEncryptionMode gets a reference to the given NullableString and assigns it to the EncryptionMode field.
+func (o *PDPConfigResponse) SetEncryptionMode(v string) {
+	o.EncryptionMode.Set(&v)
+}
+// SetEncryptionModeNil sets the value for EncryptionMode to be an explicit nil
+func (o *PDPConfigResponse) SetEncryptionModeNil() {
+	o.EncryptionMode.Set(nil)
+}
+
+// UnsetEncryptionMode ensures that no value is present for EncryptionMode, not even an explicit nil
+func (o *PDPConfigResponse) UnsetEncryptionMode() {
+	o.EncryptionMode.Unset()
 }
 
 // GetSecretStatus returns the SecretStatus field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -658,6 +701,9 @@ func (o PDPConfigResponse) ToMap() (map[string]interface{}, error) {
 	}
 	if o.OauthClientId.IsSet() {
 		toSerialize["oauthClientId"] = o.OauthClientId.Get()
+	}
+	if o.EncryptionMode.IsSet() {
+		toSerialize["encryptionMode"] = o.EncryptionMode.Get()
 	}
 	if o.SecretStatus.IsSet() {
 		toSerialize["secretStatus"] = o.SecretStatus.Get()

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **FlowServiceUrl** | Pointer to **NullableString** |  | [optional] 
 **TokenUrl** | Pointer to **NullableString** |  | [optional] 
 **OauthClientId** | Pointer to **NullableString** |  | [optional] 
+**EncryptionMode** | Pointer to **NullableString** |  | [optional] 
 **SecretStatus** | Pointer to [**NullableSecretStatus**](SecretStatus.md) |  | [optional] 
 **LastTestAt** | Pointer to **NullableTime** |  | [optional] 
 **LastTestSuccess** | Pointer to **NullableBool** |  | [optional] 
@@ -268,6 +269,41 @@ HasOauthClientId returns a boolean if a field has been set.
 `func (o *PDPConfigResponse) UnsetOauthClientId()`
 
 UnsetOauthClientId ensures that no value is present for OauthClientId, not even an explicit nil
+### GetEncryptionMode
+
+`func (o *PDPConfigResponse) GetEncryptionMode() string`
+
+GetEncryptionMode returns the EncryptionMode field if non-nil, zero value otherwise.
+
+### GetEncryptionModeOk
+
+`func (o *PDPConfigResponse) GetEncryptionModeOk() (*string, bool)`
+
+GetEncryptionModeOk returns a tuple with the EncryptionMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEncryptionMode
+
+`func (o *PDPConfigResponse) SetEncryptionMode(v string)`
+
+SetEncryptionMode sets EncryptionMode field to given value.
+
+### HasEncryptionMode
+
+`func (o *PDPConfigResponse) HasEncryptionMode() bool`
+
+HasEncryptionMode returns a boolean if a field has been set.
+
+### SetEncryptionModeNil
+
+`func (o *PDPConfigResponse) SetEncryptionModeNil(b bool)`
+
+ SetEncryptionModeNil sets the value for EncryptionMode to be an explicit nil
+
+### UnsetEncryptionMode
+`func (o *PDPConfigResponse) UnsetEncryptionMode()`
+
+UnsetEncryptionMode ensures that no value is present for EncryptionMode, not even an explicit nil
 ### GetSecretStatus
 
 `func (o *PDPConfigResponse) GetSecretStatus() SecretStatus`

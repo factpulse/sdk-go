@@ -47,11 +47,13 @@ func main() {
         "invoiceData": map[string]interface{}{
             "number": "INV-2025-001",
             "supplier": map[string]interface{}{
+                "name":           "ACME Corporation",
                 "siret":          "12345678901234",
                 "iban":           "FR7630001007941234567890185",
                 "routing_address": "12345678901234",
             },
             "recipient": map[string]interface{}{
+                "name":           "Client Company SA",
                 "siret":          "98765432109876",
                 "routing_address": "98765432109876",
             },
@@ -227,6 +229,16 @@ if err != nil {
     }
 }
 ```
+
+## Available Helpers
+
+The SDK provides the following helper types:
+
+- `Client`: Main HTTP client with auto-auth and polling
+- `Error`: Base error type
+- `AuthError`: Authentication failure
+- `ValidationError`: Validation errors with details
+- `PollingTimeout`: Task polling timeout
 
 ## Resources
 

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **TokenUrl** | **string** | PDP OAuth token URL | 
 **OauthClientId** | **string** | OAuth Client ID | 
 **ClientSecret** | **string** | OAuth Client Secret (sent but never returned) | 
+**EncryptionMode** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
@@ -160,6 +161,41 @@ and a boolean to check if the value has been set.
 SetClientSecret sets ClientSecret field to given value.
 
 
+### GetEncryptionMode
+
+`func (o *PDPConfigUpdateRequest) GetEncryptionMode() string`
+
+GetEncryptionMode returns the EncryptionMode field if non-nil, zero value otherwise.
+
+### GetEncryptionModeOk
+
+`func (o *PDPConfigUpdateRequest) GetEncryptionModeOk() (*string, bool)`
+
+GetEncryptionModeOk returns a tuple with the EncryptionMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEncryptionMode
+
+`func (o *PDPConfigUpdateRequest) SetEncryptionMode(v string)`
+
+SetEncryptionMode sets EncryptionMode field to given value.
+
+### HasEncryptionMode
+
+`func (o *PDPConfigUpdateRequest) HasEncryptionMode() bool`
+
+HasEncryptionMode returns a boolean if a field has been set.
+
+### SetEncryptionModeNil
+
+`func (o *PDPConfigUpdateRequest) SetEncryptionModeNil(b bool)`
+
+ SetEncryptionModeNil sets the value for EncryptionMode to be an explicit nil
+
+### UnsetEncryptionMode
+`func (o *PDPConfigUpdateRequest) UnsetEncryptionMode()`
+
+UnsetEncryptionMode ensures that no value is present for EncryptionMode, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

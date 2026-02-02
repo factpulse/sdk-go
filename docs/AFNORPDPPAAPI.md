@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet
 
-> IncomingInvoice GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet(ctx, flowId).IncludeDocument(includeDocument).Execute()
+> IncomingInvoice GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet(ctx, flowId).IncludeDocument(includeDocument).XEncryptionKey(xEncryptionKey).Execute()
 
 Retrieve and extract an incoming invoice
 
@@ -32,10 +32,11 @@ import (
 func main() {
 	flowId := "flowId_example" // string | AFNOR flow ID (UUID format)
 	includeDocument := true // bool | Include base64-encoded document in response (optional) (default to false)
+	xEncryptionKey := "xEncryptionKey_example" // string | Client encryption key for double encryption mode. Must be a base64-encoded AES-256 key (32 bytes). Required only when accessing resources encrypted with encryption_mode='double'. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AFNORPDPPAAPI.GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet(context.Background(), flowId).IncludeDocument(includeDocument).Execute()
+	resp, r, err := apiClient.AFNORPDPPAAPI.GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet(context.Background(), flowId).IncludeDocument(includeDocument).XEncryptionKey(xEncryptionKey).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPAAPI.GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -62,6 +63,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **includeDocument** | **bool** | Include base64-encoded document in response | [default to false]
+ **xEncryptionKey** | **string** | Client encryption key for double encryption mode. Must be a base64-encoded AES-256 key (32 bytes). Required only when accessing resources encrypted with encryption_mode&#x3D;&#39;double&#39;. | 
 
 ### Return type
 
@@ -69,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 

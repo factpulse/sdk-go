@@ -29,11 +29,18 @@ type ApiGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetRequest struct {
 	ApiService *AFNORPDPPAAPIService
 	flowId string
 	includeDocument *bool
+	xEncryptionKey *string
 }
 
 // Include base64-encoded document in response
 func (r ApiGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetRequest) IncludeDocument(includeDocument bool) ApiGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetRequest {
 	r.includeDocument = &includeDocument
+	return r
+}
+
+// Client encryption key for double encryption mode. Must be a base64-encoded AES-256 key (32 bytes). Required only when accessing resources encrypted with encryption_mode&#x3D;&#39;double&#39;.
+func (r ApiGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetRequest) XEncryptionKey(xEncryptionKey string) ApiGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetRequest {
+	r.xEncryptionKey = &xEncryptionKey
 	return r
 }
 
@@ -103,6 +110,23 @@ func (a *AFNORPDPPAAPIService) GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetExe
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xEncryptionKey != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Encryption-Key", r.xEncryptionKey, "simple", "")
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

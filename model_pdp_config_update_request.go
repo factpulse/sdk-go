@@ -20,7 +20,7 @@ import (
 // checks if the PDPConfigUpdateRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PDPConfigUpdateRequest{}
 
-// PDPConfigUpdateRequest PDP configuration update request.
+// PDPConfigUpdateRequest PDP configuration update request.  For encryption_mode='double', the X-Encryption-Key header must also be provided containing a base64-encoded AES-256 key (32 bytes).
 type PDPConfigUpdateRequest struct {
 	// Whether config is active
 	IsActive *bool `json:"isActive,omitempty"`
@@ -34,6 +34,7 @@ type PDPConfigUpdateRequest struct {
 	OauthClientId string `json:"oauthClientId"`
 	// OAuth Client Secret (sent but never returned)
 	ClientSecret string `json:"clientSecret"`
+	EncryptionMode NullableString `json:"encryptionMode,omitempty"`
 }
 
 type _PDPConfigUpdateRequest PDPConfigUpdateRequest
@@ -227,6 +228,48 @@ func (o *PDPConfigUpdateRequest) SetClientSecret(v string) {
 	o.ClientSecret = v
 }
 
+// GetEncryptionMode returns the EncryptionMode field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PDPConfigUpdateRequest) GetEncryptionMode() string {
+	if o == nil || IsNil(o.EncryptionMode.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.EncryptionMode.Get()
+}
+
+// GetEncryptionModeOk returns a tuple with the EncryptionMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PDPConfigUpdateRequest) GetEncryptionModeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.EncryptionMode.Get(), o.EncryptionMode.IsSet()
+}
+
+// HasEncryptionMode returns a boolean if a field has been set.
+func (o *PDPConfigUpdateRequest) HasEncryptionMode() bool {
+	if o != nil && o.EncryptionMode.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetEncryptionMode gets a reference to the given NullableString and assigns it to the EncryptionMode field.
+func (o *PDPConfigUpdateRequest) SetEncryptionMode(v string) {
+	o.EncryptionMode.Set(&v)
+}
+// SetEncryptionModeNil sets the value for EncryptionMode to be an explicit nil
+func (o *PDPConfigUpdateRequest) SetEncryptionModeNil() {
+	o.EncryptionMode.Set(nil)
+}
+
+// UnsetEncryptionMode ensures that no value is present for EncryptionMode, not even an explicit nil
+func (o *PDPConfigUpdateRequest) UnsetEncryptionMode() {
+	o.EncryptionMode.Unset()
+}
+
 func (o PDPConfigUpdateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -247,6 +290,9 @@ func (o PDPConfigUpdateRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["tokenUrl"] = o.TokenUrl
 	toSerialize["oauthClientId"] = o.OauthClientId
 	toSerialize["clientSecret"] = o.ClientSecret
+	if o.EncryptionMode.IsSet() {
+		toSerialize["encryptionMode"] = o.EncryptionMode.Get()
+	}
 	return toSerialize, nil
 }
 

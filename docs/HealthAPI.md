@@ -59,7 +59,7 @@ Other parameters are passed through a pointer to a apiGetUserInfoApiV1MeGetReque
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 

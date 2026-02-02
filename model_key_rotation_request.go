@@ -17,179 +17,87 @@ import (
 	"fmt"
 )
 
-// checks if the ChorusProCredentials type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ChorusProCredentials{}
+// checks if the KeyRotationRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KeyRotationRequest{}
 
-// ChorusProCredentials Chorus Pro credentials for Zero-Trust mode.  **Zero-Trust Mode**: Credentials are passed in each request and are NEVER stored.  **Security**: - Credentials are never persisted in the database - They are used only for the duration of the request - Secure transmission via HTTPS  **Use cases**: - High-security environments (banks, administrations) - Strict GDPR compliance - Tests with temporary credentials - Users who don't want to store their credentials
-type ChorusProCredentials struct {
-	// PISTE Client ID (government API portal)
-	PisteClientId string `json:"pisteClientId"`
-	// PISTE Client Secret
-	PisteClientSecret string `json:"pisteClientSecret"`
-	// Chorus Pro login
-	ChorusProLogin string `json:"chorusProLogin"`
-	// Chorus Pro password
-	ChorusProPassword string `json:"chorusProPassword"`
-	// Use sandbox environment (true) or production (false)
-	Sandbox *bool `json:"sandbox,omitempty"`
+// KeyRotationRequest Request to rotate the client encryption key.  This operation re-encrypts all secrets from the old key to the new key. Both keys must be base64-encoded AES-256 keys (32 bytes each).
+type KeyRotationRequest struct {
+	// Current encryption key (base64-encoded AES-256)
+	OldKey string `json:"oldKey"`
+	// New encryption key (base64-encoded AES-256)
+	NewKey string `json:"newKey"`
 }
 
-type _ChorusProCredentials ChorusProCredentials
+type _KeyRotationRequest KeyRotationRequest
 
-// NewChorusProCredentials instantiates a new ChorusProCredentials object
+// NewKeyRotationRequest instantiates a new KeyRotationRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewChorusProCredentials(pisteClientId string, pisteClientSecret string, chorusProLogin string, chorusProPassword string) *ChorusProCredentials {
-	this := ChorusProCredentials{}
-	this.PisteClientId = pisteClientId
-	this.PisteClientSecret = pisteClientSecret
-	this.ChorusProLogin = chorusProLogin
-	this.ChorusProPassword = chorusProPassword
-	var sandbox bool = true
-	this.Sandbox = &sandbox
+func NewKeyRotationRequest(oldKey string, newKey string) *KeyRotationRequest {
+	this := KeyRotationRequest{}
+	this.OldKey = oldKey
+	this.NewKey = newKey
 	return &this
 }
 
-// NewChorusProCredentialsWithDefaults instantiates a new ChorusProCredentials object
+// NewKeyRotationRequestWithDefaults instantiates a new KeyRotationRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewChorusProCredentialsWithDefaults() *ChorusProCredentials {
-	this := ChorusProCredentials{}
-	var sandbox bool = true
-	this.Sandbox = &sandbox
+func NewKeyRotationRequestWithDefaults() *KeyRotationRequest {
+	this := KeyRotationRequest{}
 	return &this
 }
 
-// GetPisteClientId returns the PisteClientId field value
-func (o *ChorusProCredentials) GetPisteClientId() string {
+// GetOldKey returns the OldKey field value
+func (o *KeyRotationRequest) GetOldKey() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.PisteClientId
+	return o.OldKey
 }
 
-// GetPisteClientIdOk returns a tuple with the PisteClientId field value
+// GetOldKeyOk returns a tuple with the OldKey field value
 // and a boolean to check if the value has been set.
-func (o *ChorusProCredentials) GetPisteClientIdOk() (*string, bool) {
+func (o *KeyRotationRequest) GetOldKeyOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.PisteClientId, true
+	return &o.OldKey, true
 }
 
-// SetPisteClientId sets field value
-func (o *ChorusProCredentials) SetPisteClientId(v string) {
-	o.PisteClientId = v
+// SetOldKey sets field value
+func (o *KeyRotationRequest) SetOldKey(v string) {
+	o.OldKey = v
 }
 
-// GetPisteClientSecret returns the PisteClientSecret field value
-func (o *ChorusProCredentials) GetPisteClientSecret() string {
+// GetNewKey returns the NewKey field value
+func (o *KeyRotationRequest) GetNewKey() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.PisteClientSecret
+	return o.NewKey
 }
 
-// GetPisteClientSecretOk returns a tuple with the PisteClientSecret field value
+// GetNewKeyOk returns a tuple with the NewKey field value
 // and a boolean to check if the value has been set.
-func (o *ChorusProCredentials) GetPisteClientSecretOk() (*string, bool) {
+func (o *KeyRotationRequest) GetNewKeyOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.PisteClientSecret, true
+	return &o.NewKey, true
 }
 
-// SetPisteClientSecret sets field value
-func (o *ChorusProCredentials) SetPisteClientSecret(v string) {
-	o.PisteClientSecret = v
+// SetNewKey sets field value
+func (o *KeyRotationRequest) SetNewKey(v string) {
+	o.NewKey = v
 }
 
-// GetChorusProLogin returns the ChorusProLogin field value
-func (o *ChorusProCredentials) GetChorusProLogin() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ChorusProLogin
-}
-
-// GetChorusProLoginOk returns a tuple with the ChorusProLogin field value
-// and a boolean to check if the value has been set.
-func (o *ChorusProCredentials) GetChorusProLoginOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ChorusProLogin, true
-}
-
-// SetChorusProLogin sets field value
-func (o *ChorusProCredentials) SetChorusProLogin(v string) {
-	o.ChorusProLogin = v
-}
-
-// GetChorusProPassword returns the ChorusProPassword field value
-func (o *ChorusProCredentials) GetChorusProPassword() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ChorusProPassword
-}
-
-// GetChorusProPasswordOk returns a tuple with the ChorusProPassword field value
-// and a boolean to check if the value has been set.
-func (o *ChorusProCredentials) GetChorusProPasswordOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ChorusProPassword, true
-}
-
-// SetChorusProPassword sets field value
-func (o *ChorusProCredentials) SetChorusProPassword(v string) {
-	o.ChorusProPassword = v
-}
-
-// GetSandbox returns the Sandbox field value if set, zero value otherwise.
-func (o *ChorusProCredentials) GetSandbox() bool {
-	if o == nil || IsNil(o.Sandbox) {
-		var ret bool
-		return ret
-	}
-	return *o.Sandbox
-}
-
-// GetSandboxOk returns a tuple with the Sandbox field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ChorusProCredentials) GetSandboxOk() (*bool, bool) {
-	if o == nil || IsNil(o.Sandbox) {
-		return nil, false
-	}
-	return o.Sandbox, true
-}
-
-// HasSandbox returns a boolean if a field has been set.
-func (o *ChorusProCredentials) HasSandbox() bool {
-	if o != nil && !IsNil(o.Sandbox) {
-		return true
-	}
-
-	return false
-}
-
-// SetSandbox gets a reference to the given bool and assigns it to the Sandbox field.
-func (o *ChorusProCredentials) SetSandbox(v bool) {
-	o.Sandbox = &v
-}
-
-func (o ChorusProCredentials) MarshalJSON() ([]byte, error) {
+func (o KeyRotationRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -197,27 +105,20 @@ func (o ChorusProCredentials) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ChorusProCredentials) ToMap() (map[string]interface{}, error) {
+func (o KeyRotationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["pisteClientId"] = o.PisteClientId
-	toSerialize["pisteClientSecret"] = o.PisteClientSecret
-	toSerialize["chorusProLogin"] = o.ChorusProLogin
-	toSerialize["chorusProPassword"] = o.ChorusProPassword
-	if !IsNil(o.Sandbox) {
-		toSerialize["sandbox"] = o.Sandbox
-	}
+	toSerialize["oldKey"] = o.OldKey
+	toSerialize["newKey"] = o.NewKey
 	return toSerialize, nil
 }
 
-func (o *ChorusProCredentials) UnmarshalJSON(data []byte) (err error) {
+func (o *KeyRotationRequest) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"pisteClientId",
-		"pisteClientSecret",
-		"chorusProLogin",
-		"chorusProPassword",
+		"oldKey",
+		"newKey",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -234,53 +135,53 @@ func (o *ChorusProCredentials) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varChorusProCredentials := _ChorusProCredentials{}
+	varKeyRotationRequest := _KeyRotationRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varChorusProCredentials)
+	err = decoder.Decode(&varKeyRotationRequest)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ChorusProCredentials(varChorusProCredentials)
+	*o = KeyRotationRequest(varKeyRotationRequest)
 
 	return err
 }
 
-type NullableChorusProCredentials struct {
-	value *ChorusProCredentials
+type NullableKeyRotationRequest struct {
+	value *KeyRotationRequest
 	isSet bool
 }
 
-func (v NullableChorusProCredentials) Get() *ChorusProCredentials {
+func (v NullableKeyRotationRequest) Get() *KeyRotationRequest {
 	return v.value
 }
 
-func (v *NullableChorusProCredentials) Set(val *ChorusProCredentials) {
+func (v *NullableKeyRotationRequest) Set(val *KeyRotationRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableChorusProCredentials) IsSet() bool {
+func (v NullableKeyRotationRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableChorusProCredentials) Unset() {
+func (v *NullableKeyRotationRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableChorusProCredentials(val *ChorusProCredentials) *NullableChorusProCredentials {
-	return &NullableChorusProCredentials{value: val, isSet: true}
+func NewNullableKeyRotationRequest(val *KeyRotationRequest) *NullableKeyRotationRequest {
+	return &NullableKeyRotationRequest{value: val, isSet: true}
 }
 
-func (v NullableChorusProCredentials) MarshalJSON() ([]byte, error) {
+func (v NullableKeyRotationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableChorusProCredentials) UnmarshalJSON(src []byte) error {
+func (v *NullableKeyRotationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
