@@ -18,10 +18,13 @@ import (
 // checks if the ConvertResumeRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConvertResumeRequest{}
 
-// ConvertResumeRequest Requete de reprise de conversion avec corrections.  Le champ `overrides` accepte n'importe quel sous-ensemble de FacturXInvoice. Seuls les champs fournis seront mis a jour (merge profond).  Exemple:     {         \"overrides\": {             \"supplier\": {                 \"name\": \"Ma Société\",                 \"siret\": \"12345678901234\"             },             \"totals\": {                 \"total_net_amount\": 1000.00             }         }     }
+// ConvertResumeRequest Requete de reprise de conversion avec corrections.  Le champ `overrides` accepte n'importe quel sous-ensemble de FacturXInvoice. Seuls les champs fournis seront mis a jour (merge profond).  Exemple:     {         \"overrides\": {             \"supplier\": {                 \"name\": \"Ma Société\",                 \"siret\": \"12345678901234\"             },             \"totals\": {                 \"total_net_amount\": 1000.00             }         },         \"callback_url\": \"https://example.com/webhook\",         \"webhook_mode\": \"inline\"     }
 type ConvertResumeRequest struct {
 	// Sous-ensemble de FacturXInvoice a mettre a jour (merge profond)
 	Overrides map[string]interface{} `json:"overrides,omitempty"`
+	CallbackUrl NullableString `json:"callback_url,omitempty"`
+	// Mode de livraison webhook: 'inline' ou 'download_url'
+	WebhookMode *string `json:"webhook_mode,omitempty"`
 }
 
 // NewConvertResumeRequest instantiates a new ConvertResumeRequest object
@@ -30,6 +33,8 @@ type ConvertResumeRequest struct {
 // will change when the set of required properties is changed
 func NewConvertResumeRequest() *ConvertResumeRequest {
 	this := ConvertResumeRequest{}
+	var webhookMode string = "inline"
+	this.WebhookMode = &webhookMode
 	return &this
 }
 
@@ -38,6 +43,8 @@ func NewConvertResumeRequest() *ConvertResumeRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewConvertResumeRequestWithDefaults() *ConvertResumeRequest {
 	this := ConvertResumeRequest{}
+	var webhookMode string = "inline"
+	this.WebhookMode = &webhookMode
 	return &this
 }
 
@@ -73,6 +80,80 @@ func (o *ConvertResumeRequest) SetOverrides(v map[string]interface{}) {
 	o.Overrides = v
 }
 
+// GetCallbackUrl returns the CallbackUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConvertResumeRequest) GetCallbackUrl() string {
+	if o == nil || IsNil(o.CallbackUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.CallbackUrl.Get()
+}
+
+// GetCallbackUrlOk returns a tuple with the CallbackUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConvertResumeRequest) GetCallbackUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CallbackUrl.Get(), o.CallbackUrl.IsSet()
+}
+
+// HasCallbackUrl returns a boolean if a field has been set.
+func (o *ConvertResumeRequest) HasCallbackUrl() bool {
+	if o != nil && o.CallbackUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCallbackUrl gets a reference to the given NullableString and assigns it to the CallbackUrl field.
+func (o *ConvertResumeRequest) SetCallbackUrl(v string) {
+	o.CallbackUrl.Set(&v)
+}
+// SetCallbackUrlNil sets the value for CallbackUrl to be an explicit nil
+func (o *ConvertResumeRequest) SetCallbackUrlNil() {
+	o.CallbackUrl.Set(nil)
+}
+
+// UnsetCallbackUrl ensures that no value is present for CallbackUrl, not even an explicit nil
+func (o *ConvertResumeRequest) UnsetCallbackUrl() {
+	o.CallbackUrl.Unset()
+}
+
+// GetWebhookMode returns the WebhookMode field value if set, zero value otherwise.
+func (o *ConvertResumeRequest) GetWebhookMode() string {
+	if o == nil || IsNil(o.WebhookMode) {
+		var ret string
+		return ret
+	}
+	return *o.WebhookMode
+}
+
+// GetWebhookModeOk returns a tuple with the WebhookMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConvertResumeRequest) GetWebhookModeOk() (*string, bool) {
+	if o == nil || IsNil(o.WebhookMode) {
+		return nil, false
+	}
+	return o.WebhookMode, true
+}
+
+// HasWebhookMode returns a boolean if a field has been set.
+func (o *ConvertResumeRequest) HasWebhookMode() bool {
+	if o != nil && !IsNil(o.WebhookMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetWebhookMode gets a reference to the given string and assigns it to the WebhookMode field.
+func (o *ConvertResumeRequest) SetWebhookMode(v string) {
+	o.WebhookMode = &v
+}
+
 func (o ConvertResumeRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -85,6 +166,12 @@ func (o ConvertResumeRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Overrides) {
 		toSerialize["overrides"] = o.Overrides
+	}
+	if o.CallbackUrl.IsSet() {
+		toSerialize["callback_url"] = o.CallbackUrl.Get()
+	}
+	if !IsNil(o.WebhookMode) {
+		toSerialize["webhook_mode"] = o.WebhookMode
 	}
 	return toSerialize, nil
 }

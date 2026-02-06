@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**DownloadFileApiV1ConvertConversionIdDownloadFilenameGet**](FacturXConversionAPI.md#DownloadFileApiV1ConvertConversionIdDownloadFilenameGet) | **Get** /api/v1/convert/{conversion_id}/download/{filename} | Download a generated file
 [**GetConversionStatusApiV1ConvertConversionIdStatusGet**](FacturXConversionAPI.md#GetConversionStatusApiV1ConvertConversionIdStatusGet) | **Get** /api/v1/convert/{conversion_id}/status | Check conversion status
 [**ResumeConversionApiV1ConvertConversionIdResumePost**](FacturXConversionAPI.md#ResumeConversionApiV1ConvertConversionIdResumePost) | **Post** /api/v1/convert/{conversion_id}/resume | Resume a conversion with corrections
+[**ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost**](FacturXConversionAPI.md#ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost) | **Post** /api/v1/convert/{conversion_id}/resume/async | Resume a conversion asynchronously
 
 
 
@@ -283,6 +284,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ConvertSuccessResponse**](ConvertSuccessResponse.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost
+
+> interface{} ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost(ctx, conversionId).ConvertResumeRequest(convertResumeRequest).Execute()
+
+Resume a conversion asynchronously
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/factpulse/sdk-go/v3"
+)
+
+func main() {
+	conversionId := "conversionId_example" // string | Conversion ID returned by POST /convert (UUID format)
+	convertResumeRequest := *openapiclient.NewConvertResumeRequest() // ConvertResumeRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FacturXConversionAPI.ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost(context.Background(), conversionId).ConvertResumeRequest(convertResumeRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FacturXConversionAPI.ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `FacturXConversionAPI.ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**conversionId** | **string** | Conversion ID returned by POST /convert (UUID format) | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **convertResumeRequest** | [**ConvertResumeRequest**](ConvertResumeRequest.md) |  | 
+
+### Return type
+
+**interface{}**
 
 ### Authorization
 
