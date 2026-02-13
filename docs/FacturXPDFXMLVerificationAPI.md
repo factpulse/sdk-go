@@ -5,6 +5,7 @@ All URIs are relative to *https://factpulse.fr*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet**](FacturXPDFXMLVerificationAPI.md#GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet) | **Get** /api/v1/verification/verify-async/{task_id}/status | Get status of an asynchronous verification
+[**GetVerificationTypedStatusApiV1VerificationVerifyAsyncTaskIdTypedStatusGet**](FacturXPDFXMLVerificationAPI.md#GetVerificationTypedStatusApiV1VerificationVerifyAsyncTaskIdTypedStatusGet) | **Get** /api/v1/verification/verify-async/{task_id}/typed-status | Get typed status of an asynchronous verification
 [**VerifyPdfAsyncApiV1VerificationVerifyAsyncPost**](FacturXPDFXMLVerificationAPI.md#VerifyPdfAsyncApiV1VerificationVerifyAsyncPost) | **Post** /api/v1/verification/verify-async | Verify PDF/XML Factur-X compliance (asynchronous)
 [**VerifyPdfSyncApiV1VerificationVerifyPost**](FacturXPDFXMLVerificationAPI.md#VerifyPdfSyncApiV1VerificationVerifyPost) | **Post** /api/v1/verification/verify | Verify PDF/XML Factur-X compliance (synchronous)
 
@@ -65,6 +66,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AsyncTaskStatus**](AsyncTaskStatus.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVerificationTypedStatusApiV1VerificationVerifyAsyncTaskIdTypedStatusGet
+
+> VerificationTypedTaskStatus GetVerificationTypedStatusApiV1VerificationVerifyAsyncTaskIdTypedStatusGet(ctx, taskId).Execute()
+
+Get typed status of an asynchronous verification
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/factpulse/sdk-go/v3"
+)
+
+func main() {
+	taskId := "taskId_example" // string | Celery task ID returned by /verify-async endpoint
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FacturXPDFXMLVerificationAPI.GetVerificationTypedStatusApiV1VerificationVerifyAsyncTaskIdTypedStatusGet(context.Background(), taskId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FacturXPDFXMLVerificationAPI.GetVerificationTypedStatusApiV1VerificationVerifyAsyncTaskIdTypedStatusGet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetVerificationTypedStatusApiV1VerificationVerifyAsyncTaskIdTypedStatusGet`: VerificationTypedTaskStatus
+	fmt.Fprintf(os.Stdout, "Response from `FacturXPDFXMLVerificationAPI.GetVerificationTypedStatusApiV1VerificationVerifyAsyncTaskIdTypedStatusGet`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**taskId** | **string** | Celery task ID returned by /verify-async endpoint | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVerificationTypedStatusApiV1VerificationVerifyAsyncTaskIdTypedStatusGetRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**VerificationTypedTaskStatus**](VerificationTypedTaskStatus.md)
 
 ### Authorization
 

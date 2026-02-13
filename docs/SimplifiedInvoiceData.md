@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **Comment** | Pointer to **NullableString** |  | [optional] 
 **PurchaseOrderReference** | Pointer to **NullableString** |  | [optional] 
 **ContractReference** | Pointer to **NullableString** |  | [optional] 
-**InvoiceType** | Pointer to [**InvoiceTypeCode**](InvoiceTypeCode.md) | Document type (UNTDID 1001). Default: 380 (Invoice). | [optional] [default to INVOICE]
+**InvoiceType** | Pointer to [**FactureElectroniqueModelsInvoiceTypeCode**](FactureElectroniqueModelsInvoiceTypeCode.md) | Document type (UNTDID 1001). Default: 380 (Invoice). | [optional] [default to INVOICE]
 **PrecedingInvoiceReference** | Pointer to **NullableString** |  | [optional] 
 **OperationNature** | Pointer to [**NullableOperationNature**](OperationNature.md) |  | [optional] 
 **InvoicingFramework** | Pointer to [**NullableInvoicingFrameworkCode**](InvoicingFrameworkCode.md) |  | [optional] 
@@ -284,20 +284,20 @@ HasContractReference returns a boolean if a field has been set.
 UnsetContractReference ensures that no value is present for ContractReference, not even an explicit nil
 ### GetInvoiceType
 
-`func (o *SimplifiedInvoiceData) GetInvoiceType() InvoiceTypeCode`
+`func (o *SimplifiedInvoiceData) GetInvoiceType() FactureElectroniqueModelsInvoiceTypeCode`
 
 GetInvoiceType returns the InvoiceType field if non-nil, zero value otherwise.
 
 ### GetInvoiceTypeOk
 
-`func (o *SimplifiedInvoiceData) GetInvoiceTypeOk() (*InvoiceTypeCode, bool)`
+`func (o *SimplifiedInvoiceData) GetInvoiceTypeOk() (*FactureElectroniqueModelsInvoiceTypeCode, bool)`
 
 GetInvoiceTypeOk returns a tuple with the InvoiceType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInvoiceType
 
-`func (o *SimplifiedInvoiceData) SetInvoiceType(v InvoiceTypeCode)`
+`func (o *SimplifiedInvoiceData) SetInvoiceType(v FactureElectroniqueModelsInvoiceTypeCode)`
 
 SetInvoiceType sets InvoiceType field to given value.
 

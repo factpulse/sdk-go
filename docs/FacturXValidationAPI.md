@@ -6,7 +6,6 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPost**](FacturXValidationAPI.md#ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPost) | **Post** /api/v1/processing/validate-facturx-pdf | Validate a complete Factur-X PDF
 [**ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPost**](FacturXValidationAPI.md#ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPost) | **Post** /api/v1/processing/validate-facturx-async | Validate a Factur-X PDF (asynchronous with polling)
-[**ValidateXmlApiV1ProcessingValidateXmlPost**](FacturXValidationAPI.md#ValidateXmlApiV1ProcessingValidateXmlPost) | **Post** /api/v1/processing/validate-xml | Validate an existing Factur-X XML
 
 
 
@@ -141,76 +140,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**TaskResponse**](TaskResponse.md)
-
-### Authorization
-
-[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
-
-### HTTP request headers
-
-- **Content-Type**: multipart/form-data
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ValidateXmlApiV1ProcessingValidateXmlPost
-
-> ValidationSuccessResponse ValidateXmlApiV1ProcessingValidateXmlPost(ctx).XmlFile(xmlFile).Profile(profile).SkipBrFr(skipBrFr).Execute()
-
-Validate an existing Factur-X XML
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
-)
-
-func main() {
-	xmlFile := os.NewFile(1234, "some_file") // *os.File | Factur-X XML file to validate (.xml format).
-	profile := openapiclient.APIProfile("MINIMUM") // APIProfile | Validation profile (MINIMUM, BASIC, EN16931, EXTENDED). (optional) (default to "EXTENDED")
-	skipBrFr := true // bool |  (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FacturXValidationAPI.ValidateXmlApiV1ProcessingValidateXmlPost(context.Background()).XmlFile(xmlFile).Profile(profile).SkipBrFr(skipBrFr).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FacturXValidationAPI.ValidateXmlApiV1ProcessingValidateXmlPost``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `ValidateXmlApiV1ProcessingValidateXmlPost`: ValidationSuccessResponse
-	fmt.Fprintf(os.Stdout, "Response from `FacturXValidationAPI.ValidateXmlApiV1ProcessingValidateXmlPost`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiValidateXmlApiV1ProcessingValidateXmlPostRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **xmlFile** | ***os.File** | Factur-X XML file to validate (.xml format). | 
- **profile** | [**APIProfile**](APIProfile.md) | Validation profile (MINIMUM, BASIC, EN16931, EXTENDED). | [default to &quot;EXTENDED&quot;]
- **skipBrFr** | **bool** |  | 
-
-### Return type
-
-[**ValidationSuccessResponse**](ValidationSuccessResponse.md)
 
 ### Authorization
 

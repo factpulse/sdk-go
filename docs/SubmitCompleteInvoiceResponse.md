@@ -8,7 +8,8 @@ Name | Type | Description | Notes
 **DestinationType** | **string** | Destination type | 
 **ChorusResult** | Pointer to [**NullableChorusProResult**](ChorusProResult.md) |  | [optional] 
 **AfnorResult** | Pointer to [**NullableAFNORResult**](AFNORResult.md) |  | [optional] 
-**EnrichedInvoice** | [**EnrichedInvoiceInfo**](EnrichedInvoiceInfo.md) | Enriched invoice data | 
+**EnrichedInvoice** | [**EnrichedInvoiceInfo**](EnrichedInvoiceInfo.md) | Enriched invoice data (summary) | 
+**Invoice** | **map[string]interface{}** | Complete enriched invoice data (FacturXInvoice format). Use this to regenerate the same invoice. | 
 **FacturxPdf** | [**FacturXPDFInfo**](FacturXPDFInfo.md) | Generated PDF information | 
 **Signature** | Pointer to [**NullableSignatureInfo**](SignatureInfo.md) |  | [optional] 
 **ContentB64** | **string** | Generated Factur-X PDF (and signed if requested) base64-encoded | 
@@ -18,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewSubmitCompleteInvoiceResponse
 
-`func NewSubmitCompleteInvoiceResponse(success bool, destinationType string, enrichedInvoice EnrichedInvoiceInfo, facturxPdf FacturXPDFInfo, contentB64 string, message string, ) *SubmitCompleteInvoiceResponse`
+`func NewSubmitCompleteInvoiceResponse(success bool, destinationType string, enrichedInvoice EnrichedInvoiceInfo, invoice map[string]interface{}, facturxPdf FacturXPDFInfo, contentB64 string, message string, ) *SubmitCompleteInvoiceResponse`
 
 NewSubmitCompleteInvoiceResponse instantiates a new SubmitCompleteInvoiceResponse object
 This constructor will assign default values to properties that have it defined,
@@ -161,6 +162,26 @@ and a boolean to check if the value has been set.
 `func (o *SubmitCompleteInvoiceResponse) SetEnrichedInvoice(v EnrichedInvoiceInfo)`
 
 SetEnrichedInvoice sets EnrichedInvoice field to given value.
+
+
+### GetInvoice
+
+`func (o *SubmitCompleteInvoiceResponse) GetInvoice() map[string]interface{}`
+
+GetInvoice returns the Invoice field if non-nil, zero value otherwise.
+
+### GetInvoiceOk
+
+`func (o *SubmitCompleteInvoiceResponse) GetInvoiceOk() (*map[string]interface{}, bool)`
+
+GetInvoiceOk returns a tuple with the Invoice field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInvoice
+
+`func (o *SubmitCompleteInvoiceResponse) SetInvoice(v map[string]interface{})`
+
+SetInvoice sets Invoice field to given value.
 
 
 ### GetFacturxPdf
