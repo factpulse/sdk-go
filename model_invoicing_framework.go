@@ -13,8 +13,6 @@ package factpulse
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the InvoicingFramework type satisfies the MappedNullable interface at compile time
@@ -22,22 +20,18 @@ var _ MappedNullable = &InvoicingFramework{}
 
 // InvoicingFramework Defines the invoicing framework.  - invoicing_framework_code: Chorus Pro code (A1, A2, A9, A12) - used for B2G - operation_nature: Operation nature (B1, S1, M1, etc.) - priority for Factur-X  If operation_nature is provided, it will be used directly in Factur-X XML (BT-23). Otherwise, the code will be derived from invoicing_framework_code via automatic mapping.  Example:     >>> framework = InvoicingFramework(     ...     invoicing_framework_code=InvoicingFrameworkCode.A1_SUPPLIER_INVOICE,     ...     operation_nature=OperationNature.GOODS  # Forces B1 instead of S1     ... )
 type InvoicingFramework struct {
-	// Chorus Pro framework code (A1, A2, A9, A12)
-	InvoicingFrameworkCode InvoicingFrameworkCode `json:"invoicing_framework_code"`
+	InvoicingFrameworkCode NullableInvoicingFrameworkCode `json:"invoicing_framework_code,omitempty"`
 	OperationNature NullableOperationNature `json:"operation_nature,omitempty"`
 	ApproverServiceCode NullableString `json:"approver_service_code,omitempty"`
 	ApproverStructureCode NullableString `json:"approver_structure_code,omitempty"`
 }
 
-type _InvoicingFramework InvoicingFramework
-
 // NewInvoicingFramework instantiates a new InvoicingFramework object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInvoicingFramework(invoicingFrameworkCode InvoicingFrameworkCode) *InvoicingFramework {
+func NewInvoicingFramework() *InvoicingFramework {
 	this := InvoicingFramework{}
-	this.InvoicingFrameworkCode = invoicingFrameworkCode
 	return &this
 }
 
@@ -49,28 +43,46 @@ func NewInvoicingFrameworkWithDefaults() *InvoicingFramework {
 	return &this
 }
 
-// GetInvoicingFrameworkCode returns the InvoicingFrameworkCode field value
+// GetInvoicingFrameworkCode returns the InvoicingFrameworkCode field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InvoicingFramework) GetInvoicingFrameworkCode() InvoicingFrameworkCode {
-	if o == nil {
+	if o == nil || IsNil(o.InvoicingFrameworkCode.Get()) {
 		var ret InvoicingFrameworkCode
 		return ret
 	}
-
-	return o.InvoicingFrameworkCode
+	return *o.InvoicingFrameworkCode.Get()
 }
 
-// GetInvoicingFrameworkCodeOk returns a tuple with the InvoicingFrameworkCode field value
+// GetInvoicingFrameworkCodeOk returns a tuple with the InvoicingFrameworkCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InvoicingFramework) GetInvoicingFrameworkCodeOk() (*InvoicingFrameworkCode, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.InvoicingFrameworkCode, true
+	return o.InvoicingFrameworkCode.Get(), o.InvoicingFrameworkCode.IsSet()
 }
 
-// SetInvoicingFrameworkCode sets field value
+// HasInvoicingFrameworkCode returns a boolean if a field has been set.
+func (o *InvoicingFramework) HasInvoicingFrameworkCode() bool {
+	if o != nil && o.InvoicingFrameworkCode.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetInvoicingFrameworkCode gets a reference to the given NullableInvoicingFrameworkCode and assigns it to the InvoicingFrameworkCode field.
 func (o *InvoicingFramework) SetInvoicingFrameworkCode(v InvoicingFrameworkCode) {
-	o.InvoicingFrameworkCode = v
+	o.InvoicingFrameworkCode.Set(&v)
+}
+// SetInvoicingFrameworkCodeNil sets the value for InvoicingFrameworkCode to be an explicit nil
+func (o *InvoicingFramework) SetInvoicingFrameworkCodeNil() {
+	o.InvoicingFrameworkCode.Set(nil)
+}
+
+// UnsetInvoicingFrameworkCode ensures that no value is present for InvoicingFrameworkCode, not even an explicit nil
+func (o *InvoicingFramework) UnsetInvoicingFrameworkCode() {
+	o.InvoicingFrameworkCode.Unset()
 }
 
 // GetOperationNature returns the OperationNature field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -209,7 +221,9 @@ func (o InvoicingFramework) MarshalJSON() ([]byte, error) {
 
 func (o InvoicingFramework) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["invoicing_framework_code"] = o.InvoicingFrameworkCode
+	if o.InvoicingFrameworkCode.IsSet() {
+		toSerialize["invoicing_framework_code"] = o.InvoicingFrameworkCode.Get()
+	}
 	if o.OperationNature.IsSet() {
 		toSerialize["operation_nature"] = o.OperationNature.Get()
 	}
@@ -220,43 +234,6 @@ func (o InvoicingFramework) ToMap() (map[string]interface{}, error) {
 		toSerialize["approver_structure_code"] = o.ApproverStructureCode.Get()
 	}
 	return toSerialize, nil
-}
-
-func (o *InvoicingFramework) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"invoicing_framework_code",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varInvoicingFramework := _InvoicingFramework{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInvoicingFramework)
-
-	if err != nil {
-		return err
-	}
-
-	*o = InvoicingFramework(varInvoicingFramework)
-
-	return err
 }
 
 type NullableInvoicingFramework struct {

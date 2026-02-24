@@ -28,7 +28,7 @@ type FacturXInvoice struct {
 	SubmissionMode *SubmissionMode `json:"submission_mode,omitempty"`
 	Recipient Recipient `json:"recipient"`
 	Supplier Supplier `json:"supplier"`
-	InvoicingFramework InvoicingFramework `json:"invoicing_framework"`
+	InvoicingFramework NullableInvoicingFramework `json:"invoicing_framework,omitempty"`
 	References InvoiceReferences `json:"references"`
 	Totals InvoiceTotals `json:"totals"`
 	InvoiceLines []InvoiceLine `json:"invoice_lines,omitempty"`
@@ -60,13 +60,12 @@ type _FacturXInvoice FacturXInvoice
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFacturXInvoice(invoiceNumber string, paymentDueDate string, recipient Recipient, supplier Supplier, invoicingFramework InvoicingFramework, references InvoiceReferences, totals InvoiceTotals) *FacturXInvoice {
+func NewFacturXInvoice(invoiceNumber string, paymentDueDate string, recipient Recipient, supplier Supplier, references InvoiceReferences, totals InvoiceTotals) *FacturXInvoice {
 	this := FacturXInvoice{}
 	this.InvoiceNumber = invoiceNumber
 	this.PaymentDueDate = paymentDueDate
 	this.Recipient = recipient
 	this.Supplier = supplier
-	this.InvoicingFramework = invoicingFramework
 	this.References = references
 	this.Totals = totals
 	return &this
@@ -240,28 +239,46 @@ func (o *FacturXInvoice) SetSupplier(v Supplier) {
 	o.Supplier = v
 }
 
-// GetInvoicingFramework returns the InvoicingFramework field value
+// GetInvoicingFramework returns the InvoicingFramework field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FacturXInvoice) GetInvoicingFramework() InvoicingFramework {
-	if o == nil {
+	if o == nil || IsNil(o.InvoicingFramework.Get()) {
 		var ret InvoicingFramework
 		return ret
 	}
-
-	return o.InvoicingFramework
+	return *o.InvoicingFramework.Get()
 }
 
-// GetInvoicingFrameworkOk returns a tuple with the InvoicingFramework field value
+// GetInvoicingFrameworkOk returns a tuple with the InvoicingFramework field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FacturXInvoice) GetInvoicingFrameworkOk() (*InvoicingFramework, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.InvoicingFramework, true
+	return o.InvoicingFramework.Get(), o.InvoicingFramework.IsSet()
 }
 
-// SetInvoicingFramework sets field value
+// HasInvoicingFramework returns a boolean if a field has been set.
+func (o *FacturXInvoice) HasInvoicingFramework() bool {
+	if o != nil && o.InvoicingFramework.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetInvoicingFramework gets a reference to the given NullableInvoicingFramework and assigns it to the InvoicingFramework field.
 func (o *FacturXInvoice) SetInvoicingFramework(v InvoicingFramework) {
-	o.InvoicingFramework = v
+	o.InvoicingFramework.Set(&v)
+}
+// SetInvoicingFrameworkNil sets the value for InvoicingFramework to be an explicit nil
+func (o *FacturXInvoice) SetInvoicingFrameworkNil() {
+	o.InvoicingFramework.Set(nil)
+}
+
+// UnsetInvoicingFramework ensures that no value is present for InvoicingFramework, not even an explicit nil
+func (o *FacturXInvoice) UnsetInvoicingFramework() {
+	o.InvoicingFramework.Unset()
 }
 
 // GetReferences returns the References field value
@@ -1157,7 +1174,9 @@ func (o FacturXInvoice) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["recipient"] = o.Recipient
 	toSerialize["supplier"] = o.Supplier
-	toSerialize["invoicing_framework"] = o.InvoicingFramework
+	if o.InvoicingFramework.IsSet() {
+		toSerialize["invoicing_framework"] = o.InvoicingFramework.Get()
+	}
 	toSerialize["references"] = o.References
 	toSerialize["totals"] = o.Totals
 	if !IsNil(o.InvoiceLines) {
@@ -1235,7 +1254,6 @@ func (o *FacturXInvoice) UnmarshalJSON(data []byte) (err error) {
 		"payment_due_date",
 		"recipient",
 		"supplier",
-		"invoicing_framework",
 		"references",
 		"totals",
 	}

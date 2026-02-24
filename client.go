@@ -82,6 +82,8 @@ type APIClient struct {
 
 	ParseAPI *ParseAPIService
 
+	ReferencesAPI *ReferencesAPIService
+
 	ValidationAPI *ValidationAPIService
 }
 
@@ -117,6 +119,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.HealthAPI = (*HealthAPIService)(&c.common)
 	c.InvoiceGenerationAPI = (*InvoiceGenerationAPIService)(&c.common)
 	c.ParseAPI = (*ParseAPIService)(&c.common)
+	c.ReferencesAPI = (*ReferencesAPIService)(&c.common)
 	c.ValidationAPI = (*ValidationAPIService)(&c.common)
 
 	return c

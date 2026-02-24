@@ -30,7 +30,7 @@ import (
 )
 
 func main() {
-	downloadId := "downloadId_example" // string | 
+	downloadId := "downloadId_example" // string | Unique identifier of the temporary file to check
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -50,7 +50,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**downloadId** | **string** |  | 
+**downloadId** | **string** | Unique identifier of the temporary file to check | 
 
 ### Other Parameters
 
@@ -100,7 +100,7 @@ import (
 )
 
 func main() {
-	downloadId := "downloadId_example" // string | 
+	downloadId := "downloadId_example" // string | Unique identifier of the temporary file to download
 	deleteAfter := true // bool | If true, delete the file after download (one-time download) (optional) (default to false)
 
 	configuration := openapiclient.NewConfiguration()
@@ -121,7 +121,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**downloadId** | **string** |  | 
+**downloadId** | **string** | Unique identifier of the temporary file to download | 
 
 ### Other Parameters
 

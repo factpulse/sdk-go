@@ -42,7 +42,7 @@ Activate a deactivated client.
 **Scope**: Client level (JWT with client_uid that must match {uid})
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param uid
+ @param uid Client unique identifier (UUID)
  @return ApiActivateClientApiV1ClientsUidActiverPostRequest
 */
 func (a *ClientManagementAPIService) ActivateClientApiV1ClientsUidActiverPost(ctx context.Context, uid string) ApiActivateClientApiV1ClientsUidActiverPostRequest {
@@ -315,7 +315,7 @@ Deactivate an active client.
 (AFNOR, Chorus Pro, etc.).
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param uid
+ @param uid Client unique identifier (UUID)
  @return ApiDeactivateClientApiV1ClientsUidDesactiverPostRequest
 */
 func (a *ClientManagementAPIService) DeactivateClientApiV1ClientsUidDesactiverPost(ctx context.Context, uid string) ApiDeactivateClientApiV1ClientsUidDesactiverPostRequest {
@@ -447,7 +447,7 @@ Delete the webhook secret for a client.
 for HMAC signature instead of a client-specific key.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param uid
+ @param uid Client unique identifier (UUID)
  @return ApiDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteRequest
 */
 func (a *ClientManagementAPIService) DeleteWebhookSecretApiV1ClientsUidWebhookSecretDelete(ctx context.Context, uid string) ApiDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteRequest {
@@ -581,7 +581,7 @@ The secret is used to sign webhooks sent by the server (HMAC-SHA256).
 **If a secret already exists**: It will be replaced by the new one.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param uid
+ @param uid Client unique identifier (UUID)
  @return ApiGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostRequest
 */
 func (a *ClientManagementAPIService) GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost(ctx context.Context, uid string) ApiGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostRequest {
@@ -713,7 +713,7 @@ Get details of a client.
 in the URL, otherwise a 403 error is returned.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param uid
+ @param uid Client unique identifier (UUID)
  @return ApiGetClientApiV1ClientsUidGetRequest
 */
 func (a *ClientManagementAPIService) GetClientApiV1ClientsUidGet(ctx context.Context, uid string) ApiGetClientApiV1ClientsUidGetRequest {
@@ -849,7 +849,7 @@ Get the PDP (PA/PDP) configuration for a client.
 - If not configured: `isConfigured: false` with a message
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param uid
+ @param uid Client unique identifier (UUID)
  @return ApiGetPdpConfigApiV1ClientsUidPdpConfigGetRequest
 */
 func (a *ClientManagementAPIService) GetPdpConfigApiV1ClientsUidPdpConfigGet(ctx context.Context, uid string) ApiGetPdpConfigApiV1ClientsUidPdpConfigGetRequest {
@@ -984,7 +984,7 @@ Check if a webhook secret is configured for a client.
 **Note**: The secret value is never returned, only its status.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param uid
+ @param uid Client unique identifier (UUID)
  @return ApiGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetRequest
 */
 func (a *ClientManagementAPIService) GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet(ctx context.Context, uid string) ApiGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetRequest {
@@ -1292,7 +1292,7 @@ Rotate the client encryption key for all secrets in double encryption mode.
 - Neither key is logged or stored by the server
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param uid
+ @param uid Client unique identifier (UUID)
  @return ApiRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostRequest
 */
 func (a *ClientManagementAPIService) RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost(ctx context.Context, uid string) ApiRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostRequest {
@@ -1439,7 +1439,7 @@ Update client information (partial update).
 Only provided fields are updated.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param uid
+ @param uid Client unique identifier (UUID)
  @return ApiUpdateClientApiV1ClientsUidPatchRequest
 */
 func (a *ClientManagementAPIService) UpdateClientApiV1ClientsUidPatch(ctx context.Context, uid string) ApiUpdateClientApiV1ClientsUidPatchRequest {
@@ -1609,7 +1609,7 @@ secret without the client key.
 and is never returned in API responses.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param uid
+ @param uid Client unique identifier (UUID)
  @return ApiUpdatePdpConfigApiV1ClientsUidPdpConfigPutRequest
 */
 func (a *ClientManagementAPIService) UpdatePdpConfigApiV1ClientsUidPdpConfigPut(ctx context.Context, uid string) ApiUpdatePdpConfigApiV1ClientsUidPdpConfigPutRequest {

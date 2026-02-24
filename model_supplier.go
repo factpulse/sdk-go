@@ -13,8 +13,6 @@ package factpulse
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the Supplier type satisfies the MappedNullable interface at compile time
@@ -23,7 +21,8 @@ var _ MappedNullable = &Supplier{}
 // Supplier Information about the supplier / seller (BG-4).
 type Supplier struct {
 	ElectronicAddress NullableElectronicAddress `json:"electronic_address,omitempty"`
-	SupplierId int32 `json:"supplier_id"`
+	// Chorus Pro supplier structure ID (idFournisseur). Only required for B2G.
+	SupplierId *int32 `json:"supplier_id,omitempty"`
 	PrivateId NullableString `json:"private_id,omitempty"`
 	SupplierBankAccountCode NullableInt32 `json:"supplier_bank_account_code,omitempty"`
 	SupplierServiceId NullableInt32 `json:"supplier_service_id,omitempty"`
@@ -42,15 +41,14 @@ type Supplier struct {
 	GlobalIds []ElectronicAddress `json:"global_ids,omitempty"`
 }
 
-type _Supplier Supplier
-
 // NewSupplier instantiates a new Supplier object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSupplier(supplierId int32) *Supplier {
+func NewSupplier() *Supplier {
 	this := Supplier{}
-	this.SupplierId = supplierId
+	var supplierId int32 = 0
+	this.SupplierId = &supplierId
 	return &this
 }
 
@@ -59,6 +57,8 @@ func NewSupplier(supplierId int32) *Supplier {
 // but it doesn't guarantee that properties required by API are set
 func NewSupplierWithDefaults() *Supplier {
 	this := Supplier{}
+	var supplierId int32 = 0
+	this.SupplierId = &supplierId
 	return &this
 }
 
@@ -104,28 +104,36 @@ func (o *Supplier) UnsetElectronicAddress() {
 	o.ElectronicAddress.Unset()
 }
 
-// GetSupplierId returns the SupplierId field value
+// GetSupplierId returns the SupplierId field value if set, zero value otherwise.
 func (o *Supplier) GetSupplierId() int32 {
-	if o == nil {
+	if o == nil || IsNil(o.SupplierId) {
 		var ret int32
 		return ret
 	}
-
-	return o.SupplierId
+	return *o.SupplierId
 }
 
-// GetSupplierIdOk returns a tuple with the SupplierId field value
+// GetSupplierIdOk returns a tuple with the SupplierId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Supplier) GetSupplierIdOk() (*int32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.SupplierId) {
 		return nil, false
 	}
-	return &o.SupplierId, true
+	return o.SupplierId, true
 }
 
-// SetSupplierId sets field value
+// HasSupplierId returns a boolean if a field has been set.
+func (o *Supplier) HasSupplierId() bool {
+	if o != nil && !IsNil(o.SupplierId) {
+		return true
+	}
+
+	return false
+}
+
+// SetSupplierId gets a reference to the given int32 and assigns it to the SupplierId field.
 func (o *Supplier) SetSupplierId(v int32) {
-	o.SupplierId = v
+	o.SupplierId = &v
 }
 
 // GetPrivateId returns the PrivateId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -804,7 +812,9 @@ func (o Supplier) ToMap() (map[string]interface{}, error) {
 	if o.ElectronicAddress.IsSet() {
 		toSerialize["electronic_address"] = o.ElectronicAddress.Get()
 	}
-	toSerialize["supplier_id"] = o.SupplierId
+	if !IsNil(o.SupplierId) {
+		toSerialize["supplier_id"] = o.SupplierId
+	}
 	if o.PrivateId.IsSet() {
 		toSerialize["private_id"] = o.PrivateId.Get()
 	}
@@ -854,43 +864,6 @@ func (o Supplier) ToMap() (map[string]interface{}, error) {
 		toSerialize["global_ids"] = o.GlobalIds
 	}
 	return toSerialize, nil
-}
-
-func (o *Supplier) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"supplier_id",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varSupplier := _Supplier{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSupplier)
-
-	if err != nil {
-		return err
-	}
-
-	*o = Supplier(varSupplier)
-
-	return err
 }
 
 type NullableSupplier struct {

@@ -268,6 +268,190 @@ func (a *Flux6InvoiceLifecycleCDARAPIService) GetActionCodesApiV1CdarActionCodes
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetLifecycleApiV1CdarLifecycleGetRequest struct {
+	ctx context.Context
+	ApiService *Flux6InvoiceLifecycleCDARAPIService
+	days *int32
+	invoiceId *string
+	pdpFlowServiceUrl *string
+	pdpTokenUrl *string
+	pdpClientId *string
+	pdpClientSecret *string
+}
+
+// Number of days to look back
+func (r ApiGetLifecycleApiV1CdarLifecycleGetRequest) Days(days int32) ApiGetLifecycleApiV1CdarLifecycleGetRequest {
+	r.days = &days
+	return r
+}
+
+// Filter by invoice reference
+func (r ApiGetLifecycleApiV1CdarLifecycleGetRequest) InvoiceId(invoiceId string) ApiGetLifecycleApiV1CdarLifecycleGetRequest {
+	r.invoiceId = &invoiceId
+	return r
+}
+
+// PDP Flow Service URL
+func (r ApiGetLifecycleApiV1CdarLifecycleGetRequest) PdpFlowServiceUrl(pdpFlowServiceUrl string) ApiGetLifecycleApiV1CdarLifecycleGetRequest {
+	r.pdpFlowServiceUrl = &pdpFlowServiceUrl
+	return r
+}
+
+// PDP OAuth token URL
+func (r ApiGetLifecycleApiV1CdarLifecycleGetRequest) PdpTokenUrl(pdpTokenUrl string) ApiGetLifecycleApiV1CdarLifecycleGetRequest {
+	r.pdpTokenUrl = &pdpTokenUrl
+	return r
+}
+
+// PDP Client ID
+func (r ApiGetLifecycleApiV1CdarLifecycleGetRequest) PdpClientId(pdpClientId string) ApiGetLifecycleApiV1CdarLifecycleGetRequest {
+	r.pdpClientId = &pdpClientId
+	return r
+}
+
+// PDP Client Secret
+func (r ApiGetLifecycleApiV1CdarLifecycleGetRequest) PdpClientSecret(pdpClientSecret string) ApiGetLifecycleApiV1CdarLifecycleGetRequest {
+	r.pdpClientSecret = &pdpClientSecret
+	return r
+}
+
+func (r ApiGetLifecycleApiV1CdarLifecycleGetRequest) Execute() (*LifecycleResponse, *http.Response, error) {
+	return r.ApiService.GetLifecycleApiV1CdarLifecycleGetExecute(r)
+}
+
+/*
+GetLifecycleApiV1CdarLifecycleGet [Simplified] Get lifecycle events for invoices
+
+Returns lifecycle events (CDAR) grouped by invoice reference.
+
+**How it works (AFNOR XP Z12-013 compliant):**
+1. Searches lifecycle flows on the PDP by flowType + flowDirection + date range
+2. Downloads and parses each CDAR XML to extract the invoice reference
+3. Groups events by invoice, sorted chronologically
+
+**Parameters:**
+- `days`: Number of days to look back (default: 7)
+- `invoiceId`: Optional filter on a specific invoice reference
+
+**Authentication:** JWT Bearer (recommended) or PDP credentials as query parameters.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetLifecycleApiV1CdarLifecycleGetRequest
+*/
+func (a *Flux6InvoiceLifecycleCDARAPIService) GetLifecycleApiV1CdarLifecycleGet(ctx context.Context) ApiGetLifecycleApiV1CdarLifecycleGetRequest {
+	return ApiGetLifecycleApiV1CdarLifecycleGetRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return LifecycleResponse
+func (a *Flux6InvoiceLifecycleCDARAPIService) GetLifecycleApiV1CdarLifecycleGetExecute(r ApiGetLifecycleApiV1CdarLifecycleGetRequest) (*LifecycleResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *LifecycleResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Flux6InvoiceLifecycleCDARAPIService.GetLifecycleApiV1CdarLifecycleGet")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/cdar/lifecycle"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.days != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "days", r.days, "form", "")
+	} else {
+		var defaultValue int32 = 7
+		parameterAddToHeaderOrQuery(localVarQueryParams, "days", defaultValue, "form", "")
+		r.days = &defaultValue
+	}
+	if r.invoiceId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "invoiceId", r.invoiceId, "form", "")
+	}
+	if r.pdpFlowServiceUrl != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pdpFlowServiceUrl", r.pdpFlowServiceUrl, "form", "")
+	}
+	if r.pdpTokenUrl != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pdpTokenUrl", r.pdpTokenUrl, "form", "")
+	}
+	if r.pdpClientId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pdpClientId", r.pdpClientId, "form", "")
+	}
+	if r.pdpClientSecret != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pdpClientSecret", r.pdpClientSecret, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v APIError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetReasonCodesApiV1CdarReasonCodesGetRequest struct {
 	ctx context.Context
 	ApiService *Flux6InvoiceLifecycleCDARAPIService

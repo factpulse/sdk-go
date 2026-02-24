@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ElectronicAddress** | Pointer to [**NullableElectronicAddress**](ElectronicAddress.md) |  | [optional] 
-**SupplierId** | **int32** |  | 
+**SupplierId** | Pointer to **int32** | Chorus Pro supplier structure ID (idFournisseur). Only required for B2G. | [optional] [default to 0]
 **PrivateId** | Pointer to **NullableString** |  | [optional] 
 **SupplierBankAccountCode** | Pointer to **NullableInt32** |  | [optional] 
 **SupplierServiceId** | Pointer to **NullableInt32** |  | [optional] 
@@ -27,7 +27,7 @@ Name | Type | Description | Notes
 
 ### NewSupplier
 
-`func NewSupplier(supplierId int32, ) *Supplier`
+`func NewSupplier() *Supplier`
 
 NewSupplier instantiates a new Supplier object
 This constructor will assign default values to properties that have it defined,
@@ -96,6 +96,11 @@ and a boolean to check if the value has been set.
 
 SetSupplierId sets SupplierId field to given value.
 
+### HasSupplierId
+
+`func (o *Supplier) HasSupplierId() bool`
+
+HasSupplierId returns a boolean if a field has been set.
 
 ### GetPrivateId
 

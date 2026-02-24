@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GenerateCdarApiV1CdarGeneratePost**](Flux6InvoiceLifecycleCDARAPI.md#GenerateCdarApiV1CdarGeneratePost) | **Post** /api/v1/cdar/generate | Generate a CDAR message
 [**GetActionCodesApiV1CdarActionCodesGet**](Flux6InvoiceLifecycleCDARAPI.md#GetActionCodesApiV1CdarActionCodesGet) | **Get** /api/v1/cdar/action-codes | List of CDAR action codes
+[**GetLifecycleApiV1CdarLifecycleGet**](Flux6InvoiceLifecycleCDARAPI.md#GetLifecycleApiV1CdarLifecycleGet) | **Get** /api/v1/cdar/lifecycle | [Simplified] Get lifecycle events for invoices
 [**GetReasonCodesApiV1CdarReasonCodesGet**](Flux6InvoiceLifecycleCDARAPI.md#GetReasonCodesApiV1CdarReasonCodesGet) | **Get** /api/v1/cdar/reason-codes | List of CDAR reason codes
 [**GetStatusCodesApiV1CdarStatusCodesGet**](Flux6InvoiceLifecycleCDARAPI.md#GetStatusCodesApiV1CdarStatusCodesGet) | **Get** /api/v1/cdar/status-codes | List of CDAR status codes
 [**SubmitCdarApiV1CdarSubmitPost**](Flux6InvoiceLifecycleCDARAPI.md#SubmitCdarApiV1CdarSubmitPost) | **Post** /api/v1/cdar/submit | Generate and submit a CDAR message
@@ -134,6 +135,82 @@ Other parameters are passed through a pointer to a apiGetActionCodesApiV1CdarAct
 ### Authorization
 
 No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetLifecycleApiV1CdarLifecycleGet
+
+> LifecycleResponse GetLifecycleApiV1CdarLifecycleGet(ctx).Days(days).InvoiceId(invoiceId).PdpFlowServiceUrl(pdpFlowServiceUrl).PdpTokenUrl(pdpTokenUrl).PdpClientId(pdpClientId).PdpClientSecret(pdpClientSecret).Execute()
+
+[Simplified] Get lifecycle events for invoices
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/factpulse/sdk-go/v3"
+)
+
+func main() {
+	days := int32(56) // int32 | Number of days to look back (optional) (default to 7)
+	invoiceId := "invoiceId_example" // string | Filter by invoice reference (optional)
+	pdpFlowServiceUrl := "pdpFlowServiceUrl_example" // string | PDP Flow Service URL (optional)
+	pdpTokenUrl := "pdpTokenUrl_example" // string | PDP OAuth token URL (optional)
+	pdpClientId := "pdpClientId_example" // string | PDP Client ID (optional)
+	pdpClientSecret := "pdpClientSecret_example" // string | PDP Client Secret (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.Flux6InvoiceLifecycleCDARAPI.GetLifecycleApiV1CdarLifecycleGet(context.Background()).Days(days).InvoiceId(invoiceId).PdpFlowServiceUrl(pdpFlowServiceUrl).PdpTokenUrl(pdpTokenUrl).PdpClientId(pdpClientId).PdpClientSecret(pdpClientSecret).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `Flux6InvoiceLifecycleCDARAPI.GetLifecycleApiV1CdarLifecycleGet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetLifecycleApiV1CdarLifecycleGet`: LifecycleResponse
+	fmt.Fprintf(os.Stdout, "Response from `Flux6InvoiceLifecycleCDARAPI.GetLifecycleApiV1CdarLifecycleGet`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetLifecycleApiV1CdarLifecycleGetRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **days** | **int32** | Number of days to look back | [default to 7]
+ **invoiceId** | **string** | Filter by invoice reference | 
+ **pdpFlowServiceUrl** | **string** | PDP Flow Service URL | 
+ **pdpTokenUrl** | **string** | PDP OAuth token URL | 
+ **pdpClientId** | **string** | PDP Client ID | 
+ **pdpClientSecret** | **string** | PDP Client Secret | 
+
+### Return type
+
+[**LifecycleResponse**](LifecycleResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 

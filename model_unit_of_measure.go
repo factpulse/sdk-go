@@ -16,7 +16,7 @@ import (
 	"fmt"
 )
 
-// UnitOfMeasure Enumeration of invoicing units of measure.
+// UnitOfMeasure Units of measure for invoice lines (BT-130).  Accepts both legacy French labels and UN/ECE Recommendation 20 codes. UN/ECE codes are preferred for new integrations.  | UN/ECE code | Legacy alias | Description | |-------------|--------------|-------------| | C62 | PIECE | Unit / piece | | H87 | - | Piece (ISO synonym) | | HUR | HEURE | Hour | | DAY | JOUR | Day | | MON | - | Month | | MIN | - | Minute | | KGM | KILOGRAMME | Kilogram | | LTR | LITRE | Litre | | MTR | - | Metre | | MTK | - | Square metre | | TNE | - | Metric ton | | KWH | - | Kilowatt-hour | | SET | - | Set | | LS | FORFAIT | Lump sum |
 type UnitOfMeasure string
 
 // List of UnitOfMeasure
@@ -27,6 +27,20 @@ const (
 	UNITOFMEASURE_KILOGRAMME UnitOfMeasure = "KILOGRAMME"
 	UNITOFMEASURE_LITRE UnitOfMeasure = "LITRE"
 	UNITOFMEASURE_FORFAIT UnitOfMeasure = "FORFAIT"
+	UNITOFMEASURE_C62 UnitOfMeasure = "C62"
+	UNITOFMEASURE_H87 UnitOfMeasure = "H87"
+	UNITOFMEASURE_HUR UnitOfMeasure = "HUR"
+	UNITOFMEASURE_DAY UnitOfMeasure = "DAY"
+	UNITOFMEASURE_MON UnitOfMeasure = "MON"
+	UNITOFMEASURE_MIN UnitOfMeasure = "MIN"
+	UNITOFMEASURE_KGM UnitOfMeasure = "KGM"
+	UNITOFMEASURE_LTR UnitOfMeasure = "LTR"
+	UNITOFMEASURE_MTR UnitOfMeasure = "MTR"
+	UNITOFMEASURE_MTK UnitOfMeasure = "MTK"
+	UNITOFMEASURE_TNE UnitOfMeasure = "TNE"
+	UNITOFMEASURE_KWH UnitOfMeasure = "KWH"
+	UNITOFMEASURE_SET UnitOfMeasure = "SET"
+	UNITOFMEASURE_LS UnitOfMeasure = "LS"
 )
 
 // All allowed values of UnitOfMeasure enum
@@ -37,6 +51,20 @@ var AllowedUnitOfMeasureEnumValues = []UnitOfMeasure{
 	"KILOGRAMME",
 	"LITRE",
 	"FORFAIT",
+	"C62",
+	"H87",
+	"HUR",
+	"DAY",
+	"MON",
+	"MIN",
+	"KGM",
+	"LTR",
+	"MTR",
+	"MTK",
+	"TNE",
+	"KWH",
+	"SET",
+	"LS",
 }
 
 func (v *UnitOfMeasure) UnmarshalJSON(src []byte) error {

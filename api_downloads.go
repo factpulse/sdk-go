@@ -47,7 +47,7 @@ Useful for:
 **Security**: Requires authentication, only file owner can check.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param downloadId
+ @param downloadId Unique identifier of the temporary file to check
  @return ApiCheckFileApiV1DownloadDownloadIdHeadRequest
 */
 func (a *DownloadsAPIService) CheckFileApiV1DownloadDownloadIdHead(ctx context.Context, downloadId string) ApiCheckFileApiV1DownloadDownloadIdHeadRequest {
@@ -190,7 +190,7 @@ Download a file stored temporarily after asynchronous processing.
 - Only the user who initiated the task can download the file
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param downloadId
+ @param downloadId Unique identifier of the temporary file to download
  @return ApiDownloadFileApiV1DownloadDownloadIdGetRequest
 */
 func (a *DownloadsAPIService) DownloadFileApiV1DownloadDownloadIdGet(ctx context.Context, downloadId string) ApiDownloadFileApiV1DownloadDownloadIdGetRequest {

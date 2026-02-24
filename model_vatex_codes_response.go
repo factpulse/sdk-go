@@ -17,128 +17,122 @@ import (
 	"fmt"
 )
 
-// checks if the ValidateCDARResponse type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ValidateCDARResponse{}
+// checks if the VATEXCodesResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VATEXCodesResponse{}
 
-// ValidateCDARResponse Réponse de validation CDAR.
-type ValidateCDARResponse struct {
-	// Résultat de validation
-	Valid bool `json:"valid"`
-	// Liste des erreurs
-	Errors []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse `json:"errors,omitempty"`
-	// Liste des avertissements
-	Warnings []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse `json:"warnings,omitempty"`
+// VATEXCodesResponse Response for the VATEX codes endpoint.
+type VATEXCodesResponse struct {
+	Codes []VATEXCodeInfo `json:"codes"`
+	Count int32 `json:"count"`
+	Source *string `json:"source,omitempty"`
 }
 
-type _ValidateCDARResponse ValidateCDARResponse
+type _VATEXCodesResponse VATEXCodesResponse
 
-// NewValidateCDARResponse instantiates a new ValidateCDARResponse object
+// NewVATEXCodesResponse instantiates a new VATEXCodesResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewValidateCDARResponse(valid bool) *ValidateCDARResponse {
-	this := ValidateCDARResponse{}
-	this.Valid = valid
+func NewVATEXCodesResponse(codes []VATEXCodeInfo, count int32) *VATEXCodesResponse {
+	this := VATEXCodesResponse{}
+	this.Codes = codes
+	this.Count = count
+	var source string = "https://docs.peppol.eu/poacc/billing/3.0/codelist/vatex/"
+	this.Source = &source
 	return &this
 }
 
-// NewValidateCDARResponseWithDefaults instantiates a new ValidateCDARResponse object
+// NewVATEXCodesResponseWithDefaults instantiates a new VATEXCodesResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewValidateCDARResponseWithDefaults() *ValidateCDARResponse {
-	this := ValidateCDARResponse{}
+func NewVATEXCodesResponseWithDefaults() *VATEXCodesResponse {
+	this := VATEXCodesResponse{}
+	var source string = "https://docs.peppol.eu/poacc/billing/3.0/codelist/vatex/"
+	this.Source = &source
 	return &this
 }
 
-// GetValid returns the Valid field value
-func (o *ValidateCDARResponse) GetValid() bool {
+// GetCodes returns the Codes field value
+func (o *VATEXCodesResponse) GetCodes() []VATEXCodeInfo {
 	if o == nil {
-		var ret bool
+		var ret []VATEXCodeInfo
 		return ret
 	}
 
-	return o.Valid
+	return o.Codes
 }
 
-// GetValidOk returns a tuple with the Valid field value
+// GetCodesOk returns a tuple with the Codes field value
 // and a boolean to check if the value has been set.
-func (o *ValidateCDARResponse) GetValidOk() (*bool, bool) {
+func (o *VATEXCodesResponse) GetCodesOk() ([]VATEXCodeInfo, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Valid, true
+	return o.Codes, true
 }
 
-// SetValid sets field value
-func (o *ValidateCDARResponse) SetValid(v bool) {
-	o.Valid = v
+// SetCodes sets field value
+func (o *VATEXCodesResponse) SetCodes(v []VATEXCodeInfo) {
+	o.Codes = v
 }
 
-// GetErrors returns the Errors field value if set, zero value otherwise.
-func (o *ValidateCDARResponse) GetErrors() []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse {
-	if o == nil || IsNil(o.Errors) {
-		var ret []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse
+// GetCount returns the Count field value
+func (o *VATEXCodesResponse) GetCount() int32 {
+	if o == nil {
+		var ret int32
 		return ret
 	}
-	return o.Errors
+
+	return o.Count
 }
 
-// GetErrorsOk returns a tuple with the Errors field value if set, nil otherwise
+// GetCountOk returns a tuple with the Count field value
 // and a boolean to check if the value has been set.
-func (o *ValidateCDARResponse) GetErrorsOk() ([]FactureElectroniqueRestApiSchemasCdarValidationErrorResponse, bool) {
-	if o == nil || IsNil(o.Errors) {
+func (o *VATEXCodesResponse) GetCountOk() (*int32, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Errors, true
+	return &o.Count, true
 }
 
-// HasErrors returns a boolean if a field has been set.
-func (o *ValidateCDARResponse) HasErrors() bool {
-	if o != nil && !IsNil(o.Errors) {
+// SetCount sets field value
+func (o *VATEXCodesResponse) SetCount(v int32) {
+	o.Count = v
+}
+
+// GetSource returns the Source field value if set, zero value otherwise.
+func (o *VATEXCodesResponse) GetSource() string {
+	if o == nil || IsNil(o.Source) {
+		var ret string
+		return ret
+	}
+	return *o.Source
+}
+
+// GetSourceOk returns a tuple with the Source field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VATEXCodesResponse) GetSourceOk() (*string, bool) {
+	if o == nil || IsNil(o.Source) {
+		return nil, false
+	}
+	return o.Source, true
+}
+
+// HasSource returns a boolean if a field has been set.
+func (o *VATEXCodesResponse) HasSource() bool {
+	if o != nil && !IsNil(o.Source) {
 		return true
 	}
 
 	return false
 }
 
-// SetErrors gets a reference to the given []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse and assigns it to the Errors field.
-func (o *ValidateCDARResponse) SetErrors(v []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) {
-	o.Errors = v
+// SetSource gets a reference to the given string and assigns it to the Source field.
+func (o *VATEXCodesResponse) SetSource(v string) {
+	o.Source = &v
 }
 
-// GetWarnings returns the Warnings field value if set, zero value otherwise.
-func (o *ValidateCDARResponse) GetWarnings() []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse {
-	if o == nil || IsNil(o.Warnings) {
-		var ret []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse
-		return ret
-	}
-	return o.Warnings
-}
-
-// GetWarningsOk returns a tuple with the Warnings field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ValidateCDARResponse) GetWarningsOk() ([]FactureElectroniqueRestApiSchemasCdarValidationErrorResponse, bool) {
-	if o == nil || IsNil(o.Warnings) {
-		return nil, false
-	}
-	return o.Warnings, true
-}
-
-// HasWarnings returns a boolean if a field has been set.
-func (o *ValidateCDARResponse) HasWarnings() bool {
-	if o != nil && !IsNil(o.Warnings) {
-		return true
-	}
-
-	return false
-}
-
-// SetWarnings gets a reference to the given []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse and assigns it to the Warnings field.
-func (o *ValidateCDARResponse) SetWarnings(v []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) {
-	o.Warnings = v
-}
-
-func (o ValidateCDARResponse) MarshalJSON() ([]byte, error) {
+func (o VATEXCodesResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -146,24 +140,23 @@ func (o ValidateCDARResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ValidateCDARResponse) ToMap() (map[string]interface{}, error) {
+func (o VATEXCodesResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["valid"] = o.Valid
-	if !IsNil(o.Errors) {
-		toSerialize["errors"] = o.Errors
-	}
-	if !IsNil(o.Warnings) {
-		toSerialize["warnings"] = o.Warnings
+	toSerialize["codes"] = o.Codes
+	toSerialize["count"] = o.Count
+	if !IsNil(o.Source) {
+		toSerialize["source"] = o.Source
 	}
 	return toSerialize, nil
 }
 
-func (o *ValidateCDARResponse) UnmarshalJSON(data []byte) (err error) {
+func (o *VATEXCodesResponse) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"valid",
+		"codes",
+		"count",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -180,53 +173,53 @@ func (o *ValidateCDARResponse) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varValidateCDARResponse := _ValidateCDARResponse{}
+	varVATEXCodesResponse := _VATEXCodesResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varValidateCDARResponse)
+	err = decoder.Decode(&varVATEXCodesResponse)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ValidateCDARResponse(varValidateCDARResponse)
+	*o = VATEXCodesResponse(varVATEXCodesResponse)
 
 	return err
 }
 
-type NullableValidateCDARResponse struct {
-	value *ValidateCDARResponse
+type NullableVATEXCodesResponse struct {
+	value *VATEXCodesResponse
 	isSet bool
 }
 
-func (v NullableValidateCDARResponse) Get() *ValidateCDARResponse {
+func (v NullableVATEXCodesResponse) Get() *VATEXCodesResponse {
 	return v.value
 }
 
-func (v *NullableValidateCDARResponse) Set(val *ValidateCDARResponse) {
+func (v *NullableVATEXCodesResponse) Set(val *VATEXCodesResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableValidateCDARResponse) IsSet() bool {
+func (v NullableVATEXCodesResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableValidateCDARResponse) Unset() {
+func (v *NullableVATEXCodesResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableValidateCDARResponse(val *ValidateCDARResponse) *NullableValidateCDARResponse {
-	return &NullableValidateCDARResponse{value: val, isSet: true}
+func NewNullableVATEXCodesResponse(val *VATEXCodesResponse) *NullableVATEXCodesResponse {
+	return &NullableVATEXCodesResponse{value: val, isSet: true}
 }
 
-func (v NullableValidateCDARResponse) MarshalJSON() ([]byte, error) {
+func (v NullableVATEXCodesResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableValidateCDARResponse) UnmarshalJSON(src []byte) error {
+func (v *NullableVATEXCodesResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

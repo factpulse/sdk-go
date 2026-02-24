@@ -17,60 +17,141 @@ import (
 	"fmt"
 )
 
-// checks if the FactureElectroniqueRestApiSchemasValidationValidationErrorResponse type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &FactureElectroniqueRestApiSchemasValidationValidationErrorResponse{}
+// checks if the VATEXCodeInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VATEXCodeInfo{}
 
-// FactureElectroniqueRestApiSchemasValidationValidationErrorResponse Response for validation errors.
-type FactureElectroniqueRestApiSchemasValidationValidationErrorResponse struct {
-	// List of detected validation errors.
-	Detail []string `json:"detail"`
+// VATEXCodeInfo Single VATEX code entry.
+type VATEXCodeInfo struct {
+	// VATEX code (e.g. VATEX-EU-IC)
+	Code string `json:"code"`
+	// Short name (e.g. 'Intra-Community supply')
+	Name string `json:"name"`
+	// Detailed description / remark
+	Description string `json:"description"`
+	// Associated VAT category code (E, AE, K, G, O)
+	Category string `json:"category"`
 }
 
-type _FactureElectroniqueRestApiSchemasValidationValidationErrorResponse FactureElectroniqueRestApiSchemasValidationValidationErrorResponse
+type _VATEXCodeInfo VATEXCodeInfo
 
-// NewFactureElectroniqueRestApiSchemasValidationValidationErrorResponse instantiates a new FactureElectroniqueRestApiSchemasValidationValidationErrorResponse object
+// NewVATEXCodeInfo instantiates a new VATEXCodeInfo object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFactureElectroniqueRestApiSchemasValidationValidationErrorResponse(detail []string) *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse {
-	this := FactureElectroniqueRestApiSchemasValidationValidationErrorResponse{}
-	this.Detail = detail
+func NewVATEXCodeInfo(code string, name string, description string, category string) *VATEXCodeInfo {
+	this := VATEXCodeInfo{}
+	this.Code = code
+	this.Name = name
+	this.Description = description
+	this.Category = category
 	return &this
 }
 
-// NewFactureElectroniqueRestApiSchemasValidationValidationErrorResponseWithDefaults instantiates a new FactureElectroniqueRestApiSchemasValidationValidationErrorResponse object
+// NewVATEXCodeInfoWithDefaults instantiates a new VATEXCodeInfo object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFactureElectroniqueRestApiSchemasValidationValidationErrorResponseWithDefaults() *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse {
-	this := FactureElectroniqueRestApiSchemasValidationValidationErrorResponse{}
+func NewVATEXCodeInfoWithDefaults() *VATEXCodeInfo {
+	this := VATEXCodeInfo{}
 	return &this
 }
 
-// GetDetail returns the Detail field value
-func (o *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) GetDetail() []string {
+// GetCode returns the Code field value
+func (o *VATEXCodeInfo) GetCode() string {
 	if o == nil {
-		var ret []string
+		var ret string
 		return ret
 	}
 
-	return o.Detail
+	return o.Code
 }
 
-// GetDetailOk returns a tuple with the Detail field value
+// GetCodeOk returns a tuple with the Code field value
 // and a boolean to check if the value has been set.
-func (o *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) GetDetailOk() ([]string, bool) {
+func (o *VATEXCodeInfo) GetCodeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Detail, true
+	return &o.Code, true
 }
 
-// SetDetail sets field value
-func (o *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) SetDetail(v []string) {
-	o.Detail = v
+// SetCode sets field value
+func (o *VATEXCodeInfo) SetCode(v string) {
+	o.Code = v
 }
 
-func (o FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) MarshalJSON() ([]byte, error) {
+// GetName returns the Name field value
+func (o *VATEXCodeInfo) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *VATEXCodeInfo) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *VATEXCodeInfo) SetName(v string) {
+	o.Name = v
+}
+
+// GetDescription returns the Description field value
+func (o *VATEXCodeInfo) GetDescription() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value
+// and a boolean to check if the value has been set.
+func (o *VATEXCodeInfo) GetDescriptionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Description, true
+}
+
+// SetDescription sets field value
+func (o *VATEXCodeInfo) SetDescription(v string) {
+	o.Description = v
+}
+
+// GetCategory returns the Category field value
+func (o *VATEXCodeInfo) GetCategory() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Category
+}
+
+// GetCategoryOk returns a tuple with the Category field value
+// and a boolean to check if the value has been set.
+func (o *VATEXCodeInfo) GetCategoryOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Category, true
+}
+
+// SetCategory sets field value
+func (o *VATEXCodeInfo) SetCategory(v string) {
+	o.Category = v
+}
+
+func (o VATEXCodeInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -78,18 +159,24 @@ func (o FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) Mars
 	return json.Marshal(toSerialize)
 }
 
-func (o FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) ToMap() (map[string]interface{}, error) {
+func (o VATEXCodeInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["detail"] = o.Detail
+	toSerialize["code"] = o.Code
+	toSerialize["name"] = o.Name
+	toSerialize["description"] = o.Description
+	toSerialize["category"] = o.Category
 	return toSerialize, nil
 }
 
-func (o *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) UnmarshalJSON(data []byte) (err error) {
+func (o *VATEXCodeInfo) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"detail",
+		"code",
+		"name",
+		"description",
+		"category",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -106,53 +193,53 @@ func (o *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) Unm
 		}
 	}
 
-	varFactureElectroniqueRestApiSchemasValidationValidationErrorResponse := _FactureElectroniqueRestApiSchemasValidationValidationErrorResponse{}
+	varVATEXCodeInfo := _VATEXCodeInfo{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFactureElectroniqueRestApiSchemasValidationValidationErrorResponse)
+	err = decoder.Decode(&varVATEXCodeInfo)
 
 	if err != nil {
 		return err
 	}
 
-	*o = FactureElectroniqueRestApiSchemasValidationValidationErrorResponse(varFactureElectroniqueRestApiSchemasValidationValidationErrorResponse)
+	*o = VATEXCodeInfo(varVATEXCodeInfo)
 
 	return err
 }
 
-type NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse struct {
-	value *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse
+type NullableVATEXCodeInfo struct {
+	value *VATEXCodeInfo
 	isSet bool
 }
 
-func (v NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse) Get() *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse {
+func (v NullableVATEXCodeInfo) Get() *VATEXCodeInfo {
 	return v.value
 }
 
-func (v *NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse) Set(val *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) {
+func (v *NullableVATEXCodeInfo) Set(val *VATEXCodeInfo) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse) IsSet() bool {
+func (v NullableVATEXCodeInfo) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse) Unset() {
+func (v *NullableVATEXCodeInfo) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse(val *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) *NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse {
-	return &NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse{value: val, isSet: true}
+func NewNullableVATEXCodeInfo(val *VATEXCodeInfo) *NullableVATEXCodeInfo {
+	return &NullableVATEXCodeInfo{value: val, isSet: true}
 }
 
-func (v NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse) MarshalJSON() ([]byte, error) {
+func (v NullableVATEXCodeInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse) UnmarshalJSON(src []byte) error {
+func (v *NullableVATEXCodeInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

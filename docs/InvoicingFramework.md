@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**InvoicingFrameworkCode** | [**InvoicingFrameworkCode**](InvoicingFrameworkCode.md) | Chorus Pro framework code (A1, A2, A9, A12) | 
+**InvoicingFrameworkCode** | Pointer to [**NullableInvoicingFrameworkCode**](InvoicingFrameworkCode.md) |  | [optional] 
 **OperationNature** | Pointer to [**NullableOperationNature**](OperationNature.md) |  | [optional] 
 **ApproverServiceCode** | Pointer to **NullableString** |  | [optional] 
 **ApproverStructureCode** | Pointer to **NullableString** |  | [optional] 
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewInvoicingFramework
 
-`func NewInvoicingFramework(invoicingFrameworkCode InvoicingFrameworkCode, ) *InvoicingFramework`
+`func NewInvoicingFramework() *InvoicingFramework`
 
 NewInvoicingFramework instantiates a new InvoicingFramework object
 This constructor will assign default values to properties that have it defined,
@@ -47,7 +47,22 @@ and a boolean to check if the value has been set.
 
 SetInvoicingFrameworkCode sets InvoicingFrameworkCode field to given value.
 
+### HasInvoicingFrameworkCode
 
+`func (o *InvoicingFramework) HasInvoicingFrameworkCode() bool`
+
+HasInvoicingFrameworkCode returns a boolean if a field has been set.
+
+### SetInvoicingFrameworkCodeNil
+
+`func (o *InvoicingFramework) SetInvoicingFrameworkCodeNil(b bool)`
+
+ SetInvoicingFrameworkCodeNil sets the value for InvoicingFrameworkCode to be an explicit nil
+
+### UnsetInvoicingFrameworkCode
+`func (o *InvoicingFramework) UnsetInvoicingFrameworkCode()`
+
+UnsetInvoicingFrameworkCode ensures that no value is present for InvoicingFrameworkCode, not even an explicit nil
 ### GetOperationNature
 
 `func (o *InvoicingFramework) GetOperationNature() OperationNature`

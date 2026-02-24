@@ -17,128 +17,164 @@ import (
 	"fmt"
 )
 
-// checks if the ValidateCDARResponse type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ValidateCDARResponse{}
+// checks if the InvoiceLifecycle type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &InvoiceLifecycle{}
 
-// ValidateCDARResponse Réponse de validation CDAR.
-type ValidateCDARResponse struct {
-	// Résultat de validation
-	Valid bool `json:"valid"`
-	// Liste des erreurs
-	Errors []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse `json:"errors,omitempty"`
-	// Liste des avertissements
-	Warnings []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse `json:"warnings,omitempty"`
+// InvoiceLifecycle Cycle de vie d'une facture specifique.
+type InvoiceLifecycle struct {
+	SellerId NullableString `json:"sellerId,omitempty"`
+	// Reference de la facture (IssuerAssignedID du CDAR)
+	InvoiceId string `json:"invoiceId"`
+	// Evenements de cycle de vie tries chronologiquement
+	Events []LifecycleEvent `json:"events,omitempty"`
+	// Nombre total d'evenements
+	TotalEvents int32 `json:"totalEvents"`
 }
 
-type _ValidateCDARResponse ValidateCDARResponse
+type _InvoiceLifecycle InvoiceLifecycle
 
-// NewValidateCDARResponse instantiates a new ValidateCDARResponse object
+// NewInvoiceLifecycle instantiates a new InvoiceLifecycle object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewValidateCDARResponse(valid bool) *ValidateCDARResponse {
-	this := ValidateCDARResponse{}
-	this.Valid = valid
+func NewInvoiceLifecycle(invoiceId string, totalEvents int32) *InvoiceLifecycle {
+	this := InvoiceLifecycle{}
+	this.InvoiceId = invoiceId
+	this.TotalEvents = totalEvents
 	return &this
 }
 
-// NewValidateCDARResponseWithDefaults instantiates a new ValidateCDARResponse object
+// NewInvoiceLifecycleWithDefaults instantiates a new InvoiceLifecycle object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewValidateCDARResponseWithDefaults() *ValidateCDARResponse {
-	this := ValidateCDARResponse{}
+func NewInvoiceLifecycleWithDefaults() *InvoiceLifecycle {
+	this := InvoiceLifecycle{}
 	return &this
 }
 
-// GetValid returns the Valid field value
-func (o *ValidateCDARResponse) GetValid() bool {
-	if o == nil {
-		var ret bool
+// GetSellerId returns the SellerId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceLifecycle) GetSellerId() string {
+	if o == nil || IsNil(o.SellerId.Get()) {
+		var ret string
 		return ret
 	}
-
-	return o.Valid
+	return *o.SellerId.Get()
 }
 
-// GetValidOk returns a tuple with the Valid field value
+// GetSellerIdOk returns a tuple with the SellerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ValidateCDARResponse) GetValidOk() (*bool, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceLifecycle) GetSellerIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Valid, true
+	return o.SellerId.Get(), o.SellerId.IsSet()
 }
 
-// SetValid sets field value
-func (o *ValidateCDARResponse) SetValid(v bool) {
-	o.Valid = v
-}
-
-// GetErrors returns the Errors field value if set, zero value otherwise.
-func (o *ValidateCDARResponse) GetErrors() []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse {
-	if o == nil || IsNil(o.Errors) {
-		var ret []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse
-		return ret
-	}
-	return o.Errors
-}
-
-// GetErrorsOk returns a tuple with the Errors field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ValidateCDARResponse) GetErrorsOk() ([]FactureElectroniqueRestApiSchemasCdarValidationErrorResponse, bool) {
-	if o == nil || IsNil(o.Errors) {
-		return nil, false
-	}
-	return o.Errors, true
-}
-
-// HasErrors returns a boolean if a field has been set.
-func (o *ValidateCDARResponse) HasErrors() bool {
-	if o != nil && !IsNil(o.Errors) {
+// HasSellerId returns a boolean if a field has been set.
+func (o *InvoiceLifecycle) HasSellerId() bool {
+	if o != nil && o.SellerId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetErrors gets a reference to the given []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse and assigns it to the Errors field.
-func (o *ValidateCDARResponse) SetErrors(v []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) {
-	o.Errors = v
+// SetSellerId gets a reference to the given NullableString and assigns it to the SellerId field.
+func (o *InvoiceLifecycle) SetSellerId(v string) {
+	o.SellerId.Set(&v)
+}
+// SetSellerIdNil sets the value for SellerId to be an explicit nil
+func (o *InvoiceLifecycle) SetSellerIdNil() {
+	o.SellerId.Set(nil)
 }
 
-// GetWarnings returns the Warnings field value if set, zero value otherwise.
-func (o *ValidateCDARResponse) GetWarnings() []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse {
-	if o == nil || IsNil(o.Warnings) {
-		var ret []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse
+// UnsetSellerId ensures that no value is present for SellerId, not even an explicit nil
+func (o *InvoiceLifecycle) UnsetSellerId() {
+	o.SellerId.Unset()
+}
+
+// GetInvoiceId returns the InvoiceId field value
+func (o *InvoiceLifecycle) GetInvoiceId() string {
+	if o == nil {
+		var ret string
 		return ret
 	}
-	return o.Warnings
+
+	return o.InvoiceId
 }
 
-// GetWarningsOk returns a tuple with the Warnings field value if set, nil otherwise
+// GetInvoiceIdOk returns a tuple with the InvoiceId field value
 // and a boolean to check if the value has been set.
-func (o *ValidateCDARResponse) GetWarningsOk() ([]FactureElectroniqueRestApiSchemasCdarValidationErrorResponse, bool) {
-	if o == nil || IsNil(o.Warnings) {
+func (o *InvoiceLifecycle) GetInvoiceIdOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Warnings, true
+	return &o.InvoiceId, true
 }
 
-// HasWarnings returns a boolean if a field has been set.
-func (o *ValidateCDARResponse) HasWarnings() bool {
-	if o != nil && !IsNil(o.Warnings) {
+// SetInvoiceId sets field value
+func (o *InvoiceLifecycle) SetInvoiceId(v string) {
+	o.InvoiceId = v
+}
+
+// GetEvents returns the Events field value if set, zero value otherwise.
+func (o *InvoiceLifecycle) GetEvents() []LifecycleEvent {
+	if o == nil || IsNil(o.Events) {
+		var ret []LifecycleEvent
+		return ret
+	}
+	return o.Events
+}
+
+// GetEventsOk returns a tuple with the Events field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InvoiceLifecycle) GetEventsOk() ([]LifecycleEvent, bool) {
+	if o == nil || IsNil(o.Events) {
+		return nil, false
+	}
+	return o.Events, true
+}
+
+// HasEvents returns a boolean if a field has been set.
+func (o *InvoiceLifecycle) HasEvents() bool {
+	if o != nil && !IsNil(o.Events) {
 		return true
 	}
 
 	return false
 }
 
-// SetWarnings gets a reference to the given []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse and assigns it to the Warnings field.
-func (o *ValidateCDARResponse) SetWarnings(v []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse) {
-	o.Warnings = v
+// SetEvents gets a reference to the given []LifecycleEvent and assigns it to the Events field.
+func (o *InvoiceLifecycle) SetEvents(v []LifecycleEvent) {
+	o.Events = v
 }
 
-func (o ValidateCDARResponse) MarshalJSON() ([]byte, error) {
+// GetTotalEvents returns the TotalEvents field value
+func (o *InvoiceLifecycle) GetTotalEvents() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.TotalEvents
+}
+
+// GetTotalEventsOk returns a tuple with the TotalEvents field value
+// and a boolean to check if the value has been set.
+func (o *InvoiceLifecycle) GetTotalEventsOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.TotalEvents, true
+}
+
+// SetTotalEvents sets field value
+func (o *InvoiceLifecycle) SetTotalEvents(v int32) {
+	o.TotalEvents = v
+}
+
+func (o InvoiceLifecycle) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -146,24 +182,26 @@ func (o ValidateCDARResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ValidateCDARResponse) ToMap() (map[string]interface{}, error) {
+func (o InvoiceLifecycle) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["valid"] = o.Valid
-	if !IsNil(o.Errors) {
-		toSerialize["errors"] = o.Errors
+	if o.SellerId.IsSet() {
+		toSerialize["sellerId"] = o.SellerId.Get()
 	}
-	if !IsNil(o.Warnings) {
-		toSerialize["warnings"] = o.Warnings
+	toSerialize["invoiceId"] = o.InvoiceId
+	if !IsNil(o.Events) {
+		toSerialize["events"] = o.Events
 	}
+	toSerialize["totalEvents"] = o.TotalEvents
 	return toSerialize, nil
 }
 
-func (o *ValidateCDARResponse) UnmarshalJSON(data []byte) (err error) {
+func (o *InvoiceLifecycle) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"valid",
+		"invoiceId",
+		"totalEvents",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -180,53 +218,53 @@ func (o *ValidateCDARResponse) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varValidateCDARResponse := _ValidateCDARResponse{}
+	varInvoiceLifecycle := _InvoiceLifecycle{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varValidateCDARResponse)
+	err = decoder.Decode(&varInvoiceLifecycle)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ValidateCDARResponse(varValidateCDARResponse)
+	*o = InvoiceLifecycle(varInvoiceLifecycle)
 
 	return err
 }
 
-type NullableValidateCDARResponse struct {
-	value *ValidateCDARResponse
+type NullableInvoiceLifecycle struct {
+	value *InvoiceLifecycle
 	isSet bool
 }
 
-func (v NullableValidateCDARResponse) Get() *ValidateCDARResponse {
+func (v NullableInvoiceLifecycle) Get() *InvoiceLifecycle {
 	return v.value
 }
 
-func (v *NullableValidateCDARResponse) Set(val *ValidateCDARResponse) {
+func (v *NullableInvoiceLifecycle) Set(val *InvoiceLifecycle) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableValidateCDARResponse) IsSet() bool {
+func (v NullableInvoiceLifecycle) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableValidateCDARResponse) Unset() {
+func (v *NullableInvoiceLifecycle) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableValidateCDARResponse(val *ValidateCDARResponse) *NullableValidateCDARResponse {
-	return &NullableValidateCDARResponse{value: val, isSet: true}
+func NewNullableInvoiceLifecycle(val *InvoiceLifecycle) *NullableInvoiceLifecycle {
+	return &NullableInvoiceLifecycle{value: val, isSet: true}
 }
 
-func (v NullableValidateCDARResponse) MarshalJSON() ([]byte, error) {
+func (v NullableInvoiceLifecycle) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableValidateCDARResponse) UnmarshalJSON(src []byte) error {
+func (v *NullableInvoiceLifecycle) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

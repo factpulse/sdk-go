@@ -40,7 +40,7 @@ import (
 )
 
 func main() {
-	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Client unique identifier (UUID)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -60,7 +60,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**uid** | **string** |  | 
+**uid** | **string** | Client unique identifier (UUID) | 
 
 ### Other Parameters
 
@@ -176,7 +176,7 @@ import (
 )
 
 func main() {
-	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Client unique identifier (UUID)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -196,7 +196,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**uid** | **string** |  | 
+**uid** | **string** | Client unique identifier (UUID) | 
 
 ### Other Parameters
 
@@ -246,7 +246,7 @@ import (
 )
 
 func main() {
-	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Client unique identifier (UUID)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -266,7 +266,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**uid** | **string** |  | 
+**uid** | **string** | Client unique identifier (UUID) | 
 
 ### Other Parameters
 
@@ -316,7 +316,7 @@ import (
 )
 
 func main() {
-	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Client unique identifier (UUID)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -336,7 +336,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**uid** | **string** |  | 
+**uid** | **string** | Client unique identifier (UUID) | 
 
 ### Other Parameters
 
@@ -386,7 +386,7 @@ import (
 )
 
 func main() {
-	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Client unique identifier (UUID)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -406,7 +406,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**uid** | **string** |  | 
+**uid** | **string** | Client unique identifier (UUID) | 
 
 ### Other Parameters
 
@@ -456,7 +456,7 @@ import (
 )
 
 func main() {
-	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Client unique identifier (UUID)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -476,7 +476,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**uid** | **string** |  | 
+**uid** | **string** | Client unique identifier (UUID) | 
 
 ### Other Parameters
 
@@ -526,7 +526,7 @@ import (
 )
 
 func main() {
-	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Client unique identifier (UUID)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -546,7 +546,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**uid** | **string** |  | 
+**uid** | **string** | Client unique identifier (UUID) | 
 
 ### Other Parameters
 
@@ -664,7 +664,7 @@ import (
 )
 
 func main() {
-	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Client unique identifier (UUID)
 	keyRotationRequest := *openapiclient.NewKeyRotationRequest("OldKey_example", "NewKey_example") // KeyRotationRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -685,7 +685,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**uid** | **string** |  | 
+**uid** | **string** | Client unique identifier (UUID) | 
 
 ### Other Parameters
 
@@ -736,7 +736,7 @@ import (
 )
 
 func main() {
-	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Client unique identifier (UUID)
 	clientUpdateRequest := *openapiclient.NewClientUpdateRequest() // ClientUpdateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -757,7 +757,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**uid** | **string** |  | 
+**uid** | **string** | Client unique identifier (UUID) | 
 
 ### Other Parameters
 
@@ -808,7 +808,7 @@ import (
 )
 
 func main() {
-	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Client unique identifier (UUID)
 	pDPConfigUpdateRequest := *openapiclient.NewPDPConfigUpdateRequest("FlowServiceUrl_example", "TokenUrl_example", "OauthClientId_example", "ClientSecret_example") // PDPConfigUpdateRequest | 
 	xEncryptionKey := "xEncryptionKey_example" // string | Client encryption key for double encryption mode. Must be a base64-encoded AES-256 key (32 bytes). Required only when accessing resources encrypted with encryption_mode='double'. (optional)
 
@@ -830,7 +830,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**uid** | **string** |  | 
+**uid** | **string** | Client unique identifier (UUID) | 
 
 ### Other Parameters
 

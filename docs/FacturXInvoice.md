@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **SubmissionMode** | Pointer to [**SubmissionMode**](SubmissionMode.md) |  | [optional] [default to DEPOT_PDF_API]
 **Recipient** | [**Recipient**](Recipient.md) |  | 
 **Supplier** | [**Supplier**](Supplier.md) |  | 
-**InvoicingFramework** | [**InvoicingFramework**](InvoicingFramework.md) |  | 
+**InvoicingFramework** | Pointer to [**NullableInvoicingFramework**](InvoicingFramework.md) |  | [optional] 
 **References** | [**InvoiceReferences**](InvoiceReferences.md) |  | 
 **Totals** | [**InvoiceTotals**](InvoiceTotals.md) |  | 
 **InvoiceLines** | Pointer to [**[]InvoiceLine**](InvoiceLine.md) |  | [optional] 
@@ -39,7 +39,7 @@ Name | Type | Description | Notes
 
 ### NewFacturXInvoice
 
-`func NewFacturXInvoice(invoiceNumber string, paymentDueDate string, recipient Recipient, supplier Supplier, invoicingFramework InvoicingFramework, references InvoiceReferences, totals InvoiceTotals, ) *FacturXInvoice`
+`func NewFacturXInvoice(invoiceNumber string, paymentDueDate string, recipient Recipient, supplier Supplier, references InvoiceReferences, totals InvoiceTotals, ) *FacturXInvoice`
 
 NewFacturXInvoice instantiates a new FacturXInvoice object
 This constructor will assign default values to properties that have it defined,
@@ -203,7 +203,22 @@ and a boolean to check if the value has been set.
 
 SetInvoicingFramework sets InvoicingFramework field to given value.
 
+### HasInvoicingFramework
 
+`func (o *FacturXInvoice) HasInvoicingFramework() bool`
+
+HasInvoicingFramework returns a boolean if a field has been set.
+
+### SetInvoicingFrameworkNil
+
+`func (o *FacturXInvoice) SetInvoicingFrameworkNil(b bool)`
+
+ SetInvoicingFrameworkNil sets the value for InvoicingFramework to be an explicit nil
+
+### UnsetInvoicingFramework
+`func (o *FacturXInvoice) UnsetInvoicingFramework()`
+
+UnsetInvoicingFramework ensures that no value is present for InvoicingFramework, not even an explicit nil
 ### GetReferences
 
 `func (o *FacturXInvoice) GetReferences() InvoiceReferences`

@@ -19,6 +19,7 @@ api_flux6_invoice_lifecycle_cdar.go
 api_health.go
 api_invoice_generation.go
 api_parse.go
+api_references.go
 api_validation.go
 client.go
 configuration.go
@@ -194,9 +195,9 @@ docs/FacturXInvoice.md
 docs/FacturXPDFInfo.md
 docs/FacturXPDFXMLVerificationAPI.md
 docs/FacturXValidationAPI.md
-docs/FactureElectroniqueModelsInvoiceTypeCode.md
-docs/FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.md
-docs/FactureElectroniqueRestApiSchemasValidationValidationErrorResponse.md
+docs/FactureElectroniqueRestApiSchemasCdarValidationErrorResponse.md
+docs/FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode.md
+docs/FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.md
 docs/FieldStatus.md
 docs/FileInfo.md
 docs/FilesInfo.md
@@ -230,6 +231,7 @@ docs/IncomingSupplier.md
 docs/InvoiceFormat.md
 docs/InvoiceGenerationAPI.md
 docs/InvoiceInput.md
+docs/InvoiceLifecycle.md
 docs/InvoiceLine.md
 docs/InvoiceLineAllowanceAmount.md
 docs/InvoiceNote.md
@@ -245,6 +247,8 @@ docs/InvoicingFrameworkCode.md
 docs/IssuerRoleCode.md
 docs/KeyRotationRequest.md
 docs/KeyRotationResponse.md
+docs/LifecycleEvent.md
+docs/LifecycleResponse.md
 docs/LineNetAmount.md
 docs/LineSubType.md
 docs/LineTotalAmount.md
@@ -281,6 +285,7 @@ docs/ReasonCodeInfo.md
 docs/ReasonCodesResponse.md
 docs/Recipient.md
 docs/RecipientInput.md
+docs/ReferencesAPI.md
 docs/RefuseeRequest.md
 docs/ReportIssuer.md
 docs/ReportPeriod.md
@@ -348,6 +353,8 @@ docs/UnitOfMeasure.md
 docs/VATAccountingCode.md
 docs/VATAmount.md
 docs/VATCategory.md
+docs/VATEXCodeInfo.md
+docs/VATEXCodesResponse.md
 docs/VATLine.md
 docs/VATPointDateCode.md
 docs/ValidateCDARRequest.md
@@ -536,9 +543,9 @@ model_error_source.go
 model_extraction_info.go
 model_factur_x_invoice.go
 model_factur_xpdf_info.go
-model_facture_electronique__models__invoice_type_code.go
-model_facture_electronique__rest_api__schemas__chorus_pro__chorus_pro_credentials.go
-model_facture_electronique__rest_api__schemas__validation__validation_error_response.go
+model_facture_electronique__rest_api__schemas__cdar__validation_error_response.go
+model_facture_electronique__rest_api__schemas__ereporting__invoice_type_code.go
+model_facture_electronique__rest_api__schemas__processing__chorus_pro_credentials.go
 model_field_status.go
 model_file_info.go
 model_files_info.go
@@ -568,6 +575,7 @@ model_incoming_invoice.go
 model_incoming_supplier.go
 model_invoice_format.go
 model_invoice_input.go
+model_invoice_lifecycle.go
 model_invoice_line.go
 model_invoice_line_allowance_amount.go
 model_invoice_note.go
@@ -583,6 +591,8 @@ model_invoicing_framework_code.go
 model_issuer_role_code.go
 model_key_rotation_request.go
 model_key_rotation_response.go
+model_lifecycle_event.go
+model_lifecycle_response.go
 model_line_net_amount.go
 model_line_sub_type.go
 model_line_total_amount.go
@@ -700,6 +710,8 @@ model_vat_category.go
 model_vat_line.go
 model_vat_point_date_code.go
 model_vat_rate.go
+model_vatex_code_info.go
+model_vatex_codes_response.go
 model_verification_success_response.go
 model_verification_success_task_result.go
 model_verification_typed_task_status.go
@@ -725,5 +737,6 @@ test/api_flux6_invoice_lifecycle_cdar_test.go
 test/api_health_test.go
 test/api_invoice_generation_test.go
 test/api_parse_test.go
+test/api_references_test.go
 test/api_validation_test.go
 utils.go

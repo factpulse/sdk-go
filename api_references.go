@@ -12,129 +12,132 @@ Contact: contact@factpulse.fr
 package factpulse
 
 import (
-	"encoding/json"
-	"fmt"
+	"bytes"
+	"context"
+	"io"
+	"net/http"
+	"net/url"
 )
 
-// InvoiceTypeCode Document type according to BR-FR-04 (UNTDID 1001 codes).  | Code | Name | Description | |------|------|-------------| | 380 | INVOICE | Commercial invoice | | 389 | SELF_BILLED_INVOICE | Self-billed invoice | | 393 | FACTORED_INVOICE | Factored invoice | | 501 | SELF_BILLED_FACTORED_INVOICE | Self-billed factored invoice | | 386 | PREPAYMENT_INVOICE | Prepayment invoice | | 500 | SELF_BILLED_PREPAYMENT_INVOICE | Self-billed prepayment invoice | | 384 | CORRECTIVE_INVOICE | Corrective invoice | | 471 | SELF_BILLED_CORRECTIVE_INVOICE | Self-billed corrective invoice | | 472 | FACTORED_CORRECTIVE_INVOICE | Factored corrective invoice | | 473 | SELF_BILLED_FACTORED_CORRECTIVE_INVOICE | Self-billed factored corrective invoice | | 381 | CREDIT_NOTE | Credit note | | 261 | SELF_BILLED_CREDIT_NOTE | Self-billed credit note | | 262 | GLOBAL_ALLOWANCE_CREDIT_NOTE | Credit note for global allowance | | 396 | FACTORED_CREDIT_NOTE | Factored credit note | | 502 | SELF_BILLED_FACTORED_CREDIT_NOTE | Self-billed factored credit note | | 503 | PREPAYMENT_CREDIT_NOTE | Credit note for prepayment invoice |
-type InvoiceTypeCode string
 
-// List of InvoiceTypeCode
-const (
-	INVOICETYPECODE_INVOICE InvoiceTypeCode = "380"
-	INVOICETYPECODE_SELF_BILLED_INVOICE InvoiceTypeCode = "389"
-	INVOICETYPECODE_FACTORED_INVOICE InvoiceTypeCode = "393"
-	INVOICETYPECODE_SELF_BILLED_FACTORED_INVOICE InvoiceTypeCode = "501"
-	INVOICETYPECODE_PREPAYMENT_INVOICE InvoiceTypeCode = "386"
-	INVOICETYPECODE_SELF_BILLED_PREPAYMENT_INVOICE InvoiceTypeCode = "500"
-	INVOICETYPECODE_CORRECTIVE_INVOICE InvoiceTypeCode = "384"
-	INVOICETYPECODE_SELF_BILLED_CORRECTIVE_INVOICE InvoiceTypeCode = "471"
-	INVOICETYPECODE_FACTORED_CORRECTIVE_INVOICE InvoiceTypeCode = "472"
-	INVOICETYPECODE_SELF_BILLED_FACTORED_CORRECTIVE_INVOICE InvoiceTypeCode = "473"
-	INVOICETYPECODE_CREDIT_NOTE InvoiceTypeCode = "381"
-	INVOICETYPECODE_SELF_BILLED_CREDIT_NOTE InvoiceTypeCode = "261"
-	INVOICETYPECODE_GLOBAL_ALLOWANCE_CREDIT_NOTE InvoiceTypeCode = "262"
-	INVOICETYPECODE_FACTORED_CREDIT_NOTE InvoiceTypeCode = "396"
-	INVOICETYPECODE_SELF_BILLED_FACTORED_CREDIT_NOTE InvoiceTypeCode = "502"
-	INVOICETYPECODE_PREPAYMENT_CREDIT_NOTE InvoiceTypeCode = "503"
-)
+// ReferencesAPIService ReferencesAPI service
+type ReferencesAPIService service
 
-// All allowed values of InvoiceTypeCode enum
-var AllowedInvoiceTypeCodeEnumValues = []InvoiceTypeCode{
-	"380",
-	"389",
-	"393",
-	"501",
-	"386",
-	"500",
-	"384",
-	"471",
-	"472",
-	"473",
-	"381",
-	"261",
-	"262",
-	"396",
-	"502",
-	"503",
+type ApiGetVatexCodesApiV1ReferencesVatexCodesGetRequest struct {
+	ctx context.Context
+	ApiService *ReferencesAPIService
+	category *string
 }
 
-func (v *InvoiceTypeCode) UnmarshalJSON(src []byte) error {
-	var value string
-	err := json.Unmarshal(src, &value)
+// Filter by VAT category code (E, AE, K, G, O).
+func (r ApiGetVatexCodesApiV1ReferencesVatexCodesGetRequest) Category(category string) ApiGetVatexCodesApiV1ReferencesVatexCodesGetRequest {
+	r.category = &category
+	return r
+}
+
+func (r ApiGetVatexCodesApiV1ReferencesVatexCodesGetRequest) Execute() (*VATEXCodesResponse, *http.Response, error) {
+	return r.ApiService.GetVatexCodesApiV1ReferencesVatexCodesGetExecute(r)
+}
+
+/*
+GetVatexCodesApiV1ReferencesVatexCodesGet VATEX exemption reason codes
+
+Returns the list of VATEX (VAT exemption reason) codes from the Peppol BIS Billing 3.0 code list. Source: https://docs.peppol.eu/poacc/billing/3.0/codelist/vatex/
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetVatexCodesApiV1ReferencesVatexCodesGetRequest
+*/
+func (a *ReferencesAPIService) GetVatexCodesApiV1ReferencesVatexCodesGet(ctx context.Context) ApiGetVatexCodesApiV1ReferencesVatexCodesGetRequest {
+	return ApiGetVatexCodesApiV1ReferencesVatexCodesGetRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return VATEXCodesResponse
+func (a *ReferencesAPIService) GetVatexCodesApiV1ReferencesVatexCodesGetExecute(r ApiGetVatexCodesApiV1ReferencesVatexCodesGetRequest) (*VATEXCodesResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *VATEXCodesResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReferencesAPIService.GetVatexCodesApiV1ReferencesVatexCodesGet")
 	if err != nil {
-		return err
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
-	enumTypeValue := InvoiceTypeCode(value)
-	for _, existing := range AllowedInvoiceTypeCodeEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
+
+	localVarPath := localBasePath + "/api/v1/references/vatex-codes"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.category != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "category", r.category, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
 		}
-	}
-
-	return fmt.Errorf("%+v is not a valid InvoiceTypeCode", value)
-}
-
-// NewInvoiceTypeCodeFromValue returns a pointer to a valid InvoiceTypeCode
-// for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewInvoiceTypeCodeFromValue(v string) (*InvoiceTypeCode, error) {
-	ev := InvoiceTypeCode(v)
-	if ev.IsValid() {
-		return &ev, nil
-	} else {
-		return nil, fmt.Errorf("invalid value '%v' for InvoiceTypeCode: valid values are %v", v, AllowedInvoiceTypeCodeEnumValues)
-	}
-}
-
-// IsValid return true if the value is valid for the enum, false otherwise
-func (v InvoiceTypeCode) IsValid() bool {
-	for _, existing := range AllowedInvoiceTypeCodeEnumValues {
-		if existing == v {
-			return true
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
-	return false
-}
 
-// Ptr returns reference to InvoiceTypeCode value
-func (v InvoiceTypeCode) Ptr() *InvoiceTypeCode {
-	return &v
-}
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
 
-type NullableInvoiceTypeCode struct {
-	value *InvoiceTypeCode
-	isSet bool
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
-
-func (v NullableInvoiceTypeCode) Get() *InvoiceTypeCode {
-	return v.value
-}
-
-func (v *NullableInvoiceTypeCode) Set(val *InvoiceTypeCode) {
-	v.value = val
-	v.isSet = true
-}
-
-func (v NullableInvoiceTypeCode) IsSet() bool {
-	return v.isSet
-}
-
-func (v *NullableInvoiceTypeCode) Unset() {
-	v.value = nil
-	v.isSet = false
-}
-
-func NewNullableInvoiceTypeCode(val *InvoiceTypeCode) *NullableInvoiceTypeCode {
-	return &NullableInvoiceTypeCode{value: val, isSet: true}
-}
-
-func (v NullableInvoiceTypeCode) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
-}
-
-func (v *NullableInvoiceTypeCode) UnmarshalJSON(src []byte) error {
-	v.isSet = true
-	return json.Unmarshal(src, &v.value)
-}
-
