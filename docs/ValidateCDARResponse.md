@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Valid** | **bool** | Résultat de validation | 
-**Errors** | Pointer to [**[]FactureElectroniqueRestApiSchemasCdarValidationErrorResponse**](FactureElectroniqueRestApiSchemasCdarValidationErrorResponse.md) | Liste des erreurs | [optional] 
-**Warnings** | Pointer to [**[]FactureElectroniqueRestApiSchemasCdarValidationErrorResponse**](FactureElectroniqueRestApiSchemasCdarValidationErrorResponse.md) | Liste des avertissements | [optional] 
+**Errors** | Pointer to [**[]ValidationErrorResponse**](ValidationErrorResponse.md) | Liste des erreurs | [optional] 
+**Warnings** | Pointer to [**[]ValidationErrorResponse**](ValidationErrorResponse.md) | Liste des avertissements | [optional] 
 
 ## Methods
 
@@ -49,20 +49,20 @@ SetValid sets Valid field to given value.
 
 ### GetErrors
 
-`func (o *ValidateCDARResponse) GetErrors() []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse`
+`func (o *ValidateCDARResponse) GetErrors() []ValidationErrorResponse`
 
 GetErrors returns the Errors field if non-nil, zero value otherwise.
 
 ### GetErrorsOk
 
-`func (o *ValidateCDARResponse) GetErrorsOk() (*[]FactureElectroniqueRestApiSchemasCdarValidationErrorResponse, bool)`
+`func (o *ValidateCDARResponse) GetErrorsOk() (*[]ValidationErrorResponse, bool)`
 
 GetErrorsOk returns a tuple with the Errors field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetErrors
 
-`func (o *ValidateCDARResponse) SetErrors(v []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse)`
+`func (o *ValidateCDARResponse) SetErrors(v []ValidationErrorResponse)`
 
 SetErrors sets Errors field to given value.
 
@@ -74,20 +74,20 @@ HasErrors returns a boolean if a field has been set.
 
 ### GetWarnings
 
-`func (o *ValidateCDARResponse) GetWarnings() []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse`
+`func (o *ValidateCDARResponse) GetWarnings() []ValidationErrorResponse`
 
 GetWarnings returns the Warnings field if non-nil, zero value otherwise.
 
 ### GetWarningsOk
 
-`func (o *ValidateCDARResponse) GetWarningsOk() (*[]FactureElectroniqueRestApiSchemasCdarValidationErrorResponse, bool)`
+`func (o *ValidateCDARResponse) GetWarningsOk() (*[]ValidationErrorResponse, bool)`
 
 GetWarningsOk returns a tuple with the Warnings field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetWarnings
 
-`func (o *ValidateCDARResponse) SetWarnings(v []FactureElectroniqueRestApiSchemasCdarValidationErrorResponse)`
+`func (o *ValidateCDARResponse) SetWarnings(v []ValidationErrorResponse)`
 
 SetWarnings sets Warnings field to given value.
 

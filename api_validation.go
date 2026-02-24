@@ -279,7 +279,7 @@ func (a *ValidationAPIService) ValidateXmlApiV1ProcessingValidateXmlPostExecute(
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ValidationErrorResponse
+			var v FactureElectroniqueRestApiSchemasValidationValidationErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

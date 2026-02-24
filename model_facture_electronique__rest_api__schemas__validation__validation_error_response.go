@@ -17,103 +17,60 @@ import (
 	"fmt"
 )
 
-// checks if the GetInvoiceRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetInvoiceRequest{}
+// checks if the FactureElectroniqueRestApiSchemasValidationValidationErrorResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FactureElectroniqueRestApiSchemasValidationValidationErrorResponse{}
 
-// GetInvoiceRequest Get an invoice.
-type GetInvoiceRequest struct {
-	Credentials NullableFactureElectroniqueRestApiSchemasChorusProChorusProCredentials `json:"credentials,omitempty"`
-	// Chorus Pro invoice ID
-	ChorusInvoiceId int32 `json:"chorusInvoiceId"`
+// FactureElectroniqueRestApiSchemasValidationValidationErrorResponse Response for validation errors.
+type FactureElectroniqueRestApiSchemasValidationValidationErrorResponse struct {
+	// List of detected validation errors.
+	Detail []string `json:"detail"`
 }
 
-type _GetInvoiceRequest GetInvoiceRequest
+type _FactureElectroniqueRestApiSchemasValidationValidationErrorResponse FactureElectroniqueRestApiSchemasValidationValidationErrorResponse
 
-// NewGetInvoiceRequest instantiates a new GetInvoiceRequest object
+// NewFactureElectroniqueRestApiSchemasValidationValidationErrorResponse instantiates a new FactureElectroniqueRestApiSchemasValidationValidationErrorResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetInvoiceRequest(chorusInvoiceId int32) *GetInvoiceRequest {
-	this := GetInvoiceRequest{}
-	this.ChorusInvoiceId = chorusInvoiceId
+func NewFactureElectroniqueRestApiSchemasValidationValidationErrorResponse(detail []string) *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse {
+	this := FactureElectroniqueRestApiSchemasValidationValidationErrorResponse{}
+	this.Detail = detail
 	return &this
 }
 
-// NewGetInvoiceRequestWithDefaults instantiates a new GetInvoiceRequest object
+// NewFactureElectroniqueRestApiSchemasValidationValidationErrorResponseWithDefaults instantiates a new FactureElectroniqueRestApiSchemasValidationValidationErrorResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetInvoiceRequestWithDefaults() *GetInvoiceRequest {
-	this := GetInvoiceRequest{}
+func NewFactureElectroniqueRestApiSchemasValidationValidationErrorResponseWithDefaults() *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse {
+	this := FactureElectroniqueRestApiSchemasValidationValidationErrorResponse{}
 	return &this
 }
 
-// GetCredentials returns the Credentials field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *GetInvoiceRequest) GetCredentials() FactureElectroniqueRestApiSchemasChorusProChorusProCredentials {
-	if o == nil || IsNil(o.Credentials.Get()) {
-		var ret FactureElectroniqueRestApiSchemasChorusProChorusProCredentials
-		return ret
-	}
-	return *o.Credentials.Get()
-}
-
-// GetCredentialsOk returns a tuple with the Credentials field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GetInvoiceRequest) GetCredentialsOk() (*FactureElectroniqueRestApiSchemasChorusProChorusProCredentials, bool) {
+// GetDetail returns the Detail field value
+func (o *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) GetDetail() []string {
 	if o == nil {
-		return nil, false
-	}
-	return o.Credentials.Get(), o.Credentials.IsSet()
-}
-
-// HasCredentials returns a boolean if a field has been set.
-func (o *GetInvoiceRequest) HasCredentials() bool {
-	if o != nil && o.Credentials.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCredentials gets a reference to the given NullableFactureElectroniqueRestApiSchemasChorusProChorusProCredentials and assigns it to the Credentials field.
-func (o *GetInvoiceRequest) SetCredentials(v FactureElectroniqueRestApiSchemasChorusProChorusProCredentials) {
-	o.Credentials.Set(&v)
-}
-// SetCredentialsNil sets the value for Credentials to be an explicit nil
-func (o *GetInvoiceRequest) SetCredentialsNil() {
-	o.Credentials.Set(nil)
-}
-
-// UnsetCredentials ensures that no value is present for Credentials, not even an explicit nil
-func (o *GetInvoiceRequest) UnsetCredentials() {
-	o.Credentials.Unset()
-}
-
-// GetChorusInvoiceId returns the ChorusInvoiceId field value
-func (o *GetInvoiceRequest) GetChorusInvoiceId() int32 {
-	if o == nil {
-		var ret int32
+		var ret []string
 		return ret
 	}
 
-	return o.ChorusInvoiceId
+	return o.Detail
 }
 
-// GetChorusInvoiceIdOk returns a tuple with the ChorusInvoiceId field value
+// GetDetailOk returns a tuple with the Detail field value
 // and a boolean to check if the value has been set.
-func (o *GetInvoiceRequest) GetChorusInvoiceIdOk() (*int32, bool) {
+func (o *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) GetDetailOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ChorusInvoiceId, true
+	return o.Detail, true
 }
 
-// SetChorusInvoiceId sets field value
-func (o *GetInvoiceRequest) SetChorusInvoiceId(v int32) {
-	o.ChorusInvoiceId = v
+// SetDetail sets field value
+func (o *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) SetDetail(v []string) {
+	o.Detail = v
 }
 
-func (o GetInvoiceRequest) MarshalJSON() ([]byte, error) {
+func (o FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -121,21 +78,18 @@ func (o GetInvoiceRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetInvoiceRequest) ToMap() (map[string]interface{}, error) {
+func (o FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Credentials.IsSet() {
-		toSerialize["credentials"] = o.Credentials.Get()
-	}
-	toSerialize["chorusInvoiceId"] = o.ChorusInvoiceId
+	toSerialize["detail"] = o.Detail
 	return toSerialize, nil
 }
 
-func (o *GetInvoiceRequest) UnmarshalJSON(data []byte) (err error) {
+func (o *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"chorusInvoiceId",
+		"detail",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -152,53 +106,53 @@ func (o *GetInvoiceRequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varGetInvoiceRequest := _GetInvoiceRequest{}
+	varFactureElectroniqueRestApiSchemasValidationValidationErrorResponse := _FactureElectroniqueRestApiSchemasValidationValidationErrorResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetInvoiceRequest)
+	err = decoder.Decode(&varFactureElectroniqueRestApiSchemasValidationValidationErrorResponse)
 
 	if err != nil {
 		return err
 	}
 
-	*o = GetInvoiceRequest(varGetInvoiceRequest)
+	*o = FactureElectroniqueRestApiSchemasValidationValidationErrorResponse(varFactureElectroniqueRestApiSchemasValidationValidationErrorResponse)
 
 	return err
 }
 
-type NullableGetInvoiceRequest struct {
-	value *GetInvoiceRequest
+type NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse struct {
+	value *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse
 	isSet bool
 }
 
-func (v NullableGetInvoiceRequest) Get() *GetInvoiceRequest {
+func (v NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse) Get() *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse {
 	return v.value
 }
 
-func (v *NullableGetInvoiceRequest) Set(val *GetInvoiceRequest) {
+func (v *NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse) Set(val *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetInvoiceRequest) IsSet() bool {
+func (v NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetInvoiceRequest) Unset() {
+func (v *NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetInvoiceRequest(val *GetInvoiceRequest) *NullableGetInvoiceRequest {
-	return &NullableGetInvoiceRequest{value: val, isSet: true}
+func NewNullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse(val *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) *NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse {
+	return &NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse{value: val, isSet: true}
 }
 
-func (v NullableGetInvoiceRequest) MarshalJSON() ([]byte, error) {
+func (v NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetInvoiceRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
