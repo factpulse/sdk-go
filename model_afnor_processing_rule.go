@@ -16,7 +16,7 @@ import (
 	"fmt"
 )
 
-// AFNORProcessingRule - B2B                 : e-invoicing - B2BInt              : International B2B e-reporting - B2C                 : B2C e-reporting - OutOfScope          : Out of scope (not regulated flow) - ArchiveOnly         : Archive only, no transmission - NotApplicable       : Not Applicable 
+// AFNORProcessingRule - B2B                 : e-invoicing - B2BInt              : International B2B e-reporting - B2C                 : B2C e-reporting - B2G                 : e-invoicing for B2G sales - B2GInt - OutOfScope          : Out of scope (not regulated flow) - B2GOutOfScope - ArchiveOnly         : Archive only, no transmission - NotApplicable       : Not Applicable 
 type AFNORProcessingRule string
 
 // List of AFNOR_ProcessingRule
@@ -24,7 +24,10 @@ const (
 	AFNORPROCESSINGRULE_B2_B AFNORProcessingRule = "B2B"
 	AFNORPROCESSINGRULE_B2_B_INT AFNORProcessingRule = "B2BInt"
 	AFNORPROCESSINGRULE_B2_C AFNORProcessingRule = "B2C"
+	AFNORPROCESSINGRULE_B2_G AFNORProcessingRule = "B2G"
+	AFNORPROCESSINGRULE_B2_G_INT AFNORProcessingRule = "B2GInt"
 	AFNORPROCESSINGRULE_OUT_OF_SCOPE AFNORProcessingRule = "OutOfScope"
+	AFNORPROCESSINGRULE_B2_G_OUT_OF_SCOPE AFNORProcessingRule = "B2GOutOfScope"
 	AFNORPROCESSINGRULE_ARCHIVE_ONLY AFNORProcessingRule = "ArchiveOnly"
 	AFNORPROCESSINGRULE_NOT_APPLICABLE AFNORProcessingRule = "NotApplicable"
 )
@@ -34,7 +37,10 @@ var AllowedAFNORProcessingRuleEnumValues = []AFNORProcessingRule{
 	"B2B",
 	"B2BInt",
 	"B2C",
+	"B2G",
+	"B2GInt",
 	"OutOfScope",
+	"B2GOutOfScope",
 	"ArchiveOnly",
 	"NotApplicable",
 }

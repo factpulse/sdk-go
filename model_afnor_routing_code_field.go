@@ -28,7 +28,6 @@ const (
 	AFNORROUTINGCODEFIELD_MANAGES_LEGAL_COMMITMENT_CODE AFNORRoutingCodeField = "managesLegalCommitmentCode"
 	AFNORROUTINGCODEFIELD_ADMINISTRATIVE_STATUS AFNORRoutingCodeField = "administrativeStatus"
 	AFNORROUTINGCODEFIELD_ADDRESS AFNORRoutingCodeField = "address"
-	AFNORROUTINGCODEFIELD_ID_INSTANCE AFNORRoutingCodeField = "idInstance"
 )
 
 // All allowed values of AFNORRoutingCodeField enum
@@ -40,7 +39,6 @@ var AllowedAFNORRoutingCodeFieldEnumValues = []AFNORRoutingCodeField{
 	"managesLegalCommitmentCode",
 	"administrativeStatus",
 	"address",
-	"idInstance",
 }
 
 func (v *AFNORRoutingCodeField) UnmarshalJSON(src []byte) error {

@@ -24,17 +24,18 @@ var _ MappedNullable = &AFNORFullFlowInfo{}
 // AFNORFullFlowInfo Identified Flow info: flow info + id + timestamp
 type AFNORFullFlowInfo struct {
 	// Unique identifier supporting UUID but not only, for flexibility purpose
+	FlowId string `json:"flowId"`
+	// The flow submission date and time (the date and time when the flow was created on the system) This property should be used by the API consumer as a time reference to avoid clock synchronization issues 
+	SubmittedAt time.Time `json:"submittedAt"`
+	// The tracking id is an external identifier and is used to track the flow by the sender
 	TrackingId *string `json:"trackingId,omitempty"`
 	// Name of the file
-	Name *string `json:"name,omitempty"`
+	Name string `json:"name"`
 	ProcessingRule *AFNORProcessingRule `json:"processingRule,omitempty"`
 	FlowSyntax AFNORFlowSyntax `json:"flowSyntax"`
 	FlowProfile *AFNORFlowProfile `json:"flowProfile,omitempty"`
+	// The sha256 is the fingerprint of the attached file: - if provided in the request: it should be checked once received - if not provided in the request: it may be computed and returned in the response 
 	Sha256 *string `json:"sha256,omitempty" validate:"regexp=^[a-f0-9]{64}$"`
-	// Unique identifier supporting UUID but not only, for flexibility purpose
-	FlowId *string `json:"flowId,omitempty"`
-	// The flow submission date and time (the date and time when the flow was created on the system) This property should be used by the API consumer as a time reference to avoid clock synchronization issues 
-	SubmittedAt *time.Time `json:"submittedAt,omitempty"`
 }
 
 type _AFNORFullFlowInfo AFNORFullFlowInfo
@@ -43,8 +44,11 @@ type _AFNORFullFlowInfo AFNORFullFlowInfo
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAFNORFullFlowInfo(flowSyntax AFNORFlowSyntax) *AFNORFullFlowInfo {
+func NewAFNORFullFlowInfo(flowId string, submittedAt time.Time, name string, flowSyntax AFNORFlowSyntax) *AFNORFullFlowInfo {
 	this := AFNORFullFlowInfo{}
+	this.FlowId = flowId
+	this.SubmittedAt = submittedAt
+	this.Name = name
 	this.FlowSyntax = flowSyntax
 	return &this
 }
@@ -55,6 +59,54 @@ func NewAFNORFullFlowInfo(flowSyntax AFNORFlowSyntax) *AFNORFullFlowInfo {
 func NewAFNORFullFlowInfoWithDefaults() *AFNORFullFlowInfo {
 	this := AFNORFullFlowInfo{}
 	return &this
+}
+
+// GetFlowId returns the FlowId field value
+func (o *AFNORFullFlowInfo) GetFlowId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.FlowId
+}
+
+// GetFlowIdOk returns a tuple with the FlowId field value
+// and a boolean to check if the value has been set.
+func (o *AFNORFullFlowInfo) GetFlowIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FlowId, true
+}
+
+// SetFlowId sets field value
+func (o *AFNORFullFlowInfo) SetFlowId(v string) {
+	o.FlowId = v
+}
+
+// GetSubmittedAt returns the SubmittedAt field value
+func (o *AFNORFullFlowInfo) GetSubmittedAt() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.SubmittedAt
+}
+
+// GetSubmittedAtOk returns a tuple with the SubmittedAt field value
+// and a boolean to check if the value has been set.
+func (o *AFNORFullFlowInfo) GetSubmittedAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.SubmittedAt, true
+}
+
+// SetSubmittedAt sets field value
+func (o *AFNORFullFlowInfo) SetSubmittedAt(v time.Time) {
+	o.SubmittedAt = v
 }
 
 // GetTrackingId returns the TrackingId field value if set, zero value otherwise.
@@ -89,36 +141,28 @@ func (o *AFNORFullFlowInfo) SetTrackingId(v string) {
 	o.TrackingId = &v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *AFNORFullFlowInfo) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *AFNORFullFlowInfo) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *AFNORFullFlowInfo) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *AFNORFullFlowInfo) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
 // GetProcessingRule returns the ProcessingRule field value if set, zero value otherwise.
@@ -241,70 +285,6 @@ func (o *AFNORFullFlowInfo) SetSha256(v string) {
 	o.Sha256 = &v
 }
 
-// GetFlowId returns the FlowId field value if set, zero value otherwise.
-func (o *AFNORFullFlowInfo) GetFlowId() string {
-	if o == nil || IsNil(o.FlowId) {
-		var ret string
-		return ret
-	}
-	return *o.FlowId
-}
-
-// GetFlowIdOk returns a tuple with the FlowId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AFNORFullFlowInfo) GetFlowIdOk() (*string, bool) {
-	if o == nil || IsNil(o.FlowId) {
-		return nil, false
-	}
-	return o.FlowId, true
-}
-
-// HasFlowId returns a boolean if a field has been set.
-func (o *AFNORFullFlowInfo) HasFlowId() bool {
-	if o != nil && !IsNil(o.FlowId) {
-		return true
-	}
-
-	return false
-}
-
-// SetFlowId gets a reference to the given string and assigns it to the FlowId field.
-func (o *AFNORFullFlowInfo) SetFlowId(v string) {
-	o.FlowId = &v
-}
-
-// GetSubmittedAt returns the SubmittedAt field value if set, zero value otherwise.
-func (o *AFNORFullFlowInfo) GetSubmittedAt() time.Time {
-	if o == nil || IsNil(o.SubmittedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.SubmittedAt
-}
-
-// GetSubmittedAtOk returns a tuple with the SubmittedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AFNORFullFlowInfo) GetSubmittedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.SubmittedAt) {
-		return nil, false
-	}
-	return o.SubmittedAt, true
-}
-
-// HasSubmittedAt returns a boolean if a field has been set.
-func (o *AFNORFullFlowInfo) HasSubmittedAt() bool {
-	if o != nil && !IsNil(o.SubmittedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetSubmittedAt gets a reference to the given time.Time and assigns it to the SubmittedAt field.
-func (o *AFNORFullFlowInfo) SetSubmittedAt(v time.Time) {
-	o.SubmittedAt = &v
-}
-
 func (o AFNORFullFlowInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -315,12 +295,12 @@ func (o AFNORFullFlowInfo) MarshalJSON() ([]byte, error) {
 
 func (o AFNORFullFlowInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["flowId"] = o.FlowId
+	toSerialize["submittedAt"] = o.SubmittedAt
 	if !IsNil(o.TrackingId) {
 		toSerialize["trackingId"] = o.TrackingId
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
+	toSerialize["name"] = o.Name
 	if !IsNil(o.ProcessingRule) {
 		toSerialize["processingRule"] = o.ProcessingRule
 	}
@@ -331,12 +311,6 @@ func (o AFNORFullFlowInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Sha256) {
 		toSerialize["sha256"] = o.Sha256
 	}
-	if !IsNil(o.FlowId) {
-		toSerialize["flowId"] = o.FlowId
-	}
-	if !IsNil(o.SubmittedAt) {
-		toSerialize["submittedAt"] = o.SubmittedAt
-	}
 	return toSerialize, nil
 }
 
@@ -345,6 +319,9 @@ func (o *AFNORFullFlowInfo) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"flowId",
+		"submittedAt",
+		"name",
 		"flowSyntax",
 	}
 

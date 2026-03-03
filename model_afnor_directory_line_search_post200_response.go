@@ -23,7 +23,7 @@ type AFNORDirectoryLineSearchPost200Response struct {
 	Search *AFNORSearchDirectoryLine `json:"search,omitempty"`
 	// The total number of results
 	TotalNumberOfResults *int32 `json:"totalNumberOfResults,omitempty"`
-	Results []AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode `json:"results,omitempty"`
+	Results []AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode `json:"results,omitempty"`
 }
 
 // NewAFNORDirectoryLineSearchPost200Response instantiates a new AFNORDirectoryLineSearchPost200Response object
@@ -108,9 +108,9 @@ func (o *AFNORDirectoryLineSearchPost200Response) SetTotalNumberOfResults(v int3
 }
 
 // GetResults returns the Results field value if set, zero value otherwise.
-func (o *AFNORDirectoryLineSearchPost200Response) GetResults() []AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode {
+func (o *AFNORDirectoryLineSearchPost200Response) GetResults() []AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode {
 	if o == nil || IsNil(o.Results) {
-		var ret []AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode
+		var ret []AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode
 		return ret
 	}
 	return o.Results
@@ -118,7 +118,7 @@ func (o *AFNORDirectoryLineSearchPost200Response) GetResults() []AFNORDirectoryL
 
 // GetResultsOk returns a tuple with the Results field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AFNORDirectoryLineSearchPost200Response) GetResultsOk() ([]AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode, bool) {
+func (o *AFNORDirectoryLineSearchPost200Response) GetResultsOk() ([]AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode, bool) {
 	if o == nil || IsNil(o.Results) {
 		return nil, false
 	}
@@ -134,8 +134,8 @@ func (o *AFNORDirectoryLineSearchPost200Response) HasResults() bool {
 	return false
 }
 
-// SetResults gets a reference to the given []AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode and assigns it to the Results field.
-func (o *AFNORDirectoryLineSearchPost200Response) SetResults(v []AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode) {
+// SetResults gets a reference to the given []AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode and assigns it to the Results field.
+func (o *AFNORDirectoryLineSearchPost200Response) SetResults(v []AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode) {
 	o.Results = v
 }
 

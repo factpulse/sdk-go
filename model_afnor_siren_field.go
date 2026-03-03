@@ -25,7 +25,7 @@ const (
 	AFNORSIRENFIELD_BUSINESS_NAME AFNORSirenField = "businessName"
 	AFNORSIRENFIELD_ENTITY_TYPE AFNORSirenField = "entityType"
 	AFNORSIRENFIELD_ADMINISTRATIVE_STATUS AFNORSirenField = "administrativeStatus"
-	AFNORSIRENFIELD_ID_INSTANCE AFNORSirenField = "idInstance"
+	AFNORSIRENFIELD_INSTRUCTIONS AFNORSirenField = "instructions"
 )
 
 // All allowed values of AFNORSirenField enum
@@ -34,7 +34,7 @@ var AllowedAFNORSirenFieldEnumValues = []AFNORSirenField{
 	"businessName",
 	"entityType",
 	"administrativeStatus",
-	"idInstance",
+	"instructions",
 }
 
 func (v *AFNORSirenField) UnmarshalJSON(src []byte) error {

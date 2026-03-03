@@ -13,29 +13,41 @@ package factpulse
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ChorusProCredentials type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ChorusProCredentials{}
 
-// ChorusProCredentials Optional Chorus Pro credentials.  **MODE 1 - JWT retrieval (recommended):** Do not provide this `credentials` field in the payload. Credentials will be automatically retrieved via client_uid from JWT (0-trust).  **MODE 2 - Credentials in payload:** Provide all required fields below. Useful for tests or third-party integrations.
+// ChorusProCredentials Chorus Pro credentials for Zero-Trust mode.  **Zero-Trust Mode**: Credentials are passed in each request and are NEVER stored.  **Security**: - Credentials are never persisted in the database - They are used only for the duration of the request - Secure transmission via HTTPS  **Use cases**: - High-security environments (banks, administrations) - Strict GDPR compliance - Tests with temporary credentials - Users who don't want to store their credentials
 type ChorusProCredentials struct {
-	PisteClientId NullableString `json:"pisteClientId,omitempty"`
-	PisteClientSecret NullableString `json:"pisteClientSecret,omitempty"`
-	ChorusLogin NullableString `json:"chorusLogin,omitempty"`
-	ChorusPassword NullableString `json:"chorusPassword,omitempty"`
-	// [MODE 2] Use sandbox mode (default: True)
-	SandboxMode *bool `json:"sandboxMode,omitempty"`
+	// PISTE Client ID (government API portal)
+	PisteClientId string `json:"pisteClientId"`
+	// PISTE Client Secret
+	PisteClientSecret string `json:"pisteClientSecret"`
+	// Chorus Pro login
+	ChorusProLogin string `json:"chorusProLogin"`
+	// Chorus Pro password
+	ChorusProPassword string `json:"chorusProPassword"`
+	// Use sandbox environment (true) or production (false)
+	Sandbox *bool `json:"sandbox,omitempty"`
 }
+
+type _ChorusProCredentials ChorusProCredentials
 
 // NewChorusProCredentials instantiates a new ChorusProCredentials object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewChorusProCredentials() *ChorusProCredentials {
+func NewChorusProCredentials(pisteClientId string, pisteClientSecret string, chorusProLogin string, chorusProPassword string) *ChorusProCredentials {
 	this := ChorusProCredentials{}
-	var sandboxMode bool = true
-	this.SandboxMode = &sandboxMode
+	this.PisteClientId = pisteClientId
+	this.PisteClientSecret = pisteClientSecret
+	this.ChorusProLogin = chorusProLogin
+	this.ChorusProPassword = chorusProPassword
+	var sandbox bool = true
+	this.Sandbox = &sandbox
 	return &this
 }
 
@@ -44,209 +56,137 @@ func NewChorusProCredentials() *ChorusProCredentials {
 // but it doesn't guarantee that properties required by API are set
 func NewChorusProCredentialsWithDefaults() *ChorusProCredentials {
 	this := ChorusProCredentials{}
-	var sandboxMode bool = true
-	this.SandboxMode = &sandboxMode
+	var sandbox bool = true
+	this.Sandbox = &sandbox
 	return &this
 }
 
-// GetPisteClientId returns the PisteClientId field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetPisteClientId returns the PisteClientId field value
 func (o *ChorusProCredentials) GetPisteClientId() string {
-	if o == nil || IsNil(o.PisteClientId.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.PisteClientId.Get()
+
+	return o.PisteClientId
 }
 
-// GetPisteClientIdOk returns a tuple with the PisteClientId field value if set, nil otherwise
+// GetPisteClientIdOk returns a tuple with the PisteClientId field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ChorusProCredentials) GetPisteClientIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.PisteClientId.Get(), o.PisteClientId.IsSet()
+	return &o.PisteClientId, true
 }
 
-// HasPisteClientId returns a boolean if a field has been set.
-func (o *ChorusProCredentials) HasPisteClientId() bool {
-	if o != nil && o.PisteClientId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetPisteClientId gets a reference to the given NullableString and assigns it to the PisteClientId field.
+// SetPisteClientId sets field value
 func (o *ChorusProCredentials) SetPisteClientId(v string) {
-	o.PisteClientId.Set(&v)
-}
-// SetPisteClientIdNil sets the value for PisteClientId to be an explicit nil
-func (o *ChorusProCredentials) SetPisteClientIdNil() {
-	o.PisteClientId.Set(nil)
+	o.PisteClientId = v
 }
 
-// UnsetPisteClientId ensures that no value is present for PisteClientId, not even an explicit nil
-func (o *ChorusProCredentials) UnsetPisteClientId() {
-	o.PisteClientId.Unset()
-}
-
-// GetPisteClientSecret returns the PisteClientSecret field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetPisteClientSecret returns the PisteClientSecret field value
 func (o *ChorusProCredentials) GetPisteClientSecret() string {
-	if o == nil || IsNil(o.PisteClientSecret.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.PisteClientSecret.Get()
+
+	return o.PisteClientSecret
 }
 
-// GetPisteClientSecretOk returns a tuple with the PisteClientSecret field value if set, nil otherwise
+// GetPisteClientSecretOk returns a tuple with the PisteClientSecret field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ChorusProCredentials) GetPisteClientSecretOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.PisteClientSecret.Get(), o.PisteClientSecret.IsSet()
+	return &o.PisteClientSecret, true
 }
 
-// HasPisteClientSecret returns a boolean if a field has been set.
-func (o *ChorusProCredentials) HasPisteClientSecret() bool {
-	if o != nil && o.PisteClientSecret.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetPisteClientSecret gets a reference to the given NullableString and assigns it to the PisteClientSecret field.
+// SetPisteClientSecret sets field value
 func (o *ChorusProCredentials) SetPisteClientSecret(v string) {
-	o.PisteClientSecret.Set(&v)
-}
-// SetPisteClientSecretNil sets the value for PisteClientSecret to be an explicit nil
-func (o *ChorusProCredentials) SetPisteClientSecretNil() {
-	o.PisteClientSecret.Set(nil)
+	o.PisteClientSecret = v
 }
 
-// UnsetPisteClientSecret ensures that no value is present for PisteClientSecret, not even an explicit nil
-func (o *ChorusProCredentials) UnsetPisteClientSecret() {
-	o.PisteClientSecret.Unset()
-}
-
-// GetChorusLogin returns the ChorusLogin field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ChorusProCredentials) GetChorusLogin() string {
-	if o == nil || IsNil(o.ChorusLogin.Get()) {
+// GetChorusProLogin returns the ChorusProLogin field value
+func (o *ChorusProCredentials) GetChorusProLogin() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ChorusLogin.Get()
+
+	return o.ChorusProLogin
 }
 
-// GetChorusLoginOk returns a tuple with the ChorusLogin field value if set, nil otherwise
+// GetChorusProLoginOk returns a tuple with the ChorusProLogin field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ChorusProCredentials) GetChorusLoginOk() (*string, bool) {
+func (o *ChorusProCredentials) GetChorusProLoginOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.ChorusLogin.Get(), o.ChorusLogin.IsSet()
+	return &o.ChorusProLogin, true
 }
 
-// HasChorusLogin returns a boolean if a field has been set.
-func (o *ChorusProCredentials) HasChorusLogin() bool {
-	if o != nil && o.ChorusLogin.IsSet() {
-		return true
-	}
-
-	return false
+// SetChorusProLogin sets field value
+func (o *ChorusProCredentials) SetChorusProLogin(v string) {
+	o.ChorusProLogin = v
 }
 
-// SetChorusLogin gets a reference to the given NullableString and assigns it to the ChorusLogin field.
-func (o *ChorusProCredentials) SetChorusLogin(v string) {
-	o.ChorusLogin.Set(&v)
-}
-// SetChorusLoginNil sets the value for ChorusLogin to be an explicit nil
-func (o *ChorusProCredentials) SetChorusLoginNil() {
-	o.ChorusLogin.Set(nil)
-}
-
-// UnsetChorusLogin ensures that no value is present for ChorusLogin, not even an explicit nil
-func (o *ChorusProCredentials) UnsetChorusLogin() {
-	o.ChorusLogin.Unset()
-}
-
-// GetChorusPassword returns the ChorusPassword field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ChorusProCredentials) GetChorusPassword() string {
-	if o == nil || IsNil(o.ChorusPassword.Get()) {
+// GetChorusProPassword returns the ChorusProPassword field value
+func (o *ChorusProCredentials) GetChorusProPassword() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ChorusPassword.Get()
+
+	return o.ChorusProPassword
 }
 
-// GetChorusPasswordOk returns a tuple with the ChorusPassword field value if set, nil otherwise
+// GetChorusProPasswordOk returns a tuple with the ChorusProPassword field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ChorusProCredentials) GetChorusPasswordOk() (*string, bool) {
+func (o *ChorusProCredentials) GetChorusProPasswordOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.ChorusPassword.Get(), o.ChorusPassword.IsSet()
+	return &o.ChorusProPassword, true
 }
 
-// HasChorusPassword returns a boolean if a field has been set.
-func (o *ChorusProCredentials) HasChorusPassword() bool {
-	if o != nil && o.ChorusPassword.IsSet() {
-		return true
-	}
-
-	return false
+// SetChorusProPassword sets field value
+func (o *ChorusProCredentials) SetChorusProPassword(v string) {
+	o.ChorusProPassword = v
 }
 
-// SetChorusPassword gets a reference to the given NullableString and assigns it to the ChorusPassword field.
-func (o *ChorusProCredentials) SetChorusPassword(v string) {
-	o.ChorusPassword.Set(&v)
-}
-// SetChorusPasswordNil sets the value for ChorusPassword to be an explicit nil
-func (o *ChorusProCredentials) SetChorusPasswordNil() {
-	o.ChorusPassword.Set(nil)
-}
-
-// UnsetChorusPassword ensures that no value is present for ChorusPassword, not even an explicit nil
-func (o *ChorusProCredentials) UnsetChorusPassword() {
-	o.ChorusPassword.Unset()
-}
-
-// GetSandboxMode returns the SandboxMode field value if set, zero value otherwise.
-func (o *ChorusProCredentials) GetSandboxMode() bool {
-	if o == nil || IsNil(o.SandboxMode) {
+// GetSandbox returns the Sandbox field value if set, zero value otherwise.
+func (o *ChorusProCredentials) GetSandbox() bool {
+	if o == nil || IsNil(o.Sandbox) {
 		var ret bool
 		return ret
 	}
-	return *o.SandboxMode
+	return *o.Sandbox
 }
 
-// GetSandboxModeOk returns a tuple with the SandboxMode field value if set, nil otherwise
+// GetSandboxOk returns a tuple with the Sandbox field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ChorusProCredentials) GetSandboxModeOk() (*bool, bool) {
-	if o == nil || IsNil(o.SandboxMode) {
+func (o *ChorusProCredentials) GetSandboxOk() (*bool, bool) {
+	if o == nil || IsNil(o.Sandbox) {
 		return nil, false
 	}
-	return o.SandboxMode, true
+	return o.Sandbox, true
 }
 
-// HasSandboxMode returns a boolean if a field has been set.
-func (o *ChorusProCredentials) HasSandboxMode() bool {
-	if o != nil && !IsNil(o.SandboxMode) {
+// HasSandbox returns a boolean if a field has been set.
+func (o *ChorusProCredentials) HasSandbox() bool {
+	if o != nil && !IsNil(o.Sandbox) {
 		return true
 	}
 
 	return false
 }
 
-// SetSandboxMode gets a reference to the given bool and assigns it to the SandboxMode field.
-func (o *ChorusProCredentials) SetSandboxMode(v bool) {
-	o.SandboxMode = &v
+// SetSandbox gets a reference to the given bool and assigns it to the Sandbox field.
+func (o *ChorusProCredentials) SetSandbox(v bool) {
+	o.Sandbox = &v
 }
 
 func (o ChorusProCredentials) MarshalJSON() ([]byte, error) {
@@ -259,22 +199,54 @@ func (o ChorusProCredentials) MarshalJSON() ([]byte, error) {
 
 func (o ChorusProCredentials) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.PisteClientId.IsSet() {
-		toSerialize["pisteClientId"] = o.PisteClientId.Get()
-	}
-	if o.PisteClientSecret.IsSet() {
-		toSerialize["pisteClientSecret"] = o.PisteClientSecret.Get()
-	}
-	if o.ChorusLogin.IsSet() {
-		toSerialize["chorusLogin"] = o.ChorusLogin.Get()
-	}
-	if o.ChorusPassword.IsSet() {
-		toSerialize["chorusPassword"] = o.ChorusPassword.Get()
-	}
-	if !IsNil(o.SandboxMode) {
-		toSerialize["sandboxMode"] = o.SandboxMode
+	toSerialize["pisteClientId"] = o.PisteClientId
+	toSerialize["pisteClientSecret"] = o.PisteClientSecret
+	toSerialize["chorusProLogin"] = o.ChorusProLogin
+	toSerialize["chorusProPassword"] = o.ChorusProPassword
+	if !IsNil(o.Sandbox) {
+		toSerialize["sandbox"] = o.Sandbox
 	}
 	return toSerialize, nil
+}
+
+func (o *ChorusProCredentials) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"pisteClientId",
+		"pisteClientSecret",
+		"chorusProLogin",
+		"chorusProPassword",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varChorusProCredentials := _ChorusProCredentials{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varChorusProCredentials)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ChorusProCredentials(varChorusProCredentials)
+
+	return err
 }
 
 type NullableChorusProCredentials struct {

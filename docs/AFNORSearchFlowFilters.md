@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**UpdatedAfter** | Pointer to **time.Time** |  | [optional] 
+**UpdatedAfter** | Pointer to **time.Time** | The comparison with current date is strict : updatedAt &gt; updatedAfter | [optional] 
 **UpdatedBefore** | Pointer to **time.Time** |  | [optional] 
 **ProcessingRule** | Pointer to [**[]AFNORProcessingRule**](AFNORProcessingRule.md) |  | [optional] 
 **FlowType** | Pointer to [**[]AFNORFlowType**](AFNORFlowType.md) |  | [optional] 

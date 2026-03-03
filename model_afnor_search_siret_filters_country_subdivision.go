@@ -20,7 +20,7 @@ var _ MappedNullable = &AFNORSearchSiretFiltersCountrySubdivision{}
 
 // AFNORSearchSiretFiltersCountrySubdivision struct for AFNORSearchSiretFiltersCountrySubdivision
 type AFNORSearchSiretFiltersCountrySubdivision struct {
-	Op *AFNORContainsOperator `json:"op,omitempty"`
+	Op *AFNORStrictOperator `json:"op,omitempty"`
 	// Subdivision of the country
 	Value *string `json:"value,omitempty"`
 }
@@ -43,9 +43,9 @@ func NewAFNORSearchSiretFiltersCountrySubdivisionWithDefaults() *AFNORSearchSire
 }
 
 // GetOp returns the Op field value if set, zero value otherwise.
-func (o *AFNORSearchSiretFiltersCountrySubdivision) GetOp() AFNORContainsOperator {
+func (o *AFNORSearchSiretFiltersCountrySubdivision) GetOp() AFNORStrictOperator {
 	if o == nil || IsNil(o.Op) {
-		var ret AFNORContainsOperator
+		var ret AFNORStrictOperator
 		return ret
 	}
 	return *o.Op
@@ -53,7 +53,7 @@ func (o *AFNORSearchSiretFiltersCountrySubdivision) GetOp() AFNORContainsOperato
 
 // GetOpOk returns a tuple with the Op field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AFNORSearchSiretFiltersCountrySubdivision) GetOpOk() (*AFNORContainsOperator, bool) {
+func (o *AFNORSearchSiretFiltersCountrySubdivision) GetOpOk() (*AFNORStrictOperator, bool) {
 	if o == nil || IsNil(o.Op) {
 		return nil, false
 	}
@@ -69,8 +69,8 @@ func (o *AFNORSearchSiretFiltersCountrySubdivision) HasOp() bool {
 	return false
 }
 
-// SetOp gets a reference to the given AFNORContainsOperator and assigns it to the Op field.
-func (o *AFNORSearchSiretFiltersCountrySubdivision) SetOp(v AFNORContainsOperator) {
+// SetOp gets a reference to the given AFNORStrictOperator and assigns it to the Op field.
+func (o *AFNORSearchSiretFiltersCountrySubdivision) SetOp(v AFNORStrictOperator) {
 	o.Op = &v
 }
 

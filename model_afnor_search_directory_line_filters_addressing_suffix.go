@@ -20,7 +20,7 @@ var _ MappedNullable = &AFNORSearchDirectoryLineFiltersAddressingSuffix{}
 
 // AFNORSearchDirectoryLineFiltersAddressingSuffix struct for AFNORSearchDirectoryLineFiltersAddressingSuffix
 type AFNORSearchDirectoryLineFiltersAddressingSuffix struct {
-	Op *AFNORStrictOperator `json:"op,omitempty"`
+	Op *AFNORContainsOrStrictOperator `json:"op,omitempty"`
 	// suffix of the directory line which defines an address mesh not attached to a facility
 	Value *string `json:"value,omitempty"`
 }
@@ -43,9 +43,9 @@ func NewAFNORSearchDirectoryLineFiltersAddressingSuffixWithDefaults() *AFNORSear
 }
 
 // GetOp returns the Op field value if set, zero value otherwise.
-func (o *AFNORSearchDirectoryLineFiltersAddressingSuffix) GetOp() AFNORStrictOperator {
+func (o *AFNORSearchDirectoryLineFiltersAddressingSuffix) GetOp() AFNORContainsOrStrictOperator {
 	if o == nil || IsNil(o.Op) {
-		var ret AFNORStrictOperator
+		var ret AFNORContainsOrStrictOperator
 		return ret
 	}
 	return *o.Op
@@ -53,7 +53,7 @@ func (o *AFNORSearchDirectoryLineFiltersAddressingSuffix) GetOp() AFNORStrictOpe
 
 // GetOpOk returns a tuple with the Op field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AFNORSearchDirectoryLineFiltersAddressingSuffix) GetOpOk() (*AFNORStrictOperator, bool) {
+func (o *AFNORSearchDirectoryLineFiltersAddressingSuffix) GetOpOk() (*AFNORContainsOrStrictOperator, bool) {
 	if o == nil || IsNil(o.Op) {
 		return nil, false
 	}
@@ -69,8 +69,8 @@ func (o *AFNORSearchDirectoryLineFiltersAddressingSuffix) HasOp() bool {
 	return false
 }
 
-// SetOp gets a reference to the given AFNORStrictOperator and assigns it to the Op field.
-func (o *AFNORSearchDirectoryLineFiltersAddressingSuffix) SetOp(v AFNORStrictOperator) {
+// SetOp gets a reference to the given AFNORContainsOrStrictOperator and assigns it to the Op field.
+func (o *AFNORSearchDirectoryLineFiltersAddressingSuffix) SetOp(v AFNORContainsOrStrictOperator) {
 	o.Op = &v
 }
 

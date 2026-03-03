@@ -20,15 +20,16 @@ import (
 // checks if the AFNORFlowInfo type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AFNORFlowInfo{}
 
-// AFNORFlowInfo Signaling of the flow: - The tracking id is an external identifier and is used to track the flow by the sender - The sha256 is the fingerprint of the attached file:   - if provided in the request: it should be checked once received   - if not provided in the request: it should be computed and returned in the response 
+// AFNORFlowInfo Signaling of the flow
 type AFNORFlowInfo struct {
-	// Unique identifier supporting UUID but not only, for flexibility purpose
+	// The tracking id is an external identifier and is used to track the flow by the sender
 	TrackingId *string `json:"trackingId,omitempty"`
 	// Name of the file
-	Name *string `json:"name,omitempty"`
+	Name string `json:"name"`
 	ProcessingRule *AFNORProcessingRule `json:"processingRule,omitempty"`
 	FlowSyntax AFNORFlowSyntax `json:"flowSyntax"`
 	FlowProfile *AFNORFlowProfile `json:"flowProfile,omitempty"`
+	// The sha256 is the fingerprint of the attached file: - if provided in the request: it should be checked once received - if not provided in the request: it may be computed and returned in the response 
 	Sha256 *string `json:"sha256,omitempty" validate:"regexp=^[a-f0-9]{64}$"`
 }
 
@@ -38,8 +39,9 @@ type _AFNORFlowInfo AFNORFlowInfo
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAFNORFlowInfo(flowSyntax AFNORFlowSyntax) *AFNORFlowInfo {
+func NewAFNORFlowInfo(name string, flowSyntax AFNORFlowSyntax) *AFNORFlowInfo {
 	this := AFNORFlowInfo{}
+	this.Name = name
 	this.FlowSyntax = flowSyntax
 	return &this
 }
@@ -84,36 +86,28 @@ func (o *AFNORFlowInfo) SetTrackingId(v string) {
 	o.TrackingId = &v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *AFNORFlowInfo) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *AFNORFlowInfo) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *AFNORFlowInfo) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *AFNORFlowInfo) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
 // GetProcessingRule returns the ProcessingRule field value if set, zero value otherwise.
@@ -249,9 +243,7 @@ func (o AFNORFlowInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TrackingId) {
 		toSerialize["trackingId"] = o.TrackingId
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
+	toSerialize["name"] = o.Name
 	if !IsNil(o.ProcessingRule) {
 		toSerialize["processingRule"] = o.ProcessingRule
 	}
@@ -270,6 +262,7 @@ func (o *AFNORFlowInfo) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"name",
 		"flowSyntax",
 	}
 

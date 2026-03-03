@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Op** | Pointer to [**AFNORContainsOperator**](AFNORContainsOperator.md) |  | [optional] 
+**Op** | Pointer to [**AFNORStrictOrStartWithOperator**](AFNORStrictOrStartWithOperator.md) |  | [optional] 
 **Value** | Pointer to **string** | Service postal code | [optional] 
 
 ## Methods
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetOp
 
-`func (o *AFNORSearchSiretFiltersPostalCode) GetOp() AFNORContainsOperator`
+`func (o *AFNORSearchSiretFiltersPostalCode) GetOp() AFNORStrictOrStartWithOperator`
 
 GetOp returns the Op field if non-nil, zero value otherwise.
 
 ### GetOpOk
 
-`func (o *AFNORSearchSiretFiltersPostalCode) GetOpOk() (*AFNORContainsOperator, bool)`
+`func (o *AFNORSearchSiretFiltersPostalCode) GetOpOk() (*AFNORStrictOrStartWithOperator, bool)`
 
 GetOpOk returns a tuple with the Op field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOp
 
-`func (o *AFNORSearchSiretFiltersPostalCode) SetOp(v AFNORContainsOperator)`
+`func (o *AFNORSearchSiretFiltersPostalCode) SetOp(v AFNORStrictOrStartWithOperator)`
 
 SetOp sets Op field to given value.
 

@@ -37,7 +37,7 @@ type SimplifiedInvoiceData struct {
 	PurchaseOrderReference NullableString `json:"purchaseOrderReference,omitempty"`
 	ContractReference NullableString `json:"contractReference,omitempty"`
 	// Document type (UNTDID 1001). Default: 380 (Invoice).
-	InvoiceType *FactureElectroniqueModelsInvoiceTypeCode `json:"invoiceType,omitempty"`
+	InvoiceType *InvoiceTypeCode `json:"invoiceType,omitempty"`
 	PrecedingInvoiceReference NullableString `json:"precedingInvoiceReference,omitempty"`
 	OperationNature NullableOperationNature `json:"operationNature,omitempty"`
 	InvoicingFramework NullableInvoicingFrameworkCode `json:"invoicingFramework,omitempty"`
@@ -367,9 +367,9 @@ func (o *SimplifiedInvoiceData) UnsetContractReference() {
 }
 
 // GetInvoiceType returns the InvoiceType field value if set, zero value otherwise.
-func (o *SimplifiedInvoiceData) GetInvoiceType() FactureElectroniqueModelsInvoiceTypeCode {
+func (o *SimplifiedInvoiceData) GetInvoiceType() InvoiceTypeCode {
 	if o == nil || IsNil(o.InvoiceType) {
-		var ret FactureElectroniqueModelsInvoiceTypeCode
+		var ret InvoiceTypeCode
 		return ret
 	}
 	return *o.InvoiceType
@@ -377,7 +377,7 @@ func (o *SimplifiedInvoiceData) GetInvoiceType() FactureElectroniqueModelsInvoic
 
 // GetInvoiceTypeOk returns a tuple with the InvoiceType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SimplifiedInvoiceData) GetInvoiceTypeOk() (*FactureElectroniqueModelsInvoiceTypeCode, bool) {
+func (o *SimplifiedInvoiceData) GetInvoiceTypeOk() (*InvoiceTypeCode, bool) {
 	if o == nil || IsNil(o.InvoiceType) {
 		return nil, false
 	}
@@ -393,8 +393,8 @@ func (o *SimplifiedInvoiceData) HasInvoiceType() bool {
 	return false
 }
 
-// SetInvoiceType gets a reference to the given FactureElectroniqueModelsInvoiceTypeCode and assigns it to the InvoiceType field.
-func (o *SimplifiedInvoiceData) SetInvoiceType(v FactureElectroniqueModelsInvoiceTypeCode) {
+// SetInvoiceType gets a reference to the given InvoiceTypeCode and assigns it to the InvoiceType field.
+func (o *SimplifiedInvoiceData) SetInvoiceType(v InvoiceTypeCode) {
 	o.InvoiceType = &v
 }
 

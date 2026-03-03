@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Search** | Pointer to [**AFNORSearchDirectoryLine**](AFNORSearchDirectoryLine.md) |  | [optional] 
 **TotalNumberOfResults** | Pointer to **int32** | The total number of results | [optional] 
-**Results** | Pointer to [**[]AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode**](AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode.md) |  | [optional] 
+**Results** | Pointer to [**[]AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode**](AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode.md) |  | [optional] 
 
 ## Methods
 
@@ -79,20 +79,20 @@ HasTotalNumberOfResults returns a boolean if a field has been set.
 
 ### GetResults
 
-`func (o *AFNORDirectoryLineSearchPost200Response) GetResults() []AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode`
+`func (o *AFNORDirectoryLineSearchPost200Response) GetResults() []AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode`
 
 GetResults returns the Results field if non-nil, zero value otherwise.
 
 ### GetResultsOk
 
-`func (o *AFNORDirectoryLineSearchPost200Response) GetResultsOk() (*[]AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode, bool)`
+`func (o *AFNORDirectoryLineSearchPost200Response) GetResultsOk() (*[]AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode, bool)`
 
 GetResultsOk returns a tuple with the Results field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResults
 
-`func (o *AFNORDirectoryLineSearchPost200Response) SetResults(v []AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode)`
+`func (o *AFNORDirectoryLineSearchPost200Response) SetResults(v []AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode)`
 
 SetResults sets Results field to given value.
 

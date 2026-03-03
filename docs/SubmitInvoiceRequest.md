@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Credentials** | Pointer to [**NullableFactureElectroniqueRestApiSchemasChorusProChorusProCredentials**](FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.md) |  | [optional] 
+**Credentials** | Pointer to [**NullableChorusProCredentials**](ChorusProCredentials.md) |  | [optional] 
 **InvoiceNumber** | **string** | Invoice number | 
 **InvoiceDate** | **string** | Invoice date (ISO format: YYYY-MM-DD) | 
 **PaymentDueDate** | Pointer to **NullableString** |  | [optional] 
@@ -41,20 +41,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetCredentials
 
-`func (o *SubmitInvoiceRequest) GetCredentials() FactureElectroniqueRestApiSchemasChorusProChorusProCredentials`
+`func (o *SubmitInvoiceRequest) GetCredentials() ChorusProCredentials`
 
 GetCredentials returns the Credentials field if non-nil, zero value otherwise.
 
 ### GetCredentialsOk
 
-`func (o *SubmitInvoiceRequest) GetCredentialsOk() (*FactureElectroniqueRestApiSchemasChorusProChorusProCredentials, bool)`
+`func (o *SubmitInvoiceRequest) GetCredentialsOk() (*ChorusProCredentials, bool)`
 
 GetCredentialsOk returns a tuple with the Credentials field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCredentials
 
-`func (o *SubmitInvoiceRequest) SetCredentials(v FactureElectroniqueRestApiSchemasChorusProChorusProCredentials)`
+`func (o *SubmitInvoiceRequest) SetCredentials(v ChorusProCredentials)`
 
 SetCredentials sets Credentials field to given value.
 

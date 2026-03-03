@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Op** | Pointer to [**AFNORStrictOperator**](AFNORStrictOperator.md) |  | [optional] 
+**Op** | Pointer to [**AFNORContainsOrStrictOperator**](AFNORContainsOrStrictOperator.md) |  | [optional] 
 **Value** | Pointer to **string** | suffix of the directory line which defines an address mesh not attached to a facility | [optional] 
 
 ## Methods
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetOp
 
-`func (o *AFNORSearchDirectoryLineFiltersAddressingSuffix) GetOp() AFNORStrictOperator`
+`func (o *AFNORSearchDirectoryLineFiltersAddressingSuffix) GetOp() AFNORContainsOrStrictOperator`
 
 GetOp returns the Op field if non-nil, zero value otherwise.
 
 ### GetOpOk
 
-`func (o *AFNORSearchDirectoryLineFiltersAddressingSuffix) GetOpOk() (*AFNORStrictOperator, bool)`
+`func (o *AFNORSearchDirectoryLineFiltersAddressingSuffix) GetOpOk() (*AFNORContainsOrStrictOperator, bool)`
 
 GetOpOk returns a tuple with the Op field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOp
 
-`func (o *AFNORSearchDirectoryLineFiltersAddressingSuffix) SetOp(v AFNORStrictOperator)`
+`func (o *AFNORSearchDirectoryLineFiltersAddressingSuffix) SetOp(v AFNORContainsOrStrictOperator)`
 
 SetOp sets Op field to given value.
 

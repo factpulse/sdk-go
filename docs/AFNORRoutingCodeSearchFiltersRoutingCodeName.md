@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Op** | Pointer to [**AFNORContainsOperator**](AFNORContainsOperator.md) |  | [optional] 
+**Op** | Pointer to [**AFNORContainsOrStrictOperator**](AFNORContainsOrStrictOperator.md) |  | [optional] 
 **Value** | Pointer to **string** | Name of the routing code. | [optional] 
 
 ## Methods
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetOp
 
-`func (o *AFNORRoutingCodeSearchFiltersRoutingCodeName) GetOp() AFNORContainsOperator`
+`func (o *AFNORRoutingCodeSearchFiltersRoutingCodeName) GetOp() AFNORContainsOrStrictOperator`
 
 GetOp returns the Op field if non-nil, zero value otherwise.
 
 ### GetOpOk
 
-`func (o *AFNORRoutingCodeSearchFiltersRoutingCodeName) GetOpOk() (*AFNORContainsOperator, bool)`
+`func (o *AFNORRoutingCodeSearchFiltersRoutingCodeName) GetOpOk() (*AFNORContainsOrStrictOperator, bool)`
 
 GetOpOk returns a tuple with the Op field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOp
 
-`func (o *AFNORRoutingCodeSearchFiltersRoutingCodeName) SetOp(v AFNORContainsOperator)`
+`func (o *AFNORRoutingCodeSearchFiltersRoutingCodeName) SetOp(v AFNORContainsOrStrictOperator)`
 
 SetOp sets Op field to given value.
 

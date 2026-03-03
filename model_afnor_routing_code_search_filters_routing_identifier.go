@@ -20,7 +20,7 @@ var _ MappedNullable = &AFNORRoutingCodeSearchFiltersRoutingIdentifier{}
 
 // AFNORRoutingCodeSearchFiltersRoutingIdentifier struct for AFNORRoutingCodeSearchFiltersRoutingIdentifier
 type AFNORRoutingCodeSearchFiltersRoutingIdentifier struct {
-	Op *AFNORContainsOperator `json:"op,omitempty"`
+	Op *AFNORContainsOrStrictOperator `json:"op,omitempty"`
 	// Routing identifier for a routing code.
 	Value *string `json:"value,omitempty" validate:"regexp=^$|^(?!\\\\s*$).+"`
 }
@@ -43,9 +43,9 @@ func NewAFNORRoutingCodeSearchFiltersRoutingIdentifierWithDefaults() *AFNORRouti
 }
 
 // GetOp returns the Op field value if set, zero value otherwise.
-func (o *AFNORRoutingCodeSearchFiltersRoutingIdentifier) GetOp() AFNORContainsOperator {
+func (o *AFNORRoutingCodeSearchFiltersRoutingIdentifier) GetOp() AFNORContainsOrStrictOperator {
 	if o == nil || IsNil(o.Op) {
-		var ret AFNORContainsOperator
+		var ret AFNORContainsOrStrictOperator
 		return ret
 	}
 	return *o.Op
@@ -53,7 +53,7 @@ func (o *AFNORRoutingCodeSearchFiltersRoutingIdentifier) GetOp() AFNORContainsOp
 
 // GetOpOk returns a tuple with the Op field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AFNORRoutingCodeSearchFiltersRoutingIdentifier) GetOpOk() (*AFNORContainsOperator, bool) {
+func (o *AFNORRoutingCodeSearchFiltersRoutingIdentifier) GetOpOk() (*AFNORContainsOrStrictOperator, bool) {
 	if o == nil || IsNil(o.Op) {
 		return nil, false
 	}
@@ -69,8 +69,8 @@ func (o *AFNORRoutingCodeSearchFiltersRoutingIdentifier) HasOp() bool {
 	return false
 }
 
-// SetOp gets a reference to the given AFNORContainsOperator and assigns it to the Op field.
-func (o *AFNORRoutingCodeSearchFiltersRoutingIdentifier) SetOp(v AFNORContainsOperator) {
+// SetOp gets a reference to the given AFNORContainsOrStrictOperator and assigns it to the Op field.
+func (o *AFNORRoutingCodeSearchFiltersRoutingIdentifier) SetOp(v AFNORContainsOrStrictOperator) {
 	o.Op = &v
 }
 

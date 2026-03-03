@@ -26,7 +26,6 @@ const (
 	AFNORDIRECTORYLINEFIELD_SIRET AFNORDirectoryLineField = "siret"
 	AFNORDIRECTORYLINEFIELD_ROUTING_IDENTIFIER AFNORDirectoryLineField = "routingIdentifier"
 	AFNORDIRECTORYLINEFIELD_ADDRESSING_SUFFIX AFNORDirectoryLineField = "addressingSuffix"
-	AFNORDIRECTORYLINEFIELD_ID_INSTANCE AFNORDirectoryLineField = "idInstance"
 )
 
 // All allowed values of AFNORDirectoryLineField enum
@@ -36,7 +35,6 @@ var AllowedAFNORDirectoryLineFieldEnumValues = []AFNORDirectoryLineField{
 	"siret",
 	"routingIdentifier",
 	"addressingSuffix",
-	"idInstance",
 }
 
 func (v *AFNORDirectoryLineField) UnmarshalJSON(src []byte) error {

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **BusinessName** | Pointer to **string** | Business name | [optional] 
 **EntityType** | Pointer to [**AFNOREntityType**](AFNOREntityType.md) |  | [optional] 
 **AdministrativeStatus** | Pointer to [**AFNORLegalUnitAdministrativeStatus**](AFNORLegalUnitAdministrativeStatus.md) |  | [optional] 
+**Instructions** | Pointer to [**AFNORSirenInstructions**](AFNORSirenInstructions.md) |  | [optional] 
 
 ## Methods
 
@@ -127,6 +128,31 @@ SetAdministrativeStatus sets AdministrativeStatus field to given value.
 `func (o *AFNORLegalUnitPayloadHistory) HasAdministrativeStatus() bool`
 
 HasAdministrativeStatus returns a boolean if a field has been set.
+
+### GetInstructions
+
+`func (o *AFNORLegalUnitPayloadHistory) GetInstructions() AFNORSirenInstructions`
+
+GetInstructions returns the Instructions field if non-nil, zero value otherwise.
+
+### GetInstructionsOk
+
+`func (o *AFNORLegalUnitPayloadHistory) GetInstructionsOk() (*AFNORSirenInstructions, bool)`
+
+GetInstructionsOk returns a tuple with the Instructions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInstructions
+
+`func (o *AFNORLegalUnitPayloadHistory) SetInstructions(v AFNORSirenInstructions)`
+
+SetInstructions sets Instructions field to given value.
+
+### HasInstructions
+
+`func (o *AFNORLegalUnitPayloadHistory) HasInstructions() bool`
+
+HasInstructions returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

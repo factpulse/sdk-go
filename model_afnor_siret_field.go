@@ -25,16 +25,15 @@ const (
 	AFNORSIRETFIELD_SIREN AFNORSiretField = "siren"
 	AFNORSIRETFIELD_NAME AFNORSiretField = "name"
 	AFNORSIRETFIELD_FACILITY_TYPE AFNORSiretField = "facilityType"
-	AFNORSIRETFIELD_ADDRESS AFNORSiretField = "address"
-	AFNORSIRETFIELD_DIFFUSIBLE AFNORSiretField = "diffusible"
 	AFNORSIRETFIELD_ADMINISTRATIVE_STATUS AFNORSiretField = "administrativeStatus"
+	AFNORSIRETFIELD_SIRET_INSTRUCTIONS AFNORSiretField = "siretInstructions"
+	AFNORSIRETFIELD_ADDRESS AFNORSiretField = "address"
 	AFNORSIRETFIELD_PM_STATUS AFNORSiretField = "pmStatus"
 	AFNORSIRETFIELD_PM_ONLY AFNORSiretField = "pmOnly"
 	AFNORSIRETFIELD_MANAGES_PAYMENT_STATUS AFNORSiretField = "managesPaymentStatus"
 	AFNORSIRETFIELD_MANAGES_LEGAL_COMMITMENT AFNORSiretField = "managesLegalCommitment"
 	AFNORSIRETFIELD_MANAGES_LEGAL_COMMITMENT_OR_SERVICE AFNORSiretField = "managesLegalCommitmentOrService"
 	AFNORSIRETFIELD_SERVICE_CODE_STATUS AFNORSiretField = "serviceCodeStatus"
-	AFNORSIRETFIELD_ID_INSTANCE AFNORSiretField = "idInstance"
 )
 
 // All allowed values of AFNORSiretField enum
@@ -43,16 +42,15 @@ var AllowedAFNORSiretFieldEnumValues = []AFNORSiretField{
 	"siren",
 	"name",
 	"facilityType",
-	"address",
-	"diffusible",
 	"administrativeStatus",
+	"siretInstructions",
+	"address",
 	"pmStatus",
 	"pmOnly",
 	"managesPaymentStatus",
 	"managesLegalCommitment",
 	"managesLegalCommitmentOrService",
 	"serviceCodeStatus",
-	"idInstance",
 }
 
 func (v *AFNORSiretField) UnmarshalJSON(src []byte) error {

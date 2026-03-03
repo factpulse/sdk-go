@@ -26,6 +26,7 @@ type AFNORLegalUnitPayloadHistory struct {
 	BusinessName *string `json:"businessName,omitempty"`
 	EntityType *AFNOREntityType `json:"entityType,omitempty"`
 	AdministrativeStatus *AFNORLegalUnitAdministrativeStatus `json:"administrativeStatus,omitempty"`
+	Instructions *AFNORSirenInstructions `json:"instructions,omitempty"`
 }
 
 // NewAFNORLegalUnitPayloadHistory instantiates a new AFNORLegalUnitPayloadHistory object
@@ -173,6 +174,38 @@ func (o *AFNORLegalUnitPayloadHistory) SetAdministrativeStatus(v AFNORLegalUnitA
 	o.AdministrativeStatus = &v
 }
 
+// GetInstructions returns the Instructions field value if set, zero value otherwise.
+func (o *AFNORLegalUnitPayloadHistory) GetInstructions() AFNORSirenInstructions {
+	if o == nil || IsNil(o.Instructions) {
+		var ret AFNORSirenInstructions
+		return ret
+	}
+	return *o.Instructions
+}
+
+// GetInstructionsOk returns a tuple with the Instructions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AFNORLegalUnitPayloadHistory) GetInstructionsOk() (*AFNORSirenInstructions, bool) {
+	if o == nil || IsNil(o.Instructions) {
+		return nil, false
+	}
+	return o.Instructions, true
+}
+
+// HasInstructions returns a boolean if a field has been set.
+func (o *AFNORLegalUnitPayloadHistory) HasInstructions() bool {
+	if o != nil && !IsNil(o.Instructions) {
+		return true
+	}
+
+	return false
+}
+
+// SetInstructions gets a reference to the given AFNORSirenInstructions and assigns it to the Instructions field.
+func (o *AFNORLegalUnitPayloadHistory) SetInstructions(v AFNORSirenInstructions) {
+	o.Instructions = &v
+}
+
 func (o AFNORLegalUnitPayloadHistory) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -194,6 +227,9 @@ func (o AFNORLegalUnitPayloadHistory) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.AdministrativeStatus) {
 		toSerialize["administrativeStatus"] = o.AdministrativeStatus
+	}
+	if !IsNil(o.Instructions) {
+		toSerialize["instructions"] = o.Instructions
 	}
 	return toSerialize, nil
 }

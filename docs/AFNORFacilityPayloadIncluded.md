@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **Siren** | Pointer to **string** | SIREN number | [optional] 
 **Name** | Pointer to **string** | business name | [optional] 
 **FacilityType** | Pointer to [**AFNORFacilityType**](AFNORFacilityType.md) |  | [optional] 
-**Diffusible** | Pointer to [**AFNORDiffusionStatus**](AFNORDiffusionStatus.md) |  | [optional] 
 **AdministrativeStatus** | Pointer to [**AFNORFacilityAdministrativeStatus**](AFNORFacilityAdministrativeStatus.md) |  | [optional] 
 **Address** | Pointer to [**AFNORAddressRead**](AFNORAddressRead.md) |  | [optional] 
 **B2gAdditionalData** | Pointer to [**AFNORFacilityPayloadHistoryUleB2gAdditionalData**](AFNORFacilityPayloadHistoryUleB2gAdditionalData.md) |  | [optional] 
@@ -131,31 +130,6 @@ SetFacilityType sets FacilityType field to given value.
 `func (o *AFNORFacilityPayloadIncluded) HasFacilityType() bool`
 
 HasFacilityType returns a boolean if a field has been set.
-
-### GetDiffusible
-
-`func (o *AFNORFacilityPayloadIncluded) GetDiffusible() AFNORDiffusionStatus`
-
-GetDiffusible returns the Diffusible field if non-nil, zero value otherwise.
-
-### GetDiffusibleOk
-
-`func (o *AFNORFacilityPayloadIncluded) GetDiffusibleOk() (*AFNORDiffusionStatus, bool)`
-
-GetDiffusibleOk returns a tuple with the Diffusible field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDiffusible
-
-`func (o *AFNORFacilityPayloadIncluded) SetDiffusible(v AFNORDiffusionStatus)`
-
-SetDiffusible sets Diffusible field to given value.
-
-### HasDiffusible
-
-`func (o *AFNORFacilityPayloadIncluded) HasDiffusible() bool`
-
-HasDiffusible returns a boolean if a field has been set.
 
 ### GetAdministrativeStatus
 

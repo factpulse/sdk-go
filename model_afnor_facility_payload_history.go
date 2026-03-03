@@ -27,11 +27,11 @@ type AFNORFacilityPayloadHistory struct {
 	// business name
 	Name *string `json:"name,omitempty"`
 	FacilityType *AFNORFacilityType `json:"facilityType,omitempty"`
-	Diffusible *AFNORDiffusionStatus `json:"diffusible,omitempty"`
 	AdministrativeStatus *AFNORFacilityAdministrativeStatus `json:"administrativeStatus,omitempty"`
+	SiretInstructions *AFNORSiretInstructions `json:"siretInstructions,omitempty"`
 	Address *AFNORAddressRead `json:"address,omitempty"`
 	B2gAdditionalData *AFNORFacilityPayloadHistoryUleB2gAdditionalData `json:"b2gAdditionalData,omitempty"`
-	LegalUnit *AFNORLegalUnitPayloadIncludedNoSiren `json:"legalUnit,omitempty"`
+	LegalUnit *AFNORLegalUnitPayloadIncluded `json:"legalUnit,omitempty"`
 }
 
 // NewAFNORFacilityPayloadHistory instantiates a new AFNORFacilityPayloadHistory object
@@ -179,38 +179,6 @@ func (o *AFNORFacilityPayloadHistory) SetFacilityType(v AFNORFacilityType) {
 	o.FacilityType = &v
 }
 
-// GetDiffusible returns the Diffusible field value if set, zero value otherwise.
-func (o *AFNORFacilityPayloadHistory) GetDiffusible() AFNORDiffusionStatus {
-	if o == nil || IsNil(o.Diffusible) {
-		var ret AFNORDiffusionStatus
-		return ret
-	}
-	return *o.Diffusible
-}
-
-// GetDiffusibleOk returns a tuple with the Diffusible field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AFNORFacilityPayloadHistory) GetDiffusibleOk() (*AFNORDiffusionStatus, bool) {
-	if o == nil || IsNil(o.Diffusible) {
-		return nil, false
-	}
-	return o.Diffusible, true
-}
-
-// HasDiffusible returns a boolean if a field has been set.
-func (o *AFNORFacilityPayloadHistory) HasDiffusible() bool {
-	if o != nil && !IsNil(o.Diffusible) {
-		return true
-	}
-
-	return false
-}
-
-// SetDiffusible gets a reference to the given AFNORDiffusionStatus and assigns it to the Diffusible field.
-func (o *AFNORFacilityPayloadHistory) SetDiffusible(v AFNORDiffusionStatus) {
-	o.Diffusible = &v
-}
-
 // GetAdministrativeStatus returns the AdministrativeStatus field value if set, zero value otherwise.
 func (o *AFNORFacilityPayloadHistory) GetAdministrativeStatus() AFNORFacilityAdministrativeStatus {
 	if o == nil || IsNil(o.AdministrativeStatus) {
@@ -241,6 +209,38 @@ func (o *AFNORFacilityPayloadHistory) HasAdministrativeStatus() bool {
 // SetAdministrativeStatus gets a reference to the given AFNORFacilityAdministrativeStatus and assigns it to the AdministrativeStatus field.
 func (o *AFNORFacilityPayloadHistory) SetAdministrativeStatus(v AFNORFacilityAdministrativeStatus) {
 	o.AdministrativeStatus = &v
+}
+
+// GetSiretInstructions returns the SiretInstructions field value if set, zero value otherwise.
+func (o *AFNORFacilityPayloadHistory) GetSiretInstructions() AFNORSiretInstructions {
+	if o == nil || IsNil(o.SiretInstructions) {
+		var ret AFNORSiretInstructions
+		return ret
+	}
+	return *o.SiretInstructions
+}
+
+// GetSiretInstructionsOk returns a tuple with the SiretInstructions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AFNORFacilityPayloadHistory) GetSiretInstructionsOk() (*AFNORSiretInstructions, bool) {
+	if o == nil || IsNil(o.SiretInstructions) {
+		return nil, false
+	}
+	return o.SiretInstructions, true
+}
+
+// HasSiretInstructions returns a boolean if a field has been set.
+func (o *AFNORFacilityPayloadHistory) HasSiretInstructions() bool {
+	if o != nil && !IsNil(o.SiretInstructions) {
+		return true
+	}
+
+	return false
+}
+
+// SetSiretInstructions gets a reference to the given AFNORSiretInstructions and assigns it to the SiretInstructions field.
+func (o *AFNORFacilityPayloadHistory) SetSiretInstructions(v AFNORSiretInstructions) {
+	o.SiretInstructions = &v
 }
 
 // GetAddress returns the Address field value if set, zero value otherwise.
@@ -308,9 +308,9 @@ func (o *AFNORFacilityPayloadHistory) SetB2gAdditionalData(v AFNORFacilityPayloa
 }
 
 // GetLegalUnit returns the LegalUnit field value if set, zero value otherwise.
-func (o *AFNORFacilityPayloadHistory) GetLegalUnit() AFNORLegalUnitPayloadIncludedNoSiren {
+func (o *AFNORFacilityPayloadHistory) GetLegalUnit() AFNORLegalUnitPayloadIncluded {
 	if o == nil || IsNil(o.LegalUnit) {
-		var ret AFNORLegalUnitPayloadIncludedNoSiren
+		var ret AFNORLegalUnitPayloadIncluded
 		return ret
 	}
 	return *o.LegalUnit
@@ -318,7 +318,7 @@ func (o *AFNORFacilityPayloadHistory) GetLegalUnit() AFNORLegalUnitPayloadInclud
 
 // GetLegalUnitOk returns a tuple with the LegalUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AFNORFacilityPayloadHistory) GetLegalUnitOk() (*AFNORLegalUnitPayloadIncludedNoSiren, bool) {
+func (o *AFNORFacilityPayloadHistory) GetLegalUnitOk() (*AFNORLegalUnitPayloadIncluded, bool) {
 	if o == nil || IsNil(o.LegalUnit) {
 		return nil, false
 	}
@@ -334,8 +334,8 @@ func (o *AFNORFacilityPayloadHistory) HasLegalUnit() bool {
 	return false
 }
 
-// SetLegalUnit gets a reference to the given AFNORLegalUnitPayloadIncludedNoSiren and assigns it to the LegalUnit field.
-func (o *AFNORFacilityPayloadHistory) SetLegalUnit(v AFNORLegalUnitPayloadIncludedNoSiren) {
+// SetLegalUnit gets a reference to the given AFNORLegalUnitPayloadIncluded and assigns it to the LegalUnit field.
+func (o *AFNORFacilityPayloadHistory) SetLegalUnit(v AFNORLegalUnitPayloadIncluded) {
 	o.LegalUnit = &v
 }
 
@@ -361,11 +361,11 @@ func (o AFNORFacilityPayloadHistory) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FacilityType) {
 		toSerialize["facilityType"] = o.FacilityType
 	}
-	if !IsNil(o.Diffusible) {
-		toSerialize["diffusible"] = o.Diffusible
-	}
 	if !IsNil(o.AdministrativeStatus) {
 		toSerialize["administrativeStatus"] = o.AdministrativeStatus
+	}
+	if !IsNil(o.SiretInstructions) {
+		toSerialize["siretInstructions"] = o.SiretInstructions
 	}
 	if !IsNil(o.Address) {
 		toSerialize["address"] = o.Address

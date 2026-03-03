@@ -27,7 +27,6 @@ type AFNORFacilityPayloadIncluded struct {
 	// business name
 	Name *string `json:"name,omitempty"`
 	FacilityType *AFNORFacilityType `json:"facilityType,omitempty"`
-	Diffusible *AFNORDiffusionStatus `json:"diffusible,omitempty"`
 	AdministrativeStatus *AFNORFacilityAdministrativeStatus `json:"administrativeStatus,omitempty"`
 	Address *AFNORAddressRead `json:"address,omitempty"`
 	B2gAdditionalData *AFNORFacilityPayloadHistoryUleB2gAdditionalData `json:"b2gAdditionalData,omitempty"`
@@ -178,38 +177,6 @@ func (o *AFNORFacilityPayloadIncluded) SetFacilityType(v AFNORFacilityType) {
 	o.FacilityType = &v
 }
 
-// GetDiffusible returns the Diffusible field value if set, zero value otherwise.
-func (o *AFNORFacilityPayloadIncluded) GetDiffusible() AFNORDiffusionStatus {
-	if o == nil || IsNil(o.Diffusible) {
-		var ret AFNORDiffusionStatus
-		return ret
-	}
-	return *o.Diffusible
-}
-
-// GetDiffusibleOk returns a tuple with the Diffusible field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AFNORFacilityPayloadIncluded) GetDiffusibleOk() (*AFNORDiffusionStatus, bool) {
-	if o == nil || IsNil(o.Diffusible) {
-		return nil, false
-	}
-	return o.Diffusible, true
-}
-
-// HasDiffusible returns a boolean if a field has been set.
-func (o *AFNORFacilityPayloadIncluded) HasDiffusible() bool {
-	if o != nil && !IsNil(o.Diffusible) {
-		return true
-	}
-
-	return false
-}
-
-// SetDiffusible gets a reference to the given AFNORDiffusionStatus and assigns it to the Diffusible field.
-func (o *AFNORFacilityPayloadIncluded) SetDiffusible(v AFNORDiffusionStatus) {
-	o.Diffusible = &v
-}
-
 // GetAdministrativeStatus returns the AdministrativeStatus field value if set, zero value otherwise.
 func (o *AFNORFacilityPayloadIncluded) GetAdministrativeStatus() AFNORFacilityAdministrativeStatus {
 	if o == nil || IsNil(o.AdministrativeStatus) {
@@ -327,9 +294,6 @@ func (o AFNORFacilityPayloadIncluded) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.FacilityType) {
 		toSerialize["facilityType"] = o.FacilityType
-	}
-	if !IsNil(o.Diffusible) {
-		toSerialize["diffusible"] = o.Diffusible
 	}
 	if !IsNil(o.AdministrativeStatus) {
 		toSerialize["administrativeStatus"] = o.AdministrativeStatus

@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TrackingId** | Pointer to **string** | Unique identifier supporting UUID but not only, for flexibility purpose | [optional] 
-**Name** | Pointer to **string** | Name of the file | [optional] 
+**TrackingId** | Pointer to **string** | The tracking id is an external identifier and is used to track the flow by the sender | [optional] 
+**Name** | **string** | Name of the file | 
 **ProcessingRule** | Pointer to [**AFNORProcessingRule**](AFNORProcessingRule.md) |  | [optional] 
 **FlowSyntax** | [**AFNORFlowSyntax**](AFNORFlowSyntax.md) |  | 
 **FlowProfile** | Pointer to [**AFNORFlowProfile**](AFNORFlowProfile.md) |  | [optional] 
-**Sha256** | Pointer to **string** |  | [optional] 
+**Sha256** | Pointer to **string** | The sha256 is the fingerprint of the attached file: - if provided in the request: it should be checked once received - if not provided in the request: it may be computed and returned in the response  | [optional] 
 
 ## Methods
 
 ### NewAFNORFlowInfo
 
-`func NewAFNORFlowInfo(flowSyntax AFNORFlowSyntax, ) *AFNORFlowInfo`
+`func NewAFNORFlowInfo(name string, flowSyntax AFNORFlowSyntax, ) *AFNORFlowInfo`
 
 NewAFNORFlowInfo instantiates a new AFNORFlowInfo object
 This constructor will assign default values to properties that have it defined,
@@ -74,11 +74,6 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
-
-`func (o *AFNORFlowInfo) HasName() bool`
-
-HasName returns a boolean if a field has been set.
 
 ### GetProcessingRule
 

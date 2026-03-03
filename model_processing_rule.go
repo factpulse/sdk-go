@@ -16,7 +16,7 @@ import (
 	"fmt"
 )
 
-// ProcessingRule AFNOR XP Z12-013 ProcessingRule (Annexe A, lignes 212-216).  Valeurs EXACTES de la spec (case-sensitive).
+// ProcessingRule AFNOR XP Z12-013 ProcessingRule (Annexe A v1.2.0).  Valeurs EXACTES de la spec (case-sensitive).
 type ProcessingRule string
 
 // List of ProcessingRule
@@ -24,7 +24,10 @@ const (
 	PROCESSINGRULE_B2_B ProcessingRule = "B2B"
 	PROCESSINGRULE_B2_B_INT ProcessingRule = "B2BInt"
 	PROCESSINGRULE_B2_C ProcessingRule = "B2C"
+	PROCESSINGRULE_B2_G ProcessingRule = "B2G"
+	PROCESSINGRULE_B2_G_INT ProcessingRule = "B2GInt"
 	PROCESSINGRULE_OUT_OF_SCOPE ProcessingRule = "OutOfScope"
+	PROCESSINGRULE_B2_G_OUT_OF_SCOPE ProcessingRule = "B2GOutOfScope"
 	PROCESSINGRULE_ARCHIVE_ONLY ProcessingRule = "ArchiveOnly"
 	PROCESSINGRULE_NOT_APPLICABLE ProcessingRule = "NotApplicable"
 )
@@ -34,7 +37,10 @@ var AllowedProcessingRuleEnumValues = []ProcessingRule{
 	"B2B",
 	"B2BInt",
 	"B2C",
+	"B2G",
+	"B2GInt",
 	"OutOfScope",
+	"B2GOutOfScope",
 	"ArchiveOnly",
 	"NotApplicable",
 }

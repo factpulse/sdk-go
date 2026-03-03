@@ -21,6 +21,7 @@ var _ MappedNullable = &AFNORSearchFlowFilters{}
 
 // AFNORSearchFlowFilters Filtering criteria, at least one is required
 type AFNORSearchFlowFilters struct {
+	// The comparison with current date is strict : updatedAt > updatedAfter
 	UpdatedAfter *time.Time `json:"updatedAfter,omitempty"`
 	UpdatedBefore *time.Time `json:"updatedBefore,omitempty"`
 	ProcessingRule []AFNORProcessingRule `json:"processingRule,omitempty"`

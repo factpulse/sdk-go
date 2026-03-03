@@ -21,19 +21,21 @@ type AFNORAlgorithm string
 
 // List of AFNOR_Algorithm
 const (
-	AFNORALGORITHM_RSA AFNORAlgorithm = "RSA"
+	AFNORALGORITHM_RS256 AFNORAlgorithm = "RS256"
+	AFNORALGORITHM_HS256 AFNORAlgorithm = "HS256"
 	AFNORALGORITHM_ECDSA AFNORAlgorithm = "ECDSA"
-	AFNORALGORITHM_RSA_PSS AFNORAlgorithm = "RSA_PSS"
 	AFNORALGORITHM_EDDSA_25519 AFNORAlgorithm = "EDDSA_25519"
+	AFNORALGORITHM_RSA_PSS AFNORAlgorithm = "RSA_PSS"
 	AFNORALGORITHM_EDDSA_448 AFNORAlgorithm = "EDDSA_448"
 )
 
 // All allowed values of AFNORAlgorithm enum
 var AllowedAFNORAlgorithmEnumValues = []AFNORAlgorithm{
-	"RSA",
+	"RS256",
+	"HS256",
 	"ECDSA",
-	"RSA_PSS",
 	"EDDSA_25519",
+	"RSA_PSS",
 	"EDDSA_448",
 }
 

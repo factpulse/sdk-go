@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Op** | Pointer to [**AFNORContainsOperator**](AFNORContainsOperator.md) |  | [optional] 
+**Op** | Pointer to [**AFNORStrictOperator**](AFNORStrictOperator.md) |  | [optional] 
 **Value** | Pointer to [**AFNORFacilityType**](AFNORFacilityType.md) |  | [optional] 
 
 ## Methods
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetOp
 
-`func (o *AFNORSearchSiretFiltersFacilityType) GetOp() AFNORContainsOperator`
+`func (o *AFNORSearchSiretFiltersFacilityType) GetOp() AFNORStrictOperator`
 
 GetOp returns the Op field if non-nil, zero value otherwise.
 
 ### GetOpOk
 
-`func (o *AFNORSearchSiretFiltersFacilityType) GetOpOk() (*AFNORContainsOperator, bool)`
+`func (o *AFNORSearchSiretFiltersFacilityType) GetOpOk() (*AFNORStrictOperator, bool)`
 
 GetOpOk returns a tuple with the Op field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOp
 
-`func (o *AFNORSearchSiretFiltersFacilityType) SetOp(v AFNORContainsOperator)`
+`func (o *AFNORSearchSiretFiltersFacilityType) SetOp(v AFNORStrictOperator)`
 
 SetOp sets Op field to given value.
 

@@ -14,6 +14,8 @@ package factpulse
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the AFNORFlow type satisfies the MappedNullable interface at compile time
@@ -21,30 +23,43 @@ var _ MappedNullable = &AFNORFlow{}
 
 // AFNORFlow The properties of a Flow resource
 type AFNORFlow struct {
-	// The flow submission date and time (the date and time when the flow was created on the system) 
-	SubmittedAt *time.Time `json:"submittedAt,omitempty"`
-	// The last update date and time of the flow. When the flow is submitted updatedAt is equal to submittedAt. When the flow acknowledgment status is changed updatedAt date and time is updated. 
-	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
-	// Unique identifier supporting UUID but not only, for flexibility purpose
-	FlowId *string `json:"flowId,omitempty"`
-	// Unique identifier supporting UUID but not only, for flexibility purpose
+	// The tracking id is an external identifier and is used to track the flow by the sender
 	TrackingId *string `json:"trackingId,omitempty"`
-	FlowType *AFNORFlowType `json:"flowType,omitempty"`
+	// Name of the file
+	Name string `json:"name"`
 	ProcessingRule *AFNORProcessingRule `json:"processingRule,omitempty"`
-	// Says whether the processing rule has been computed or the processing rule was an input parameter
-	ProcessingRuleSource *string `json:"processingRuleSource,omitempty"`
-	FlowDirection *AFNORFlowDirection `json:"flowDirection,omitempty"`
-	FlowSyntax *AFNORFlowSyntax `json:"flowSyntax,omitempty"`
+	FlowSyntax AFNORFlowSyntax `json:"flowSyntax"`
 	FlowProfile *AFNORFlowProfile `json:"flowProfile,omitempty"`
-	Acknowledgement *AFNORAcknowledgement `json:"acknowledgement,omitempty"`
+	// Unique identifier supporting UUID but not only, for flexibility purpose
+	FlowId string `json:"flowId"`
+	// The flow submission date and time (the date and time when the flow was created on the system) This property should be used by the API consumer as a time reference to avoid clock synchronization issues 
+	SubmittedAt time.Time `json:"submittedAt"`
+	// The last update date and time of the flow. When the flow is submitted updatedAt is equal to submittedAt. When the flow acknowledgment status is changed updatedAt date and time is updated. 
+	UpdatedAt time.Time `json:"updatedAt"`
+	FlowType AFNORFlowType `json:"flowType"`
+	// Says whether the processing rule has been computed or the processing rule was an input parameter
+	ProcessingRuleSource string `json:"processingRuleSource"`
+	FlowDirection AFNORFlowDirection `json:"flowDirection"`
+	Acknowledgement AFNORAcknowledgement `json:"acknowledgement"`
 }
+
+type _AFNORFlow AFNORFlow
 
 // NewAFNORFlow instantiates a new AFNORFlow object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAFNORFlow() *AFNORFlow {
+func NewAFNORFlow(name string, flowSyntax AFNORFlowSyntax, flowId string, submittedAt time.Time, updatedAt time.Time, flowType AFNORFlowType, processingRuleSource string, flowDirection AFNORFlowDirection, acknowledgement AFNORAcknowledgement) *AFNORFlow {
 	this := AFNORFlow{}
+	this.Name = name
+	this.FlowSyntax = flowSyntax
+	this.FlowId = flowId
+	this.SubmittedAt = submittedAt
+	this.UpdatedAt = updatedAt
+	this.FlowType = flowType
+	this.ProcessingRuleSource = processingRuleSource
+	this.FlowDirection = flowDirection
+	this.Acknowledgement = acknowledgement
 	return &this
 }
 
@@ -54,102 +69,6 @@ func NewAFNORFlow() *AFNORFlow {
 func NewAFNORFlowWithDefaults() *AFNORFlow {
 	this := AFNORFlow{}
 	return &this
-}
-
-// GetSubmittedAt returns the SubmittedAt field value if set, zero value otherwise.
-func (o *AFNORFlow) GetSubmittedAt() time.Time {
-	if o == nil || IsNil(o.SubmittedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.SubmittedAt
-}
-
-// GetSubmittedAtOk returns a tuple with the SubmittedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AFNORFlow) GetSubmittedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.SubmittedAt) {
-		return nil, false
-	}
-	return o.SubmittedAt, true
-}
-
-// HasSubmittedAt returns a boolean if a field has been set.
-func (o *AFNORFlow) HasSubmittedAt() bool {
-	if o != nil && !IsNil(o.SubmittedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetSubmittedAt gets a reference to the given time.Time and assigns it to the SubmittedAt field.
-func (o *AFNORFlow) SetSubmittedAt(v time.Time) {
-	o.SubmittedAt = &v
-}
-
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *AFNORFlow) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AFNORFlow) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
-		return nil, false
-	}
-	return o.UpdatedAt, true
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *AFNORFlow) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *AFNORFlow) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
-}
-
-// GetFlowId returns the FlowId field value if set, zero value otherwise.
-func (o *AFNORFlow) GetFlowId() string {
-	if o == nil || IsNil(o.FlowId) {
-		var ret string
-		return ret
-	}
-	return *o.FlowId
-}
-
-// GetFlowIdOk returns a tuple with the FlowId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AFNORFlow) GetFlowIdOk() (*string, bool) {
-	if o == nil || IsNil(o.FlowId) {
-		return nil, false
-	}
-	return o.FlowId, true
-}
-
-// HasFlowId returns a boolean if a field has been set.
-func (o *AFNORFlow) HasFlowId() bool {
-	if o != nil && !IsNil(o.FlowId) {
-		return true
-	}
-
-	return false
-}
-
-// SetFlowId gets a reference to the given string and assigns it to the FlowId field.
-func (o *AFNORFlow) SetFlowId(v string) {
-	o.FlowId = &v
 }
 
 // GetTrackingId returns the TrackingId field value if set, zero value otherwise.
@@ -184,36 +103,28 @@ func (o *AFNORFlow) SetTrackingId(v string) {
 	o.TrackingId = &v
 }
 
-// GetFlowType returns the FlowType field value if set, zero value otherwise.
-func (o *AFNORFlow) GetFlowType() AFNORFlowType {
-	if o == nil || IsNil(o.FlowType) {
-		var ret AFNORFlowType
+// GetName returns the Name field value
+func (o *AFNORFlow) GetName() string {
+	if o == nil {
+		var ret string
 		return ret
 	}
-	return *o.FlowType
+
+	return o.Name
 }
 
-// GetFlowTypeOk returns a tuple with the FlowType field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *AFNORFlow) GetFlowTypeOk() (*AFNORFlowType, bool) {
-	if o == nil || IsNil(o.FlowType) {
+func (o *AFNORFlow) GetNameOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FlowType, true
+	return &o.Name, true
 }
 
-// HasFlowType returns a boolean if a field has been set.
-func (o *AFNORFlow) HasFlowType() bool {
-	if o != nil && !IsNil(o.FlowType) {
-		return true
-	}
-
-	return false
-}
-
-// SetFlowType gets a reference to the given AFNORFlowType and assigns it to the FlowType field.
-func (o *AFNORFlow) SetFlowType(v AFNORFlowType) {
-	o.FlowType = &v
+// SetName sets field value
+func (o *AFNORFlow) SetName(v string) {
+	o.Name = v
 }
 
 // GetProcessingRule returns the ProcessingRule field value if set, zero value otherwise.
@@ -248,100 +159,28 @@ func (o *AFNORFlow) SetProcessingRule(v AFNORProcessingRule) {
 	o.ProcessingRule = &v
 }
 
-// GetProcessingRuleSource returns the ProcessingRuleSource field value if set, zero value otherwise.
-func (o *AFNORFlow) GetProcessingRuleSource() string {
-	if o == nil || IsNil(o.ProcessingRuleSource) {
-		var ret string
-		return ret
-	}
-	return *o.ProcessingRuleSource
-}
-
-// GetProcessingRuleSourceOk returns a tuple with the ProcessingRuleSource field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AFNORFlow) GetProcessingRuleSourceOk() (*string, bool) {
-	if o == nil || IsNil(o.ProcessingRuleSource) {
-		return nil, false
-	}
-	return o.ProcessingRuleSource, true
-}
-
-// HasProcessingRuleSource returns a boolean if a field has been set.
-func (o *AFNORFlow) HasProcessingRuleSource() bool {
-	if o != nil && !IsNil(o.ProcessingRuleSource) {
-		return true
-	}
-
-	return false
-}
-
-// SetProcessingRuleSource gets a reference to the given string and assigns it to the ProcessingRuleSource field.
-func (o *AFNORFlow) SetProcessingRuleSource(v string) {
-	o.ProcessingRuleSource = &v
-}
-
-// GetFlowDirection returns the FlowDirection field value if set, zero value otherwise.
-func (o *AFNORFlow) GetFlowDirection() AFNORFlowDirection {
-	if o == nil || IsNil(o.FlowDirection) {
-		var ret AFNORFlowDirection
-		return ret
-	}
-	return *o.FlowDirection
-}
-
-// GetFlowDirectionOk returns a tuple with the FlowDirection field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AFNORFlow) GetFlowDirectionOk() (*AFNORFlowDirection, bool) {
-	if o == nil || IsNil(o.FlowDirection) {
-		return nil, false
-	}
-	return o.FlowDirection, true
-}
-
-// HasFlowDirection returns a boolean if a field has been set.
-func (o *AFNORFlow) HasFlowDirection() bool {
-	if o != nil && !IsNil(o.FlowDirection) {
-		return true
-	}
-
-	return false
-}
-
-// SetFlowDirection gets a reference to the given AFNORFlowDirection and assigns it to the FlowDirection field.
-func (o *AFNORFlow) SetFlowDirection(v AFNORFlowDirection) {
-	o.FlowDirection = &v
-}
-
-// GetFlowSyntax returns the FlowSyntax field value if set, zero value otherwise.
+// GetFlowSyntax returns the FlowSyntax field value
 func (o *AFNORFlow) GetFlowSyntax() AFNORFlowSyntax {
-	if o == nil || IsNil(o.FlowSyntax) {
+	if o == nil {
 		var ret AFNORFlowSyntax
 		return ret
 	}
-	return *o.FlowSyntax
+
+	return o.FlowSyntax
 }
 
-// GetFlowSyntaxOk returns a tuple with the FlowSyntax field value if set, nil otherwise
+// GetFlowSyntaxOk returns a tuple with the FlowSyntax field value
 // and a boolean to check if the value has been set.
 func (o *AFNORFlow) GetFlowSyntaxOk() (*AFNORFlowSyntax, bool) {
-	if o == nil || IsNil(o.FlowSyntax) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FlowSyntax, true
+	return &o.FlowSyntax, true
 }
 
-// HasFlowSyntax returns a boolean if a field has been set.
-func (o *AFNORFlow) HasFlowSyntax() bool {
-	if o != nil && !IsNil(o.FlowSyntax) {
-		return true
-	}
-
-	return false
-}
-
-// SetFlowSyntax gets a reference to the given AFNORFlowSyntax and assigns it to the FlowSyntax field.
+// SetFlowSyntax sets field value
 func (o *AFNORFlow) SetFlowSyntax(v AFNORFlowSyntax) {
-	o.FlowSyntax = &v
+	o.FlowSyntax = v
 }
 
 // GetFlowProfile returns the FlowProfile field value if set, zero value otherwise.
@@ -376,36 +215,172 @@ func (o *AFNORFlow) SetFlowProfile(v AFNORFlowProfile) {
 	o.FlowProfile = &v
 }
 
-// GetAcknowledgement returns the Acknowledgement field value if set, zero value otherwise.
+// GetFlowId returns the FlowId field value
+func (o *AFNORFlow) GetFlowId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.FlowId
+}
+
+// GetFlowIdOk returns a tuple with the FlowId field value
+// and a boolean to check if the value has been set.
+func (o *AFNORFlow) GetFlowIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FlowId, true
+}
+
+// SetFlowId sets field value
+func (o *AFNORFlow) SetFlowId(v string) {
+	o.FlowId = v
+}
+
+// GetSubmittedAt returns the SubmittedAt field value
+func (o *AFNORFlow) GetSubmittedAt() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.SubmittedAt
+}
+
+// GetSubmittedAtOk returns a tuple with the SubmittedAt field value
+// and a boolean to check if the value has been set.
+func (o *AFNORFlow) GetSubmittedAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.SubmittedAt, true
+}
+
+// SetSubmittedAt sets field value
+func (o *AFNORFlow) SetSubmittedAt(v time.Time) {
+	o.SubmittedAt = v
+}
+
+// GetUpdatedAt returns the UpdatedAt field value
+func (o *AFNORFlow) GetUpdatedAt() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.UpdatedAt
+}
+
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
+// and a boolean to check if the value has been set.
+func (o *AFNORFlow) GetUpdatedAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.UpdatedAt, true
+}
+
+// SetUpdatedAt sets field value
+func (o *AFNORFlow) SetUpdatedAt(v time.Time) {
+	o.UpdatedAt = v
+}
+
+// GetFlowType returns the FlowType field value
+func (o *AFNORFlow) GetFlowType() AFNORFlowType {
+	if o == nil {
+		var ret AFNORFlowType
+		return ret
+	}
+
+	return o.FlowType
+}
+
+// GetFlowTypeOk returns a tuple with the FlowType field value
+// and a boolean to check if the value has been set.
+func (o *AFNORFlow) GetFlowTypeOk() (*AFNORFlowType, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FlowType, true
+}
+
+// SetFlowType sets field value
+func (o *AFNORFlow) SetFlowType(v AFNORFlowType) {
+	o.FlowType = v
+}
+
+// GetProcessingRuleSource returns the ProcessingRuleSource field value
+func (o *AFNORFlow) GetProcessingRuleSource() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ProcessingRuleSource
+}
+
+// GetProcessingRuleSourceOk returns a tuple with the ProcessingRuleSource field value
+// and a boolean to check if the value has been set.
+func (o *AFNORFlow) GetProcessingRuleSourceOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ProcessingRuleSource, true
+}
+
+// SetProcessingRuleSource sets field value
+func (o *AFNORFlow) SetProcessingRuleSource(v string) {
+	o.ProcessingRuleSource = v
+}
+
+// GetFlowDirection returns the FlowDirection field value
+func (o *AFNORFlow) GetFlowDirection() AFNORFlowDirection {
+	if o == nil {
+		var ret AFNORFlowDirection
+		return ret
+	}
+
+	return o.FlowDirection
+}
+
+// GetFlowDirectionOk returns a tuple with the FlowDirection field value
+// and a boolean to check if the value has been set.
+func (o *AFNORFlow) GetFlowDirectionOk() (*AFNORFlowDirection, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FlowDirection, true
+}
+
+// SetFlowDirection sets field value
+func (o *AFNORFlow) SetFlowDirection(v AFNORFlowDirection) {
+	o.FlowDirection = v
+}
+
+// GetAcknowledgement returns the Acknowledgement field value
 func (o *AFNORFlow) GetAcknowledgement() AFNORAcknowledgement {
-	if o == nil || IsNil(o.Acknowledgement) {
+	if o == nil {
 		var ret AFNORAcknowledgement
 		return ret
 	}
-	return *o.Acknowledgement
+
+	return o.Acknowledgement
 }
 
-// GetAcknowledgementOk returns a tuple with the Acknowledgement field value if set, nil otherwise
+// GetAcknowledgementOk returns a tuple with the Acknowledgement field value
 // and a boolean to check if the value has been set.
 func (o *AFNORFlow) GetAcknowledgementOk() (*AFNORAcknowledgement, bool) {
-	if o == nil || IsNil(o.Acknowledgement) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Acknowledgement, true
+	return &o.Acknowledgement, true
 }
 
-// HasAcknowledgement returns a boolean if a field has been set.
-func (o *AFNORFlow) HasAcknowledgement() bool {
-	if o != nil && !IsNil(o.Acknowledgement) {
-		return true
-	}
-
-	return false
-}
-
-// SetAcknowledgement gets a reference to the given AFNORAcknowledgement and assigns it to the Acknowledgement field.
+// SetAcknowledgement sets field value
 func (o *AFNORFlow) SetAcknowledgement(v AFNORAcknowledgement) {
-	o.Acknowledgement = &v
+	o.Acknowledgement = v
 }
 
 func (o AFNORFlow) MarshalJSON() ([]byte, error) {
@@ -418,40 +393,70 @@ func (o AFNORFlow) MarshalJSON() ([]byte, error) {
 
 func (o AFNORFlow) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.SubmittedAt) {
-		toSerialize["submittedAt"] = o.SubmittedAt
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updatedAt"] = o.UpdatedAt
-	}
-	if !IsNil(o.FlowId) {
-		toSerialize["flowId"] = o.FlowId
-	}
 	if !IsNil(o.TrackingId) {
 		toSerialize["trackingId"] = o.TrackingId
 	}
-	if !IsNil(o.FlowType) {
-		toSerialize["flowType"] = o.FlowType
-	}
+	toSerialize["name"] = o.Name
 	if !IsNil(o.ProcessingRule) {
 		toSerialize["processingRule"] = o.ProcessingRule
 	}
-	if !IsNil(o.ProcessingRuleSource) {
-		toSerialize["processingRuleSource"] = o.ProcessingRuleSource
-	}
-	if !IsNil(o.FlowDirection) {
-		toSerialize["flowDirection"] = o.FlowDirection
-	}
-	if !IsNil(o.FlowSyntax) {
-		toSerialize["flowSyntax"] = o.FlowSyntax
-	}
+	toSerialize["flowSyntax"] = o.FlowSyntax
 	if !IsNil(o.FlowProfile) {
 		toSerialize["flowProfile"] = o.FlowProfile
 	}
-	if !IsNil(o.Acknowledgement) {
-		toSerialize["acknowledgement"] = o.Acknowledgement
-	}
+	toSerialize["flowId"] = o.FlowId
+	toSerialize["submittedAt"] = o.SubmittedAt
+	toSerialize["updatedAt"] = o.UpdatedAt
+	toSerialize["flowType"] = o.FlowType
+	toSerialize["processingRuleSource"] = o.ProcessingRuleSource
+	toSerialize["flowDirection"] = o.FlowDirection
+	toSerialize["acknowledgement"] = o.Acknowledgement
 	return toSerialize, nil
+}
+
+func (o *AFNORFlow) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+		"flowSyntax",
+		"flowId",
+		"submittedAt",
+		"updatedAt",
+		"flowType",
+		"processingRuleSource",
+		"flowDirection",
+		"acknowledgement",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAFNORFlow := _AFNORFlow{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAFNORFlow)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AFNORFlow(varAFNORFlow)
+
+	return err
 }
 
 type NullableAFNORFlow struct {

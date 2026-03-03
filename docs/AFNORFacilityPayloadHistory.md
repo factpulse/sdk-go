@@ -8,11 +8,11 @@ Name | Type | Description | Notes
 **Siren** | Pointer to **string** | SIREN number | [optional] 
 **Name** | Pointer to **string** | business name | [optional] 
 **FacilityType** | Pointer to [**AFNORFacilityType**](AFNORFacilityType.md) |  | [optional] 
-**Diffusible** | Pointer to [**AFNORDiffusionStatus**](AFNORDiffusionStatus.md) |  | [optional] 
 **AdministrativeStatus** | Pointer to [**AFNORFacilityAdministrativeStatus**](AFNORFacilityAdministrativeStatus.md) |  | [optional] 
+**SiretInstructions** | Pointer to [**AFNORSiretInstructions**](AFNORSiretInstructions.md) |  | [optional] 
 **Address** | Pointer to [**AFNORAddressRead**](AFNORAddressRead.md) |  | [optional] 
 **B2gAdditionalData** | Pointer to [**AFNORFacilityPayloadHistoryUleB2gAdditionalData**](AFNORFacilityPayloadHistoryUleB2gAdditionalData.md) |  | [optional] 
-**LegalUnit** | Pointer to [**AFNORLegalUnitPayloadIncludedNoSiren**](AFNORLegalUnitPayloadIncludedNoSiren.md) |  | [optional] 
+**LegalUnit** | Pointer to [**AFNORLegalUnitPayloadIncluded**](AFNORLegalUnitPayloadIncluded.md) |  | [optional] 
 
 ## Methods
 
@@ -133,31 +133,6 @@ SetFacilityType sets FacilityType field to given value.
 
 HasFacilityType returns a boolean if a field has been set.
 
-### GetDiffusible
-
-`func (o *AFNORFacilityPayloadHistory) GetDiffusible() AFNORDiffusionStatus`
-
-GetDiffusible returns the Diffusible field if non-nil, zero value otherwise.
-
-### GetDiffusibleOk
-
-`func (o *AFNORFacilityPayloadHistory) GetDiffusibleOk() (*AFNORDiffusionStatus, bool)`
-
-GetDiffusibleOk returns a tuple with the Diffusible field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDiffusible
-
-`func (o *AFNORFacilityPayloadHistory) SetDiffusible(v AFNORDiffusionStatus)`
-
-SetDiffusible sets Diffusible field to given value.
-
-### HasDiffusible
-
-`func (o *AFNORFacilityPayloadHistory) HasDiffusible() bool`
-
-HasDiffusible returns a boolean if a field has been set.
-
 ### GetAdministrativeStatus
 
 `func (o *AFNORFacilityPayloadHistory) GetAdministrativeStatus() AFNORFacilityAdministrativeStatus`
@@ -182,6 +157,31 @@ SetAdministrativeStatus sets AdministrativeStatus field to given value.
 `func (o *AFNORFacilityPayloadHistory) HasAdministrativeStatus() bool`
 
 HasAdministrativeStatus returns a boolean if a field has been set.
+
+### GetSiretInstructions
+
+`func (o *AFNORFacilityPayloadHistory) GetSiretInstructions() AFNORSiretInstructions`
+
+GetSiretInstructions returns the SiretInstructions field if non-nil, zero value otherwise.
+
+### GetSiretInstructionsOk
+
+`func (o *AFNORFacilityPayloadHistory) GetSiretInstructionsOk() (*AFNORSiretInstructions, bool)`
+
+GetSiretInstructionsOk returns a tuple with the SiretInstructions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSiretInstructions
+
+`func (o *AFNORFacilityPayloadHistory) SetSiretInstructions(v AFNORSiretInstructions)`
+
+SetSiretInstructions sets SiretInstructions field to given value.
+
+### HasSiretInstructions
+
+`func (o *AFNORFacilityPayloadHistory) HasSiretInstructions() bool`
+
+HasSiretInstructions returns a boolean if a field has been set.
 
 ### GetAddress
 
@@ -235,20 +235,20 @@ HasB2gAdditionalData returns a boolean if a field has been set.
 
 ### GetLegalUnit
 
-`func (o *AFNORFacilityPayloadHistory) GetLegalUnit() AFNORLegalUnitPayloadIncludedNoSiren`
+`func (o *AFNORFacilityPayloadHistory) GetLegalUnit() AFNORLegalUnitPayloadIncluded`
 
 GetLegalUnit returns the LegalUnit field if non-nil, zero value otherwise.
 
 ### GetLegalUnitOk
 
-`func (o *AFNORFacilityPayloadHistory) GetLegalUnitOk() (*AFNORLegalUnitPayloadIncludedNoSiren, bool)`
+`func (o *AFNORFacilityPayloadHistory) GetLegalUnitOk() (*AFNORLegalUnitPayloadIncluded, bool)`
 
 GetLegalUnitOk returns a tuple with the LegalUnit field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLegalUnit
 
-`func (o *AFNORFacilityPayloadHistory) SetLegalUnit(v AFNORLegalUnitPayloadIncludedNoSiren)`
+`func (o *AFNORFacilityPayloadHistory) SetLegalUnit(v AFNORLegalUnitPayloadIncluded)`
 
 SetLegalUnit sets LegalUnit field to given value.
 
