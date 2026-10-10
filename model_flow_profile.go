@@ -24,6 +24,7 @@ const (
 	FLOWPROFILE_BASIC FlowProfile = "Basic"
 	FLOWPROFILE_CIUS FlowProfile = "CIUS"
 	FLOWPROFILE_EXTENDED_CTC_FR FlowProfile = "Extended-CTC-FR"
+	FLOWPROFILE_UNDEFINED FlowProfile = "Undefined"
 )
 
 // All allowed values of FlowProfile enum
@@ -31,6 +32,7 @@ var AllowedFlowProfileEnumValues = []FlowProfile{
 	"Basic",
 	"CIUS",
 	"Extended-CTC-FR",
+	"Undefined",
 }
 
 func (v *FlowProfile) UnmarshalJSON(src []byte) error {

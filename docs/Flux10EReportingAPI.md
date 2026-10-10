@@ -36,7 +36,7 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -103,7 +103,7 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -170,7 +170,7 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -236,7 +236,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -297,7 +297,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -343,7 +343,7 @@ No authorization required
 
 ## SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost
 
-> SubmitEReportingResponse SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(ctx).SubmitAggregatedReportRequest(submitAggregatedReportRequest).Execute()
+> SubmitEReportingResponse SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(ctx).SubmitAggregatedReportRequest(submitAggregatedReportRequest).OrganizationId(organizationId).Execute()
 
 Submit aggregated e-reporting to PA/PDP
 
@@ -359,15 +359,16 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
 	submitAggregatedReportRequest := *openapiclient.NewSubmitAggregatedReportRequest(*openapiclient.NewCreateAggregatedReportRequest("EREPORT-2025-001", *openapiclient.NewReportSender("123456789", "Ma Société SARL"), *openapiclient.NewReportPeriod(time.Now(), time.Now()))) // SubmitAggregatedReportRequest | 
+	organizationId := "organizationId_example" // string | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.Flux10EReportingAPI.SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(context.Background()).SubmitAggregatedReportRequest(submitAggregatedReportRequest).Execute()
+	resp, r, err := apiClient.Flux10EReportingAPI.SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(context.Background()).SubmitAggregatedReportRequest(submitAggregatedReportRequest).OrganizationId(organizationId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `Flux10EReportingAPI.SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -389,6 +390,7 @@ Other parameters are passed through a pointer to a apiSubmitAggregatedEreporting
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **submitAggregatedReportRequest** | [**SubmitAggregatedReportRequest**](SubmitAggregatedReportRequest.md) |  | 
+ **organizationId** | **string** | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. | 
 
 ### Return type
 
@@ -410,7 +412,7 @@ Name | Type | Description  | Notes
 
 ## SubmitEreportingApiV1EreportingSubmitPost
 
-> SubmitEReportingResponse SubmitEreportingApiV1EreportingSubmitPost(ctx).SubmitEReportingRequest(submitEReportingRequest).Execute()
+> SubmitEReportingResponse SubmitEreportingApiV1EreportingSubmitPost(ctx).SubmitEReportingRequest(submitEReportingRequest).OrganizationId(organizationId).Execute()
 
 Submit e-reporting to PA/PDP
 
@@ -426,15 +428,16 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
 	submitEReportingRequest := *openapiclient.NewSubmitEReportingRequest(*openapiclient.NewCreateEReportingRequest("EREPORT-2025-001", openapiclient.EReportingFlowType("10.1"), *openapiclient.NewReportSender("123456789", "Ma Société SARL"), *openapiclient.NewReportPeriod(time.Now(), time.Now()))) // SubmitEReportingRequest | 
+	organizationId := "organizationId_example" // string | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.Flux10EReportingAPI.SubmitEreportingApiV1EreportingSubmitPost(context.Background()).SubmitEReportingRequest(submitEReportingRequest).Execute()
+	resp, r, err := apiClient.Flux10EReportingAPI.SubmitEreportingApiV1EreportingSubmitPost(context.Background()).SubmitEReportingRequest(submitEReportingRequest).OrganizationId(organizationId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `Flux10EReportingAPI.SubmitEreportingApiV1EreportingSubmitPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -456,6 +459,7 @@ Other parameters are passed through a pointer to a apiSubmitEreportingApiV1Erepo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **submitEReportingRequest** | [**SubmitEReportingRequest**](SubmitEReportingRequest.md) |  | 
+ **organizationId** | **string** | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. | 
 
 ### Return type
 
@@ -477,7 +481,7 @@ Name | Type | Description  | Notes
 
 ## SubmitXmlEreportingApiV1EreportingSubmitXmlPost
 
-> SubmitEReportingResponse SubmitXmlEreportingApiV1EreportingSubmitXmlPost(ctx).XmlFile(xmlFile).TrackingId(trackingId).SkipValidation(skipValidation).PdpFlowServiceUrl(pdpFlowServiceUrl).PdpTokenUrl(pdpTokenUrl).PdpClientId(pdpClientId).PdpClientSecret(pdpClientSecret).Execute()
+> SubmitEReportingResponse SubmitXmlEreportingApiV1EreportingSubmitXmlPost(ctx).XmlFile(xmlFile).OrganizationId(organizationId).TrackingId(trackingId).SkipValidation(skipValidation).PdpFlowServiceUrl(pdpFlowServiceUrl).PdpTokenUrl(pdpTokenUrl).PdpClientId(pdpClientId).PdpClientSecret(pdpClientSecret).Execute()
 
 Submit pre-generated e-reporting XML
 
@@ -492,11 +496,12 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
 	xmlFile := os.NewFile(1234, "some_file") // *os.File | E-reporting XML file
+	organizationId := "organizationId_example" // string | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)
 	trackingId := "trackingId_example" // string |  (optional)
 	skipValidation := true // bool | Skip XSD validation (optional) (default to false)
 	pdpFlowServiceUrl := "pdpFlowServiceUrl_example" // string |  (optional)
@@ -506,7 +511,7 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.Flux10EReportingAPI.SubmitXmlEreportingApiV1EreportingSubmitXmlPost(context.Background()).XmlFile(xmlFile).TrackingId(trackingId).SkipValidation(skipValidation).PdpFlowServiceUrl(pdpFlowServiceUrl).PdpTokenUrl(pdpTokenUrl).PdpClientId(pdpClientId).PdpClientSecret(pdpClientSecret).Execute()
+	resp, r, err := apiClient.Flux10EReportingAPI.SubmitXmlEreportingApiV1EreportingSubmitXmlPost(context.Background()).XmlFile(xmlFile).OrganizationId(organizationId).TrackingId(trackingId).SkipValidation(skipValidation).PdpFlowServiceUrl(pdpFlowServiceUrl).PdpTokenUrl(pdpTokenUrl).PdpClientId(pdpClientId).PdpClientSecret(pdpClientSecret).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `Flux10EReportingAPI.SubmitXmlEreportingApiV1EreportingSubmitXmlPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -528,6 +533,7 @@ Other parameters are passed through a pointer to a apiSubmitXmlEreportingApiV1Er
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **xmlFile** | ***os.File** | E-reporting XML file | 
+ **organizationId** | **string** | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. | 
  **trackingId** | **string** |  | 
  **skipValidation** | **bool** | Skip XSD validation | [default to false]
  **pdpFlowServiceUrl** | **string** |  | 
@@ -571,7 +577,7 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -638,7 +644,7 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -704,7 +710,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {

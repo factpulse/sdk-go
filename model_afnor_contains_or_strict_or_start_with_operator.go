@@ -16,50 +16,54 @@ import (
 	"fmt"
 )
 
-// AFNORContainsOperator \\\"contains\\\" comparison operator
-type AFNORContainsOperator string
+// AFNORContainsOrStrictOrStartWithOperator \\\"contains\\\", \\\"strict\\\" or \\\"startWith\\\" comparison operator
+type AFNORContainsOrStrictOrStartWithOperator string
 
-// List of AFNOR_containsOperator
+// List of AFNOR_containsOrStrictOrStartWithOperator
 const (
-	AFNORCONTAINSOPERATOR_CONTAINS AFNORContainsOperator = "contains"
+	AFNORCONTAINSORSTRICTORSTARTWITHOPERATOR_CONTAINS AFNORContainsOrStrictOrStartWithOperator = "contains"
+	AFNORCONTAINSORSTRICTORSTARTWITHOPERATOR_STRICT AFNORContainsOrStrictOrStartWithOperator = "strict"
+	AFNORCONTAINSORSTRICTORSTARTWITHOPERATOR_START_WITH AFNORContainsOrStrictOrStartWithOperator = "startWith"
 )
 
-// All allowed values of AFNORContainsOperator enum
-var AllowedAFNORContainsOperatorEnumValues = []AFNORContainsOperator{
+// All allowed values of AFNORContainsOrStrictOrStartWithOperator enum
+var AllowedAFNORContainsOrStrictOrStartWithOperatorEnumValues = []AFNORContainsOrStrictOrStartWithOperator{
 	"contains",
+	"strict",
+	"startWith",
 }
 
-func (v *AFNORContainsOperator) UnmarshalJSON(src []byte) error {
+func (v *AFNORContainsOrStrictOrStartWithOperator) UnmarshalJSON(src []byte) error {
 	var value string
 	err := json.Unmarshal(src, &value)
 	if err != nil {
 		return err
 	}
-	enumTypeValue := AFNORContainsOperator(value)
-	for _, existing := range AllowedAFNORContainsOperatorEnumValues {
+	enumTypeValue := AFNORContainsOrStrictOrStartWithOperator(value)
+	for _, existing := range AllowedAFNORContainsOrStrictOrStartWithOperatorEnumValues {
 		if existing == enumTypeValue {
 			*v = enumTypeValue
 			return nil
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid AFNORContainsOperator", value)
+	return fmt.Errorf("%+v is not a valid AFNORContainsOrStrictOrStartWithOperator", value)
 }
 
-// NewAFNORContainsOperatorFromValue returns a pointer to a valid AFNORContainsOperator
+// NewAFNORContainsOrStrictOrStartWithOperatorFromValue returns a pointer to a valid AFNORContainsOrStrictOrStartWithOperator
 // for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewAFNORContainsOperatorFromValue(v string) (*AFNORContainsOperator, error) {
-	ev := AFNORContainsOperator(v)
+func NewAFNORContainsOrStrictOrStartWithOperatorFromValue(v string) (*AFNORContainsOrStrictOrStartWithOperator, error) {
+	ev := AFNORContainsOrStrictOrStartWithOperator(v)
 	if ev.IsValid() {
 		return &ev, nil
 	} else {
-		return nil, fmt.Errorf("invalid value '%v' for AFNORContainsOperator: valid values are %v", v, AllowedAFNORContainsOperatorEnumValues)
+		return nil, fmt.Errorf("invalid value '%v' for AFNORContainsOrStrictOrStartWithOperator: valid values are %v", v, AllowedAFNORContainsOrStrictOrStartWithOperatorEnumValues)
 	}
 }
 
 // IsValid return true if the value is valid for the enum, false otherwise
-func (v AFNORContainsOperator) IsValid() bool {
-	for _, existing := range AllowedAFNORContainsOperatorEnumValues {
+func (v AFNORContainsOrStrictOrStartWithOperator) IsValid() bool {
+	for _, existing := range AllowedAFNORContainsOrStrictOrStartWithOperatorEnumValues {
 		if existing == v {
 			return true
 		}
@@ -67,43 +71,43 @@ func (v AFNORContainsOperator) IsValid() bool {
 	return false
 }
 
-// Ptr returns reference to AFNOR_containsOperator value
-func (v AFNORContainsOperator) Ptr() *AFNORContainsOperator {
+// Ptr returns reference to AFNOR_containsOrStrictOrStartWithOperator value
+func (v AFNORContainsOrStrictOrStartWithOperator) Ptr() *AFNORContainsOrStrictOrStartWithOperator {
 	return &v
 }
 
-type NullableAFNORContainsOperator struct {
-	value *AFNORContainsOperator
+type NullableAFNORContainsOrStrictOrStartWithOperator struct {
+	value *AFNORContainsOrStrictOrStartWithOperator
 	isSet bool
 }
 
-func (v NullableAFNORContainsOperator) Get() *AFNORContainsOperator {
+func (v NullableAFNORContainsOrStrictOrStartWithOperator) Get() *AFNORContainsOrStrictOrStartWithOperator {
 	return v.value
 }
 
-func (v *NullableAFNORContainsOperator) Set(val *AFNORContainsOperator) {
+func (v *NullableAFNORContainsOrStrictOrStartWithOperator) Set(val *AFNORContainsOrStrictOrStartWithOperator) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAFNORContainsOperator) IsSet() bool {
+func (v NullableAFNORContainsOrStrictOrStartWithOperator) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAFNORContainsOperator) Unset() {
+func (v *NullableAFNORContainsOrStrictOrStartWithOperator) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAFNORContainsOperator(val *AFNORContainsOperator) *NullableAFNORContainsOperator {
-	return &NullableAFNORContainsOperator{value: val, isSet: true}
+func NewNullableAFNORContainsOrStrictOrStartWithOperator(val *AFNORContainsOrStrictOrStartWithOperator) *NullableAFNORContainsOrStrictOrStartWithOperator {
+	return &NullableAFNORContainsOrStrictOrStartWithOperator{value: val, isSet: true}
 }
 
-func (v NullableAFNORContainsOperator) MarshalJSON() ([]byte, error) {
+func (v NullableAFNORContainsOrStrictOrStartWithOperator) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAFNORContainsOperator) UnmarshalJSON(src []byte) error {
+func (v *NullableAFNORContainsOrStrictOrStartWithOperator) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

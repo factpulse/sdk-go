@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Filters** | Pointer to [**AFNORSearchDirectoryLineFilters**](AFNORSearchDirectoryLineFilters.md) |  | [optional] 
 **Sorting** | Pointer to [**[]AFNORSearchDirectoryLineSortingInner**](AFNORSearchDirectoryLineSortingInner.md) | Sorting criteria on a field and an order (ascending or descending). | [optional] 
 **Fields** | Pointer to [**[]AFNORDirectoryLineField**](AFNORDirectoryLineField.md) | Allows you to filter the desired fields in the response. | [optional] 
+**Include** | Pointer to **[]string** |  | [optional] 
 **Limit** | Pointer to **int32** | Maximum number of results | [optional] 
 **Ignore** | Pointer to **int32** | Number of results to skip | [optional] 
 
@@ -103,6 +104,31 @@ SetFields sets Fields field to given value.
 `func (o *AFNORSearchDirectoryLine) HasFields() bool`
 
 HasFields returns a boolean if a field has been set.
+
+### GetInclude
+
+`func (o *AFNORSearchDirectoryLine) GetInclude() []string`
+
+GetInclude returns the Include field if non-nil, zero value otherwise.
+
+### GetIncludeOk
+
+`func (o *AFNORSearchDirectoryLine) GetIncludeOk() (*[]string, bool)`
+
+GetIncludeOk returns a tuple with the Include field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInclude
+
+`func (o *AFNORSearchDirectoryLine) SetInclude(v []string)`
+
+SetInclude sets Include field to given value.
+
+### HasInclude
+
+`func (o *AFNORSearchDirectoryLine) HasInclude() bool`
+
+HasInclude returns a boolean if a field has been set.
 
 ### GetLimit
 

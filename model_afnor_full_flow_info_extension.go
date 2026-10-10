@@ -21,7 +21,7 @@ import (
 // checks if the AFNORFullFlowInfoExtension type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AFNORFullFlowInfoExtension{}
 
-// AFNORFullFlowInfoExtension Extension schema to build FFullFlowInfo, Flow schemas
+// AFNORFullFlowInfoExtension Extension schema to build FullFlowInfo, Flow schemas
 type AFNORFullFlowInfoExtension struct {
 	// Unique identifier supporting UUID but not only, for flexibility purpose
 	FlowId string `json:"flowId"`

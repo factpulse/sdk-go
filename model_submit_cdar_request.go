@@ -50,6 +50,8 @@ type SubmitCDARRequest struct {
 	ReasonText NullableString `json:"reasonText,omitempty"`
 	ActionCode NullableString `json:"actionCode,omitempty"`
 	EncaisseAmount NullableEncaisseamount `json:"encaisseAmount,omitempty"`
+	// Taux de TVA du montant encaissé en % (MDT-224, requis par BR-FR-CDV-14 pour le statut 212 ; défaut 20)
+	EncaisseVatRate *float32 `json:"encaisseVatRate,omitempty"`
 	// Type de flux AFNOR (CustomerInvoiceLC, SupplierInvoiceLC, etc.)
 	FlowType *string `json:"flowType,omitempty"`
 	PdpFlowServiceUrl NullableString `json:"pdpFlowServiceUrl,omitempty"`
@@ -79,6 +81,8 @@ func NewSubmitCDARRequest(documentId string, senderSiren string, invoiceId strin
 	var invoiceTypeCode string = "380"
 	this.InvoiceTypeCode = &invoiceTypeCode
 	this.Status = status
+	var encaisseVatRate float32 = 20
+	this.EncaisseVatRate = &encaisseVatRate
 	var flowType string = "CustomerInvoiceLC"
 	this.FlowType = &flowType
 	return &this
@@ -97,6 +101,8 @@ func NewSubmitCDARRequestWithDefaults() *SubmitCDARRequest {
 	this.SenderRole = &senderRole
 	var invoiceTypeCode string = "380"
 	this.InvoiceTypeCode = &invoiceTypeCode
+	var encaisseVatRate float32 = 20
+	this.EncaisseVatRate = &encaisseVatRate
 	var flowType string = "CustomerInvoiceLC"
 	this.FlowType = &flowType
 	return &this
@@ -718,6 +724,38 @@ func (o *SubmitCDARRequest) UnsetEncaisseAmount() {
 	o.EncaisseAmount.Unset()
 }
 
+// GetEncaisseVatRate returns the EncaisseVatRate field value if set, zero value otherwise.
+func (o *SubmitCDARRequest) GetEncaisseVatRate() float32 {
+	if o == nil || IsNil(o.EncaisseVatRate) {
+		var ret float32
+		return ret
+	}
+	return *o.EncaisseVatRate
+}
+
+// GetEncaisseVatRateOk returns a tuple with the EncaisseVatRate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SubmitCDARRequest) GetEncaisseVatRateOk() (*float32, bool) {
+	if o == nil || IsNil(o.EncaisseVatRate) {
+		return nil, false
+	}
+	return o.EncaisseVatRate, true
+}
+
+// HasEncaisseVatRate returns a boolean if a field has been set.
+func (o *SubmitCDARRequest) HasEncaisseVatRate() bool {
+	if o != nil && !IsNil(o.EncaisseVatRate) {
+		return true
+	}
+
+	return false
+}
+
+// SetEncaisseVatRate gets a reference to the given float32 and assigns it to the EncaisseVatRate field.
+func (o *SubmitCDARRequest) SetEncaisseVatRate(v float32) {
+	o.EncaisseVatRate = &v
+}
+
 // GetFlowType returns the FlowType field value if set, zero value otherwise.
 func (o *SubmitCDARRequest) GetFlowType() string {
 	if o == nil || IsNil(o.FlowType) {
@@ -971,6 +1009,9 @@ func (o SubmitCDARRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if o.EncaisseAmount.IsSet() {
 		toSerialize["encaisseAmount"] = o.EncaisseAmount.Get()
+	}
+	if !IsNil(o.EncaisseVatRate) {
+		toSerialize["encaisseVatRate"] = o.EncaisseVatRate
 	}
 	if !IsNil(o.FlowType) {
 		toSerialize["flowType"] = o.FlowType

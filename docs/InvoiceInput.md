@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **InvoiceId** | **string** | Invoice identifier | 
 **IssueDate** | **string** | Invoice issue date | 
-**TypeCode** | Pointer to [**FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode**](FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode.md) | Invoice type code | [optional] [default to _380]
+**TypeCode** | Pointer to [**InvoiceTypeCode**](InvoiceTypeCode.md) | Invoice type code | [optional] [default to _380]
 **Currency** | Pointer to [**Currency**](Currency.md) |  | [optional] [default to EUR]
 **DueDate** | Pointer to **NullableString** |  | [optional] 
 **SellerId** | Pointer to **NullableString** |  | [optional] 
@@ -19,6 +19,8 @@ Name | Type | Description | Notes
 **TaxExclusiveAmount** | [**Taxexclusiveamount1**](Taxexclusiveamount1.md) |  | 
 **TaxAmount** | [**Taxamount1**](Taxamount1.md) |  | 
 **TaxBreakdown** | [**[]TaxBreakdownInput**](TaxBreakdownInput.md) | VAT breakdown | 
+**TaxAmountEur** | Pointer to [**NullableTaxamounteur**](Taxamounteur.md) |  | [optional] 
+**BusinessProcessId** | Pointer to **NullableString** |  | [optional] 
 **ReferencedInvoiceId** | Pointer to **NullableString** |  | [optional] 
 **ReferencedInvoiceDate** | Pointer to **NullableString** |  | [optional] 
 
@@ -83,20 +85,20 @@ SetIssueDate sets IssueDate field to given value.
 
 ### GetTypeCode
 
-`func (o *InvoiceInput) GetTypeCode() FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode`
+`func (o *InvoiceInput) GetTypeCode() InvoiceTypeCode`
 
 GetTypeCode returns the TypeCode field if non-nil, zero value otherwise.
 
 ### GetTypeCodeOk
 
-`func (o *InvoiceInput) GetTypeCodeOk() (*FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode, bool)`
+`func (o *InvoiceInput) GetTypeCodeOk() (*InvoiceTypeCode, bool)`
 
 GetTypeCodeOk returns a tuple with the TypeCode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTypeCode
 
-`func (o *InvoiceInput) SetTypeCode(v FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode)`
+`func (o *InvoiceInput) SetTypeCode(v InvoiceTypeCode)`
 
 SetTypeCode sets TypeCode field to given value.
 
@@ -446,6 +448,76 @@ and a boolean to check if the value has been set.
 SetTaxBreakdown sets TaxBreakdown field to given value.
 
 
+### GetTaxAmountEur
+
+`func (o *InvoiceInput) GetTaxAmountEur() Taxamounteur`
+
+GetTaxAmountEur returns the TaxAmountEur field if non-nil, zero value otherwise.
+
+### GetTaxAmountEurOk
+
+`func (o *InvoiceInput) GetTaxAmountEurOk() (*Taxamounteur, bool)`
+
+GetTaxAmountEurOk returns a tuple with the TaxAmountEur field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaxAmountEur
+
+`func (o *InvoiceInput) SetTaxAmountEur(v Taxamounteur)`
+
+SetTaxAmountEur sets TaxAmountEur field to given value.
+
+### HasTaxAmountEur
+
+`func (o *InvoiceInput) HasTaxAmountEur() bool`
+
+HasTaxAmountEur returns a boolean if a field has been set.
+
+### SetTaxAmountEurNil
+
+`func (o *InvoiceInput) SetTaxAmountEurNil(b bool)`
+
+ SetTaxAmountEurNil sets the value for TaxAmountEur to be an explicit nil
+
+### UnsetTaxAmountEur
+`func (o *InvoiceInput) UnsetTaxAmountEur()`
+
+UnsetTaxAmountEur ensures that no value is present for TaxAmountEur, not even an explicit nil
+### GetBusinessProcessId
+
+`func (o *InvoiceInput) GetBusinessProcessId() string`
+
+GetBusinessProcessId returns the BusinessProcessId field if non-nil, zero value otherwise.
+
+### GetBusinessProcessIdOk
+
+`func (o *InvoiceInput) GetBusinessProcessIdOk() (*string, bool)`
+
+GetBusinessProcessIdOk returns a tuple with the BusinessProcessId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBusinessProcessId
+
+`func (o *InvoiceInput) SetBusinessProcessId(v string)`
+
+SetBusinessProcessId sets BusinessProcessId field to given value.
+
+### HasBusinessProcessId
+
+`func (o *InvoiceInput) HasBusinessProcessId() bool`
+
+HasBusinessProcessId returns a boolean if a field has been set.
+
+### SetBusinessProcessIdNil
+
+`func (o *InvoiceInput) SetBusinessProcessIdNil(b bool)`
+
+ SetBusinessProcessIdNil sets the value for BusinessProcessId to be an explicit nil
+
+### UnsetBusinessProcessId
+`func (o *InvoiceInput) UnsetBusinessProcessId()`
+
+UnsetBusinessProcessId ensures that no value is present for BusinessProcessId, not even an explicit nil
 ### GetReferencedInvoiceId
 
 `func (o *InvoiceInput) GetReferencedInvoiceId() string`

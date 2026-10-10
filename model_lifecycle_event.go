@@ -28,6 +28,7 @@ type LifecycleEvent struct {
 	StatusCode string `json:"statusCode"`
 	StatusDescription NullableString `json:"statusDescription,omitempty"`
 	AckStatus NullableString `json:"ackStatus,omitempty"`
+	FlowDirection NullableString `json:"flowDirection,omitempty"`
 	At NullableString `json:"at,omitempty"`
 	DocumentId NullableString `json:"documentId,omitempty"`
 	Amount NullableString `json:"amount,omitempty" validate:"regexp=^(?!^[-+.]*$)[+-]?0*\\\\d*\\\\.?\\\\d*$"`
@@ -188,6 +189,48 @@ func (o *LifecycleEvent) SetAckStatusNil() {
 // UnsetAckStatus ensures that no value is present for AckStatus, not even an explicit nil
 func (o *LifecycleEvent) UnsetAckStatus() {
 	o.AckStatus.Unset()
+}
+
+// GetFlowDirection returns the FlowDirection field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *LifecycleEvent) GetFlowDirection() string {
+	if o == nil || IsNil(o.FlowDirection.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.FlowDirection.Get()
+}
+
+// GetFlowDirectionOk returns a tuple with the FlowDirection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *LifecycleEvent) GetFlowDirectionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FlowDirection.Get(), o.FlowDirection.IsSet()
+}
+
+// HasFlowDirection returns a boolean if a field has been set.
+func (o *LifecycleEvent) HasFlowDirection() bool {
+	if o != nil && o.FlowDirection.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFlowDirection gets a reference to the given NullableString and assigns it to the FlowDirection field.
+func (o *LifecycleEvent) SetFlowDirection(v string) {
+	o.FlowDirection.Set(&v)
+}
+// SetFlowDirectionNil sets the value for FlowDirection to be an explicit nil
+func (o *LifecycleEvent) SetFlowDirectionNil() {
+	o.FlowDirection.Set(nil)
+}
+
+// UnsetFlowDirection ensures that no value is present for FlowDirection, not even an explicit nil
+func (o *LifecycleEvent) UnsetFlowDirection() {
+	o.FlowDirection.Unset()
 }
 
 // GetAt returns the At field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -501,6 +544,9 @@ func (o LifecycleEvent) ToMap() (map[string]interface{}, error) {
 	}
 	if o.AckStatus.IsSet() {
 		toSerialize["ackStatus"] = o.AckStatus.Get()
+	}
+	if o.FlowDirection.IsSet() {
+		toSerialize["flowDirection"] = o.FlowDirection.Get()
 	}
 	if o.At.IsSet() {
 		toSerialize["at"] = o.At.Get()

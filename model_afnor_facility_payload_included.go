@@ -28,6 +28,7 @@ type AFNORFacilityPayloadIncluded struct {
 	Name *string `json:"name,omitempty"`
 	FacilityType *AFNORFacilityType `json:"facilityType,omitempty"`
 	AdministrativeStatus *AFNORFacilityAdministrativeStatus `json:"administrativeStatus,omitempty"`
+	Instructions *AFNORSiretInstructions `json:"instructions,omitempty"`
 	Address *AFNORAddressRead `json:"address,omitempty"`
 	B2gAdditionalData *AFNORFacilityPayloadHistoryUleB2gAdditionalData `json:"b2gAdditionalData,omitempty"`
 }
@@ -209,6 +210,38 @@ func (o *AFNORFacilityPayloadIncluded) SetAdministrativeStatus(v AFNORFacilityAd
 	o.AdministrativeStatus = &v
 }
 
+// GetInstructions returns the Instructions field value if set, zero value otherwise.
+func (o *AFNORFacilityPayloadIncluded) GetInstructions() AFNORSiretInstructions {
+	if o == nil || IsNil(o.Instructions) {
+		var ret AFNORSiretInstructions
+		return ret
+	}
+	return *o.Instructions
+}
+
+// GetInstructionsOk returns a tuple with the Instructions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AFNORFacilityPayloadIncluded) GetInstructionsOk() (*AFNORSiretInstructions, bool) {
+	if o == nil || IsNil(o.Instructions) {
+		return nil, false
+	}
+	return o.Instructions, true
+}
+
+// HasInstructions returns a boolean if a field has been set.
+func (o *AFNORFacilityPayloadIncluded) HasInstructions() bool {
+	if o != nil && !IsNil(o.Instructions) {
+		return true
+	}
+
+	return false
+}
+
+// SetInstructions gets a reference to the given AFNORSiretInstructions and assigns it to the Instructions field.
+func (o *AFNORFacilityPayloadIncluded) SetInstructions(v AFNORSiretInstructions) {
+	o.Instructions = &v
+}
+
 // GetAddress returns the Address field value if set, zero value otherwise.
 func (o *AFNORFacilityPayloadIncluded) GetAddress() AFNORAddressRead {
 	if o == nil || IsNil(o.Address) {
@@ -297,6 +330,9 @@ func (o AFNORFacilityPayloadIncluded) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.AdministrativeStatus) {
 		toSerialize["administrativeStatus"] = o.AdministrativeStatus
+	}
+	if !IsNil(o.Instructions) {
+		toSerialize["instructions"] = o.Instructions
 	}
 	if !IsNil(o.Address) {
 		toSerialize["address"] = o.Address

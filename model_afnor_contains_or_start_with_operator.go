@@ -16,60 +16,52 @@ import (
 	"fmt"
 )
 
-// AFNORAlgorithm the model 'AFNORAlgorithm'
-type AFNORAlgorithm string
+// AFNORContainsOrStartWithOperator \\\"contains\\\" or \\\"startWith\\\" comparison operator
+type AFNORContainsOrStartWithOperator string
 
-// List of AFNOR_Algorithm
+// List of AFNOR_containsOrStartWithOperator
 const (
-	AFNORALGORITHM_RS256 AFNORAlgorithm = "RS256"
-	AFNORALGORITHM_HS256 AFNORAlgorithm = "HS256"
-	AFNORALGORITHM_ECDSA AFNORAlgorithm = "ECDSA"
-	AFNORALGORITHM_EDDSA_25519 AFNORAlgorithm = "EDDSA_25519"
-	AFNORALGORITHM_RSA_PSS AFNORAlgorithm = "RSA_PSS"
-	AFNORALGORITHM_EDDSA_448 AFNORAlgorithm = "EDDSA_448"
+	AFNORCONTAINSORSTARTWITHOPERATOR_CONTAINS AFNORContainsOrStartWithOperator = "contains"
+	AFNORCONTAINSORSTARTWITHOPERATOR_START_WITH AFNORContainsOrStartWithOperator = "startWith"
 )
 
-// All allowed values of AFNORAlgorithm enum
-var AllowedAFNORAlgorithmEnumValues = []AFNORAlgorithm{
-	"RS256",
-	"HS256",
-	"ECDSA",
-	"EDDSA_25519",
-	"RSA_PSS",
-	"EDDSA_448",
+// All allowed values of AFNORContainsOrStartWithOperator enum
+var AllowedAFNORContainsOrStartWithOperatorEnumValues = []AFNORContainsOrStartWithOperator{
+	"contains",
+	"startWith",
 }
 
-func (v *AFNORAlgorithm) UnmarshalJSON(src []byte) error {
+func (v *AFNORContainsOrStartWithOperator) UnmarshalJSON(src []byte) error {
 	var value string
 	err := json.Unmarshal(src, &value)
 	if err != nil {
 		return err
 	}
-	enumTypeValue := AFNORAlgorithm(value)
-	for _, existing := range AllowedAFNORAlgorithmEnumValues {
+	enumTypeValue := AFNORContainsOrStartWithOperator(value)
+	for _, existing := range AllowedAFNORContainsOrStartWithOperatorEnumValues {
 		if existing == enumTypeValue {
 			*v = enumTypeValue
 			return nil
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid AFNORAlgorithm", value)
+	return fmt.Errorf("%+v is not a valid AFNORContainsOrStartWithOperator", value)
 }
 
-// NewAFNORAlgorithmFromValue returns a pointer to a valid AFNORAlgorithm
+// NewAFNORContainsOrStartWithOperatorFromValue returns a pointer to a valid AFNORContainsOrStartWithOperator
 // for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewAFNORAlgorithmFromValue(v string) (*AFNORAlgorithm, error) {
-	ev := AFNORAlgorithm(v)
+func NewAFNORContainsOrStartWithOperatorFromValue(v string) (*AFNORContainsOrStartWithOperator, error) {
+	ev := AFNORContainsOrStartWithOperator(v)
 	if ev.IsValid() {
 		return &ev, nil
 	} else {
-		return nil, fmt.Errorf("invalid value '%v' for AFNORAlgorithm: valid values are %v", v, AllowedAFNORAlgorithmEnumValues)
+		return nil, fmt.Errorf("invalid value '%v' for AFNORContainsOrStartWithOperator: valid values are %v", v, AllowedAFNORContainsOrStartWithOperatorEnumValues)
 	}
 }
 
 // IsValid return true if the value is valid for the enum, false otherwise
-func (v AFNORAlgorithm) IsValid() bool {
-	for _, existing := range AllowedAFNORAlgorithmEnumValues {
+func (v AFNORContainsOrStartWithOperator) IsValid() bool {
+	for _, existing := range AllowedAFNORContainsOrStartWithOperatorEnumValues {
 		if existing == v {
 			return true
 		}
@@ -77,43 +69,43 @@ func (v AFNORAlgorithm) IsValid() bool {
 	return false
 }
 
-// Ptr returns reference to AFNOR_Algorithm value
-func (v AFNORAlgorithm) Ptr() *AFNORAlgorithm {
+// Ptr returns reference to AFNOR_containsOrStartWithOperator value
+func (v AFNORContainsOrStartWithOperator) Ptr() *AFNORContainsOrStartWithOperator {
 	return &v
 }
 
-type NullableAFNORAlgorithm struct {
-	value *AFNORAlgorithm
+type NullableAFNORContainsOrStartWithOperator struct {
+	value *AFNORContainsOrStartWithOperator
 	isSet bool
 }
 
-func (v NullableAFNORAlgorithm) Get() *AFNORAlgorithm {
+func (v NullableAFNORContainsOrStartWithOperator) Get() *AFNORContainsOrStartWithOperator {
 	return v.value
 }
 
-func (v *NullableAFNORAlgorithm) Set(val *AFNORAlgorithm) {
+func (v *NullableAFNORContainsOrStartWithOperator) Set(val *AFNORContainsOrStartWithOperator) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAFNORAlgorithm) IsSet() bool {
+func (v NullableAFNORContainsOrStartWithOperator) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAFNORAlgorithm) Unset() {
+func (v *NullableAFNORContainsOrStartWithOperator) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAFNORAlgorithm(val *AFNORAlgorithm) *NullableAFNORAlgorithm {
-	return &NullableAFNORAlgorithm{value: val, isSet: true}
+func NewNullableAFNORContainsOrStartWithOperator(val *AFNORContainsOrStartWithOperator) *NullableAFNORContainsOrStartWithOperator {
+	return &NullableAFNORContainsOrStartWithOperator{value: val, isSet: true}
 }
 
-func (v NullableAFNORAlgorithm) MarshalJSON() ([]byte, error) {
+func (v NullableAFNORContainsOrStartWithOperator) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAFNORAlgorithm) UnmarshalJSON(src []byte) error {
+func (v *NullableAFNORContainsOrStartWithOperator) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

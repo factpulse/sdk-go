@@ -17,158 +17,60 @@ import (
 	"fmt"
 )
 
-// checks if the AFNORCallbackParameters type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AFNORCallbackParameters{}
+// checks if the SuperPDPConnectURLResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SuperPDPConnectURLResponse{}
 
-// AFNORCallbackParameters struct for AFNORCallbackParameters
-type AFNORCallbackParameters struct {
-	Url string `json:"url"`
-	Headers []AFNORCallbackHeader `json:"headers,omitempty"`
-	Authentication *AFNORCallbackAuthentication `json:"authentication,omitempty"`
-	Signature *AFNORCallbackSignature `json:"signature,omitempty"`
+// SuperPDPConnectURLResponse SuperPDP OAuth authorization URL for a client.
+type SuperPDPConnectURLResponse struct {
+	// URL to redirect the end user to in order to connect their SuperPDP account
+	AuthorizeUrl string `json:"authorizeUrl"`
 }
 
-type _AFNORCallbackParameters AFNORCallbackParameters
+type _SuperPDPConnectURLResponse SuperPDPConnectURLResponse
 
-// NewAFNORCallbackParameters instantiates a new AFNORCallbackParameters object
+// NewSuperPDPConnectURLResponse instantiates a new SuperPDPConnectURLResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAFNORCallbackParameters(url string) *AFNORCallbackParameters {
-	this := AFNORCallbackParameters{}
-	this.Url = url
+func NewSuperPDPConnectURLResponse(authorizeUrl string) *SuperPDPConnectURLResponse {
+	this := SuperPDPConnectURLResponse{}
+	this.AuthorizeUrl = authorizeUrl
 	return &this
 }
 
-// NewAFNORCallbackParametersWithDefaults instantiates a new AFNORCallbackParameters object
+// NewSuperPDPConnectURLResponseWithDefaults instantiates a new SuperPDPConnectURLResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAFNORCallbackParametersWithDefaults() *AFNORCallbackParameters {
-	this := AFNORCallbackParameters{}
+func NewSuperPDPConnectURLResponseWithDefaults() *SuperPDPConnectURLResponse {
+	this := SuperPDPConnectURLResponse{}
 	return &this
 }
 
-// GetUrl returns the Url field value
-func (o *AFNORCallbackParameters) GetUrl() string {
+// GetAuthorizeUrl returns the AuthorizeUrl field value
+func (o *SuperPDPConnectURLResponse) GetAuthorizeUrl() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Url
+	return o.AuthorizeUrl
 }
 
-// GetUrlOk returns a tuple with the Url field value
+// GetAuthorizeUrlOk returns a tuple with the AuthorizeUrl field value
 // and a boolean to check if the value has been set.
-func (o *AFNORCallbackParameters) GetUrlOk() (*string, bool) {
+func (o *SuperPDPConnectURLResponse) GetAuthorizeUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Url, true
+	return &o.AuthorizeUrl, true
 }
 
-// SetUrl sets field value
-func (o *AFNORCallbackParameters) SetUrl(v string) {
-	o.Url = v
+// SetAuthorizeUrl sets field value
+func (o *SuperPDPConnectURLResponse) SetAuthorizeUrl(v string) {
+	o.AuthorizeUrl = v
 }
 
-// GetHeaders returns the Headers field value if set, zero value otherwise.
-func (o *AFNORCallbackParameters) GetHeaders() []AFNORCallbackHeader {
-	if o == nil || IsNil(o.Headers) {
-		var ret []AFNORCallbackHeader
-		return ret
-	}
-	return o.Headers
-}
-
-// GetHeadersOk returns a tuple with the Headers field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AFNORCallbackParameters) GetHeadersOk() ([]AFNORCallbackHeader, bool) {
-	if o == nil || IsNil(o.Headers) {
-		return nil, false
-	}
-	return o.Headers, true
-}
-
-// HasHeaders returns a boolean if a field has been set.
-func (o *AFNORCallbackParameters) HasHeaders() bool {
-	if o != nil && !IsNil(o.Headers) {
-		return true
-	}
-
-	return false
-}
-
-// SetHeaders gets a reference to the given []AFNORCallbackHeader and assigns it to the Headers field.
-func (o *AFNORCallbackParameters) SetHeaders(v []AFNORCallbackHeader) {
-	o.Headers = v
-}
-
-// GetAuthentication returns the Authentication field value if set, zero value otherwise.
-func (o *AFNORCallbackParameters) GetAuthentication() AFNORCallbackAuthentication {
-	if o == nil || IsNil(o.Authentication) {
-		var ret AFNORCallbackAuthentication
-		return ret
-	}
-	return *o.Authentication
-}
-
-// GetAuthenticationOk returns a tuple with the Authentication field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AFNORCallbackParameters) GetAuthenticationOk() (*AFNORCallbackAuthentication, bool) {
-	if o == nil || IsNil(o.Authentication) {
-		return nil, false
-	}
-	return o.Authentication, true
-}
-
-// HasAuthentication returns a boolean if a field has been set.
-func (o *AFNORCallbackParameters) HasAuthentication() bool {
-	if o != nil && !IsNil(o.Authentication) {
-		return true
-	}
-
-	return false
-}
-
-// SetAuthentication gets a reference to the given AFNORCallbackAuthentication and assigns it to the Authentication field.
-func (o *AFNORCallbackParameters) SetAuthentication(v AFNORCallbackAuthentication) {
-	o.Authentication = &v
-}
-
-// GetSignature returns the Signature field value if set, zero value otherwise.
-func (o *AFNORCallbackParameters) GetSignature() AFNORCallbackSignature {
-	if o == nil || IsNil(o.Signature) {
-		var ret AFNORCallbackSignature
-		return ret
-	}
-	return *o.Signature
-}
-
-// GetSignatureOk returns a tuple with the Signature field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AFNORCallbackParameters) GetSignatureOk() (*AFNORCallbackSignature, bool) {
-	if o == nil || IsNil(o.Signature) {
-		return nil, false
-	}
-	return o.Signature, true
-}
-
-// HasSignature returns a boolean if a field has been set.
-func (o *AFNORCallbackParameters) HasSignature() bool {
-	if o != nil && !IsNil(o.Signature) {
-		return true
-	}
-
-	return false
-}
-
-// SetSignature gets a reference to the given AFNORCallbackSignature and assigns it to the Signature field.
-func (o *AFNORCallbackParameters) SetSignature(v AFNORCallbackSignature) {
-	o.Signature = &v
-}
-
-func (o AFNORCallbackParameters) MarshalJSON() ([]byte, error) {
+func (o SuperPDPConnectURLResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -176,27 +78,18 @@ func (o AFNORCallbackParameters) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AFNORCallbackParameters) ToMap() (map[string]interface{}, error) {
+func (o SuperPDPConnectURLResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["url"] = o.Url
-	if !IsNil(o.Headers) {
-		toSerialize["headers"] = o.Headers
-	}
-	if !IsNil(o.Authentication) {
-		toSerialize["authentication"] = o.Authentication
-	}
-	if !IsNil(o.Signature) {
-		toSerialize["signature"] = o.Signature
-	}
+	toSerialize["authorizeUrl"] = o.AuthorizeUrl
 	return toSerialize, nil
 }
 
-func (o *AFNORCallbackParameters) UnmarshalJSON(data []byte) (err error) {
+func (o *SuperPDPConnectURLResponse) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"url",
+		"authorizeUrl",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -213,53 +106,53 @@ func (o *AFNORCallbackParameters) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varAFNORCallbackParameters := _AFNORCallbackParameters{}
+	varSuperPDPConnectURLResponse := _SuperPDPConnectURLResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAFNORCallbackParameters)
+	err = decoder.Decode(&varSuperPDPConnectURLResponse)
 
 	if err != nil {
 		return err
 	}
 
-	*o = AFNORCallbackParameters(varAFNORCallbackParameters)
+	*o = SuperPDPConnectURLResponse(varSuperPDPConnectURLResponse)
 
 	return err
 }
 
-type NullableAFNORCallbackParameters struct {
-	value *AFNORCallbackParameters
+type NullableSuperPDPConnectURLResponse struct {
+	value *SuperPDPConnectURLResponse
 	isSet bool
 }
 
-func (v NullableAFNORCallbackParameters) Get() *AFNORCallbackParameters {
+func (v NullableSuperPDPConnectURLResponse) Get() *SuperPDPConnectURLResponse {
 	return v.value
 }
 
-func (v *NullableAFNORCallbackParameters) Set(val *AFNORCallbackParameters) {
+func (v *NullableSuperPDPConnectURLResponse) Set(val *SuperPDPConnectURLResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAFNORCallbackParameters) IsSet() bool {
+func (v NullableSuperPDPConnectURLResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAFNORCallbackParameters) Unset() {
+func (v *NullableSuperPDPConnectURLResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAFNORCallbackParameters(val *AFNORCallbackParameters) *NullableAFNORCallbackParameters {
-	return &NullableAFNORCallbackParameters{value: val, isSet: true}
+func NewNullableSuperPDPConnectURLResponse(val *SuperPDPConnectURLResponse) *NullableSuperPDPConnectURLResponse {
+	return &NullableSuperPDPConnectURLResponse{value: val, isSet: true}
 }
 
-func (v NullableAFNORCallbackParameters) MarshalJSON() ([]byte, error) {
+func (v NullableSuperPDPConnectURLResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAFNORCallbackParameters) UnmarshalJSON(src []byte) error {
+func (v *NullableSuperPDPConnectURLResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

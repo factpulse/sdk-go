@@ -13,6 +13,7 @@ package factpulse
 
 import (
 	"encoding/json"
+	"time"
 	"bytes"
 	"fmt"
 )
@@ -23,8 +24,12 @@ var _ MappedNullable = &AFNORWebhook{}
 // AFNORWebhook struct for AFNORWebhook
 type AFNORWebhook struct {
 	WebhookId *string `json:"webhookId,omitempty"`
-	Callback AFNORCallbackParameters `json:"callback"`
-	Metadata AFNORWebhookMetadata `json:"metadata"`
+	SigningKey *string `json:"signingKey,omitempty"`
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	CallbackUrl string `json:"callbackUrl"`
+	FlowTypes []AFNORFlowType `json:"flowTypes,omitempty"`
+	FlowDirection *AFNORFlowDirection `json:"flowDirection,omitempty"`
+	AckStatus *AFNORFlowAckStatus `json:"ackStatus,omitempty"`
 }
 
 type _AFNORWebhook AFNORWebhook
@@ -33,10 +38,9 @@ type _AFNORWebhook AFNORWebhook
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAFNORWebhook(callback AFNORCallbackParameters, metadata AFNORWebhookMetadata) *AFNORWebhook {
+func NewAFNORWebhook(callbackUrl string) *AFNORWebhook {
 	this := AFNORWebhook{}
-	this.Callback = callback
-	this.Metadata = metadata
+	this.CallbackUrl = callbackUrl
 	return &this
 }
 
@@ -80,52 +84,188 @@ func (o *AFNORWebhook) SetWebhookId(v string) {
 	o.WebhookId = &v
 }
 
-// GetCallback returns the Callback field value
-func (o *AFNORWebhook) GetCallback() AFNORCallbackParameters {
+// GetSigningKey returns the SigningKey field value if set, zero value otherwise.
+func (o *AFNORWebhook) GetSigningKey() string {
+	if o == nil || IsNil(o.SigningKey) {
+		var ret string
+		return ret
+	}
+	return *o.SigningKey
+}
+
+// GetSigningKeyOk returns a tuple with the SigningKey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AFNORWebhook) GetSigningKeyOk() (*string, bool) {
+	if o == nil || IsNil(o.SigningKey) {
+		return nil, false
+	}
+	return o.SigningKey, true
+}
+
+// HasSigningKey returns a boolean if a field has been set.
+func (o *AFNORWebhook) HasSigningKey() bool {
+	if o != nil && !IsNil(o.SigningKey) {
+		return true
+	}
+
+	return false
+}
+
+// SetSigningKey gets a reference to the given string and assigns it to the SigningKey field.
+func (o *AFNORWebhook) SetSigningKey(v string) {
+	o.SigningKey = &v
+}
+
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+func (o *AFNORWebhook) GetCreatedAt() time.Time {
+	if o == nil || IsNil(o.CreatedAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AFNORWebhook) GetCreatedAtOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.CreatedAt) {
+		return nil, false
+	}
+	return o.CreatedAt, true
+}
+
+// HasCreatedAt returns a boolean if a field has been set.
+func (o *AFNORWebhook) HasCreatedAt() bool {
+	if o != nil && !IsNil(o.CreatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+func (o *AFNORWebhook) SetCreatedAt(v time.Time) {
+	o.CreatedAt = &v
+}
+
+// GetCallbackUrl returns the CallbackUrl field value
+func (o *AFNORWebhook) GetCallbackUrl() string {
 	if o == nil {
-		var ret AFNORCallbackParameters
+		var ret string
 		return ret
 	}
 
-	return o.Callback
+	return o.CallbackUrl
 }
 
-// GetCallbackOk returns a tuple with the Callback field value
+// GetCallbackUrlOk returns a tuple with the CallbackUrl field value
 // and a boolean to check if the value has been set.
-func (o *AFNORWebhook) GetCallbackOk() (*AFNORCallbackParameters, bool) {
+func (o *AFNORWebhook) GetCallbackUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Callback, true
+	return &o.CallbackUrl, true
 }
 
-// SetCallback sets field value
-func (o *AFNORWebhook) SetCallback(v AFNORCallbackParameters) {
-	o.Callback = v
+// SetCallbackUrl sets field value
+func (o *AFNORWebhook) SetCallbackUrl(v string) {
+	o.CallbackUrl = v
 }
 
-// GetMetadata returns the Metadata field value
-func (o *AFNORWebhook) GetMetadata() AFNORWebhookMetadata {
-	if o == nil {
-		var ret AFNORWebhookMetadata
+// GetFlowTypes returns the FlowTypes field value if set, zero value otherwise.
+func (o *AFNORWebhook) GetFlowTypes() []AFNORFlowType {
+	if o == nil || IsNil(o.FlowTypes) {
+		var ret []AFNORFlowType
 		return ret
 	}
-
-	return o.Metadata
+	return o.FlowTypes
 }
 
-// GetMetadataOk returns a tuple with the Metadata field value
+// GetFlowTypesOk returns a tuple with the FlowTypes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AFNORWebhook) GetMetadataOk() (*AFNORWebhookMetadata, bool) {
-	if o == nil {
+func (o *AFNORWebhook) GetFlowTypesOk() ([]AFNORFlowType, bool) {
+	if o == nil || IsNil(o.FlowTypes) {
 		return nil, false
 	}
-	return &o.Metadata, true
+	return o.FlowTypes, true
 }
 
-// SetMetadata sets field value
-func (o *AFNORWebhook) SetMetadata(v AFNORWebhookMetadata) {
-	o.Metadata = v
+// HasFlowTypes returns a boolean if a field has been set.
+func (o *AFNORWebhook) HasFlowTypes() bool {
+	if o != nil && !IsNil(o.FlowTypes) {
+		return true
+	}
+
+	return false
+}
+
+// SetFlowTypes gets a reference to the given []AFNORFlowType and assigns it to the FlowTypes field.
+func (o *AFNORWebhook) SetFlowTypes(v []AFNORFlowType) {
+	o.FlowTypes = v
+}
+
+// GetFlowDirection returns the FlowDirection field value if set, zero value otherwise.
+func (o *AFNORWebhook) GetFlowDirection() AFNORFlowDirection {
+	if o == nil || IsNil(o.FlowDirection) {
+		var ret AFNORFlowDirection
+		return ret
+	}
+	return *o.FlowDirection
+}
+
+// GetFlowDirectionOk returns a tuple with the FlowDirection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AFNORWebhook) GetFlowDirectionOk() (*AFNORFlowDirection, bool) {
+	if o == nil || IsNil(o.FlowDirection) {
+		return nil, false
+	}
+	return o.FlowDirection, true
+}
+
+// HasFlowDirection returns a boolean if a field has been set.
+func (o *AFNORWebhook) HasFlowDirection() bool {
+	if o != nil && !IsNil(o.FlowDirection) {
+		return true
+	}
+
+	return false
+}
+
+// SetFlowDirection gets a reference to the given AFNORFlowDirection and assigns it to the FlowDirection field.
+func (o *AFNORWebhook) SetFlowDirection(v AFNORFlowDirection) {
+	o.FlowDirection = &v
+}
+
+// GetAckStatus returns the AckStatus field value if set, zero value otherwise.
+func (o *AFNORWebhook) GetAckStatus() AFNORFlowAckStatus {
+	if o == nil || IsNil(o.AckStatus) {
+		var ret AFNORFlowAckStatus
+		return ret
+	}
+	return *o.AckStatus
+}
+
+// GetAckStatusOk returns a tuple with the AckStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AFNORWebhook) GetAckStatusOk() (*AFNORFlowAckStatus, bool) {
+	if o == nil || IsNil(o.AckStatus) {
+		return nil, false
+	}
+	return o.AckStatus, true
+}
+
+// HasAckStatus returns a boolean if a field has been set.
+func (o *AFNORWebhook) HasAckStatus() bool {
+	if o != nil && !IsNil(o.AckStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetAckStatus gets a reference to the given AFNORFlowAckStatus and assigns it to the AckStatus field.
+func (o *AFNORWebhook) SetAckStatus(v AFNORFlowAckStatus) {
+	o.AckStatus = &v
 }
 
 func (o AFNORWebhook) MarshalJSON() ([]byte, error) {
@@ -141,8 +281,22 @@ func (o AFNORWebhook) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.WebhookId) {
 		toSerialize["webhookId"] = o.WebhookId
 	}
-	toSerialize["callback"] = o.Callback
-	toSerialize["metadata"] = o.Metadata
+	if !IsNil(o.SigningKey) {
+		toSerialize["signingKey"] = o.SigningKey
+	}
+	if !IsNil(o.CreatedAt) {
+		toSerialize["createdAt"] = o.CreatedAt
+	}
+	toSerialize["callbackUrl"] = o.CallbackUrl
+	if !IsNil(o.FlowTypes) {
+		toSerialize["flowTypes"] = o.FlowTypes
+	}
+	if !IsNil(o.FlowDirection) {
+		toSerialize["flowDirection"] = o.FlowDirection
+	}
+	if !IsNil(o.AckStatus) {
+		toSerialize["ackStatus"] = o.AckStatus
+	}
 	return toSerialize, nil
 }
 
@@ -151,8 +305,7 @@ func (o *AFNORWebhook) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"callback",
-		"metadata",
+		"callbackUrl",
 	}
 
 	allProperties := make(map[string]interface{})

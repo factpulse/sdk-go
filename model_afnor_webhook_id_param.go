@@ -13,6 +13,7 @@ package factpulse
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // checks if the AFNORWebhookIdParam type satisfies the MappedNullable interface at compile time
@@ -21,6 +22,8 @@ var _ MappedNullable = &AFNORWebhookIdParam{}
 // AFNORWebhookIdParam struct for AFNORWebhookIdParam
 type AFNORWebhookIdParam struct {
 	WebhookId *string `json:"webhookId,omitempty"`
+	SigningKey *string `json:"signingKey,omitempty"`
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
 }
 
 // NewAFNORWebhookIdParam instantiates a new AFNORWebhookIdParam object
@@ -72,6 +75,70 @@ func (o *AFNORWebhookIdParam) SetWebhookId(v string) {
 	o.WebhookId = &v
 }
 
+// GetSigningKey returns the SigningKey field value if set, zero value otherwise.
+func (o *AFNORWebhookIdParam) GetSigningKey() string {
+	if o == nil || IsNil(o.SigningKey) {
+		var ret string
+		return ret
+	}
+	return *o.SigningKey
+}
+
+// GetSigningKeyOk returns a tuple with the SigningKey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AFNORWebhookIdParam) GetSigningKeyOk() (*string, bool) {
+	if o == nil || IsNil(o.SigningKey) {
+		return nil, false
+	}
+	return o.SigningKey, true
+}
+
+// HasSigningKey returns a boolean if a field has been set.
+func (o *AFNORWebhookIdParam) HasSigningKey() bool {
+	if o != nil && !IsNil(o.SigningKey) {
+		return true
+	}
+
+	return false
+}
+
+// SetSigningKey gets a reference to the given string and assigns it to the SigningKey field.
+func (o *AFNORWebhookIdParam) SetSigningKey(v string) {
+	o.SigningKey = &v
+}
+
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+func (o *AFNORWebhookIdParam) GetCreatedAt() time.Time {
+	if o == nil || IsNil(o.CreatedAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AFNORWebhookIdParam) GetCreatedAtOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.CreatedAt) {
+		return nil, false
+	}
+	return o.CreatedAt, true
+}
+
+// HasCreatedAt returns a boolean if a field has been set.
+func (o *AFNORWebhookIdParam) HasCreatedAt() bool {
+	if o != nil && !IsNil(o.CreatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+func (o *AFNORWebhookIdParam) SetCreatedAt(v time.Time) {
+	o.CreatedAt = &v
+}
+
 func (o AFNORWebhookIdParam) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -84,6 +151,12 @@ func (o AFNORWebhookIdParam) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.WebhookId) {
 		toSerialize["webhookId"] = o.WebhookId
+	}
+	if !IsNil(o.SigningKey) {
+		toSerialize["signingKey"] = o.SigningKey
+	}
+	if !IsNil(o.CreatedAt) {
+		toSerialize["createdAt"] = o.CreatedAt
 	}
 	return toSerialize, nil
 }

@@ -23,7 +23,8 @@ var _ MappedNullable = &PaymentAmountByRate{}
 // PaymentAmountByRate Payment amount for a specific VAT rate.
 type PaymentAmountByRate struct {
 	Rate Rate `json:"rate"`
-	Amount Amount1 `json:"amount"`
+	Amount Amount2 `json:"amount"`
+	AmountEur NullableAmounteur `json:"amountEur,omitempty"`
 }
 
 type _PaymentAmountByRate PaymentAmountByRate
@@ -32,7 +33,7 @@ type _PaymentAmountByRate PaymentAmountByRate
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaymentAmountByRate(rate Rate, amount Amount1) *PaymentAmountByRate {
+func NewPaymentAmountByRate(rate Rate, amount Amount2) *PaymentAmountByRate {
 	this := PaymentAmountByRate{}
 	this.Rate = rate
 	this.Amount = amount
@@ -72,9 +73,9 @@ func (o *PaymentAmountByRate) SetRate(v Rate) {
 }
 
 // GetAmount returns the Amount field value
-func (o *PaymentAmountByRate) GetAmount() Amount1 {
+func (o *PaymentAmountByRate) GetAmount() Amount2 {
 	if o == nil {
-		var ret Amount1
+		var ret Amount2
 		return ret
 	}
 
@@ -83,7 +84,7 @@ func (o *PaymentAmountByRate) GetAmount() Amount1 {
 
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
-func (o *PaymentAmountByRate) GetAmountOk() (*Amount1, bool) {
+func (o *PaymentAmountByRate) GetAmountOk() (*Amount2, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -91,8 +92,50 @@ func (o *PaymentAmountByRate) GetAmountOk() (*Amount1, bool) {
 }
 
 // SetAmount sets field value
-func (o *PaymentAmountByRate) SetAmount(v Amount1) {
+func (o *PaymentAmountByRate) SetAmount(v Amount2) {
 	o.Amount = v
+}
+
+// GetAmountEur returns the AmountEur field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentAmountByRate) GetAmountEur() Amounteur {
+	if o == nil || IsNil(o.AmountEur.Get()) {
+		var ret Amounteur
+		return ret
+	}
+	return *o.AmountEur.Get()
+}
+
+// GetAmountEurOk returns a tuple with the AmountEur field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentAmountByRate) GetAmountEurOk() (*Amounteur, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AmountEur.Get(), o.AmountEur.IsSet()
+}
+
+// HasAmountEur returns a boolean if a field has been set.
+func (o *PaymentAmountByRate) HasAmountEur() bool {
+	if o != nil && o.AmountEur.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAmountEur gets a reference to the given NullableAmounteur and assigns it to the AmountEur field.
+func (o *PaymentAmountByRate) SetAmountEur(v Amounteur) {
+	o.AmountEur.Set(&v)
+}
+// SetAmountEurNil sets the value for AmountEur to be an explicit nil
+func (o *PaymentAmountByRate) SetAmountEurNil() {
+	o.AmountEur.Set(nil)
+}
+
+// UnsetAmountEur ensures that no value is present for AmountEur, not even an explicit nil
+func (o *PaymentAmountByRate) UnsetAmountEur() {
+	o.AmountEur.Unset()
 }
 
 func (o PaymentAmountByRate) MarshalJSON() ([]byte, error) {
@@ -107,6 +150,9 @@ func (o PaymentAmountByRate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["rate"] = o.Rate
 	toSerialize["amount"] = o.Amount
+	if o.AmountEur.IsSet() {
+		toSerialize["amountEur"] = o.AmountEur.Get()
+	}
 	return toSerialize, nil
 }
 

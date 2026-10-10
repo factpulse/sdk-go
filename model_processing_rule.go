@@ -16,7 +16,7 @@ import (
 	"fmt"
 )
 
-// ProcessingRule AFNOR XP Z12-013 ProcessingRule (Annexe A v1.2.0).  Valeurs EXACTES de la spec (case-sensitive).
+// ProcessingRule AFNOR XP Z12-013 ProcessingRule (Annexe A v1.3.0).  Valeurs EXACTES de la spec (case-sensitive).
 type ProcessingRule string
 
 // List of ProcessingRule
@@ -30,6 +30,7 @@ const (
 	PROCESSINGRULE_B2_G_OUT_OF_SCOPE ProcessingRule = "B2GOutOfScope"
 	PROCESSINGRULE_ARCHIVE_ONLY ProcessingRule = "ArchiveOnly"
 	PROCESSINGRULE_NOT_APPLICABLE ProcessingRule = "NotApplicable"
+	PROCESSINGRULE_UNDEFINED ProcessingRule = "Undefined"
 )
 
 // All allowed values of ProcessingRule enum
@@ -43,6 +44,7 @@ var AllowedProcessingRuleEnumValues = []ProcessingRule{
 	"B2GOutOfScope",
 	"ArchiveOnly",
 	"NotApplicable",
+	"Undefined",
 }
 
 func (v *ProcessingRule) UnmarshalJSON(src []byte) error {

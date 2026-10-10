@@ -374,10 +374,17 @@ type ApiSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostRequest st
 	ctx context.Context
 	ApiService *InvoiceGenerationAPIService
 	submitCompleteInvoiceRequest *SubmitCompleteInvoiceRequest
+	organizationId *string
 }
 
 func (r ApiSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostRequest) SubmitCompleteInvoiceRequest(submitCompleteInvoiceRequest SubmitCompleteInvoiceRequest) ApiSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostRequest {
 	r.submitCompleteInvoiceRequest = &submitCompleteInvoiceRequest
+	return r
+}
+
+// Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space.
+func (r ApiSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostRequest) OrganizationId(organizationId string) ApiSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostRequest {
+	r.organizationId = &organizationId
 	return r
 }
 
@@ -396,6 +403,19 @@ Unified endpoint to submit a complete invoice to different destinations.
     2. **Factur-X PDF generation**: creates a PDF/A-3 with embedded XML
     3. **Electronic signature** (optional): signs the PDF with a certificate
     4. **Submission**: sends to the chosen destination (Chorus Pro or AFNOR PDP)
+
+    **Two accepted `invoiceData` formats, detected automatically** (same rule as
+    `/generate-invoice`):
+    - **Simplified format** (`number` + `lines`): totals, VAT and dates are computed.
+      Any field of the complete model may be added on top (`deliveryDate` BT-72,
+      `deliveryParty` BG-15, `paymentReference` BT-83, `supplier.bic` BT-86, ...).
+    - **Complete format** (`invoiceLines` present): full `FacturXInvoice` structure,
+      used as provided.
+
+    A non-compliant invoice is **not submitted**: the Schematron errors are returned
+    as a 400 `SCHEMATRON_VALIDATION_FAILED`, rather than a 200 followed by an
+    asynchronous rejection by the PA. This includes the empty-element rule
+    (PEPPOL-EN16931-R008), which the PAs apply as blocking.
 
     **Supported destinations:**
     - **Chorus Pro**: French B2G platform (invoices to public sector)
@@ -483,6 +503,9 @@ func (a *InvoiceGenerationAPIService) SubmitCompleteInvoiceApiV1ProcessingInvoic
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.organizationId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "Organization-Id", r.organizationId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.submitCompleteInvoiceRequest
 	if r.ctx != nil {
@@ -563,6 +586,7 @@ type ApiSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost
 	submitCompleteInvoiceRequest *SubmitCompleteInvoiceRequest
 	callbackUrl *string
 	webhookMode *string
+	organizationId *string
 }
 
 func (r ApiSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostRequest) SubmitCompleteInvoiceRequest(submitCompleteInvoiceRequest SubmitCompleteInvoiceRequest) ApiSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostRequest {
@@ -579,6 +603,12 @@ func (r ApiSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncP
 // Webhook content delivery: &#39;inline&#39; (base64 in payload) or &#39;download_url&#39; (temporary URL, 1h TTL)
 func (r ApiSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostRequest) WebhookMode(webhookMode string) ApiSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostRequest {
 	r.webhookMode = &webhookMode
+	return r
+}
+
+// Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space.
+func (r ApiSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostRequest) OrganizationId(organizationId string) ApiSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostRequest {
+	r.organizationId = &organizationId
 	return r
 }
 
@@ -683,6 +713,9 @@ func (a *InvoiceGenerationAPIService) SubmitCompleteInvoiceAsyncApiV1ProcessingI
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.organizationId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "Organization-Id", r.organizationId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.submitCompleteInvoiceRequest

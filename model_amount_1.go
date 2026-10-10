@@ -17,7 +17,7 @@ import (
 )
 
 
-// Amount1 Payment amount
+// Amount1 Montant encaissé en EUR (obligatoire, BR-FR-CDV-14)
 type Amount1 struct {
 	Float32 *float32
 	String *string

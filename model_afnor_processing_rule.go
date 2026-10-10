@@ -16,7 +16,7 @@ import (
 	"fmt"
 )
 
-// AFNORProcessingRule - B2B                 : e-invoicing - B2BInt              : International B2B e-reporting - B2C                 : B2C e-reporting - B2G                 : e-invoicing for B2G sales - B2GInt - OutOfScope          : Out of scope (not regulated flow) - B2GOutOfScope - ArchiveOnly         : Archive only, no transmission - NotApplicable       : Not Applicable 
+// AFNORProcessingRule - B2B                 : e-invoicing - B2BInt              : International B2B e-reporting - B2C                 : B2C e-reporting - B2G                 : e-invoicing for B2G sales - B2GInt - OutOfScope          : Out of scope (not regulated flow) - B2GOutOfScope - ArchiveOnly         : Archive only, no transmission - NotApplicable       : Not Applicable - Undefined           : Not yet defined when in Pending state or unable to define when in Error state 
 type AFNORProcessingRule string
 
 // List of AFNOR_ProcessingRule
@@ -30,6 +30,7 @@ const (
 	AFNORPROCESSINGRULE_B2_G_OUT_OF_SCOPE AFNORProcessingRule = "B2GOutOfScope"
 	AFNORPROCESSINGRULE_ARCHIVE_ONLY AFNORProcessingRule = "ArchiveOnly"
 	AFNORPROCESSINGRULE_NOT_APPLICABLE AFNORProcessingRule = "NotApplicable"
+	AFNORPROCESSINGRULE_UNDEFINED AFNORProcessingRule = "Undefined"
 )
 
 // All allowed values of AFNORProcessingRule enum
@@ -43,6 +44,7 @@ var AllowedAFNORProcessingRuleEnumValues = []AFNORProcessingRule{
 	"B2GOutOfScope",
 	"ArchiveOnly",
 	"NotApplicable",
+	"Undefined",
 }
 
 func (v *AFNORProcessingRule) UnmarshalJSON(src []byte) error {

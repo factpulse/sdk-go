@@ -22,8 +22,10 @@ var _ MappedNullable = &AFNORSearchFlowParams{}
 
 // AFNORSearchFlowParams struct for AFNORSearchFlowParams
 type AFNORSearchFlowParams struct {
-	// Maximum number of results that may be returned
+	// Pagination, Maximum number of results that may be returned
 	Limit *int32 `json:"limit,omitempty"`
+	// If cursor is provided, then start search starting from that cursor
+	Cursor *string `json:"cursor,omitempty"`
 	Where AFNORSearchFlowFilters `json:"where"`
 }
 
@@ -83,6 +85,38 @@ func (o *AFNORSearchFlowParams) SetLimit(v int32) {
 	o.Limit = &v
 }
 
+// GetCursor returns the Cursor field value if set, zero value otherwise.
+func (o *AFNORSearchFlowParams) GetCursor() string {
+	if o == nil || IsNil(o.Cursor) {
+		var ret string
+		return ret
+	}
+	return *o.Cursor
+}
+
+// GetCursorOk returns a tuple with the Cursor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AFNORSearchFlowParams) GetCursorOk() (*string, bool) {
+	if o == nil || IsNil(o.Cursor) {
+		return nil, false
+	}
+	return o.Cursor, true
+}
+
+// HasCursor returns a boolean if a field has been set.
+func (o *AFNORSearchFlowParams) HasCursor() bool {
+	if o != nil && !IsNil(o.Cursor) {
+		return true
+	}
+
+	return false
+}
+
+// SetCursor gets a reference to the given string and assigns it to the Cursor field.
+func (o *AFNORSearchFlowParams) SetCursor(v string) {
+	o.Cursor = &v
+}
+
 // GetWhere returns the Where field value
 func (o *AFNORSearchFlowParams) GetWhere() AFNORSearchFlowFilters {
 	if o == nil {
@@ -119,6 +153,9 @@ func (o AFNORSearchFlowParams) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Limit) {
 		toSerialize["limit"] = o.Limit
+	}
+	if !IsNil(o.Cursor) {
+		toSerialize["cursor"] = o.Cursor
 	}
 	toSerialize["where"] = o.Where
 	return toSerialize, nil

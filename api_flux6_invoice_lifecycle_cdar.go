@@ -273,10 +273,12 @@ type ApiGetLifecycleApiV1CdarLifecycleGetRequest struct {
 	ApiService *Flux6InvoiceLifecycleCDARAPIService
 	days *int32
 	invoiceId *string
+	flowDirection *string
 	pdpFlowServiceUrl *string
 	pdpTokenUrl *string
 	pdpClientId *string
 	pdpClientSecret *string
+	organizationId *string
 }
 
 // Number of days to look back
@@ -288,6 +290,12 @@ func (r ApiGetLifecycleApiV1CdarLifecycleGetRequest) Days(days int32) ApiGetLife
 // Filter by invoice reference
 func (r ApiGetLifecycleApiV1CdarLifecycleGetRequest) InvoiceId(invoiceId string) ApiGetLifecycleApiV1CdarLifecycleGetRequest {
 	r.invoiceId = &invoiceId
+	return r
+}
+
+// All (default), In (received statuses) or Out (issued statuses)
+func (r ApiGetLifecycleApiV1CdarLifecycleGetRequest) FlowDirection(flowDirection string) ApiGetLifecycleApiV1CdarLifecycleGetRequest {
+	r.flowDirection = &flowDirection
 	return r
 }
 
@@ -315,6 +323,12 @@ func (r ApiGetLifecycleApiV1CdarLifecycleGetRequest) PdpClientSecret(pdpClientSe
 	return r
 }
 
+// Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space.
+func (r ApiGetLifecycleApiV1CdarLifecycleGetRequest) OrganizationId(organizationId string) ApiGetLifecycleApiV1CdarLifecycleGetRequest {
+	r.organizationId = &organizationId
+	return r
+}
+
 func (r ApiGetLifecycleApiV1CdarLifecycleGetRequest) Execute() (*LifecycleResponse, *http.Response, error) {
 	return r.ApiService.GetLifecycleApiV1CdarLifecycleGetExecute(r)
 }
@@ -332,6 +346,8 @@ Returns lifecycle events (CDAR) grouped by invoice reference.
 **Parameters:**
 - `days`: Number of days to look back (default: 7)
 - `invoiceId`: Optional filter on a specific invoice reference
+- `flowDirection`: `All` (default), `In` (statuses received from the counterparty)
+  or `Out` (statuses issued by you or your PA, e.g. 202/203)
 
 **Authentication:** JWT Bearer (recommended) or PDP credentials as query parameters.
 
@@ -376,6 +392,13 @@ func (a *Flux6InvoiceLifecycleCDARAPIService) GetLifecycleApiV1CdarLifecycleGetE
 	if r.invoiceId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "invoiceId", r.invoiceId, "form", "")
 	}
+	if r.flowDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "flowDirection", r.flowDirection, "form", "")
+	} else {
+		var defaultValue string = "All"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "flowDirection", defaultValue, "form", "")
+		r.flowDirection = &defaultValue
+	}
 	if r.pdpFlowServiceUrl != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "pdpFlowServiceUrl", r.pdpFlowServiceUrl, "form", "")
 	}
@@ -404,6 +427,9 @@ func (a *Flux6InvoiceLifecycleCDARAPIService) GetLifecycleApiV1CdarLifecycleGetE
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.organizationId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "Organization-Id", r.organizationId, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -658,10 +684,17 @@ type ApiSubmitCdarApiV1CdarSubmitPostRequest struct {
 	ctx context.Context
 	ApiService *Flux6InvoiceLifecycleCDARAPIService
 	submitCDARRequest *SubmitCDARRequest
+	organizationId *string
 }
 
 func (r ApiSubmitCdarApiV1CdarSubmitPostRequest) SubmitCDARRequest(submitCDARRequest SubmitCDARRequest) ApiSubmitCdarApiV1CdarSubmitPostRequest {
 	r.submitCDARRequest = &submitCDARRequest
+	return r
+}
+
+// Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space.
+func (r ApiSubmitCdarApiV1CdarSubmitPostRequest) OrganizationId(organizationId string) ApiSubmitCdarApiV1CdarSubmitPostRequest {
+	r.organizationId = &organizationId
 	return r
 }
 
@@ -733,6 +766,9 @@ func (a *Flux6InvoiceLifecycleCDARAPIService) SubmitCdarApiV1CdarSubmitPostExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.organizationId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "Organization-Id", r.organizationId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.submitCDARRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -786,10 +822,17 @@ type ApiSubmitCdarXmlApiV1CdarSubmitXmlPostRequest struct {
 	ctx context.Context
 	ApiService *Flux6InvoiceLifecycleCDARAPIService
 	submitCDARXMLRequest *SubmitCDARXMLRequest
+	organizationId *string
 }
 
 func (r ApiSubmitCdarXmlApiV1CdarSubmitXmlPostRequest) SubmitCDARXMLRequest(submitCDARXMLRequest SubmitCDARXMLRequest) ApiSubmitCdarXmlApiV1CdarSubmitXmlPostRequest {
 	r.submitCDARXMLRequest = &submitCDARXMLRequest
+	return r
+}
+
+// Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space.
+func (r ApiSubmitCdarXmlApiV1CdarSubmitXmlPostRequest) OrganizationId(organizationId string) ApiSubmitCdarXmlApiV1CdarSubmitXmlPostRequest {
+	r.organizationId = &organizationId
 	return r
 }
 
@@ -863,6 +906,9 @@ func (a *Flux6InvoiceLifecycleCDARAPIService) SubmitCdarXmlApiV1CdarSubmitXmlPos
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.organizationId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "Organization-Id", r.organizationId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.submitCDARXMLRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -916,10 +962,17 @@ type ApiSubmitEncaisseeApiV1CdarEncaisseePostRequest struct {
 	ctx context.Context
 	ApiService *Flux6InvoiceLifecycleCDARAPIService
 	encaisseeRequest *EncaisseeRequest
+	organizationId *string
 }
 
 func (r ApiSubmitEncaisseeApiV1CdarEncaisseePostRequest) EncaisseeRequest(encaisseeRequest EncaisseeRequest) ApiSubmitEncaisseeApiV1CdarEncaisseePostRequest {
 	r.encaisseeRequest = &encaisseeRequest
+	return r
+}
+
+// Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space.
+func (r ApiSubmitEncaisseeApiV1CdarEncaisseePostRequest) OrganizationId(organizationId string) ApiSubmitEncaisseeApiV1CdarEncaisseePostRequest {
+	r.organizationId = &organizationId
 	return r
 }
 
@@ -995,6 +1048,9 @@ func (a *Flux6InvoiceLifecycleCDARAPIService) SubmitEncaisseeApiV1CdarEncaisseeP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.organizationId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "Organization-Id", r.organizationId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.encaisseeRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -1048,10 +1104,17 @@ type ApiSubmitRefuseeApiV1CdarRefuseePostRequest struct {
 	ctx context.Context
 	ApiService *Flux6InvoiceLifecycleCDARAPIService
 	refuseeRequest *RefuseeRequest
+	organizationId *string
 }
 
 func (r ApiSubmitRefuseeApiV1CdarRefuseePostRequest) RefuseeRequest(refuseeRequest RefuseeRequest) ApiSubmitRefuseeApiV1CdarRefuseePostRequest {
 	r.refuseeRequest = &refuseeRequest
+	return r
+}
+
+// Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space.
+func (r ApiSubmitRefuseeApiV1CdarRefuseePostRequest) OrganizationId(organizationId string) ApiSubmitRefuseeApiV1CdarRefuseePostRequest {
+	r.organizationId = &organizationId
 	return r
 }
 
@@ -1141,6 +1204,9 @@ func (a *Flux6InvoiceLifecycleCDARAPIService) SubmitRefuseeApiV1CdarRefuseePostE
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.organizationId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "Organization-Id", r.organizationId, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.refuseeRequest

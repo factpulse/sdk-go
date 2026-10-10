@@ -20,7 +20,7 @@ var _ MappedNullable = &AFNORSearchSiretFiltersName{}
 
 // AFNORSearchSiretFiltersName struct for AFNORSearchSiretFiltersName
 type AFNORSearchSiretFiltersName struct {
-	Op *AFNORContainsOrStrictOperator `json:"op,omitempty"`
+	Op *AFNORContainsOrStrictOrStartWithOperator `json:"op,omitempty"`
 	// business name
 	Value *string `json:"value,omitempty"`
 }
@@ -43,9 +43,9 @@ func NewAFNORSearchSiretFiltersNameWithDefaults() *AFNORSearchSiretFiltersName {
 }
 
 // GetOp returns the Op field value if set, zero value otherwise.
-func (o *AFNORSearchSiretFiltersName) GetOp() AFNORContainsOrStrictOperator {
+func (o *AFNORSearchSiretFiltersName) GetOp() AFNORContainsOrStrictOrStartWithOperator {
 	if o == nil || IsNil(o.Op) {
-		var ret AFNORContainsOrStrictOperator
+		var ret AFNORContainsOrStrictOrStartWithOperator
 		return ret
 	}
 	return *o.Op
@@ -53,7 +53,7 @@ func (o *AFNORSearchSiretFiltersName) GetOp() AFNORContainsOrStrictOperator {
 
 // GetOpOk returns a tuple with the Op field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AFNORSearchSiretFiltersName) GetOpOk() (*AFNORContainsOrStrictOperator, bool) {
+func (o *AFNORSearchSiretFiltersName) GetOpOk() (*AFNORContainsOrStrictOrStartWithOperator, bool) {
 	if o == nil || IsNil(o.Op) {
 		return nil, false
 	}
@@ -69,8 +69,8 @@ func (o *AFNORSearchSiretFiltersName) HasOp() bool {
 	return false
 }
 
-// SetOp gets a reference to the given AFNORContainsOrStrictOperator and assigns it to the Op field.
-func (o *AFNORSearchSiretFiltersName) SetOp(v AFNORContainsOrStrictOperator) {
+// SetOp gets a reference to the given AFNORContainsOrStrictOrStartWithOperator and assigns it to the Op field.
+func (o *AFNORSearchSiretFiltersName) SetOp(v AFNORContainsOrStrictOrStartWithOperator) {
 	o.Op = &v
 }
 

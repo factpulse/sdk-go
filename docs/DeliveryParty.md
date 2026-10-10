@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **NullableString** |  | [optional] 
-**GlobalId** | Pointer to [**NullableElectronicAddress**](ElectronicAddress.md) |  | [optional] 
+**GlobalId** | Pointer to [**NullableElectronicAddressInput**](ElectronicAddressInput.md) |  | [optional] 
 **Name** | Pointer to **NullableString** |  | [optional] 
-**PostalAddress** | Pointer to [**NullablePostalAddress**](PostalAddress.md) |  | [optional] 
+**PostalAddress** | Pointer to [**NullablePostalAddressInput**](PostalAddressInput.md) |  | [optional] 
 
 ## Methods
 
@@ -65,20 +65,20 @@ HasId returns a boolean if a field has been set.
 UnsetId ensures that no value is present for Id, not even an explicit nil
 ### GetGlobalId
 
-`func (o *DeliveryParty) GetGlobalId() ElectronicAddress`
+`func (o *DeliveryParty) GetGlobalId() ElectronicAddressInput`
 
 GetGlobalId returns the GlobalId field if non-nil, zero value otherwise.
 
 ### GetGlobalIdOk
 
-`func (o *DeliveryParty) GetGlobalIdOk() (*ElectronicAddress, bool)`
+`func (o *DeliveryParty) GetGlobalIdOk() (*ElectronicAddressInput, bool)`
 
 GetGlobalIdOk returns a tuple with the GlobalId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetGlobalId
 
-`func (o *DeliveryParty) SetGlobalId(v ElectronicAddress)`
+`func (o *DeliveryParty) SetGlobalId(v ElectronicAddressInput)`
 
 SetGlobalId sets GlobalId field to given value.
 
@@ -135,20 +135,20 @@ HasName returns a boolean if a field has been set.
 UnsetName ensures that no value is present for Name, not even an explicit nil
 ### GetPostalAddress
 
-`func (o *DeliveryParty) GetPostalAddress() PostalAddress`
+`func (o *DeliveryParty) GetPostalAddress() PostalAddressInput`
 
 GetPostalAddress returns the PostalAddress field if non-nil, zero value otherwise.
 
 ### GetPostalAddressOk
 
-`func (o *DeliveryParty) GetPostalAddressOk() (*PostalAddress, bool)`
+`func (o *DeliveryParty) GetPostalAddressOk() (*PostalAddressInput, bool)`
 
 GetPostalAddressOk returns a tuple with the PostalAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPostalAddress
 
-`func (o *DeliveryParty) SetPostalAddress(v PostalAddress)`
+`func (o *DeliveryParty) SetPostalAddress(v PostalAddressInput)`
 
 SetPostalAddress sets PostalAddress field to given value.
 

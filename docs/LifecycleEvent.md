@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **StatusCode** | **string** | Code statut (200-601) | 
 **StatusDescription** | Pointer to **NullableString** |  | [optional] 
 **AckStatus** | Pointer to **NullableString** |  | [optional] 
+**FlowDirection** | Pointer to **NullableString** |  | [optional] 
 **At** | Pointer to **NullableString** |  | [optional] 
 **DocumentId** | Pointer to **NullableString** |  | [optional] 
 **Amount** | Pointer to **NullableString** |  | [optional] 
@@ -145,6 +146,41 @@ HasAckStatus returns a boolean if a field has been set.
 `func (o *LifecycleEvent) UnsetAckStatus()`
 
 UnsetAckStatus ensures that no value is present for AckStatus, not even an explicit nil
+### GetFlowDirection
+
+`func (o *LifecycleEvent) GetFlowDirection() string`
+
+GetFlowDirection returns the FlowDirection field if non-nil, zero value otherwise.
+
+### GetFlowDirectionOk
+
+`func (o *LifecycleEvent) GetFlowDirectionOk() (*string, bool)`
+
+GetFlowDirectionOk returns a tuple with the FlowDirection field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFlowDirection
+
+`func (o *LifecycleEvent) SetFlowDirection(v string)`
+
+SetFlowDirection sets FlowDirection field to given value.
+
+### HasFlowDirection
+
+`func (o *LifecycleEvent) HasFlowDirection() bool`
+
+HasFlowDirection returns a boolean if a field has been set.
+
+### SetFlowDirectionNil
+
+`func (o *LifecycleEvent) SetFlowDirectionNil(b bool)`
+
+ SetFlowDirectionNil sets the value for FlowDirection to be an explicit nil
+
+### UnsetFlowDirection
+`func (o *LifecycleEvent) UnsetFlowDirection()`
+
+UnsetFlowDirection ensures that no value is present for FlowDirection, not even an explicit nil
 ### GetAt
 
 `func (o *LifecycleEvent) GetAt() string`

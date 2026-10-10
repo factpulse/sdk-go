@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **IsCharge** | **bool** | True for charge, False for allowance (ChargeIndicator). | 
-**Amount** | [**Amount2**](Amount2.md) |  | 
+**Amount** | [**Amount**](Amount.md) |  | 
 **BaseAmount** | Pointer to [**NullableBaseAmount**](BaseAmount.md) |  | [optional] 
 **Percentage** | Pointer to [**NullablePercentage**](Percentage.md) |  | [optional] 
 **Reason** | Pointer to **NullableString** |  | [optional] 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewAllowanceCharge
 
-`func NewAllowanceCharge(isCharge bool, amount Amount2, ) *AllowanceCharge`
+`func NewAllowanceCharge(isCharge bool, amount Amount, ) *AllowanceCharge`
 
 NewAllowanceCharge instantiates a new AllowanceCharge object
 This constructor will assign default values to properties that have it defined,
@@ -54,20 +54,20 @@ SetIsCharge sets IsCharge field to given value.
 
 ### GetAmount
 
-`func (o *AllowanceCharge) GetAmount() Amount2`
+`func (o *AllowanceCharge) GetAmount() Amount`
 
 GetAmount returns the Amount field if non-nil, zero value otherwise.
 
 ### GetAmountOk
 
-`func (o *AllowanceCharge) GetAmountOk() (*Amount2, bool)`
+`func (o *AllowanceCharge) GetAmountOk() (*Amount, bool)`
 
 GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAmount
 
-`func (o *AllowanceCharge) SetAmount(v Amount2)`
+`func (o *AllowanceCharge) SetAmount(v Amount)`
 
 SetAmount sets Amount field to given value.
 

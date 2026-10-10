@@ -5,15 +5,15 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Number** | **string** | Unique invoice number | 
-**Supplier** | **map[string]interface{}** | Supplier information (siret, iban, ...) | 
-**Recipient** | **map[string]interface{}** | Recipient information (siret, ...) | 
+**Supplier** | **map[string]interface{}** | Supplier information (siret, iban, bic, routingAddress, ...). For a seller without an intra-community VAT number (VAT franchise, article 293 B of the CGI), provide &#x60;taxRegistrationId&#x60; (BT-32, usually the SIREN): it satisfies BR-E-02 and prevents BT-31 from being auto-calculated. | 
+**Recipient** | **map[string]interface{}** | Recipient information (siret, vatNumber for BT-48, ...) | 
 **Lines** | **[]map[string]interface{}** | Invoice lines | 
 **Date** | Pointer to **NullableString** |  | [optional] 
 **DueDays** | Pointer to **int32** | Due date in days (default: 30) | [optional] [default to 30]
 **Comment** | Pointer to **NullableString** |  | [optional] 
 **PurchaseOrderReference** | Pointer to **NullableString** |  | [optional] 
 **ContractReference** | Pointer to **NullableString** |  | [optional] 
-**InvoiceType** | Pointer to [**InvoiceTypeCode**](InvoiceTypeCode.md) | Document type (UNTDID 1001). Default: 380 (Invoice). | [optional] [default to INVOICE]
+**InvoiceType** | Pointer to [**FactureElectroniqueModelsInvoiceTypeCode**](FactureElectroniqueModelsInvoiceTypeCode.md) | Document type (UNTDID 1001). Default: 380 (Invoice). | [optional] [default to INVOICE]
 **PrecedingInvoiceReference** | Pointer to **NullableString** |  | [optional] 
 **OperationNature** | Pointer to [**NullableOperationNature**](OperationNature.md) |  | [optional] 
 **InvoicingFramework** | Pointer to [**NullableInvoicingFrameworkCode**](InvoicingFrameworkCode.md) |  | [optional] 
@@ -284,20 +284,20 @@ HasContractReference returns a boolean if a field has been set.
 UnsetContractReference ensures that no value is present for ContractReference, not even an explicit nil
 ### GetInvoiceType
 
-`func (o *SimplifiedInvoiceData) GetInvoiceType() InvoiceTypeCode`
+`func (o *SimplifiedInvoiceData) GetInvoiceType() FactureElectroniqueModelsInvoiceTypeCode`
 
 GetInvoiceType returns the InvoiceType field if non-nil, zero value otherwise.
 
 ### GetInvoiceTypeOk
 
-`func (o *SimplifiedInvoiceData) GetInvoiceTypeOk() (*InvoiceTypeCode, bool)`
+`func (o *SimplifiedInvoiceData) GetInvoiceTypeOk() (*FactureElectroniqueModelsInvoiceTypeCode, bool)`
 
 GetInvoiceTypeOk returns a tuple with the InvoiceType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInvoiceType
 
-`func (o *SimplifiedInvoiceData) SetInvoiceType(v InvoiceTypeCode)`
+`func (o *SimplifiedInvoiceData) SetInvoiceType(v FactureElectroniqueModelsInvoiceTypeCode)`
 
 SetInvoiceType sets InvoiceType field to given value.
 

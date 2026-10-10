@@ -17,151 +17,94 @@ import (
 	"fmt"
 )
 
-// checks if the AFNORWebhookMetadata type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AFNORWebhookMetadata{}
+// checks if the ElectronicAddressOutput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ElectronicAddressOutput{}
 
-// AFNORWebhookMetadata struct for AFNORWebhookMetadata
-type AFNORWebhookMetadata struct {
-	ProcessingRule *AFNORProcessingRule `json:"processingRule,omitempty"`
-	FlowType AFNORFlowType `json:"flowType"`
-	FlowDirection AFNORFlowDirection `json:"flowDirection"`
-	AckStatus *AFNORFlowAckStatus `json:"ackStatus,omitempty"`
+// ElectronicAddressOutput Represents an electronic invoicing address, composed of an identifier and its scheme (SchemeID) in accordance with EN16931. Example: { \"identifier\": \"123456789\", \"scheme_id\": \"0225\" }
+type ElectronicAddressOutput struct {
+	// Electronic address identifier (e.g., SIREN, SIRET, routing code)
+	Identifier string `json:"identifier"`
+	// Identification scheme (EAS code)
+	SchemeId *SchemeID `json:"schemeId,omitempty"`
 }
 
-type _AFNORWebhookMetadata AFNORWebhookMetadata
+type _ElectronicAddressOutput ElectronicAddressOutput
 
-// NewAFNORWebhookMetadata instantiates a new AFNORWebhookMetadata object
+// NewElectronicAddressOutput instantiates a new ElectronicAddressOutput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAFNORWebhookMetadata(flowType AFNORFlowType, flowDirection AFNORFlowDirection) *AFNORWebhookMetadata {
-	this := AFNORWebhookMetadata{}
-	this.FlowType = flowType
-	this.FlowDirection = flowDirection
+func NewElectronicAddressOutput(identifier string) *ElectronicAddressOutput {
+	this := ElectronicAddressOutput{}
+	this.Identifier = identifier
 	return &this
 }
 
-// NewAFNORWebhookMetadataWithDefaults instantiates a new AFNORWebhookMetadata object
+// NewElectronicAddressOutputWithDefaults instantiates a new ElectronicAddressOutput object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAFNORWebhookMetadataWithDefaults() *AFNORWebhookMetadata {
-	this := AFNORWebhookMetadata{}
+func NewElectronicAddressOutputWithDefaults() *ElectronicAddressOutput {
+	this := ElectronicAddressOutput{}
 	return &this
 }
 
-// GetProcessingRule returns the ProcessingRule field value if set, zero value otherwise.
-func (o *AFNORWebhookMetadata) GetProcessingRule() AFNORProcessingRule {
-	if o == nil || IsNil(o.ProcessingRule) {
-		var ret AFNORProcessingRule
+// GetIdentifier returns the Identifier field value
+func (o *ElectronicAddressOutput) GetIdentifier() string {
+	if o == nil {
+		var ret string
 		return ret
 	}
-	return *o.ProcessingRule
+
+	return o.Identifier
 }
 
-// GetProcessingRuleOk returns a tuple with the ProcessingRule field value if set, nil otherwise
+// GetIdentifierOk returns a tuple with the Identifier field value
 // and a boolean to check if the value has been set.
-func (o *AFNORWebhookMetadata) GetProcessingRuleOk() (*AFNORProcessingRule, bool) {
-	if o == nil || IsNil(o.ProcessingRule) {
+func (o *ElectronicAddressOutput) GetIdentifierOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ProcessingRule, true
+	return &o.Identifier, true
 }
 
-// HasProcessingRule returns a boolean if a field has been set.
-func (o *AFNORWebhookMetadata) HasProcessingRule() bool {
-	if o != nil && !IsNil(o.ProcessingRule) {
+// SetIdentifier sets field value
+func (o *ElectronicAddressOutput) SetIdentifier(v string) {
+	o.Identifier = v
+}
+
+// GetSchemeId returns the SchemeId field value if set, zero value otherwise.
+func (o *ElectronicAddressOutput) GetSchemeId() SchemeID {
+	if o == nil || IsNil(o.SchemeId) {
+		var ret SchemeID
+		return ret
+	}
+	return *o.SchemeId
+}
+
+// GetSchemeIdOk returns a tuple with the SchemeId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ElectronicAddressOutput) GetSchemeIdOk() (*SchemeID, bool) {
+	if o == nil || IsNil(o.SchemeId) {
+		return nil, false
+	}
+	return o.SchemeId, true
+}
+
+// HasSchemeId returns a boolean if a field has been set.
+func (o *ElectronicAddressOutput) HasSchemeId() bool {
+	if o != nil && !IsNil(o.SchemeId) {
 		return true
 	}
 
 	return false
 }
 
-// SetProcessingRule gets a reference to the given AFNORProcessingRule and assigns it to the ProcessingRule field.
-func (o *AFNORWebhookMetadata) SetProcessingRule(v AFNORProcessingRule) {
-	o.ProcessingRule = &v
+// SetSchemeId gets a reference to the given SchemeID and assigns it to the SchemeId field.
+func (o *ElectronicAddressOutput) SetSchemeId(v SchemeID) {
+	o.SchemeId = &v
 }
 
-// GetFlowType returns the FlowType field value
-func (o *AFNORWebhookMetadata) GetFlowType() AFNORFlowType {
-	if o == nil {
-		var ret AFNORFlowType
-		return ret
-	}
-
-	return o.FlowType
-}
-
-// GetFlowTypeOk returns a tuple with the FlowType field value
-// and a boolean to check if the value has been set.
-func (o *AFNORWebhookMetadata) GetFlowTypeOk() (*AFNORFlowType, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FlowType, true
-}
-
-// SetFlowType sets field value
-func (o *AFNORWebhookMetadata) SetFlowType(v AFNORFlowType) {
-	o.FlowType = v
-}
-
-// GetFlowDirection returns the FlowDirection field value
-func (o *AFNORWebhookMetadata) GetFlowDirection() AFNORFlowDirection {
-	if o == nil {
-		var ret AFNORFlowDirection
-		return ret
-	}
-
-	return o.FlowDirection
-}
-
-// GetFlowDirectionOk returns a tuple with the FlowDirection field value
-// and a boolean to check if the value has been set.
-func (o *AFNORWebhookMetadata) GetFlowDirectionOk() (*AFNORFlowDirection, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FlowDirection, true
-}
-
-// SetFlowDirection sets field value
-func (o *AFNORWebhookMetadata) SetFlowDirection(v AFNORFlowDirection) {
-	o.FlowDirection = v
-}
-
-// GetAckStatus returns the AckStatus field value if set, zero value otherwise.
-func (o *AFNORWebhookMetadata) GetAckStatus() AFNORFlowAckStatus {
-	if o == nil || IsNil(o.AckStatus) {
-		var ret AFNORFlowAckStatus
-		return ret
-	}
-	return *o.AckStatus
-}
-
-// GetAckStatusOk returns a tuple with the AckStatus field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AFNORWebhookMetadata) GetAckStatusOk() (*AFNORFlowAckStatus, bool) {
-	if o == nil || IsNil(o.AckStatus) {
-		return nil, false
-	}
-	return o.AckStatus, true
-}
-
-// HasAckStatus returns a boolean if a field has been set.
-func (o *AFNORWebhookMetadata) HasAckStatus() bool {
-	if o != nil && !IsNil(o.AckStatus) {
-		return true
-	}
-
-	return false
-}
-
-// SetAckStatus gets a reference to the given AFNORFlowAckStatus and assigns it to the AckStatus field.
-func (o *AFNORWebhookMetadata) SetAckStatus(v AFNORFlowAckStatus) {
-	o.AckStatus = &v
-}
-
-func (o AFNORWebhookMetadata) MarshalJSON() ([]byte, error) {
+func (o ElectronicAddressOutput) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -169,26 +112,21 @@ func (o AFNORWebhookMetadata) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AFNORWebhookMetadata) ToMap() (map[string]interface{}, error) {
+func (o ElectronicAddressOutput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ProcessingRule) {
-		toSerialize["processingRule"] = o.ProcessingRule
-	}
-	toSerialize["flowType"] = o.FlowType
-	toSerialize["flowDirection"] = o.FlowDirection
-	if !IsNil(o.AckStatus) {
-		toSerialize["ackStatus"] = o.AckStatus
+	toSerialize["identifier"] = o.Identifier
+	if !IsNil(o.SchemeId) {
+		toSerialize["schemeId"] = o.SchemeId
 	}
 	return toSerialize, nil
 }
 
-func (o *AFNORWebhookMetadata) UnmarshalJSON(data []byte) (err error) {
+func (o *ElectronicAddressOutput) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"flowType",
-		"flowDirection",
+		"identifier",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -205,53 +143,53 @@ func (o *AFNORWebhookMetadata) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varAFNORWebhookMetadata := _AFNORWebhookMetadata{}
+	varElectronicAddressOutput := _ElectronicAddressOutput{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAFNORWebhookMetadata)
+	err = decoder.Decode(&varElectronicAddressOutput)
 
 	if err != nil {
 		return err
 	}
 
-	*o = AFNORWebhookMetadata(varAFNORWebhookMetadata)
+	*o = ElectronicAddressOutput(varElectronicAddressOutput)
 
 	return err
 }
 
-type NullableAFNORWebhookMetadata struct {
-	value *AFNORWebhookMetadata
+type NullableElectronicAddressOutput struct {
+	value *ElectronicAddressOutput
 	isSet bool
 }
 
-func (v NullableAFNORWebhookMetadata) Get() *AFNORWebhookMetadata {
+func (v NullableElectronicAddressOutput) Get() *ElectronicAddressOutput {
 	return v.value
 }
 
-func (v *NullableAFNORWebhookMetadata) Set(val *AFNORWebhookMetadata) {
+func (v *NullableElectronicAddressOutput) Set(val *ElectronicAddressOutput) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAFNORWebhookMetadata) IsSet() bool {
+func (v NullableElectronicAddressOutput) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAFNORWebhookMetadata) Unset() {
+func (v *NullableElectronicAddressOutput) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAFNORWebhookMetadata(val *AFNORWebhookMetadata) *NullableAFNORWebhookMetadata {
-	return &NullableAFNORWebhookMetadata{value: val, isSet: true}
+func NewNullableElectronicAddressOutput(val *ElectronicAddressOutput) *NullableElectronicAddressOutput {
+	return &NullableElectronicAddressOutput{value: val, isSet: true}
 }
 
-func (v NullableAFNORWebhookMetadata) MarshalJSON() ([]byte, error) {
+func (v NullableElectronicAddressOutput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAFNORWebhookMetadata) UnmarshalJSON(src []byte) error {
+func (v *NullableElectronicAddressOutput) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

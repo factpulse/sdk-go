@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Limit** | Pointer to **int32** |  | [optional] 
+**Limit** | Pointer to **int32** | Pagination, Maximum number of results that may be returned | [optional] [default to 25]
+**NextCursor** | Pointer to **string** | Pagination management: - If present, says where to start for next page, set nextCursor as the cursor in the next request - If omitted, says that pagination is finished  | [optional] 
 **Filters** | Pointer to [**AFNORSearchFlowFilters**](AFNORSearchFlowFilters.md) |  | [optional] 
 **Results** | Pointer to [**[]AFNORFlow**](AFNORFlow.md) |  | [optional] 
 
@@ -51,6 +52,31 @@ SetLimit sets Limit field to given value.
 `func (o *AFNORSearchFlowContent) HasLimit() bool`
 
 HasLimit returns a boolean if a field has been set.
+
+### GetNextCursor
+
+`func (o *AFNORSearchFlowContent) GetNextCursor() string`
+
+GetNextCursor returns the NextCursor field if non-nil, zero value otherwise.
+
+### GetNextCursorOk
+
+`func (o *AFNORSearchFlowContent) GetNextCursorOk() (*string, bool)`
+
+GetNextCursorOk returns a tuple with the NextCursor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNextCursor
+
+`func (o *AFNORSearchFlowContent) SetNextCursor(v string)`
+
+SetNextCursor sets NextCursor field to given value.
+
+### HasNextCursor
+
+`func (o *AFNORSearchFlowContent) HasNextCursor() bool`
+
+HasNextCursor returns a boolean if a field has been set.
 
 ### GetFilters
 

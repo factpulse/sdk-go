@@ -27,7 +27,7 @@ type TaxRepresentative struct {
 	// Tax representative VAT identifier (BT-63).
 	VatNumber string `json:"vat_number"`
 	// Tax representative postal address (BG-12).
-	PostalAddress PostalAddress `json:"postal_address"`
+	PostalAddress PostalAddressInput `json:"postal_address"`
 }
 
 type _TaxRepresentative TaxRepresentative
@@ -36,7 +36,7 @@ type _TaxRepresentative TaxRepresentative
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTaxRepresentative(name string, vatNumber string, postalAddress PostalAddress) *TaxRepresentative {
+func NewTaxRepresentative(name string, vatNumber string, postalAddress PostalAddressInput) *TaxRepresentative {
 	this := TaxRepresentative{}
 	this.Name = name
 	this.VatNumber = vatNumber
@@ -101,9 +101,9 @@ func (o *TaxRepresentative) SetVatNumber(v string) {
 }
 
 // GetPostalAddress returns the PostalAddress field value
-func (o *TaxRepresentative) GetPostalAddress() PostalAddress {
+func (o *TaxRepresentative) GetPostalAddress() PostalAddressInput {
 	if o == nil {
-		var ret PostalAddress
+		var ret PostalAddressInput
 		return ret
 	}
 
@@ -112,7 +112,7 @@ func (o *TaxRepresentative) GetPostalAddress() PostalAddress {
 
 // GetPostalAddressOk returns a tuple with the PostalAddress field value
 // and a boolean to check if the value has been set.
-func (o *TaxRepresentative) GetPostalAddressOk() (*PostalAddress, bool) {
+func (o *TaxRepresentative) GetPostalAddressOk() (*PostalAddressInput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -120,7 +120,7 @@ func (o *TaxRepresentative) GetPostalAddressOk() (*PostalAddress, bool) {
 }
 
 // SetPostalAddress sets field value
-func (o *TaxRepresentative) SetPostalAddress(v PostalAddress) {
+func (o *TaxRepresentative) SetPostalAddress(v PostalAddressInput) {
 	o.PostalAddress = v
 }
 

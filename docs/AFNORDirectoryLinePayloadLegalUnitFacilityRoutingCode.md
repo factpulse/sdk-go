@@ -6,8 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AddressingIdentifier** | Pointer to **string** | Addressing identifier of the directory line. | [optional] 
 **PlatformType** | Pointer to [**AFNORRecipientPlatformType**](AFNORRecipientPlatformType.md) |  | [optional] 
+**DirectoryLineStatus** | Pointer to [**AFNORUniqueDirectoryLineStatus**](AFNORUniqueDirectoryLineStatus.md) |  | [optional] 
 **Siren** | Pointer to **string** | SIREN number | [optional] 
 **Siret** | Pointer to **string** | SIRET Number | [optional] 
+**RoutingIdentifier** | Pointer to **string** | Routing identifier od a routing code. | [optional] 
 **AddressingSuffix** | Pointer to **string** | suffix of the directory line which defines an address mesh not attached to a facility | [optional] 
 **RoutingCode** | Pointer to [**AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCodeRoutingCode**](AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCodeRoutingCode.md) |  | [optional] 
 **LegalUnit** | Pointer to [**AFNORLegalUnitPayloadIncluded**](AFNORLegalUnitPayloadIncluded.md) |  | [optional] 
@@ -82,6 +84,31 @@ SetPlatformType sets PlatformType field to given value.
 
 HasPlatformType returns a boolean if a field has been set.
 
+### GetDirectoryLineStatus
+
+`func (o *AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode) GetDirectoryLineStatus() AFNORUniqueDirectoryLineStatus`
+
+GetDirectoryLineStatus returns the DirectoryLineStatus field if non-nil, zero value otherwise.
+
+### GetDirectoryLineStatusOk
+
+`func (o *AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode) GetDirectoryLineStatusOk() (*AFNORUniqueDirectoryLineStatus, bool)`
+
+GetDirectoryLineStatusOk returns a tuple with the DirectoryLineStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDirectoryLineStatus
+
+`func (o *AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode) SetDirectoryLineStatus(v AFNORUniqueDirectoryLineStatus)`
+
+SetDirectoryLineStatus sets DirectoryLineStatus field to given value.
+
+### HasDirectoryLineStatus
+
+`func (o *AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode) HasDirectoryLineStatus() bool`
+
+HasDirectoryLineStatus returns a boolean if a field has been set.
+
 ### GetSiren
 
 `func (o *AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode) GetSiren() string`
@@ -131,6 +158,31 @@ SetSiret sets Siret field to given value.
 `func (o *AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode) HasSiret() bool`
 
 HasSiret returns a boolean if a field has been set.
+
+### GetRoutingIdentifier
+
+`func (o *AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode) GetRoutingIdentifier() string`
+
+GetRoutingIdentifier returns the RoutingIdentifier field if non-nil, zero value otherwise.
+
+### GetRoutingIdentifierOk
+
+`func (o *AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode) GetRoutingIdentifierOk() (*string, bool)`
+
+GetRoutingIdentifierOk returns a tuple with the RoutingIdentifier field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRoutingIdentifier
+
+`func (o *AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode) SetRoutingIdentifier(v string)`
+
+SetRoutingIdentifier sets RoutingIdentifier field to given value.
+
+### HasRoutingIdentifier
+
+`func (o *AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode) HasRoutingIdentifier() bool`
+
+HasRoutingIdentifier returns a boolean if a field has been set.
 
 ### GetAddressingSuffix
 

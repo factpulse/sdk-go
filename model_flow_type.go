@@ -16,14 +16,15 @@ import (
 	"fmt"
 )
 
-// FlowType AFNOR XP Z12-013 FlowType enum.  Values from swagger specification v1.2.0: - Invoice flows (factures) - Lifecycle flows (cycle de vie) - E-reporting flows (transactions/paiements)
+// FlowType AFNOR XP Z12-013 FlowType enum.  Values from swagger specification v1.3.0: - Invoice flows (factures) - Lifecycle flows (cycle de vie) - E-reporting flows (transactions/paiements) - \"State*\" flows sent to DFH and Undefined (added in v1.3.0)
 type FlowType string
 
 // List of FlowType
 const (
 	FLOWTYPE_CUSTOMER_INVOICE FlowType = "CustomerInvoice"
 	FLOWTYPE_SUPPLIER_INVOICE FlowType = "SupplierInvoice"
-	FLOWTYPE_STATE_INVOICE FlowType = "StateInvoice"
+	FLOWTYPE_STATE_CUSTOMER_INVOICE FlowType = "StateCustomerInvoice"
+	FLOWTYPE_STATE_SUPPLIER_INVOICE FlowType = "StateSupplierInvoice"
 	FLOWTYPE_CUSTOMER_INVOICE_LC FlowType = "CustomerInvoiceLC"
 	FLOWTYPE_SUPPLIER_INVOICE_LC FlowType = "SupplierInvoiceLC"
 	FLOWTYPE_STATE_CUSTOMER_INVOICE_LC FlowType = "StateCustomerInvoiceLC"
@@ -33,14 +34,20 @@ const (
 	FLOWTYPE_UNITARY_SUPPLIER_TRANSACTION_REPORT FlowType = "UnitarySupplierTransactionReport"
 	FLOWTYPE_UNITARY_CUSTOMER_PAYMENT_REPORT FlowType = "UnitaryCustomerPaymentReport"
 	FLOWTYPE_AGGREGATED_CUSTOMER_PAYMENT_REPORT FlowType = "AggregatedCustomerPaymentReport"
+	FLOWTYPE_STATE_TRANSACTION_REPORT FlowType = "StateTransactionReport"
+	FLOWTYPE_STATE_TRANSACTION_REPORT_LC FlowType = "StateTransactionReportLC"
+	FLOWTYPE_STATE_PAYMENT_REPORT FlowType = "StatePaymentReport"
+	FLOWTYPE_STATE_PAYMENT_REPORT_LC FlowType = "StatePaymentReportLC"
 	FLOWTYPE_MULTI_FLOW_REPORT FlowType = "MultiFlowReport"
+	FLOWTYPE_UNDEFINED FlowType = "Undefined"
 )
 
 // All allowed values of FlowType enum
 var AllowedFlowTypeEnumValues = []FlowType{
 	"CustomerInvoice",
 	"SupplierInvoice",
-	"StateInvoice",
+	"StateCustomerInvoice",
+	"StateSupplierInvoice",
 	"CustomerInvoiceLC",
 	"SupplierInvoiceLC",
 	"StateCustomerInvoiceLC",
@@ -50,7 +57,12 @@ var AllowedFlowTypeEnumValues = []FlowType{
 	"UnitarySupplierTransactionReport",
 	"UnitaryCustomerPaymentReport",
 	"AggregatedCustomerPaymentReport",
+	"StateTransactionReport",
+	"StateTransactionReportLC",
+	"StatePaymentReport",
+	"StatePaymentReportLC",
 	"MultiFlowReport",
+	"Undefined",
 }
 
 func (v *FlowType) UnmarshalJSON(src []byte) error {

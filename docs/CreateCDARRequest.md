@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **ReasonText** | Pointer to **NullableString** |  | [optional] 
 **ActionCode** | Pointer to **NullableString** |  | [optional] 
 **EncaisseAmount** | Pointer to [**NullableEncaisseamount**](Encaisseamount.md) |  | [optional] 
+**EncaisseVatRate** | Pointer to **float32** | Taux de TVA du montant encaissé en % (MDT-224, requis par BR-FR-CDV-14 pour le statut 212 ; défaut 20) | [optional] [default to 20]
 
 ## Methods
 
@@ -547,6 +548,31 @@ HasEncaisseAmount returns a boolean if a field has been set.
 `func (o *CreateCDARRequest) UnsetEncaisseAmount()`
 
 UnsetEncaisseAmount ensures that no value is present for EncaisseAmount, not even an explicit nil
+### GetEncaisseVatRate
+
+`func (o *CreateCDARRequest) GetEncaisseVatRate() float32`
+
+GetEncaisseVatRate returns the EncaisseVatRate field if non-nil, zero value otherwise.
+
+### GetEncaisseVatRateOk
+
+`func (o *CreateCDARRequest) GetEncaisseVatRateOk() (*float32, bool)`
+
+GetEncaisseVatRateOk returns a tuple with the EncaisseVatRate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEncaisseVatRate
+
+`func (o *CreateCDARRequest) SetEncaisseVatRate(v float32)`
+
+SetEncaisseVatRate sets EncaisseVatRate field to given value.
+
+### HasEncaisseVatRate
+
+`func (o *CreateCDARRequest) HasEncaisseVatRate() bool`
+
+HasEncaisseVatRate returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -27,7 +27,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 
 ## SubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost
 
-> SubmitCompleteInvoiceResponse SubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost(ctx).SubmitCompleteInvoiceRequest(submitCompleteInvoiceRequest).Execute()
+> SubmitCompleteInvoiceResponse SubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost(ctx).SubmitCompleteInvoiceRequest(submitCompleteInvoiceRequest).OrganizationId(organizationId).Execute()
 
 Submit a complete invoice (generation + signature + submission)
 
@@ -107,15 +107,16 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
-	submitCompleteInvoiceRequest := *openapiclient.NewSubmitCompleteInvoiceRequest(*openapiclient.NewSimplifiedInvoiceData("Number_example", map[string]interface{}{"key": interface{}(123)}, map[string]interface{}{"key": interface{}(123)}, []map[string]interface{}{map[string]interface{}{"key": interface{}(123)}}), "SourcePdf_example", openapiclient.Destination{AFNORDestination: openapiclient.NewAFNORDestination()}) // SubmitCompleteInvoiceRequest | 
+	submitCompleteInvoiceRequest := *openapiclient.NewSubmitCompleteInvoiceRequest(openapiclient.Invoicedata{FacturXInvoice: openapiclient.NewFacturXInvoice("InvoiceNumber_example", "PaymentDueDate_example", *openapiclient.NewRecipient(), *openapiclient.NewSupplier(), *openapiclient.NewInvoiceReferences(openapiclient.PaymentMeans("CHEQUE"), openapiclient.InvoiceTypeCode("380"), openapiclient.VATAccountingCode("TVA_SUR_DEBIT")), *openapiclient.NewInvoiceTotals(*openapiclient.NewTotalNetAmount(), *openapiclient.NewTotalVATAmount(), *openapiclient.NewTotalGrossAmount(), *openapiclient.NewAmountDue()))}, "SourcePdf_example", openapiclient.Destination{AFNORDestination: openapiclient.NewAFNORDestination()}) // SubmitCompleteInvoiceRequest | 
+	organizationId := "organizationId_example" // string | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.InvoiceGenerationAPI.SubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost(context.Background()).SubmitCompleteInvoiceRequest(submitCompleteInvoiceRequest).Execute()
+	resp, r, err := apiClient.InvoiceGenerationAPI.SubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost(context.Background()).SubmitCompleteInvoiceRequest(submitCompleteInvoiceRequest).OrganizationId(organizationId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `InvoiceGenerationAPI.SubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -137,6 +138,7 @@ Other parameters are passed through a pointer to a apiSubmitCompleteInvoiceApiV1
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **submitCompleteInvoiceRequest** | [**SubmitCompleteInvoiceRequest**](SubmitCompleteInvoiceRequest.md) |  | 
+ **organizationId** | **string** | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. | 
 
 ### Return type
 
@@ -158,7 +160,7 @@ Name | Type | Description  | Notes
 
 ## SubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost
 
-> TaskResponse SubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost(ctx).SubmitCompleteInvoiceRequest(submitCompleteInvoiceRequest).CallbackUrl(callbackUrl).WebhookMode(webhookMode).Execute()
+> TaskResponse SubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost(ctx).SubmitCompleteInvoiceRequest(submitCompleteInvoiceRequest).CallbackUrl(callbackUrl).WebhookMode(webhookMode).OrganizationId(organizationId).Execute()
 
 Submit a complete invoice (asynchronous with Celery)
 
@@ -173,17 +175,18 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
-	submitCompleteInvoiceRequest := *openapiclient.NewSubmitCompleteInvoiceRequest(*openapiclient.NewSimplifiedInvoiceData("Number_example", map[string]interface{}{"key": interface{}(123)}, map[string]interface{}{"key": interface{}(123)}, []map[string]interface{}{map[string]interface{}{"key": interface{}(123)}}), "SourcePdf_example", openapiclient.Destination{AFNORDestination: openapiclient.NewAFNORDestination()}) // SubmitCompleteInvoiceRequest | 
+	submitCompleteInvoiceRequest := *openapiclient.NewSubmitCompleteInvoiceRequest(openapiclient.Invoicedata{FacturXInvoice: openapiclient.NewFacturXInvoice("InvoiceNumber_example", "PaymentDueDate_example", *openapiclient.NewRecipient(), *openapiclient.NewSupplier(), *openapiclient.NewInvoiceReferences(openapiclient.PaymentMeans("CHEQUE"), openapiclient.InvoiceTypeCode("380"), openapiclient.VATAccountingCode("TVA_SUR_DEBIT")), *openapiclient.NewInvoiceTotals(*openapiclient.NewTotalNetAmount(), *openapiclient.NewTotalVATAmount(), *openapiclient.NewTotalGrossAmount(), *openapiclient.NewAmountDue()))}, "SourcePdf_example", openapiclient.Destination{AFNORDestination: openapiclient.NewAFNORDestination()}) // SubmitCompleteInvoiceRequest | 
 	callbackUrl := "callbackUrl_example" // string | Webhook URL for async notification when submission completes. (optional)
 	webhookMode := "webhookMode_example" // string | Webhook content delivery: 'inline' (base64 in payload) or 'download_url' (temporary URL, 1h TTL) (optional) (default to "inline")
+	organizationId := "organizationId_example" // string | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.InvoiceGenerationAPI.SubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost(context.Background()).SubmitCompleteInvoiceRequest(submitCompleteInvoiceRequest).CallbackUrl(callbackUrl).WebhookMode(webhookMode).Execute()
+	resp, r, err := apiClient.InvoiceGenerationAPI.SubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost(context.Background()).SubmitCompleteInvoiceRequest(submitCompleteInvoiceRequest).CallbackUrl(callbackUrl).WebhookMode(webhookMode).OrganizationId(organizationId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `InvoiceGenerationAPI.SubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -207,6 +210,7 @@ Name | Type | Description  | Notes
  **submitCompleteInvoiceRequest** | [**SubmitCompleteInvoiceRequest**](SubmitCompleteInvoiceRequest.md) |  | 
  **callbackUrl** | **string** | Webhook URL for async notification when submission completes. | 
  **webhookMode** | **string** | Webhook content delivery: &#39;inline&#39; (base64 in payload) or &#39;download_url&#39; (temporary URL, 1h TTL) | [default to &quot;inline&quot;]
+ **organizationId** | **string** | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. | 
 
 ### Return type
 

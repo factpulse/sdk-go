@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Siren** | **string** | SIREN or SIRET number of the sender (PA or company) | 
 **Name** | **string** | Company name | 
+**SchemeId** | Pointer to **NullableString** |  | [optional] 
 **VatId** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
@@ -67,6 +68,41 @@ and a boolean to check if the value has been set.
 SetName sets Name field to given value.
 
 
+### GetSchemeId
+
+`func (o *ReportSender) GetSchemeId() string`
+
+GetSchemeId returns the SchemeId field if non-nil, zero value otherwise.
+
+### GetSchemeIdOk
+
+`func (o *ReportSender) GetSchemeIdOk() (*string, bool)`
+
+GetSchemeIdOk returns a tuple with the SchemeId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSchemeId
+
+`func (o *ReportSender) SetSchemeId(v string)`
+
+SetSchemeId sets SchemeId field to given value.
+
+### HasSchemeId
+
+`func (o *ReportSender) HasSchemeId() bool`
+
+HasSchemeId returns a boolean if a field has been set.
+
+### SetSchemeIdNil
+
+`func (o *ReportSender) SetSchemeIdNil(b bool)`
+
+ SetSchemeIdNil sets the value for SchemeId to be an explicit nil
+
+### UnsetSchemeId
+`func (o *ReportSender) UnsetSchemeId()`
+
+UnsetSchemeId ensures that no value is present for SchemeId, not even an explicit nil
 ### GetVatId
 
 `func (o *ReportSender) GetVatId() string`

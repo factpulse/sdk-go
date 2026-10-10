@@ -13,173 +13,99 @@ package factpulse
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
-// checks if the AFNORBasicAuthentication type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AFNORBasicAuthentication{}
 
-// AFNORBasicAuthentication struct for AFNORBasicAuthentication
-type AFNORBasicAuthentication struct {
-	UserId string `json:"userId"`
-	UserPassword string `json:"userPassword"`
+// Taxamounteur VAT amount in EUR for a non-EUR invoice. Computed automatically from the exchange rate when omitted.
+type Taxamounteur struct {
+	Float32 *float32
+	String *string
 }
 
-type _AFNORBasicAuthentication AFNORBasicAuthentication
-
-// NewAFNORBasicAuthentication instantiates a new AFNORBasicAuthentication object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewAFNORBasicAuthentication(userId string, userPassword string) *AFNORBasicAuthentication {
-	this := AFNORBasicAuthentication{}
-	this.UserId = userId
-	this.UserPassword = userPassword
-	return &this
-}
-
-// NewAFNORBasicAuthenticationWithDefaults instantiates a new AFNORBasicAuthentication object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewAFNORBasicAuthenticationWithDefaults() *AFNORBasicAuthentication {
-	this := AFNORBasicAuthentication{}
-	return &this
-}
-
-// GetUserId returns the UserId field value
-func (o *AFNORBasicAuthentication) GetUserId() string {
-	if o == nil {
-		var ret string
-		return ret
+// Unmarshal JSON data into any of the pointers in the struct
+func (dst *Taxamounteur) UnmarshalJSON(data []byte) error {
+	var err error
+	// this object is nullable so check if the payload is null or empty string
+	if string(data) == "" || string(data) == "{}" {
+		return nil
 	}
 
-	return o.UserId
-}
-
-// GetUserIdOk returns a tuple with the UserId field value
-// and a boolean to check if the value has been set.
-func (o *AFNORBasicAuthentication) GetUserIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.UserId, true
-}
-
-// SetUserId sets field value
-func (o *AFNORBasicAuthentication) SetUserId(v string) {
-	o.UserId = v
-}
-
-// GetUserPassword returns the UserPassword field value
-func (o *AFNORBasicAuthentication) GetUserPassword() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.UserPassword
-}
-
-// GetUserPasswordOk returns a tuple with the UserPassword field value
-// and a boolean to check if the value has been set.
-func (o *AFNORBasicAuthentication) GetUserPasswordOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.UserPassword, true
-}
-
-// SetUserPassword sets field value
-func (o *AFNORBasicAuthentication) SetUserPassword(v string) {
-	o.UserPassword = v
-}
-
-func (o AFNORBasicAuthentication) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o AFNORBasicAuthentication) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["userId"] = o.UserId
-	toSerialize["userPassword"] = o.UserPassword
-	return toSerialize, nil
-}
-
-func (o *AFNORBasicAuthentication) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"userId",
-		"userPassword",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
+	// try to unmarshal JSON data into Float32
+	err = json.Unmarshal(data, &dst.Float32);
+	if err == nil {
+		jsonFloat32, _ := json.Marshal(dst.Float32)
+		if string(jsonFloat32) == "{}" { // empty struct
+			dst.Float32 = nil
+		} else {
+			return nil // data stored in dst.Float32, return on the first match
 		}
+	} else {
+		dst.Float32 = nil
 	}
 
-	varAFNORBasicAuthentication := _AFNORBasicAuthentication{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAFNORBasicAuthentication)
-
-	if err != nil {
-		return err
+	// try to unmarshal JSON data into String
+	err = json.Unmarshal(data, &dst.String);
+	if err == nil {
+		jsonString, _ := json.Marshal(dst.String)
+		if string(jsonString) == "{}" { // empty struct
+			dst.String = nil
+		} else {
+			return nil // data stored in dst.String, return on the first match
+		}
+	} else {
+		dst.String = nil
 	}
 
-	*o = AFNORBasicAuthentication(varAFNORBasicAuthentication)
-
-	return err
+	return fmt.Errorf("data failed to match schemas in anyOf(Taxamounteur)")
 }
 
-type NullableAFNORBasicAuthentication struct {
-	value *AFNORBasicAuthentication
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src Taxamounteur) MarshalJSON() ([]byte, error) {
+	if src.Float32 != nil {
+		return json.Marshal(&src.Float32)
+	}
+
+	if src.String != nil {
+		return json.Marshal(&src.String)
+	}
+
+	return nil, nil // no data in anyOf schemas
+}
+
+
+type NullableTaxamounteur struct {
+	value *Taxamounteur
 	isSet bool
 }
 
-func (v NullableAFNORBasicAuthentication) Get() *AFNORBasicAuthentication {
+func (v NullableTaxamounteur) Get() *Taxamounteur {
 	return v.value
 }
 
-func (v *NullableAFNORBasicAuthentication) Set(val *AFNORBasicAuthentication) {
+func (v *NullableTaxamounteur) Set(val *Taxamounteur) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAFNORBasicAuthentication) IsSet() bool {
+func (v NullableTaxamounteur) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAFNORBasicAuthentication) Unset() {
+func (v *NullableTaxamounteur) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAFNORBasicAuthentication(val *AFNORBasicAuthentication) *NullableAFNORBasicAuthentication {
-	return &NullableAFNORBasicAuthentication{value: val, isSet: true}
+func NewNullableTaxamounteur(val *Taxamounteur) *NullableTaxamounteur {
+	return &NullableTaxamounteur{value: val, isSet: true}
 }
 
-func (v NullableAFNORBasicAuthentication) MarshalJSON() ([]byte, error) {
+func (v NullableTaxamounteur) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAFNORBasicAuthentication) UnmarshalJSON(src []byte) error {
+func (v *NullableTaxamounteur) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

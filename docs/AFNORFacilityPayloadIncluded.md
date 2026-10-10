@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | business name | [optional] 
 **FacilityType** | Pointer to [**AFNORFacilityType**](AFNORFacilityType.md) |  | [optional] 
 **AdministrativeStatus** | Pointer to [**AFNORFacilityAdministrativeStatus**](AFNORFacilityAdministrativeStatus.md) |  | [optional] 
+**Instructions** | Pointer to [**AFNORSiretInstructions**](AFNORSiretInstructions.md) |  | [optional] 
 **Address** | Pointer to [**AFNORAddressRead**](AFNORAddressRead.md) |  | [optional] 
 **B2gAdditionalData** | Pointer to [**AFNORFacilityPayloadHistoryUleB2gAdditionalData**](AFNORFacilityPayloadHistoryUleB2gAdditionalData.md) |  | [optional] 
 
@@ -155,6 +156,31 @@ SetAdministrativeStatus sets AdministrativeStatus field to given value.
 `func (o *AFNORFacilityPayloadIncluded) HasAdministrativeStatus() bool`
 
 HasAdministrativeStatus returns a boolean if a field has been set.
+
+### GetInstructions
+
+`func (o *AFNORFacilityPayloadIncluded) GetInstructions() AFNORSiretInstructions`
+
+GetInstructions returns the Instructions field if non-nil, zero value otherwise.
+
+### GetInstructionsOk
+
+`func (o *AFNORFacilityPayloadIncluded) GetInstructionsOk() (*AFNORSiretInstructions, bool)`
+
+GetInstructionsOk returns a tuple with the Instructions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInstructions
+
+`func (o *AFNORFacilityPayloadIncluded) SetInstructions(v AFNORSiretInstructions)`
+
+SetInstructions sets Instructions field to given value.
+
+### HasInstructions
+
+`func (o *AFNORFacilityPayloadIncluded) HasInstructions() bool`
+
+HasInstructions returns a boolean if a field has been set.
 
 ### GetAddress
 

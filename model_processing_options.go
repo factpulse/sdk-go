@@ -22,7 +22,7 @@ var _ MappedNullable = &ProcessingOptions{}
 type ProcessingOptions struct {
 	// Factur-X profile to use
 	FacturxProfile *APIProfile `json:"facturxProfile,omitempty"`
-	// Auto-enrich data (Company APIs, Chorus Pro, etc.)
+	// Auto-enrich data (Company APIs, Chorus Pro, etc.). Applies to the **simplified format** only: a complete `FacturXInvoice` payload is used exactly as provided.
 	AutoEnrich *bool `json:"autoEnrich,omitempty"`
 	// Validate Factur-X XML with Schematron
 	ValidateXml *bool `json:"validateXml,omitempty"`

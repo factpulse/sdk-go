@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**InvoiceData** | [**SimplifiedInvoiceData**](SimplifiedInvoiceData.md) | Invoice data in simplified format (see examples) | 
+**InvoiceData** | [**Invoicedata**](Invoicedata.md) |  | 
 **SourcePdf** | **string** | Base64-encoded source PDF (will be transformed to Factur-X) | 
 **Destination** | [**Destination**](Destination.md) |  | 
 **Signature** | Pointer to [**NullableSignatureParameters**](SignatureParameters.md) |  | [optional] 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewSubmitCompleteInvoiceRequest
 
-`func NewSubmitCompleteInvoiceRequest(invoiceData SimplifiedInvoiceData, sourcePdf string, destination Destination, ) *SubmitCompleteInvoiceRequest`
+`func NewSubmitCompleteInvoiceRequest(invoiceData Invoicedata, sourcePdf string, destination Destination, ) *SubmitCompleteInvoiceRequest`
 
 NewSubmitCompleteInvoiceRequest instantiates a new SubmitCompleteInvoiceRequest object
 This constructor will assign default values to properties that have it defined,
@@ -31,20 +31,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetInvoiceData
 
-`func (o *SubmitCompleteInvoiceRequest) GetInvoiceData() SimplifiedInvoiceData`
+`func (o *SubmitCompleteInvoiceRequest) GetInvoiceData() Invoicedata`
 
 GetInvoiceData returns the InvoiceData field if non-nil, zero value otherwise.
 
 ### GetInvoiceDataOk
 
-`func (o *SubmitCompleteInvoiceRequest) GetInvoiceDataOk() (*SimplifiedInvoiceData, bool)`
+`func (o *SubmitCompleteInvoiceRequest) GetInvoiceDataOk() (*Invoicedata, bool)`
 
 GetInvoiceDataOk returns a tuple with the InvoiceData field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInvoiceData
 
-`func (o *SubmitCompleteInvoiceRequest) SetInvoiceData(v SimplifiedInvoiceData)`
+`func (o *SubmitCompleteInvoiceRequest) SetInvoiceData(v Invoicedata)`
 
 SetInvoiceData sets InvoiceData field to given value.
 

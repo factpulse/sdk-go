@@ -8,9 +8,12 @@ Method | HTTP request | Description
 [**CreateClientApiV1ClientsPost**](ClientManagementAPI.md#CreateClientApiV1ClientsPost) | **Post** /api/v1/clients | Create a client
 [**DeactivateClientApiV1ClientsUidDesactiverPost**](ClientManagementAPI.md#DeactivateClientApiV1ClientsUidDesactiverPost) | **Post** /api/v1/clients/{uid}/desactiver | Deactivate a client
 [**DeleteWebhookSecretApiV1ClientsUidWebhookSecretDelete**](ClientManagementAPI.md#DeleteWebhookSecretApiV1ClientsUidWebhookSecretDelete) | **Delete** /api/v1/clients/{uid}/webhook-secret | Delete webhook secret
+[**DisconnectSuperpdpApiV1ClientsUidSuperpdpDelete**](ClientManagementAPI.md#DisconnectSuperpdpApiV1ClientsUidSuperpdpDelete) | **Delete** /api/v1/clients/{uid}/superpdp | Disconnect SuperPDP
 [**GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost**](ClientManagementAPI.md#GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost) | **Post** /api/v1/clients/{uid}/webhook-secret/generate | Generate webhook secret
 [**GetClientApiV1ClientsUidGet**](ClientManagementAPI.md#GetClientApiV1ClientsUidGet) | **Get** /api/v1/clients/{uid} | Get client details
 [**GetPdpConfigApiV1ClientsUidPdpConfigGet**](ClientManagementAPI.md#GetPdpConfigApiV1ClientsUidPdpConfigGet) | **Get** /api/v1/clients/{uid}/pdp-config | Get client PDP configuration
+[**GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost**](ClientManagementAPI.md#GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost) | **Post** /api/v1/clients/{uid}/superpdp/connect-url | Get SuperPDP connection URL
+[**GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet**](ClientManagementAPI.md#GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet) | **Get** /api/v1/clients/{uid}/superpdp/status | Get SuperPDP connection status
 [**GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet**](ClientManagementAPI.md#GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet) | **Get** /api/v1/clients/{uid}/webhook-secret/status | Get webhook secret status
 [**ListClientsApiV1ClientsGet**](ClientManagementAPI.md#ListClientsApiV1ClientsGet) | **Get** /api/v1/clients | List clients
 [**RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost**](ClientManagementAPI.md#RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost) | **Post** /api/v1/clients/{uid}/rotate-encryption-key | Rotate client encryption key
@@ -36,7 +39,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -106,7 +109,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -172,7 +175,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -242,7 +245,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -295,6 +298,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## DisconnectSuperpdpApiV1ClientsUidSuperpdpDelete
+
+> SuperPDPDisconnectResponse DisconnectSuperpdpApiV1ClientsUidSuperpdpDelete(ctx, uid).Execute()
+
+Disconnect SuperPDP
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/factpulse/sdk-go/v4"
+)
+
+func main() {
+	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Client unique identifier (UUID)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ClientManagementAPI.DisconnectSuperpdpApiV1ClientsUidSuperpdpDelete(context.Background(), uid).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ClientManagementAPI.DisconnectSuperpdpApiV1ClientsUidSuperpdpDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DisconnectSuperpdpApiV1ClientsUidSuperpdpDelete`: SuperPDPDisconnectResponse
+	fmt.Fprintf(os.Stdout, "Response from `ClientManagementAPI.DisconnectSuperpdpApiV1ClientsUidSuperpdpDelete`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**uid** | **string** | Client unique identifier (UUID) | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**SuperPDPDisconnectResponse**](SuperPDPDisconnectResponse.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost
 
 > WebhookSecretGenerateResponse GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost(ctx, uid).Execute()
@@ -312,7 +385,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -382,7 +455,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -452,7 +525,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -505,6 +578,150 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost
+
+> SuperPDPConnectURLResponse GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost(ctx, uid).ModeSandbox(modeSandbox).ReturnUrl(returnUrl).Execute()
+
+Get SuperPDP connection URL
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/factpulse/sdk-go/v4"
+)
+
+func main() {
+	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Client unique identifier (UUID)
+	modeSandbox := true // bool | True for the SuperPDP sandbox app (default), False for production (optional) (default to true)
+	returnUrl := "returnUrl_example" // string | Absolute http(s) URL to redirect the end user to once the SuperPDP connection is done. Defaults to the FactPulse confirmation page. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ClientManagementAPI.GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost(context.Background(), uid).ModeSandbox(modeSandbox).ReturnUrl(returnUrl).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ClientManagementAPI.GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost`: SuperPDPConnectURLResponse
+	fmt.Fprintf(os.Stdout, "Response from `ClientManagementAPI.GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**uid** | **string** | Client unique identifier (UUID) | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **modeSandbox** | **bool** | True for the SuperPDP sandbox app (default), False for production | [default to true]
+ **returnUrl** | **string** | Absolute http(s) URL to redirect the end user to once the SuperPDP connection is done. Defaults to the FactPulse confirmation page. | 
+
+### Return type
+
+[**SuperPDPConnectURLResponse**](SuperPDPConnectURLResponse.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet
+
+> SuperPDPStatusResponse GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet(ctx, uid).Execute()
+
+Get SuperPDP connection status
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/factpulse/sdk-go/v4"
+)
+
+func main() {
+	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Client unique identifier (UUID)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ClientManagementAPI.GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet(context.Background(), uid).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ClientManagementAPI.GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet`: SuperPDPStatusResponse
+	fmt.Fprintf(os.Stdout, "Response from `ClientManagementAPI.GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**uid** | **string** | Client unique identifier (UUID) | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**SuperPDPStatusResponse**](SuperPDPStatusResponse.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet
 
 > WebhookSecretStatusResponse GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet(ctx, uid).Execute()
@@ -522,7 +739,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -592,7 +809,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -660,7 +877,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -732,7 +949,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -804,7 +1021,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {

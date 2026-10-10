@@ -27,7 +27,7 @@ type InvoiceInput struct {
 	// Invoice issue date
 	IssueDate string `json:"issueDate"`
 	// Invoice type code
-	TypeCode *FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode `json:"typeCode,omitempty"`
+	TypeCode *InvoiceTypeCode `json:"typeCode,omitempty"`
 	Currency *Currency `json:"currency,omitempty"`
 	DueDate NullableString `json:"dueDate,omitempty"`
 	SellerId NullableString `json:"sellerId,omitempty"`
@@ -41,6 +41,8 @@ type InvoiceInput struct {
 	TaxAmount Taxamount1 `json:"taxAmount"`
 	// VAT breakdown
 	TaxBreakdown []TaxBreakdownInput `json:"taxBreakdown"`
+	TaxAmountEur NullableTaxamounteur `json:"taxAmountEur,omitempty"`
+	BusinessProcessId NullableString `json:"businessProcessId,omitempty"`
 	ReferencedInvoiceId NullableString `json:"referencedInvoiceId,omitempty"`
 	ReferencedInvoiceDate NullableString `json:"referencedInvoiceDate,omitempty"`
 }
@@ -119,9 +121,9 @@ func (o *InvoiceInput) SetIssueDate(v string) {
 }
 
 // GetTypeCode returns the TypeCode field value if set, zero value otherwise.
-func (o *InvoiceInput) GetTypeCode() FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode {
+func (o *InvoiceInput) GetTypeCode() InvoiceTypeCode {
 	if o == nil || IsNil(o.TypeCode) {
-		var ret FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode
+		var ret InvoiceTypeCode
 		return ret
 	}
 	return *o.TypeCode
@@ -129,7 +131,7 @@ func (o *InvoiceInput) GetTypeCode() FactureElectroniqueRestApiSchemasEreporting
 
 // GetTypeCodeOk returns a tuple with the TypeCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InvoiceInput) GetTypeCodeOk() (*FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode, bool) {
+func (o *InvoiceInput) GetTypeCodeOk() (*InvoiceTypeCode, bool) {
 	if o == nil || IsNil(o.TypeCode) {
 		return nil, false
 	}
@@ -145,8 +147,8 @@ func (o *InvoiceInput) HasTypeCode() bool {
 	return false
 }
 
-// SetTypeCode gets a reference to the given FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode and assigns it to the TypeCode field.
-func (o *InvoiceInput) SetTypeCode(v FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode) {
+// SetTypeCode gets a reference to the given InvoiceTypeCode and assigns it to the TypeCode field.
+func (o *InvoiceInput) SetTypeCode(v InvoiceTypeCode) {
 	o.TypeCode = &v
 }
 
@@ -562,6 +564,90 @@ func (o *InvoiceInput) SetTaxBreakdown(v []TaxBreakdownInput) {
 	o.TaxBreakdown = v
 }
 
+// GetTaxAmountEur returns the TaxAmountEur field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceInput) GetTaxAmountEur() Taxamounteur {
+	if o == nil || IsNil(o.TaxAmountEur.Get()) {
+		var ret Taxamounteur
+		return ret
+	}
+	return *o.TaxAmountEur.Get()
+}
+
+// GetTaxAmountEurOk returns a tuple with the TaxAmountEur field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceInput) GetTaxAmountEurOk() (*Taxamounteur, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TaxAmountEur.Get(), o.TaxAmountEur.IsSet()
+}
+
+// HasTaxAmountEur returns a boolean if a field has been set.
+func (o *InvoiceInput) HasTaxAmountEur() bool {
+	if o != nil && o.TaxAmountEur.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTaxAmountEur gets a reference to the given NullableTaxamounteur and assigns it to the TaxAmountEur field.
+func (o *InvoiceInput) SetTaxAmountEur(v Taxamounteur) {
+	o.TaxAmountEur.Set(&v)
+}
+// SetTaxAmountEurNil sets the value for TaxAmountEur to be an explicit nil
+func (o *InvoiceInput) SetTaxAmountEurNil() {
+	o.TaxAmountEur.Set(nil)
+}
+
+// UnsetTaxAmountEur ensures that no value is present for TaxAmountEur, not even an explicit nil
+func (o *InvoiceInput) UnsetTaxAmountEur() {
+	o.TaxAmountEur.Unset()
+}
+
+// GetBusinessProcessId returns the BusinessProcessId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvoiceInput) GetBusinessProcessId() string {
+	if o == nil || IsNil(o.BusinessProcessId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.BusinessProcessId.Get()
+}
+
+// GetBusinessProcessIdOk returns a tuple with the BusinessProcessId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceInput) GetBusinessProcessIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.BusinessProcessId.Get(), o.BusinessProcessId.IsSet()
+}
+
+// HasBusinessProcessId returns a boolean if a field has been set.
+func (o *InvoiceInput) HasBusinessProcessId() bool {
+	if o != nil && o.BusinessProcessId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetBusinessProcessId gets a reference to the given NullableString and assigns it to the BusinessProcessId field.
+func (o *InvoiceInput) SetBusinessProcessId(v string) {
+	o.BusinessProcessId.Set(&v)
+}
+// SetBusinessProcessIdNil sets the value for BusinessProcessId to be an explicit nil
+func (o *InvoiceInput) SetBusinessProcessIdNil() {
+	o.BusinessProcessId.Set(nil)
+}
+
+// UnsetBusinessProcessId ensures that no value is present for BusinessProcessId, not even an explicit nil
+func (o *InvoiceInput) UnsetBusinessProcessId() {
+	o.BusinessProcessId.Unset()
+}
+
 // GetReferencedInvoiceId returns the ReferencedInvoiceId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InvoiceInput) GetReferencedInvoiceId() string {
 	if o == nil || IsNil(o.ReferencedInvoiceId.Get()) {
@@ -689,6 +775,12 @@ func (o InvoiceInput) ToMap() (map[string]interface{}, error) {
 	toSerialize["taxExclusiveAmount"] = o.TaxExclusiveAmount
 	toSerialize["taxAmount"] = o.TaxAmount
 	toSerialize["taxBreakdown"] = o.TaxBreakdown
+	if o.TaxAmountEur.IsSet() {
+		toSerialize["taxAmountEur"] = o.TaxAmountEur.Get()
+	}
+	if o.BusinessProcessId.IsSet() {
+		toSerialize["businessProcessId"] = o.BusinessProcessId.Get()
+	}
 	if o.ReferencedInvoiceId.IsSet() {
 		toSerialize["referencedInvoiceId"] = o.ReferencedInvoiceId.Get()
 	}

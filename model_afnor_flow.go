@@ -27,9 +27,9 @@ type AFNORFlow struct {
 	TrackingId *string `json:"trackingId,omitempty"`
 	// Name of the file
 	Name string `json:"name"`
-	ProcessingRule *AFNORProcessingRule `json:"processingRule,omitempty"`
+	ProcessingRule AFNORProcessingRule `json:"processingRule"`
 	FlowSyntax AFNORFlowSyntax `json:"flowSyntax"`
-	FlowProfile *AFNORFlowProfile `json:"flowProfile,omitempty"`
+	FlowProfile AFNORFlowProfile `json:"flowProfile"`
 	// Unique identifier supporting UUID but not only, for flexibility purpose
 	FlowId string `json:"flowId"`
 	// The flow submission date and time (the date and time when the flow was created on the system) This property should be used by the API consumer as a time reference to avoid clock synchronization issues 
@@ -49,10 +49,12 @@ type _AFNORFlow AFNORFlow
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAFNORFlow(name string, flowSyntax AFNORFlowSyntax, flowId string, submittedAt time.Time, updatedAt time.Time, flowType AFNORFlowType, processingRuleSource string, flowDirection AFNORFlowDirection, acknowledgement AFNORAcknowledgement) *AFNORFlow {
+func NewAFNORFlow(name string, processingRule AFNORProcessingRule, flowSyntax AFNORFlowSyntax, flowProfile AFNORFlowProfile, flowId string, submittedAt time.Time, updatedAt time.Time, flowType AFNORFlowType, processingRuleSource string, flowDirection AFNORFlowDirection, acknowledgement AFNORAcknowledgement) *AFNORFlow {
 	this := AFNORFlow{}
 	this.Name = name
+	this.ProcessingRule = processingRule
 	this.FlowSyntax = flowSyntax
+	this.FlowProfile = flowProfile
 	this.FlowId = flowId
 	this.SubmittedAt = submittedAt
 	this.UpdatedAt = updatedAt
@@ -127,36 +129,28 @@ func (o *AFNORFlow) SetName(v string) {
 	o.Name = v
 }
 
-// GetProcessingRule returns the ProcessingRule field value if set, zero value otherwise.
+// GetProcessingRule returns the ProcessingRule field value
 func (o *AFNORFlow) GetProcessingRule() AFNORProcessingRule {
-	if o == nil || IsNil(o.ProcessingRule) {
+	if o == nil {
 		var ret AFNORProcessingRule
 		return ret
 	}
-	return *o.ProcessingRule
+
+	return o.ProcessingRule
 }
 
-// GetProcessingRuleOk returns a tuple with the ProcessingRule field value if set, nil otherwise
+// GetProcessingRuleOk returns a tuple with the ProcessingRule field value
 // and a boolean to check if the value has been set.
 func (o *AFNORFlow) GetProcessingRuleOk() (*AFNORProcessingRule, bool) {
-	if o == nil || IsNil(o.ProcessingRule) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ProcessingRule, true
+	return &o.ProcessingRule, true
 }
 
-// HasProcessingRule returns a boolean if a field has been set.
-func (o *AFNORFlow) HasProcessingRule() bool {
-	if o != nil && !IsNil(o.ProcessingRule) {
-		return true
-	}
-
-	return false
-}
-
-// SetProcessingRule gets a reference to the given AFNORProcessingRule and assigns it to the ProcessingRule field.
+// SetProcessingRule sets field value
 func (o *AFNORFlow) SetProcessingRule(v AFNORProcessingRule) {
-	o.ProcessingRule = &v
+	o.ProcessingRule = v
 }
 
 // GetFlowSyntax returns the FlowSyntax field value
@@ -183,36 +177,28 @@ func (o *AFNORFlow) SetFlowSyntax(v AFNORFlowSyntax) {
 	o.FlowSyntax = v
 }
 
-// GetFlowProfile returns the FlowProfile field value if set, zero value otherwise.
+// GetFlowProfile returns the FlowProfile field value
 func (o *AFNORFlow) GetFlowProfile() AFNORFlowProfile {
-	if o == nil || IsNil(o.FlowProfile) {
+	if o == nil {
 		var ret AFNORFlowProfile
 		return ret
 	}
-	return *o.FlowProfile
+
+	return o.FlowProfile
 }
 
-// GetFlowProfileOk returns a tuple with the FlowProfile field value if set, nil otherwise
+// GetFlowProfileOk returns a tuple with the FlowProfile field value
 // and a boolean to check if the value has been set.
 func (o *AFNORFlow) GetFlowProfileOk() (*AFNORFlowProfile, bool) {
-	if o == nil || IsNil(o.FlowProfile) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FlowProfile, true
+	return &o.FlowProfile, true
 }
 
-// HasFlowProfile returns a boolean if a field has been set.
-func (o *AFNORFlow) HasFlowProfile() bool {
-	if o != nil && !IsNil(o.FlowProfile) {
-		return true
-	}
-
-	return false
-}
-
-// SetFlowProfile gets a reference to the given AFNORFlowProfile and assigns it to the FlowProfile field.
+// SetFlowProfile sets field value
 func (o *AFNORFlow) SetFlowProfile(v AFNORFlowProfile) {
-	o.FlowProfile = &v
+	o.FlowProfile = v
 }
 
 // GetFlowId returns the FlowId field value
@@ -397,13 +383,9 @@ func (o AFNORFlow) ToMap() (map[string]interface{}, error) {
 		toSerialize["trackingId"] = o.TrackingId
 	}
 	toSerialize["name"] = o.Name
-	if !IsNil(o.ProcessingRule) {
-		toSerialize["processingRule"] = o.ProcessingRule
-	}
+	toSerialize["processingRule"] = o.ProcessingRule
 	toSerialize["flowSyntax"] = o.FlowSyntax
-	if !IsNil(o.FlowProfile) {
-		toSerialize["flowProfile"] = o.FlowProfile
-	}
+	toSerialize["flowProfile"] = o.FlowProfile
 	toSerialize["flowId"] = o.FlowId
 	toSerialize["submittedAt"] = o.SubmittedAt
 	toSerialize["updatedAt"] = o.UpdatedAt
@@ -420,7 +402,9 @@ func (o *AFNORFlow) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"name",
+		"processingRule",
 		"flowSyntax",
+		"flowProfile",
 		"flowId",
 		"submittedAt",
 		"updatedAt",

@@ -25,7 +25,7 @@ type ElectronicAddress struct {
 	// Electronic address identifier (e.g., SIREN, SIRET, routing code)
 	Identifier string `json:"identifier"`
 	// Identification scheme (EAS code)
-	SchemeId *SchemeID `json:"schemeId,omitempty"`
+	SchemeId *SchemeID `json:"scheme_id,omitempty"`
 }
 
 type _ElectronicAddress ElectronicAddress
@@ -116,7 +116,7 @@ func (o ElectronicAddress) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["identifier"] = o.Identifier
 	if !IsNil(o.SchemeId) {
-		toSerialize["schemeId"] = o.SchemeId
+		toSerialize["scheme_id"] = o.SchemeId
 	}
 	return toSerialize, nil
 }

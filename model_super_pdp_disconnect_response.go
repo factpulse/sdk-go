@@ -13,132 +13,91 @@ package factpulse
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
-// checks if the AFNORWebhookPatchPayload type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AFNORWebhookPatchPayload{}
+// checks if the SuperPDPDisconnectResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SuperPDPDisconnectResponse{}
 
-// AFNORWebhookPatchPayload struct for AFNORWebhookPatchPayload
-type AFNORWebhookPatchPayload struct {
-	Headers []AFNORCallbackHeader `json:"headers,omitempty"`
-	Authentication *AFNORCallbackAuthentication `json:"authentication,omitempty"`
-	Signature *AFNORCallbackSignature `json:"signature,omitempty"`
+// SuperPDPDisconnectResponse Response after disconnecting SuperPDP for a client.
+type SuperPDPDisconnectResponse struct {
+	// Whether the disconnection completed successfully
+	Success bool `json:"success"`
+	// Whether a SuperPDP connection existed and was removed
+	Deleted bool `json:"deleted"`
 }
 
-// NewAFNORWebhookPatchPayload instantiates a new AFNORWebhookPatchPayload object
+type _SuperPDPDisconnectResponse SuperPDPDisconnectResponse
+
+// NewSuperPDPDisconnectResponse instantiates a new SuperPDPDisconnectResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAFNORWebhookPatchPayload() *AFNORWebhookPatchPayload {
-	this := AFNORWebhookPatchPayload{}
+func NewSuperPDPDisconnectResponse(success bool, deleted bool) *SuperPDPDisconnectResponse {
+	this := SuperPDPDisconnectResponse{}
+	this.Success = success
+	this.Deleted = deleted
 	return &this
 }
 
-// NewAFNORWebhookPatchPayloadWithDefaults instantiates a new AFNORWebhookPatchPayload object
+// NewSuperPDPDisconnectResponseWithDefaults instantiates a new SuperPDPDisconnectResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAFNORWebhookPatchPayloadWithDefaults() *AFNORWebhookPatchPayload {
-	this := AFNORWebhookPatchPayload{}
+func NewSuperPDPDisconnectResponseWithDefaults() *SuperPDPDisconnectResponse {
+	this := SuperPDPDisconnectResponse{}
 	return &this
 }
 
-// GetHeaders returns the Headers field value if set, zero value otherwise.
-func (o *AFNORWebhookPatchPayload) GetHeaders() []AFNORCallbackHeader {
-	if o == nil || IsNil(o.Headers) {
-		var ret []AFNORCallbackHeader
+// GetSuccess returns the Success field value
+func (o *SuperPDPDisconnectResponse) GetSuccess() bool {
+	if o == nil {
+		var ret bool
 		return ret
 	}
-	return o.Headers
+
+	return o.Success
 }
 
-// GetHeadersOk returns a tuple with the Headers field value if set, nil otherwise
+// GetSuccessOk returns a tuple with the Success field value
 // and a boolean to check if the value has been set.
-func (o *AFNORWebhookPatchPayload) GetHeadersOk() ([]AFNORCallbackHeader, bool) {
-	if o == nil || IsNil(o.Headers) {
+func (o *SuperPDPDisconnectResponse) GetSuccessOk() (*bool, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Headers, true
+	return &o.Success, true
 }
 
-// HasHeaders returns a boolean if a field has been set.
-func (o *AFNORWebhookPatchPayload) HasHeaders() bool {
-	if o != nil && !IsNil(o.Headers) {
-		return true
-	}
-
-	return false
+// SetSuccess sets field value
+func (o *SuperPDPDisconnectResponse) SetSuccess(v bool) {
+	o.Success = v
 }
 
-// SetHeaders gets a reference to the given []AFNORCallbackHeader and assigns it to the Headers field.
-func (o *AFNORWebhookPatchPayload) SetHeaders(v []AFNORCallbackHeader) {
-	o.Headers = v
-}
-
-// GetAuthentication returns the Authentication field value if set, zero value otherwise.
-func (o *AFNORWebhookPatchPayload) GetAuthentication() AFNORCallbackAuthentication {
-	if o == nil || IsNil(o.Authentication) {
-		var ret AFNORCallbackAuthentication
+// GetDeleted returns the Deleted field value
+func (o *SuperPDPDisconnectResponse) GetDeleted() bool {
+	if o == nil {
+		var ret bool
 		return ret
 	}
-	return *o.Authentication
+
+	return o.Deleted
 }
 
-// GetAuthenticationOk returns a tuple with the Authentication field value if set, nil otherwise
+// GetDeletedOk returns a tuple with the Deleted field value
 // and a boolean to check if the value has been set.
-func (o *AFNORWebhookPatchPayload) GetAuthenticationOk() (*AFNORCallbackAuthentication, bool) {
-	if o == nil || IsNil(o.Authentication) {
+func (o *SuperPDPDisconnectResponse) GetDeletedOk() (*bool, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Authentication, true
+	return &o.Deleted, true
 }
 
-// HasAuthentication returns a boolean if a field has been set.
-func (o *AFNORWebhookPatchPayload) HasAuthentication() bool {
-	if o != nil && !IsNil(o.Authentication) {
-		return true
-	}
-
-	return false
+// SetDeleted sets field value
+func (o *SuperPDPDisconnectResponse) SetDeleted(v bool) {
+	o.Deleted = v
 }
 
-// SetAuthentication gets a reference to the given AFNORCallbackAuthentication and assigns it to the Authentication field.
-func (o *AFNORWebhookPatchPayload) SetAuthentication(v AFNORCallbackAuthentication) {
-	o.Authentication = &v
-}
-
-// GetSignature returns the Signature field value if set, zero value otherwise.
-func (o *AFNORWebhookPatchPayload) GetSignature() AFNORCallbackSignature {
-	if o == nil || IsNil(o.Signature) {
-		var ret AFNORCallbackSignature
-		return ret
-	}
-	return *o.Signature
-}
-
-// GetSignatureOk returns a tuple with the Signature field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AFNORWebhookPatchPayload) GetSignatureOk() (*AFNORCallbackSignature, bool) {
-	if o == nil || IsNil(o.Signature) {
-		return nil, false
-	}
-	return o.Signature, true
-}
-
-// HasSignature returns a boolean if a field has been set.
-func (o *AFNORWebhookPatchPayload) HasSignature() bool {
-	if o != nil && !IsNil(o.Signature) {
-		return true
-	}
-
-	return false
-}
-
-// SetSignature gets a reference to the given AFNORCallbackSignature and assigns it to the Signature field.
-func (o *AFNORWebhookPatchPayload) SetSignature(v AFNORCallbackSignature) {
-	o.Signature = &v
-}
-
-func (o AFNORWebhookPatchPayload) MarshalJSON() ([]byte, error) {
+func (o SuperPDPDisconnectResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -146,52 +105,83 @@ func (o AFNORWebhookPatchPayload) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AFNORWebhookPatchPayload) ToMap() (map[string]interface{}, error) {
+func (o SuperPDPDisconnectResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Headers) {
-		toSerialize["headers"] = o.Headers
-	}
-	if !IsNil(o.Authentication) {
-		toSerialize["authentication"] = o.Authentication
-	}
-	if !IsNil(o.Signature) {
-		toSerialize["signature"] = o.Signature
-	}
+	toSerialize["success"] = o.Success
+	toSerialize["deleted"] = o.Deleted
 	return toSerialize, nil
 }
 
-type NullableAFNORWebhookPatchPayload struct {
-	value *AFNORWebhookPatchPayload
+func (o *SuperPDPDisconnectResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"success",
+		"deleted",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSuperPDPDisconnectResponse := _SuperPDPDisconnectResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varSuperPDPDisconnectResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SuperPDPDisconnectResponse(varSuperPDPDisconnectResponse)
+
+	return err
+}
+
+type NullableSuperPDPDisconnectResponse struct {
+	value *SuperPDPDisconnectResponse
 	isSet bool
 }
 
-func (v NullableAFNORWebhookPatchPayload) Get() *AFNORWebhookPatchPayload {
+func (v NullableSuperPDPDisconnectResponse) Get() *SuperPDPDisconnectResponse {
 	return v.value
 }
 
-func (v *NullableAFNORWebhookPatchPayload) Set(val *AFNORWebhookPatchPayload) {
+func (v *NullableSuperPDPDisconnectResponse) Set(val *SuperPDPDisconnectResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAFNORWebhookPatchPayload) IsSet() bool {
+func (v NullableSuperPDPDisconnectResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAFNORWebhookPatchPayload) Unset() {
+func (v *NullableSuperPDPDisconnectResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAFNORWebhookPatchPayload(val *AFNORWebhookPatchPayload) *NullableAFNORWebhookPatchPayload {
-	return &NullableAFNORWebhookPatchPayload{value: val, isSet: true}
+func NewNullableSuperPDPDisconnectResponse(val *SuperPDPDisconnectResponse) *NullableSuperPDPDisconnectResponse {
+	return &NullableSuperPDPDisconnectResponse{value: val, isSet: true}
 }
 
-func (v NullableAFNORWebhookPatchPayload) MarshalJSON() ([]byte, error) {
+func (v NullableSuperPDPDisconnectResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAFNORWebhookPatchPayload) UnmarshalJSON(src []byte) error {
+func (v *NullableSuperPDPDisconnectResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

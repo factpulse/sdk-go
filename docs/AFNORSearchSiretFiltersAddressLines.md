@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Op** | Pointer to [**AFNORContainsOperator**](AFNORContainsOperator.md) |  | [optional] 
+**Op** | Pointer to [**AFNORContainsOrStartWithOperator**](AFNORContainsOrStartWithOperator.md) |  | [optional] 
 **Value** | Pointer to **string** | address lines of the recipient structure having defined the directory line(s). | [optional] 
 
 ## Methods
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetOp
 
-`func (o *AFNORSearchSiretFiltersAddressLines) GetOp() AFNORContainsOperator`
+`func (o *AFNORSearchSiretFiltersAddressLines) GetOp() AFNORContainsOrStartWithOperator`
 
 GetOp returns the Op field if non-nil, zero value otherwise.
 
 ### GetOpOk
 
-`func (o *AFNORSearchSiretFiltersAddressLines) GetOpOk() (*AFNORContainsOperator, bool)`
+`func (o *AFNORSearchSiretFiltersAddressLines) GetOpOk() (*AFNORContainsOrStartWithOperator, bool)`
 
 GetOpOk returns a tuple with the Op field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOp
 
-`func (o *AFNORSearchSiretFiltersAddressLines) SetOp(v AFNORContainsOperator)`
+`func (o *AFNORSearchSiretFiltersAddressLines) SetOp(v AFNORContainsOrStartWithOperator)`
 
 SetOp sets Op field to given value.
 

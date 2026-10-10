@@ -26,7 +26,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -94,7 +94,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {

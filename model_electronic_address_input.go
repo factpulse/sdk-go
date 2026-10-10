@@ -17,111 +17,94 @@ import (
 	"fmt"
 )
 
-// checks if the AFNOROAuth2Authentication type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AFNOROAuth2Authentication{}
+// checks if the ElectronicAddressInput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ElectronicAddressInput{}
 
-// AFNOROAuth2Authentication struct for AFNOROAuth2Authentication
-type AFNOROAuth2Authentication struct {
-	TokenUrl string `json:"tokenUrl"`
-	ClientId string `json:"clientId"`
-	ClientSecret string `json:"clientSecret"`
+// ElectronicAddressInput Represents an electronic invoicing address, composed of an identifier and its scheme (SchemeID) in accordance with EN16931. Example: { \"identifier\": \"123456789\", \"scheme_id\": \"0225\" }
+type ElectronicAddressInput struct {
+	// Electronic address identifier (e.g., SIREN, SIRET, routing code)
+	Identifier string `json:"identifier"`
+	// Identification scheme (EAS code)
+	SchemeId *SchemeID `json:"scheme_id,omitempty"`
 }
 
-type _AFNOROAuth2Authentication AFNOROAuth2Authentication
+type _ElectronicAddressInput ElectronicAddressInput
 
-// NewAFNOROAuth2Authentication instantiates a new AFNOROAuth2Authentication object
+// NewElectronicAddressInput instantiates a new ElectronicAddressInput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAFNOROAuth2Authentication(tokenUrl string, clientId string, clientSecret string) *AFNOROAuth2Authentication {
-	this := AFNOROAuth2Authentication{}
-	this.TokenUrl = tokenUrl
-	this.ClientId = clientId
-	this.ClientSecret = clientSecret
+func NewElectronicAddressInput(identifier string) *ElectronicAddressInput {
+	this := ElectronicAddressInput{}
+	this.Identifier = identifier
 	return &this
 }
 
-// NewAFNOROAuth2AuthenticationWithDefaults instantiates a new AFNOROAuth2Authentication object
+// NewElectronicAddressInputWithDefaults instantiates a new ElectronicAddressInput object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAFNOROAuth2AuthenticationWithDefaults() *AFNOROAuth2Authentication {
-	this := AFNOROAuth2Authentication{}
+func NewElectronicAddressInputWithDefaults() *ElectronicAddressInput {
+	this := ElectronicAddressInput{}
 	return &this
 }
 
-// GetTokenUrl returns the TokenUrl field value
-func (o *AFNOROAuth2Authentication) GetTokenUrl() string {
+// GetIdentifier returns the Identifier field value
+func (o *ElectronicAddressInput) GetIdentifier() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.TokenUrl
+	return o.Identifier
 }
 
-// GetTokenUrlOk returns a tuple with the TokenUrl field value
+// GetIdentifierOk returns a tuple with the Identifier field value
 // and a boolean to check if the value has been set.
-func (o *AFNOROAuth2Authentication) GetTokenUrlOk() (*string, bool) {
+func (o *ElectronicAddressInput) GetIdentifierOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.TokenUrl, true
+	return &o.Identifier, true
 }
 
-// SetTokenUrl sets field value
-func (o *AFNOROAuth2Authentication) SetTokenUrl(v string) {
-	o.TokenUrl = v
+// SetIdentifier sets field value
+func (o *ElectronicAddressInput) SetIdentifier(v string) {
+	o.Identifier = v
 }
 
-// GetClientId returns the ClientId field value
-func (o *AFNOROAuth2Authentication) GetClientId() string {
-	if o == nil {
-		var ret string
+// GetSchemeId returns the SchemeId field value if set, zero value otherwise.
+func (o *ElectronicAddressInput) GetSchemeId() SchemeID {
+	if o == nil || IsNil(o.SchemeId) {
+		var ret SchemeID
 		return ret
 	}
-
-	return o.ClientId
+	return *o.SchemeId
 }
 
-// GetClientIdOk returns a tuple with the ClientId field value
+// GetSchemeIdOk returns a tuple with the SchemeId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AFNOROAuth2Authentication) GetClientIdOk() (*string, bool) {
-	if o == nil {
+func (o *ElectronicAddressInput) GetSchemeIdOk() (*SchemeID, bool) {
+	if o == nil || IsNil(o.SchemeId) {
 		return nil, false
 	}
-	return &o.ClientId, true
+	return o.SchemeId, true
 }
 
-// SetClientId sets field value
-func (o *AFNOROAuth2Authentication) SetClientId(v string) {
-	o.ClientId = v
-}
-
-// GetClientSecret returns the ClientSecret field value
-func (o *AFNOROAuth2Authentication) GetClientSecret() string {
-	if o == nil {
-		var ret string
-		return ret
+// HasSchemeId returns a boolean if a field has been set.
+func (o *ElectronicAddressInput) HasSchemeId() bool {
+	if o != nil && !IsNil(o.SchemeId) {
+		return true
 	}
 
-	return o.ClientSecret
+	return false
 }
 
-// GetClientSecretOk returns a tuple with the ClientSecret field value
-// and a boolean to check if the value has been set.
-func (o *AFNOROAuth2Authentication) GetClientSecretOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ClientSecret, true
+// SetSchemeId gets a reference to the given SchemeID and assigns it to the SchemeId field.
+func (o *ElectronicAddressInput) SetSchemeId(v SchemeID) {
+	o.SchemeId = &v
 }
 
-// SetClientSecret sets field value
-func (o *AFNOROAuth2Authentication) SetClientSecret(v string) {
-	o.ClientSecret = v
-}
-
-func (o AFNOROAuth2Authentication) MarshalJSON() ([]byte, error) {
+func (o ElectronicAddressInput) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -129,22 +112,21 @@ func (o AFNOROAuth2Authentication) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AFNOROAuth2Authentication) ToMap() (map[string]interface{}, error) {
+func (o ElectronicAddressInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["tokenUrl"] = o.TokenUrl
-	toSerialize["clientId"] = o.ClientId
-	toSerialize["clientSecret"] = o.ClientSecret
+	toSerialize["identifier"] = o.Identifier
+	if !IsNil(o.SchemeId) {
+		toSerialize["scheme_id"] = o.SchemeId
+	}
 	return toSerialize, nil
 }
 
-func (o *AFNOROAuth2Authentication) UnmarshalJSON(data []byte) (err error) {
+func (o *ElectronicAddressInput) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"tokenUrl",
-		"clientId",
-		"clientSecret",
+		"identifier",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -161,53 +143,53 @@ func (o *AFNOROAuth2Authentication) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varAFNOROAuth2Authentication := _AFNOROAuth2Authentication{}
+	varElectronicAddressInput := _ElectronicAddressInput{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAFNOROAuth2Authentication)
+	err = decoder.Decode(&varElectronicAddressInput)
 
 	if err != nil {
 		return err
 	}
 
-	*o = AFNOROAuth2Authentication(varAFNOROAuth2Authentication)
+	*o = ElectronicAddressInput(varElectronicAddressInput)
 
 	return err
 }
 
-type NullableAFNOROAuth2Authentication struct {
-	value *AFNOROAuth2Authentication
+type NullableElectronicAddressInput struct {
+	value *ElectronicAddressInput
 	isSet bool
 }
 
-func (v NullableAFNOROAuth2Authentication) Get() *AFNOROAuth2Authentication {
+func (v NullableElectronicAddressInput) Get() *ElectronicAddressInput {
 	return v.value
 }
 
-func (v *NullableAFNOROAuth2Authentication) Set(val *AFNOROAuth2Authentication) {
+func (v *NullableElectronicAddressInput) Set(val *ElectronicAddressInput) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAFNOROAuth2Authentication) IsSet() bool {
+func (v NullableElectronicAddressInput) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAFNOROAuth2Authentication) Unset() {
+func (v *NullableElectronicAddressInput) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAFNOROAuth2Authentication(val *AFNOROAuth2Authentication) *NullableAFNOROAuth2Authentication {
-	return &NullableAFNOROAuth2Authentication{value: val, isSet: true}
+func NewNullableElectronicAddressInput(val *ElectronicAddressInput) *NullableElectronicAddressInput {
+	return &NullableElectronicAddressInput{value: val, isSet: true}
 }
 
-func (v NullableAFNOROAuth2Authentication) MarshalJSON() ([]byte, error) {
+func (v NullableElectronicAddressInput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAFNOROAuth2Authentication) UnmarshalJSON(src []byte) error {
+func (v *NullableElectronicAddressInput) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **ReasonText** | Pointer to **NullableString** |  | [optional] 
 **ActionCode** | Pointer to **NullableString** |  | [optional] 
 **EncaisseAmount** | Pointer to [**NullableEncaisseamount**](Encaisseamount.md) |  | [optional] 
+**EncaisseVatRate** | Pointer to **float32** | Taux de TVA du montant encaissé en % (MDT-224, requis par BR-FR-CDV-14 pour le statut 212 ; défaut 20) | [optional] [default to 20]
 **FlowType** | Pointer to **string** | Type de flux AFNOR (CustomerInvoiceLC, SupplierInvoiceLC, etc.) | [optional] [default to "CustomerInvoiceLC"]
 **PdpFlowServiceUrl** | Pointer to **NullableString** |  | [optional] 
 **PdpTokenUrl** | Pointer to **NullableString** |  | [optional] 
@@ -552,6 +553,31 @@ HasEncaisseAmount returns a boolean if a field has been set.
 `func (o *SubmitCDARRequest) UnsetEncaisseAmount()`
 
 UnsetEncaisseAmount ensures that no value is present for EncaisseAmount, not even an explicit nil
+### GetEncaisseVatRate
+
+`func (o *SubmitCDARRequest) GetEncaisseVatRate() float32`
+
+GetEncaisseVatRate returns the EncaisseVatRate field if non-nil, zero value otherwise.
+
+### GetEncaisseVatRateOk
+
+`func (o *SubmitCDARRequest) GetEncaisseVatRateOk() (*float32, bool)`
+
+GetEncaisseVatRateOk returns a tuple with the EncaisseVatRate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEncaisseVatRate
+
+`func (o *SubmitCDARRequest) SetEncaisseVatRate(v float32)`
+
+SetEncaisseVatRate sets EncaisseVatRate field to given value.
+
+### HasEncaisseVatRate
+
+`func (o *SubmitCDARRequest) HasEncaisseVatRate() bool`
+
+HasEncaisseVatRate returns a boolean if a field has been set.
+
 ### GetFlowType
 
 `func (o *SubmitCDARRequest) GetFlowType() string`

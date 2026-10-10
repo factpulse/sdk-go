@@ -22,8 +22,7 @@ var _ MappedNullable = &SubmitCompleteInvoiceRequest{}
 
 // SubmitCompleteInvoiceRequest Request to submit a complete invoice (generation + submission).  Workflow: 1. Auto-enrichment (optional) 2. Factur-X PDF generation 3. Signature (optional) 4. Submission to destination
 type SubmitCompleteInvoiceRequest struct {
-	// Invoice data in simplified format (see examples)
-	InvoiceData SimplifiedInvoiceData `json:"invoiceData"`
+	InvoiceData Invoicedata `json:"invoiceData"`
 	// Base64-encoded source PDF (will be transformed to Factur-X)
 	SourcePdf string `json:"sourcePdf"`
 	Destination Destination `json:"destination"`
@@ -38,7 +37,7 @@ type _SubmitCompleteInvoiceRequest SubmitCompleteInvoiceRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSubmitCompleteInvoiceRequest(invoiceData SimplifiedInvoiceData, sourcePdf string, destination Destination) *SubmitCompleteInvoiceRequest {
+func NewSubmitCompleteInvoiceRequest(invoiceData Invoicedata, sourcePdf string, destination Destination) *SubmitCompleteInvoiceRequest {
 	this := SubmitCompleteInvoiceRequest{}
 	this.InvoiceData = invoiceData
 	this.SourcePdf = sourcePdf
@@ -55,9 +54,9 @@ func NewSubmitCompleteInvoiceRequestWithDefaults() *SubmitCompleteInvoiceRequest
 }
 
 // GetInvoiceData returns the InvoiceData field value
-func (o *SubmitCompleteInvoiceRequest) GetInvoiceData() SimplifiedInvoiceData {
+func (o *SubmitCompleteInvoiceRequest) GetInvoiceData() Invoicedata {
 	if o == nil {
-		var ret SimplifiedInvoiceData
+		var ret Invoicedata
 		return ret
 	}
 
@@ -66,7 +65,7 @@ func (o *SubmitCompleteInvoiceRequest) GetInvoiceData() SimplifiedInvoiceData {
 
 // GetInvoiceDataOk returns a tuple with the InvoiceData field value
 // and a boolean to check if the value has been set.
-func (o *SubmitCompleteInvoiceRequest) GetInvoiceDataOk() (*SimplifiedInvoiceData, bool) {
+func (o *SubmitCompleteInvoiceRequest) GetInvoiceDataOk() (*Invoicedata, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -74,7 +73,7 @@ func (o *SubmitCompleteInvoiceRequest) GetInvoiceDataOk() (*SimplifiedInvoiceDat
 }
 
 // SetInvoiceData sets field value
-func (o *SubmitCompleteInvoiceRequest) SetInvoiceData(v SimplifiedInvoiceData) {
+func (o *SubmitCompleteInvoiceRequest) SetInvoiceData(v Invoicedata) {
 	o.InvoiceData = v
 }
 

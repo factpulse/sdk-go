@@ -30,7 +30,9 @@ type EncaisseeRequest struct {
 	InvoiceBuyerSiren string `json:"invoiceBuyerSiren"`
 	// Adresse électronique de l'acheteur (MDT-73)
 	InvoiceBuyerElectronicAddress string `json:"invoiceBuyerElectronicAddress"`
-	Amount Amount `json:"amount"`
+	Amount Amount1 `json:"amount"`
+	// Taux de TVA du montant encaissé en % (MDT-224, requis par BR-FR-CDV-14 ; défaut 20)
+	VatRate *float32 `json:"vatRate,omitempty"`
 	// Code devise ISO 4217
 	Currency *string `json:"currency,omitempty"`
 	SenderSiren NullableString `json:"senderSiren,omitempty"`
@@ -48,13 +50,15 @@ type _EncaisseeRequest EncaisseeRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEncaisseeRequest(invoiceId string, invoiceIssueDate string, invoiceBuyerSiren string, invoiceBuyerElectronicAddress string, amount Amount) *EncaisseeRequest {
+func NewEncaisseeRequest(invoiceId string, invoiceIssueDate string, invoiceBuyerSiren string, invoiceBuyerElectronicAddress string, amount Amount1) *EncaisseeRequest {
 	this := EncaisseeRequest{}
 	this.InvoiceId = invoiceId
 	this.InvoiceIssueDate = invoiceIssueDate
 	this.InvoiceBuyerSiren = invoiceBuyerSiren
 	this.InvoiceBuyerElectronicAddress = invoiceBuyerElectronicAddress
 	this.Amount = amount
+	var vatRate float32 = 20
+	this.VatRate = &vatRate
 	var currency string = "EUR"
 	this.Currency = &currency
 	var flowType string = "CustomerInvoiceLC"
@@ -67,6 +71,8 @@ func NewEncaisseeRequest(invoiceId string, invoiceIssueDate string, invoiceBuyer
 // but it doesn't guarantee that properties required by API are set
 func NewEncaisseeRequestWithDefaults() *EncaisseeRequest {
 	this := EncaisseeRequest{}
+	var vatRate float32 = 20
+	this.VatRate = &vatRate
 	var currency string = "EUR"
 	this.Currency = &currency
 	var flowType string = "CustomerInvoiceLC"
@@ -171,9 +177,9 @@ func (o *EncaisseeRequest) SetInvoiceBuyerElectronicAddress(v string) {
 }
 
 // GetAmount returns the Amount field value
-func (o *EncaisseeRequest) GetAmount() Amount {
+func (o *EncaisseeRequest) GetAmount() Amount1 {
 	if o == nil {
-		var ret Amount
+		var ret Amount1
 		return ret
 	}
 
@@ -182,7 +188,7 @@ func (o *EncaisseeRequest) GetAmount() Amount {
 
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
-func (o *EncaisseeRequest) GetAmountOk() (*Amount, bool) {
+func (o *EncaisseeRequest) GetAmountOk() (*Amount1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -190,8 +196,40 @@ func (o *EncaisseeRequest) GetAmountOk() (*Amount, bool) {
 }
 
 // SetAmount sets field value
-func (o *EncaisseeRequest) SetAmount(v Amount) {
+func (o *EncaisseeRequest) SetAmount(v Amount1) {
 	o.Amount = v
+}
+
+// GetVatRate returns the VatRate field value if set, zero value otherwise.
+func (o *EncaisseeRequest) GetVatRate() float32 {
+	if o == nil || IsNil(o.VatRate) {
+		var ret float32
+		return ret
+	}
+	return *o.VatRate
+}
+
+// GetVatRateOk returns a tuple with the VatRate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EncaisseeRequest) GetVatRateOk() (*float32, bool) {
+	if o == nil || IsNil(o.VatRate) {
+		return nil, false
+	}
+	return o.VatRate, true
+}
+
+// HasVatRate returns a boolean if a field has been set.
+func (o *EncaisseeRequest) HasVatRate() bool {
+	if o != nil && !IsNil(o.VatRate) {
+		return true
+	}
+
+	return false
+}
+
+// SetVatRate gets a reference to the given float32 and assigns it to the VatRate field.
+func (o *EncaisseeRequest) SetVatRate(v float32) {
+	o.VatRate = &v
 }
 
 // GetCurrency returns the Currency field value if set, zero value otherwise.
@@ -483,6 +521,9 @@ func (o EncaisseeRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["invoiceBuyerSiren"] = o.InvoiceBuyerSiren
 	toSerialize["invoiceBuyerElectronicAddress"] = o.InvoiceBuyerElectronicAddress
 	toSerialize["amount"] = o.Amount
+	if !IsNil(o.VatRate) {
+		toSerialize["vatRate"] = o.VatRate
+	}
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}

@@ -8,11 +8,9 @@ Method | HTTP request | Description
 [**DeleteWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidDelete**](AFNORPDPPAFlowServiceAPI.md#DeleteWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidDelete) | **Delete** /api/v1/afnor/flow/v1/webhooks/{webhookUid} | Delete a webhook
 [**DownloadFlowProxyApiV1AfnorFlowV1FlowsFlowIdGet**](AFNORPDPPAFlowServiceAPI.md#DownloadFlowProxyApiV1AfnorFlowV1FlowsFlowIdGet) | **Get** /api/v1/afnor/flow/v1/flows/{flowId} | Download a flow
 [**FlowHealthcheckProxyApiV1AfnorFlowV1HealthcheckGet**](AFNORPDPPAFlowServiceAPI.md#FlowHealthcheckProxyApiV1AfnorFlowV1HealthcheckGet) | **Get** /api/v1/afnor/flow/v1/healthcheck | Healthcheck Flow Service
-[**GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet**](AFNORPDPPAFlowServiceAPI.md#GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet) | **Get** /api/v1/afnor/flow/v1/webhooks/{webhookUid} | Get a webhook
 [**ListWebhooksProxyApiV1AfnorFlowV1WebhooksGet**](AFNORPDPPAFlowServiceAPI.md#ListWebhooksProxyApiV1AfnorFlowV1WebhooksGet) | **Get** /api/v1/afnor/flow/v1/webhooks | List webhooks
 [**SearchFlowsProxyApiV1AfnorFlowV1FlowsSearchPost**](AFNORPDPPAFlowServiceAPI.md#SearchFlowsProxyApiV1AfnorFlowV1FlowsSearchPost) | **Post** /api/v1/afnor/flow/v1/flows/search | Search flows
 [**SubmitFlowProxyApiV1AfnorFlowV1FlowsPost**](AFNORPDPPAFlowServiceAPI.md#SubmitFlowProxyApiV1AfnorFlowV1FlowsPost) | **Post** /api/v1/afnor/flow/v1/flows | Submit an invoicing flow
-[**UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch**](AFNORPDPPAFlowServiceAPI.md#UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch) | **Patch** /api/v1/afnor/flow/v1/webhooks/{webhookUid} | Update a webhook
 
 
 
@@ -33,7 +31,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -94,7 +92,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -164,7 +162,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -236,7 +234,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -280,76 +278,6 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet
-
-> AFNORWebhook GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet(ctx, webhookUid).Execute()
-
-Get a webhook
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
-)
-
-func main() {
-	webhookUid := "webhookUid_example" // string | Webhook unique identifier (UUID)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AFNORPDPPAFlowServiceAPI.GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet(context.Background(), webhookUid).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPAFlowServiceAPI.GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet`: AFNORWebhook
-	fmt.Fprintf(os.Stdout, "Response from `AFNORPDPPAFlowServiceAPI.GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**webhookUid** | **string** | Webhook unique identifier (UUID) | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**AFNORWebhook**](AFNORWebhook.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## ListWebhooksProxyApiV1AfnorFlowV1WebhooksGet
 
 > []AFNORWebhook ListWebhooksProxyApiV1AfnorFlowV1WebhooksGet(ctx).Execute()
@@ -367,7 +295,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -428,7 +356,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -494,7 +422,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -538,76 +466,6 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: multipart/form-data
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch
-
-> AFNORWebhook UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch(ctx, webhookUid).Execute()
-
-Update a webhook
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
-)
-
-func main() {
-	webhookUid := "webhookUid_example" // string | Webhook unique identifier (UUID)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AFNORPDPPAFlowServiceAPI.UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch(context.Background(), webhookUid).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AFNORPDPPAFlowServiceAPI.UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch`: AFNORWebhook
-	fmt.Fprintf(os.Stdout, "Response from `AFNORPDPPAFlowServiceAPI.UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**webhookUid** | **string** | Webhook unique identifier (UUID) | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**AFNORWebhook**](AFNORWebhook.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

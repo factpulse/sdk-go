@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **TrackingId** | Pointer to **string** | The tracking id is an external identifier and is used to track the flow by the sender | [optional] 
 **Name** | **string** | Name of the file | 
-**ProcessingRule** | Pointer to [**AFNORProcessingRule**](AFNORProcessingRule.md) |  | [optional] 
+**ProcessingRule** | [**AFNORProcessingRule**](AFNORProcessingRule.md) |  | 
 **FlowSyntax** | [**AFNORFlowSyntax**](AFNORFlowSyntax.md) |  | 
-**FlowProfile** | Pointer to [**AFNORFlowProfile**](AFNORFlowProfile.md) |  | [optional] 
+**FlowProfile** | [**AFNORFlowProfile**](AFNORFlowProfile.md) |  | 
 **FlowId** | **string** | Unique identifier supporting UUID but not only, for flexibility purpose | 
 **SubmittedAt** | **time.Time** | The flow submission date and time (the date and time when the flow was created on the system) This property should be used by the API consumer as a time reference to avoid clock synchronization issues  | 
 **UpdatedAt** | **time.Time** | The last update date and time of the flow. When the flow is submitted updatedAt is equal to submittedAt. When the flow acknowledgment status is changed updatedAt date and time is updated.  | 
@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewAFNORFlow
 
-`func NewAFNORFlow(name string, flowSyntax AFNORFlowSyntax, flowId string, submittedAt time.Time, updatedAt time.Time, flowType AFNORFlowType, processingRuleSource string, flowDirection AFNORFlowDirection, acknowledgement AFNORAcknowledgement, ) *AFNORFlow`
+`func NewAFNORFlow(name string, processingRule AFNORProcessingRule, flowSyntax AFNORFlowSyntax, flowProfile AFNORFlowProfile, flowId string, submittedAt time.Time, updatedAt time.Time, flowType AFNORFlowType, processingRuleSource string, flowDirection AFNORFlowDirection, acknowledgement AFNORAcknowledgement, ) *AFNORFlow`
 
 NewAFNORFlow instantiates a new AFNORFlow object
 This constructor will assign default values to properties that have it defined,
@@ -100,11 +100,6 @@ and a boolean to check if the value has been set.
 
 SetProcessingRule sets ProcessingRule field to given value.
 
-### HasProcessingRule
-
-`func (o *AFNORFlow) HasProcessingRule() bool`
-
-HasProcessingRule returns a boolean if a field has been set.
 
 ### GetFlowSyntax
 
@@ -145,11 +140,6 @@ and a boolean to check if the value has been set.
 
 SetFlowProfile sets FlowProfile field to given value.
 
-### HasFlowProfile
-
-`func (o *AFNORFlow) HasFlowProfile() bool`
-
-HasFlowProfile returns a boolean if a field has been set.
 
 ### GetFlowId
 

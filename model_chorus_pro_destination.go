@@ -21,7 +21,7 @@ var _ MappedNullable = &ChorusProDestination{}
 // ChorusProDestination Specific configuration for Chorus Pro destination.
 type ChorusProDestination struct {
 	Type *string `json:"type,omitempty"`
-	Credentials NullableFactureElectroniqueRestApiSchemasProcessingChorusProCredentials `json:"credentials,omitempty"`
+	Credentials NullableChorusProCredentials `json:"credentials,omitempty"`
 }
 
 // NewChorusProDestination instantiates a new ChorusProDestination object
@@ -78,9 +78,9 @@ func (o *ChorusProDestination) SetType(v string) {
 }
 
 // GetCredentials returns the Credentials field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ChorusProDestination) GetCredentials() FactureElectroniqueRestApiSchemasProcessingChorusProCredentials {
+func (o *ChorusProDestination) GetCredentials() ChorusProCredentials {
 	if o == nil || IsNil(o.Credentials.Get()) {
-		var ret FactureElectroniqueRestApiSchemasProcessingChorusProCredentials
+		var ret ChorusProCredentials
 		return ret
 	}
 	return *o.Credentials.Get()
@@ -89,7 +89,7 @@ func (o *ChorusProDestination) GetCredentials() FactureElectroniqueRestApiSchema
 // GetCredentialsOk returns a tuple with the Credentials field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ChorusProDestination) GetCredentialsOk() (*FactureElectroniqueRestApiSchemasProcessingChorusProCredentials, bool) {
+func (o *ChorusProDestination) GetCredentialsOk() (*ChorusProCredentials, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -105,8 +105,8 @@ func (o *ChorusProDestination) HasCredentials() bool {
 	return false
 }
 
-// SetCredentials gets a reference to the given NullableFactureElectroniqueRestApiSchemasProcessingChorusProCredentials and assigns it to the Credentials field.
-func (o *ChorusProDestination) SetCredentials(v FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) {
+// SetCredentials gets a reference to the given NullableChorusProCredentials and assigns it to the Credentials field.
+func (o *ChorusProDestination) SetCredentials(v ChorusProCredentials) {
 	o.Credentials.Set(&v)
 }
 // SetCredentialsNil sets the value for Credentials to be an explicit nil

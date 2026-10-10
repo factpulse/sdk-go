@@ -652,10 +652,17 @@ type ApiSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostRequest str
 	ctx context.Context
 	ApiService *Flux10EReportingAPIService
 	submitAggregatedReportRequest *SubmitAggregatedReportRequest
+	organizationId *string
 }
 
 func (r ApiSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostRequest) SubmitAggregatedReportRequest(submitAggregatedReportRequest SubmitAggregatedReportRequest) ApiSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostRequest {
 	r.submitAggregatedReportRequest = &submitAggregatedReportRequest
+	return r
+}
+
+// Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space.
+func (r ApiSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostRequest) OrganizationId(organizationId string) ApiSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostRequest {
+	r.organizationId = &organizationId
 	return r
 }
 
@@ -722,6 +729,9 @@ func (a *Flux10EReportingAPIService) SubmitAggregatedEreportingApiV1EreportingSu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.organizationId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "Organization-Id", r.organizationId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.submitAggregatedReportRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -775,10 +785,17 @@ type ApiSubmitEreportingApiV1EreportingSubmitPostRequest struct {
 	ctx context.Context
 	ApiService *Flux10EReportingAPIService
 	submitEReportingRequest *SubmitEReportingRequest
+	organizationId *string
 }
 
 func (r ApiSubmitEreportingApiV1EreportingSubmitPostRequest) SubmitEReportingRequest(submitEReportingRequest SubmitEReportingRequest) ApiSubmitEreportingApiV1EreportingSubmitPostRequest {
 	r.submitEReportingRequest = &submitEReportingRequest
+	return r
+}
+
+// Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space.
+func (r ApiSubmitEreportingApiV1EreportingSubmitPostRequest) OrganizationId(organizationId string) ApiSubmitEreportingApiV1EreportingSubmitPostRequest {
+	r.organizationId = &organizationId
 	return r
 }
 
@@ -849,6 +866,9 @@ func (a *Flux10EReportingAPIService) SubmitEreportingApiV1EreportingSubmitPostEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.organizationId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "Organization-Id", r.organizationId, "simple", "")
+	}
 	// body params
 	localVarPostBody = r.submitEReportingRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -902,6 +922,7 @@ type ApiSubmitXmlEreportingApiV1EreportingSubmitXmlPostRequest struct {
 	ctx context.Context
 	ApiService *Flux10EReportingAPIService
 	xmlFile *os.File
+	organizationId *string
 	trackingId *string
 	skipValidation *bool
 	pdpFlowServiceUrl *string
@@ -913,6 +934,12 @@ type ApiSubmitXmlEreportingApiV1EreportingSubmitXmlPostRequest struct {
 // E-reporting XML file
 func (r ApiSubmitXmlEreportingApiV1EreportingSubmitXmlPostRequest) XmlFile(xmlFile *os.File) ApiSubmitXmlEreportingApiV1EreportingSubmitXmlPostRequest {
 	r.xmlFile = xmlFile
+	return r
+}
+
+// Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space.
+func (r ApiSubmitXmlEreportingApiV1EreportingSubmitXmlPostRequest) OrganizationId(organizationId string) ApiSubmitXmlEreportingApiV1EreportingSubmitXmlPostRequest {
+	r.organizationId = &organizationId
 	return r
 }
 
@@ -1017,6 +1044,9 @@ func (a *Flux10EReportingAPIService) SubmitXmlEreportingApiV1EreportingSubmitXml
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.organizationId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "Organization-Id", r.organizationId, "simple", "")
 	}
 	var xmlFileLocalVarFormFileName string
 	var xmlFileLocalVarFileName     string

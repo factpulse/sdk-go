@@ -24,6 +24,7 @@ const (
 	AFNORFLOWPROFILE_BASIC AFNORFlowProfile = "Basic"
 	AFNORFLOWPROFILE_CIUS AFNORFlowProfile = "CIUS"
 	AFNORFLOWPROFILE_EXTENDED_CTC_FR AFNORFlowProfile = "Extended-CTC-FR"
+	AFNORFLOWPROFILE_UNDEFINED AFNORFlowProfile = "Undefined"
 )
 
 // All allowed values of AFNORFlowProfile enum
@@ -31,6 +32,7 @@ var AllowedAFNORFlowProfileEnumValues = []AFNORFlowProfile{
 	"Basic",
 	"CIUS",
 	"Extended-CTC-FR",
+	"Undefined",
 }
 
 func (v *AFNORFlowProfile) UnmarshalJSON(src []byte) error {

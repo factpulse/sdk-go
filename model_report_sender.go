@@ -26,6 +26,7 @@ type ReportSender struct {
 	Siren string `json:"siren"`
 	// Company name
 	Name string `json:"name"`
+	SchemeId NullableString `json:"schemeId,omitempty"`
 	VatId NullableString `json:"vatId,omitempty"`
 }
 
@@ -98,6 +99,48 @@ func (o *ReportSender) SetName(v string) {
 	o.Name = v
 }
 
+// GetSchemeId returns the SchemeId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ReportSender) GetSchemeId() string {
+	if o == nil || IsNil(o.SchemeId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.SchemeId.Get()
+}
+
+// GetSchemeIdOk returns a tuple with the SchemeId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ReportSender) GetSchemeIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SchemeId.Get(), o.SchemeId.IsSet()
+}
+
+// HasSchemeId returns a boolean if a field has been set.
+func (o *ReportSender) HasSchemeId() bool {
+	if o != nil && o.SchemeId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSchemeId gets a reference to the given NullableString and assigns it to the SchemeId field.
+func (o *ReportSender) SetSchemeId(v string) {
+	o.SchemeId.Set(&v)
+}
+// SetSchemeIdNil sets the value for SchemeId to be an explicit nil
+func (o *ReportSender) SetSchemeIdNil() {
+	o.SchemeId.Set(nil)
+}
+
+// UnsetSchemeId ensures that no value is present for SchemeId, not even an explicit nil
+func (o *ReportSender) UnsetSchemeId() {
+	o.SchemeId.Unset()
+}
+
 // GetVatId returns the VatId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ReportSender) GetVatId() string {
 	if o == nil || IsNil(o.VatId.Get()) {
@@ -152,6 +195,9 @@ func (o ReportSender) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["siren"] = o.Siren
 	toSerialize["name"] = o.Name
+	if o.SchemeId.IsSet() {
+		toSerialize["schemeId"] = o.SchemeId.Get()
+	}
 	if o.VatId.IsSet() {
 		toSerialize["vatId"] = o.VatId.Get()
 	}

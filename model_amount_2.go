@@ -17,7 +17,7 @@ import (
 )
 
 
-// Amount2 Allowance/charge amount (BT-92/99/136/141).
+// Amount2 Payment amount
 type Amount2 struct {
 	Float32 *float32
 	String *string

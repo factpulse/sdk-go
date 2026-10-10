@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **FacturxProfile** | Pointer to [**APIProfile**](APIProfile.md) | Factur-X profile to use | [optional] [default to EN16931]
-**AutoEnrich** | Pointer to **bool** | Auto-enrich data (Company APIs, Chorus Pro, etc.) | [optional] [default to true]
+**AutoEnrich** | Pointer to **bool** | Auto-enrich data (Company APIs, Chorus Pro, etc.). Applies to the **simplified format** only: a complete &#x60;FacturXInvoice&#x60; payload is used exactly as provided. | [optional] [default to true]
 **ValidateXml** | Pointer to **bool** | Validate Factur-X XML with Schematron | [optional] [default to true]
 **VerifyDestinationParameters** | Pointer to **bool** | Verify required parameters for destination (e.g., service_code for Chorus) | [optional] [default to true]
 

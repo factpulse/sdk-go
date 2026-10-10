@@ -50,6 +50,8 @@ type CreateCDARRequest struct {
 	ReasonText NullableString `json:"reasonText,omitempty"`
 	ActionCode NullableString `json:"actionCode,omitempty"`
 	EncaisseAmount NullableEncaisseamount `json:"encaisseAmount,omitempty"`
+	// Taux de TVA du montant encaissé en % (MDT-224, requis par BR-FR-CDV-14 pour le statut 212 ; défaut 20)
+	EncaisseVatRate *float32 `json:"encaisseVatRate,omitempty"`
 }
 
 type _CreateCDARRequest CreateCDARRequest
@@ -73,6 +75,8 @@ func NewCreateCDARRequest(documentId string, senderSiren string, invoiceId strin
 	var invoiceTypeCode string = "380"
 	this.InvoiceTypeCode = &invoiceTypeCode
 	this.Status = status
+	var encaisseVatRate float32 = 20
+	this.EncaisseVatRate = &encaisseVatRate
 	return &this
 }
 
@@ -89,6 +93,8 @@ func NewCreateCDARRequestWithDefaults() *CreateCDARRequest {
 	this.SenderRole = &senderRole
 	var invoiceTypeCode string = "380"
 	this.InvoiceTypeCode = &invoiceTypeCode
+	var encaisseVatRate float32 = 20
+	this.EncaisseVatRate = &encaisseVatRate
 	return &this
 }
 
@@ -708,6 +714,38 @@ func (o *CreateCDARRequest) UnsetEncaisseAmount() {
 	o.EncaisseAmount.Unset()
 }
 
+// GetEncaisseVatRate returns the EncaisseVatRate field value if set, zero value otherwise.
+func (o *CreateCDARRequest) GetEncaisseVatRate() float32 {
+	if o == nil || IsNil(o.EncaisseVatRate) {
+		var ret float32
+		return ret
+	}
+	return *o.EncaisseVatRate
+}
+
+// GetEncaisseVatRateOk returns a tuple with the EncaisseVatRate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateCDARRequest) GetEncaisseVatRateOk() (*float32, bool) {
+	if o == nil || IsNil(o.EncaisseVatRate) {
+		return nil, false
+	}
+	return o.EncaisseVatRate, true
+}
+
+// HasEncaisseVatRate returns a boolean if a field has been set.
+func (o *CreateCDARRequest) HasEncaisseVatRate() bool {
+	if o != nil && !IsNil(o.EncaisseVatRate) {
+		return true
+	}
+
+	return false
+}
+
+// SetEncaisseVatRate gets a reference to the given float32 and assigns it to the EncaisseVatRate field.
+func (o *CreateCDARRequest) SetEncaisseVatRate(v float32) {
+	o.EncaisseVatRate = &v
+}
+
 func (o CreateCDARRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -761,6 +799,9 @@ func (o CreateCDARRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if o.EncaisseAmount.IsSet() {
 		toSerialize["encaisseAmount"] = o.EncaisseAmount.Get()
+	}
+	if !IsNil(o.EncaisseVatRate) {
+		toSerialize["encaisseVatRate"] = o.EncaisseVatRate
 	}
 	return toSerialize, nil
 }

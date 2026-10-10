@@ -25,6 +25,9 @@ type TaxBreakdownInput struct {
 	Rate Rate1 `json:"rate"`
 	TaxableAmount Taxableamount `json:"taxableAmount"`
 	TaxAmount Taxamount2 `json:"taxAmount"`
+	TaxCategoryCode NullableString `json:"taxCategoryCode,omitempty"`
+	ExemptionReasonCode NullableString `json:"exemptionReasonCode,omitempty"`
+	ExemptionReason NullableString `json:"exemptionReason,omitempty"`
 }
 
 type _TaxBreakdownInput TaxBreakdownInput
@@ -121,6 +124,132 @@ func (o *TaxBreakdownInput) SetTaxAmount(v Taxamount2) {
 	o.TaxAmount = v
 }
 
+// GetTaxCategoryCode returns the TaxCategoryCode field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TaxBreakdownInput) GetTaxCategoryCode() string {
+	if o == nil || IsNil(o.TaxCategoryCode.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.TaxCategoryCode.Get()
+}
+
+// GetTaxCategoryCodeOk returns a tuple with the TaxCategoryCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TaxBreakdownInput) GetTaxCategoryCodeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TaxCategoryCode.Get(), o.TaxCategoryCode.IsSet()
+}
+
+// HasTaxCategoryCode returns a boolean if a field has been set.
+func (o *TaxBreakdownInput) HasTaxCategoryCode() bool {
+	if o != nil && o.TaxCategoryCode.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTaxCategoryCode gets a reference to the given NullableString and assigns it to the TaxCategoryCode field.
+func (o *TaxBreakdownInput) SetTaxCategoryCode(v string) {
+	o.TaxCategoryCode.Set(&v)
+}
+// SetTaxCategoryCodeNil sets the value for TaxCategoryCode to be an explicit nil
+func (o *TaxBreakdownInput) SetTaxCategoryCodeNil() {
+	o.TaxCategoryCode.Set(nil)
+}
+
+// UnsetTaxCategoryCode ensures that no value is present for TaxCategoryCode, not even an explicit nil
+func (o *TaxBreakdownInput) UnsetTaxCategoryCode() {
+	o.TaxCategoryCode.Unset()
+}
+
+// GetExemptionReasonCode returns the ExemptionReasonCode field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TaxBreakdownInput) GetExemptionReasonCode() string {
+	if o == nil || IsNil(o.ExemptionReasonCode.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ExemptionReasonCode.Get()
+}
+
+// GetExemptionReasonCodeOk returns a tuple with the ExemptionReasonCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TaxBreakdownInput) GetExemptionReasonCodeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ExemptionReasonCode.Get(), o.ExemptionReasonCode.IsSet()
+}
+
+// HasExemptionReasonCode returns a boolean if a field has been set.
+func (o *TaxBreakdownInput) HasExemptionReasonCode() bool {
+	if o != nil && o.ExemptionReasonCode.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetExemptionReasonCode gets a reference to the given NullableString and assigns it to the ExemptionReasonCode field.
+func (o *TaxBreakdownInput) SetExemptionReasonCode(v string) {
+	o.ExemptionReasonCode.Set(&v)
+}
+// SetExemptionReasonCodeNil sets the value for ExemptionReasonCode to be an explicit nil
+func (o *TaxBreakdownInput) SetExemptionReasonCodeNil() {
+	o.ExemptionReasonCode.Set(nil)
+}
+
+// UnsetExemptionReasonCode ensures that no value is present for ExemptionReasonCode, not even an explicit nil
+func (o *TaxBreakdownInput) UnsetExemptionReasonCode() {
+	o.ExemptionReasonCode.Unset()
+}
+
+// GetExemptionReason returns the ExemptionReason field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TaxBreakdownInput) GetExemptionReason() string {
+	if o == nil || IsNil(o.ExemptionReason.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ExemptionReason.Get()
+}
+
+// GetExemptionReasonOk returns a tuple with the ExemptionReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TaxBreakdownInput) GetExemptionReasonOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ExemptionReason.Get(), o.ExemptionReason.IsSet()
+}
+
+// HasExemptionReason returns a boolean if a field has been set.
+func (o *TaxBreakdownInput) HasExemptionReason() bool {
+	if o != nil && o.ExemptionReason.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetExemptionReason gets a reference to the given NullableString and assigns it to the ExemptionReason field.
+func (o *TaxBreakdownInput) SetExemptionReason(v string) {
+	o.ExemptionReason.Set(&v)
+}
+// SetExemptionReasonNil sets the value for ExemptionReason to be an explicit nil
+func (o *TaxBreakdownInput) SetExemptionReasonNil() {
+	o.ExemptionReason.Set(nil)
+}
+
+// UnsetExemptionReason ensures that no value is present for ExemptionReason, not even an explicit nil
+func (o *TaxBreakdownInput) UnsetExemptionReason() {
+	o.ExemptionReason.Unset()
+}
+
 func (o TaxBreakdownInput) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -134,6 +263,15 @@ func (o TaxBreakdownInput) ToMap() (map[string]interface{}, error) {
 	toSerialize["rate"] = o.Rate
 	toSerialize["taxableAmount"] = o.TaxableAmount
 	toSerialize["taxAmount"] = o.TaxAmount
+	if o.TaxCategoryCode.IsSet() {
+		toSerialize["taxCategoryCode"] = o.TaxCategoryCode.Get()
+	}
+	if o.ExemptionReasonCode.IsSet() {
+		toSerialize["exemptionReasonCode"] = o.ExemptionReasonCode.Get()
+	}
+	if o.ExemptionReason.IsSet() {
+		toSerialize["exemptionReason"] = o.ExemptionReason.Get()
+	}
 	return toSerialize, nil
 }
 

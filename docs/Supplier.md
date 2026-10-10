@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ElectronicAddress** | Pointer to [**NullableElectronicAddress**](ElectronicAddress.md) |  | [optional] 
+**ElectronicAddress** | Pointer to [**NullableElectronicAddressInput**](ElectronicAddressInput.md) |  | [optional] 
 **SupplierId** | Pointer to **int32** | Chorus Pro supplier structure ID (idFournisseur). Only required for B2G. | [optional] [default to 0]
 **PrivateId** | Pointer to **NullableString** |  | [optional] 
 **SupplierBankAccountCode** | Pointer to **NullableInt32** |  | [optional] 
@@ -15,13 +15,14 @@ Name | Type | Description | Notes
 **Siren** | Pointer to **NullableString** |  | [optional] 
 **Siret** | Pointer to **NullableString** |  | [optional] 
 **VatNumber** | Pointer to **NullableString** |  | [optional] 
+**TaxRegistrationId** | Pointer to **NullableString** |  | [optional] 
 **Iban** | Pointer to **NullableString** |  | [optional] 
 **Bic** | Pointer to **NullableString** |  | [optional] 
 **BankAccountName** | Pointer to **NullableString** |  | [optional] 
 **ProprietaryId** | Pointer to **NullableString** |  | [optional] 
-**PostalAddress** | Pointer to [**NullablePostalAddress**](PostalAddress.md) |  | [optional] 
+**PostalAddress** | Pointer to [**NullablePostalAddressInput**](PostalAddressInput.md) |  | [optional] 
 **Contact** | Pointer to [**NullableContact**](Contact.md) |  | [optional] 
-**GlobalIds** | Pointer to [**[]ElectronicAddress**](ElectronicAddress.md) |  | [optional] 
+**GlobalIds** | Pointer to [**[]ElectronicAddressInput**](ElectronicAddressInput.md) |  | [optional] 
 
 ## Methods
 
@@ -44,20 +45,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetElectronicAddress
 
-`func (o *Supplier) GetElectronicAddress() ElectronicAddress`
+`func (o *Supplier) GetElectronicAddress() ElectronicAddressInput`
 
 GetElectronicAddress returns the ElectronicAddress field if non-nil, zero value otherwise.
 
 ### GetElectronicAddressOk
 
-`func (o *Supplier) GetElectronicAddressOk() (*ElectronicAddress, bool)`
+`func (o *Supplier) GetElectronicAddressOk() (*ElectronicAddressInput, bool)`
 
 GetElectronicAddressOk returns a tuple with the ElectronicAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetElectronicAddress
 
-`func (o *Supplier) SetElectronicAddress(v ElectronicAddress)`
+`func (o *Supplier) SetElectronicAddress(v ElectronicAddressInput)`
 
 SetElectronicAddress sets ElectronicAddress field to given value.
 
@@ -417,6 +418,41 @@ HasVatNumber returns a boolean if a field has been set.
 `func (o *Supplier) UnsetVatNumber()`
 
 UnsetVatNumber ensures that no value is present for VatNumber, not even an explicit nil
+### GetTaxRegistrationId
+
+`func (o *Supplier) GetTaxRegistrationId() string`
+
+GetTaxRegistrationId returns the TaxRegistrationId field if non-nil, zero value otherwise.
+
+### GetTaxRegistrationIdOk
+
+`func (o *Supplier) GetTaxRegistrationIdOk() (*string, bool)`
+
+GetTaxRegistrationIdOk returns a tuple with the TaxRegistrationId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaxRegistrationId
+
+`func (o *Supplier) SetTaxRegistrationId(v string)`
+
+SetTaxRegistrationId sets TaxRegistrationId field to given value.
+
+### HasTaxRegistrationId
+
+`func (o *Supplier) HasTaxRegistrationId() bool`
+
+HasTaxRegistrationId returns a boolean if a field has been set.
+
+### SetTaxRegistrationIdNil
+
+`func (o *Supplier) SetTaxRegistrationIdNil(b bool)`
+
+ SetTaxRegistrationIdNil sets the value for TaxRegistrationId to be an explicit nil
+
+### UnsetTaxRegistrationId
+`func (o *Supplier) UnsetTaxRegistrationId()`
+
+UnsetTaxRegistrationId ensures that no value is present for TaxRegistrationId, not even an explicit nil
 ### GetIban
 
 `func (o *Supplier) GetIban() string`
@@ -559,20 +595,20 @@ HasProprietaryId returns a boolean if a field has been set.
 UnsetProprietaryId ensures that no value is present for ProprietaryId, not even an explicit nil
 ### GetPostalAddress
 
-`func (o *Supplier) GetPostalAddress() PostalAddress`
+`func (o *Supplier) GetPostalAddress() PostalAddressInput`
 
 GetPostalAddress returns the PostalAddress field if non-nil, zero value otherwise.
 
 ### GetPostalAddressOk
 
-`func (o *Supplier) GetPostalAddressOk() (*PostalAddress, bool)`
+`func (o *Supplier) GetPostalAddressOk() (*PostalAddressInput, bool)`
 
 GetPostalAddressOk returns a tuple with the PostalAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPostalAddress
 
-`func (o *Supplier) SetPostalAddress(v PostalAddress)`
+`func (o *Supplier) SetPostalAddress(v PostalAddressInput)`
 
 SetPostalAddress sets PostalAddress field to given value.
 
@@ -629,20 +665,20 @@ HasContact returns a boolean if a field has been set.
 UnsetContact ensures that no value is present for Contact, not even an explicit nil
 ### GetGlobalIds
 
-`func (o *Supplier) GetGlobalIds() []ElectronicAddress`
+`func (o *Supplier) GetGlobalIds() []ElectronicAddressInput`
 
 GetGlobalIds returns the GlobalIds field if non-nil, zero value otherwise.
 
 ### GetGlobalIdsOk
 
-`func (o *Supplier) GetGlobalIdsOk() (*[]ElectronicAddress, bool)`
+`func (o *Supplier) GetGlobalIdsOk() (*[]ElectronicAddressInput, bool)`
 
 GetGlobalIdsOk returns a tuple with the GlobalIds field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetGlobalIds
 
-`func (o *Supplier) SetGlobalIds(v []ElectronicAddress)`
+`func (o *Supplier) SetGlobalIds(v []ElectronicAddressInput)`
 
 SetGlobalIds sets GlobalIds field to given value.
 

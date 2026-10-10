@@ -21,7 +21,7 @@ var _ MappedNullable = &AFNORSirenSearchPost200Response{}
 // AFNORSirenSearchPost200Response struct for AFNORSirenSearchPost200Response
 type AFNORSirenSearchPost200Response struct {
 	Search *AFNORSearchSiren `json:"search,omitempty"`
-	// The total number of results
+	// The total number of results, if -1 is returned then this value is not managed due to performance issue
 	TotalNumberOfResults *int32 `json:"totalNumberOfResults,omitempty"`
 	Results []AFNORLegalUnitPayloadHistory `json:"results,omitempty"`
 }
@@ -32,6 +32,8 @@ type AFNORSirenSearchPost200Response struct {
 // will change when the set of required properties is changed
 func NewAFNORSirenSearchPost200Response() *AFNORSirenSearchPost200Response {
 	this := AFNORSirenSearchPost200Response{}
+	var totalNumberOfResults int32 = -1
+	this.TotalNumberOfResults = &totalNumberOfResults
 	return &this
 }
 
@@ -40,6 +42,8 @@ func NewAFNORSirenSearchPost200Response() *AFNORSirenSearchPost200Response {
 // but it doesn't guarantee that properties required by API are set
 func NewAFNORSirenSearchPost200ResponseWithDefaults() *AFNORSirenSearchPost200Response {
 	this := AFNORSirenSearchPost200Response{}
+	var totalNumberOfResults int32 = -1
+	this.TotalNumberOfResults = &totalNumberOfResults
 	return &this
 }
 

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **DirectoryLineStatus** | Pointer to [**AFNORDirectoryLineStatus**](AFNORDirectoryLineStatus.md) |  | [optional] 
 **Siren** | Pointer to **string** | SIREN number | [optional] 
 **Siret** | Pointer to **string** | SIRET Number | [optional] 
+**RoutingIdentifier** | Pointer to **string** | Routing identifier od a routing code. | [optional] 
 **AddressingSuffix** | Pointer to **string** | suffix of the directory line which defines an address mesh not attached to a facility | [optional] 
 **RoutingCode** | Pointer to [**AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCodeRoutingCode**](AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCodeRoutingCode.md) |  | [optional] 
 **LegalUnit** | Pointer to [**AFNORLegalUnitPayloadIncluded**](AFNORLegalUnitPayloadIncluded.md) |  | [optional] 
@@ -157,6 +158,31 @@ SetSiret sets Siret field to given value.
 `func (o *AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode) HasSiret() bool`
 
 HasSiret returns a boolean if a field has been set.
+
+### GetRoutingIdentifier
+
+`func (o *AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode) GetRoutingIdentifier() string`
+
+GetRoutingIdentifier returns the RoutingIdentifier field if non-nil, zero value otherwise.
+
+### GetRoutingIdentifierOk
+
+`func (o *AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode) GetRoutingIdentifierOk() (*string, bool)`
+
+GetRoutingIdentifierOk returns a tuple with the RoutingIdentifier field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRoutingIdentifier
+
+`func (o *AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode) SetRoutingIdentifier(v string)`
+
+SetRoutingIdentifier sets RoutingIdentifier field to given value.
+
+### HasRoutingIdentifier
+
+`func (o *AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode) HasRoutingIdentifier() bool`
+
+HasRoutingIdentifier returns a boolean if a field has been set.
 
 ### GetAddressingSuffix
 

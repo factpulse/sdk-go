@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ElectronicAddress** | Pointer to [**NullableElectronicAddress**](ElectronicAddress.md) |  | [optional] 
+**ElectronicAddress** | Pointer to [**NullableElectronicAddressInput**](ElectronicAddressInput.md) |  | [optional] 
 **ExecutingServiceCode** | Pointer to **NullableString** |  | [optional] 
 **Name** | Pointer to **NullableString** |  | [optional] 
 **Siren** | Pointer to **NullableString** |  | [optional] 
 **Siret** | Pointer to **NullableString** |  | [optional] 
 **VatNumber** | Pointer to **NullableString** |  | [optional] 
-**PostalAddress** | Pointer to [**NullablePostalAddress**](PostalAddress.md) |  | [optional] 
+**PostalAddress** | Pointer to [**NullablePostalAddressInput**](PostalAddressInput.md) |  | [optional] 
 **Contact** | Pointer to [**NullableContact**](Contact.md) |  | [optional] 
-**GlobalIds** | Pointer to [**[]ElectronicAddress**](ElectronicAddress.md) |  | [optional] 
+**GlobalIds** | Pointer to [**[]ElectronicAddressInput**](ElectronicAddressInput.md) |  | [optional] 
 
 ## Methods
 
@@ -35,20 +35,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetElectronicAddress
 
-`func (o *Recipient) GetElectronicAddress() ElectronicAddress`
+`func (o *Recipient) GetElectronicAddress() ElectronicAddressInput`
 
 GetElectronicAddress returns the ElectronicAddress field if non-nil, zero value otherwise.
 
 ### GetElectronicAddressOk
 
-`func (o *Recipient) GetElectronicAddressOk() (*ElectronicAddress, bool)`
+`func (o *Recipient) GetElectronicAddressOk() (*ElectronicAddressInput, bool)`
 
 GetElectronicAddressOk returns a tuple with the ElectronicAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetElectronicAddress
 
-`func (o *Recipient) SetElectronicAddress(v ElectronicAddress)`
+`func (o *Recipient) SetElectronicAddress(v ElectronicAddressInput)`
 
 SetElectronicAddress sets ElectronicAddress field to given value.
 
@@ -245,20 +245,20 @@ HasVatNumber returns a boolean if a field has been set.
 UnsetVatNumber ensures that no value is present for VatNumber, not even an explicit nil
 ### GetPostalAddress
 
-`func (o *Recipient) GetPostalAddress() PostalAddress`
+`func (o *Recipient) GetPostalAddress() PostalAddressInput`
 
 GetPostalAddress returns the PostalAddress field if non-nil, zero value otherwise.
 
 ### GetPostalAddressOk
 
-`func (o *Recipient) GetPostalAddressOk() (*PostalAddress, bool)`
+`func (o *Recipient) GetPostalAddressOk() (*PostalAddressInput, bool)`
 
 GetPostalAddressOk returns a tuple with the PostalAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPostalAddress
 
-`func (o *Recipient) SetPostalAddress(v PostalAddress)`
+`func (o *Recipient) SetPostalAddress(v PostalAddressInput)`
 
 SetPostalAddress sets PostalAddress field to given value.
 
@@ -315,20 +315,20 @@ HasContact returns a boolean if a field has been set.
 UnsetContact ensures that no value is present for Contact, not even an explicit nil
 ### GetGlobalIds
 
-`func (o *Recipient) GetGlobalIds() []ElectronicAddress`
+`func (o *Recipient) GetGlobalIds() []ElectronicAddressInput`
 
 GetGlobalIds returns the GlobalIds field if non-nil, zero value otherwise.
 
 ### GetGlobalIdsOk
 
-`func (o *Recipient) GetGlobalIdsOk() (*[]ElectronicAddress, bool)`
+`func (o *Recipient) GetGlobalIdsOk() (*[]ElectronicAddressInput, bool)`
 
 GetGlobalIdsOk returns a tuple with the GlobalIds field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetGlobalIds
 
-`func (o *Recipient) SetGlobalIds(v []ElectronicAddress)`
+`func (o *Recipient) SetGlobalIds(v []ElectronicAddressInput)`
 
 SetGlobalIds sets GlobalIds field to given value.
 

@@ -23,10 +23,13 @@ type AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode struct {
 	// Addressing identifier of the directory line.
 	AddressingIdentifier *string `json:"addressingIdentifier,omitempty"`
 	PlatformType *AFNORRecipientPlatformType `json:"platformType,omitempty"`
+	DirectoryLineStatus *AFNORUniqueDirectoryLineStatus `json:"directoryLineStatus,omitempty"`
 	// SIREN number
 	Siren *string `json:"siren,omitempty" validate:"regexp=^([0-9]{9})$"`
 	// SIRET Number
 	Siret *string `json:"siret,omitempty" validate:"regexp=^([0-9]{14})$"`
+	// Routing identifier od a routing code.
+	RoutingIdentifier *string `json:"routingIdentifier,omitempty" validate:"regexp=^(?!\\\\s+$)[\\\\-_\\/a-zA-Z0-9]{1,100}$"`
 	// suffix of the directory line which defines an address mesh not attached to a facility
 	AddressingSuffix *string `json:"addressingSuffix,omitempty"`
 	RoutingCode *AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCodeRoutingCode `json:"routingCode,omitempty"`
@@ -115,6 +118,38 @@ func (o *AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode) SetPlatformType(
 	o.PlatformType = &v
 }
 
+// GetDirectoryLineStatus returns the DirectoryLineStatus field value if set, zero value otherwise.
+func (o *AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode) GetDirectoryLineStatus() AFNORUniqueDirectoryLineStatus {
+	if o == nil || IsNil(o.DirectoryLineStatus) {
+		var ret AFNORUniqueDirectoryLineStatus
+		return ret
+	}
+	return *o.DirectoryLineStatus
+}
+
+// GetDirectoryLineStatusOk returns a tuple with the DirectoryLineStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode) GetDirectoryLineStatusOk() (*AFNORUniqueDirectoryLineStatus, bool) {
+	if o == nil || IsNil(o.DirectoryLineStatus) {
+		return nil, false
+	}
+	return o.DirectoryLineStatus, true
+}
+
+// HasDirectoryLineStatus returns a boolean if a field has been set.
+func (o *AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode) HasDirectoryLineStatus() bool {
+	if o != nil && !IsNil(o.DirectoryLineStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetDirectoryLineStatus gets a reference to the given AFNORUniqueDirectoryLineStatus and assigns it to the DirectoryLineStatus field.
+func (o *AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode) SetDirectoryLineStatus(v AFNORUniqueDirectoryLineStatus) {
+	o.DirectoryLineStatus = &v
+}
+
 // GetSiren returns the Siren field value if set, zero value otherwise.
 func (o *AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode) GetSiren() string {
 	if o == nil || IsNil(o.Siren) {
@@ -177,6 +212,38 @@ func (o *AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode) HasSiret() bool 
 // SetSiret gets a reference to the given string and assigns it to the Siret field.
 func (o *AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode) SetSiret(v string) {
 	o.Siret = &v
+}
+
+// GetRoutingIdentifier returns the RoutingIdentifier field value if set, zero value otherwise.
+func (o *AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode) GetRoutingIdentifier() string {
+	if o == nil || IsNil(o.RoutingIdentifier) {
+		var ret string
+		return ret
+	}
+	return *o.RoutingIdentifier
+}
+
+// GetRoutingIdentifierOk returns a tuple with the RoutingIdentifier field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode) GetRoutingIdentifierOk() (*string, bool) {
+	if o == nil || IsNil(o.RoutingIdentifier) {
+		return nil, false
+	}
+	return o.RoutingIdentifier, true
+}
+
+// HasRoutingIdentifier returns a boolean if a field has been set.
+func (o *AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode) HasRoutingIdentifier() bool {
+	if o != nil && !IsNil(o.RoutingIdentifier) {
+		return true
+	}
+
+	return false
+}
+
+// SetRoutingIdentifier gets a reference to the given string and assigns it to the RoutingIdentifier field.
+func (o *AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode) SetRoutingIdentifier(v string) {
+	o.RoutingIdentifier = &v
 }
 
 // GetAddressingSuffix returns the AddressingSuffix field value if set, zero value otherwise.
@@ -323,11 +390,17 @@ func (o AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode) ToMap() (map[stri
 	if !IsNil(o.PlatformType) {
 		toSerialize["platformType"] = o.PlatformType
 	}
+	if !IsNil(o.DirectoryLineStatus) {
+		toSerialize["directoryLineStatus"] = o.DirectoryLineStatus
+	}
 	if !IsNil(o.Siren) {
 		toSerialize["siren"] = o.Siren
 	}
 	if !IsNil(o.Siret) {
 		toSerialize["siret"] = o.Siret
+	}
+	if !IsNil(o.RoutingIdentifier) {
+		toSerialize["routingIdentifier"] = o.RoutingIdentifier
 	}
 	if !IsNil(o.AddressingSuffix) {
 		toSerialize["addressingSuffix"] = o.AddressingSuffix

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Field** | Pointer to [**AFNORSiretField**](AFNORSiretField.md) |  | [optional] 
-**SortingOrder** | Pointer to [**AFNORSortingOrder**](AFNORSortingOrder.md) |  | [optional] 
+**Order** | Pointer to [**AFNORSortingOrder**](AFNORSortingOrder.md) |  | [optional] 
 
 ## Methods
 
@@ -51,30 +51,30 @@ SetField sets Field field to given value.
 
 HasField returns a boolean if a field has been set.
 
-### GetSortingOrder
+### GetOrder
 
-`func (o *AFNORSearchSiretSortingInner) GetSortingOrder() AFNORSortingOrder`
+`func (o *AFNORSearchSiretSortingInner) GetOrder() AFNORSortingOrder`
 
-GetSortingOrder returns the SortingOrder field if non-nil, zero value otherwise.
+GetOrder returns the Order field if non-nil, zero value otherwise.
 
-### GetSortingOrderOk
+### GetOrderOk
 
-`func (o *AFNORSearchSiretSortingInner) GetSortingOrderOk() (*AFNORSortingOrder, bool)`
+`func (o *AFNORSearchSiretSortingInner) GetOrderOk() (*AFNORSortingOrder, bool)`
 
-GetSortingOrderOk returns a tuple with the SortingOrder field if it's non-nil, zero value otherwise
+GetOrderOk returns a tuple with the Order field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSortingOrder
+### SetOrder
 
-`func (o *AFNORSearchSiretSortingInner) SetSortingOrder(v AFNORSortingOrder)`
+`func (o *AFNORSearchSiretSortingInner) SetOrder(v AFNORSortingOrder)`
 
-SetSortingOrder sets SortingOrder field to given value.
+SetOrder sets Order field to given value.
 
-### HasSortingOrder
+### HasOrder
 
-`func (o *AFNORSearchSiretSortingInner) HasSortingOrder() bool`
+`func (o *AFNORSearchSiretSortingInner) HasOrder() bool`
 
-HasSortingOrder returns a boolean if a field has been set.
+HasOrder returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

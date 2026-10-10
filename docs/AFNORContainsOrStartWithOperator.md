@@ -1,0 +1,13 @@
+# AFNORContainsOrStartWithOperator
+
+## Enum
+
+
+* `CONTAINS` (value: `"contains"`)
+
+* `START_WITH` (value: `"startWith"`)
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

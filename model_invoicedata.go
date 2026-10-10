@@ -17,102 +17,102 @@ import (
 	"gopkg.in/validator.v2"
 )
 
-// AFNORCallbackAuthentication - The authentication mode required for the callback call
-type AFNORCallbackAuthentication struct {
-	AFNORBasicAuthentication *AFNORBasicAuthentication
-	AFNOROAuth2Authentication *AFNOROAuth2Authentication
+// Invoicedata - Invoice data, in either of the two accepted formats (detected automatically, same rule as /generate-invoice): 1. **Simplified format**: `number` + `lines`, with auto-enrichment. Any field of the complete model may be added on top. 2. **Complete format**: full `FacturXInvoice` structure, recognised by the presence of `invoiceLines`. No auto-enrichment of totals.
+type Invoicedata struct {
+	FacturXInvoice *FacturXInvoice
+	SimplifiedInvoiceData *SimplifiedInvoiceData
 }
 
-// AFNORBasicAuthenticationAsAFNORCallbackAuthentication is a convenience function that returns AFNORBasicAuthentication wrapped in AFNORCallbackAuthentication
-func AFNORBasicAuthenticationAsAFNORCallbackAuthentication(v *AFNORBasicAuthentication) AFNORCallbackAuthentication {
-	return AFNORCallbackAuthentication{
-		AFNORBasicAuthentication: v,
+// FacturXInvoiceAsInvoicedata is a convenience function that returns FacturXInvoice wrapped in Invoicedata
+func FacturXInvoiceAsInvoicedata(v *FacturXInvoice) Invoicedata {
+	return Invoicedata{
+		FacturXInvoice: v,
 	}
 }
 
-// AFNOROAuth2AuthenticationAsAFNORCallbackAuthentication is a convenience function that returns AFNOROAuth2Authentication wrapped in AFNORCallbackAuthentication
-func AFNOROAuth2AuthenticationAsAFNORCallbackAuthentication(v *AFNOROAuth2Authentication) AFNORCallbackAuthentication {
-	return AFNORCallbackAuthentication{
-		AFNOROAuth2Authentication: v,
+// SimplifiedInvoiceDataAsInvoicedata is a convenience function that returns SimplifiedInvoiceData wrapped in Invoicedata
+func SimplifiedInvoiceDataAsInvoicedata(v *SimplifiedInvoiceData) Invoicedata {
+	return Invoicedata{
+		SimplifiedInvoiceData: v,
 	}
 }
 
 
 // Unmarshal JSON data into one of the pointers in the struct
-func (dst *AFNORCallbackAuthentication) UnmarshalJSON(data []byte) error {
+func (dst *Invoicedata) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into AFNORBasicAuthentication
-	err = newStrictDecoder(data).Decode(&dst.AFNORBasicAuthentication)
+	// try to unmarshal data into FacturXInvoice
+	err = newStrictDecoder(data).Decode(&dst.FacturXInvoice)
 	if err == nil {
-		jsonAFNORBasicAuthentication, _ := json.Marshal(dst.AFNORBasicAuthentication)
-		if string(jsonAFNORBasicAuthentication) == "{}" { // empty struct
-			dst.AFNORBasicAuthentication = nil
+		jsonFacturXInvoice, _ := json.Marshal(dst.FacturXInvoice)
+		if string(jsonFacturXInvoice) == "{}" { // empty struct
+			dst.FacturXInvoice = nil
 		} else {
-			if err = validator.Validate(dst.AFNORBasicAuthentication); err != nil {
-				dst.AFNORBasicAuthentication = nil
+			if err = validator.Validate(dst.FacturXInvoice); err != nil {
+				dst.FacturXInvoice = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AFNORBasicAuthentication = nil
+		dst.FacturXInvoice = nil
 	}
 
-	// try to unmarshal data into AFNOROAuth2Authentication
-	err = newStrictDecoder(data).Decode(&dst.AFNOROAuth2Authentication)
+	// try to unmarshal data into SimplifiedInvoiceData
+	err = newStrictDecoder(data).Decode(&dst.SimplifiedInvoiceData)
 	if err == nil {
-		jsonAFNOROAuth2Authentication, _ := json.Marshal(dst.AFNOROAuth2Authentication)
-		if string(jsonAFNOROAuth2Authentication) == "{}" { // empty struct
-			dst.AFNOROAuth2Authentication = nil
+		jsonSimplifiedInvoiceData, _ := json.Marshal(dst.SimplifiedInvoiceData)
+		if string(jsonSimplifiedInvoiceData) == "{}" { // empty struct
+			dst.SimplifiedInvoiceData = nil
 		} else {
-			if err = validator.Validate(dst.AFNOROAuth2Authentication); err != nil {
-				dst.AFNOROAuth2Authentication = nil
+			if err = validator.Validate(dst.SimplifiedInvoiceData); err != nil {
+				dst.SimplifiedInvoiceData = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AFNOROAuth2Authentication = nil
+		dst.SimplifiedInvoiceData = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.AFNORBasicAuthentication = nil
-		dst.AFNOROAuth2Authentication = nil
+		dst.FacturXInvoice = nil
+		dst.SimplifiedInvoiceData = nil
 
-		return fmt.Errorf("data matches more than one schema in oneOf(AFNORCallbackAuthentication)")
+		return fmt.Errorf("data matches more than one schema in oneOf(Invoicedata)")
 	} else if match == 1 {
 		return nil // exactly one match
 	} else { // no match
-		return fmt.Errorf("data failed to match schemas in oneOf(AFNORCallbackAuthentication)")
+		return fmt.Errorf("data failed to match schemas in oneOf(Invoicedata)")
 	}
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
-func (src AFNORCallbackAuthentication) MarshalJSON() ([]byte, error) {
-	if src.AFNORBasicAuthentication != nil {
-		return json.Marshal(&src.AFNORBasicAuthentication)
+func (src Invoicedata) MarshalJSON() ([]byte, error) {
+	if src.FacturXInvoice != nil {
+		return json.Marshal(&src.FacturXInvoice)
 	}
 
-	if src.AFNOROAuth2Authentication != nil {
-		return json.Marshal(&src.AFNOROAuth2Authentication)
+	if src.SimplifiedInvoiceData != nil {
+		return json.Marshal(&src.SimplifiedInvoiceData)
 	}
 
 	return nil, nil // no data in oneOf schemas
 }
 
 // Get the actual instance
-func (obj *AFNORCallbackAuthentication) GetActualInstance() (interface{}) {
+func (obj *Invoicedata) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.AFNORBasicAuthentication != nil {
-		return obj.AFNORBasicAuthentication
+	if obj.FacturXInvoice != nil {
+		return obj.FacturXInvoice
 	}
 
-	if obj.AFNOROAuth2Authentication != nil {
-		return obj.AFNOROAuth2Authentication
+	if obj.SimplifiedInvoiceData != nil {
+		return obj.SimplifiedInvoiceData
 	}
 
 	// all schemas are nil
@@ -120,51 +120,51 @@ func (obj *AFNORCallbackAuthentication) GetActualInstance() (interface{}) {
 }
 
 // Get the actual instance value
-func (obj AFNORCallbackAuthentication) GetActualInstanceValue() (interface{}) {
-	if obj.AFNORBasicAuthentication != nil {
-		return *obj.AFNORBasicAuthentication
+func (obj Invoicedata) GetActualInstanceValue() (interface{}) {
+	if obj.FacturXInvoice != nil {
+		return *obj.FacturXInvoice
 	}
 
-	if obj.AFNOROAuth2Authentication != nil {
-		return *obj.AFNOROAuth2Authentication
+	if obj.SimplifiedInvoiceData != nil {
+		return *obj.SimplifiedInvoiceData
 	}
 
 	// all schemas are nil
 	return nil
 }
 
-type NullableAFNORCallbackAuthentication struct {
-	value *AFNORCallbackAuthentication
+type NullableInvoicedata struct {
+	value *Invoicedata
 	isSet bool
 }
 
-func (v NullableAFNORCallbackAuthentication) Get() *AFNORCallbackAuthentication {
+func (v NullableInvoicedata) Get() *Invoicedata {
 	return v.value
 }
 
-func (v *NullableAFNORCallbackAuthentication) Set(val *AFNORCallbackAuthentication) {
+func (v *NullableInvoicedata) Set(val *Invoicedata) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAFNORCallbackAuthentication) IsSet() bool {
+func (v NullableInvoicedata) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAFNORCallbackAuthentication) Unset() {
+func (v *NullableInvoicedata) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAFNORCallbackAuthentication(val *AFNORCallbackAuthentication) *NullableAFNORCallbackAuthentication {
-	return &NullableAFNORCallbackAuthentication{value: val, isSet: true}
+func NewNullableInvoicedata(val *Invoicedata) *NullableInvoicedata {
+	return &NullableInvoicedata{value: val, isSet: true}
 }
 
-func (v NullableAFNORCallbackAuthentication) MarshalJSON() ([]byte, error) {
+func (v NullableInvoicedata) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAFNORCallbackAuthentication) UnmarshalJSON(src []byte) error {
+func (v *NullableInvoicedata) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

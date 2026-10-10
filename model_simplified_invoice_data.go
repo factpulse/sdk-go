@@ -13,20 +13,19 @@ package factpulse
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
 // checks if the SimplifiedInvoiceData type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SimplifiedInvoiceData{}
 
-// SimplifiedInvoiceData Simplified invoice data (minimal format for auto-enrichment).
+// SimplifiedInvoiceData Simplified invoice data (minimal format for auto-enrichment).  Any field of the complete `FacturXInvoice` model may be added on top of the fields declared below (`deliveryDate` BT-72, `deliveryParty` BG-15, `paymentReference` BT-83, `payee` BG-10, ...): extra keys are kept and merged by `FacturXInvoice.create_from_simplified_dict`. Whatever the simplified format computes itself (totals, lines, addresses) always wins.
 type SimplifiedInvoiceData struct {
 	// Unique invoice number
 	Number string `json:"number"`
-	// Supplier information (siret, iban, ...)
+	// Supplier information (siret, iban, bic, routingAddress, ...). For a seller without an intra-community VAT number (VAT franchise, article 293 B of the CGI), provide `taxRegistrationId` (BT-32, usually the SIREN): it satisfies BR-E-02 and prevents BT-31 from being auto-calculated.
 	Supplier map[string]interface{} `json:"supplier"`
-	// Recipient information (siret, ...)
+	// Recipient information (siret, vatNumber for BT-48, ...)
 	Recipient map[string]interface{} `json:"recipient"`
 	// Invoice lines
 	Lines []map[string]interface{} `json:"lines"`
@@ -37,10 +36,11 @@ type SimplifiedInvoiceData struct {
 	PurchaseOrderReference NullableString `json:"purchaseOrderReference,omitempty"`
 	ContractReference NullableString `json:"contractReference,omitempty"`
 	// Document type (UNTDID 1001). Default: 380 (Invoice).
-	InvoiceType *InvoiceTypeCode `json:"invoiceType,omitempty"`
+	InvoiceType *FactureElectroniqueModelsInvoiceTypeCode `json:"invoiceType,omitempty"`
 	PrecedingInvoiceReference NullableString `json:"precedingInvoiceReference,omitempty"`
 	OperationNature NullableOperationNature `json:"operationNature,omitempty"`
 	InvoicingFramework NullableInvoicingFrameworkCode `json:"invoicingFramework,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SimplifiedInvoiceData SimplifiedInvoiceData
@@ -367,9 +367,9 @@ func (o *SimplifiedInvoiceData) UnsetContractReference() {
 }
 
 // GetInvoiceType returns the InvoiceType field value if set, zero value otherwise.
-func (o *SimplifiedInvoiceData) GetInvoiceType() InvoiceTypeCode {
+func (o *SimplifiedInvoiceData) GetInvoiceType() FactureElectroniqueModelsInvoiceTypeCode {
 	if o == nil || IsNil(o.InvoiceType) {
-		var ret InvoiceTypeCode
+		var ret FactureElectroniqueModelsInvoiceTypeCode
 		return ret
 	}
 	return *o.InvoiceType
@@ -377,7 +377,7 @@ func (o *SimplifiedInvoiceData) GetInvoiceType() InvoiceTypeCode {
 
 // GetInvoiceTypeOk returns a tuple with the InvoiceType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SimplifiedInvoiceData) GetInvoiceTypeOk() (*InvoiceTypeCode, bool) {
+func (o *SimplifiedInvoiceData) GetInvoiceTypeOk() (*FactureElectroniqueModelsInvoiceTypeCode, bool) {
 	if o == nil || IsNil(o.InvoiceType) {
 		return nil, false
 	}
@@ -393,8 +393,8 @@ func (o *SimplifiedInvoiceData) HasInvoiceType() bool {
 	return false
 }
 
-// SetInvoiceType gets a reference to the given InvoiceTypeCode and assigns it to the InvoiceType field.
-func (o *SimplifiedInvoiceData) SetInvoiceType(v InvoiceTypeCode) {
+// SetInvoiceType gets a reference to the given FactureElectroniqueModelsInvoiceTypeCode and assigns it to the InvoiceType field.
+func (o *SimplifiedInvoiceData) SetInvoiceType(v FactureElectroniqueModelsInvoiceTypeCode) {
 	o.InvoiceType = &v
 }
 
@@ -565,6 +565,11 @@ func (o SimplifiedInvoiceData) ToMap() (map[string]interface{}, error) {
 	if o.InvoicingFramework.IsSet() {
 		toSerialize["invoicingFramework"] = o.InvoicingFramework.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -595,15 +600,32 @@ func (o *SimplifiedInvoiceData) UnmarshalJSON(data []byte) (err error) {
 
 	varSimplifiedInvoiceData := _SimplifiedInvoiceData{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSimplifiedInvoiceData)
+	err = json.Unmarshal(data, &varSimplifiedInvoiceData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SimplifiedInvoiceData(varSimplifiedInvoiceData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "number")
+		delete(additionalProperties, "supplier")
+		delete(additionalProperties, "recipient")
+		delete(additionalProperties, "lines")
+		delete(additionalProperties, "date")
+		delete(additionalProperties, "dueDays")
+		delete(additionalProperties, "comment")
+		delete(additionalProperties, "purchaseOrderReference")
+		delete(additionalProperties, "contractReference")
+		delete(additionalProperties, "invoiceType")
+		delete(additionalProperties, "precedingInvoiceReference")
+		delete(additionalProperties, "operationNature")
+		delete(additionalProperties, "invoicingFramework")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

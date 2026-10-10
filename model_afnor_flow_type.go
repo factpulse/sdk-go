@@ -16,14 +16,13 @@ import (
 	"fmt"
 )
 
-// AFNORFlowType - `CustomerInvoice`: a non-self-billed outgoing invoice or a self-billed incoming invoice - `SupplierInvoice`: a non-self-billed incoming invoice or self-billed outgoing invoice - `StateInvoice`: an invoice Flow sent to DFH - `CustomerInvoiceLC`: a lifecycle (CDAR) related to a customer invoice - `SupplierInvoiceLC`: a lifecycle (CDAR) related to supplier invoice - `StateCustomerInvoiceLC`: a customer invoice LC sent to DFH - `StateSupplierInvoiceLC`: a supplier invoice LC sent to DFH - `AggregatedCustomerTransactionReport` : a transaction E-Reporting flow containing aggregated B2C sales (FRR 10.3) - `IndividualCustomerTransactionReport`: a transaction E-Reporting flow containing international B2B sales or a B2C transaction flow reported individually (FRR 10.1) - `AggregatedCustomerPaymentReport` : a E-Reporting of collections flow containing collections linked to B2C sales (FRR 10.4) - `UnitaryCustomerPaymentReport` : an E-Reporting of collections flow containing collections linked to unit international B2B sales or B2C sales (FRR 10.2) - `UnitarySupplierTransactionReport`: a transaction E-Reporting flow containing international B2B purchases (FRR 10.1) - `MultiFlowReport`: an E-Reporting flow which contains at least 2 different flow types (FRR 10) 
+// AFNORFlowType - `CustomerInvoice`: a non-self-billed outgoing invoice or a self-billed incoming invoice - `SupplierInvoice`: a non-self-billed incoming invoice or self-billed outgoing invoice - `CustomerInvoiceLC`: a lifecycle (CDAR) related to a customer invoice - `SupplierInvoiceLC`: a lifecycle (CDAR) related to supplier invoice - `StateCustomerInvoiceLC`: a customer invoice LC sent to DFH - `StateSupplierInvoiceLC`: a supplier invoice LC sent to DFH - `AggregatedCustomerTransactionReport` : a transaction e-reporting flow containing aggregated B2C sales (FRR 10.3) - `UnitaryCustomerTransactionReport`: a transaction e-reporting flow containing international B2B sales or a B2C transaction flow reported individually (FRR 10.1) - `AggregatedCustomerPaymentReport` : an e-reporting of collections flow containing collections linked to B2C sales (FRR 10.4) - `UnitaryCustomerPaymentReport` : an e-reporting of collections flow containing collections linked to unit international B2B sales or B2C sales (FRR 10.2) - `UnitarySupplierTransactionReport`: a transaction e-reporting flow containing international B2B purchases (FRR 10.1) - `MultiFlowReport`: an e-reporting flow which contains at least 2 different flow types (FRR 10) - `StateCustomerInvoice` : a reporting flow 1 sent to DFH related to an invoice of type ‘CustomerInvoice’ - `StateSupplierInvoice` : a reporting flow 1 sent to DFH related to an invoice of type ‘SupplierInvoice’ for self-billing - `StateTransactionReport` : a transaction e-reporting flow 10.1 or 10.3 sent to the DFH - `StateTransactionReportLC` : a lifecycle for a StateTransactionReport flow - `StatePaymentReport` : a payment e-reporting flow 10.2 or 10.4 sent to DFH - `StatePaymentReportLC` : a lifecycle for a StatePaymentReport flow - `Undefined`            : Not yet defined when in Pending state or unable to define when in Error state 
 type AFNORFlowType string
 
 // List of AFNOR_FlowType
 const (
 	AFNORFLOWTYPE_CUSTOMER_INVOICE AFNORFlowType = "CustomerInvoice"
 	AFNORFLOWTYPE_SUPPLIER_INVOICE AFNORFlowType = "SupplierInvoice"
-	AFNORFLOWTYPE_STATE_INVOICE AFNORFlowType = "StateInvoice"
 	AFNORFLOWTYPE_CUSTOMER_INVOICE_LC AFNORFlowType = "CustomerInvoiceLC"
 	AFNORFLOWTYPE_SUPPLIER_INVOICE_LC AFNORFlowType = "SupplierInvoiceLC"
 	AFNORFLOWTYPE_STATE_CUSTOMER_INVOICE_LC AFNORFlowType = "StateCustomerInvoiceLC"
@@ -34,13 +33,19 @@ const (
 	AFNORFLOWTYPE_UNITARY_CUSTOMER_PAYMENT_REPORT AFNORFlowType = "UnitaryCustomerPaymentReport"
 	AFNORFLOWTYPE_UNITARY_SUPPLIER_TRANSACTION_REPORT AFNORFlowType = "UnitarySupplierTransactionReport"
 	AFNORFLOWTYPE_MULTI_FLOW_REPORT AFNORFlowType = "MultiFlowReport"
+	AFNORFLOWTYPE_STATE_CUSTOMER_INVOICE AFNORFlowType = "StateCustomerInvoice"
+	AFNORFLOWTYPE_STATE_SUPPLIER_INVOICE AFNORFlowType = "StateSupplierInvoice"
+	AFNORFLOWTYPE_STATE_TRANSACTION_REPORT AFNORFlowType = "StateTransactionReport"
+	AFNORFLOWTYPE_STATE_TRANSACTION_REPORT_LC AFNORFlowType = "StateTransactionReportLC"
+	AFNORFLOWTYPE_STATE_PAYMENT_REPORT AFNORFlowType = "StatePaymentReport"
+	AFNORFLOWTYPE_STATE_PAYMENT_REPORT_LC AFNORFlowType = "StatePaymentReportLC"
+	AFNORFLOWTYPE_UNDEFINED AFNORFlowType = "Undefined"
 )
 
 // All allowed values of AFNORFlowType enum
 var AllowedAFNORFlowTypeEnumValues = []AFNORFlowType{
 	"CustomerInvoice",
 	"SupplierInvoice",
-	"StateInvoice",
 	"CustomerInvoiceLC",
 	"SupplierInvoiceLC",
 	"StateCustomerInvoiceLC",
@@ -51,6 +56,13 @@ var AllowedAFNORFlowTypeEnumValues = []AFNORFlowType{
 	"UnitaryCustomerPaymentReport",
 	"UnitarySupplierTransactionReport",
 	"MultiFlowReport",
+	"StateCustomerInvoice",
+	"StateSupplierInvoice",
+	"StateTransactionReport",
+	"StateTransactionReportLC",
+	"StatePaymentReport",
+	"StatePaymentReportLC",
+	"Undefined",
 }
 
 func (v *AFNORFlowType) UnmarshalJSON(src []byte) error {

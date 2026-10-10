@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Tax representative name (BT-62). | 
 **VatNumber** | **string** | Tax representative VAT identifier (BT-63). | 
-**PostalAddress** | [**PostalAddress**](PostalAddress.md) | Tax representative postal address (BG-12). | 
+**PostalAddress** | [**PostalAddressInput**](PostalAddressInput.md) | Tax representative postal address (BG-12). | 
 
 ## Methods
 
 ### NewTaxRepresentative
 
-`func NewTaxRepresentative(name string, vatNumber string, postalAddress PostalAddress, ) *TaxRepresentative`
+`func NewTaxRepresentative(name string, vatNumber string, postalAddress PostalAddressInput, ) *TaxRepresentative`
 
 NewTaxRepresentative instantiates a new TaxRepresentative object
 This constructor will assign default values to properties that have it defined,
@@ -69,20 +69,20 @@ SetVatNumber sets VatNumber field to given value.
 
 ### GetPostalAddress
 
-`func (o *TaxRepresentative) GetPostalAddress() PostalAddress`
+`func (o *TaxRepresentative) GetPostalAddress() PostalAddressInput`
 
 GetPostalAddress returns the PostalAddress field if non-nil, zero value otherwise.
 
 ### GetPostalAddressOk
 
-`func (o *TaxRepresentative) GetPostalAddressOk() (*PostalAddress, bool)`
+`func (o *TaxRepresentative) GetPostalAddressOk() (*PostalAddressInput, bool)`
 
 GetPostalAddressOk returns a tuple with the PostalAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPostalAddress
 
-`func (o *TaxRepresentative) SetPostalAddress(v PostalAddress)`
+`func (o *TaxRepresentative) SetPostalAddress(v PostalAddressInput)`
 
 SetPostalAddress sets PostalAddress field to given value.
 

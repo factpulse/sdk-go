@@ -27,8 +27,9 @@ type IncomingSupplier struct {
 	Siren NullableString `json:"siren,omitempty"`
 	Siret NullableString `json:"siret,omitempty"`
 	VatNumber NullableString `json:"vatNumber,omitempty"`
-	PostalAddress NullablePostalAddress `json:"postalAddress,omitempty"`
-	ElectronicAddress NullableElectronicAddress `json:"electronicAddress,omitempty"`
+	TaxRegistrationId NullableString `json:"taxRegistrationId,omitempty"`
+	PostalAddress NullablePostalAddressOutput `json:"postalAddress,omitempty"`
+	ElectronicAddress NullableElectronicAddressOutput `json:"electronicAddress,omitempty"`
 	Email NullableString `json:"email,omitempty"`
 	Phone NullableString `json:"phone,omitempty"`
 }
@@ -203,10 +204,52 @@ func (o *IncomingSupplier) UnsetVatNumber() {
 	o.VatNumber.Unset()
 }
 
+// GetTaxRegistrationId returns the TaxRegistrationId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *IncomingSupplier) GetTaxRegistrationId() string {
+	if o == nil || IsNil(o.TaxRegistrationId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.TaxRegistrationId.Get()
+}
+
+// GetTaxRegistrationIdOk returns a tuple with the TaxRegistrationId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *IncomingSupplier) GetTaxRegistrationIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TaxRegistrationId.Get(), o.TaxRegistrationId.IsSet()
+}
+
+// HasTaxRegistrationId returns a boolean if a field has been set.
+func (o *IncomingSupplier) HasTaxRegistrationId() bool {
+	if o != nil && o.TaxRegistrationId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTaxRegistrationId gets a reference to the given NullableString and assigns it to the TaxRegistrationId field.
+func (o *IncomingSupplier) SetTaxRegistrationId(v string) {
+	o.TaxRegistrationId.Set(&v)
+}
+// SetTaxRegistrationIdNil sets the value for TaxRegistrationId to be an explicit nil
+func (o *IncomingSupplier) SetTaxRegistrationIdNil() {
+	o.TaxRegistrationId.Set(nil)
+}
+
+// UnsetTaxRegistrationId ensures that no value is present for TaxRegistrationId, not even an explicit nil
+func (o *IncomingSupplier) UnsetTaxRegistrationId() {
+	o.TaxRegistrationId.Unset()
+}
+
 // GetPostalAddress returns the PostalAddress field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *IncomingSupplier) GetPostalAddress() PostalAddress {
+func (o *IncomingSupplier) GetPostalAddress() PostalAddressOutput {
 	if o == nil || IsNil(o.PostalAddress.Get()) {
-		var ret PostalAddress
+		var ret PostalAddressOutput
 		return ret
 	}
 	return *o.PostalAddress.Get()
@@ -215,7 +258,7 @@ func (o *IncomingSupplier) GetPostalAddress() PostalAddress {
 // GetPostalAddressOk returns a tuple with the PostalAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IncomingSupplier) GetPostalAddressOk() (*PostalAddress, bool) {
+func (o *IncomingSupplier) GetPostalAddressOk() (*PostalAddressOutput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -231,8 +274,8 @@ func (o *IncomingSupplier) HasPostalAddress() bool {
 	return false
 }
 
-// SetPostalAddress gets a reference to the given NullablePostalAddress and assigns it to the PostalAddress field.
-func (o *IncomingSupplier) SetPostalAddress(v PostalAddress) {
+// SetPostalAddress gets a reference to the given NullablePostalAddressOutput and assigns it to the PostalAddress field.
+func (o *IncomingSupplier) SetPostalAddress(v PostalAddressOutput) {
 	o.PostalAddress.Set(&v)
 }
 // SetPostalAddressNil sets the value for PostalAddress to be an explicit nil
@@ -246,9 +289,9 @@ func (o *IncomingSupplier) UnsetPostalAddress() {
 }
 
 // GetElectronicAddress returns the ElectronicAddress field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *IncomingSupplier) GetElectronicAddress() ElectronicAddress {
+func (o *IncomingSupplier) GetElectronicAddress() ElectronicAddressOutput {
 	if o == nil || IsNil(o.ElectronicAddress.Get()) {
-		var ret ElectronicAddress
+		var ret ElectronicAddressOutput
 		return ret
 	}
 	return *o.ElectronicAddress.Get()
@@ -257,7 +300,7 @@ func (o *IncomingSupplier) GetElectronicAddress() ElectronicAddress {
 // GetElectronicAddressOk returns a tuple with the ElectronicAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IncomingSupplier) GetElectronicAddressOk() (*ElectronicAddress, bool) {
+func (o *IncomingSupplier) GetElectronicAddressOk() (*ElectronicAddressOutput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -273,8 +316,8 @@ func (o *IncomingSupplier) HasElectronicAddress() bool {
 	return false
 }
 
-// SetElectronicAddress gets a reference to the given NullableElectronicAddress and assigns it to the ElectronicAddress field.
-func (o *IncomingSupplier) SetElectronicAddress(v ElectronicAddress) {
+// SetElectronicAddress gets a reference to the given NullableElectronicAddressOutput and assigns it to the ElectronicAddress field.
+func (o *IncomingSupplier) SetElectronicAddress(v ElectronicAddressOutput) {
 	o.ElectronicAddress.Set(&v)
 }
 // SetElectronicAddressNil sets the value for ElectronicAddress to be an explicit nil
@@ -390,6 +433,9 @@ func (o IncomingSupplier) ToMap() (map[string]interface{}, error) {
 	}
 	if o.VatNumber.IsSet() {
 		toSerialize["vatNumber"] = o.VatNumber.Get()
+	}
+	if o.TaxRegistrationId.IsSet() {
+		toSerialize["taxRegistrationId"] = o.TaxRegistrationId.Get()
 	}
 	if o.PostalAddress.IsSet() {
 		toSerialize["postalAddress"] = o.PostalAddress.Get()

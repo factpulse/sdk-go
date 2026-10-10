@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Search** | Pointer to [**AFNORSearchDirectoryLine**](AFNORSearchDirectoryLine.md) |  | [optional] 
-**TotalNumberOfResults** | Pointer to **int32** | The total number of results | [optional] 
+**TotalNumberOfResults** | Pointer to **int32** | The total number of results, if -1 is returned then this value is not managed due to performance issue | [optional] [default to -1]
 **Results** | Pointer to [**[]AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode**](AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode.md) |  | [optional] 
 
 ## Methods

@@ -13,7 +13,7 @@ Official Go client for the FactPulse API - French electronic invoicing.
 ## Installation
 
 ```bash
-go get github.com/factpulse/sdk-go/v3
+go get github.com/factpulse/sdk-go/v4
 ```
 
 ## Quick Start
@@ -27,7 +27,7 @@ import (
     "log"
     "os"
 
-    factpulse "github.com/factpulse/sdk-go/v3"
+    factpulse "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -218,7 +218,7 @@ result, err := client.Post("processing/invoices/submit-complete-async", map[stri
 ## Error Handling
 
 ```go
-import factpulse "github.com/factpulse/sdk-go/v3"
+import factpulse "github.com/factpulse/sdk-go/v4"
 
 result, err := client.Post("processing/validate-xml", data)
 if err != nil {

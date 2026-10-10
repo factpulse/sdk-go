@@ -22,7 +22,7 @@ var _ MappedNullable = &GetStructureRequest{}
 
 // GetStructureRequest Get structure details.
 type GetStructureRequest struct {
-	Credentials NullableChorusProCredentials `json:"credentials,omitempty"`
+	Credentials NullableFactureElectroniqueRestApiSchemasChorusProChorusProCredentials `json:"credentials,omitempty"`
 	// Chorus Pro structure ID
 	StructureId int32 `json:"structureId"`
 	// Language code (fr, en)
@@ -54,9 +54,9 @@ func NewGetStructureRequestWithDefaults() *GetStructureRequest {
 }
 
 // GetCredentials returns the Credentials field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *GetStructureRequest) GetCredentials() ChorusProCredentials {
+func (o *GetStructureRequest) GetCredentials() FactureElectroniqueRestApiSchemasChorusProChorusProCredentials {
 	if o == nil || IsNil(o.Credentials.Get()) {
-		var ret ChorusProCredentials
+		var ret FactureElectroniqueRestApiSchemasChorusProChorusProCredentials
 		return ret
 	}
 	return *o.Credentials.Get()
@@ -65,7 +65,7 @@ func (o *GetStructureRequest) GetCredentials() ChorusProCredentials {
 // GetCredentialsOk returns a tuple with the Credentials field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GetStructureRequest) GetCredentialsOk() (*ChorusProCredentials, bool) {
+func (o *GetStructureRequest) GetCredentialsOk() (*FactureElectroniqueRestApiSchemasChorusProChorusProCredentials, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -81,8 +81,8 @@ func (o *GetStructureRequest) HasCredentials() bool {
 	return false
 }
 
-// SetCredentials gets a reference to the given NullableChorusProCredentials and assigns it to the Credentials field.
-func (o *GetStructureRequest) SetCredentials(v ChorusProCredentials) {
+// SetCredentials gets a reference to the given NullableFactureElectroniqueRestApiSchemasChorusProChorusProCredentials and assigns it to the Credentials field.
+func (o *GetStructureRequest) SetCredentials(v FactureElectroniqueRestApiSchemasChorusProChorusProCredentials) {
 	o.Credentials.Set(&v)
 }
 // SetCredentialsNil sets the value for Credentials to be an explicit nil

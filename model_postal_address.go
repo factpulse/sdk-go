@@ -20,13 +20,13 @@ var _ MappedNullable = &PostalAddress{}
 
 // PostalAddress Represents a postal address (BG-5, BG-8, BG-12, BG-15).
 type PostalAddress struct {
-	PostalCode NullableString `json:"postalCode,omitempty"`
-	LineOne NullableString `json:"lineOne,omitempty"`
-	LineTwo NullableString `json:"lineTwo,omitempty"`
-	LineThree NullableString `json:"lineThree,omitempty"`
+	PostalCode NullableString `json:"postal_code,omitempty"`
+	LineOne NullableString `json:"line_one,omitempty"`
+	LineTwo NullableString `json:"line_two,omitempty"`
+	LineThree NullableString `json:"line_three,omitempty"`
 	City NullableString `json:"city,omitempty"`
-	CountryCode NullableString `json:"countryCode,omitempty"`
-	CountrySubdivision NullableString `json:"countrySubdivision,omitempty"`
+	CountryCode NullableString `json:"country_code,omitempty"`
+	CountrySubdivision NullableString `json:"country_subdivision,omitempty"`
 }
 
 // NewPostalAddress instantiates a new PostalAddress object
@@ -351,25 +351,25 @@ func (o PostalAddress) MarshalJSON() ([]byte, error) {
 func (o PostalAddress) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.PostalCode.IsSet() {
-		toSerialize["postalCode"] = o.PostalCode.Get()
+		toSerialize["postal_code"] = o.PostalCode.Get()
 	}
 	if o.LineOne.IsSet() {
-		toSerialize["lineOne"] = o.LineOne.Get()
+		toSerialize["line_one"] = o.LineOne.Get()
 	}
 	if o.LineTwo.IsSet() {
-		toSerialize["lineTwo"] = o.LineTwo.Get()
+		toSerialize["line_two"] = o.LineTwo.Get()
 	}
 	if o.LineThree.IsSet() {
-		toSerialize["lineThree"] = o.LineThree.Get()
+		toSerialize["line_three"] = o.LineThree.Get()
 	}
 	if o.City.IsSet() {
 		toSerialize["city"] = o.City.Get()
 	}
 	if o.CountryCode.IsSet() {
-		toSerialize["countryCode"] = o.CountryCode.Get()
+		toSerialize["country_code"] = o.CountryCode.Get()
 	}
 	if o.CountrySubdivision.IsSet() {
-		toSerialize["countrySubdivision"] = o.CountrySubdivision.Get()
+		toSerialize["country_subdivision"] = o.CountrySubdivision.Get()
 	}
 	return toSerialize, nil
 }

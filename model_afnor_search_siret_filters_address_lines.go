@@ -20,7 +20,7 @@ var _ MappedNullable = &AFNORSearchSiretFiltersAddressLines{}
 
 // AFNORSearchSiretFiltersAddressLines struct for AFNORSearchSiretFiltersAddressLines
 type AFNORSearchSiretFiltersAddressLines struct {
-	Op *AFNORContainsOperator `json:"op,omitempty"`
+	Op *AFNORContainsOrStartWithOperator `json:"op,omitempty"`
 	// address lines of the recipient structure having defined the directory line(s).
 	Value *string `json:"value,omitempty"`
 }
@@ -43,9 +43,9 @@ func NewAFNORSearchSiretFiltersAddressLinesWithDefaults() *AFNORSearchSiretFilte
 }
 
 // GetOp returns the Op field value if set, zero value otherwise.
-func (o *AFNORSearchSiretFiltersAddressLines) GetOp() AFNORContainsOperator {
+func (o *AFNORSearchSiretFiltersAddressLines) GetOp() AFNORContainsOrStartWithOperator {
 	if o == nil || IsNil(o.Op) {
-		var ret AFNORContainsOperator
+		var ret AFNORContainsOrStartWithOperator
 		return ret
 	}
 	return *o.Op
@@ -53,7 +53,7 @@ func (o *AFNORSearchSiretFiltersAddressLines) GetOp() AFNORContainsOperator {
 
 // GetOpOk returns a tuple with the Op field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AFNORSearchSiretFiltersAddressLines) GetOpOk() (*AFNORContainsOperator, bool) {
+func (o *AFNORSearchSiretFiltersAddressLines) GetOpOk() (*AFNORContainsOrStartWithOperator, bool) {
 	if o == nil || IsNil(o.Op) {
 		return nil, false
 	}
@@ -69,8 +69,8 @@ func (o *AFNORSearchSiretFiltersAddressLines) HasOp() bool {
 	return false
 }
 
-// SetOp gets a reference to the given AFNORContainsOperator and assigns it to the Op field.
-func (o *AFNORSearchSiretFiltersAddressLines) SetOp(v AFNORContainsOperator) {
+// SetOp gets a reference to the given AFNORContainsOrStartWithOperator and assigns it to the Op field.
+func (o *AFNORSearchSiretFiltersAddressLines) SetOp(v AFNORContainsOrStartWithOperator) {
 	o.Op = &v
 }
 

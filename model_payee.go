@@ -27,10 +27,10 @@ type Payee struct {
 	PayeeId NullableString `json:"payeeId,omitempty"`
 	Siret NullableString `json:"siret,omitempty" validate:"regexp=^\\\\d{14}$"`
 	Siren NullableString `json:"siren,omitempty" validate:"regexp=^\\\\d{9}$"`
-	ElectronicAddress NullableElectronicAddress `json:"electronicAddress,omitempty"`
+	ElectronicAddress NullableElectronicAddressInput `json:"electronicAddress,omitempty"`
 	Iban NullableString `json:"iban,omitempty"`
 	Bic NullableString `json:"bic,omitempty"`
-	GlobalIds []ElectronicAddress `json:"global_ids,omitempty"`
+	GlobalIds []ElectronicAddressInput `json:"global_ids,omitempty"`
 }
 
 type _Payee Payee
@@ -204,9 +204,9 @@ func (o *Payee) UnsetSiren() {
 }
 
 // GetElectronicAddress returns the ElectronicAddress field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Payee) GetElectronicAddress() ElectronicAddress {
+func (o *Payee) GetElectronicAddress() ElectronicAddressInput {
 	if o == nil || IsNil(o.ElectronicAddress.Get()) {
-		var ret ElectronicAddress
+		var ret ElectronicAddressInput
 		return ret
 	}
 	return *o.ElectronicAddress.Get()
@@ -215,7 +215,7 @@ func (o *Payee) GetElectronicAddress() ElectronicAddress {
 // GetElectronicAddressOk returns a tuple with the ElectronicAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Payee) GetElectronicAddressOk() (*ElectronicAddress, bool) {
+func (o *Payee) GetElectronicAddressOk() (*ElectronicAddressInput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -231,8 +231,8 @@ func (o *Payee) HasElectronicAddress() bool {
 	return false
 }
 
-// SetElectronicAddress gets a reference to the given NullableElectronicAddress and assigns it to the ElectronicAddress field.
-func (o *Payee) SetElectronicAddress(v ElectronicAddress) {
+// SetElectronicAddress gets a reference to the given NullableElectronicAddressInput and assigns it to the ElectronicAddress field.
+func (o *Payee) SetElectronicAddress(v ElectronicAddressInput) {
 	o.ElectronicAddress.Set(&v)
 }
 // SetElectronicAddressNil sets the value for ElectronicAddress to be an explicit nil
@@ -330,9 +330,9 @@ func (o *Payee) UnsetBic() {
 }
 
 // GetGlobalIds returns the GlobalIds field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Payee) GetGlobalIds() []ElectronicAddress {
+func (o *Payee) GetGlobalIds() []ElectronicAddressInput {
 	if o == nil {
-		var ret []ElectronicAddress
+		var ret []ElectronicAddressInput
 		return ret
 	}
 	return o.GlobalIds
@@ -341,7 +341,7 @@ func (o *Payee) GetGlobalIds() []ElectronicAddress {
 // GetGlobalIdsOk returns a tuple with the GlobalIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Payee) GetGlobalIdsOk() ([]ElectronicAddress, bool) {
+func (o *Payee) GetGlobalIdsOk() ([]ElectronicAddressInput, bool) {
 	if o == nil || IsNil(o.GlobalIds) {
 		return nil, false
 	}
@@ -357,8 +357,8 @@ func (o *Payee) HasGlobalIds() bool {
 	return false
 }
 
-// SetGlobalIds gets a reference to the given []ElectronicAddress and assigns it to the GlobalIds field.
-func (o *Payee) SetGlobalIds(v []ElectronicAddress) {
+// SetGlobalIds gets a reference to the given []ElectronicAddressInput and assigns it to the GlobalIds field.
+func (o *Payee) SetGlobalIds(v []ElectronicAddressInput) {
 	o.GlobalIds = v
 }
 

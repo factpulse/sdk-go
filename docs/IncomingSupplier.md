@@ -8,8 +8,9 @@ Name | Type | Description | Notes
 **Siren** | Pointer to **NullableString** |  | [optional] 
 **Siret** | Pointer to **NullableString** |  | [optional] 
 **VatNumber** | Pointer to **NullableString** |  | [optional] 
-**PostalAddress** | Pointer to [**NullablePostalAddress**](PostalAddress.md) |  | [optional] 
-**ElectronicAddress** | Pointer to [**NullableElectronicAddress**](ElectronicAddress.md) |  | [optional] 
+**TaxRegistrationId** | Pointer to **NullableString** |  | [optional] 
+**PostalAddress** | Pointer to [**NullablePostalAddressOutput**](PostalAddressOutput.md) |  | [optional] 
+**ElectronicAddress** | Pointer to [**NullableElectronicAddressOutput**](ElectronicAddressOutput.md) |  | [optional] 
 **Email** | Pointer to **NullableString** |  | [optional] 
 **Phone** | Pointer to **NullableString** |  | [optional] 
 
@@ -157,22 +158,57 @@ HasVatNumber returns a boolean if a field has been set.
 `func (o *IncomingSupplier) UnsetVatNumber()`
 
 UnsetVatNumber ensures that no value is present for VatNumber, not even an explicit nil
+### GetTaxRegistrationId
+
+`func (o *IncomingSupplier) GetTaxRegistrationId() string`
+
+GetTaxRegistrationId returns the TaxRegistrationId field if non-nil, zero value otherwise.
+
+### GetTaxRegistrationIdOk
+
+`func (o *IncomingSupplier) GetTaxRegistrationIdOk() (*string, bool)`
+
+GetTaxRegistrationIdOk returns a tuple with the TaxRegistrationId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaxRegistrationId
+
+`func (o *IncomingSupplier) SetTaxRegistrationId(v string)`
+
+SetTaxRegistrationId sets TaxRegistrationId field to given value.
+
+### HasTaxRegistrationId
+
+`func (o *IncomingSupplier) HasTaxRegistrationId() bool`
+
+HasTaxRegistrationId returns a boolean if a field has been set.
+
+### SetTaxRegistrationIdNil
+
+`func (o *IncomingSupplier) SetTaxRegistrationIdNil(b bool)`
+
+ SetTaxRegistrationIdNil sets the value for TaxRegistrationId to be an explicit nil
+
+### UnsetTaxRegistrationId
+`func (o *IncomingSupplier) UnsetTaxRegistrationId()`
+
+UnsetTaxRegistrationId ensures that no value is present for TaxRegistrationId, not even an explicit nil
 ### GetPostalAddress
 
-`func (o *IncomingSupplier) GetPostalAddress() PostalAddress`
+`func (o *IncomingSupplier) GetPostalAddress() PostalAddressOutput`
 
 GetPostalAddress returns the PostalAddress field if non-nil, zero value otherwise.
 
 ### GetPostalAddressOk
 
-`func (o *IncomingSupplier) GetPostalAddressOk() (*PostalAddress, bool)`
+`func (o *IncomingSupplier) GetPostalAddressOk() (*PostalAddressOutput, bool)`
 
 GetPostalAddressOk returns a tuple with the PostalAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPostalAddress
 
-`func (o *IncomingSupplier) SetPostalAddress(v PostalAddress)`
+`func (o *IncomingSupplier) SetPostalAddress(v PostalAddressOutput)`
 
 SetPostalAddress sets PostalAddress field to given value.
 
@@ -194,20 +230,20 @@ HasPostalAddress returns a boolean if a field has been set.
 UnsetPostalAddress ensures that no value is present for PostalAddress, not even an explicit nil
 ### GetElectronicAddress
 
-`func (o *IncomingSupplier) GetElectronicAddress() ElectronicAddress`
+`func (o *IncomingSupplier) GetElectronicAddress() ElectronicAddressOutput`
 
 GetElectronicAddress returns the ElectronicAddress field if non-nil, zero value otherwise.
 
 ### GetElectronicAddressOk
 
-`func (o *IncomingSupplier) GetElectronicAddressOk() (*ElectronicAddress, bool)`
+`func (o *IncomingSupplier) GetElectronicAddressOk() (*ElectronicAddressOutput, bool)`
 
 GetElectronicAddressOk returns a tuple with the ElectronicAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetElectronicAddress
 
-`func (o *IncomingSupplier) SetElectronicAddress(v ElectronicAddress)`
+`func (o *IncomingSupplier) SetElectronicAddress(v ElectronicAddressOutput)`
 
 SetElectronicAddress sets ElectronicAddress field to given value.
 

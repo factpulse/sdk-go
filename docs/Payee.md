@@ -8,10 +8,10 @@ Name | Type | Description | Notes
 **PayeeId** | Pointer to **NullableString** |  | [optional] 
 **Siret** | Pointer to **NullableString** |  | [optional] 
 **Siren** | Pointer to **NullableString** |  | [optional] 
-**ElectronicAddress** | Pointer to [**NullableElectronicAddress**](ElectronicAddress.md) |  | [optional] 
+**ElectronicAddress** | Pointer to [**NullableElectronicAddressInput**](ElectronicAddressInput.md) |  | [optional] 
 **Iban** | Pointer to **NullableString** |  | [optional] 
 **Bic** | Pointer to **NullableString** |  | [optional] 
-**GlobalIds** | Pointer to [**[]ElectronicAddress**](ElectronicAddress.md) |  | [optional] 
+**GlobalIds** | Pointer to [**[]ElectronicAddressInput**](ElectronicAddressInput.md) |  | [optional] 
 
 ## Methods
 
@@ -159,20 +159,20 @@ HasSiren returns a boolean if a field has been set.
 UnsetSiren ensures that no value is present for Siren, not even an explicit nil
 ### GetElectronicAddress
 
-`func (o *Payee) GetElectronicAddress() ElectronicAddress`
+`func (o *Payee) GetElectronicAddress() ElectronicAddressInput`
 
 GetElectronicAddress returns the ElectronicAddress field if non-nil, zero value otherwise.
 
 ### GetElectronicAddressOk
 
-`func (o *Payee) GetElectronicAddressOk() (*ElectronicAddress, bool)`
+`func (o *Payee) GetElectronicAddressOk() (*ElectronicAddressInput, bool)`
 
 GetElectronicAddressOk returns a tuple with the ElectronicAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetElectronicAddress
 
-`func (o *Payee) SetElectronicAddress(v ElectronicAddress)`
+`func (o *Payee) SetElectronicAddress(v ElectronicAddressInput)`
 
 SetElectronicAddress sets ElectronicAddress field to given value.
 
@@ -264,20 +264,20 @@ HasBic returns a boolean if a field has been set.
 UnsetBic ensures that no value is present for Bic, not even an explicit nil
 ### GetGlobalIds
 
-`func (o *Payee) GetGlobalIds() []ElectronicAddress`
+`func (o *Payee) GetGlobalIds() []ElectronicAddressInput`
 
 GetGlobalIds returns the GlobalIds field if non-nil, zero value otherwise.
 
 ### GetGlobalIdsOk
 
-`func (o *Payee) GetGlobalIdsOk() (*[]ElectronicAddress, bool)`
+`func (o *Payee) GetGlobalIdsOk() (*[]ElectronicAddressInput, bool)`
 
 GetGlobalIdsOk returns a tuple with the GlobalIds field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetGlobalIds
 
-`func (o *Payee) SetGlobalIds(v []ElectronicAddress)`
+`func (o *Payee) SetGlobalIds(v []ElectronicAddressInput)`
 
 SetGlobalIds sets GlobalIds field to given value.
 

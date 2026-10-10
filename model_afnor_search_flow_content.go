@@ -20,7 +20,10 @@ var _ MappedNullable = &AFNORSearchFlowContent{}
 
 // AFNORSearchFlowContent A set of flows matching criterias, provided into the request
 type AFNORSearchFlowContent struct {
+	// Pagination, Maximum number of results that may be returned
 	Limit *int32 `json:"limit,omitempty"`
+	// Pagination management: - If present, says where to start for next page, set nextCursor as the cursor in the next request - If omitted, says that pagination is finished 
+	NextCursor *string `json:"nextCursor,omitempty"`
 	Filters *AFNORSearchFlowFilters `json:"filters,omitempty"`
 	Results []AFNORFlow `json:"results,omitempty"`
 }
@@ -31,6 +34,8 @@ type AFNORSearchFlowContent struct {
 // will change when the set of required properties is changed
 func NewAFNORSearchFlowContent() *AFNORSearchFlowContent {
 	this := AFNORSearchFlowContent{}
+	var limit int32 = 25
+	this.Limit = &limit
 	return &this
 }
 
@@ -39,6 +44,8 @@ func NewAFNORSearchFlowContent() *AFNORSearchFlowContent {
 // but it doesn't guarantee that properties required by API are set
 func NewAFNORSearchFlowContentWithDefaults() *AFNORSearchFlowContent {
 	this := AFNORSearchFlowContent{}
+	var limit int32 = 25
+	this.Limit = &limit
 	return &this
 }
 
@@ -72,6 +79,38 @@ func (o *AFNORSearchFlowContent) HasLimit() bool {
 // SetLimit gets a reference to the given int32 and assigns it to the Limit field.
 func (o *AFNORSearchFlowContent) SetLimit(v int32) {
 	o.Limit = &v
+}
+
+// GetNextCursor returns the NextCursor field value if set, zero value otherwise.
+func (o *AFNORSearchFlowContent) GetNextCursor() string {
+	if o == nil || IsNil(o.NextCursor) {
+		var ret string
+		return ret
+	}
+	return *o.NextCursor
+}
+
+// GetNextCursorOk returns a tuple with the NextCursor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AFNORSearchFlowContent) GetNextCursorOk() (*string, bool) {
+	if o == nil || IsNil(o.NextCursor) {
+		return nil, false
+	}
+	return o.NextCursor, true
+}
+
+// HasNextCursor returns a boolean if a field has been set.
+func (o *AFNORSearchFlowContent) HasNextCursor() bool {
+	if o != nil && !IsNil(o.NextCursor) {
+		return true
+	}
+
+	return false
+}
+
+// SetNextCursor gets a reference to the given string and assigns it to the NextCursor field.
+func (o *AFNORSearchFlowContent) SetNextCursor(v string) {
+	o.NextCursor = &v
 }
 
 // GetFilters returns the Filters field value if set, zero value otherwise.
@@ -150,6 +189,9 @@ func (o AFNORSearchFlowContent) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Limit) {
 		toSerialize["limit"] = o.Limit
+	}
+	if !IsNil(o.NextCursor) {
+		toSerialize["nextCursor"] = o.NextCursor
 	}
 	if !IsNil(o.Filters) {
 		toSerialize["filters"] = o.Filters

@@ -21,9 +21,9 @@ var _ MappedNullable = &DeliveryParty{}
 // DeliveryParty Delivery location information (BG-15 Deliver to).  Represents the party or location where goods/services are delivered.
 type DeliveryParty struct {
 	Id NullableString `json:"id,omitempty"`
-	GlobalId NullableElectronicAddress `json:"global_id,omitempty"`
+	GlobalId NullableElectronicAddressInput `json:"global_id,omitempty"`
 	Name NullableString `json:"name,omitempty"`
-	PostalAddress NullablePostalAddress `json:"postal_address,omitempty"`
+	PostalAddress NullablePostalAddressInput `json:"postal_address,omitempty"`
 }
 
 // NewDeliveryParty instantiates a new DeliveryParty object
@@ -86,9 +86,9 @@ func (o *DeliveryParty) UnsetId() {
 }
 
 // GetGlobalId returns the GlobalId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *DeliveryParty) GetGlobalId() ElectronicAddress {
+func (o *DeliveryParty) GetGlobalId() ElectronicAddressInput {
 	if o == nil || IsNil(o.GlobalId.Get()) {
-		var ret ElectronicAddress
+		var ret ElectronicAddressInput
 		return ret
 	}
 	return *o.GlobalId.Get()
@@ -97,7 +97,7 @@ func (o *DeliveryParty) GetGlobalId() ElectronicAddress {
 // GetGlobalIdOk returns a tuple with the GlobalId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *DeliveryParty) GetGlobalIdOk() (*ElectronicAddress, bool) {
+func (o *DeliveryParty) GetGlobalIdOk() (*ElectronicAddressInput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -113,8 +113,8 @@ func (o *DeliveryParty) HasGlobalId() bool {
 	return false
 }
 
-// SetGlobalId gets a reference to the given NullableElectronicAddress and assigns it to the GlobalId field.
-func (o *DeliveryParty) SetGlobalId(v ElectronicAddress) {
+// SetGlobalId gets a reference to the given NullableElectronicAddressInput and assigns it to the GlobalId field.
+func (o *DeliveryParty) SetGlobalId(v ElectronicAddressInput) {
 	o.GlobalId.Set(&v)
 }
 // SetGlobalIdNil sets the value for GlobalId to be an explicit nil
@@ -170,9 +170,9 @@ func (o *DeliveryParty) UnsetName() {
 }
 
 // GetPostalAddress returns the PostalAddress field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *DeliveryParty) GetPostalAddress() PostalAddress {
+func (o *DeliveryParty) GetPostalAddress() PostalAddressInput {
 	if o == nil || IsNil(o.PostalAddress.Get()) {
-		var ret PostalAddress
+		var ret PostalAddressInput
 		return ret
 	}
 	return *o.PostalAddress.Get()
@@ -181,7 +181,7 @@ func (o *DeliveryParty) GetPostalAddress() PostalAddress {
 // GetPostalAddressOk returns a tuple with the PostalAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *DeliveryParty) GetPostalAddressOk() (*PostalAddress, bool) {
+func (o *DeliveryParty) GetPostalAddressOk() (*PostalAddressInput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -197,8 +197,8 @@ func (o *DeliveryParty) HasPostalAddress() bool {
 	return false
 }
 
-// SetPostalAddress gets a reference to the given NullablePostalAddress and assigns it to the PostalAddress field.
-func (o *DeliveryParty) SetPostalAddress(v PostalAddress) {
+// SetPostalAddress gets a reference to the given NullablePostalAddressInput and assigns it to the PostalAddress field.
+func (o *DeliveryParty) SetPostalAddress(v PostalAddressInput) {
 	o.PostalAddress.Set(&v)
 }
 // SetPostalAddressNil sets the value for PostalAddress to be an explicit nil

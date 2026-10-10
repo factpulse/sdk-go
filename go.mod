@@ -1,4 +1,4 @@
-module github.com/factpulse/sdk-go/v3
+module github.com/factpulse/sdk-go/v4
 
 go 1.22
 

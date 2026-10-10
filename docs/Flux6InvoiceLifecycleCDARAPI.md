@@ -36,7 +36,7 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -102,7 +102,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -148,7 +148,7 @@ No authorization required
 
 ## GetLifecycleApiV1CdarLifecycleGet
 
-> LifecycleResponse GetLifecycleApiV1CdarLifecycleGet(ctx).Days(days).InvoiceId(invoiceId).PdpFlowServiceUrl(pdpFlowServiceUrl).PdpTokenUrl(pdpTokenUrl).PdpClientId(pdpClientId).PdpClientSecret(pdpClientSecret).Execute()
+> LifecycleResponse GetLifecycleApiV1CdarLifecycleGet(ctx).Days(days).InvoiceId(invoiceId).FlowDirection(flowDirection).PdpFlowServiceUrl(pdpFlowServiceUrl).PdpTokenUrl(pdpTokenUrl).PdpClientId(pdpClientId).PdpClientSecret(pdpClientSecret).OrganizationId(organizationId).Execute()
 
 [Simplified] Get lifecycle events for invoices
 
@@ -163,20 +163,22 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
 	days := int32(56) // int32 | Number of days to look back (optional) (default to 7)
 	invoiceId := "invoiceId_example" // string | Filter by invoice reference (optional)
+	flowDirection := "flowDirection_example" // string | All (default), In (received statuses) or Out (issued statuses) (optional) (default to "All")
 	pdpFlowServiceUrl := "pdpFlowServiceUrl_example" // string | PDP Flow Service URL (optional)
 	pdpTokenUrl := "pdpTokenUrl_example" // string | PDP OAuth token URL (optional)
 	pdpClientId := "pdpClientId_example" // string | PDP Client ID (optional)
 	pdpClientSecret := "pdpClientSecret_example" // string | PDP Client Secret (optional)
+	organizationId := "organizationId_example" // string | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.Flux6InvoiceLifecycleCDARAPI.GetLifecycleApiV1CdarLifecycleGet(context.Background()).Days(days).InvoiceId(invoiceId).PdpFlowServiceUrl(pdpFlowServiceUrl).PdpTokenUrl(pdpTokenUrl).PdpClientId(pdpClientId).PdpClientSecret(pdpClientSecret).Execute()
+	resp, r, err := apiClient.Flux6InvoiceLifecycleCDARAPI.GetLifecycleApiV1CdarLifecycleGet(context.Background()).Days(days).InvoiceId(invoiceId).FlowDirection(flowDirection).PdpFlowServiceUrl(pdpFlowServiceUrl).PdpTokenUrl(pdpTokenUrl).PdpClientId(pdpClientId).PdpClientSecret(pdpClientSecret).OrganizationId(organizationId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `Flux6InvoiceLifecycleCDARAPI.GetLifecycleApiV1CdarLifecycleGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -199,10 +201,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **days** | **int32** | Number of days to look back | [default to 7]
  **invoiceId** | **string** | Filter by invoice reference | 
+ **flowDirection** | **string** | All (default), In (received statuses) or Out (issued statuses) | [default to &quot;All&quot;]
  **pdpFlowServiceUrl** | **string** | PDP Flow Service URL | 
  **pdpTokenUrl** | **string** | PDP OAuth token URL | 
  **pdpClientId** | **string** | PDP Client ID | 
  **pdpClientSecret** | **string** | PDP Client Secret | 
+ **organizationId** | **string** | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. | 
 
 ### Return type
 
@@ -239,7 +243,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -300,7 +304,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -346,7 +350,7 @@ No authorization required
 
 ## SubmitCdarApiV1CdarSubmitPost
 
-> SubmitCDARResponse SubmitCdarApiV1CdarSubmitPost(ctx).SubmitCDARRequest(submitCDARRequest).Execute()
+> SubmitCDARResponse SubmitCdarApiV1CdarSubmitPost(ctx).SubmitCDARRequest(submitCDARRequest).OrganizationId(organizationId).Execute()
 
 Generate and submit a CDAR message
 
@@ -362,15 +366,16 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
 	submitCDARRequest := *openapiclient.NewSubmitCDARRequest("DocumentId_example", "SenderSiren_example", "InvoiceId_example", time.Now(), "Status_example") // SubmitCDARRequest | 
+	organizationId := "organizationId_example" // string | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.Flux6InvoiceLifecycleCDARAPI.SubmitCdarApiV1CdarSubmitPost(context.Background()).SubmitCDARRequest(submitCDARRequest).Execute()
+	resp, r, err := apiClient.Flux6InvoiceLifecycleCDARAPI.SubmitCdarApiV1CdarSubmitPost(context.Background()).SubmitCDARRequest(submitCDARRequest).OrganizationId(organizationId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `Flux6InvoiceLifecycleCDARAPI.SubmitCdarApiV1CdarSubmitPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -392,6 +397,7 @@ Other parameters are passed through a pointer to a apiSubmitCdarApiV1CdarSubmitP
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **submitCDARRequest** | [**SubmitCDARRequest**](SubmitCDARRequest.md) |  | 
+ **organizationId** | **string** | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. | 
 
 ### Return type
 
@@ -413,7 +419,7 @@ Name | Type | Description  | Notes
 
 ## SubmitCdarXmlApiV1CdarSubmitXmlPost
 
-> SubmitCDARResponse SubmitCdarXmlApiV1CdarSubmitXmlPost(ctx).SubmitCDARXMLRequest(submitCDARXMLRequest).Execute()
+> SubmitCDARResponse SubmitCdarXmlApiV1CdarSubmitXmlPost(ctx).SubmitCDARXMLRequest(submitCDARXMLRequest).OrganizationId(organizationId).Execute()
 
 Submit a pre-generated CDAR XML
 
@@ -428,15 +434,16 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
 	submitCDARXMLRequest := *openapiclient.NewSubmitCDARXMLRequest("Xml_example") // SubmitCDARXMLRequest | 
+	organizationId := "organizationId_example" // string | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.Flux6InvoiceLifecycleCDARAPI.SubmitCdarXmlApiV1CdarSubmitXmlPost(context.Background()).SubmitCDARXMLRequest(submitCDARXMLRequest).Execute()
+	resp, r, err := apiClient.Flux6InvoiceLifecycleCDARAPI.SubmitCdarXmlApiV1CdarSubmitXmlPost(context.Background()).SubmitCDARXMLRequest(submitCDARXMLRequest).OrganizationId(organizationId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `Flux6InvoiceLifecycleCDARAPI.SubmitCdarXmlApiV1CdarSubmitXmlPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -458,6 +465,7 @@ Other parameters are passed through a pointer to a apiSubmitCdarXmlApiV1CdarSubm
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **submitCDARXMLRequest** | [**SubmitCDARXMLRequest**](SubmitCDARXMLRequest.md) |  | 
+ **organizationId** | **string** | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. | 
 
 ### Return type
 
@@ -479,7 +487,7 @@ Name | Type | Description  | Notes
 
 ## SubmitEncaisseeApiV1CdarEncaisseePost
 
-> SimplifiedCDARResponse SubmitEncaisseeApiV1CdarEncaisseePost(ctx).EncaisseeRequest(encaisseeRequest).Execute()
+> SimplifiedCDARResponse SubmitEncaisseeApiV1CdarEncaisseePost(ctx).EncaisseeRequest(encaisseeRequest).OrganizationId(organizationId).Execute()
 
 [Simplified] Submit PAID status (212) - Issued invoice
 
@@ -495,15 +503,16 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
-	encaisseeRequest := *openapiclient.NewEncaisseeRequest("InvoiceId_example", time.Now(), "InvoiceBuyerSiren_example", "InvoiceBuyerElectronicAddress_example", *openapiclient.NewAmount()) // EncaisseeRequest | 
+	encaisseeRequest := *openapiclient.NewEncaisseeRequest("InvoiceId_example", time.Now(), "InvoiceBuyerSiren_example", "InvoiceBuyerElectronicAddress_example", *openapiclient.NewAmount1()) // EncaisseeRequest | 
+	organizationId := "organizationId_example" // string | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.Flux6InvoiceLifecycleCDARAPI.SubmitEncaisseeApiV1CdarEncaisseePost(context.Background()).EncaisseeRequest(encaisseeRequest).Execute()
+	resp, r, err := apiClient.Flux6InvoiceLifecycleCDARAPI.SubmitEncaisseeApiV1CdarEncaisseePost(context.Background()).EncaisseeRequest(encaisseeRequest).OrganizationId(organizationId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `Flux6InvoiceLifecycleCDARAPI.SubmitEncaisseeApiV1CdarEncaisseePost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -525,6 +534,7 @@ Other parameters are passed through a pointer to a apiSubmitEncaisseeApiV1CdarEn
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **encaisseeRequest** | [**EncaisseeRequest**](EncaisseeRequest.md) |  | 
+ **organizationId** | **string** | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. | 
 
 ### Return type
 
@@ -546,7 +556,7 @@ Name | Type | Description  | Notes
 
 ## SubmitRefuseeApiV1CdarRefuseePost
 
-> SimplifiedCDARResponse SubmitRefuseeApiV1CdarRefuseePost(ctx).RefuseeRequest(refuseeRequest).Execute()
+> SimplifiedCDARResponse SubmitRefuseeApiV1CdarRefuseePost(ctx).RefuseeRequest(refuseeRequest).OrganizationId(organizationId).Execute()
 
 [Simplified] Submit REFUSED status (210) - Received invoice
 
@@ -562,15 +572,16 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
 	refuseeRequest := *openapiclient.NewRefuseeRequest("InvoiceId_example", time.Now(), "InvoiceSellerSiren_example", "InvoiceSellerElectronicAddress_example", "ReasonCode_example") // RefuseeRequest | 
+	organizationId := "organizationId_example" // string | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.Flux6InvoiceLifecycleCDARAPI.SubmitRefuseeApiV1CdarRefuseePost(context.Background()).RefuseeRequest(refuseeRequest).Execute()
+	resp, r, err := apiClient.Flux6InvoiceLifecycleCDARAPI.SubmitRefuseeApiV1CdarRefuseePost(context.Background()).RefuseeRequest(refuseeRequest).OrganizationId(organizationId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `Flux6InvoiceLifecycleCDARAPI.SubmitRefuseeApiV1CdarRefuseePost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -592,6 +603,7 @@ Other parameters are passed through a pointer to a apiSubmitRefuseeApiV1CdarRefu
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **refuseeRequest** | [**RefuseeRequest**](RefuseeRequest.md) |  | 
+ **organizationId** | **string** | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. | 
 
 ### Return type
 
@@ -628,7 +640,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
@@ -694,7 +706,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/factpulse/sdk-go/v3"
+	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {

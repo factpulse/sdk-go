@@ -20,15 +20,15 @@ var _ MappedNullable = &Recipient{}
 
 // Recipient Information about the invoice recipient / buyer (BG-7).
 type Recipient struct {
-	ElectronicAddress NullableElectronicAddress `json:"electronic_address,omitempty"`
+	ElectronicAddress NullableElectronicAddressInput `json:"electronic_address,omitempty"`
 	ExecutingServiceCode NullableString `json:"executing_service_code,omitempty"`
 	Name NullableString `json:"name,omitempty"`
 	Siren NullableString `json:"siren,omitempty"`
 	Siret NullableString `json:"siret,omitempty"`
 	VatNumber NullableString `json:"vat_number,omitempty"`
-	PostalAddress NullablePostalAddress `json:"postal_address,omitempty"`
+	PostalAddress NullablePostalAddressInput `json:"postal_address,omitempty"`
 	Contact NullableContact `json:"contact,omitempty"`
-	GlobalIds []ElectronicAddress `json:"global_ids,omitempty"`
+	GlobalIds []ElectronicAddressInput `json:"global_ids,omitempty"`
 }
 
 // NewRecipient instantiates a new Recipient object
@@ -49,9 +49,9 @@ func NewRecipientWithDefaults() *Recipient {
 }
 
 // GetElectronicAddress returns the ElectronicAddress field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Recipient) GetElectronicAddress() ElectronicAddress {
+func (o *Recipient) GetElectronicAddress() ElectronicAddressInput {
 	if o == nil || IsNil(o.ElectronicAddress.Get()) {
-		var ret ElectronicAddress
+		var ret ElectronicAddressInput
 		return ret
 	}
 	return *o.ElectronicAddress.Get()
@@ -60,7 +60,7 @@ func (o *Recipient) GetElectronicAddress() ElectronicAddress {
 // GetElectronicAddressOk returns a tuple with the ElectronicAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Recipient) GetElectronicAddressOk() (*ElectronicAddress, bool) {
+func (o *Recipient) GetElectronicAddressOk() (*ElectronicAddressInput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -76,8 +76,8 @@ func (o *Recipient) HasElectronicAddress() bool {
 	return false
 }
 
-// SetElectronicAddress gets a reference to the given NullableElectronicAddress and assigns it to the ElectronicAddress field.
-func (o *Recipient) SetElectronicAddress(v ElectronicAddress) {
+// SetElectronicAddress gets a reference to the given NullableElectronicAddressInput and assigns it to the ElectronicAddress field.
+func (o *Recipient) SetElectronicAddress(v ElectronicAddressInput) {
 	o.ElectronicAddress.Set(&v)
 }
 // SetElectronicAddressNil sets the value for ElectronicAddress to be an explicit nil
@@ -301,9 +301,9 @@ func (o *Recipient) UnsetVatNumber() {
 }
 
 // GetPostalAddress returns the PostalAddress field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Recipient) GetPostalAddress() PostalAddress {
+func (o *Recipient) GetPostalAddress() PostalAddressInput {
 	if o == nil || IsNil(o.PostalAddress.Get()) {
-		var ret PostalAddress
+		var ret PostalAddressInput
 		return ret
 	}
 	return *o.PostalAddress.Get()
@@ -312,7 +312,7 @@ func (o *Recipient) GetPostalAddress() PostalAddress {
 // GetPostalAddressOk returns a tuple with the PostalAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Recipient) GetPostalAddressOk() (*PostalAddress, bool) {
+func (o *Recipient) GetPostalAddressOk() (*PostalAddressInput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -328,8 +328,8 @@ func (o *Recipient) HasPostalAddress() bool {
 	return false
 }
 
-// SetPostalAddress gets a reference to the given NullablePostalAddress and assigns it to the PostalAddress field.
-func (o *Recipient) SetPostalAddress(v PostalAddress) {
+// SetPostalAddress gets a reference to the given NullablePostalAddressInput and assigns it to the PostalAddress field.
+func (o *Recipient) SetPostalAddress(v PostalAddressInput) {
 	o.PostalAddress.Set(&v)
 }
 // SetPostalAddressNil sets the value for PostalAddress to be an explicit nil
@@ -385,9 +385,9 @@ func (o *Recipient) UnsetContact() {
 }
 
 // GetGlobalIds returns the GlobalIds field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Recipient) GetGlobalIds() []ElectronicAddress {
+func (o *Recipient) GetGlobalIds() []ElectronicAddressInput {
 	if o == nil {
-		var ret []ElectronicAddress
+		var ret []ElectronicAddressInput
 		return ret
 	}
 	return o.GlobalIds
@@ -396,7 +396,7 @@ func (o *Recipient) GetGlobalIds() []ElectronicAddress {
 // GetGlobalIdsOk returns a tuple with the GlobalIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Recipient) GetGlobalIdsOk() ([]ElectronicAddress, bool) {
+func (o *Recipient) GetGlobalIdsOk() ([]ElectronicAddressInput, bool) {
 	if o == nil || IsNil(o.GlobalIds) {
 		return nil, false
 	}
@@ -412,8 +412,8 @@ func (o *Recipient) HasGlobalIds() bool {
 	return false
 }
 
-// SetGlobalIds gets a reference to the given []ElectronicAddress and assigns it to the GlobalIds field.
-func (o *Recipient) SetGlobalIds(v []ElectronicAddress) {
+// SetGlobalIds gets a reference to the given []ElectronicAddressInput and assigns it to the GlobalIds field.
+func (o *Recipient) SetGlobalIds(v []ElectronicAddressInput) {
 	o.GlobalIds = v
 }
 

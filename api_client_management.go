@@ -558,6 +558,138 @@ func (a *ClientManagementAPIService) DeleteWebhookSecretApiV1ClientsUidWebhookSe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteRequest struct {
+	ctx context.Context
+	ApiService *ClientManagementAPIService
+	uid string
+}
+
+func (r ApiDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteRequest) Execute() (*SuperPDPDisconnectResponse, *http.Response, error) {
+	return r.ApiService.DisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteExecute(r)
+}
+
+/*
+DisconnectSuperpdpApiV1ClientsUidSuperpdpDelete Disconnect SuperPDP
+
+Disconnect SuperPDP for a client.
+
+**Scope**: Client level (JWT with client_uid that must match {uid})
+
+Revokes the stored refresh token with SuperPDP (RFC 7009) and deletes the
+stored tokens. The client can reconnect later via the connect-url endpoint.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param uid Client unique identifier (UUID)
+ @return ApiDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteRequest
+*/
+func (a *ClientManagementAPIService) DisconnectSuperpdpApiV1ClientsUidSuperpdpDelete(ctx context.Context, uid string) ApiDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteRequest {
+	return ApiDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteRequest{
+		ApiService: a,
+		ctx: ctx,
+		uid: uid,
+	}
+}
+
+// Execute executes the request
+//  @return SuperPDPDisconnectResponse
+func (a *ClientManagementAPIService) DisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteExecute(r ApiDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteRequest) (*SuperPDPDisconnectResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *SuperPDPDisconnectResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ClientManagementAPIService.DisconnectSuperpdpApiV1ClientsUidSuperpdpDelete")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/clients/{uid}/superpdp"
+	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", url.PathEscape(parameterValueToString(r.uid, "uid")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostRequest struct {
 	ctx context.Context
 	ApiService *ClientManagementAPIService
@@ -876,6 +1008,308 @@ func (a *ClientManagementAPIService) GetPdpConfigApiV1ClientsUidPdpConfigGetExec
 	}
 
 	localVarPath := localBasePath + "/api/v1/clients/{uid}/pdp-config"
+	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", url.PathEscape(parameterValueToString(r.uid, "uid")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostRequest struct {
+	ctx context.Context
+	ApiService *ClientManagementAPIService
+	uid string
+	modeSandbox *bool
+	returnUrl *string
+}
+
+// True for the SuperPDP sandbox app (default), False for production
+func (r ApiGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostRequest) ModeSandbox(modeSandbox bool) ApiGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostRequest {
+	r.modeSandbox = &modeSandbox
+	return r
+}
+
+// Absolute http(s) URL to redirect the end user to once the SuperPDP connection is done. Defaults to the FactPulse confirmation page.
+func (r ApiGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostRequest) ReturnUrl(returnUrl string) ApiGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostRequest {
+	r.returnUrl = &returnUrl
+	return r
+}
+
+func (r ApiGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostRequest) Execute() (*SuperPDPConnectURLResponse, *http.Response, error) {
+	return r.ApiService.GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostExecute(r)
+}
+
+/*
+GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost Get SuperPDP connection URL
+
+Generate the SuperPDP OAuth2 authorization URL for a client.
+
+**Scope**: Client level (JWT with client_uid that must match {uid})
+
+Redirect the end user to the returned `authorizeUrl` so they can connect
+their own SuperPDP account to FactPulse (OAuth2 Authorization Code).
+
+**Query parameters**:
+- `modeSandbox` (default `true`): connect via the SuperPDP sandbox app
+  (fictitious data) or the production app.
+- `returnUrl` (optional): absolute http(s) URL of your own portal. Once the
+  SuperPDP authorization flow is over, the end user is redirected there with
+  `superpdp_connected=true|false` (and `superpdp_error=<code>` on failure)
+  appended to the query string. Without it, FactPulse displays its own
+  confirmation page. Returns `400 invalid_return_url` if the URL is not an
+  absolute http(s) URL.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param uid Client unique identifier (UUID)
+ @return ApiGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostRequest
+*/
+func (a *ClientManagementAPIService) GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost(ctx context.Context, uid string) ApiGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostRequest {
+	return ApiGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostRequest{
+		ApiService: a,
+		ctx: ctx,
+		uid: uid,
+	}
+}
+
+// Execute executes the request
+//  @return SuperPDPConnectURLResponse
+func (a *ClientManagementAPIService) GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostExecute(r ApiGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostRequest) (*SuperPDPConnectURLResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *SuperPDPConnectURLResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ClientManagementAPIService.GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/clients/{uid}/superpdp/connect-url"
+	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", url.PathEscape(parameterValueToString(r.uid, "uid")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.modeSandbox != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "modeSandbox", r.modeSandbox, "form", "")
+	} else {
+		var defaultValue bool = true
+		parameterAddToHeaderOrQuery(localVarQueryParams, "modeSandbox", defaultValue, "form", "")
+		r.modeSandbox = &defaultValue
+	}
+	if r.returnUrl != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "returnUrl", r.returnUrl, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetRequest struct {
+	ctx context.Context
+	ApiService *ClientManagementAPIService
+	uid string
+}
+
+func (r ApiGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetRequest) Execute() (*SuperPDPStatusResponse, *http.Response, error) {
+	return r.ApiService.GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetExecute(r)
+}
+
+/*
+GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet Get SuperPDP connection status
+
+Check whether a client has connected its SuperPDP account.
+
+**Scope**: Client level (JWT with client_uid that must match {uid})
+
+**Response**:
+- `connected`: Whether the client has an active SuperPDP connection
+- `connectedAt`: When the connection was established (if any)
+- `expiresAt`: When the current access token expires (if any)
+- `modeSandbox`: True if connected via the sandbox app, False for production, null if not connected
+- `lastError`: Last token refresh error, if any
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param uid Client unique identifier (UUID)
+ @return ApiGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetRequest
+*/
+func (a *ClientManagementAPIService) GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet(ctx context.Context, uid string) ApiGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetRequest {
+	return ApiGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetRequest{
+		ApiService: a,
+		ctx: ctx,
+		uid: uid,
+	}
+}
+
+// Execute executes the request
+//  @return SuperPDPStatusResponse
+func (a *ClientManagementAPIService) GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetExecute(r ApiGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetRequest) (*SuperPDPStatusResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *SuperPDPStatusResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ClientManagementAPIService.GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/clients/{uid}/superpdp/status"
 	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", url.PathEscape(parameterValueToString(r.uid, "uid")), -1)
 
 	localVarHeaderParams := make(map[string]string)

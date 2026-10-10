@@ -26,14 +26,9 @@ configuration.go
 docs/AFNORAcknowledgement.md
 docs/AFNORAcknowledgementDetail.md
 docs/AFNORAddressRead.md
-docs/AFNORAlgorithm.md
-docs/AFNORBasicAuthentication.md
-docs/AFNORCallbackAuthentication.md
-docs/AFNORCallbackHeader.md
-docs/AFNORCallbackParameters.md
-docs/AFNORCallbackSignature.md
-docs/AFNORContainsOperator.md
+docs/AFNORContainsOrStartWithOperator.md
 docs/AFNORContainsOrStrictOperator.md
+docs/AFNORContainsOrStrictOrStartWithOperator.md
 docs/AFNORCoreFlowInfo.md
 docs/AFNORCredentials.md
 docs/AFNORDestination.md
@@ -66,7 +61,6 @@ docs/AFNORHealthCheckResponse.md
 docs/AFNORLegalUnitAdministrativeStatus.md
 docs/AFNORLegalUnitPayloadHistory.md
 docs/AFNORLegalUnitPayloadIncluded.md
-docs/AFNOROAuth2Authentication.md
 docs/AFNORPDPPAAPI.md
 docs/AFNORPDPPADirectoryServiceAPI.md
 docs/AFNORPDPPAFlowServiceAPI.md
@@ -120,11 +114,10 @@ docs/AFNORSiretSearchPost200Response.md
 docs/AFNORSortingOrder.md
 docs/AFNORStrictOperator.md
 docs/AFNORStrictOrStartWithOperator.md
+docs/AFNORUniqueDirectoryLineStatus.md
 docs/AFNORWebhook.md
 docs/AFNORWebhookIdParam.md
-docs/AFNORWebhookMetadata.md
 docs/AFNORWebhookParams.md
-docs/AFNORWebhookPatchPayload.md
 docs/APIError.md
 docs/APIProfile.md
 docs/AcknowledgmentStatus.md
@@ -141,6 +134,7 @@ docs/Amount.md
 docs/Amount1.md
 docs/Amount2.md
 docs/AmountDue.md
+docs/Amounteur.md
 docs/AsyncTaskStatus.md
 docs/AsyncTasksAPI.md
 docs/BaseAmount.md
@@ -185,6 +179,8 @@ docs/DownloadsAPI.md
 docs/EReportingFlowType.md
 docs/EReportingValidationError.md
 docs/ElectronicAddress.md
+docs/ElectronicAddressInput.md
+docs/ElectronicAddressOutput.md
 docs/ElectronicSignatureAPI.md
 docs/Encaisseamount.md
 docs/Encaisseamount1.md
@@ -198,9 +194,9 @@ docs/FacturXInvoice.md
 docs/FacturXPDFInfo.md
 docs/FacturXPDFXMLVerificationAPI.md
 docs/FacturXValidationAPI.md
+docs/FactureElectroniqueModelsInvoiceTypeCode.md
 docs/FactureElectroniqueRestApiSchemasCdarValidationErrorResponse.md
-docs/FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode.md
-docs/FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.md
+docs/FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.md
 docs/FieldStatus.md
 docs/FileInfo.md
 docs/FilesInfo.md
@@ -245,6 +241,7 @@ docs/InvoiceTotals.md
 docs/InvoiceTotalsPrepayment.md
 docs/InvoiceTypeCode.md
 docs/InvoiceTypeCodeOutput.md
+docs/Invoicedata.md
 docs/InvoicingFramework.md
 docs/InvoicingFrameworkCode.md
 docs/IssuerRoleCode.md
@@ -275,6 +272,8 @@ docs/PaymentCard.md
 docs/PaymentMeans.md
 docs/Percentage.md
 docs/PostalAddress.md
+docs/PostalAddressInput.md
+docs/PostalAddressOutput.md
 docs/PriceAllowanceAmount.md
 docs/PriceBasisQuantity.md
 docs/ProcessingOptions.md
@@ -332,6 +331,9 @@ docs/SubmitInvoiceRequest.md
 docs/SubmitInvoiceResponse.md
 docs/SubmitNetAmount.md
 docs/SubmitVatAmount.md
+docs/SuperPDPConnectURLResponse.md
+docs/SuperPDPDisconnectResponse.md
+docs/SuperPDPStatusResponse.md
 docs/SupplementaryAttachment.md
 docs/Supplier.md
 docs/TaskErrorResult.md
@@ -344,6 +346,7 @@ docs/Taxableamount.md
 docs/Taxamount.md
 docs/Taxamount1.md
 docs/Taxamount2.md
+docs/Taxamounteur.md
 docs/Taxexclusiveamount.md
 docs/Taxexclusiveamount1.md
 docs/TotalGrossAmount.md
@@ -392,14 +395,9 @@ model_additional_document.go
 model_afnor_acknowledgement.go
 model_afnor_acknowledgement_detail.go
 model_afnor_address_read.go
-model_afnor_algorithm.go
-model_afnor_basic_authentication.go
-model_afnor_callback_authentication.go
-model_afnor_callback_header.go
-model_afnor_callback_parameters.go
-model_afnor_callback_signature.go
-model_afnor_contains_operator.go
+model_afnor_contains_or_start_with_operator.go
 model_afnor_contains_or_strict_operator.go
+model_afnor_contains_or_strict_or_start_with_operator.go
 model_afnor_core_flow_info.go
 model_afnor_credentials.go
 model_afnor_destination.go
@@ -432,7 +430,6 @@ model_afnor_health_check_response.go
 model_afnor_legal_unit_administrative_status.go
 model_afnor_legal_unit_payload_history.go
 model_afnor_legal_unit_payload_included.go
-model_afnor_o_auth2_authentication.go
 model_afnor_processing_rule.go
 model_afnor_reason_code.go
 model_afnor_reason_code_enum.go
@@ -483,11 +480,10 @@ model_afnor_siret_search_post200_response.go
 model_afnor_sorting_order.go
 model_afnor_strict_operator.go
 model_afnor_strict_or_start_with_operator.go
+model_afnor_unique_directory_line_status.go
 model_afnor_webhook.go
 model_afnor_webhook_id_param.go
-model_afnor_webhook_metadata.go
 model_afnor_webhook_params.go
-model_afnor_webhook_patch_payload.go
 model_aggregated_payment_input.go
 model_aggregated_transaction_input.go
 model_allowance_charge.go
@@ -498,6 +494,7 @@ model_amount.go
 model_amount_1.go
 model_amount_2.go
 model_amount_due.go
+model_amounteur.go
 model_api_error.go
 model_api_profile.go
 model_async_task_status.go
@@ -540,6 +537,8 @@ model_document_type_info.go
 model_e_reporting_flow_type.go
 model_e_reporting_validation_error.go
 model_electronic_address.go
+model_electronic_address_input.go
+model_electronic_address_output.go
 model_encaisseamount.go
 model_encaisseamount_1.go
 model_encaissee_request.go
@@ -549,9 +548,9 @@ model_error_source.go
 model_extraction_info.go
 model_factur_x_invoice.go
 model_factur_xpdf_info.go
+model_facture_electronique__models__invoice_type_code.go
 model_facture_electronique__rest_api__schemas__cdar__validation_error_response.go
-model_facture_electronique__rest_api__schemas__ereporting__invoice_type_code.go
-model_facture_electronique__rest_api__schemas__processing__chorus_pro_credentials.go
+model_facture_electronique__rest_api__schemas__chorus_pro__chorus_pro_credentials.go
 model_field_status.go
 model_file_info.go
 model_files_info.go
@@ -592,6 +591,7 @@ model_invoice_totals.go
 model_invoice_totals_prepayment.go
 model_invoice_type_code.go
 model_invoice_type_code_output.go
+model_invoicedata.go
 model_invoicing_framework.go
 model_invoicing_framework_code.go
 model_issuer_role_code.go
@@ -621,6 +621,8 @@ model_pdp_config_update_request.go
 model_pdp_credentials.go
 model_percentage.go
 model_postal_address.go
+model_postal_address_input.go
+model_postal_address_output.go
 model_price_allowance_amount.go
 model_price_basis_quantity.go
 model_processing_options.go
@@ -677,6 +679,9 @@ model_submit_invoice_request.go
 model_submit_invoice_response.go
 model_submit_net_amount.go
 model_submit_vat_amount.go
+model_super_pdp_connect_url_response.go
+model_super_pdp_disconnect_response.go
+model_super_pdp_status_response.go
 model_supplementary_attachment.go
 model_supplier.go
 model_task_error_result.go
@@ -689,6 +694,7 @@ model_taxableamount_0.go
 model_taxamount.go
 model_taxamount_1.go
 model_taxamount_2.go
+model_taxamounteur.go
 model_taxexclusiveamount.go
 model_taxexclusiveamount_1.go
 model_total_gross_amount.go

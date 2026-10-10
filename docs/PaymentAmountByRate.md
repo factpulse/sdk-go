@@ -5,13 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Rate** | [**Rate**](Rate.md) |  | 
-**Amount** | [**Amount1**](Amount1.md) |  | 
+**Amount** | [**Amount2**](Amount2.md) |  | 
+**AmountEur** | Pointer to [**NullableAmounteur**](Amounteur.md) |  | [optional] 
 
 ## Methods
 
 ### NewPaymentAmountByRate
 
-`func NewPaymentAmountByRate(rate Rate, amount Amount1, ) *PaymentAmountByRate`
+`func NewPaymentAmountByRate(rate Rate, amount Amount2, ) *PaymentAmountByRate`
 
 NewPaymentAmountByRate instantiates a new PaymentAmountByRate object
 This constructor will assign default values to properties that have it defined,
@@ -48,24 +49,59 @@ SetRate sets Rate field to given value.
 
 ### GetAmount
 
-`func (o *PaymentAmountByRate) GetAmount() Amount1`
+`func (o *PaymentAmountByRate) GetAmount() Amount2`
 
 GetAmount returns the Amount field if non-nil, zero value otherwise.
 
 ### GetAmountOk
 
-`func (o *PaymentAmountByRate) GetAmountOk() (*Amount1, bool)`
+`func (o *PaymentAmountByRate) GetAmountOk() (*Amount2, bool)`
 
 GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAmount
 
-`func (o *PaymentAmountByRate) SetAmount(v Amount1)`
+`func (o *PaymentAmountByRate) SetAmount(v Amount2)`
 
 SetAmount sets Amount field to given value.
 
 
+### GetAmountEur
+
+`func (o *PaymentAmountByRate) GetAmountEur() Amounteur`
+
+GetAmountEur returns the AmountEur field if non-nil, zero value otherwise.
+
+### GetAmountEurOk
+
+`func (o *PaymentAmountByRate) GetAmountEurOk() (*Amounteur, bool)`
+
+GetAmountEurOk returns a tuple with the AmountEur field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAmountEur
+
+`func (o *PaymentAmountByRate) SetAmountEur(v Amounteur)`
+
+SetAmountEur sets AmountEur field to given value.
+
+### HasAmountEur
+
+`func (o *PaymentAmountByRate) HasAmountEur() bool`
+
+HasAmountEur returns a boolean if a field has been set.
+
+### SetAmountEurNil
+
+`func (o *PaymentAmountByRate) SetAmountEurNil(b bool)`
+
+ SetAmountEurNil sets the value for AmountEur to be an explicit nil
+
+### UnsetAmountEur
+`func (o *PaymentAmountByRate) UnsetAmountEur()`
+
+UnsetAmountEur ensures that no value is present for AmountEur, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

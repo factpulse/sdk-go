@@ -13,176 +13,100 @@ package factpulse
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
-// checks if the AFNORCallbackSignature type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AFNORCallbackSignature{}
+// AFNORUniqueDirectoryLineStatus Current line status of the platform.   - Enabled : Active line linked to a platform   - Disabled : No platform linked to the line 
+type AFNORUniqueDirectoryLineStatus string
 
-// AFNORCallbackSignature struct for AFNORCallbackSignature
-type AFNORCallbackSignature struct {
-	Algo AFNORAlgorithm `json:"algo"`
-	// Base 64 encoded string
-	Key string `json:"key"`
+// List of AFNOR_uniqueDirectoryLineStatus
+const (
+	AFNORUNIQUEDIRECTORYLINESTATUS_ENABLED AFNORUniqueDirectoryLineStatus = "Enabled"
+	AFNORUNIQUEDIRECTORYLINESTATUS_DISABLED AFNORUniqueDirectoryLineStatus = "Disabled"
+)
+
+// All allowed values of AFNORUniqueDirectoryLineStatus enum
+var AllowedAFNORUniqueDirectoryLineStatusEnumValues = []AFNORUniqueDirectoryLineStatus{
+	"Enabled",
+	"Disabled",
 }
 
-type _AFNORCallbackSignature AFNORCallbackSignature
-
-// NewAFNORCallbackSignature instantiates a new AFNORCallbackSignature object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewAFNORCallbackSignature(algo AFNORAlgorithm, key string) *AFNORCallbackSignature {
-	this := AFNORCallbackSignature{}
-	this.Algo = algo
-	this.Key = key
-	return &this
-}
-
-// NewAFNORCallbackSignatureWithDefaults instantiates a new AFNORCallbackSignature object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewAFNORCallbackSignatureWithDefaults() *AFNORCallbackSignature {
-	this := AFNORCallbackSignature{}
-	return &this
-}
-
-// GetAlgo returns the Algo field value
-func (o *AFNORCallbackSignature) GetAlgo() AFNORAlgorithm {
-	if o == nil {
-		var ret AFNORAlgorithm
-		return ret
-	}
-
-	return o.Algo
-}
-
-// GetAlgoOk returns a tuple with the Algo field value
-// and a boolean to check if the value has been set.
-func (o *AFNORCallbackSignature) GetAlgoOk() (*AFNORAlgorithm, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Algo, true
-}
-
-// SetAlgo sets field value
-func (o *AFNORCallbackSignature) SetAlgo(v AFNORAlgorithm) {
-	o.Algo = v
-}
-
-// GetKey returns the Key field value
-func (o *AFNORCallbackSignature) GetKey() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Key
-}
-
-// GetKeyOk returns a tuple with the Key field value
-// and a boolean to check if the value has been set.
-func (o *AFNORCallbackSignature) GetKeyOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Key, true
-}
-
-// SetKey sets field value
-func (o *AFNORCallbackSignature) SetKey(v string) {
-	o.Key = v
-}
-
-func (o AFNORCallbackSignature) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o AFNORCallbackSignature) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["algo"] = o.Algo
-	toSerialize["key"] = o.Key
-	return toSerialize, nil
-}
-
-func (o *AFNORCallbackSignature) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"algo",
-		"key",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varAFNORCallbackSignature := _AFNORCallbackSignature{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAFNORCallbackSignature)
-
+func (v *AFNORUniqueDirectoryLineStatus) UnmarshalJSON(src []byte) error {
+	var value string
+	err := json.Unmarshal(src, &value)
 	if err != nil {
 		return err
 	}
+	enumTypeValue := AFNORUniqueDirectoryLineStatus(value)
+	for _, existing := range AllowedAFNORUniqueDirectoryLineStatusEnumValues {
+		if existing == enumTypeValue {
+			*v = enumTypeValue
+			return nil
+		}
+	}
 
-	*o = AFNORCallbackSignature(varAFNORCallbackSignature)
-
-	return err
+	return fmt.Errorf("%+v is not a valid AFNORUniqueDirectoryLineStatus", value)
 }
 
-type NullableAFNORCallbackSignature struct {
-	value *AFNORCallbackSignature
+// NewAFNORUniqueDirectoryLineStatusFromValue returns a pointer to a valid AFNORUniqueDirectoryLineStatus
+// for the value passed as argument, or an error if the value passed is not allowed by the enum
+func NewAFNORUniqueDirectoryLineStatusFromValue(v string) (*AFNORUniqueDirectoryLineStatus, error) {
+	ev := AFNORUniqueDirectoryLineStatus(v)
+	if ev.IsValid() {
+		return &ev, nil
+	} else {
+		return nil, fmt.Errorf("invalid value '%v' for AFNORUniqueDirectoryLineStatus: valid values are %v", v, AllowedAFNORUniqueDirectoryLineStatusEnumValues)
+	}
+}
+
+// IsValid return true if the value is valid for the enum, false otherwise
+func (v AFNORUniqueDirectoryLineStatus) IsValid() bool {
+	for _, existing := range AllowedAFNORUniqueDirectoryLineStatusEnumValues {
+		if existing == v {
+			return true
+		}
+	}
+	return false
+}
+
+// Ptr returns reference to AFNOR_uniqueDirectoryLineStatus value
+func (v AFNORUniqueDirectoryLineStatus) Ptr() *AFNORUniqueDirectoryLineStatus {
+	return &v
+}
+
+type NullableAFNORUniqueDirectoryLineStatus struct {
+	value *AFNORUniqueDirectoryLineStatus
 	isSet bool
 }
 
-func (v NullableAFNORCallbackSignature) Get() *AFNORCallbackSignature {
+func (v NullableAFNORUniqueDirectoryLineStatus) Get() *AFNORUniqueDirectoryLineStatus {
 	return v.value
 }
 
-func (v *NullableAFNORCallbackSignature) Set(val *AFNORCallbackSignature) {
+func (v *NullableAFNORUniqueDirectoryLineStatus) Set(val *AFNORUniqueDirectoryLineStatus) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAFNORCallbackSignature) IsSet() bool {
+func (v NullableAFNORUniqueDirectoryLineStatus) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAFNORCallbackSignature) Unset() {
+func (v *NullableAFNORUniqueDirectoryLineStatus) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAFNORCallbackSignature(val *AFNORCallbackSignature) *NullableAFNORCallbackSignature {
-	return &NullableAFNORCallbackSignature{value: val, isSet: true}
+func NewNullableAFNORUniqueDirectoryLineStatus(val *AFNORUniqueDirectoryLineStatus) *NullableAFNORUniqueDirectoryLineStatus {
+	return &NullableAFNORUniqueDirectoryLineStatus{value: val, isSet: true}
 }
 
-func (v NullableAFNORCallbackSignature) MarshalJSON() ([]byte, error) {
+func (v NullableAFNORUniqueDirectoryLineStatus) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAFNORCallbackSignature) UnmarshalJSON(src []byte) error {
+func (v *NullableAFNORUniqueDirectoryLineStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

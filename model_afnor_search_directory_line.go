@@ -25,6 +25,7 @@ type AFNORSearchDirectoryLine struct {
 	Sorting []AFNORSearchDirectoryLineSortingInner `json:"sorting,omitempty"`
 	// Allows you to filter the desired fields in the response.
 	Fields []AFNORDirectoryLineField `json:"fields,omitempty"`
+	Include []string `json:"include,omitempty"`
 	// Maximum number of results
 	Limit *int32 `json:"limit,omitempty"`
 	// Number of results to skip
@@ -144,6 +145,38 @@ func (o *AFNORSearchDirectoryLine) SetFields(v []AFNORDirectoryLineField) {
 	o.Fields = v
 }
 
+// GetInclude returns the Include field value if set, zero value otherwise.
+func (o *AFNORSearchDirectoryLine) GetInclude() []string {
+	if o == nil || IsNil(o.Include) {
+		var ret []string
+		return ret
+	}
+	return o.Include
+}
+
+// GetIncludeOk returns a tuple with the Include field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AFNORSearchDirectoryLine) GetIncludeOk() ([]string, bool) {
+	if o == nil || IsNil(o.Include) {
+		return nil, false
+	}
+	return o.Include, true
+}
+
+// HasInclude returns a boolean if a field has been set.
+func (o *AFNORSearchDirectoryLine) HasInclude() bool {
+	if o != nil && !IsNil(o.Include) {
+		return true
+	}
+
+	return false
+}
+
+// SetInclude gets a reference to the given []string and assigns it to the Include field.
+func (o *AFNORSearchDirectoryLine) SetInclude(v []string) {
+	o.Include = v
+}
+
 // GetLimit returns the Limit field value if set, zero value otherwise.
 func (o *AFNORSearchDirectoryLine) GetLimit() int32 {
 	if o == nil || IsNil(o.Limit) {
@@ -226,6 +259,9 @@ func (o AFNORSearchDirectoryLine) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Fields) {
 		toSerialize["fields"] = o.Fields
+	}
+	if !IsNil(o.Include) {
+		toSerialize["include"] = o.Include
 	}
 	if !IsNil(o.Limit) {
 		toSerialize["limit"] = o.Limit

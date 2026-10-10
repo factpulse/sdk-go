@@ -22,8 +22,10 @@ var _ MappedNullable = &AFNORWebhookParams{}
 
 // AFNORWebhookParams struct for AFNORWebhookParams
 type AFNORWebhookParams struct {
-	Callback AFNORCallbackParameters `json:"callback"`
-	Metadata AFNORWebhookMetadata `json:"metadata"`
+	CallbackUrl string `json:"callbackUrl"`
+	FlowTypes []AFNORFlowType `json:"flowTypes,omitempty"`
+	FlowDirection *AFNORFlowDirection `json:"flowDirection,omitempty"`
+	AckStatus *AFNORFlowAckStatus `json:"ackStatus,omitempty"`
 }
 
 type _AFNORWebhookParams AFNORWebhookParams
@@ -32,10 +34,9 @@ type _AFNORWebhookParams AFNORWebhookParams
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAFNORWebhookParams(callback AFNORCallbackParameters, metadata AFNORWebhookMetadata) *AFNORWebhookParams {
+func NewAFNORWebhookParams(callbackUrl string) *AFNORWebhookParams {
 	this := AFNORWebhookParams{}
-	this.Callback = callback
-	this.Metadata = metadata
+	this.CallbackUrl = callbackUrl
 	return &this
 }
 
@@ -47,52 +48,124 @@ func NewAFNORWebhookParamsWithDefaults() *AFNORWebhookParams {
 	return &this
 }
 
-// GetCallback returns the Callback field value
-func (o *AFNORWebhookParams) GetCallback() AFNORCallbackParameters {
+// GetCallbackUrl returns the CallbackUrl field value
+func (o *AFNORWebhookParams) GetCallbackUrl() string {
 	if o == nil {
-		var ret AFNORCallbackParameters
+		var ret string
 		return ret
 	}
 
-	return o.Callback
+	return o.CallbackUrl
 }
 
-// GetCallbackOk returns a tuple with the Callback field value
+// GetCallbackUrlOk returns a tuple with the CallbackUrl field value
 // and a boolean to check if the value has been set.
-func (o *AFNORWebhookParams) GetCallbackOk() (*AFNORCallbackParameters, bool) {
+func (o *AFNORWebhookParams) GetCallbackUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Callback, true
+	return &o.CallbackUrl, true
 }
 
-// SetCallback sets field value
-func (o *AFNORWebhookParams) SetCallback(v AFNORCallbackParameters) {
-	o.Callback = v
+// SetCallbackUrl sets field value
+func (o *AFNORWebhookParams) SetCallbackUrl(v string) {
+	o.CallbackUrl = v
 }
 
-// GetMetadata returns the Metadata field value
-func (o *AFNORWebhookParams) GetMetadata() AFNORWebhookMetadata {
-	if o == nil {
-		var ret AFNORWebhookMetadata
+// GetFlowTypes returns the FlowTypes field value if set, zero value otherwise.
+func (o *AFNORWebhookParams) GetFlowTypes() []AFNORFlowType {
+	if o == nil || IsNil(o.FlowTypes) {
+		var ret []AFNORFlowType
 		return ret
 	}
-
-	return o.Metadata
+	return o.FlowTypes
 }
 
-// GetMetadataOk returns a tuple with the Metadata field value
+// GetFlowTypesOk returns a tuple with the FlowTypes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AFNORWebhookParams) GetMetadataOk() (*AFNORWebhookMetadata, bool) {
-	if o == nil {
+func (o *AFNORWebhookParams) GetFlowTypesOk() ([]AFNORFlowType, bool) {
+	if o == nil || IsNil(o.FlowTypes) {
 		return nil, false
 	}
-	return &o.Metadata, true
+	return o.FlowTypes, true
 }
 
-// SetMetadata sets field value
-func (o *AFNORWebhookParams) SetMetadata(v AFNORWebhookMetadata) {
-	o.Metadata = v
+// HasFlowTypes returns a boolean if a field has been set.
+func (o *AFNORWebhookParams) HasFlowTypes() bool {
+	if o != nil && !IsNil(o.FlowTypes) {
+		return true
+	}
+
+	return false
+}
+
+// SetFlowTypes gets a reference to the given []AFNORFlowType and assigns it to the FlowTypes field.
+func (o *AFNORWebhookParams) SetFlowTypes(v []AFNORFlowType) {
+	o.FlowTypes = v
+}
+
+// GetFlowDirection returns the FlowDirection field value if set, zero value otherwise.
+func (o *AFNORWebhookParams) GetFlowDirection() AFNORFlowDirection {
+	if o == nil || IsNil(o.FlowDirection) {
+		var ret AFNORFlowDirection
+		return ret
+	}
+	return *o.FlowDirection
+}
+
+// GetFlowDirectionOk returns a tuple with the FlowDirection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AFNORWebhookParams) GetFlowDirectionOk() (*AFNORFlowDirection, bool) {
+	if o == nil || IsNil(o.FlowDirection) {
+		return nil, false
+	}
+	return o.FlowDirection, true
+}
+
+// HasFlowDirection returns a boolean if a field has been set.
+func (o *AFNORWebhookParams) HasFlowDirection() bool {
+	if o != nil && !IsNil(o.FlowDirection) {
+		return true
+	}
+
+	return false
+}
+
+// SetFlowDirection gets a reference to the given AFNORFlowDirection and assigns it to the FlowDirection field.
+func (o *AFNORWebhookParams) SetFlowDirection(v AFNORFlowDirection) {
+	o.FlowDirection = &v
+}
+
+// GetAckStatus returns the AckStatus field value if set, zero value otherwise.
+func (o *AFNORWebhookParams) GetAckStatus() AFNORFlowAckStatus {
+	if o == nil || IsNil(o.AckStatus) {
+		var ret AFNORFlowAckStatus
+		return ret
+	}
+	return *o.AckStatus
+}
+
+// GetAckStatusOk returns a tuple with the AckStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AFNORWebhookParams) GetAckStatusOk() (*AFNORFlowAckStatus, bool) {
+	if o == nil || IsNil(o.AckStatus) {
+		return nil, false
+	}
+	return o.AckStatus, true
+}
+
+// HasAckStatus returns a boolean if a field has been set.
+func (o *AFNORWebhookParams) HasAckStatus() bool {
+	if o != nil && !IsNil(o.AckStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetAckStatus gets a reference to the given AFNORFlowAckStatus and assigns it to the AckStatus field.
+func (o *AFNORWebhookParams) SetAckStatus(v AFNORFlowAckStatus) {
+	o.AckStatus = &v
 }
 
 func (o AFNORWebhookParams) MarshalJSON() ([]byte, error) {
@@ -105,8 +178,16 @@ func (o AFNORWebhookParams) MarshalJSON() ([]byte, error) {
 
 func (o AFNORWebhookParams) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["callback"] = o.Callback
-	toSerialize["metadata"] = o.Metadata
+	toSerialize["callbackUrl"] = o.CallbackUrl
+	if !IsNil(o.FlowTypes) {
+		toSerialize["flowTypes"] = o.FlowTypes
+	}
+	if !IsNil(o.FlowDirection) {
+		toSerialize["flowDirection"] = o.FlowDirection
+	}
+	if !IsNil(o.AckStatus) {
+		toSerialize["ackStatus"] = o.AckStatus
+	}
 	return toSerialize, nil
 }
 
@@ -115,8 +196,7 @@ func (o *AFNORWebhookParams) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"callback",
-		"metadata",
+		"callbackUrl",
 	}
 
 	allProperties := make(map[string]interface{})

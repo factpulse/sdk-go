@@ -24,7 +24,7 @@ var _ MappedNullable = &AllowanceCharge{}
 type AllowanceCharge struct {
 	// True for charge, False for allowance (ChargeIndicator).
 	IsCharge bool `json:"is_charge"`
-	Amount Amount2 `json:"amount"`
+	Amount Amount `json:"amount"`
 	BaseAmount NullableBaseAmount `json:"base_amount,omitempty"`
 	Percentage NullablePercentage `json:"percentage,omitempty"`
 	Reason NullableString `json:"reason,omitempty"`
@@ -39,7 +39,7 @@ type _AllowanceCharge AllowanceCharge
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAllowanceCharge(isCharge bool, amount Amount2) *AllowanceCharge {
+func NewAllowanceCharge(isCharge bool, amount Amount) *AllowanceCharge {
 	this := AllowanceCharge{}
 	this.IsCharge = isCharge
 	this.Amount = amount
@@ -79,9 +79,9 @@ func (o *AllowanceCharge) SetIsCharge(v bool) {
 }
 
 // GetAmount returns the Amount field value
-func (o *AllowanceCharge) GetAmount() Amount2 {
+func (o *AllowanceCharge) GetAmount() Amount {
 	if o == nil {
-		var ret Amount2
+		var ret Amount
 		return ret
 	}
 
@@ -90,7 +90,7 @@ func (o *AllowanceCharge) GetAmount() Amount2 {
 
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
-func (o *AllowanceCharge) GetAmountOk() (*Amount2, bool) {
+func (o *AllowanceCharge) GetAmountOk() (*Amount, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -98,7 +98,7 @@ func (o *AllowanceCharge) GetAmountOk() (*Amount2, bool) {
 }
 
 // SetAmount sets field value
-func (o *AllowanceCharge) SetAmount(v Amount2) {
+func (o *AllowanceCharge) SetAmount(v Amount) {
 	o.Amount = v
 }
 

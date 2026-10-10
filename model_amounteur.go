@@ -13,173 +13,99 @@ package factpulse
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
-// checks if the AFNORCallbackHeader type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AFNORCallbackHeader{}
 
-// AFNORCallbackHeader struct for AFNORCallbackHeader
-type AFNORCallbackHeader struct {
-	HeaderName string `json:"headerName"`
-	HeaderValue string `json:"headerValue"`
+// Amounteur Payment amount in EUR for a non-EUR payment (G6.27). Computed automatically from the exchange rate when omitted.
+type Amounteur struct {
+	Float32 *float32
+	String *string
 }
 
-type _AFNORCallbackHeader AFNORCallbackHeader
-
-// NewAFNORCallbackHeader instantiates a new AFNORCallbackHeader object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewAFNORCallbackHeader(headerName string, headerValue string) *AFNORCallbackHeader {
-	this := AFNORCallbackHeader{}
-	this.HeaderName = headerName
-	this.HeaderValue = headerValue
-	return &this
-}
-
-// NewAFNORCallbackHeaderWithDefaults instantiates a new AFNORCallbackHeader object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewAFNORCallbackHeaderWithDefaults() *AFNORCallbackHeader {
-	this := AFNORCallbackHeader{}
-	return &this
-}
-
-// GetHeaderName returns the HeaderName field value
-func (o *AFNORCallbackHeader) GetHeaderName() string {
-	if o == nil {
-		var ret string
-		return ret
+// Unmarshal JSON data into any of the pointers in the struct
+func (dst *Amounteur) UnmarshalJSON(data []byte) error {
+	var err error
+	// this object is nullable so check if the payload is null or empty string
+	if string(data) == "" || string(data) == "{}" {
+		return nil
 	}
 
-	return o.HeaderName
-}
-
-// GetHeaderNameOk returns a tuple with the HeaderName field value
-// and a boolean to check if the value has been set.
-func (o *AFNORCallbackHeader) GetHeaderNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.HeaderName, true
-}
-
-// SetHeaderName sets field value
-func (o *AFNORCallbackHeader) SetHeaderName(v string) {
-	o.HeaderName = v
-}
-
-// GetHeaderValue returns the HeaderValue field value
-func (o *AFNORCallbackHeader) GetHeaderValue() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.HeaderValue
-}
-
-// GetHeaderValueOk returns a tuple with the HeaderValue field value
-// and a boolean to check if the value has been set.
-func (o *AFNORCallbackHeader) GetHeaderValueOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.HeaderValue, true
-}
-
-// SetHeaderValue sets field value
-func (o *AFNORCallbackHeader) SetHeaderValue(v string) {
-	o.HeaderValue = v
-}
-
-func (o AFNORCallbackHeader) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o AFNORCallbackHeader) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["headerName"] = o.HeaderName
-	toSerialize["headerValue"] = o.HeaderValue
-	return toSerialize, nil
-}
-
-func (o *AFNORCallbackHeader) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"headerName",
-		"headerValue",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
+	// try to unmarshal JSON data into Float32
+	err = json.Unmarshal(data, &dst.Float32);
+	if err == nil {
+		jsonFloat32, _ := json.Marshal(dst.Float32)
+		if string(jsonFloat32) == "{}" { // empty struct
+			dst.Float32 = nil
+		} else {
+			return nil // data stored in dst.Float32, return on the first match
 		}
+	} else {
+		dst.Float32 = nil
 	}
 
-	varAFNORCallbackHeader := _AFNORCallbackHeader{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAFNORCallbackHeader)
-
-	if err != nil {
-		return err
+	// try to unmarshal JSON data into String
+	err = json.Unmarshal(data, &dst.String);
+	if err == nil {
+		jsonString, _ := json.Marshal(dst.String)
+		if string(jsonString) == "{}" { // empty struct
+			dst.String = nil
+		} else {
+			return nil // data stored in dst.String, return on the first match
+		}
+	} else {
+		dst.String = nil
 	}
 
-	*o = AFNORCallbackHeader(varAFNORCallbackHeader)
-
-	return err
+	return fmt.Errorf("data failed to match schemas in anyOf(Amounteur)")
 }
 
-type NullableAFNORCallbackHeader struct {
-	value *AFNORCallbackHeader
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src Amounteur) MarshalJSON() ([]byte, error) {
+	if src.Float32 != nil {
+		return json.Marshal(&src.Float32)
+	}
+
+	if src.String != nil {
+		return json.Marshal(&src.String)
+	}
+
+	return nil, nil // no data in anyOf schemas
+}
+
+
+type NullableAmounteur struct {
+	value *Amounteur
 	isSet bool
 }
 
-func (v NullableAFNORCallbackHeader) Get() *AFNORCallbackHeader {
+func (v NullableAmounteur) Get() *Amounteur {
 	return v.value
 }
 
-func (v *NullableAFNORCallbackHeader) Set(val *AFNORCallbackHeader) {
+func (v *NullableAmounteur) Set(val *Amounteur) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAFNORCallbackHeader) IsSet() bool {
+func (v NullableAmounteur) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAFNORCallbackHeader) Unset() {
+func (v *NullableAmounteur) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAFNORCallbackHeader(val *AFNORCallbackHeader) *NullableAFNORCallbackHeader {
-	return &NullableAFNORCallbackHeader{value: val, isSet: true}
+func NewNullableAmounteur(val *Amounteur) *NullableAmounteur {
+	return &NullableAmounteur{value: val, isSet: true}
 }
 
-func (v NullableAFNORCallbackHeader) MarshalJSON() ([]byte, error) {
+func (v NullableAmounteur) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAFNORCallbackHeader) UnmarshalJSON(src []byte) error {
+func (v *NullableAmounteur) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Limit** | Pointer to **int32** | Maximum number of results that may be returned | [optional] [default to 25]
+**Limit** | Pointer to **int32** | Pagination, Maximum number of results that may be returned | [optional] [default to 25]
+**Cursor** | Pointer to **string** | If cursor is provided, then start search starting from that cursor | [optional] 
 **Where** | [**AFNORSearchFlowFilters**](AFNORSearchFlowFilters.md) |  | 
 
 ## Methods
@@ -50,6 +51,31 @@ SetLimit sets Limit field to given value.
 `func (o *AFNORSearchFlowParams) HasLimit() bool`
 
 HasLimit returns a boolean if a field has been set.
+
+### GetCursor
+
+`func (o *AFNORSearchFlowParams) GetCursor() string`
+
+GetCursor returns the Cursor field if non-nil, zero value otherwise.
+
+### GetCursorOk
+
+`func (o *AFNORSearchFlowParams) GetCursorOk() (*string, bool)`
+
+GetCursorOk returns a tuple with the Cursor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCursor
+
+`func (o *AFNORSearchFlowParams) SetCursor(v string)`
+
+SetCursor sets Cursor field to given value.
+
+### HasCursor
+
+`func (o *AFNORSearchFlowParams) HasCursor() bool`
+
+HasCursor returns a boolean if a field has been set.
 
 ### GetWhere
 

@@ -8,7 +8,8 @@ Name | Type | Description | Notes
 **InvoiceIssueDate** | **string** | Date d&#39;émission de la facture (YYYY-MM-DD) | 
 **InvoiceBuyerSiren** | **string** | SIREN de l&#39;acheteur (destinataire du statut) | 
 **InvoiceBuyerElectronicAddress** | **string** | Adresse électronique de l&#39;acheteur (MDT-73) | 
-**Amount** | [**Amount**](Amount.md) |  | 
+**Amount** | [**Amount1**](Amount1.md) |  | 
+**VatRate** | Pointer to **float32** | Taux de TVA du montant encaissé en % (MDT-224, requis par BR-FR-CDV-14 ; défaut 20) | [optional] [default to 20]
 **Currency** | Pointer to **string** | Code devise ISO 4217 | [optional] [default to "EUR"]
 **SenderSiren** | Pointer to **NullableString** |  | [optional] 
 **FlowType** | Pointer to **string** | Type de flux (CustomerInvoiceLC pour facture émise) | [optional] [default to "CustomerInvoiceLC"]
@@ -21,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewEncaisseeRequest
 
-`func NewEncaisseeRequest(invoiceId string, invoiceIssueDate string, invoiceBuyerSiren string, invoiceBuyerElectronicAddress string, amount Amount, ) *EncaisseeRequest`
+`func NewEncaisseeRequest(invoiceId string, invoiceIssueDate string, invoiceBuyerSiren string, invoiceBuyerElectronicAddress string, amount Amount1, ) *EncaisseeRequest`
 
 NewEncaisseeRequest instantiates a new EncaisseeRequest object
 This constructor will assign default values to properties that have it defined,
@@ -118,23 +119,48 @@ SetInvoiceBuyerElectronicAddress sets InvoiceBuyerElectronicAddress field to giv
 
 ### GetAmount
 
-`func (o *EncaisseeRequest) GetAmount() Amount`
+`func (o *EncaisseeRequest) GetAmount() Amount1`
 
 GetAmount returns the Amount field if non-nil, zero value otherwise.
 
 ### GetAmountOk
 
-`func (o *EncaisseeRequest) GetAmountOk() (*Amount, bool)`
+`func (o *EncaisseeRequest) GetAmountOk() (*Amount1, bool)`
 
 GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAmount
 
-`func (o *EncaisseeRequest) SetAmount(v Amount)`
+`func (o *EncaisseeRequest) SetAmount(v Amount1)`
 
 SetAmount sets Amount field to given value.
 
+
+### GetVatRate
+
+`func (o *EncaisseeRequest) GetVatRate() float32`
+
+GetVatRate returns the VatRate field if non-nil, zero value otherwise.
+
+### GetVatRateOk
+
+`func (o *EncaisseeRequest) GetVatRateOk() (*float32, bool)`
+
+GetVatRateOk returns a tuple with the VatRate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVatRate
+
+`func (o *EncaisseeRequest) SetVatRate(v float32)`
+
+SetVatRate sets VatRate field to given value.
+
+### HasVatRate
+
+`func (o *EncaisseeRequest) HasVatRate() bool`
+
+HasVatRate returns a boolean if a field has been set.
 
 ### GetCurrency
 

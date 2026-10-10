@@ -21,7 +21,7 @@ var _ MappedNullable = &AFNORSearchSiretSortingInner{}
 // AFNORSearchSiretSortingInner A sorting criteria composed of a field and an order (ascending or descending).
 type AFNORSearchSiretSortingInner struct {
 	Field *AFNORSiretField `json:"field,omitempty"`
-	SortingOrder *AFNORSortingOrder `json:"sortingOrder,omitempty"`
+	Order *AFNORSortingOrder `json:"order,omitempty"`
 }
 
 // NewAFNORSearchSiretSortingInner instantiates a new AFNORSearchSiretSortingInner object
@@ -73,36 +73,36 @@ func (o *AFNORSearchSiretSortingInner) SetField(v AFNORSiretField) {
 	o.Field = &v
 }
 
-// GetSortingOrder returns the SortingOrder field value if set, zero value otherwise.
-func (o *AFNORSearchSiretSortingInner) GetSortingOrder() AFNORSortingOrder {
-	if o == nil || IsNil(o.SortingOrder) {
+// GetOrder returns the Order field value if set, zero value otherwise.
+func (o *AFNORSearchSiretSortingInner) GetOrder() AFNORSortingOrder {
+	if o == nil || IsNil(o.Order) {
 		var ret AFNORSortingOrder
 		return ret
 	}
-	return *o.SortingOrder
+	return *o.Order
 }
 
-// GetSortingOrderOk returns a tuple with the SortingOrder field value if set, nil otherwise
+// GetOrderOk returns a tuple with the Order field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AFNORSearchSiretSortingInner) GetSortingOrderOk() (*AFNORSortingOrder, bool) {
-	if o == nil || IsNil(o.SortingOrder) {
+func (o *AFNORSearchSiretSortingInner) GetOrderOk() (*AFNORSortingOrder, bool) {
+	if o == nil || IsNil(o.Order) {
 		return nil, false
 	}
-	return o.SortingOrder, true
+	return o.Order, true
 }
 
-// HasSortingOrder returns a boolean if a field has been set.
-func (o *AFNORSearchSiretSortingInner) HasSortingOrder() bool {
-	if o != nil && !IsNil(o.SortingOrder) {
+// HasOrder returns a boolean if a field has been set.
+func (o *AFNORSearchSiretSortingInner) HasOrder() bool {
+	if o != nil && !IsNil(o.Order) {
 		return true
 	}
 
 	return false
 }
 
-// SetSortingOrder gets a reference to the given AFNORSortingOrder and assigns it to the SortingOrder field.
-func (o *AFNORSearchSiretSortingInner) SetSortingOrder(v AFNORSortingOrder) {
-	o.SortingOrder = &v
+// SetOrder gets a reference to the given AFNORSortingOrder and assigns it to the Order field.
+func (o *AFNORSearchSiretSortingInner) SetOrder(v AFNORSortingOrder) {
+	o.Order = &v
 }
 
 func (o AFNORSearchSiretSortingInner) MarshalJSON() ([]byte, error) {
@@ -118,8 +118,8 @@ func (o AFNORSearchSiretSortingInner) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Field) {
 		toSerialize["field"] = o.Field
 	}
-	if !IsNil(o.SortingOrder) {
-		toSerialize["sortingOrder"] = o.SortingOrder
+	if !IsNil(o.Order) {
+		toSerialize["order"] = o.Order
 	}
 	return toSerialize, nil
 }
