@@ -28,6 +28,7 @@ type ValidateCDARRequest struct {
 	Status NullableString `json:"status,omitempty"`
 	ReasonCode NullableString `json:"reasonCode,omitempty"`
 	EncaisseAmount NullableEncaisseamount1 `json:"encaisseAmount,omitempty"`
+	EncaisseAmountsByRate []EncaisseAmountByRate `json:"encaisseAmountsByRate,omitempty"`
 }
 
 // NewValidateCDARRequest instantiates a new ValidateCDARRequest object
@@ -383,6 +384,39 @@ func (o *ValidateCDARRequest) UnsetEncaisseAmount() {
 	o.EncaisseAmount.Unset()
 }
 
+// GetEncaisseAmountsByRate returns the EncaisseAmountsByRate field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ValidateCDARRequest) GetEncaisseAmountsByRate() []EncaisseAmountByRate {
+	if o == nil {
+		var ret []EncaisseAmountByRate
+		return ret
+	}
+	return o.EncaisseAmountsByRate
+}
+
+// GetEncaisseAmountsByRateOk returns a tuple with the EncaisseAmountsByRate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ValidateCDARRequest) GetEncaisseAmountsByRateOk() ([]EncaisseAmountByRate, bool) {
+	if o == nil || IsNil(o.EncaisseAmountsByRate) {
+		return nil, false
+	}
+	return o.EncaisseAmountsByRate, true
+}
+
+// HasEncaisseAmountsByRate returns a boolean if a field has been set.
+func (o *ValidateCDARRequest) HasEncaisseAmountsByRate() bool {
+	if o != nil && !IsNil(o.EncaisseAmountsByRate) {
+		return true
+	}
+
+	return false
+}
+
+// SetEncaisseAmountsByRate gets a reference to the given []EncaisseAmountByRate and assigns it to the EncaisseAmountsByRate field.
+func (o *ValidateCDARRequest) SetEncaisseAmountsByRate(v []EncaisseAmountByRate) {
+	o.EncaisseAmountsByRate = v
+}
+
 func (o ValidateCDARRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -416,6 +450,9 @@ func (o ValidateCDARRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if o.EncaisseAmount.IsSet() {
 		toSerialize["encaisseAmount"] = o.EncaisseAmount.Get()
+	}
+	if o.EncaisseAmountsByRate != nil {
+		toSerialize["encaisseAmountsByRate"] = o.EncaisseAmountsByRate
 	}
 	return toSerialize, nil
 }

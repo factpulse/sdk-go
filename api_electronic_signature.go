@@ -17,7 +17,6 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"os"
 )
 
 
@@ -232,7 +231,7 @@ func (a *ElectronicSignatureAPIService) GenerateTestCertificateApiV1ProcessingGe
 type ApiSignPdfApiV1ProcessingSignPdfPostRequest struct {
 	ctx context.Context
 	ApiService *ElectronicSignatureAPIService
-	pdfFile *os.File
+	pdfFile *string
 	reason *string
 	location *string
 	contact *string
@@ -242,8 +241,8 @@ type ApiSignPdfApiV1ProcessingSignPdfPostRequest struct {
 }
 
 // PDF file to sign (will be processed and returned signed in base64)
-func (r ApiSignPdfApiV1ProcessingSignPdfPostRequest) PdfFile(pdfFile *os.File) ApiSignPdfApiV1ProcessingSignPdfPostRequest {
-	r.pdfFile = pdfFile
+func (r ApiSignPdfApiV1ProcessingSignPdfPostRequest) PdfFile(pdfFile string) ApiSignPdfApiV1ProcessingSignPdfPostRequest {
+	r.pdfFile = &pdfFile
 	return r
 }
 
@@ -351,21 +350,7 @@ func (a *ElectronicSignatureAPIService) SignPdfApiV1ProcessingSignPdfPostExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	var pdfFileLocalVarFormFileName string
-	var pdfFileLocalVarFileName     string
-	var pdfFileLocalVarFileBytes    []byte
-
-	pdfFileLocalVarFormFileName = "pdf_file"
-	pdfFileLocalVarFile := r.pdfFile
-
-	if pdfFileLocalVarFile != nil {
-		fbs, _ := io.ReadAll(pdfFileLocalVarFile)
-
-		pdfFileLocalVarFileBytes = fbs
-		pdfFileLocalVarFileName = pdfFileLocalVarFile.Name()
-		pdfFileLocalVarFile.Close()
-		formFiles = append(formFiles, formFile{fileBytes: pdfFileLocalVarFileBytes, fileName: pdfFileLocalVarFileName, formFileName: pdfFileLocalVarFormFileName})
-	}
+	parameterAddToHeaderOrQuery(localVarFormParams, "pdf_file", r.pdfFile, "", "")
 	if r.reason != nil {
 		parameterAddToHeaderOrQuery(localVarFormParams, "reason", r.reason, "", "")
 	}
@@ -448,7 +433,7 @@ func (a *ElectronicSignatureAPIService) SignPdfApiV1ProcessingSignPdfPostExecute
 type ApiSignPdfAsyncApiV1ProcessingSignPdfAsyncPostRequest struct {
 	ctx context.Context
 	ApiService *ElectronicSignatureAPIService
-	pdfFile *os.File
+	pdfFile *string
 	callbackUrl *string
 	webhookMode *string
 	reason *string
@@ -460,8 +445,8 @@ type ApiSignPdfAsyncApiV1ProcessingSignPdfAsyncPostRequest struct {
 }
 
 // PDF file to sign (processed asynchronously)
-func (r ApiSignPdfAsyncApiV1ProcessingSignPdfAsyncPostRequest) PdfFile(pdfFile *os.File) ApiSignPdfAsyncApiV1ProcessingSignPdfAsyncPostRequest {
-	r.pdfFile = pdfFile
+func (r ApiSignPdfAsyncApiV1ProcessingSignPdfAsyncPostRequest) PdfFile(pdfFile string) ApiSignPdfAsyncApiV1ProcessingSignPdfAsyncPostRequest {
+	r.pdfFile = &pdfFile
 	return r
 }
 
@@ -583,21 +568,7 @@ func (a *ElectronicSignatureAPIService) SignPdfAsyncApiV1ProcessingSignPdfAsyncP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	var pdfFileLocalVarFormFileName string
-	var pdfFileLocalVarFileName     string
-	var pdfFileLocalVarFileBytes    []byte
-
-	pdfFileLocalVarFormFileName = "pdf_file"
-	pdfFileLocalVarFile := r.pdfFile
-
-	if pdfFileLocalVarFile != nil {
-		fbs, _ := io.ReadAll(pdfFileLocalVarFile)
-
-		pdfFileLocalVarFileBytes = fbs
-		pdfFileLocalVarFileName = pdfFileLocalVarFile.Name()
-		pdfFileLocalVarFile.Close()
-		formFiles = append(formFiles, formFile{fileBytes: pdfFileLocalVarFileBytes, fileName: pdfFileLocalVarFileName, formFileName: pdfFileLocalVarFormFileName})
-	}
+	parameterAddToHeaderOrQuery(localVarFormParams, "pdf_file", r.pdfFile, "", "")
 	if r.callbackUrl != nil {
 		parameterAddToHeaderOrQuery(localVarFormParams, "callback_url", r.callbackUrl, "", "")
 	}
@@ -686,12 +657,12 @@ func (a *ElectronicSignatureAPIService) SignPdfAsyncApiV1ProcessingSignPdfAsyncP
 type ApiValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostRequest struct {
 	ctx context.Context
 	ApiService *ElectronicSignatureAPIService
-	pdfFile *os.File
+	pdfFile *string
 }
 
 // PDF file to validate (will be analyzed to detect and validate signatures)
-func (r ApiValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostRequest) PdfFile(pdfFile *os.File) ApiValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostRequest {
-	r.pdfFile = pdfFile
+func (r ApiValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostRequest) PdfFile(pdfFile string) ApiValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostRequest {
+	r.pdfFile = &pdfFile
 	return r
 }
 
@@ -768,21 +739,7 @@ func (a *ElectronicSignatureAPIService) ValidatePdfSignatureEndpointApiV1Process
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	var pdfFileLocalVarFormFileName string
-	var pdfFileLocalVarFileName     string
-	var pdfFileLocalVarFileBytes    []byte
-
-	pdfFileLocalVarFormFileName = "pdf_file"
-	pdfFileLocalVarFile := r.pdfFile
-
-	if pdfFileLocalVarFile != nil {
-		fbs, _ := io.ReadAll(pdfFileLocalVarFile)
-
-		pdfFileLocalVarFileBytes = fbs
-		pdfFileLocalVarFileName = pdfFileLocalVarFile.Name()
-		pdfFileLocalVarFile.Close()
-		formFiles = append(formFiles, formFile{fileBytes: pdfFileLocalVarFileBytes, fileName: pdfFileLocalVarFileName, formFileName: pdfFileLocalVarFormFileName})
-	}
+	parameterAddToHeaderOrQuery(localVarFormParams, "pdf_file", r.pdfFile, "", "")
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

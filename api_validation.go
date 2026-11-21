@@ -17,7 +17,6 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"os"
 )
 
 
@@ -27,14 +26,14 @@ type ValidationAPIService service
 type ApiValidateXmlApiV1ProcessingValidateXmlPostRequest struct {
 	ctx context.Context
 	ApiService *ValidationAPIService
-	xmlFile *os.File
+	xmlFile *string
 	profile *APIProfile
 	skipBrFr *bool
 }
 
 // CII (Factur-X) or UBL XML file to validate (.xml format). Format is auto-detected.
-func (r ApiValidateXmlApiV1ProcessingValidateXmlPostRequest) XmlFile(xmlFile *os.File) ApiValidateXmlApiV1ProcessingValidateXmlPostRequest {
-	r.xmlFile = xmlFile
+func (r ApiValidateXmlApiV1ProcessingValidateXmlPostRequest) XmlFile(xmlFile string) ApiValidateXmlApiV1ProcessingValidateXmlPostRequest {
+	r.xmlFile = &xmlFile
 	return r
 }
 
@@ -134,7 +133,7 @@ Examples:
 
 1. **XSLT loading**: Schematron file converted to XSLT (Saxon-HE)
 2. **Transformation**: Rules applied to XML
-3. **Results analysis**: Extraction of errors (`failed-assert`) and warnings (`successful-report`)
+3. **Results analysis**: Extraction of `failed-assert` and `successful-report`; an unflagged rule is fatal, flagged `warning`/`info` rules are non-blocking
 4. **Report**: Structured list of non-conformities
 
 ## Responses
@@ -221,21 +220,7 @@ func (a *ValidationAPIService) ValidateXmlApiV1ProcessingValidateXmlPostExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	var xmlFileLocalVarFormFileName string
-	var xmlFileLocalVarFileName     string
-	var xmlFileLocalVarFileBytes    []byte
-
-	xmlFileLocalVarFormFileName = "xml_file"
-	xmlFileLocalVarFile := r.xmlFile
-
-	if xmlFileLocalVarFile != nil {
-		fbs, _ := io.ReadAll(xmlFileLocalVarFile)
-
-		xmlFileLocalVarFileBytes = fbs
-		xmlFileLocalVarFileName = xmlFileLocalVarFile.Name()
-		xmlFileLocalVarFile.Close()
-		formFiles = append(formFiles, formFile{fileBytes: xmlFileLocalVarFileBytes, fileName: xmlFileLocalVarFileName, formFileName: xmlFileLocalVarFormFileName})
-	}
+	parameterAddToHeaderOrQuery(localVarFormParams, "xml_file", r.xmlFile, "", "")
 	if r.profile != nil {
 		parameterAddToHeaderOrQuery(localVarFormParams, "profile", r.profile, "", "")
 	}
@@ -279,7 +264,7 @@ func (a *ValidationAPIService) ValidateXmlApiV1ProcessingValidateXmlPostExecute(
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ValidationErrorResponse
+			var v FactureElectroniqueRestApiSchemasValidationValidationErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

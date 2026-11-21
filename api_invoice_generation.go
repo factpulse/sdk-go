@@ -17,7 +17,6 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"os"
 )
 
 
@@ -31,7 +30,7 @@ type ApiGenerateInvoiceApiV1ProcessingGenerateInvoicePostRequest struct {
 	profile *APIProfile
 	outputFormat *OutputFormat
 	autoEnrich *bool
-	sourcePdf *os.File
+	sourcePdf *string
 	callbackUrl *string
 	webhookMode *string
 	skipBrFr *bool
@@ -61,8 +60,8 @@ func (r ApiGenerateInvoiceApiV1ProcessingGenerateInvoicePostRequest) AutoEnrich(
 	return r
 }
 
-func (r ApiGenerateInvoiceApiV1ProcessingGenerateInvoicePostRequest) SourcePdf(sourcePdf *os.File) ApiGenerateInvoiceApiV1ProcessingGenerateInvoicePostRequest {
-	r.sourcePdf = sourcePdf
+func (r ApiGenerateInvoiceApiV1ProcessingGenerateInvoicePostRequest) SourcePdf(sourcePdf string) ApiGenerateInvoiceApiV1ProcessingGenerateInvoicePostRequest {
+	r.sourcePdf = &sourcePdf
 	return r
 }
 
@@ -285,20 +284,8 @@ func (a *InvoiceGenerationAPIService) GenerateInvoiceApiV1ProcessingGenerateInvo
 	if r.autoEnrich != nil {
 		parameterAddToHeaderOrQuery(localVarFormParams, "auto_enrich", r.autoEnrich, "", "")
 	}
-	var sourcePdfLocalVarFormFileName string
-	var sourcePdfLocalVarFileName     string
-	var sourcePdfLocalVarFileBytes    []byte
-
-	sourcePdfLocalVarFormFileName = "source_pdf"
-	sourcePdfLocalVarFile := r.sourcePdf
-
-	if sourcePdfLocalVarFile != nil {
-		fbs, _ := io.ReadAll(sourcePdfLocalVarFile)
-
-		sourcePdfLocalVarFileBytes = fbs
-		sourcePdfLocalVarFileName = sourcePdfLocalVarFile.Name()
-		sourcePdfLocalVarFile.Close()
-		formFiles = append(formFiles, formFile{fileBytes: sourcePdfLocalVarFileBytes, fileName: sourcePdfLocalVarFileName, formFileName: sourcePdfLocalVarFormFileName})
+	if r.sourcePdf != nil {
+		parameterAddToHeaderOrQuery(localVarFormParams, "source_pdf", r.sourcePdf, "", "")
 	}
 	if r.callbackUrl != nil {
 		parameterAddToHeaderOrQuery(localVarFormParams, "callback_url", r.callbackUrl, "", "")

@@ -15,11 +15,11 @@ import (
 	"encoding/json"
 )
 
-// checks if the ChorusProCredentials type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ChorusProCredentials{}
+// checks if the FactureElectroniqueRestApiSchemasProcessingChorusProCredentials type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FactureElectroniqueRestApiSchemasProcessingChorusProCredentials{}
 
-// ChorusProCredentials Optional Chorus Pro credentials.  **MODE 1 - JWT retrieval (recommended):** Do not provide this `credentials` field in the payload. Credentials will be automatically retrieved via client_uid from JWT (0-trust).  **MODE 2 - Credentials in payload:** Provide all required fields below. Useful for tests or third-party integrations.
-type ChorusProCredentials struct {
+// FactureElectroniqueRestApiSchemasProcessingChorusProCredentials Optional Chorus Pro credentials.  **MODE 1 - JWT retrieval (recommended):** Do not provide this `credentials` field in the payload. Credentials will be automatically retrieved via client_uid from JWT (0-trust).  **MODE 2 - Credentials in payload:** Provide all required fields below. Useful for tests or third-party integrations.
+type FactureElectroniqueRestApiSchemasProcessingChorusProCredentials struct {
 	PisteClientId NullableString `json:"pisteClientId,omitempty"`
 	PisteClientSecret NullableString `json:"pisteClientSecret,omitempty"`
 	ChorusLogin NullableString `json:"chorusLogin,omitempty"`
@@ -28,29 +28,29 @@ type ChorusProCredentials struct {
 	SandboxMode *bool `json:"sandboxMode,omitempty"`
 }
 
-// NewChorusProCredentials instantiates a new ChorusProCredentials object
+// NewFactureElectroniqueRestApiSchemasProcessingChorusProCredentials instantiates a new FactureElectroniqueRestApiSchemasProcessingChorusProCredentials object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewChorusProCredentials() *ChorusProCredentials {
-	this := ChorusProCredentials{}
+func NewFactureElectroniqueRestApiSchemasProcessingChorusProCredentials() *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials {
+	this := FactureElectroniqueRestApiSchemasProcessingChorusProCredentials{}
 	var sandboxMode bool = true
 	this.SandboxMode = &sandboxMode
 	return &this
 }
 
-// NewChorusProCredentialsWithDefaults instantiates a new ChorusProCredentials object
+// NewFactureElectroniqueRestApiSchemasProcessingChorusProCredentialsWithDefaults instantiates a new FactureElectroniqueRestApiSchemasProcessingChorusProCredentials object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewChorusProCredentialsWithDefaults() *ChorusProCredentials {
-	this := ChorusProCredentials{}
+func NewFactureElectroniqueRestApiSchemasProcessingChorusProCredentialsWithDefaults() *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials {
+	this := FactureElectroniqueRestApiSchemasProcessingChorusProCredentials{}
 	var sandboxMode bool = true
 	this.SandboxMode = &sandboxMode
 	return &this
 }
 
 // GetPisteClientId returns the PisteClientId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ChorusProCredentials) GetPisteClientId() string {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) GetPisteClientId() string {
 	if o == nil || IsNil(o.PisteClientId.Get()) {
 		var ret string
 		return ret
@@ -61,7 +61,7 @@ func (o *ChorusProCredentials) GetPisteClientId() string {
 // GetPisteClientIdOk returns a tuple with the PisteClientId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ChorusProCredentials) GetPisteClientIdOk() (*string, bool) {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) GetPisteClientIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,7 +69,7 @@ func (o *ChorusProCredentials) GetPisteClientIdOk() (*string, bool) {
 }
 
 // HasPisteClientId returns a boolean if a field has been set.
-func (o *ChorusProCredentials) HasPisteClientId() bool {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) HasPisteClientId() bool {
 	if o != nil && o.PisteClientId.IsSet() {
 		return true
 	}
@@ -78,21 +78,21 @@ func (o *ChorusProCredentials) HasPisteClientId() bool {
 }
 
 // SetPisteClientId gets a reference to the given NullableString and assigns it to the PisteClientId field.
-func (o *ChorusProCredentials) SetPisteClientId(v string) {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) SetPisteClientId(v string) {
 	o.PisteClientId.Set(&v)
 }
 // SetPisteClientIdNil sets the value for PisteClientId to be an explicit nil
-func (o *ChorusProCredentials) SetPisteClientIdNil() {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) SetPisteClientIdNil() {
 	o.PisteClientId.Set(nil)
 }
 
 // UnsetPisteClientId ensures that no value is present for PisteClientId, not even an explicit nil
-func (o *ChorusProCredentials) UnsetPisteClientId() {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) UnsetPisteClientId() {
 	o.PisteClientId.Unset()
 }
 
 // GetPisteClientSecret returns the PisteClientSecret field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ChorusProCredentials) GetPisteClientSecret() string {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) GetPisteClientSecret() string {
 	if o == nil || IsNil(o.PisteClientSecret.Get()) {
 		var ret string
 		return ret
@@ -103,7 +103,7 @@ func (o *ChorusProCredentials) GetPisteClientSecret() string {
 // GetPisteClientSecretOk returns a tuple with the PisteClientSecret field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ChorusProCredentials) GetPisteClientSecretOk() (*string, bool) {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) GetPisteClientSecretOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -111,7 +111,7 @@ func (o *ChorusProCredentials) GetPisteClientSecretOk() (*string, bool) {
 }
 
 // HasPisteClientSecret returns a boolean if a field has been set.
-func (o *ChorusProCredentials) HasPisteClientSecret() bool {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) HasPisteClientSecret() bool {
 	if o != nil && o.PisteClientSecret.IsSet() {
 		return true
 	}
@@ -120,21 +120,21 @@ func (o *ChorusProCredentials) HasPisteClientSecret() bool {
 }
 
 // SetPisteClientSecret gets a reference to the given NullableString and assigns it to the PisteClientSecret field.
-func (o *ChorusProCredentials) SetPisteClientSecret(v string) {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) SetPisteClientSecret(v string) {
 	o.PisteClientSecret.Set(&v)
 }
 // SetPisteClientSecretNil sets the value for PisteClientSecret to be an explicit nil
-func (o *ChorusProCredentials) SetPisteClientSecretNil() {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) SetPisteClientSecretNil() {
 	o.PisteClientSecret.Set(nil)
 }
 
 // UnsetPisteClientSecret ensures that no value is present for PisteClientSecret, not even an explicit nil
-func (o *ChorusProCredentials) UnsetPisteClientSecret() {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) UnsetPisteClientSecret() {
 	o.PisteClientSecret.Unset()
 }
 
 // GetChorusLogin returns the ChorusLogin field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ChorusProCredentials) GetChorusLogin() string {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) GetChorusLogin() string {
 	if o == nil || IsNil(o.ChorusLogin.Get()) {
 		var ret string
 		return ret
@@ -145,7 +145,7 @@ func (o *ChorusProCredentials) GetChorusLogin() string {
 // GetChorusLoginOk returns a tuple with the ChorusLogin field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ChorusProCredentials) GetChorusLoginOk() (*string, bool) {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) GetChorusLoginOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -153,7 +153,7 @@ func (o *ChorusProCredentials) GetChorusLoginOk() (*string, bool) {
 }
 
 // HasChorusLogin returns a boolean if a field has been set.
-func (o *ChorusProCredentials) HasChorusLogin() bool {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) HasChorusLogin() bool {
 	if o != nil && o.ChorusLogin.IsSet() {
 		return true
 	}
@@ -162,21 +162,21 @@ func (o *ChorusProCredentials) HasChorusLogin() bool {
 }
 
 // SetChorusLogin gets a reference to the given NullableString and assigns it to the ChorusLogin field.
-func (o *ChorusProCredentials) SetChorusLogin(v string) {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) SetChorusLogin(v string) {
 	o.ChorusLogin.Set(&v)
 }
 // SetChorusLoginNil sets the value for ChorusLogin to be an explicit nil
-func (o *ChorusProCredentials) SetChorusLoginNil() {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) SetChorusLoginNil() {
 	o.ChorusLogin.Set(nil)
 }
 
 // UnsetChorusLogin ensures that no value is present for ChorusLogin, not even an explicit nil
-func (o *ChorusProCredentials) UnsetChorusLogin() {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) UnsetChorusLogin() {
 	o.ChorusLogin.Unset()
 }
 
 // GetChorusPassword returns the ChorusPassword field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ChorusProCredentials) GetChorusPassword() string {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) GetChorusPassword() string {
 	if o == nil || IsNil(o.ChorusPassword.Get()) {
 		var ret string
 		return ret
@@ -187,7 +187,7 @@ func (o *ChorusProCredentials) GetChorusPassword() string {
 // GetChorusPasswordOk returns a tuple with the ChorusPassword field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ChorusProCredentials) GetChorusPasswordOk() (*string, bool) {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) GetChorusPasswordOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -195,7 +195,7 @@ func (o *ChorusProCredentials) GetChorusPasswordOk() (*string, bool) {
 }
 
 // HasChorusPassword returns a boolean if a field has been set.
-func (o *ChorusProCredentials) HasChorusPassword() bool {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) HasChorusPassword() bool {
 	if o != nil && o.ChorusPassword.IsSet() {
 		return true
 	}
@@ -204,21 +204,21 @@ func (o *ChorusProCredentials) HasChorusPassword() bool {
 }
 
 // SetChorusPassword gets a reference to the given NullableString and assigns it to the ChorusPassword field.
-func (o *ChorusProCredentials) SetChorusPassword(v string) {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) SetChorusPassword(v string) {
 	o.ChorusPassword.Set(&v)
 }
 // SetChorusPasswordNil sets the value for ChorusPassword to be an explicit nil
-func (o *ChorusProCredentials) SetChorusPasswordNil() {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) SetChorusPasswordNil() {
 	o.ChorusPassword.Set(nil)
 }
 
 // UnsetChorusPassword ensures that no value is present for ChorusPassword, not even an explicit nil
-func (o *ChorusProCredentials) UnsetChorusPassword() {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) UnsetChorusPassword() {
 	o.ChorusPassword.Unset()
 }
 
 // GetSandboxMode returns the SandboxMode field value if set, zero value otherwise.
-func (o *ChorusProCredentials) GetSandboxMode() bool {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) GetSandboxMode() bool {
 	if o == nil || IsNil(o.SandboxMode) {
 		var ret bool
 		return ret
@@ -228,7 +228,7 @@ func (o *ChorusProCredentials) GetSandboxMode() bool {
 
 // GetSandboxModeOk returns a tuple with the SandboxMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ChorusProCredentials) GetSandboxModeOk() (*bool, bool) {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) GetSandboxModeOk() (*bool, bool) {
 	if o == nil || IsNil(o.SandboxMode) {
 		return nil, false
 	}
@@ -236,7 +236,7 @@ func (o *ChorusProCredentials) GetSandboxModeOk() (*bool, bool) {
 }
 
 // HasSandboxMode returns a boolean if a field has been set.
-func (o *ChorusProCredentials) HasSandboxMode() bool {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) HasSandboxMode() bool {
 	if o != nil && !IsNil(o.SandboxMode) {
 		return true
 	}
@@ -245,11 +245,11 @@ func (o *ChorusProCredentials) HasSandboxMode() bool {
 }
 
 // SetSandboxMode gets a reference to the given bool and assigns it to the SandboxMode field.
-func (o *ChorusProCredentials) SetSandboxMode(v bool) {
+func (o *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) SetSandboxMode(v bool) {
 	o.SandboxMode = &v
 }
 
-func (o ChorusProCredentials) MarshalJSON() ([]byte, error) {
+func (o FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -257,7 +257,7 @@ func (o ChorusProCredentials) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ChorusProCredentials) ToMap() (map[string]interface{}, error) {
+func (o FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.PisteClientId.IsSet() {
 		toSerialize["pisteClientId"] = o.PisteClientId.Get()
@@ -277,38 +277,38 @@ func (o ChorusProCredentials) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableChorusProCredentials struct {
-	value *ChorusProCredentials
+type NullableFactureElectroniqueRestApiSchemasProcessingChorusProCredentials struct {
+	value *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials
 	isSet bool
 }
 
-func (v NullableChorusProCredentials) Get() *ChorusProCredentials {
+func (v NullableFactureElectroniqueRestApiSchemasProcessingChorusProCredentials) Get() *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials {
 	return v.value
 }
 
-func (v *NullableChorusProCredentials) Set(val *ChorusProCredentials) {
+func (v *NullableFactureElectroniqueRestApiSchemasProcessingChorusProCredentials) Set(val *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableChorusProCredentials) IsSet() bool {
+func (v NullableFactureElectroniqueRestApiSchemasProcessingChorusProCredentials) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableChorusProCredentials) Unset() {
+func (v *NullableFactureElectroniqueRestApiSchemasProcessingChorusProCredentials) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableChorusProCredentials(val *ChorusProCredentials) *NullableChorusProCredentials {
-	return &NullableChorusProCredentials{value: val, isSet: true}
+func NewNullableFactureElectroniqueRestApiSchemasProcessingChorusProCredentials(val *FactureElectroniqueRestApiSchemasProcessingChorusProCredentials) *NullableFactureElectroniqueRestApiSchemasProcessingChorusProCredentials {
+	return &NullableFactureElectroniqueRestApiSchemasProcessingChorusProCredentials{value: val, isSet: true}
 }
 
-func (v NullableChorusProCredentials) MarshalJSON() ([]byte, error) {
+func (v NullableFactureElectroniqueRestApiSchemasProcessingChorusProCredentials) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableChorusProCredentials) UnmarshalJSON(src []byte) error {
+func (v *NullableFactureElectroniqueRestApiSchemasProcessingChorusProCredentials) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

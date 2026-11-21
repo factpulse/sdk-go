@@ -17,7 +17,6 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"os"
 )
 
 
@@ -921,7 +920,7 @@ func (a *Flux10EReportingAPIService) SubmitEreportingApiV1EreportingSubmitPostEx
 type ApiSubmitXmlEreportingApiV1EreportingSubmitXmlPostRequest struct {
 	ctx context.Context
 	ApiService *Flux10EReportingAPIService
-	xmlFile *os.File
+	xmlFile *string
 	organizationId *string
 	trackingId *string
 	skipValidation *bool
@@ -932,8 +931,8 @@ type ApiSubmitXmlEreportingApiV1EreportingSubmitXmlPostRequest struct {
 }
 
 // E-reporting XML file
-func (r ApiSubmitXmlEreportingApiV1EreportingSubmitXmlPostRequest) XmlFile(xmlFile *os.File) ApiSubmitXmlEreportingApiV1EreportingSubmitXmlPostRequest {
-	r.xmlFile = xmlFile
+func (r ApiSubmitXmlEreportingApiV1EreportingSubmitXmlPostRequest) XmlFile(xmlFile string) ApiSubmitXmlEreportingApiV1EreportingSubmitXmlPostRequest {
+	r.xmlFile = &xmlFile
 	return r
 }
 
@@ -1048,21 +1047,7 @@ func (a *Flux10EReportingAPIService) SubmitXmlEreportingApiV1EreportingSubmitXml
 	if r.organizationId != nil {
 		parameterAddToHeaderOrQuery(localVarHeaderParams, "Organization-Id", r.organizationId, "simple", "")
 	}
-	var xmlFileLocalVarFormFileName string
-	var xmlFileLocalVarFileName     string
-	var xmlFileLocalVarFileBytes    []byte
-
-	xmlFileLocalVarFormFileName = "xml_file"
-	xmlFileLocalVarFile := r.xmlFile
-
-	if xmlFileLocalVarFile != nil {
-		fbs, _ := io.ReadAll(xmlFileLocalVarFile)
-
-		xmlFileLocalVarFileBytes = fbs
-		xmlFileLocalVarFileName = xmlFileLocalVarFile.Name()
-		xmlFileLocalVarFile.Close()
-		formFiles = append(formFiles, formFile{fileBytes: xmlFileLocalVarFileBytes, fileName: xmlFileLocalVarFileName, formFileName: xmlFileLocalVarFormFileName})
-	}
+	parameterAddToHeaderOrQuery(localVarFormParams, "xml_file", r.xmlFile, "", "")
 	if r.trackingId != nil {
 		parameterAddToHeaderOrQuery(localVarFormParams, "tracking_id", r.trackingId, "", "")
 	}
@@ -1406,14 +1391,14 @@ func (a *Flux10EReportingAPIService) ValidateEreportingApiV1EreportingValidatePo
 type ApiValidateXmlEreportingApiV1EreportingValidateXmlPostRequest struct {
 	ctx context.Context
 	ApiService *Flux10EReportingAPIService
-	xmlFile *os.File
+	xmlFile *string
 	validateCoherence *bool
 	validatePeriod *bool
 }
 
 // E-reporting XML file to validate
-func (r ApiValidateXmlEreportingApiV1EreportingValidateXmlPostRequest) XmlFile(xmlFile *os.File) ApiValidateXmlEreportingApiV1EreportingValidateXmlPostRequest {
-	r.xmlFile = xmlFile
+func (r ApiValidateXmlEreportingApiV1EreportingValidateXmlPostRequest) XmlFile(xmlFile string) ApiValidateXmlEreportingApiV1EreportingValidateXmlPostRequest {
+	r.xmlFile = &xmlFile
 	return r
 }
 
@@ -1518,21 +1503,7 @@ func (a *Flux10EReportingAPIService) ValidateXmlEreportingApiV1EreportingValidat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	var xmlFileLocalVarFormFileName string
-	var xmlFileLocalVarFileName     string
-	var xmlFileLocalVarFileBytes    []byte
-
-	xmlFileLocalVarFormFileName = "xml_file"
-	xmlFileLocalVarFile := r.xmlFile
-
-	if xmlFileLocalVarFile != nil {
-		fbs, _ := io.ReadAll(xmlFileLocalVarFile)
-
-		xmlFileLocalVarFileBytes = fbs
-		xmlFileLocalVarFileName = xmlFileLocalVarFile.Name()
-		xmlFileLocalVarFile.Close()
-		formFiles = append(formFiles, formFile{fileBytes: xmlFileLocalVarFileBytes, fileName: xmlFileLocalVarFileName, formFileName: xmlFileLocalVarFormFileName})
-	}
+	parameterAddToHeaderOrQuery(localVarFormParams, "xml_file", r.xmlFile, "", "")
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

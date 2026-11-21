@@ -17,7 +17,6 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"os"
 )
 
 
@@ -27,13 +26,13 @@ type ParseAPIService service
 type ApiParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostRequest struct {
 	ctx context.Context
 	ApiService *ParseAPIService
-	file *os.File
+	file *string
 	callbackUrl *string
 }
 
 // Factur-X PDF or XML file to parse
-func (r ApiParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostRequest) File(file *os.File) ApiParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostRequest {
-	r.file = file
+func (r ApiParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostRequest) File(file string) ApiParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostRequest {
+	r.file = &file
 	return r
 }
 
@@ -111,21 +110,7 @@ func (a *ParseAPIService) ParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	var fileLocalVarFormFileName string
-	var fileLocalVarFileName     string
-	var fileLocalVarFileBytes    []byte
-
-	fileLocalVarFormFileName = "file"
-	fileLocalVarFile := r.file
-
-	if fileLocalVarFile != nil {
-		fbs, _ := io.ReadAll(fileLocalVarFile)
-
-		fileLocalVarFileBytes = fbs
-		fileLocalVarFileName = fileLocalVarFile.Name()
-		fileLocalVarFile.Close()
-		formFiles = append(formFiles, formFile{fileBytes: fileLocalVarFileBytes, fileName: fileLocalVarFileName, formFileName: fileLocalVarFormFileName})
-	}
+	parameterAddToHeaderOrQuery(localVarFormParams, "file", r.file, "", "")
 	if r.callbackUrl != nil {
 		parameterAddToHeaderOrQuery(localVarFormParams, "callbackUrl", r.callbackUrl, "", "")
 	}
@@ -204,12 +189,12 @@ func (a *ParseAPIService) ParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostE
 type ApiParseFacturxSyncApiV1ProcessingParseFacturxPostRequest struct {
 	ctx context.Context
 	ApiService *ParseAPIService
-	file *os.File
+	file *string
 }
 
 // Factur-X PDF or XML file to parse
-func (r ApiParseFacturxSyncApiV1ProcessingParseFacturxPostRequest) File(file *os.File) ApiParseFacturxSyncApiV1ProcessingParseFacturxPostRequest {
-	r.file = file
+func (r ApiParseFacturxSyncApiV1ProcessingParseFacturxPostRequest) File(file string) ApiParseFacturxSyncApiV1ProcessingParseFacturxPostRequest {
+	r.file = &file
 	return r
 }
 
@@ -287,21 +272,7 @@ func (a *ParseAPIService) ParseFacturxSyncApiV1ProcessingParseFacturxPostExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	var fileLocalVarFormFileName string
-	var fileLocalVarFileName     string
-	var fileLocalVarFileBytes    []byte
-
-	fileLocalVarFormFileName = "file"
-	fileLocalVarFile := r.file
-
-	if fileLocalVarFile != nil {
-		fbs, _ := io.ReadAll(fileLocalVarFile)
-
-		fileLocalVarFileBytes = fbs
-		fileLocalVarFileName = fileLocalVarFile.Name()
-		fileLocalVarFile.Close()
-		formFiles = append(formFiles, formFile{fileBytes: fileLocalVarFileBytes, fileName: fileLocalVarFileName, formFileName: fileLocalVarFormFileName})
-	}
+	parameterAddToHeaderOrQuery(localVarFormParams, "file", r.file, "", "")
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

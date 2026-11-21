@@ -14,11 +14,13 @@ Method | HTTP request | Description
 [**GetPdpConfigApiV1ClientsUidPdpConfigGet**](ClientManagementAPI.md#GetPdpConfigApiV1ClientsUidPdpConfigGet) | **Get** /api/v1/clients/{uid}/pdp-config | Get client PDP configuration
 [**GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost**](ClientManagementAPI.md#GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost) | **Post** /api/v1/clients/{uid}/superpdp/connect-url | Get SuperPDP connection URL
 [**GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet**](ClientManagementAPI.md#GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet) | **Get** /api/v1/clients/{uid}/superpdp/status | Get SuperPDP connection status
+[**GetSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimeGet**](ClientManagementAPI.md#GetSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimeGet) | **Get** /api/v1/clients/{uid}/superpdp/vat-regime | Get the SuperPDP VAT regime
 [**GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet**](ClientManagementAPI.md#GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet) | **Get** /api/v1/clients/{uid}/webhook-secret/status | Get webhook secret status
 [**ListClientsApiV1ClientsGet**](ClientManagementAPI.md#ListClientsApiV1ClientsGet) | **Get** /api/v1/clients | List clients
 [**RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost**](ClientManagementAPI.md#RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost) | **Post** /api/v1/clients/{uid}/rotate-encryption-key | Rotate client encryption key
 [**UpdateClientApiV1ClientsUidPatch**](ClientManagementAPI.md#UpdateClientApiV1ClientsUidPatch) | **Patch** /api/v1/clients/{uid} | Update a client
 [**UpdatePdpConfigApiV1ClientsUidPdpConfigPut**](ClientManagementAPI.md#UpdatePdpConfigApiV1ClientsUidPdpConfigPut) | **Put** /api/v1/clients/{uid}/pdp-config | Configure client PDP
+[**UpdateSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimePatch**](ClientManagementAPI.md#UpdateSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimePatch) | **Patch** /api/v1/clients/{uid}/superpdp/vat-regime | Set the SuperPDP VAT regime
 
 
 
@@ -722,6 +724,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimeGet
+
+> SuperPDPVatRegimeResponse GetSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimeGet(ctx, uid).Execute()
+
+Get the SuperPDP VAT regime
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/factpulse/sdk-go/v4"
+)
+
+func main() {
+	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Client unique identifier (UUID)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ClientManagementAPI.GetSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimeGet(context.Background(), uid).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ClientManagementAPI.GetSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimeGet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimeGet`: SuperPDPVatRegimeResponse
+	fmt.Fprintf(os.Stdout, "Response from `ClientManagementAPI.GetSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimeGet`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**uid** | **string** | Client unique identifier (UUID) | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimeGetRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**SuperPDPVatRegimeResponse**](SuperPDPVatRegimeResponse.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet
 
 > WebhookSecretStatusResponse GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet(ctx, uid).Execute()
@@ -1063,6 +1135,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PDPConfigResponse**](PDPConfigResponse.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimePatch
+
+> SuperPDPVatRegimeResponse UpdateSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimePatch(ctx, uid).SuperPDPVatRegimeUpdateRequest(superPDPVatRegimeUpdateRequest).Execute()
+
+Set the SuperPDP VAT regime
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/factpulse/sdk-go/v4"
+)
+
+func main() {
+	uid := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Client unique identifier (UUID)
+	superPDPVatRegimeUpdateRequest := *openapiclient.NewSuperPDPVatRegimeUpdateRequest("VatRegime_example") // SuperPDPVatRegimeUpdateRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ClientManagementAPI.UpdateSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimePatch(context.Background(), uid).SuperPDPVatRegimeUpdateRequest(superPDPVatRegimeUpdateRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ClientManagementAPI.UpdateSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimePatch``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimePatch`: SuperPDPVatRegimeResponse
+	fmt.Fprintf(os.Stdout, "Response from `ClientManagementAPI.UpdateSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimePatch`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**uid** | **string** | Client unique identifier (UUID) | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimePatchRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **superPDPVatRegimeUpdateRequest** | [**SuperPDPVatRegimeUpdateRequest**](SuperPDPVatRegimeUpdateRequest.md) |  | 
+
+### Return type
+
+[**SuperPDPVatRegimeResponse**](SuperPDPVatRegimeResponse.md)
 
 ### Authorization
 

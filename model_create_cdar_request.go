@@ -52,6 +52,8 @@ type CreateCDARRequest struct {
 	EncaisseAmount NullableEncaisseamount `json:"encaisseAmount,omitempty"`
 	// Taux de TVA du montant encaissé en % (MDT-224, requis par BR-FR-CDV-14 pour le statut 212 ; défaut 20)
 	EncaisseVatRate *float32 `json:"encaisseVatRate,omitempty"`
+	EncaisseAmountsByRate []EncaisseAmountByRate `json:"encaisseAmountsByRate,omitempty"`
+	Comment NullableString `json:"comment,omitempty"`
 }
 
 type _CreateCDARRequest CreateCDARRequest
@@ -746,6 +748,81 @@ func (o *CreateCDARRequest) SetEncaisseVatRate(v float32) {
 	o.EncaisseVatRate = &v
 }
 
+// GetEncaisseAmountsByRate returns the EncaisseAmountsByRate field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateCDARRequest) GetEncaisseAmountsByRate() []EncaisseAmountByRate {
+	if o == nil {
+		var ret []EncaisseAmountByRate
+		return ret
+	}
+	return o.EncaisseAmountsByRate
+}
+
+// GetEncaisseAmountsByRateOk returns a tuple with the EncaisseAmountsByRate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateCDARRequest) GetEncaisseAmountsByRateOk() ([]EncaisseAmountByRate, bool) {
+	if o == nil || IsNil(o.EncaisseAmountsByRate) {
+		return nil, false
+	}
+	return o.EncaisseAmountsByRate, true
+}
+
+// HasEncaisseAmountsByRate returns a boolean if a field has been set.
+func (o *CreateCDARRequest) HasEncaisseAmountsByRate() bool {
+	if o != nil && !IsNil(o.EncaisseAmountsByRate) {
+		return true
+	}
+
+	return false
+}
+
+// SetEncaisseAmountsByRate gets a reference to the given []EncaisseAmountByRate and assigns it to the EncaisseAmountsByRate field.
+func (o *CreateCDARRequest) SetEncaisseAmountsByRate(v []EncaisseAmountByRate) {
+	o.EncaisseAmountsByRate = v
+}
+
+// GetComment returns the Comment field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateCDARRequest) GetComment() string {
+	if o == nil || IsNil(o.Comment.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Comment.Get()
+}
+
+// GetCommentOk returns a tuple with the Comment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateCDARRequest) GetCommentOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Comment.Get(), o.Comment.IsSet()
+}
+
+// HasComment returns a boolean if a field has been set.
+func (o *CreateCDARRequest) HasComment() bool {
+	if o != nil && o.Comment.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetComment gets a reference to the given NullableString and assigns it to the Comment field.
+func (o *CreateCDARRequest) SetComment(v string) {
+	o.Comment.Set(&v)
+}
+// SetCommentNil sets the value for Comment to be an explicit nil
+func (o *CreateCDARRequest) SetCommentNil() {
+	o.Comment.Set(nil)
+}
+
+// UnsetComment ensures that no value is present for Comment, not even an explicit nil
+func (o *CreateCDARRequest) UnsetComment() {
+	o.Comment.Unset()
+}
+
 func (o CreateCDARRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -802,6 +879,12 @@ func (o CreateCDARRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.EncaisseVatRate) {
 		toSerialize["encaisseVatRate"] = o.EncaisseVatRate
+	}
+	if o.EncaisseAmountsByRate != nil {
+		toSerialize["encaisseAmountsByRate"] = o.EncaisseAmountsByRate
+	}
+	if o.Comment.IsSet() {
+		toSerialize["comment"] = o.Comment.Get()
 	}
 	return toSerialize, nil
 }

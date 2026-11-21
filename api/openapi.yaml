@@ -836,7 +836,7 @@ paths:
 
         1. **XSLT loading**: Schematron file converted to XSLT (Saxon-HE)
         2. **Transformation**: Rules applied to XML
-        3. **Results analysis**: Extraction of errors (`failed-assert`) and warnings (`successful-report`)
+        3. **Results analysis**: Extraction of `failed-assert` and `successful-report`; an unflagged rule is fatal, flagged `warning`/`info` rules are non-blocking
         4. **Report**: Structured list of non-conformities
 
         ## Responses
@@ -889,7 +889,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ValidationErrorResponse"
+                $ref: "#/components/schemas/facture_electronique__rest_api__schemas__validation__ValidationErrorResponse"
           description: XML does not comply with validation rules
         "422":
           content:
@@ -5083,13 +5083,22 @@ paths:
         Returns lifecycle events (CDAR) grouped by invoice reference.
 
         **How it works (AFNOR XP Z12-013 compliant):**
-        1. Searches lifecycle flows on the PDP by flowType + flowDirection + date range
+        1. Searches lifecycle flows on the PDP by flowType + flowDirection + date range,
+           following the cursor pagination (all pages are read)
         2. Downloads and parses each CDAR XML to extract the invoice reference
         3. Groups events by invoice, sorted chronologically
 
         **Parameters:**
-        - `days`: Number of days to look back (default: 7)
-        - `invoiceId`: Optional filter on a specific invoice reference
+        - `days`: Number of days to look back (default: 7). Ignored when `dateFrom` is set.
+        - `dateFrom` / `dateTo`: Explicit time window (ISO 8601, UTC if no offset).
+          `dateTo` defaults to now.
+        - `invoiceId`: Optional filter on a specific invoice reference. The filter is applied
+          after reading the window: prefer one call per synchronisation over one call per invoice.
+
+        **Limits:** at most 1000 status flows are read per call. When the limit is reached,
+        `truncated` is `true` and the response is incomplete: split the window with
+        `dateFrom` / `dateTo`. For incremental synchronisation, request the period since
+        your last successful sync (plus a small margin).
         - `flowDirection`: `All` (default), `In` (statuses received from the counterparty)
           or `Out` (statuses issued by you or your PA, e.g. 202/203)
 
@@ -5108,6 +5117,26 @@ paths:
           minimum: 1
           title: Days
           type: integer
+        style: form
+      - description: "Window start (ISO 8601, UTC if no offset). Overrides days."
+        explode: true
+        in: query
+        name: dateFrom
+        required: false
+        schema:
+          format: date-time
+          nullable: true
+          type: string
+        style: form
+      - description: "Window end (ISO 8601, UTC if no offset). Default: now"
+        explode: true
+        in: query
+        name: dateTo
+        required: false
+        schema:
+          format: date-time
+          nullable: true
+          type: string
         style: form
       - description: Filter by invoice reference
         explode: true
@@ -6380,6 +6409,129 @@ paths:
       summary: Disconnect SuperPDP
       tags:
       - Client Management
+  /api/v1/clients/{uid}/superpdp/vat-regime:
+    get:
+      description: |-
+        Read the VAT regime of the client's company at SuperPDP (`vatRegime` is null when not set).
+
+        SuperPDP refuses e-reporting ("The VAT regime needs to be setup at the company
+        level") until the VAT regime of the company is set: it defines the e-reporting
+        transmission periods, and the Flux 10 file does not carry it. This setting is
+        not part of the AFNOR API; FactPulse sets it with the client's SuperPDP
+        connection.
+
+        **Scope**: Client level (JWT with client_uid that must match {uid})
+
+        **Errors**:
+        - `404 not_connected`: the client has not connected its SuperPDP account
+        - `400 superpdp_error`: SuperPDP refused the request (`superpdp_status`, `message`)
+        - `502`: SuperPDP unreachable, or the SuperPDP connection must be redone
+      operationId: get_superpdp_vat_regime_api_v1_clients__uid__superpdp_vat_regime_get
+      parameters:
+      - description: Client unique identifier (UUID)
+        explode: false
+        in: path
+        name: uid
+        required: true
+        schema:
+          description: Client unique identifier (UUID)
+          format: uuid
+          title: Uid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuperPDPVatRegimeResponse"
+          description: Successful Response
+        "400":
+          description: Invalid request
+        "401":
+          description: Missing or invalid JWT token
+        "403":
+          description: Access denied
+        "404":
+          description: Client not found
+        "500":
+          description: Server error
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      security:
+      - HTTPBearer: []
+      - APIKeyHeader: []
+      summary: Get the SuperPDP VAT regime
+      tags:
+      - Client Management
+    patch:
+      description: |-
+        Set the VAT regime of the client's company at SuperPDP. When `hasVatOnDebits` is omitted, its current value is kept.
+
+        SuperPDP refuses e-reporting ("The VAT regime needs to be setup at the company
+        level") until the VAT regime of the company is set: it defines the e-reporting
+        transmission periods, and the Flux 10 file does not carry it. This setting is
+        not part of the AFNOR API; FactPulse sets it with the client's SuperPDP
+        connection.
+
+        **Scope**: Client level (JWT with client_uid that must match {uid})
+
+        **Errors**:
+        - `404 not_connected`: the client has not connected its SuperPDP account
+        - `400 superpdp_error`: SuperPDP refused the request (`superpdp_status`, `message`)
+        - `502`: SuperPDP unreachable, or the SuperPDP connection must be redone
+      operationId: update_superpdp_vat_regime_api_v1_clients__uid__superpdp_vat_regime_patch
+      parameters:
+      - description: Client unique identifier (UUID)
+        explode: false
+        in: path
+        name: uid
+        required: true
+        schema:
+          description: Client unique identifier (UUID)
+          format: uuid
+          title: Uid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SuperPDPVatRegimeUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuperPDPVatRegimeResponse"
+          description: Successful Response
+        "400":
+          description: Invalid request
+        "401":
+          description: Missing or invalid JWT token
+        "403":
+          description: Access denied
+        "404":
+          description: Client not found
+        "500":
+          description: Server error
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      security:
+      - HTTPBearer: []
+      - APIKeyHeader: []
+      summary: Set the SuperPDP VAT regime
+      tags:
+      - Client Management
   /api/v1/me:
     get:
       description: |-
@@ -6858,7 +7010,6 @@ components:
       properties:
         file:
           description: "Document to convert (PDF, DOCX, XLSX, JPG, PNG)"
-          format: binary
           title: File
           type: string
         output:
@@ -6907,7 +7058,6 @@ components:
           title: Auto Enrich
           type: boolean
         source_pdf:
-          format: binary
           nullable: true
           type: string
         callback_url:
@@ -6929,7 +7079,6 @@ components:
       properties:
         file:
           description: Factur-X PDF or XML file to parse
-          format: binary
           title: File
           type: string
         callbackUrl:
@@ -6942,7 +7091,6 @@ components:
       properties:
         file:
           description: Factur-X PDF or XML file to parse
-          format: binary
           title: File
           type: string
       required:
@@ -6953,7 +7101,6 @@ components:
         pdf_file:
           description: PDF file to sign (will be processed and returned signed in
             base64)
-          format: binary
           title: Pdf File
           type: string
         reason:
@@ -6989,7 +7136,6 @@ components:
       properties:
         pdf_file:
           description: PDF file to sign (processed asynchronously)
-          format: binary
           title: Pdf File
           type: string
         callback_url:
@@ -7034,7 +7180,6 @@ components:
       properties:
         xml_file:
           description: E-reporting XML file
-          format: binary
           title: Xml File
           type: string
         tracking_id:
@@ -7064,7 +7209,6 @@ components:
       properties:
         pdf_file:
           description: Factur-X PDF file to validate (.pdf format).
-          format: binary
           title: Pdf File
           type: string
         profile:
@@ -7087,7 +7231,6 @@ components:
       properties:
         pdf_file:
           description: Factur-X PDF file to validate (.pdf format).
-          format: binary
           title: Pdf File
           type: string
         profile:
@@ -7117,7 +7260,6 @@ components:
         pdf_file:
           description: PDF file to validate (will be analyzed to detect and validate
             signatures)
-          format: binary
           title: Pdf File
           type: string
       required:
@@ -7128,7 +7270,6 @@ components:
         xml_file:
           description: CII (Factur-X) or UBL XML file to validate (.xml format). Format
             is auto-detected.
-          format: binary
           title: Xml File
           type: string
         profile:
@@ -7147,7 +7288,6 @@ components:
       properties:
         xml_file:
           description: CDAR XML file to validate
-          format: binary
           title: Xml File
           type: string
       required:
@@ -7157,7 +7297,6 @@ components:
       properties:
         xml_file:
           description: E-reporting XML file to validate
-          format: binary
           title: Xml File
           type: string
       required:
@@ -7167,7 +7306,6 @@ components:
       properties:
         pdf_file:
           description: Factur-X PDF file to verify
-          format: binary
           title: Pdf File
           type: string
         force_ocr:
@@ -7191,7 +7329,6 @@ components:
       properties:
         pdf_file:
           description: Factur-X PDF file to verify
-          format: binary
           title: Pdf File
           type: string
       required:
@@ -7342,42 +7479,6 @@ components:
       - validFrom
       - validTo
       title: CertificateInfoResponse
-    ChorusProCredentials:
-      description: |-
-        Optional Chorus Pro credentials.
-
-        **MODE 1 - JWT retrieval (recommended):**
-        Do not provide this `credentials` field in the payload.
-        Credentials will be automatically retrieved via client_uid from JWT (0-trust).
-
-        **MODE 2 - Credentials in payload:**
-        Provide all required fields below.
-        Useful for tests or third-party integrations.
-      example:
-        chorusLogin: my_login@company.fr
-        chorusPassword: MyPassword123!
-        pisteClientId: my_piste_client_id
-        pisteClientSecret: my_piste_secret
-        sandboxMode: true
-      properties:
-        pisteClientId:
-          nullable: true
-          type: string
-        pisteClientSecret:
-          nullable: true
-          type: string
-        chorusLogin:
-          nullable: true
-          type: string
-        chorusPassword:
-          nullable: true
-          type: string
-        sandboxMode:
-          default: true
-          description: "[MODE 2] Use sandbox mode (default: True)"
-          title: Sandboxmode
-          type: boolean
-      title: ChorusProCredentials
     ChorusProDestination:
       description: Specific configuration for Chorus Pro destination.
       properties:
@@ -7389,7 +7490,7 @@ components:
           type: string
         credentials:
           allOf:
-          - $ref: "#/components/schemas/ChorusProCredentials"
+          - $ref: "#/components/schemas/facture_electronique__rest_api__schemas__processing__ChorusProCredentials"
           nullable: true
       title: ChorusProDestination
     ChorusProResult:
@@ -8417,6 +8518,11 @@ components:
         invoiceIssueDate: 2000-01-23
         invoiceBuyerSiren: invoiceBuyerSiren
         typeCode: "23"
+        encaisseAmountsByRate:
+        - amount: "720.00"
+          rate: 20
+        - amount: "720.00"
+          rate: 20
         businessProcess: REGULATED
         senderName: senderName
         invoiceSellerSiren: invoiceSellerSiren
@@ -8438,6 +8544,7 @@ components:
         invoiceId: invoiceId
         actionCode: actionCode
         encaisseAmount: 0.8008281904610115
+        comment: comment
         reasonCode: reasonCode
         senderRole: WK
         status: status
@@ -8518,6 +8625,16 @@ components:
             \ BR-FR-CDV-14 pour le statut 212 ; défaut 20)"
           title: Encaissevatrate
           type: number
+        encaisseAmountsByRate:
+          items:
+            $ref: "#/components/schemas/EncaisseAmountByRate"
+          minItems: 1
+          nullable: true
+          type: array
+        comment:
+          maxLength: 2000
+          nullable: true
+          type: string
       required:
       - documentId
       - invoiceId
@@ -8797,6 +8914,23 @@ components:
       required:
       - identifier
       title: ElectronicAddress
+    EncaisseAmountByRate:
+      description: "Montant encaissé TTC pour un taux de TVA (un bloc MEN, MDG-43)."
+      example:
+        amount: "720.00"
+        rate: 20
+      properties:
+        rate:
+          description: "Taux de TVA applicable au montant encaissé, en % (MDT-224)"
+          example: 20
+          title: Rate
+          type: number
+        amount:
+          $ref: "#/components/schemas/Amount_1"
+      required:
+      - amount
+      - rate
+      title: EncaisseAmountByRate
     EncaisseeRequest:
       description: |-
         Requête simplifiée pour soumettre un statut ENCAISSÉE (212).
@@ -8806,7 +8940,7 @@ components:
 
         Statut obligatoire PPF - Le montant encaissé est OBLIGATOIRE (BR-FR-CDV-14).
       example:
-        amount: 0.08008281904610115
+        amount: 0.8008281904610115
         senderSiren: senderSiren
         invoiceIssueDate: 2000-01-23
         vatRate: 6.027456183070403
@@ -8817,7 +8951,13 @@ components:
         pdpClientSecret: pdpClientSecret
         invoiceBuyerElectronicAddress: invoiceBuyerElectronicAddress
         invoiceId: invoiceId
+        comment: comment
         currency: EUR
+        amountsByRate:
+        - amount: "720.00"
+          rate: 20
+        - amount: "720.00"
+          rate: 20
         flowType: CustomerInvoiceLC
       properties:
         invoiceId:
@@ -8834,17 +8974,26 @@ components:
           title: Invoicebuyersiren
           type: string
         invoiceBuyerElectronicAddress:
-          description: Adresse électronique de l'acheteur (MDT-73)
-          title: Invoicebuyerelectronicaddress
+          nullable: true
           type: string
         amount:
-          $ref: "#/components/schemas/Amount_1"
+          $ref: "#/components/schemas/Amount_2"
         vatRate:
           default: 20
           description: "Taux de TVA du montant encaissé en % (MDT-224, requis par\
-            \ BR-FR-CDV-14 ; défaut 20)"
+            \ BR-FR-CDV-14 ; défaut 20). Ignoré avec amountsByRate"
           title: Vatrate
           type: number
+        amountsByRate:
+          items:
+            $ref: "#/components/schemas/EncaisseAmountByRate"
+          minItems: 1
+          nullable: true
+          type: array
+        comment:
+          maxLength: 2000
+          nullable: true
+          type: string
         currency:
           default: EUR
           description: Code devise ISO 4217
@@ -8871,8 +9020,6 @@ components:
           nullable: true
           type: string
       required:
-      - amount
-      - invoiceBuyerElectronicAddress
       - invoiceBuyerSiren
       - invoiceId
       - invoiceIssueDate
@@ -9736,11 +9883,15 @@ components:
           loc:
           - Location_inner
           - Location_inner
+          input: ""
+          ctx: "{}"
           type: type
         - msg: msg
           loc:
           - Location_inner
           - Location_inner
+          input: ""
+          ctx: "{}"
           type: type
       properties:
         detail:
@@ -9932,7 +10083,7 @@ components:
           type: string
         typeCode:
           allOf:
-          - $ref: "#/components/schemas/InvoiceTypeCode"
+          - $ref: "#/components/schemas/facture_electronique__rest_api__schemas__ereporting__InvoiceTypeCode"
           default: "380"
           description: Invoice type code
         currency:
@@ -10337,16 +10488,6 @@ components:
       - total_net_amount
       - vat_amount
       title: InvoiceTotals
-    InvoiceTypeCode:
-      description: Invoice type codes (UNTDID 1001).
-      enum:
-      - "380"
-      - "381"
-      - "384"
-      - "389"
-      - "386"
-      title: InvoiceTypeCode
-      type: string
     InvoiceTypeCode-Output:
       description: |-
         Document type according to BR-FR-04 (UNTDID 1001 codes).
@@ -10600,6 +10741,7 @@ components:
       description: "Reponse des cycles de vie, groupes par facture."
       example:
         cutoffDays: 1
+        totalFlows: 5
         invoices:
         - sellerId: sellerId
           totalEvents: 0
@@ -10657,6 +10799,9 @@ components:
             flowId: flowId
             statusCode: statusCode
             issuerSiren: issuerSiren
+        dateTo: dateTo
+        truncated: false
+        dateFrom: dateFrom
         totalInvoices: 6
       properties:
         invoices:
@@ -10673,6 +10818,23 @@ components:
           description: Nombre de jours de la fenetre de recherche
           title: Cutoffdays
           type: integer
+        totalFlows:
+          default: 0
+          description: Nombre de flux de statut (CDAR) lus sur la PA
+          title: Totalflows
+          type: integer
+        truncated:
+          default: false
+          description: "True si la limite de flux lus par appel a ete atteinte : la\
+            \ reponse est incomplete, reduire la fenetre (dateFrom/dateTo ou days)"
+          title: Truncated
+          type: boolean
+        dateFrom:
+          nullable: true
+          type: string
+        dateTo:
+          nullable: true
+          type: string
       required:
       - cutoffDays
       - totalInvoices
@@ -11249,7 +11411,7 @@ components:
         rate:
           $ref: "#/components/schemas/Rate"
         amount:
-          $ref: "#/components/schemas/Amount_2"
+          $ref: "#/components/schemas/Amount_3"
         amountEur:
           $ref: "#/components/schemas/Amounteur"
       required:
@@ -11284,6 +11446,9 @@ components:
         | ESPECE | CASH | 10 |
         | AUTRE | OTHER | 57 |
         | REPORT | CLEARING | 97 |
+        | CARTE | CARD | 48 |
+
+        CARTE is not a Chorus Pro value: it is sent to Chorus Pro as AUTRE.
       enum:
       - CHEQUE
       - PRELEVEMENT
@@ -11291,6 +11456,7 @@ components:
       - ESPECE
       - AUTRE
       - REPORT
+      - CARTE
       title: PaymentMeans
       type: string
     PostalAddress-Input:
@@ -12444,16 +12610,25 @@ components:
       description: Requête de soumission CDAR (génération + envoi).
       example:
         reasonText: reasonText
-        senderSiren: senderSiren
-        invoiceIssueDate: 2000-01-23
         invoiceBuyerSiren: invoiceBuyerSiren
-        pdpFlowServiceUrl: pdpFlowServiceUrl
-        pdpTokenUrl: pdpTokenUrl
         pdpClientId: pdpClientId
-        typeCode: "23"
-        businessProcess: REGULATED
+        encaisseAmountsByRate:
+        - amount: "720.00"
+          rate: 20
+        - amount: "720.00"
+          rate: 20
         senderName: senderName
         invoiceSellerSiren: invoiceSellerSiren
+        senderEmail: senderEmail
+        actionCode: actionCode
+        encaisseAmount: 0.8008281904610115
+        reasonCode: reasonCode
+        senderSiren: senderSiren
+        invoiceIssueDate: 2000-01-23
+        pdpFlowServiceUrl: pdpFlowServiceUrl
+        pdpTokenUrl: pdpTokenUrl
+        typeCode: "23"
+        businessProcess: REGULATED
         recipients:
         - siren: siren
           role: BY
@@ -12466,14 +12641,11 @@ components:
           siret: siret
           email: email
         pdpClientSecret: pdpClientSecret
-        senderEmail: senderEmail
         invoiceTypeCode: "380"
         encaisseVatRate: 6.027456183070403
         documentId: documentId
         invoiceId: invoiceId
-        actionCode: actionCode
-        encaisseAmount: 0.8008281904610115
-        reasonCode: reasonCode
+        comment: comment
         senderRole: WK
         status: status
         flowType: CustomerInvoiceLC
@@ -12554,6 +12726,16 @@ components:
             \ BR-FR-CDV-14 pour le statut 212 ; défaut 20)"
           title: Encaissevatrate
           type: number
+        encaisseAmountsByRate:
+          items:
+            $ref: "#/components/schemas/EncaisseAmountByRate"
+          minItems: 1
+          nullable: true
+          type: array
+        comment:
+          maxLength: 2000
+          nullable: true
+          type: string
         flowType:
           default: CustomerInvoiceLC
           description: "Type de flux AFNOR (CustomerInvoiceLC, SupplierInvoiceLC,\
@@ -13028,6 +13210,48 @@ components:
       required:
       - connected
       title: SuperPDPStatusResponse
+    SuperPDPVatRegimeResponse:
+      description: VAT regime of the client's company at SuperPDP.
+      example:
+        vatRegime: monthly
+        hasVatOnDebits: false
+      properties:
+        vatRegime:
+          enum:
+          - monthly
+          - quarterly
+          - simplified
+          - vat_exemption
+          nullable: true
+          type: string
+        hasVatOnDebits:
+          default: false
+          description: Whether VAT on debits is opted for
+          title: Hasvatondebits
+          type: boolean
+      title: SuperPDPVatRegimeResponse
+    SuperPDPVatRegimeUpdateRequest:
+      description: VAT regime to set on the client's company at SuperPDP.
+      example:
+        vatRegime: monthly
+        hasVatOnDebits: true
+      properties:
+        vatRegime:
+          description: "monthly (réel normal mensuel), quarterly (réel normal trimestriel),\
+            \ simplified (régime simplifié), vat_exemption (franchise en base)"
+          enum:
+          - monthly
+          - quarterly
+          - simplified
+          - vat_exemption
+          title: Vatregime
+          type: string
+        hasVatOnDebits:
+          nullable: true
+          type: boolean
+      required:
+      - vatRegime
+      title: SuperPDPVatRegimeUpdateRequest
     SupplementaryAttachment:
       description: Represents a supplementary attachment.
       properties:
@@ -13477,6 +13701,11 @@ components:
         reasonCode: reasonCode
         senderRole: senderRole
         status: status
+        encaisseAmountsByRate:
+        - amount: "720.00"
+          rate: 20
+        - amount: "720.00"
+          rate: 20
       properties:
         documentId:
           nullable: true
@@ -13502,6 +13731,11 @@ components:
           type: string
         encaisseAmount:
           $ref: "#/components/schemas/Encaisseamount_1"
+        encaisseAmountsByRate:
+          items:
+            $ref: "#/components/schemas/EncaisseAmountByRate"
+          nullable: true
+          type: array
       title: ValidateCDARRequest
     ValidateCDARResponse:
       description: Réponse de validation CDAR.
@@ -13619,6 +13853,8 @@ components:
         loc:
         - Location_inner
         - Location_inner
+        input: ""
+        ctx: "{}"
         type: type
       properties:
         loc:
@@ -13632,6 +13868,11 @@ components:
         type:
           title: Error Type
           type: string
+        input:
+          title: Input
+        ctx:
+          title: Context
+          type: object
       required:
       - loc
       - msg
@@ -13669,22 +13910,6 @@ components:
       - item
       - reason
       title: ValidationErrorDetail
-    ValidationErrorResponse:
-      description: Response for validation errors.
-      example:
-        detail:
-        - detail
-        - detail
-      properties:
-        detail:
-          description: List of detected validation errors.
-          items:
-            type: string
-          title: Detail
-          type: array
-      required:
-      - detail
-      title: ValidationErrorResponse
     ValidationInfo:
       description: Informations sur la validation.
       example:
@@ -14350,6 +14575,68 @@ components:
       - pisteClientId
       - pisteClientSecret
       title: ChorusProCredentials
+    facture_electronique__rest_api__schemas__ereporting__InvoiceTypeCode:
+      description: Invoice type codes (UNTDID 1001).
+      enum:
+      - "380"
+      - "381"
+      - "384"
+      - "389"
+      - "386"
+      title: InvoiceTypeCode
+      type: string
+    facture_electronique__rest_api__schemas__processing__ChorusProCredentials:
+      description: |-
+        Optional Chorus Pro credentials.
+
+        **MODE 1 - JWT retrieval (recommended):**
+        Do not provide this `credentials` field in the payload.
+        Credentials will be automatically retrieved via client_uid from JWT (0-trust).
+
+        **MODE 2 - Credentials in payload:**
+        Provide all required fields below.
+        Useful for tests or third-party integrations.
+      example:
+        chorusLogin: my_login@company.fr
+        chorusPassword: MyPassword123!
+        pisteClientId: my_piste_client_id
+        pisteClientSecret: my_piste_secret
+        sandboxMode: true
+      properties:
+        pisteClientId:
+          nullable: true
+          type: string
+        pisteClientSecret:
+          nullable: true
+          type: string
+        chorusLogin:
+          nullable: true
+          type: string
+        chorusPassword:
+          nullable: true
+          type: string
+        sandboxMode:
+          default: true
+          description: "[MODE 2] Use sandbox mode (default: True)"
+          title: Sandboxmode
+          type: boolean
+      title: ChorusProCredentials
+    facture_electronique__rest_api__schemas__validation__ValidationErrorResponse:
+      description: Response for validation errors.
+      example:
+        detail:
+        - detail
+        - detail
+      properties:
+        detail:
+          description: List of detected validation errors.
+          items:
+            type: string
+          title: Detail
+          type: array
+      required:
+      - detail
+      title: ValidationErrorResponse
     ElectronicAddress:
       description: |-
         Represents an electronic invoicing address, composed of an identifier
@@ -17480,6 +17767,61 @@ components:
           $ref: "#/components/schemas/AFNOR_routingCodeAdministrativeStatus"
         address:
           $ref: "#/components/schemas/AFNOR_addressRead"
+    InvoiceTypeCode:
+      description: Invoice type code (BT-3). UNTDID 1001.
+      enum:
+      - "380"
+      - "389"
+      - "393"
+      - "501"
+      - "386"
+      - "500"
+      - "384"
+      - "471"
+      - "472"
+      - "473"
+      - "381"
+      - "261"
+      - "262"
+      - "396"
+      - "502"
+      - "503"
+      title: InvoiceTypeCode
+      type: string
+      x-enum-varnames:
+      - INVOICE
+      - SELF_BILLED_INVOICE
+      - FACTORED_INVOICE
+      - SELF_BILLED_FACTORED_INVOICE
+      - PREPAYMENT_INVOICE
+      - SELF_BILLED_PREPAYMENT_INVOICE
+      - CORRECTIVE_INVOICE
+      - SELF_BILLED_CORRECTIVE_INVOICE
+      - FACTORED_CORRECTIVE_INVOICE
+      - SELF_BILLED_FACTORED_CORRECTIVE_INVOICE
+      - CREDIT_NOTE
+      - SELF_BILLED_CREDIT_NOTE
+      - GLOBAL_ALLOWANCE_CREDIT_NOTE
+      - FACTORED_CREDIT_NOTE
+      - SELF_BILLED_FACTORED_CREDIT_NOTE
+      - PREPAYMENT_CREDIT_NOTE
+      x-enum-descriptions:
+      - Commercial Invoice
+      - Self-billed Invoice
+      - Factored Invoice
+      - Self-billed Factored Invoice
+      - Prepayment Invoice
+      - Self-billed Prepayment Invoice
+      - Corrective Invoice
+      - Self-billed Corrective Invoice
+      - Factored Corrective Invoice
+      - Self-billed Factored Corrective Invoice
+      - Credit Note
+      - Self-billed Credit Note
+      - Global Allowance Credit Note
+      - Factored Credit Note
+      - Self-billed Factored Credit Note
+      - Prepayment Credit Note
     submit_flow_proxy_api_v1_afnor_flow_v1_flows_post_request:
       properties:
         flowInfo:
@@ -17565,17 +17907,28 @@ components:
       - type: number
       - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
         type: string
-      description: Montant encaissé (requis pour statut 212)
+      description: "Montant TTC encaissé à un seul taux (statut 212). Négatif pour\
+        \ un décaissement. Pour plusieurs taux, utiliser encaisseAmountsByRate"
       nullable: true
       title: Encaisseamount
     Amount_1:
       anyOf:
-      - exclusiveMinimum: true
-        minimum: 0.0
-        type: number
+      - type: number
       - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
         type: string
-      description: "Montant encaissé en EUR (obligatoire, BR-FR-CDV-14)"
+      description: "Montant TTC encaissé pour ce taux, en EUR (MDT-215). Négatif pour\
+        \ un décaissement (remboursement, P1.15)"
+      example: "720.00"
+      title: Amount
+    Amount_2:
+      anyOf:
+      - type: number
+      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+        type: string
+      description: "Montant TTC encaissé en EUR, à un seul taux (vatRate). Négatif\
+        \ pour un décaissement (remboursement). Pour plusieurs taux, utiliser amountsByRate.\
+        \ Requis si amountsByRate est absent (BR-FR-CDV-14)"
+      nullable: true
       title: Amount
     GenerationTaskStatus_result:
       discriminator:
@@ -17798,12 +18151,13 @@ components:
       description: VAT rate
       example: "20.00"
       title: Rate
-    Amount_2:
+    Amount_3:
       anyOf:
       - type: number
       - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
         type: string
-      description: Payment amount
+      description: "Collected amount for this VAT rate (TT-95 / TT-99). Negative for\
+        \ a refund, on the refund date (G7.07)"
       example: "12000.00"
       title: Amount
     Amounteur:

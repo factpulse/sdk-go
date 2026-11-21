@@ -500,7 +500,7 @@ import (
 )
 
 func main() {
-	xmlFile := os.NewFile(1234, "some_file") // *os.File | E-reporting XML file
+	xmlFile := "xmlFile_example" // string | E-reporting XML file
 	organizationId := "organizationId_example" // string | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)
 	trackingId := "trackingId_example" // string |  (optional)
 	skipValidation := true // bool | Skip XSD validation (optional) (default to false)
@@ -532,7 +532,7 @@ Other parameters are passed through a pointer to a apiSubmitXmlEreportingApiV1Er
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **xmlFile** | ***os.File** | E-reporting XML file | 
+ **xmlFile** | **string** | E-reporting XML file | 
  **organizationId** | **string** | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. | 
  **trackingId** | **string** |  | 
  **skipValidation** | **bool** | Skip XSD validation | [default to false]
@@ -714,7 +714,7 @@ import (
 )
 
 func main() {
-	xmlFile := os.NewFile(1234, "some_file") // *os.File | E-reporting XML file to validate
+	xmlFile := "xmlFile_example" // string | E-reporting XML file to validate
 	validateCoherence := true // bool | Validate data coherence (REJ_COH) (optional) (default to true)
 	validatePeriod := true // bool | Validate period coherence (REJ_PER) (optional) (default to true)
 
@@ -741,7 +741,7 @@ Other parameters are passed through a pointer to a apiValidateXmlEreportingApiV1
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **xmlFile** | ***os.File** | E-reporting XML file to validate | 
+ **xmlFile** | **string** | E-reporting XML file to validate | 
  **validateCoherence** | **bool** | Validate data coherence (REJ_COH) | [default to true]
  **validatePeriod** | **bool** | Validate period coherence (REJ_PER) | [default to true]
 

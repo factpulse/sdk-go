@@ -18,7 +18,6 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"os"
 )
 
 
@@ -28,15 +27,15 @@ type FacturXConversionAPIService service
 type ApiConvertDocumentAsyncApiV1ConvertAsyncPostRequest struct {
 	ctx context.Context
 	ApiService *FacturXConversionAPIService
-	file *os.File
+	file *string
 	output *string
 	callbackUrl *string
 	webhookMode *string
 }
 
 // Document to convert (PDF, DOCX, XLSX, JPG, PNG)
-func (r ApiConvertDocumentAsyncApiV1ConvertAsyncPostRequest) File(file *os.File) ApiConvertDocumentAsyncApiV1ConvertAsyncPostRequest {
-	r.file = file
+func (r ApiConvertDocumentAsyncApiV1ConvertAsyncPostRequest) File(file string) ApiConvertDocumentAsyncApiV1ConvertAsyncPostRequest {
+	r.file = &file
 	return r
 }
 
@@ -128,21 +127,7 @@ func (a *FacturXConversionAPIService) ConvertDocumentAsyncApiV1ConvertAsyncPostE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	var fileLocalVarFormFileName string
-	var fileLocalVarFileName     string
-	var fileLocalVarFileBytes    []byte
-
-	fileLocalVarFormFileName = "file"
-	fileLocalVarFile := r.file
-
-	if fileLocalVarFile != nil {
-		fbs, _ := io.ReadAll(fileLocalVarFile)
-
-		fileLocalVarFileBytes = fbs
-		fileLocalVarFileName = fileLocalVarFile.Name()
-		fileLocalVarFile.Close()
-		formFiles = append(formFiles, formFile{fileBytes: fileLocalVarFileBytes, fileName: fileLocalVarFileName, formFileName: fileLocalVarFormFileName})
-	}
+	parameterAddToHeaderOrQuery(localVarFormParams, "file", r.file, "", "")
 	if r.output != nil {
 		parameterAddToHeaderOrQuery(localVarFormParams, "output", r.output, "", "")
 	}

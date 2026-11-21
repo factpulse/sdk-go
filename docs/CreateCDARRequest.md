@@ -23,6 +23,8 @@ Name | Type | Description | Notes
 **ActionCode** | Pointer to **NullableString** |  | [optional] 
 **EncaisseAmount** | Pointer to [**NullableEncaisseamount**](Encaisseamount.md) |  | [optional] 
 **EncaisseVatRate** | Pointer to **float32** | Taux de TVA du montant encaissé en % (MDT-224, requis par BR-FR-CDV-14 pour le statut 212 ; défaut 20) | [optional] [default to 20]
+**EncaisseAmountsByRate** | Pointer to [**[]EncaisseAmountByRate**](EncaisseAmountByRate.md) |  | [optional] 
+**Comment** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
@@ -573,6 +575,76 @@ SetEncaisseVatRate sets EncaisseVatRate field to given value.
 
 HasEncaisseVatRate returns a boolean if a field has been set.
 
+### GetEncaisseAmountsByRate
+
+`func (o *CreateCDARRequest) GetEncaisseAmountsByRate() []EncaisseAmountByRate`
+
+GetEncaisseAmountsByRate returns the EncaisseAmountsByRate field if non-nil, zero value otherwise.
+
+### GetEncaisseAmountsByRateOk
+
+`func (o *CreateCDARRequest) GetEncaisseAmountsByRateOk() (*[]EncaisseAmountByRate, bool)`
+
+GetEncaisseAmountsByRateOk returns a tuple with the EncaisseAmountsByRate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEncaisseAmountsByRate
+
+`func (o *CreateCDARRequest) SetEncaisseAmountsByRate(v []EncaisseAmountByRate)`
+
+SetEncaisseAmountsByRate sets EncaisseAmountsByRate field to given value.
+
+### HasEncaisseAmountsByRate
+
+`func (o *CreateCDARRequest) HasEncaisseAmountsByRate() bool`
+
+HasEncaisseAmountsByRate returns a boolean if a field has been set.
+
+### SetEncaisseAmountsByRateNil
+
+`func (o *CreateCDARRequest) SetEncaisseAmountsByRateNil(b bool)`
+
+ SetEncaisseAmountsByRateNil sets the value for EncaisseAmountsByRate to be an explicit nil
+
+### UnsetEncaisseAmountsByRate
+`func (o *CreateCDARRequest) UnsetEncaisseAmountsByRate()`
+
+UnsetEncaisseAmountsByRate ensures that no value is present for EncaisseAmountsByRate, not even an explicit nil
+### GetComment
+
+`func (o *CreateCDARRequest) GetComment() string`
+
+GetComment returns the Comment field if non-nil, zero value otherwise.
+
+### GetCommentOk
+
+`func (o *CreateCDARRequest) GetCommentOk() (*string, bool)`
+
+GetCommentOk returns a tuple with the Comment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComment
+
+`func (o *CreateCDARRequest) SetComment(v string)`
+
+SetComment sets Comment field to given value.
+
+### HasComment
+
+`func (o *CreateCDARRequest) HasComment() bool`
+
+HasComment returns a boolean if a field has been set.
+
+### SetCommentNil
+
+`func (o *CreateCDARRequest) SetCommentNil(b bool)`
+
+ SetCommentNil sets the value for Comment to be an explicit nil
+
+### UnsetComment
+`func (o *CreateCDARRequest) UnsetComment()`
+
+UnsetComment ensures that no value is present for Comment, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

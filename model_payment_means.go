@@ -16,7 +16,7 @@ import (
 	"fmt"
 )
 
-// PaymentMeans Payment methods - Chorus Pro API codes (modePaiement).  Values are official Chorus Pro enum values, automatically mapped to UNTDID 4461 codes for Factur-X/UBL XML generation.  | Chorus Pro code | Name | UNTDID 4461 | |-----------------|------|-------------| | CHEQUE | CHECK | 20 | | PRELEVEMENT | DIRECT_DEBIT | 49 | | VIREMENT | CREDIT_TRANSFER | 30 | | ESPECE | CASH | 10 | | AUTRE | OTHER | 57 | | REPORT | CLEARING | 97 |
+// PaymentMeans Payment methods - Chorus Pro API codes (modePaiement).  Values are official Chorus Pro enum values, automatically mapped to UNTDID 4461 codes for Factur-X/UBL XML generation.  | Chorus Pro code | Name | UNTDID 4461 | |-----------------|------|-------------| | CHEQUE | CHECK | 20 | | PRELEVEMENT | DIRECT_DEBIT | 49 | | VIREMENT | CREDIT_TRANSFER | 30 | | ESPECE | CASH | 10 | | AUTRE | OTHER | 57 | | REPORT | CLEARING | 97 | | CARTE | CARD | 48 |  CARTE is not a Chorus Pro value: it is sent to Chorus Pro as AUTRE.
 type PaymentMeans string
 
 // List of PaymentMeans
@@ -27,6 +27,7 @@ const (
 	PAYMENTMEANS_ESPECE PaymentMeans = "ESPECE"
 	PAYMENTMEANS_AUTRE PaymentMeans = "AUTRE"
 	PAYMENTMEANS_REPORT PaymentMeans = "REPORT"
+	PAYMENTMEANS_CARTE PaymentMeans = "CARTE"
 )
 
 // All allowed values of PaymentMeans enum
@@ -37,6 +38,7 @@ var AllowedPaymentMeansEnumValues = []PaymentMeans{
 	"ESPECE",
 	"AUTRE",
 	"REPORT",
+	"CARTE",
 }
 
 func (v *PaymentMeans) UnmarshalJSON(src []byte) error {

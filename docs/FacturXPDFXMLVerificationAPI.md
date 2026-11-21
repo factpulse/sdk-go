@@ -172,7 +172,7 @@ import (
 )
 
 func main() {
-	pdfFile := os.NewFile(1234, "some_file") // *os.File | Factur-X PDF file to verify
+	pdfFile := "pdfFile_example" // string | Factur-X PDF file to verify
 	forceOcr := true // bool | Force OCR usage even if PDF contains native text (optional) (default to false)
 	callbackUrl := "callbackUrl_example" // string |  (optional)
 	webhookMode := "webhookMode_example" // string | Webhook content delivery: 'inline' (base64 in payload) or 'download_url' (temporary URL, 1h TTL) (optional) (default to "inline")
@@ -200,7 +200,7 @@ Other parameters are passed through a pointer to a apiVerifyPdfAsyncApiV1Verific
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pdfFile** | ***os.File** | Factur-X PDF file to verify | 
+ **pdfFile** | **string** | Factur-X PDF file to verify | 
  **forceOcr** | **bool** | Force OCR usage even if PDF contains native text | [default to false]
  **callbackUrl** | **string** |  | 
  **webhookMode** | **string** | Webhook content delivery: &#39;inline&#39; (base64 in payload) or &#39;download_url&#39; (temporary URL, 1h TTL) | [default to &quot;inline&quot;]
@@ -244,7 +244,7 @@ import (
 )
 
 func main() {
-	pdfFile := os.NewFile(1234, "some_file") // *os.File | Factur-X PDF file to verify
+	pdfFile := "pdfFile_example" // string | Factur-X PDF file to verify
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -269,7 +269,7 @@ Other parameters are passed through a pointer to a apiVerifyPdfSyncApiV1Verifica
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pdfFile** | ***os.File** | Factur-X PDF file to verify | 
+ **pdfFile** | **string** | Factur-X PDF file to verify | 
 
 ### Return type
 

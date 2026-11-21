@@ -17,7 +17,7 @@ import (
 )
 
 
-// Amount1 Montant encaissé en EUR (obligatoire, BR-FR-CDV-14)
+// Amount1 Montant TTC encaissé pour ce taux, en EUR (MDT-215). Négatif pour un décaissement (remboursement, P1.15)
 type Amount1 struct {
 	Float32 *float32
 	String *string

@@ -34,7 +34,7 @@ import (
 )
 
 func main() {
-	file := os.NewFile(1234, "some_file") // *os.File | Document to convert (PDF, DOCX, XLSX, JPG, PNG)
+	file := "file_example" // string | Document to convert (PDF, DOCX, XLSX, JPG, PNG)
 	output := "output_example" // string | Output format: pdf, xml, both (optional) (default to "pdf")
 	callbackUrl := "callbackUrl_example" // string |  (optional)
 	webhookMode := "webhookMode_example" // string | Content delivery mode: 'inline' (base64 in webhook) or 'download_url' (temporary URL, 1h TTL) (optional) (default to "inline")
@@ -62,7 +62,7 @@ Other parameters are passed through a pointer to a apiConvertDocumentAsyncApiV1C
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file** | ***os.File** | Document to convert (PDF, DOCX, XLSX, JPG, PNG) | 
+ **file** | **string** | Document to convert (PDF, DOCX, XLSX, JPG, PNG) | 
  **output** | **string** | Output format: pdf, xml, both | [default to &quot;pdf&quot;]
  **callbackUrl** | **string** |  | 
  **webhookMode** | **string** | Content delivery mode: &#39;inline&#39; (base64 in webhook) or &#39;download_url&#39; (temporary URL, 1h TTL) | [default to &quot;inline&quot;]

@@ -23,7 +23,7 @@ var _ MappedNullable = &PaymentAmountByRate{}
 // PaymentAmountByRate Payment amount for a specific VAT rate.
 type PaymentAmountByRate struct {
 	Rate Rate `json:"rate"`
-	Amount Amount2 `json:"amount"`
+	Amount Amount3 `json:"amount"`
 	AmountEur NullableAmounteur `json:"amountEur,omitempty"`
 }
 
@@ -33,7 +33,7 @@ type _PaymentAmountByRate PaymentAmountByRate
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaymentAmountByRate(rate Rate, amount Amount2) *PaymentAmountByRate {
+func NewPaymentAmountByRate(rate Rate, amount Amount3) *PaymentAmountByRate {
 	this := PaymentAmountByRate{}
 	this.Rate = rate
 	this.Amount = amount
@@ -73,9 +73,9 @@ func (o *PaymentAmountByRate) SetRate(v Rate) {
 }
 
 // GetAmount returns the Amount field value
-func (o *PaymentAmountByRate) GetAmount() Amount2 {
+func (o *PaymentAmountByRate) GetAmount() Amount3 {
 	if o == nil {
-		var ret Amount2
+		var ret Amount3
 		return ret
 	}
 
@@ -84,7 +84,7 @@ func (o *PaymentAmountByRate) GetAmount() Amount2 {
 
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
-func (o *PaymentAmountByRate) GetAmountOk() (*Amount2, bool) {
+func (o *PaymentAmountByRate) GetAmountOk() (*Amount3, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -92,7 +92,7 @@ func (o *PaymentAmountByRate) GetAmountOk() (*Amount2, bool) {
 }
 
 // SetAmount sets field value
-func (o *PaymentAmountByRate) SetAmount(v Amount2) {
+func (o *PaymentAmountByRate) SetAmount(v Amount3) {
 	o.Amount = v
 }
 

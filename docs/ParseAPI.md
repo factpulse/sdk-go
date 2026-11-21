@@ -30,7 +30,7 @@ import (
 )
 
 func main() {
-	file := os.NewFile(1234, "some_file") // *os.File | Factur-X PDF or XML file to parse
+	file := "file_example" // string | Factur-X PDF or XML file to parse
 	callbackUrl := "callbackUrl_example" // string |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -56,7 +56,7 @@ Other parameters are passed through a pointer to a apiParseFacturxAsyncApiV1Proc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file** | ***os.File** | Factur-X PDF or XML file to parse | 
+ **file** | **string** | Factur-X PDF or XML file to parse | 
  **callbackUrl** | **string** |  | 
 
 ### Return type
@@ -98,7 +98,7 @@ import (
 )
 
 func main() {
-	file := os.NewFile(1234, "some_file") // *os.File | Factur-X PDF or XML file to parse
+	file := "file_example" // string | Factur-X PDF or XML file to parse
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -123,7 +123,7 @@ Other parameters are passed through a pointer to a apiParseFacturxSyncApiV1Proce
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file** | ***os.File** | Factur-X PDF or XML file to parse | 
+ **file** | **string** | Factur-X PDF or XML file to parse | 
 
 ### Return type
 

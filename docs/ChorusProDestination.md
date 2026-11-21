@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** |  | [optional] [default to "chorus_pro"]
-**Credentials** | Pointer to [**NullableChorusProCredentials**](ChorusProCredentials.md) |  | [optional] 
+**Credentials** | Pointer to [**NullableFactureElectroniqueRestApiSchemasProcessingChorusProCredentials**](FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.md) |  | [optional] 
 
 ## Methods
 
@@ -53,20 +53,20 @@ HasType returns a boolean if a field has been set.
 
 ### GetCredentials
 
-`func (o *ChorusProDestination) GetCredentials() ChorusProCredentials`
+`func (o *ChorusProDestination) GetCredentials() FactureElectroniqueRestApiSchemasProcessingChorusProCredentials`
 
 GetCredentials returns the Credentials field if non-nil, zero value otherwise.
 
 ### GetCredentialsOk
 
-`func (o *ChorusProDestination) GetCredentialsOk() (*ChorusProCredentials, bool)`
+`func (o *ChorusProDestination) GetCredentialsOk() (*FactureElectroniqueRestApiSchemasProcessingChorusProCredentials, bool)`
 
 GetCredentialsOk returns a tuple with the Credentials field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCredentials
 
-`func (o *ChorusProDestination) SetCredentials(v ChorusProCredentials)`
+`func (o *ChorusProDestination) SetCredentials(v FactureElectroniqueRestApiSchemasProcessingChorusProCredentials)`
 
 SetCredentials sets Credentials field to given value.
 

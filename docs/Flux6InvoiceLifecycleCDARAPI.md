@@ -148,7 +148,7 @@ No authorization required
 
 ## GetLifecycleApiV1CdarLifecycleGet
 
-> LifecycleResponse GetLifecycleApiV1CdarLifecycleGet(ctx).Days(days).InvoiceId(invoiceId).FlowDirection(flowDirection).PdpFlowServiceUrl(pdpFlowServiceUrl).PdpTokenUrl(pdpTokenUrl).PdpClientId(pdpClientId).PdpClientSecret(pdpClientSecret).OrganizationId(organizationId).Execute()
+> LifecycleResponse GetLifecycleApiV1CdarLifecycleGet(ctx).Days(days).DateFrom(dateFrom).DateTo(dateTo).InvoiceId(invoiceId).FlowDirection(flowDirection).PdpFlowServiceUrl(pdpFlowServiceUrl).PdpTokenUrl(pdpTokenUrl).PdpClientId(pdpClientId).PdpClientSecret(pdpClientSecret).OrganizationId(organizationId).Execute()
 
 [Simplified] Get lifecycle events for invoices
 
@@ -163,11 +163,14 @@ import (
 	"context"
 	"fmt"
 	"os"
+    "time"
 	openapiclient "github.com/factpulse/sdk-go/v4"
 )
 
 func main() {
 	days := int32(56) // int32 | Number of days to look back (optional) (default to 7)
+	dateFrom := time.Now() // time.Time | Window start (ISO 8601, UTC if no offset). Overrides days. (optional)
+	dateTo := time.Now() // time.Time | Window end (ISO 8601, UTC if no offset). Default: now (optional)
 	invoiceId := "invoiceId_example" // string | Filter by invoice reference (optional)
 	flowDirection := "flowDirection_example" // string | All (default), In (received statuses) or Out (issued statuses) (optional) (default to "All")
 	pdpFlowServiceUrl := "pdpFlowServiceUrl_example" // string | PDP Flow Service URL (optional)
@@ -178,7 +181,7 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.Flux6InvoiceLifecycleCDARAPI.GetLifecycleApiV1CdarLifecycleGet(context.Background()).Days(days).InvoiceId(invoiceId).FlowDirection(flowDirection).PdpFlowServiceUrl(pdpFlowServiceUrl).PdpTokenUrl(pdpTokenUrl).PdpClientId(pdpClientId).PdpClientSecret(pdpClientSecret).OrganizationId(organizationId).Execute()
+	resp, r, err := apiClient.Flux6InvoiceLifecycleCDARAPI.GetLifecycleApiV1CdarLifecycleGet(context.Background()).Days(days).DateFrom(dateFrom).DateTo(dateTo).InvoiceId(invoiceId).FlowDirection(flowDirection).PdpFlowServiceUrl(pdpFlowServiceUrl).PdpTokenUrl(pdpTokenUrl).PdpClientId(pdpClientId).PdpClientSecret(pdpClientSecret).OrganizationId(organizationId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `Flux6InvoiceLifecycleCDARAPI.GetLifecycleApiV1CdarLifecycleGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -200,6 +203,8 @@ Other parameters are passed through a pointer to a apiGetLifecycleApiV1CdarLifec
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **days** | **int32** | Number of days to look back | [default to 7]
+ **dateFrom** | **time.Time** | Window start (ISO 8601, UTC if no offset). Overrides days. | 
+ **dateTo** | **time.Time** | Window end (ISO 8601, UTC if no offset). Default: now | 
  **invoiceId** | **string** | Filter by invoice reference | 
  **flowDirection** | **string** | All (default), In (received statuses) or Out (issued statuses) | [default to &quot;All&quot;]
  **pdpFlowServiceUrl** | **string** | PDP Flow Service URL | 
@@ -507,7 +512,7 @@ import (
 )
 
 func main() {
-	encaisseeRequest := *openapiclient.NewEncaisseeRequest("InvoiceId_example", time.Now(), "InvoiceBuyerSiren_example", "InvoiceBuyerElectronicAddress_example", *openapiclient.NewAmount1()) // EncaisseeRequest | 
+	encaisseeRequest := *openapiclient.NewEncaisseeRequest("InvoiceId_example", time.Now(), "InvoiceBuyerSiren_example") // EncaisseeRequest | 
 	organizationId := "organizationId_example" // string | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -710,7 +715,7 @@ import (
 )
 
 func main() {
-	xmlFile := os.NewFile(1234, "some_file") // *os.File | CDAR XML file to validate
+	xmlFile := "xmlFile_example" // string | CDAR XML file to validate
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -735,7 +740,7 @@ Other parameters are passed through a pointer to a apiValidateXmlCdarApiV1CdarVa
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **xmlFile** | ***os.File** | CDAR XML file to validate | 
+ **xmlFile** | **string** | CDAR XML file to validate | 
 
 ### Return type
 

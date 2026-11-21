@@ -17,7 +17,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"os"
+	"time"
 )
 
 
@@ -272,6 +272,8 @@ type ApiGetLifecycleApiV1CdarLifecycleGetRequest struct {
 	ctx context.Context
 	ApiService *Flux6InvoiceLifecycleCDARAPIService
 	days *int32
+	dateFrom *time.Time
+	dateTo *time.Time
 	invoiceId *string
 	flowDirection *string
 	pdpFlowServiceUrl *string
@@ -284,6 +286,18 @@ type ApiGetLifecycleApiV1CdarLifecycleGetRequest struct {
 // Number of days to look back
 func (r ApiGetLifecycleApiV1CdarLifecycleGetRequest) Days(days int32) ApiGetLifecycleApiV1CdarLifecycleGetRequest {
 	r.days = &days
+	return r
+}
+
+// Window start (ISO 8601, UTC if no offset). Overrides days.
+func (r ApiGetLifecycleApiV1CdarLifecycleGetRequest) DateFrom(dateFrom time.Time) ApiGetLifecycleApiV1CdarLifecycleGetRequest {
+	r.dateFrom = &dateFrom
+	return r
+}
+
+// Window end (ISO 8601, UTC if no offset). Default: now
+func (r ApiGetLifecycleApiV1CdarLifecycleGetRequest) DateTo(dateTo time.Time) ApiGetLifecycleApiV1CdarLifecycleGetRequest {
+	r.dateTo = &dateTo
 	return r
 }
 
@@ -339,13 +353,22 @@ GetLifecycleApiV1CdarLifecycleGet [Simplified] Get lifecycle events for invoices
 Returns lifecycle events (CDAR) grouped by invoice reference.
 
 **How it works (AFNOR XP Z12-013 compliant):**
-1. Searches lifecycle flows on the PDP by flowType + flowDirection + date range
+1. Searches lifecycle flows on the PDP by flowType + flowDirection + date range,
+   following the cursor pagination (all pages are read)
 2. Downloads and parses each CDAR XML to extract the invoice reference
 3. Groups events by invoice, sorted chronologically
 
 **Parameters:**
-- `days`: Number of days to look back (default: 7)
-- `invoiceId`: Optional filter on a specific invoice reference
+- `days`: Number of days to look back (default: 7). Ignored when `dateFrom` is set.
+- `dateFrom` / `dateTo`: Explicit time window (ISO 8601, UTC if no offset).
+  `dateTo` defaults to now.
+- `invoiceId`: Optional filter on a specific invoice reference. The filter is applied
+  after reading the window: prefer one call per synchronisation over one call per invoice.
+
+**Limits:** at most 1000 status flows are read per call. When the limit is reached,
+`truncated` is `true` and the response is incomplete: split the window with
+`dateFrom` / `dateTo`. For incremental synchronisation, request the period since
+your last successful sync (plus a small margin).
 - `flowDirection`: `All` (default), `In` (statuses received from the counterparty)
   or `Out` (statuses issued by you or your PA, e.g. 202/203)
 
@@ -388,6 +411,12 @@ func (a *Flux6InvoiceLifecycleCDARAPIService) GetLifecycleApiV1CdarLifecycleGetE
 		var defaultValue int32 = 7
 		parameterAddToHeaderOrQuery(localVarQueryParams, "days", defaultValue, "form", "")
 		r.days = &defaultValue
+	}
+	if r.dateFrom != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dateFrom", r.dateFrom, "form", "")
+	}
+	if r.dateTo != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dateTo", r.dateTo, "form", "")
 	}
 	if r.invoiceId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "invoiceId", r.invoiceId, "form", "")
@@ -1402,12 +1431,12 @@ func (a *Flux6InvoiceLifecycleCDARAPIService) ValidateCdarApiV1CdarValidatePostE
 type ApiValidateXmlCdarApiV1CdarValidateXmlPostRequest struct {
 	ctx context.Context
 	ApiService *Flux6InvoiceLifecycleCDARAPIService
-	xmlFile *os.File
+	xmlFile *string
 }
 
 // CDAR XML file to validate
-func (r ApiValidateXmlCdarApiV1CdarValidateXmlPostRequest) XmlFile(xmlFile *os.File) ApiValidateXmlCdarApiV1CdarValidateXmlPostRequest {
-	r.xmlFile = xmlFile
+func (r ApiValidateXmlCdarApiV1CdarValidateXmlPostRequest) XmlFile(xmlFile string) ApiValidateXmlCdarApiV1CdarValidateXmlPostRequest {
+	r.xmlFile = &xmlFile
 	return r
 }
 
@@ -1478,21 +1507,7 @@ func (a *Flux6InvoiceLifecycleCDARAPIService) ValidateXmlCdarApiV1CdarValidateXm
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	var xmlFileLocalVarFormFileName string
-	var xmlFileLocalVarFileName     string
-	var xmlFileLocalVarFileBytes    []byte
-
-	xmlFileLocalVarFormFileName = "xml_file"
-	xmlFileLocalVarFile := r.xmlFile
-
-	if xmlFileLocalVarFile != nil {
-		fbs, _ := io.ReadAll(xmlFileLocalVarFile)
-
-		xmlFileLocalVarFileBytes = fbs
-		xmlFileLocalVarFileName = xmlFileLocalVarFile.Name()
-		xmlFileLocalVarFile.Close()
-		formFiles = append(formFiles, formFile{fileBytes: xmlFileLocalVarFileBytes, fileName: xmlFileLocalVarFileName, formFileName: xmlFileLocalVarFormFileName})
-	}
+	parameterAddToHeaderOrQuery(localVarFormParams, "xml_file", r.xmlFile, "", "")
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

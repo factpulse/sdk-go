@@ -7,6 +7,10 @@ Name | Type | Description | Notes
 **Invoices** | Pointer to [**[]InvoiceLifecycle**](InvoiceLifecycle.md) | Cycles de vie par facture | [optional] 
 **TotalInvoices** | **int32** | Nombre de factures | 
 **CutoffDays** | **int32** | Nombre de jours de la fenetre de recherche | 
+**TotalFlows** | Pointer to **int32** | Nombre de flux de statut (CDAR) lus sur la PA | [optional] [default to 0]
+**Truncated** | Pointer to **bool** | True si la limite de flux lus par appel a ete atteinte : la reponse est incomplete, reduire la fenetre (dateFrom/dateTo ou days) | [optional] [default to false]
+**DateFrom** | Pointer to **NullableString** |  | [optional] 
+**DateTo** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
@@ -92,6 +96,126 @@ and a boolean to check if the value has been set.
 SetCutoffDays sets CutoffDays field to given value.
 
 
+### GetTotalFlows
+
+`func (o *LifecycleResponse) GetTotalFlows() int32`
+
+GetTotalFlows returns the TotalFlows field if non-nil, zero value otherwise.
+
+### GetTotalFlowsOk
+
+`func (o *LifecycleResponse) GetTotalFlowsOk() (*int32, bool)`
+
+GetTotalFlowsOk returns a tuple with the TotalFlows field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalFlows
+
+`func (o *LifecycleResponse) SetTotalFlows(v int32)`
+
+SetTotalFlows sets TotalFlows field to given value.
+
+### HasTotalFlows
+
+`func (o *LifecycleResponse) HasTotalFlows() bool`
+
+HasTotalFlows returns a boolean if a field has been set.
+
+### GetTruncated
+
+`func (o *LifecycleResponse) GetTruncated() bool`
+
+GetTruncated returns the Truncated field if non-nil, zero value otherwise.
+
+### GetTruncatedOk
+
+`func (o *LifecycleResponse) GetTruncatedOk() (*bool, bool)`
+
+GetTruncatedOk returns a tuple with the Truncated field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTruncated
+
+`func (o *LifecycleResponse) SetTruncated(v bool)`
+
+SetTruncated sets Truncated field to given value.
+
+### HasTruncated
+
+`func (o *LifecycleResponse) HasTruncated() bool`
+
+HasTruncated returns a boolean if a field has been set.
+
+### GetDateFrom
+
+`func (o *LifecycleResponse) GetDateFrom() string`
+
+GetDateFrom returns the DateFrom field if non-nil, zero value otherwise.
+
+### GetDateFromOk
+
+`func (o *LifecycleResponse) GetDateFromOk() (*string, bool)`
+
+GetDateFromOk returns a tuple with the DateFrom field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDateFrom
+
+`func (o *LifecycleResponse) SetDateFrom(v string)`
+
+SetDateFrom sets DateFrom field to given value.
+
+### HasDateFrom
+
+`func (o *LifecycleResponse) HasDateFrom() bool`
+
+HasDateFrom returns a boolean if a field has been set.
+
+### SetDateFromNil
+
+`func (o *LifecycleResponse) SetDateFromNil(b bool)`
+
+ SetDateFromNil sets the value for DateFrom to be an explicit nil
+
+### UnsetDateFrom
+`func (o *LifecycleResponse) UnsetDateFrom()`
+
+UnsetDateFrom ensures that no value is present for DateFrom, not even an explicit nil
+### GetDateTo
+
+`func (o *LifecycleResponse) GetDateTo() string`
+
+GetDateTo returns the DateTo field if non-nil, zero value otherwise.
+
+### GetDateToOk
+
+`func (o *LifecycleResponse) GetDateToOk() (*string, bool)`
+
+GetDateToOk returns a tuple with the DateTo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDateTo
+
+`func (o *LifecycleResponse) SetDateTo(v string)`
+
+SetDateTo sets DateTo field to given value.
+
+### HasDateTo
+
+`func (o *LifecycleResponse) HasDateTo() bool`
+
+HasDateTo returns a boolean if a field has been set.
+
+### SetDateToNil
+
+`func (o *LifecycleResponse) SetDateToNil(b bool)`
+
+ SetDateToNil sets the value for DateTo to be an explicit nil
+
+### UnsetDateTo
+`func (o *LifecycleResponse) UnsetDateTo()`
+
+UnsetDateTo ensures that no value is present for DateTo, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

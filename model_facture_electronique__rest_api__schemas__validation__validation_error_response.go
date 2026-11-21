@@ -17,37 +17,37 @@ import (
 	"fmt"
 )
 
-// checks if the ValidationErrorResponse type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ValidationErrorResponse{}
+// checks if the FactureElectroniqueRestApiSchemasValidationValidationErrorResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FactureElectroniqueRestApiSchemasValidationValidationErrorResponse{}
 
-// ValidationErrorResponse Response for validation errors.
-type ValidationErrorResponse struct {
+// FactureElectroniqueRestApiSchemasValidationValidationErrorResponse Response for validation errors.
+type FactureElectroniqueRestApiSchemasValidationValidationErrorResponse struct {
 	// List of detected validation errors.
 	Detail []string `json:"detail"`
 }
 
-type _ValidationErrorResponse ValidationErrorResponse
+type _FactureElectroniqueRestApiSchemasValidationValidationErrorResponse FactureElectroniqueRestApiSchemasValidationValidationErrorResponse
 
-// NewValidationErrorResponse instantiates a new ValidationErrorResponse object
+// NewFactureElectroniqueRestApiSchemasValidationValidationErrorResponse instantiates a new FactureElectroniqueRestApiSchemasValidationValidationErrorResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewValidationErrorResponse(detail []string) *ValidationErrorResponse {
-	this := ValidationErrorResponse{}
+func NewFactureElectroniqueRestApiSchemasValidationValidationErrorResponse(detail []string) *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse {
+	this := FactureElectroniqueRestApiSchemasValidationValidationErrorResponse{}
 	this.Detail = detail
 	return &this
 }
 
-// NewValidationErrorResponseWithDefaults instantiates a new ValidationErrorResponse object
+// NewFactureElectroniqueRestApiSchemasValidationValidationErrorResponseWithDefaults instantiates a new FactureElectroniqueRestApiSchemasValidationValidationErrorResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewValidationErrorResponseWithDefaults() *ValidationErrorResponse {
-	this := ValidationErrorResponse{}
+func NewFactureElectroniqueRestApiSchemasValidationValidationErrorResponseWithDefaults() *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse {
+	this := FactureElectroniqueRestApiSchemasValidationValidationErrorResponse{}
 	return &this
 }
 
 // GetDetail returns the Detail field value
-func (o *ValidationErrorResponse) GetDetail() []string {
+func (o *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) GetDetail() []string {
 	if o == nil {
 		var ret []string
 		return ret
@@ -58,7 +58,7 @@ func (o *ValidationErrorResponse) GetDetail() []string {
 
 // GetDetailOk returns a tuple with the Detail field value
 // and a boolean to check if the value has been set.
-func (o *ValidationErrorResponse) GetDetailOk() ([]string, bool) {
+func (o *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) GetDetailOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,11 +66,11 @@ func (o *ValidationErrorResponse) GetDetailOk() ([]string, bool) {
 }
 
 // SetDetail sets field value
-func (o *ValidationErrorResponse) SetDetail(v []string) {
+func (o *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) SetDetail(v []string) {
 	o.Detail = v
 }
 
-func (o ValidationErrorResponse) MarshalJSON() ([]byte, error) {
+func (o FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -78,13 +78,13 @@ func (o ValidationErrorResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ValidationErrorResponse) ToMap() (map[string]interface{}, error) {
+func (o FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["detail"] = o.Detail
 	return toSerialize, nil
 }
 
-func (o *ValidationErrorResponse) UnmarshalJSON(data []byte) (err error) {
+func (o *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -106,53 +106,53 @@ func (o *ValidationErrorResponse) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varValidationErrorResponse := _ValidationErrorResponse{}
+	varFactureElectroniqueRestApiSchemasValidationValidationErrorResponse := _FactureElectroniqueRestApiSchemasValidationValidationErrorResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varValidationErrorResponse)
+	err = decoder.Decode(&varFactureElectroniqueRestApiSchemasValidationValidationErrorResponse)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ValidationErrorResponse(varValidationErrorResponse)
+	*o = FactureElectroniqueRestApiSchemasValidationValidationErrorResponse(varFactureElectroniqueRestApiSchemasValidationValidationErrorResponse)
 
 	return err
 }
 
-type NullableValidationErrorResponse struct {
-	value *ValidationErrorResponse
+type NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse struct {
+	value *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse
 	isSet bool
 }
 
-func (v NullableValidationErrorResponse) Get() *ValidationErrorResponse {
+func (v NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse) Get() *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse {
 	return v.value
 }
 
-func (v *NullableValidationErrorResponse) Set(val *ValidationErrorResponse) {
+func (v *NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse) Set(val *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableValidationErrorResponse) IsSet() bool {
+func (v NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableValidationErrorResponse) Unset() {
+func (v *NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableValidationErrorResponse(val *ValidationErrorResponse) *NullableValidationErrorResponse {
-	return &NullableValidationErrorResponse{value: val, isSet: true}
+func NewNullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse(val *FactureElectroniqueRestApiSchemasValidationValidationErrorResponse) *NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse {
+	return &NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse{value: val, isSet: true}
 }
 
-func (v NullableValidationErrorResponse) MarshalJSON() ([]byte, error) {
+func (v NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableValidationErrorResponse) UnmarshalJSON(src []byte) error {
+func (v *NullableFactureElectroniqueRestApiSchemasValidationValidationErrorResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

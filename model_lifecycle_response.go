@@ -28,6 +28,12 @@ type LifecycleResponse struct {
 	TotalInvoices int32 `json:"totalInvoices"`
 	// Nombre de jours de la fenetre de recherche
 	CutoffDays int32 `json:"cutoffDays"`
+	// Nombre de flux de statut (CDAR) lus sur la PA
+	TotalFlows *int32 `json:"totalFlows,omitempty"`
+	// True si la limite de flux lus par appel a ete atteinte : la reponse est incomplete, reduire la fenetre (dateFrom/dateTo ou days)
+	Truncated *bool `json:"truncated,omitempty"`
+	DateFrom NullableString `json:"dateFrom,omitempty"`
+	DateTo NullableString `json:"dateTo,omitempty"`
 }
 
 type _LifecycleResponse LifecycleResponse
@@ -40,6 +46,10 @@ func NewLifecycleResponse(totalInvoices int32, cutoffDays int32) *LifecycleRespo
 	this := LifecycleResponse{}
 	this.TotalInvoices = totalInvoices
 	this.CutoffDays = cutoffDays
+	var totalFlows int32 = 0
+	this.TotalFlows = &totalFlows
+	var truncated bool = false
+	this.Truncated = &truncated
 	return &this
 }
 
@@ -48,6 +58,10 @@ func NewLifecycleResponse(totalInvoices int32, cutoffDays int32) *LifecycleRespo
 // but it doesn't guarantee that properties required by API are set
 func NewLifecycleResponseWithDefaults() *LifecycleResponse {
 	this := LifecycleResponse{}
+	var totalFlows int32 = 0
+	this.TotalFlows = &totalFlows
+	var truncated bool = false
+	this.Truncated = &truncated
 	return &this
 }
 
@@ -131,6 +145,154 @@ func (o *LifecycleResponse) SetCutoffDays(v int32) {
 	o.CutoffDays = v
 }
 
+// GetTotalFlows returns the TotalFlows field value if set, zero value otherwise.
+func (o *LifecycleResponse) GetTotalFlows() int32 {
+	if o == nil || IsNil(o.TotalFlows) {
+		var ret int32
+		return ret
+	}
+	return *o.TotalFlows
+}
+
+// GetTotalFlowsOk returns a tuple with the TotalFlows field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LifecycleResponse) GetTotalFlowsOk() (*int32, bool) {
+	if o == nil || IsNil(o.TotalFlows) {
+		return nil, false
+	}
+	return o.TotalFlows, true
+}
+
+// HasTotalFlows returns a boolean if a field has been set.
+func (o *LifecycleResponse) HasTotalFlows() bool {
+	if o != nil && !IsNil(o.TotalFlows) {
+		return true
+	}
+
+	return false
+}
+
+// SetTotalFlows gets a reference to the given int32 and assigns it to the TotalFlows field.
+func (o *LifecycleResponse) SetTotalFlows(v int32) {
+	o.TotalFlows = &v
+}
+
+// GetTruncated returns the Truncated field value if set, zero value otherwise.
+func (o *LifecycleResponse) GetTruncated() bool {
+	if o == nil || IsNil(o.Truncated) {
+		var ret bool
+		return ret
+	}
+	return *o.Truncated
+}
+
+// GetTruncatedOk returns a tuple with the Truncated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LifecycleResponse) GetTruncatedOk() (*bool, bool) {
+	if o == nil || IsNil(o.Truncated) {
+		return nil, false
+	}
+	return o.Truncated, true
+}
+
+// HasTruncated returns a boolean if a field has been set.
+func (o *LifecycleResponse) HasTruncated() bool {
+	if o != nil && !IsNil(o.Truncated) {
+		return true
+	}
+
+	return false
+}
+
+// SetTruncated gets a reference to the given bool and assigns it to the Truncated field.
+func (o *LifecycleResponse) SetTruncated(v bool) {
+	o.Truncated = &v
+}
+
+// GetDateFrom returns the DateFrom field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *LifecycleResponse) GetDateFrom() string {
+	if o == nil || IsNil(o.DateFrom.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.DateFrom.Get()
+}
+
+// GetDateFromOk returns a tuple with the DateFrom field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *LifecycleResponse) GetDateFromOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DateFrom.Get(), o.DateFrom.IsSet()
+}
+
+// HasDateFrom returns a boolean if a field has been set.
+func (o *LifecycleResponse) HasDateFrom() bool {
+	if o != nil && o.DateFrom.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDateFrom gets a reference to the given NullableString and assigns it to the DateFrom field.
+func (o *LifecycleResponse) SetDateFrom(v string) {
+	o.DateFrom.Set(&v)
+}
+// SetDateFromNil sets the value for DateFrom to be an explicit nil
+func (o *LifecycleResponse) SetDateFromNil() {
+	o.DateFrom.Set(nil)
+}
+
+// UnsetDateFrom ensures that no value is present for DateFrom, not even an explicit nil
+func (o *LifecycleResponse) UnsetDateFrom() {
+	o.DateFrom.Unset()
+}
+
+// GetDateTo returns the DateTo field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *LifecycleResponse) GetDateTo() string {
+	if o == nil || IsNil(o.DateTo.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.DateTo.Get()
+}
+
+// GetDateToOk returns a tuple with the DateTo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *LifecycleResponse) GetDateToOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DateTo.Get(), o.DateTo.IsSet()
+}
+
+// HasDateTo returns a boolean if a field has been set.
+func (o *LifecycleResponse) HasDateTo() bool {
+	if o != nil && o.DateTo.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDateTo gets a reference to the given NullableString and assigns it to the DateTo field.
+func (o *LifecycleResponse) SetDateTo(v string) {
+	o.DateTo.Set(&v)
+}
+// SetDateToNil sets the value for DateTo to be an explicit nil
+func (o *LifecycleResponse) SetDateToNil() {
+	o.DateTo.Set(nil)
+}
+
+// UnsetDateTo ensures that no value is present for DateTo, not even an explicit nil
+func (o *LifecycleResponse) UnsetDateTo() {
+	o.DateTo.Unset()
+}
+
 func (o LifecycleResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -146,6 +308,18 @@ func (o LifecycleResponse) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["totalInvoices"] = o.TotalInvoices
 	toSerialize["cutoffDays"] = o.CutoffDays
+	if !IsNil(o.TotalFlows) {
+		toSerialize["totalFlows"] = o.TotalFlows
+	}
+	if !IsNil(o.Truncated) {
+		toSerialize["truncated"] = o.Truncated
+	}
+	if o.DateFrom.IsSet() {
+		toSerialize["dateFrom"] = o.DateFrom.Get()
+	}
+	if o.DateTo.IsSet() {
+		toSerialize["dateTo"] = o.DateTo.Get()
+	}
 	return toSerialize, nil
 }
 

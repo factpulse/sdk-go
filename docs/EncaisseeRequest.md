@@ -7,9 +7,11 @@ Name | Type | Description | Notes
 **InvoiceId** | **string** | Identifiant de la facture (BT-1) | 
 **InvoiceIssueDate** | **string** | Date d&#39;émission de la facture (YYYY-MM-DD) | 
 **InvoiceBuyerSiren** | **string** | SIREN de l&#39;acheteur (destinataire du statut) | 
-**InvoiceBuyerElectronicAddress** | **string** | Adresse électronique de l&#39;acheteur (MDT-73) | 
-**Amount** | [**Amount1**](Amount1.md) |  | 
-**VatRate** | Pointer to **float32** | Taux de TVA du montant encaissé en % (MDT-224, requis par BR-FR-CDV-14 ; défaut 20) | [optional] [default to 20]
+**InvoiceBuyerElectronicAddress** | Pointer to **NullableString** |  | [optional] 
+**Amount** | Pointer to [**NullableAmount2**](Amount2.md) |  | [optional] 
+**VatRate** | Pointer to **float32** | Taux de TVA du montant encaissé en % (MDT-224, requis par BR-FR-CDV-14 ; défaut 20). Ignoré avec amountsByRate | [optional] [default to 20]
+**AmountsByRate** | Pointer to [**[]EncaisseAmountByRate**](EncaisseAmountByRate.md) |  | [optional] 
+**Comment** | Pointer to **NullableString** |  | [optional] 
 **Currency** | Pointer to **string** | Code devise ISO 4217 | [optional] [default to "EUR"]
 **SenderSiren** | Pointer to **NullableString** |  | [optional] 
 **FlowType** | Pointer to **string** | Type de flux (CustomerInvoiceLC pour facture émise) | [optional] [default to "CustomerInvoiceLC"]
@@ -22,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewEncaisseeRequest
 
-`func NewEncaisseeRequest(invoiceId string, invoiceIssueDate string, invoiceBuyerSiren string, invoiceBuyerElectronicAddress string, amount Amount1, ) *EncaisseeRequest`
+`func NewEncaisseeRequest(invoiceId string, invoiceIssueDate string, invoiceBuyerSiren string, ) *EncaisseeRequest`
 
 NewEncaisseeRequest instantiates a new EncaisseeRequest object
 This constructor will assign default values to properties that have it defined,
@@ -116,27 +118,57 @@ and a boolean to check if the value has been set.
 
 SetInvoiceBuyerElectronicAddress sets InvoiceBuyerElectronicAddress field to given value.
 
+### HasInvoiceBuyerElectronicAddress
 
+`func (o *EncaisseeRequest) HasInvoiceBuyerElectronicAddress() bool`
+
+HasInvoiceBuyerElectronicAddress returns a boolean if a field has been set.
+
+### SetInvoiceBuyerElectronicAddressNil
+
+`func (o *EncaisseeRequest) SetInvoiceBuyerElectronicAddressNil(b bool)`
+
+ SetInvoiceBuyerElectronicAddressNil sets the value for InvoiceBuyerElectronicAddress to be an explicit nil
+
+### UnsetInvoiceBuyerElectronicAddress
+`func (o *EncaisseeRequest) UnsetInvoiceBuyerElectronicAddress()`
+
+UnsetInvoiceBuyerElectronicAddress ensures that no value is present for InvoiceBuyerElectronicAddress, not even an explicit nil
 ### GetAmount
 
-`func (o *EncaisseeRequest) GetAmount() Amount1`
+`func (o *EncaisseeRequest) GetAmount() Amount2`
 
 GetAmount returns the Amount field if non-nil, zero value otherwise.
 
 ### GetAmountOk
 
-`func (o *EncaisseeRequest) GetAmountOk() (*Amount1, bool)`
+`func (o *EncaisseeRequest) GetAmountOk() (*Amount2, bool)`
 
 GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAmount
 
-`func (o *EncaisseeRequest) SetAmount(v Amount1)`
+`func (o *EncaisseeRequest) SetAmount(v Amount2)`
 
 SetAmount sets Amount field to given value.
 
+### HasAmount
 
+`func (o *EncaisseeRequest) HasAmount() bool`
+
+HasAmount returns a boolean if a field has been set.
+
+### SetAmountNil
+
+`func (o *EncaisseeRequest) SetAmountNil(b bool)`
+
+ SetAmountNil sets the value for Amount to be an explicit nil
+
+### UnsetAmount
+`func (o *EncaisseeRequest) UnsetAmount()`
+
+UnsetAmount ensures that no value is present for Amount, not even an explicit nil
 ### GetVatRate
 
 `func (o *EncaisseeRequest) GetVatRate() float32`
@@ -162,6 +194,76 @@ SetVatRate sets VatRate field to given value.
 
 HasVatRate returns a boolean if a field has been set.
 
+### GetAmountsByRate
+
+`func (o *EncaisseeRequest) GetAmountsByRate() []EncaisseAmountByRate`
+
+GetAmountsByRate returns the AmountsByRate field if non-nil, zero value otherwise.
+
+### GetAmountsByRateOk
+
+`func (o *EncaisseeRequest) GetAmountsByRateOk() (*[]EncaisseAmountByRate, bool)`
+
+GetAmountsByRateOk returns a tuple with the AmountsByRate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAmountsByRate
+
+`func (o *EncaisseeRequest) SetAmountsByRate(v []EncaisseAmountByRate)`
+
+SetAmountsByRate sets AmountsByRate field to given value.
+
+### HasAmountsByRate
+
+`func (o *EncaisseeRequest) HasAmountsByRate() bool`
+
+HasAmountsByRate returns a boolean if a field has been set.
+
+### SetAmountsByRateNil
+
+`func (o *EncaisseeRequest) SetAmountsByRateNil(b bool)`
+
+ SetAmountsByRateNil sets the value for AmountsByRate to be an explicit nil
+
+### UnsetAmountsByRate
+`func (o *EncaisseeRequest) UnsetAmountsByRate()`
+
+UnsetAmountsByRate ensures that no value is present for AmountsByRate, not even an explicit nil
+### GetComment
+
+`func (o *EncaisseeRequest) GetComment() string`
+
+GetComment returns the Comment field if non-nil, zero value otherwise.
+
+### GetCommentOk
+
+`func (o *EncaisseeRequest) GetCommentOk() (*string, bool)`
+
+GetCommentOk returns a tuple with the Comment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComment
+
+`func (o *EncaisseeRequest) SetComment(v string)`
+
+SetComment sets Comment field to given value.
+
+### HasComment
+
+`func (o *EncaisseeRequest) HasComment() bool`
+
+HasComment returns a boolean if a field has been set.
+
+### SetCommentNil
+
+`func (o *EncaisseeRequest) SetCommentNil(b bool)`
+
+ SetCommentNil sets the value for Comment to be an explicit nil
+
+### UnsetComment
+`func (o *EncaisseeRequest) UnsetComment()`
+
+UnsetComment ensures that no value is present for Comment, not even an explicit nil
 ### GetCurrency
 
 `func (o *EncaisseeRequest) GetCurrency() string`

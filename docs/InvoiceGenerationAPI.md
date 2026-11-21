@@ -35,7 +35,7 @@ func main() {
 	profile := openapiclient.APIProfile("MINIMUM") // APIProfile | Factur-X/CII profile: MINIMUM, BASIC, EN16931 or EXTENDED. Ignored when output_format='ubl' (always EN16931). (optional) (default to "EXTENDED")
 	outputFormat := openapiclient.OutputFormat("xml") // OutputFormat | Output format: 'xml' or 'cii' (CII/Factur-X XML), 'ubl' (UBL 2.1 XML), 'pdf' (Factur-X PDF/A-3). (optional) (default to "xml")
 	autoEnrich := true // bool | 🆕 Enable auto-enrichment from SIRET/SIREN (simplified format only) (optional) (default to true)
-	sourcePdf := os.NewFile(1234, "some_file") // *os.File |  (optional)
+	sourcePdf := "sourcePdf_example" // string |  (optional)
 	callbackUrl := "callbackUrl_example" // string |  (optional)
 	webhookMode := "webhookMode_example" // string | Webhook content delivery: 'inline' (base64 in payload) or 'download_url' (temporary URL, 1h TTL) (optional) (default to "inline")
 	skipBrFr := true // bool |  (optional)
@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
  **profile** | [**APIProfile**](APIProfile.md) | Factur-X/CII profile: MINIMUM, BASIC, EN16931 or EXTENDED. Ignored when output_format&#x3D;&#39;ubl&#39; (always EN16931). | [default to &quot;EXTENDED&quot;]
  **outputFormat** | [**OutputFormat**](OutputFormat.md) | Output format: &#39;xml&#39; or &#39;cii&#39; (CII/Factur-X XML), &#39;ubl&#39; (UBL 2.1 XML), &#39;pdf&#39; (Factur-X PDF/A-3). | [default to &quot;xml&quot;]
  **autoEnrich** | **bool** | 🆕 Enable auto-enrichment from SIRET/SIREN (simplified format only) | [default to true]
- **sourcePdf** | ***os.File** |  | 
+ **sourcePdf** | **string** |  | 
  **callbackUrl** | **string** |  | 
  **webhookMode** | **string** | Webhook content delivery: &#39;inline&#39; (base64 in payload) or &#39;download_url&#39; (temporary URL, 1h TTL) | [default to &quot;inline&quot;]
  **skipBrFr** | **bool** |  | 

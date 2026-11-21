@@ -17,7 +17,7 @@ import (
 )
 
 
-// Amount2 Payment amount
+// Amount2 Montant TTC encaissé en EUR, à un seul taux (vatRate). Négatif pour un décaissement (remboursement). Pour plusieurs taux, utiliser amountsByRate. Requis si amountsByRate est absent (BR-FR-CDV-14)
 type Amount2 struct {
 	Float32 *float32
 	String *string
@@ -26,6 +26,11 @@ type Amount2 struct {
 // Unmarshal JSON data into any of the pointers in the struct
 func (dst *Amount2) UnmarshalJSON(data []byte) error {
 	var err error
+	// this object is nullable so check if the payload is null or empty string
+	if string(data) == "" || string(data) == "{}" {
+		return nil
+	}
+
 	// try to unmarshal JSON data into Float32
 	err = json.Unmarshal(data, &dst.Float32);
 	if err == nil {

@@ -30,7 +30,7 @@ import (
 )
 
 func main() {
-	pdfFile := os.NewFile(1234, "some_file") // *os.File | Factur-X PDF file to validate (.pdf format).
+	pdfFile := "pdfFile_example" // string | Factur-X PDF file to validate (.pdf format).
 	profile := openapiclient.APIProfile("MINIMUM") // APIProfile |  (optional)
 	useVerapdf := true // bool | Enable strict PDF/A validation with VeraPDF (recommended for production). If False, uses basic metadata validation. (optional) (default to false)
 	skipBrFr := true // bool |  (optional)
@@ -58,7 +58,7 @@ Other parameters are passed through a pointer to a apiValidateFacturxPdfApiV1Pro
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pdfFile** | ***os.File** | Factur-X PDF file to validate (.pdf format). | 
+ **pdfFile** | **string** | Factur-X PDF file to validate (.pdf format). | 
  **profile** | [**APIProfile**](APIProfile.md) |  | 
  **useVerapdf** | **bool** | Enable strict PDF/A validation with VeraPDF (recommended for production). If False, uses basic metadata validation. | [default to false]
  **skipBrFr** | **bool** |  | 
@@ -102,7 +102,7 @@ import (
 )
 
 func main() {
-	pdfFile := os.NewFile(1234, "some_file") // *os.File | Factur-X PDF file to validate (.pdf format).
+	pdfFile := "pdfFile_example" // string | Factur-X PDF file to validate (.pdf format).
 	profile := openapiclient.APIProfile("MINIMUM") // APIProfile |  (optional)
 	useVerapdf := true // bool | Enable strict PDF/A validation with VeraPDF (recommended for production). May take several seconds. (optional) (default to false)
 	callbackUrl := "callbackUrl_example" // string |  (optional)
@@ -131,7 +131,7 @@ Other parameters are passed through a pointer to a apiValidateFacturxPdfAsyncApi
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pdfFile** | ***os.File** | Factur-X PDF file to validate (.pdf format). | 
+ **pdfFile** | **string** | Factur-X PDF file to validate (.pdf format). | 
  **profile** | [**APIProfile**](APIProfile.md) |  | 
  **useVerapdf** | **bool** | Enable strict PDF/A validation with VeraPDF (recommended for production). May take several seconds. | [default to false]
  **callbackUrl** | **string** |  | 

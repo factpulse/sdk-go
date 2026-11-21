@@ -17,7 +17,7 @@ import (
 )
 
 
-// Encaisseamount Montant encaissé (requis pour statut 212)
+// Encaisseamount Montant TTC encaissé à un seul taux (statut 212). Négatif pour un décaissement. Pour plusieurs taux, utiliser encaisseAmountsByRate
 type Encaisseamount struct {
 	Float32 *float32
 	String *string

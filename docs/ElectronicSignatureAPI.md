@@ -98,7 +98,7 @@ import (
 )
 
 func main() {
-	pdfFile := os.NewFile(1234, "some_file") // *os.File | PDF file to sign (will be processed and returned signed in base64)
+	pdfFile := "pdfFile_example" // string | PDF file to sign (will be processed and returned signed in base64)
 	reason := "reason_example" // string |  (optional)
 	location := "location_example" // string |  (optional)
 	contact := "contact_example" // string |  (optional)
@@ -129,7 +129,7 @@ Other parameters are passed through a pointer to a apiSignPdfApiV1ProcessingSign
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pdfFile** | ***os.File** | PDF file to sign (will be processed and returned signed in base64) | 
+ **pdfFile** | **string** | PDF file to sign (will be processed and returned signed in base64) | 
  **reason** | **string** |  | 
  **location** | **string** |  | 
  **contact** | **string** |  | 
@@ -176,7 +176,7 @@ import (
 )
 
 func main() {
-	pdfFile := os.NewFile(1234, "some_file") // *os.File | PDF file to sign (processed asynchronously)
+	pdfFile := "pdfFile_example" // string | PDF file to sign (processed asynchronously)
 	callbackUrl := "callbackUrl_example" // string |  (optional)
 	webhookMode := "webhookMode_example" // string | Webhook content delivery: 'inline' (base64 in payload) or 'download_url' (temporary URL, 1h TTL) (optional) (default to "inline")
 	reason := "reason_example" // string |  (optional)
@@ -209,7 +209,7 @@ Other parameters are passed through a pointer to a apiSignPdfAsyncApiV1Processin
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pdfFile** | ***os.File** | PDF file to sign (processed asynchronously) | 
+ **pdfFile** | **string** | PDF file to sign (processed asynchronously) | 
  **callbackUrl** | **string** |  | 
  **webhookMode** | **string** | Webhook content delivery: &#39;inline&#39; (base64 in payload) or &#39;download_url&#39; (temporary URL, 1h TTL) | [default to &quot;inline&quot;]
  **reason** | **string** |  | 
@@ -258,7 +258,7 @@ import (
 )
 
 func main() {
-	pdfFile := os.NewFile(1234, "some_file") // *os.File | PDF file to validate (will be analyzed to detect and validate signatures)
+	pdfFile := "pdfFile_example" // string | PDF file to validate (will be analyzed to detect and validate signatures)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -283,7 +283,7 @@ Other parameters are passed through a pointer to a apiValidatePdfSignatureEndpoi
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pdfFile** | ***os.File** | PDF file to validate (will be analyzed to detect and validate signatures) | 
+ **pdfFile** | **string** | PDF file to validate (will be analyzed to detect and validate signatures) | 
 
 ### Return type
 

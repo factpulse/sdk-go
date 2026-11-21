@@ -29,7 +29,7 @@ import (
 )
 
 func main() {
-	xmlFile := os.NewFile(1234, "some_file") // *os.File | CII (Factur-X) or UBL XML file to validate (.xml format). Format is auto-detected.
+	xmlFile := "xmlFile_example" // string | CII (Factur-X) or UBL XML file to validate (.xml format). Format is auto-detected.
 	profile := openapiclient.APIProfile("MINIMUM") // APIProfile | Validation profile (MINIMUM, BASIC, EN16931, EXTENDED). Used for CII only; ignored for UBL (always EN16931). (optional) (default to "EXTENDED")
 	skipBrFr := true // bool |  (optional)
 
@@ -56,7 +56,7 @@ Other parameters are passed through a pointer to a apiValidateXmlApiV1Processing
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **xmlFile** | ***os.File** | CII (Factur-X) or UBL XML file to validate (.xml format). Format is auto-detected. | 
+ **xmlFile** | **string** | CII (Factur-X) or UBL XML file to validate (.xml format). Format is auto-detected. | 
  **profile** | [**APIProfile**](APIProfile.md) | Validation profile (MINIMUM, BASIC, EN16931, EXTENDED). Used for CII only; ignored for UBL (always EN16931). | [default to &quot;EXTENDED&quot;]
  **skipBrFr** | **bool** |  | 
 

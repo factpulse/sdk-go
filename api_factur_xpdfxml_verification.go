@@ -18,7 +18,6 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"os"
 )
 
 
@@ -317,15 +316,15 @@ func (a *FacturXPDFXMLVerificationAPIService) GetVerificationTypedStatusApiV1Ver
 type ApiVerifyPdfAsyncApiV1VerificationVerifyAsyncPostRequest struct {
 	ctx context.Context
 	ApiService *FacturXPDFXMLVerificationAPIService
-	pdfFile *os.File
+	pdfFile *string
 	forceOcr *bool
 	callbackUrl *string
 	webhookMode *string
 }
 
 // Factur-X PDF file to verify
-func (r ApiVerifyPdfAsyncApiV1VerificationVerifyAsyncPostRequest) PdfFile(pdfFile *os.File) ApiVerifyPdfAsyncApiV1VerificationVerifyAsyncPostRequest {
-	r.pdfFile = pdfFile
+func (r ApiVerifyPdfAsyncApiV1VerificationVerifyAsyncPostRequest) PdfFile(pdfFile string) ApiVerifyPdfAsyncApiV1VerificationVerifyAsyncPostRequest {
+	r.pdfFile = &pdfFile
 	return r
 }
 
@@ -448,21 +447,7 @@ func (a *FacturXPDFXMLVerificationAPIService) VerifyPdfAsyncApiV1VerificationVer
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	var pdfFileLocalVarFormFileName string
-	var pdfFileLocalVarFileName     string
-	var pdfFileLocalVarFileBytes    []byte
-
-	pdfFileLocalVarFormFileName = "pdf_file"
-	pdfFileLocalVarFile := r.pdfFile
-
-	if pdfFileLocalVarFile != nil {
-		fbs, _ := io.ReadAll(pdfFileLocalVarFile)
-
-		pdfFileLocalVarFileBytes = fbs
-		pdfFileLocalVarFileName = pdfFileLocalVarFile.Name()
-		pdfFileLocalVarFile.Close()
-		formFiles = append(formFiles, formFile{fileBytes: pdfFileLocalVarFileBytes, fileName: pdfFileLocalVarFileName, formFileName: pdfFileLocalVarFormFileName})
-	}
+	parameterAddToHeaderOrQuery(localVarFormParams, "pdf_file", r.pdfFile, "", "")
 	if r.forceOcr != nil {
 		parameterAddToHeaderOrQuery(localVarFormParams, "force_ocr", r.forceOcr, "", "")
 	}
@@ -547,12 +532,12 @@ func (a *FacturXPDFXMLVerificationAPIService) VerifyPdfAsyncApiV1VerificationVer
 type ApiVerifyPdfSyncApiV1VerificationVerifyPostRequest struct {
 	ctx context.Context
 	ApiService *FacturXPDFXMLVerificationAPIService
-	pdfFile *os.File
+	pdfFile *string
 }
 
 // Factur-X PDF file to verify
-func (r ApiVerifyPdfSyncApiV1VerificationVerifyPostRequest) PdfFile(pdfFile *os.File) ApiVerifyPdfSyncApiV1VerificationVerifyPostRequest {
-	r.pdfFile = pdfFile
+func (r ApiVerifyPdfSyncApiV1VerificationVerifyPostRequest) PdfFile(pdfFile string) ApiVerifyPdfSyncApiV1VerificationVerifyPostRequest {
+	r.pdfFile = &pdfFile
 	return r
 }
 
@@ -636,21 +621,7 @@ func (a *FacturXPDFXMLVerificationAPIService) VerifyPdfSyncApiV1VerificationVeri
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	var pdfFileLocalVarFormFileName string
-	var pdfFileLocalVarFileName     string
-	var pdfFileLocalVarFileBytes    []byte
-
-	pdfFileLocalVarFormFileName = "pdf_file"
-	pdfFileLocalVarFile := r.pdfFile
-
-	if pdfFileLocalVarFile != nil {
-		fbs, _ := io.ReadAll(pdfFileLocalVarFile)
-
-		pdfFileLocalVarFileBytes = fbs
-		pdfFileLocalVarFileName = pdfFileLocalVarFile.Name()
-		pdfFileLocalVarFile.Close()
-		formFiles = append(formFiles, formFile{fileBytes: pdfFileLocalVarFileBytes, fileName: pdfFileLocalVarFileName, formFileName: pdfFileLocalVarFormFileName})
-	}
+	parameterAddToHeaderOrQuery(localVarFormParams, "pdf_file", r.pdfFile, "", "")
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

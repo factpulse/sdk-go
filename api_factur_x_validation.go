@@ -17,7 +17,6 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"os"
 )
 
 
@@ -27,15 +26,15 @@ type FacturXValidationAPIService service
 type ApiValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostRequest struct {
 	ctx context.Context
 	ApiService *FacturXValidationAPIService
-	pdfFile *os.File
+	pdfFile *string
 	profile *APIProfile
 	useVerapdf *bool
 	skipBrFr *bool
 }
 
 // Factur-X PDF file to validate (.pdf format).
-func (r ApiValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostRequest) PdfFile(pdfFile *os.File) ApiValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostRequest {
-	r.pdfFile = pdfFile
+func (r ApiValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostRequest) PdfFile(pdfFile string) ApiValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostRequest {
+	r.pdfFile = &pdfFile
 	return r
 }
 
@@ -248,21 +247,7 @@ func (a *FacturXValidationAPIService) ValidateFacturxPdfApiV1ProcessingValidateF
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	var pdfFileLocalVarFormFileName string
-	var pdfFileLocalVarFileName     string
-	var pdfFileLocalVarFileBytes    []byte
-
-	pdfFileLocalVarFormFileName = "pdf_file"
-	pdfFileLocalVarFile := r.pdfFile
-
-	if pdfFileLocalVarFile != nil {
-		fbs, _ := io.ReadAll(pdfFileLocalVarFile)
-
-		pdfFileLocalVarFileBytes = fbs
-		pdfFileLocalVarFileName = pdfFileLocalVarFile.Name()
-		pdfFileLocalVarFile.Close()
-		formFiles = append(formFiles, formFile{fileBytes: pdfFileLocalVarFileBytes, fileName: pdfFileLocalVarFileName, formFileName: pdfFileLocalVarFormFileName})
-	}
+	parameterAddToHeaderOrQuery(localVarFormParams, "pdf_file", r.pdfFile, "", "")
 	if r.profile != nil {
 		parameterAddToHeaderOrQuery(localVarFormParams, "profile", r.profile, "", "")
 	}
@@ -347,7 +332,7 @@ func (a *FacturXValidationAPIService) ValidateFacturxPdfApiV1ProcessingValidateF
 type ApiValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostRequest struct {
 	ctx context.Context
 	ApiService *FacturXValidationAPIService
-	pdfFile *os.File
+	pdfFile *string
 	profile *APIProfile
 	useVerapdf *bool
 	callbackUrl *string
@@ -355,8 +340,8 @@ type ApiValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostRequest st
 }
 
 // Factur-X PDF file to validate (.pdf format).
-func (r ApiValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostRequest) PdfFile(pdfFile *os.File) ApiValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostRequest {
-	r.pdfFile = pdfFile
+func (r ApiValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostRequest) PdfFile(pdfFile string) ApiValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostRequest {
+	r.pdfFile = &pdfFile
 	return r
 }
 
@@ -545,21 +530,7 @@ func (a *FacturXValidationAPIService) ValidateFacturxPdfAsyncApiV1ProcessingVali
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	var pdfFileLocalVarFormFileName string
-	var pdfFileLocalVarFileName     string
-	var pdfFileLocalVarFileBytes    []byte
-
-	pdfFileLocalVarFormFileName = "pdf_file"
-	pdfFileLocalVarFile := r.pdfFile
-
-	if pdfFileLocalVarFile != nil {
-		fbs, _ := io.ReadAll(pdfFileLocalVarFile)
-
-		pdfFileLocalVarFileBytes = fbs
-		pdfFileLocalVarFileName = pdfFileLocalVarFile.Name()
-		pdfFileLocalVarFile.Close()
-		formFiles = append(formFiles, formFile{fileBytes: pdfFileLocalVarFileBytes, fileName: pdfFileLocalVarFileName, formFileName: pdfFileLocalVarFormFileName})
-	}
+	parameterAddToHeaderOrQuery(localVarFormParams, "pdf_file", r.pdfFile, "", "")
 	if r.profile != nil {
 		parameterAddToHeaderOrQuery(localVarFormParams, "profile", r.profile, "", "")
 	}

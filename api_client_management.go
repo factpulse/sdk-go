@@ -1394,6 +1394,146 @@ func (a *ClientManagementAPIService) GetSuperpdpStatusApiV1ClientsUidSuperpdpSta
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimeGetRequest struct {
+	ctx context.Context
+	ApiService *ClientManagementAPIService
+	uid string
+}
+
+func (r ApiGetSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimeGetRequest) Execute() (*SuperPDPVatRegimeResponse, *http.Response, error) {
+	return r.ApiService.GetSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimeGetExecute(r)
+}
+
+/*
+GetSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimeGet Get the SuperPDP VAT regime
+
+Read the VAT regime of the client's company at SuperPDP (`vatRegime` is null when not set).
+
+SuperPDP refuses e-reporting ("The VAT regime needs to be setup at the company
+level") until the VAT regime of the company is set: it defines the e-reporting
+transmission periods, and the Flux 10 file does not carry it. This setting is
+not part of the AFNOR API; FactPulse sets it with the client's SuperPDP
+connection.
+
+**Scope**: Client level (JWT with client_uid that must match {uid})
+
+**Errors**:
+- `404 not_connected`: the client has not connected its SuperPDP account
+- `400 superpdp_error`: SuperPDP refused the request (`superpdp_status`, `message`)
+- `502`: SuperPDP unreachable, or the SuperPDP connection must be redone
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param uid Client unique identifier (UUID)
+ @return ApiGetSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimeGetRequest
+*/
+func (a *ClientManagementAPIService) GetSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimeGet(ctx context.Context, uid string) ApiGetSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimeGetRequest {
+	return ApiGetSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimeGetRequest{
+		ApiService: a,
+		ctx: ctx,
+		uid: uid,
+	}
+}
+
+// Execute executes the request
+//  @return SuperPDPVatRegimeResponse
+func (a *ClientManagementAPIService) GetSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimeGetExecute(r ApiGetSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimeGetRequest) (*SuperPDPVatRegimeResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *SuperPDPVatRegimeResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ClientManagementAPIService.GetSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimeGet")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/clients/{uid}/superpdp/vat-regime"
+	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", url.PathEscape(parameterValueToString(r.uid, "uid")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetRequest struct {
 	ctx context.Context
 	ApiService *ClientManagementAPIService
@@ -2101,6 +2241,157 @@ func (a *ClientManagementAPIService) UpdatePdpConfigApiV1ClientsUidPdpConfigPutE
 	}
 	// body params
 	localVarPostBody = r.pDPConfigUpdateRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimePatchRequest struct {
+	ctx context.Context
+	ApiService *ClientManagementAPIService
+	uid string
+	superPDPVatRegimeUpdateRequest *SuperPDPVatRegimeUpdateRequest
+}
+
+func (r ApiUpdateSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimePatchRequest) SuperPDPVatRegimeUpdateRequest(superPDPVatRegimeUpdateRequest SuperPDPVatRegimeUpdateRequest) ApiUpdateSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimePatchRequest {
+	r.superPDPVatRegimeUpdateRequest = &superPDPVatRegimeUpdateRequest
+	return r
+}
+
+func (r ApiUpdateSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimePatchRequest) Execute() (*SuperPDPVatRegimeResponse, *http.Response, error) {
+	return r.ApiService.UpdateSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimePatchExecute(r)
+}
+
+/*
+UpdateSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimePatch Set the SuperPDP VAT regime
+
+Set the VAT regime of the client's company at SuperPDP. When `hasVatOnDebits` is omitted, its current value is kept.
+
+SuperPDP refuses e-reporting ("The VAT regime needs to be setup at the company
+level") until the VAT regime of the company is set: it defines the e-reporting
+transmission periods, and the Flux 10 file does not carry it. This setting is
+not part of the AFNOR API; FactPulse sets it with the client's SuperPDP
+connection.
+
+**Scope**: Client level (JWT with client_uid that must match {uid})
+
+**Errors**:
+- `404 not_connected`: the client has not connected its SuperPDP account
+- `400 superpdp_error`: SuperPDP refused the request (`superpdp_status`, `message`)
+- `502`: SuperPDP unreachable, or the SuperPDP connection must be redone
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param uid Client unique identifier (UUID)
+ @return ApiUpdateSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimePatchRequest
+*/
+func (a *ClientManagementAPIService) UpdateSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimePatch(ctx context.Context, uid string) ApiUpdateSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimePatchRequest {
+	return ApiUpdateSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimePatchRequest{
+		ApiService: a,
+		ctx: ctx,
+		uid: uid,
+	}
+}
+
+// Execute executes the request
+//  @return SuperPDPVatRegimeResponse
+func (a *ClientManagementAPIService) UpdateSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimePatchExecute(r ApiUpdateSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimePatchRequest) (*SuperPDPVatRegimeResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *SuperPDPVatRegimeResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ClientManagementAPIService.UpdateSuperpdpVatRegimeApiV1ClientsUidSuperpdpVatRegimePatch")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/clients/{uid}/superpdp/vat-regime"
+	localVarPath = strings.Replace(localVarPath, "{"+"uid"+"}", url.PathEscape(parameterValueToString(r.uid, "uid")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.superPDPVatRegimeUpdateRequest == nil {
+		return localVarReturnValue, nil, reportError("superPDPVatRegimeUpdateRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.superPDPVatRegimeUpdateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

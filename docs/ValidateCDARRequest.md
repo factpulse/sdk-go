@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **Status** | Pointer to **NullableString** |  | [optional] 
 **ReasonCode** | Pointer to **NullableString** |  | [optional] 
 **EncaisseAmount** | Pointer to [**NullableEncaisseamount1**](Encaisseamount1.md) |  | [optional] 
+**EncaisseAmountsByRate** | Pointer to [**[]EncaisseAmountByRate**](EncaisseAmountByRate.md) |  | [optional] 
 
 ## Methods
 
@@ -312,6 +313,41 @@ HasEncaisseAmount returns a boolean if a field has been set.
 `func (o *ValidateCDARRequest) UnsetEncaisseAmount()`
 
 UnsetEncaisseAmount ensures that no value is present for EncaisseAmount, not even an explicit nil
+### GetEncaisseAmountsByRate
+
+`func (o *ValidateCDARRequest) GetEncaisseAmountsByRate() []EncaisseAmountByRate`
+
+GetEncaisseAmountsByRate returns the EncaisseAmountsByRate field if non-nil, zero value otherwise.
+
+### GetEncaisseAmountsByRateOk
+
+`func (o *ValidateCDARRequest) GetEncaisseAmountsByRateOk() (*[]EncaisseAmountByRate, bool)`
+
+GetEncaisseAmountsByRateOk returns a tuple with the EncaisseAmountsByRate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEncaisseAmountsByRate
+
+`func (o *ValidateCDARRequest) SetEncaisseAmountsByRate(v []EncaisseAmountByRate)`
+
+SetEncaisseAmountsByRate sets EncaisseAmountsByRate field to given value.
+
+### HasEncaisseAmountsByRate
+
+`func (o *ValidateCDARRequest) HasEncaisseAmountsByRate() bool`
+
+HasEncaisseAmountsByRate returns a boolean if a field has been set.
+
+### SetEncaisseAmountsByRateNil
+
+`func (o *ValidateCDARRequest) SetEncaisseAmountsByRateNil(b bool)`
+
+ SetEncaisseAmountsByRateNil sets the value for EncaisseAmountsByRate to be an explicit nil
+
+### UnsetEncaisseAmountsByRate
+`func (o *ValidateCDARRequest) UnsetEncaisseAmountsByRate()`
+
+UnsetEncaisseAmountsByRate ensures that no value is present for EncaisseAmountsByRate, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

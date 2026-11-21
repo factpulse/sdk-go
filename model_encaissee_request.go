@@ -28,11 +28,12 @@ type EncaisseeRequest struct {
 	InvoiceIssueDate string `json:"invoiceIssueDate"`
 	// SIREN de l'acheteur (destinataire du statut)
 	InvoiceBuyerSiren string `json:"invoiceBuyerSiren"`
-	// Adresse électronique de l'acheteur (MDT-73)
-	InvoiceBuyerElectronicAddress string `json:"invoiceBuyerElectronicAddress"`
-	Amount Amount1 `json:"amount"`
-	// Taux de TVA du montant encaissé en % (MDT-224, requis par BR-FR-CDV-14 ; défaut 20)
+	InvoiceBuyerElectronicAddress NullableString `json:"invoiceBuyerElectronicAddress,omitempty"`
+	Amount NullableAmount2 `json:"amount,omitempty"`
+	// Taux de TVA du montant encaissé en % (MDT-224, requis par BR-FR-CDV-14 ; défaut 20). Ignoré avec amountsByRate
 	VatRate *float32 `json:"vatRate,omitempty"`
+	AmountsByRate []EncaisseAmountByRate `json:"amountsByRate,omitempty"`
+	Comment NullableString `json:"comment,omitempty"`
 	// Code devise ISO 4217
 	Currency *string `json:"currency,omitempty"`
 	SenderSiren NullableString `json:"senderSiren,omitempty"`
@@ -50,13 +51,11 @@ type _EncaisseeRequest EncaisseeRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEncaisseeRequest(invoiceId string, invoiceIssueDate string, invoiceBuyerSiren string, invoiceBuyerElectronicAddress string, amount Amount1) *EncaisseeRequest {
+func NewEncaisseeRequest(invoiceId string, invoiceIssueDate string, invoiceBuyerSiren string) *EncaisseeRequest {
 	this := EncaisseeRequest{}
 	this.InvoiceId = invoiceId
 	this.InvoiceIssueDate = invoiceIssueDate
 	this.InvoiceBuyerSiren = invoiceBuyerSiren
-	this.InvoiceBuyerElectronicAddress = invoiceBuyerElectronicAddress
-	this.Amount = amount
 	var vatRate float32 = 20
 	this.VatRate = &vatRate
 	var currency string = "EUR"
@@ -152,52 +151,88 @@ func (o *EncaisseeRequest) SetInvoiceBuyerSiren(v string) {
 	o.InvoiceBuyerSiren = v
 }
 
-// GetInvoiceBuyerElectronicAddress returns the InvoiceBuyerElectronicAddress field value
+// GetInvoiceBuyerElectronicAddress returns the InvoiceBuyerElectronicAddress field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EncaisseeRequest) GetInvoiceBuyerElectronicAddress() string {
-	if o == nil {
+	if o == nil || IsNil(o.InvoiceBuyerElectronicAddress.Get()) {
 		var ret string
 		return ret
 	}
-
-	return o.InvoiceBuyerElectronicAddress
+	return *o.InvoiceBuyerElectronicAddress.Get()
 }
 
-// GetInvoiceBuyerElectronicAddressOk returns a tuple with the InvoiceBuyerElectronicAddress field value
+// GetInvoiceBuyerElectronicAddressOk returns a tuple with the InvoiceBuyerElectronicAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EncaisseeRequest) GetInvoiceBuyerElectronicAddressOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.InvoiceBuyerElectronicAddress, true
+	return o.InvoiceBuyerElectronicAddress.Get(), o.InvoiceBuyerElectronicAddress.IsSet()
 }
 
-// SetInvoiceBuyerElectronicAddress sets field value
-func (o *EncaisseeRequest) SetInvoiceBuyerElectronicAddress(v string) {
-	o.InvoiceBuyerElectronicAddress = v
-}
-
-// GetAmount returns the Amount field value
-func (o *EncaisseeRequest) GetAmount() Amount1 {
-	if o == nil {
-		var ret Amount1
-		return ret
+// HasInvoiceBuyerElectronicAddress returns a boolean if a field has been set.
+func (o *EncaisseeRequest) HasInvoiceBuyerElectronicAddress() bool {
+	if o != nil && o.InvoiceBuyerElectronicAddress.IsSet() {
+		return true
 	}
 
-	return o.Amount
+	return false
 }
 
-// GetAmountOk returns a tuple with the Amount field value
+// SetInvoiceBuyerElectronicAddress gets a reference to the given NullableString and assigns it to the InvoiceBuyerElectronicAddress field.
+func (o *EncaisseeRequest) SetInvoiceBuyerElectronicAddress(v string) {
+	o.InvoiceBuyerElectronicAddress.Set(&v)
+}
+// SetInvoiceBuyerElectronicAddressNil sets the value for InvoiceBuyerElectronicAddress to be an explicit nil
+func (o *EncaisseeRequest) SetInvoiceBuyerElectronicAddressNil() {
+	o.InvoiceBuyerElectronicAddress.Set(nil)
+}
+
+// UnsetInvoiceBuyerElectronicAddress ensures that no value is present for InvoiceBuyerElectronicAddress, not even an explicit nil
+func (o *EncaisseeRequest) UnsetInvoiceBuyerElectronicAddress() {
+	o.InvoiceBuyerElectronicAddress.Unset()
+}
+
+// GetAmount returns the Amount field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EncaisseeRequest) GetAmount() Amount2 {
+	if o == nil || IsNil(o.Amount.Get()) {
+		var ret Amount2
+		return ret
+	}
+	return *o.Amount.Get()
+}
+
+// GetAmountOk returns a tuple with the Amount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EncaisseeRequest) GetAmountOk() (*Amount1, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EncaisseeRequest) GetAmountOk() (*Amount2, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Amount, true
+	return o.Amount.Get(), o.Amount.IsSet()
 }
 
-// SetAmount sets field value
-func (o *EncaisseeRequest) SetAmount(v Amount1) {
-	o.Amount = v
+// HasAmount returns a boolean if a field has been set.
+func (o *EncaisseeRequest) HasAmount() bool {
+	if o != nil && o.Amount.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAmount gets a reference to the given NullableAmount2 and assigns it to the Amount field.
+func (o *EncaisseeRequest) SetAmount(v Amount2) {
+	o.Amount.Set(&v)
+}
+// SetAmountNil sets the value for Amount to be an explicit nil
+func (o *EncaisseeRequest) SetAmountNil() {
+	o.Amount.Set(nil)
+}
+
+// UnsetAmount ensures that no value is present for Amount, not even an explicit nil
+func (o *EncaisseeRequest) UnsetAmount() {
+	o.Amount.Unset()
 }
 
 // GetVatRate returns the VatRate field value if set, zero value otherwise.
@@ -230,6 +265,81 @@ func (o *EncaisseeRequest) HasVatRate() bool {
 // SetVatRate gets a reference to the given float32 and assigns it to the VatRate field.
 func (o *EncaisseeRequest) SetVatRate(v float32) {
 	o.VatRate = &v
+}
+
+// GetAmountsByRate returns the AmountsByRate field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EncaisseeRequest) GetAmountsByRate() []EncaisseAmountByRate {
+	if o == nil {
+		var ret []EncaisseAmountByRate
+		return ret
+	}
+	return o.AmountsByRate
+}
+
+// GetAmountsByRateOk returns a tuple with the AmountsByRate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EncaisseeRequest) GetAmountsByRateOk() ([]EncaisseAmountByRate, bool) {
+	if o == nil || IsNil(o.AmountsByRate) {
+		return nil, false
+	}
+	return o.AmountsByRate, true
+}
+
+// HasAmountsByRate returns a boolean if a field has been set.
+func (o *EncaisseeRequest) HasAmountsByRate() bool {
+	if o != nil && !IsNil(o.AmountsByRate) {
+		return true
+	}
+
+	return false
+}
+
+// SetAmountsByRate gets a reference to the given []EncaisseAmountByRate and assigns it to the AmountsByRate field.
+func (o *EncaisseeRequest) SetAmountsByRate(v []EncaisseAmountByRate) {
+	o.AmountsByRate = v
+}
+
+// GetComment returns the Comment field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EncaisseeRequest) GetComment() string {
+	if o == nil || IsNil(o.Comment.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Comment.Get()
+}
+
+// GetCommentOk returns a tuple with the Comment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EncaisseeRequest) GetCommentOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Comment.Get(), o.Comment.IsSet()
+}
+
+// HasComment returns a boolean if a field has been set.
+func (o *EncaisseeRequest) HasComment() bool {
+	if o != nil && o.Comment.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetComment gets a reference to the given NullableString and assigns it to the Comment field.
+func (o *EncaisseeRequest) SetComment(v string) {
+	o.Comment.Set(&v)
+}
+// SetCommentNil sets the value for Comment to be an explicit nil
+func (o *EncaisseeRequest) SetCommentNil() {
+	o.Comment.Set(nil)
+}
+
+// UnsetComment ensures that no value is present for Comment, not even an explicit nil
+func (o *EncaisseeRequest) UnsetComment() {
+	o.Comment.Unset()
 }
 
 // GetCurrency returns the Currency field value if set, zero value otherwise.
@@ -519,10 +629,20 @@ func (o EncaisseeRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["invoiceId"] = o.InvoiceId
 	toSerialize["invoiceIssueDate"] = o.InvoiceIssueDate
 	toSerialize["invoiceBuyerSiren"] = o.InvoiceBuyerSiren
-	toSerialize["invoiceBuyerElectronicAddress"] = o.InvoiceBuyerElectronicAddress
-	toSerialize["amount"] = o.Amount
+	if o.InvoiceBuyerElectronicAddress.IsSet() {
+		toSerialize["invoiceBuyerElectronicAddress"] = o.InvoiceBuyerElectronicAddress.Get()
+	}
+	if o.Amount.IsSet() {
+		toSerialize["amount"] = o.Amount.Get()
+	}
 	if !IsNil(o.VatRate) {
 		toSerialize["vatRate"] = o.VatRate
+	}
+	if o.AmountsByRate != nil {
+		toSerialize["amountsByRate"] = o.AmountsByRate
+	}
+	if o.Comment.IsSet() {
+		toSerialize["comment"] = o.Comment.Get()
 	}
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
@@ -556,8 +676,6 @@ func (o *EncaisseeRequest) UnmarshalJSON(data []byte) (err error) {
 		"invoiceId",
 		"invoiceIssueDate",
 		"invoiceBuyerSiren",
-		"invoiceBuyerElectronicAddress",
-		"amount",
 	}
 
 	allProperties := make(map[string]interface{})
